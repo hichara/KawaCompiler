@@ -22,5 +22,3 @@ appellerons Kawa, ce dernier doit supporter:
 	  execpté que les paramètres pourront être préfixés du mot clé
 	  **value** (transmission par valeur au lieu de référence)
 
-test
-----

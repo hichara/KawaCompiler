@@ -1,0 +1,12 @@
+
+Utilisateur->Système:Compilation exécutable
+note over Utilisateur,Système: L'utilisateur donne la liste des fichiers précompilés au Système
+
+Système->Utilisateur:Affichage étape "Création exécutable"
+alt L'ensemble des fichiers est existant
+    Système->Système: Compilation fichier ELF   
+else Un des fichiers est introuvable
+    Système->Utilisateur: Affichage erreur
+    Système->Système: Interruption
+end
+

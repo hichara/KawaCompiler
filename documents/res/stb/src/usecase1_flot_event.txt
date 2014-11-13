@@ -1,0 +1,27 @@
+Utilisateur->Système:Compilation de classe
+
+
+Système->Utilisateur:Affichage étape "Analyse lexicale"
+Système->Système: Analyse lexicale
+
+
+Système->Utilisateur:Affichage étape "Analyse syntaxique"
+
+alt Syntaxe correcte
+    note left of Système: Une classe par fichier
+    Système->Système: Analyse syntaxique
+    
+else
+    Système->Utilisateur: Affichage erreur
+    Système->Système: Interruption
+end
+Système->Utilisateur:Affichage étape "Analyse sémantique"
+alt Sémantique correcte
+    Système->Système: Analyse sémantique
+else
+    Système->Utilisateur: Affichage erreur
+    Système->Système: Interruption
+end
+
+Système->Utilisateur:Affichage étape "Génération code intermédiare"
+Système->Système:Génération de code intermédiaire dans un fichier .o

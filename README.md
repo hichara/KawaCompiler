@@ -1,6 +1,8 @@
 Compilateur KAWA
 ================
 
+1. Objet
+
 Objet
 -----
 LLVM est une infrastructure modulaire permettant la réalisation de
@@ -19,3 +21,5 @@ appellerons Kawa, ce dernier doit supporter:
 	- Les méthodes seront définies de manière identique à Java
 	  execpté que les paramètres pourront être préfixés du mot clé
 	  **value** (transmission par valeur au lieu de référence)
+
+

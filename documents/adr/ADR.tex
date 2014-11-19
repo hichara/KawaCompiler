@@ -1,0 +1,148 @@
+\documentclass{../res/univ-projet}
+
+%Import des packages utilisés pour le document
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage{array}
+%\usepackage{hyperref}
+%\usepackage{tabularx, longtable}
+%\usepackage[table]{xcolor}
+%\usepackage{fancyhdr}
+%\usepackage{lastpage}
+
+\definecolor{gris}{rgb}{0.95, 0.95, 0.95}
+
+%Redéfinition des marges
+%\addtolength{\hoffset}{-2cm}
+%\addtolength{\textwidth}{4cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{1cm}
+\addtolength{\headsep}{0.8cm} 
+\addtolength{\footskip}{-0.2cm}
+
+
+%Import page de garde et structures pour la gestion de projet
+%\usepackage{structures}
+
+%Variables
+\logo{../res/logo_univ.png}
+\title{Analyse Des Risques}
+\author{Pierre-Luc \bsc{BLOT}}
+\projet{Compilateur LLVM}
+\projdesc{Langage jouet Kawa}
+\filiere{M1GIL - Conduite de Projet}
+\version{0.1}
+%\relecteur{Pierre-Luc \bsc{BLOT}}
+%\signataire{Florent \bsc{NICART}}
+\date{\today}
+
+\histentry{0.1}{18/11/2014}{Version initiale.}
+
+% -- Début du document -- %
+\begin{document}
+
+%Page de garde
+\maketitle
+\newpage
+%La table des matières
+\tableofcontents
+\newpage
+
+\section{Difficultés connues concernant le projet}
+  \begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
+    \hline
+    \color{white}\cellcolor{blue}\bfseries{Id}&
+    \color{white}\cellcolor{blue}\bfseries{Intitulé}&
+    \color{white}\cellcolor{blue}\bfseries{Niveau de difficulté}\\
+    \cr
+    \hline
+    D\_1&
+    Utilisation de la technologie LLVM&
+    5
+    \cr
+    \hline
+    D\_2&
+    Étude des besoins du client&
+    5
+    \cr
+    \hline
+    D\_3&
+    Développement du projet en C++&
+    4
+    \cr
+    \hline
+    D\_4&
+    Implémentation du polymorphisme&
+    5
+    \cr
+    \hline
+    D\_5&
+    Compilation partagée&
+    5
+    \cr
+    \hline
+    D\_6&
+    Garbage collector&
+    5
+    \cr
+    \hline
+    D\_4&
+    Création de la grammaire&
+    3
+    \cr
+    \hline
+    D\_7&
+    Analyseur lexical&
+    2
+    \cr
+    \hline
+    D\_8&
+    Analyseur syntaxique&
+    3
+    \cr
+    \hline
+    D\_9&
+    Analyseur sémantique&
+    4
+    \cr
+    \hline
+  \end{tabular}\\
+
+\section{Évaluations du projet}
+  \subsection{Particularités du sujet}
+    La particularité de ce projet est de réaliser un compilateur pour un langage de programmation haut niveau reposant sur le pardigme objet et reprenant la syntaxe du langage JAVA. Il est possible d'effectuer des tâches d'optimisation à la C++ qui est
+    lui de plus bas niveau.
+  \subsection{Définition du besoin}
+    % todo
+
+  \subsection{La disponibilité des acteurs et des ressources}
+  \subsection{La composition de l'équipe}
+    \subsubsection{Rôles}
+      \begin{itemize}
+        \item Responsable client : Kheireddine
+        \item Responsable Technique : Nasser, Abdellatif ,Madjid
+        \item Testeur : Amzath, Allexandre
+        \item Chef de projet : Pierre-Luc
+      \end{itemize}
+    \subsubsection{Rédacteurs des documents}
+      \begin{itemize}
+        \item STB : Nasser et Kheireddine
+        \item DAL : Nasser et Kheireddine
+        \item PDD : Pierre-Luc et Madjid
+        \item CDR : Allexandre et Amzath
+        \item ADR : Pierre-Luc et Madjid
+      \end{itemize}
+  \subsection{Nos connaissances techniques}
+    % todo
+  \subsection{Complexité des solutions techniques à mettre en oeuvre}
+    % todo
+  \subsection{Les procédés de test}
+    % todo
+  \subsection{Charge de travail hors projet}
+    % todo
+  \subsection{Perturbations engendrées par les autres activités}
+    % todo
+  
+\end{document}
+

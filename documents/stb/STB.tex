@@ -27,17 +27,7 @@
 
 %Variables
 \logo{../res/logo_univ.png}
-\title{Spécification Technique de Besoin}
-\author{Kheireddine \bsc{Berkane}, Pierre-Luc \bsc{BLOT}}
-\projet{Compilateur LLVM}
-\projdesc{Langage jouet Kawa}
-\filiere{M1GIL - Conduite de Projet}
-\version{0.1}
-%\relecteur{Pierre-Luc \bsc{BLOT}}
-%\signataire{Florent \bsc{NICART}}
-\date{\today}
-
-\histentry{0.1}{04/11/2014}{Version initiale.}
+\input{entete}
 
 % -- Début du document -- %
 \begin{document}
@@ -115,228 +105,54 @@ Différents documents de référence :
   \color{white}\cellcolor{blue}\bfseries{Priorité}\\
   \cr
   \hline EF\_1&
-  Compilation code source Kawa&
-  Développeur Kawa&
+  Afficher l'aide&
+  Utilisateur&
   Indispensable
   \cr
   \hline EF\_2&
-  Compilation classe&
-  Compilateur&
+  Compiler une application en mode monolithique &
+   Utilisateur&
   Indispensable
   \cr
   \hline EF\_3&
-  Compilation classe abstraite& 
-  Compilateur&
-  Important
+  Compiler une application en mode partagé& 
+  Utilisateur&
+  Secondaire
   \cr
   \hline EF\_4&
-  Compilation interface&
-  Compilateur&
+  Chosir un nom pour l'exécutable&
+   Utilisateur&
   Important
   \cr
   \hline EF\_5&
-  Compiler notion héritage&
-  Compilateur&
+  Compiler des bibliothèques&
+  Utilisateur&
   Important
   \cr
   \hline EF\_6&
-  Compiler notion polymorphisme&
-  Compilateur&
+  Afficher la version du compilateur&
+  Utilisateur&
   Important
   \cr
   \hline EF\_7&
-  Compiler notion polymorphisme ad hoc&
-  Compilateur&
+  Définir des dépendances entre sources et classes&
+  Utilisateur&
   Important
   \cr
   \hline EF\_8&
-  Compiler notion polymorphisme de type&
-  Compilateur&
+  Activer l'affichage en couleur&
+  Utilisateur&
   Important
   \cr
-  \hline EF\_9&
-  Compiler bloc de controle&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_10&
-  Compiler méthodes&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_11&
-  Compiler méthodes avec paramètres préfixés d'un mot clé \bsc{value}&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_12&
-  Compiler système de type&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_13&
-  Compiler affectation&
-  Compilateur& Indispensable
-  \cr
-  \hline EF\_14&
-  Compiler opérateurs arithmétiques sur type primitif&
-  Compilateur& Important
-  \cr
+  
   \hline
 \end{tabular}\\
 
-%\newpage
+\newpage
 
-%Cas d'utilisation
-\subsection{Cas d'utilisation 1}
-\ficheGraphic
-{Compilation de classes kawa}                    % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble de classes
-  kawa afin de les précompiler.
-}
-{
-	Ensemble de fichiers source de classes
-	respectant la syntaxe du langage kawa. 
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase1_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 1.
+\input{usecases}
 
-
-%Cas d'utilisation 2
-\subsection{Cas d'utilisation 2}
-\ficheGraphic
-{Compilation d'interface kawa}                    % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble d'interfaces
-  kawa afin de les précompiler.
-}
-{
-	Ensemble de fichiers source d'interfaces
-	respectant la syntaxe du langage kawa. 
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 2.
-
-
-%Cas d'utilisation
-\subsection{Cas d'utilisation 3}
-\ficheGraphic
-{Compilation d'exécutable}                      % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble de classes
-  et interfaces kawa précompiler afin de
-  créer un fichier exécutable.
-}
-{
-	Ensemble de fichiers précompilés.
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase3_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 3.
-\vspace{0.5cm}
-
-\section{Exigences opérationnelles}
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-\end{tabular}\\
-
-\section{Exigences opérationnelles d'interface}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-\end{tabular}\\
-
-
-\section{Exigences de qualité}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-  EQ\_1&
-  Le compilateur ne plante pas et affiche des messages d'erreurs clairs&
-  Important
-  \cr
-  \hline
-\end{tabular}\\
-
-\section{Exigences de réalisation}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-  ER\_1&
-  La compilation produit un exécutable linux au format ELF&
-  Indispensable
-  \cr
-  \hline
-  ER\_2&
-  Pas d'implémentation des cast&
-  \cr
-  \hline
-  ER\_3&
-  Pas d'implémentation de la générécité&
-  \cr
-  \hline
-  ER\_4&
-  Implémentation en code monolithique&
-  Indispensable
-  \cr
-  \hline
-  ER\_5&
-  Implémentation en code partagé&
-  Optionnel
-  \cr
-  \hline
-  ER\_6&
-  Pas d'attributs dans les interfaces. Seulement des méthodes.
-  \cr
-  \hline
-\end{tabular}\\
+\input{exigences}
 
 \end{document}
 

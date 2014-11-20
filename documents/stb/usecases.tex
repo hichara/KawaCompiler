@@ -1,6 +1,6 @@
 \begin{figure}
   \centering
-  \includegraphics[scale=0.8]{../res/stb/UseCase_07.jpg}
+  \includegraphics[scale=0.8]{../res/stb/vs_finale_usecase.jpg}
   \caption{\textbf{Cas d'utilisations du compilateur kawa.}}
 \end{figure}
 
@@ -14,9 +14,9 @@
    la liste des options du compilateur sur la sortie standard à travers une ligne de commande.
 }
 {
-  
+  L'odre de priorité entre le commutateur de help (-h ou --help) et le commutateur de version (-v ou --version) est définit par la première occurrence de l'un des deux commutateur i-e si nous avons un \textbf {-h} avant un \textbf {-v}, le compilateur annule tout le reste et affiche le help 
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande :kawac -h ou --help}                             % Evénements déclenchants
 {Action utilisateur}                       % Conditions d'arrêt
 % {0.6}{../res/stb/usecase2_flot_event.png}      % Diagramme
 {} % acteur(s)
@@ -34,9 +34,9 @@
 }
 {
 	Ensemble de fichiers sources 
-	respectant la syntaxe du langage kawa. 
+	respectant la syntaxe du langage kawa.La non présence des deux commutateurs (-h ou --help) et (-v ou --version) dans la ligne de commande permettant la compilation est obligatoire
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande :kawac -m filessources.}                             % Evénements déclenchants
 {Erreur (syntaxe, fichier introuvable, ..), ou 
  succès de la compilation}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
@@ -55,13 +55,13 @@
 {Utilisateur du compilateur}                               % Acteurs concernés
 {                                                % Description
   L’utilisateur introduit un ensemble de sources kawa
-  ainsi des exécutables qui auraient été déjà compiler ailleurs,afin de compiler un programme kawa.
+ qui peuvent appelés des bibliothèques externes, le compilateur doit être capable de chercher les bibliothèques pour les utiliser ou bien  de les recompiler si nécessaire.La distinction entre ce mode et le mode monolithique c'est l'absence du commutateur -m 
 }
 {
-	Ensemble de fichiers source d'interfaces
-	respectant la syntaxe du langage kawa. 
+	Ensemble de fichiers source respectant la syntaxe du langage kawa qui peuvent utiliser des bibliothèques partagées.La non présence des deux commutateurs (-h ou --help) et (-v ou --version) dans la ligne de commande permettant la compilation est obligatoire
+	
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande:kawac filessources [options]}                             % Evénements déclenchants
 {Erreur (syntaxe, fichier introuvable, ..), ou 
  succès de la compilation}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
@@ -75,35 +75,15 @@
 %Cas d'utilisation
 \subsection{Cas d'utilisation EF\_4}
 \fiche
-{Chosir un nom pour l'exécutable}                      % Nom du cas d'utilisation
+{Compiler application utilisant des bibliothèques partagées}                      % Nom du cas d'utilisation
 {Utilisateur du compilateur}                               % Acteurs concernés
 {                                                % Description
-    L'utilisateur peut choisir le nom d'exécutable à produire via un ligne de commande. 
+    L'utilisateur peut compiler des bibliothèques dynamiques en compilant son application obligatoirement dans un mode partagé,et ceci est possible même si son source n'utilise pas forcément ces bibliothèques externes.      
 }
 {
-	
+  La non présence des deux commutateurs (-h ou --help) et (-v ou --version) dans la ligne de commande permettant la compilation est obligatoire.
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Action utilisateur.}                       % Conditions d'arrêt
-%{0.6}{../res/stb/usecase3_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
- 
-}{} % system
-{} % flot exceptions
-% Fin de la fiche du cas d'utilisation 3.
-%Cas d'utilisation
-\subsection{Cas d'utilisation EF\_5}
-\fiche
-{Compiler des bibliothèques}                      % Nom du cas d'utilisation
-{Utilisateur du compilateur}                               % Acteurs concernés
-{                                                % Description
-   l'utilisateur introduit l'ensemble des sources de la  bibliothèque ce qui implique une  compilation 
-   en mode partagé.Si le client ne précise pas le nom de l’exécutable, le nom est repris à partir du fichier contenant la méthode main.    
-}
-{
-  
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande:kawac filessources [options] }                             % Evénements déclenchants
 {Erreur (syntaxe, fichier introuvable, ..), ou 
  succès de la compilation.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
@@ -113,18 +93,18 @@
 {Abondant provoqué par l'utilisateur.} % flot exceptions
 % Fin de la fiche du cas d'utilisation 3.
 %Cas d'utilisation
-\subsection{Cas d'utilisation EF\_6}
+\subsection{Cas d'utilisation EF\_5}
 \fiche
 {Afficher la version du compilateur}                      % Nom du cas d'utilisation
 {Utilisateur du compilateur}                               % Acteurs concernés
 {                                                % Description
    
-L'utilisateur peut savoir la version du compilateur avec le quel compile ses sources et ses bibliothèques grâce à une ligne de commande.   
+L'utilisateur peut savoir la version du compilateur avec le quel compile ses sources et ses bibliothèques  à travers un commutateur de ligne de commande.   
 }
 {
-  
+   L'odre de priorité entre le commutateur de help (-h ou --help) et le commutateur de version (-v ou --version) est définit par la première occurrence de l'un des deux commutateur i-e si nous avons un \textbf {-v} avant un \textbf {-h}, le compilateur annule tout le reste et affiche la version
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande:kawac -v ou --version}                             % Evénements déclenchants
 {Action utilisateur.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
@@ -133,18 +113,17 @@ L'utilisateur peut savoir la version du compilateur avec le quel compile ses sou
 {} % flot exceptions
 % Fin de la fiche du cas d'utilisation 3.
 %Cas d'utilisation
-\subsection{Cas d'utilisation EF\_7}
+\subsection{Cas d'utilisation EF\_6}
 \fiche
-{Définir des dépendances entre sources et classes}          % Nom du cas d'utilisation
+{Indiquer les chemins des dépendances entre sources et classes déjà compilées}          % Nom du cas d'utilisation
 {Utilisateur du compilateur}                               % Acteurs concernés
 {                                                % Description
    
-L'utilisateur peut définir les dépendances utiles pour la compilation entre les sources et des fichiers déjà compilés    
-}
+L'utilisateur peut définir les dépendances pour la compilation de son application, en indiquant des chemins entre les sources et des fichiers déjà compilés.}
 {
   
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande:kawac filessources -d path}                             % Evénements déclenchants
 {Action utilisateur.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
@@ -154,18 +133,18 @@ L'utilisateur peut définir les dépendances utiles pour la compilation entre le
 % Fin de la fiche du cas d'utilisation 3.
 
 %Cas d'utilisation
-\subsection{Cas d'utilisation EF\_8}
+\subsection{Cas d'utilisation EF\_7}
 \fiche
 {Activer l'affichage en couleur}          % Nom du cas d'utilisation
 {Utilisateur du compilateur}                               % Acteurs concernés
 {                                                % Description
    
-L'utilisateur peut activer l'option de l'affichage en couleur, afin de décorer les messages renvoyés par le compilateur.   
+  L'utilisateur peut activer l'option de l'affichage en couleur, afin de décorer les messages renvoyés par le compilateur dans les différents modes de compilation.   
 }
 {
   
 }                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
+{Commutateur de ligne de commande:kawac filessource --color}                             % Evénements déclenchants
 {Action utilisateur.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions

@@ -17,11 +17,11 @@
   L'odre de priorité entre le commutateur de help (-h ou --help) et le commutateur de version (-v ou --version) est définit par la première occurrence de l'un des deux commutateur i-e si nous avons un \textbf {-h} avant un \textbf {-v}, le compilateur annule tout le reste et affiche le help 
 }                                                % Préconditions
 {Commutateur de ligne de commande :kawac -h ou --help}                             % Evénements déclenchants
-{Action utilisateur}                       % Conditions d'arrêt
+{Action utilisateur permettant de quiter ce mode }                       % Conditions d'arrêt
 % {0.6}{../res/stb/usecase2_flot_event.png}      % Diagramme
 {} % acteur(s)
 {} % system
-{} % flot exceptions
+{} % flot exceptionsb
  % fin usecase EF_1
 
 \subsection{Cas d'utilisation EF\_2}
@@ -37,14 +37,14 @@
 	respectant la syntaxe du langage kawa.La non présence des deux commutateurs (-h ou --help) et (-v ou --version) dans la ligne de commande permettant la compilation est obligatoire
 }                                                % Préconditions
 {Commutateur de ligne de commande :kawac -m filessources.}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
+{Fin du programme (succès de la compilation),ou bien un message renvoyé par le compialteur indiquant une erreur rencontrée lors de l'analyse de programme, ainsi que dans certains cas le compilateur ne touve pas les fichiers à compiler. 
+}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
 {                                                % Flots d'exceptions
   
 }
 {} % system
-{ Abondant provoqué par l'utilisateur. } % flot exceptions
+{Abondant provoqué par l'utilisateur, comme la fermeture du terminal au cours de la compilation. } % flot exceptions
 % Fin de la fiche du cas d'utilisation 1.
 
 
@@ -62,13 +62,12 @@
 	
 }                                                % Préconditions
 {Commutateur de ligne de commande:kawac filessources [options]}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
+{Fin du programme (succès de la compilation),ou bien un message renvoyé par le compialteur indiquant une erreur rencontrée lors de l'analyse de programme, ainsi que dans certains cas le compilateur ne touve pas les fichiers à compiler.} % Conditions d'arrêt
 %{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
 {                                                % Flots d'exceptions
   
 }{} % system
-{Abondant provoqué par l'utilisateur.} % flot exceptions
+{Abondant provoqué par l'utilisateur,comme la fermeture du terminal au cours de la compilation.} % flot exceptions
 % Fin de la fiche du cas d'utilisation 2.
 
 
@@ -83,14 +82,13 @@
 {
   La non présence des deux commutateurs (-h ou --help) et (-v ou --version) dans la ligne de commande permettant la compilation est obligatoire.
 }                                                % Préconditions
-{Commutateur de ligne de commande:kawac filessources [options] }                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation.}                       % Conditions d'arrêt
+{Commutateur de ligne de commande:kawac filessources [options] } % Evénements déclenchants
+{Fin du programme (succès de la compilation),ou bien un message renvoyé par le compialteur indiquant une erreur rencontrée lors de l'analyse de programme, ainsi que dans certains cas le compilateur ne touve pas les fichiers à compiler.} % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
  
 }{} % system
-{Abondant provoqué par l'utilisateur.} % flot exceptions
+{Abondant provoqué par l'utilisateur,comme la fermeture du terminal au cours de la compilation.} % flot exceptions
 % Fin de la fiche du cas d'utilisation 3.
 %Cas d'utilisation
 \subsection{Cas d'utilisation EF\_5}
@@ -105,7 +103,7 @@ L'utilisateur peut savoir la version du compilateur avec le quel compile ses sou
    L'odre de priorité entre le commutateur de help (-h ou --help) et le commutateur de version (-v ou --version) est définit par la première occurrence de l'un des deux commutateur i-e si nous avons un \textbf {-v} avant un \textbf {-h}, le compilateur annule tout le reste et affiche la version
 }                                                % Préconditions
 {Commutateur de ligne de commande:kawac -v ou --version}                             % Evénements déclenchants
-{Action utilisateur.}                       % Conditions d'arrêt
+{Fin du programme.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
  
@@ -124,12 +122,12 @@ L'utilisateur peut définir les dépendances pour la compilation de son applicat
   
 }                                                % Préconditions
 {Commutateur de ligne de commande:kawac filessources -d path}                             % Evénements déclenchants
-{Action utilisateur.}                       % Conditions d'arrêt
+{Fin du programme (succès de la compilation),ou bien un message renvoyé par le compialteur indiquant une erreur rencontrée lors de l'analyse de programme, ainsi que dans certains cas le compilateur ne touve pas les fichiers à compiler.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
  
-}{} % system
-{} % flot exceptions
+}{} % condition d'arret
+{Abondant provoqué par l'utilisateur, comme la fermeture du terminal au cours de la compilation.} % flot exceptions
 % Fin de la fiche du cas d'utilisation 3.
 
 %Cas d'utilisation
@@ -145,7 +143,7 @@ L'utilisateur peut définir les dépendances pour la compilation de son applicat
   
 }                                                % Préconditions
 {Commutateur de ligne de commande:kawac filessource --color}                             % Evénements déclenchants
-{Action utilisateur.}                       % Conditions d'arrêt
+{Fin du programme.}                       % Conditions d'arrêt
 %{0.6}{../res/stb/usecase3_flot_event.png}     % Diagramme
 {                                                % Flots d'exceptions
  

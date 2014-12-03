@@ -45,9 +45,9 @@
 LLVM est une infrastructure modulaire permettant la réalisation de
 chaînes de compilation et conçue pour l'optimisation. Elle met en oeuvre
 une représentation intermédiaire du code qui permet de découpler les
-langages de l'architecture. Nore objectif est de réaliser, à l'aide de
-l'infrastructure LLVM, un comilateur pour un langage jouet, que nous
-appellerons Kawa, ce dernier doit supporter:
+langages de l'architecture. Notre objectif est de réaliser, à l'aide de
+l'infrastructure LLVM, un compilateur pour un langage jouet, que nous
+appellerons \textbf {Kawa}, ce dernier doit supporter:
  \begin{itemize}
  	\item	Les classes, les classes abstraites, les interfaces
 	\item   L'héritage
@@ -57,15 +57,28 @@ appellerons Kawa, ce dernier doit supporter:
 	\item   Les instructions de contrôle telles ques (if/else, for,
 	  while/do, switch, etc.).
 	\item   Les méthodes seront définies de manière identique à Java
-	  execpté que les paramètres pourront être préfixés du mot clé
+	  excepté que les paramètres pourront être préfixés du mot clé
 	  \bsc{value} (transmission par valeur au lieu de référence)
  \end{itemize}
 
 
-\subsection{Besoins opérationnels}
+%\subsection{Besoins opérationnels}
 \subsection{Objectifs techniques}
-\subsection{Contraintes et recommendations}
-\subsection{Résultats attendus}
+%Descritpion et motivation de l'utilisation de kawa et llvm
+l'objectif  à travers le choix du langage \textbf {kawa} qui est similaire  à \textbf {java} ( un langage de haut niveau d'abstraction) c'est de permettre une facilité ainsi qu'une rapidité de développement par rapport à d'autres langages de programmation tel que le « C ».Le code Java  est compilé dans un langage intermédiaire  Bytecode et est exécuté dans un environnement d'exécution JVM (Java Virtual Machine), dans le cadre de notre projet nous allons montrer que l'on peut compiler un code similaire à java (kawa) en code natif sans passer par une machine virtuelle (MV), cette manière de compilation permet d'avoir un code machine en un seul passage à l'encontre de compilateur « javac » qui produit le code binaire en deux passages, un premier passage  pour générer de pseudo code (bytecode) et le deuxième passage  pour optimiser et traduire localement le bytecode en instructions du processeur de la plate-forme.
+
+Pour réaliser le compilateur du langage \textbf {kawa} nous allons utiliser l'infrastructure \textbf {LLVM}, à travers cette infrastructure moderne nous allons apprendre la compilation d'un langage évolué dans ces différentes étapes jusqu'à la génération de code machine, car LLVM fournit des librairies facilitant l’écriture de front-end (transformation de code source en une représentation intermédiaire \textbf {IR}), ainsi que la partie  back-end (transformation de la représentation intermédiaire en code machine).
+
+Nous allons  bénéficier dans le cadre de ce projet des différents avantages offerts par \textbf {LLVM} et \textbf {Clang} (compilateur c++ basé sur llvm) tels que :
+\begin{itemize}
+\item Les messages d’erreurs sont beaucoup plus compréhensibles.
+\item La rapidité de la compilation ainsi que l'optimisation de la vitesse d'exécution.
+\item Une architecture en bibliothèque qui est suffisamment modulaire ce qui rend facile le développement et l'intégration de d'autres bibliothèques.
+\item La portabilité sur d'autres architectures.
+\end{itemize}
+
+%\subsection{Contraintes et recommendations}
+%\subsection{Résultats attendus}
 
 \section{Documents applicables et de référence}
 % Liste des
@@ -83,7 +96,7 @@ Différents documents de référence :
   \begin{itemize}
   	\item LLVM : (Low Level Virtual Machine) est une infrastructure de compilateur conçue optimisation à la compilation.
 	\item Kawa : langage jouet qui reprend quelques fonctionnalités de java.
-	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par APPELE.
+	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par APPLE.
 	\item GIT : logiciel qui permet de stocker un ensemble de fichiers en conservant la chronologie de toutes les modifications qui ont été effectuées dessus.
 	\item ELF : (Executable and Linkable Format) est un format de fichier binaire utilisé pour l'enregistrement de code compilé (objets, exécutables, bibliothèques de fonctions).
 	\item Ubuntu : Distribution linux sur base Debian.

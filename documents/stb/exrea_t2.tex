@@ -1,192 +1,269 @@
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{13cm}|}%|>{\centering}p{3cm}|}
+\begin{tabular}{|>{\centering}p{1,5cm}|>{}p{10cm}|>{\centering}p{3cm}|}
   \hline
   \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}\\
+  \color{white}\cellcolor{blue}\bfseries{Intitulé et Description}&
+  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
 
   \cr
   \hline
   EXR\_1&
-  On pourra choisir le nom du fichier à l'issue de la compilation.
+  {\bfseries Nommage des fichiers de sortie} : On pourra choisir le nom du fichier à l'issue de la compilation.&
+  Indispensable
   \cr
   \hline
   EXR\_2&
-  KAWAC est capable de dire si le code est valide pour la grammaire de KAWA, et émettre des erreurs pour signaler la ligne et un moyen de résolution.
+  {\bfseries Reconnaissance de la grammaire KAWA} : KAWAC est capable de dire si le code est valide pour la grammaire de KAWA, et émettre des erreurs pour signaler à quelle position dans le texte, et si possible proposer une solution au problème.&
+  Indispensable
   \cr
   \hline
   EXR\_3&
-  KAWAC pourra compiler des fichiers et fournir un exécutable qui n'a pas besoin de bibliothèques externes pour fonctionner. L'ensemble du code donné en entrée devra fournir une méthode main, qui sera le point d'entrée de l'application.
+  {\bfseries Compilation d'application en monolithique} : KAWAC pourra compiler des fichiers et fournir un exécutable qui n'a pas besoin de bibliothèques externes pour fonctionner. L'ensemble du code donné en entrée devra fournir une méthode main, qui sera le point d'entrée de l'application.&
+  Indispensable
   \cr
   \hline
   EXR\_4&
-  KAWAC pourra compiler des fichiers et fournir un exécutable. L'exécutable s'il le faut dépendra de ressources externes pour pouvoir fonctionner. Le code en entrée devra fournir une méthode main, qui sera le point d'entrée de l'application.
+  {\bfseries Compilation d'application partagée} : KAWAC pourra compiler des fichiers et fournir un exécutable. L'exécutable s'il le faut dépendra de ressources externes pour pouvoir fonctionner. Le code en entrée devra fournir une méthode main, qui sera le point d'entrée de l'application.&
+  Important
   \cr
   \hline
   EXR\_5&
-  KAWAC pourra compiler des fichiers et fournir une biblithèque qui dépendra d'aucune bibliothèque externe. Les fichier passés en entrée doivent ne pas contenir de méthode main.
+  {\bfseries Compilation de bibliothèque partagée} : KAWAC pourra compiler des fichiers et fournir une nouvelle bibliothèque. La bibliothèque s'il le faut dépendra de ressources externes pour pouvoir fonctionner. Le code en entrée devra ne pas contenir de methode main.&
+  Important
+
   \cr
   \hline
   EXR\_6&
-  KAWAC pourra compiler des fichiers et fournir une nouvelle bibliothèque. La bibliothèque s'il le faut dépendra de ressources externes pour pouvoir fonctionner. Le code en entrée devra ne pas contenir de methode main.
+  {\bfseries Gestion des mots clés} : KAWA spécifie dans sa grammaire une liste de mots réservés. Ces mots sont utilisés par le développeur pour des actions prédéfinies, et ne peuvent être utilisés comme nom de méthodes, d'attributs ou de variables.&
+  Indispensable
+
   \cr
   \hline
   EXR\_7&
-  KAWAC gère une table de mots clé contenant les mots réservés par la spécification de la grammaire de KAWA. 
+  {\bfseries Fichier de sortie au format ELF} : Le compilateur utilisera le format ELF pour la production des fichiers en sortie. Les fichiers contiendront une section contenant les information permettant la résolution des liens d’appel de fonctions. Les fichiers exécutables utiliseront ces informations pour monter en mémoire les références des bibliothèques externes lors de la phase d'édition des liens.&
+  Indispensable
+
   \cr
   \hline
   EXR\_8&
-  Le compilateur utilisera le format ELF pour effectuer l'édition des liens.
+  {\bfseries Gestion de la mémoire} : La gestion de la mémoire est automatisée. Les réservations et libérations des espaces mémoires utilisés par les objets s’effectuent sans une intervention directe du développeur. Les objets non référencés sont susceptibles d'être désalloués. Une demande d'allocation mémoire ne peut être est faite par l'utilisateur que grâce au mot clé  \textbf{new} permettant d'instancier un objet.&
+  Important
+
   \cr
   \hline
   EXR\_9&
-  Le programme exécutable intégrera un mécanisme permettant de gérer la mémoire au cours de l'exécution.
+  {\bfseries Importation de packages} : Le développeur peut utiliser des entités présents dans des packages externes, grâce au mot clé \textbf{import}.&
+  Important
+
+  \cr
+  \hline  
+  EXR\_10&
+  {\bfseries Déclaration de package} : Le développeur déclarer un package grâce au mot clé \textbf{package}.&
+  Indispensable
+
   \cr
   \hline
-  EXR\_10&
-  KAWAC est capable de reconnaître et compiler des classes écrites en KAWA.
-  \cr
+
+\end{tabular}\\
+
+\newpage
+\begin{tabular}{|>{\centering}p{1,5cm}|>{}p{10cm}|>{\centering}p{3cm}|}
+
   \hline
   EXR\_11&
-  KAWAC est capable de reconnaître et compiler des classes abstraites écrites en KAWA.
+  {\bfseries Reconnaissance et compilation de classes} : KAWAC est capable de reconnaître et compiler des classes écrites en KAWA. La déclaration d'une classe se fait grâce au mot clé \textbf{class}. Une classe est déclarée dans un fichier \textbf{.kawa}, et rend en sortie un fichier \textbf{.klass}. Une classe permet de définir des attributs, des constructeurs et des méthodes. Elle peut être instanciée et utilisée par une ou plusieurs applications. Une classe peut dériver une classe abstraite ou une autre classe et implémenter plusieurs interfaces(Veuillez consulter la grammaire KAWA en annexe pour la syntaxe).&
+  Indispensable
+
   \cr
   \hline
+
   EXR\_12&
-  KAWAC est capable de reconnaître et compiler des interfaces écrites en KAWA.
+  {\bfseries Reconnaissance et compilation de classes abstraites} : KAWAC est capable de reconnaître et compiler des classes abstraites écrites en KAWA.La déclaration d'une classe abstraite se fait grâce aux mots clés abstract class. Une classe abstraite est déclarée dans un fichier \textbf{.kawa}, et rend en sortie un fichier \textbf{.klass}. Contrairement à une classe normale, une classe abstraite ne peut être instanciée. Elle est faite pour être dériver par une autre classe. Cependant, en plus des fonctionnalités d'une classe normale, une classe abstraite peut définir des prototypes de méthodes qui devront être implémentées par les classes filles de la classe abstraite.(Veuillez consulter la grammaire KAWA en annexe pour la syntaxe).&
+  Indispensable
+
   \cr
   \hline
+
+\hline
   EXR\_13&
-  KAWA permet d'utiliser des objets en utilsant des réferences de type différents, à la condition que le type statique soit un ancêtre du type dynamique. Seules les méthodes du type statique sont accéssibles.
+  {\bfseries Reconnaissance et compilation d'interfaces} : KAWAC est capable de reconnaître et compiler des interfaces écrites en KAWA. La déclaration d'une interface se fait grâce au mot clé \textbf{interface}. Une interface est déclarée dans un fichier \textbf{.kawa}, et rends en sortie un fichier \textbf{.klass}. Une interface ne peut que déclarer les prototypes des méthodes que devront implémenter les classes qui implémenteront l’interface. Ces dernières ne peuvent être que de portée publique et sont abstraites. Une interface ne contient ni attribut, ni constructeur. Une interface est destinée à être implémentée par une classe ou partiellement par une classe abstraite. Le développeur utilisera le mot clé \textbf{extends} pour spécifier l’implémentation d'une ou plusieurs interfaces(Veuillez consulter la grammaire KAWA en annexe pour la syntaxe).&
+  Indispensable
+
   \cr
   \hline
   EXR\_14&
-  KAWA autorise la dérivation de classe. KAWA ne gère pas l'héritage multiple de classe.
+  {\bfseries Prise en charge du polymorphisme ad-hoc}: Si plusieurs méthodes portent le même nom, KAWA est capable de déterminer la méthode à appeler lors de l'exécution de l'application en fonction de la signature de la méthode.&
+  Important
+
   \cr
   \hline
   EXR\_15&
-  l'implémentation d'interface : KAWA autorise l'implémentation d'une ou plusieurs interfaces.
+  {\bfseries Prise en charge du polymorphisme de sous-type} : KAWA est capable de déterminer lors de l'exécution la méthode en fonction du type dynamique de la classe appelante. KAWAC n'autorise pas le cast d'objets.&
+  Important
+
   \cr
   \hline
   EXR\_16&
-  KAWA autorise la dérivation de classe. KAWA ne gère pas l'héritage multiple de classe.
-  \cr
-  \hline
-  EXR\_17&
-  KAWA autorise l'implémentation d'une ou plusieurs interfaces.
-  \cr
-  \hline
+  {\bfseries Dérivation d'entités} : En utilisant le mot clé \textbf{extends} dans la déclaration d'une classe, d'une classe abstraite ou d'une interface, l'utilisateur est capable de dériver ou d’implémenter une classe ou des interfaces. Une classe peut dériver une autre classe ou une classe abstraite. Si non abstraite dérive une classe abstraite ou une interface, elle doit implémenter toutes les méthodes abstraites de la classe qu'elle dérive. Une classe ne peut dériver qu'une classe à la fois, mais peut implémenter plusieurs interfaces. Une interface peut dériver plusieurs interfaces, mais ne peut dériver une classe.&
+  Important
 
-
-  EXR\_18&
-  Chaque objet, pour être instancié, fournit une méthode qui permettra son intanciation. KAWAC fournira un constructeur si un n'est pas définit.
-  \cr
-  \hline
-  EXR\_19&
-  Chaque objet fournit une methode qui sera appelée lors de sa destruction par le garbage collector.
-  \cr
-  \hline
-  EXR\_20&
-  On peut déclarer un bloc d'instructions paramétrable s'exécutant s'il est appelé.
-  \cr
-  \hline
-  EXR\_21&
-  On peut allouer des espaces mémoires représentant les champs de chaque objet.
-  \cr
-  \hline
-  EXR\_22&
-  On peut définir des variables temporaires et de portées limitées. Les variables locales ne sont pas des attributs.
-  \cr
-  \hline
-  EXR\_23&
-  On peut définir des espaces mémoires associés aux classes. Les objets instanciant ou dérivant la classe où a été déclaré l'attribut et si la visibilité le permet, pointeront vers la même adresse pour cet attribut.     
   \cr
   \hline
 
 \end{tabular}\\
 \newpage
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{13cm}|}
+\begin{tabular}{|>{\centering}p{1,5cm}|>{}p{10cm}|>{\centering}p{3cm}|}
 
-\hline
+  \hline
+
+  EXR\_17&
+  {\bfseries Mécanisme de constructeur} : Chaque classe, pour être instancié, fournit une ou plusieurs méthodes qui permettront son instanciation.
+  KAWAC fournira un constructeur si aucun constructeur n'est pas définit. L'instanciation se fait grâce au mot clé \textbf{new}, et retourne une référence vers un espace mémoire stockant l'objet. Une classe abstraite peut définir un constructeur, mais ne peut instancier. Une interface n'a pas de constructeur.(Veuillez consulter la grammaire KAWA en annexe pour la syntaxe).&
+  Indispensable
+  \cr
+  \hline
+
+
+  EXR\_18&
+  {\bfseries Mécanisme de finalisation} : Chaque objet fournit une méthode qui sera appelée lors de sa destruction par le garbage collector. Si aucune méthode n'est définie par le développeur, KAWAC en fournira une par défaut.&
+  Secondaire
+
+  \cr
+  \hline
+  EXR\_19&
+  {\bfseries Reconnaissance et définition de méthode et de variables} : On peut déclarer un bloc d'instructions paramétrable s'exécutant s'il est appelé.On peut définir des variables temporaires et dont la portée sera limitée au bloc dans lequel elles ont été déclarées. Les variables locales ne sont pas des attributs et ne sont plus accessibles à la fin du bloc d'instruction les déclarant.&
+  Indispensable
+
+  \cr
+  \hline
+  EXR\_20&
+  {\bfseries Reconnaissance et définition d'attribut d'objet} : On peut déclarer des champs propres à chaque objet. Les espaces attribués à chaque attribut ne sont accessibles que durant la période de vie de l'objet, par les membres de l'objet ou par un programme externe si l'attribut est déclaré public.&
+  Indispensable
+
+  \cr
+  \hline
+  EXR\_21&
+  {\bfseries Définition d'attributs statiques} : On peut définir des espaces mémoires associés aux classes. Les objets instanciant ou dérivant la classe où a été déclaré l'attribut et si la visibilité le permet, pointeront vers la même adresse pour cet attribut. Une méthode statique ne peut accéder aux attributs ou méthodes qui ne sont pas statiques.&
+  Important
+
+  \cr
+  \hline
+
+  EXR\_22&
+  {\bfseries Définition d'attribut de constantes} :Un attribut constant ne peut être modifié après affectation. Il doit avoir été initialisé d'être utilisable par une autre opération que l'affectation.&
+  Secondaire
+
+  \cr
+  \hline
+  EXR\_23&
+  {\bfseries Définition d'attributs, de variables ou de méthodes de type value} : En définissant un attribut avec le mot clé \textbf{value}, on aura accès non pas a une référence vers un espace mémoire stockant les données, mais directement a un bloc de données. Dans le cas d'une méthode, la méthode renvoie un bloc de données représentant le résultat.&
+  Important
+
+  \cr
+  \hline
   EXR\_24&
-  Un attribut constant ne peut être modifié après affectation. Il doit avoir été initialisé avant pour être utilisable par une autre opération que l'affectation.
+  {\bfseries Définition méthode a référence} : La méthode renvoie une référence vers un espace mémoire contenant les données de l'objet renvoyé.&
+  Indispensable
+
   \cr
   \hline
   EXR\_25&
-  En définissant un attribut avec le mot clé \'value\', on aura accès non pas a une réference vers un espace mémoire stockant les données, mais directement a un bloc de données. 
+  {\bfseries Définition méthode a sans référence} : La méthode ne retourne rien.&
+  Indispensable
+
   \cr
   \hline
   EXR\_26&
-  La méthode renvoie un bloc de données représentant le resultat.
+  {\bfseries Définition méthode finale} : La méthode ne peut être surchargée ou redéfinie.&
+  Secondaire
+
   \cr
   \hline
   EXR\_27&
-  La méthode renvoie une référence vers un espace mémoire contenant les données de l'objet renvoyé.
+  {\bfseries Définition méthode statique} : La méthode peut être accessible à partir du nom de la classe. Une méthode statique ne peut faire appel aux attributs non statiques de sa classe.&
+  Important
+
   \cr
   \hline
   EXR\_28&
-  La méthode ne retourne rien.
-  \cr
+  {\bfseries Héritage de méthode} : Une classe dérivant une autre copiera toute les méthodes déjà définit dans l'arborescence de ses ancêtres. Mais ne pourra y accéder que si la visibilité le permet.&
+  Indispensable
+
+  \cr 
+  \hline
+
+\end{tabular}\\
+
+\newpage
+\begin{tabular}{|>{\centering}p{1,5cm}|>{}p{10cm}|>{\centering}p{3cm}|}
+
   \hline
   EXR\_29&
-  La méthode ne peut être surchargée ou redéfinie.
+  {\bfseries Héritage d'attribut} : Une classe dérivant une autre copiera tout les attributs déjà définit dans l’arborescence de ses ancêtres si la visibilité le permet.
+  On ne peut pas redéfinir un attribut déjà définit dans la classe ou interface dérivée.&
+  Indispensable
+
   \cr
   \hline
   EXR\_30&
-  La méthode peut être accéssible à partir du nom de la classe.
+  {\bfseries Redéfinition de méthode} : Une méthode peut être définie avec le nom d'une autre existence, en renvoyant le même type de valeur, ainsi que les mêmes paramétrés dans une autre de l'arborescence de la classe ayant premièrement définit.&
+  Important
+
   \cr
   \hline
   EXR\_31&
-  Une classe dérivant une autre copira toute les méthodes déja définit dans l'arborescence de ses ancêtres. Mais ne pourra y acceder que si la visibilité le permet.
+  {\bfseries Surcharge des méthode} : Une méthode peut être définie avec le nom d'une autre existence, en renvoyant le même type de valeur, mais avec des paramètres différents.&
+  Important
+
   \cr
   \hline
   EXR\_32&
-  Une classe dérivant une autre copira tout les attributs déja definit dans l'arborescenece de ses ancêtres si la visibilité le permet.
+  {\bfseries Concepte de visibilité :} A l'aide des mots clés, on peut définir la visibilité des attributs et méthodes des classes sur plusieurs niveaux. Privée, pour empêcher l'accès en dehors de la classe. Protégée, pour empêcher l'accès en dehors de la classe, sauf pour les hérités de la classe ou de l'interface. Publique pour autoriser l'accès à tous.&
+  Important
+
   \cr
   \hline
   EXR\_33&
-  Une méthode peut être definie avec le nom d'une autre existence, en renvoyant le meme type de valeur, ainsi que les memes parametres.  
+  {\bfseries Portée de variable} : Une variable n'est effective qu'à l’intérieur du bloc à dans lequel elle a été déclarée. &
+  Indispensable
+
   \cr
   \hline
+
   EXR\_34&
-  Une méthode peut être définit avec le nom d'une autre existence, en renvoyant le meme type de valeur, mais avec des paramètres différents.  
+  {\bfseries Gestion des exceptions} : On est capable de provoquer volontairement ou non, une execption qui se propagera dans le programme, jusqu'a ce qu'elle soit rattrapée et traitée par le programme. Si une exception n'est pas traité, l'application devra s'arreter et afficher un message d'erreur sur la sortie des erreurs.&
+  Secondaire
+
   \cr
   \hline
+
   EXR\_35&
-  Les valeurs stockées dans les attributs et les variables pourront être réaffectées.
+  {\bfseries Reconnaissance des expression conditionnelles} : KAWA admet des expressions conditionnelles. Le programme exécute un bloc d'instruction donné ou un autre selon des condition définies par le développeur.&
+  Imporant
+
   \cr
   \hline
   EXR\_36&
-  A l'aide des mots clés, on peut définir la visibilité des attributs et methodes des classes sur plusieurs niveaux. Privée, pour empêcher l'accès en dehors de la classe. Protégée, pour empêcher l'accès en dehors de la classe, sauf pour les héritiés de la classe ou de l'interface. Publique pour autoriser l'accès à tous.
+  {\bfseries Reconnaissance des expression de bouclages} : KAWA admet des expressions de bouclage. Le programme répétera l'exécution d'un bloc d’instruction donné tant qu'une condition définies par le développeur est correcte .&
+  Important
+
   \cr
   \hline
   EXR\_37&
-  Une variable n'est effective qu'à l'interieur du bloc à dans lequel elle a été déclarée.
+  {\bfseries Bloc de classe} : La définition du corps de l'objet se fera a l’intérieur d'un bloc délimité par \{ et \}. Le bloc de classe est le bloc générale contenant toutes les déclarations liées à une classe. A part les importations de packages, la déclaration de l'entête de la classe ou interface ou les commentaires, aucun autre élément ne doit être présent dans le fichier. On ne peut définir qu'une classe par fichier et KAWA n'autorise pas la déclaration de classe imbriquée.&
+  Indispensable
+
   \cr
   \hline
   EXR\_38&
-  Une méthode accepte des références ou des bloc de données en paramètre et les remplace aux bons endroits dans son bloc d'execution.  
+  {\bfseries Bloc d'instruction} : On peut définir une suite d'instructions délimité par \{ et \}. Un bloc d'instruction peut contenir d'autres blocs.&
+  Indispensable
+
   \cr
   \hline
   EXR\_39&
-  KAWA admet des expressions conditionnelles.
-  \cr
-  \hline
-  EXR\_40&
-  KAWA admet des expressions de bouclage.
-  \cr
-  \hline
-  EXR\_41&
-  KAWAC gère une table de mots clé contenant les mots réservés par la spécification de la grammaire de KAWA.
-  \cr
-  \hline
-  EXR\_42&
-  La défintion du corps de l'objet se fera à l'intérieur d'un bloc délimité paramétré. Un bloc de classe ne peut en contenir un autre.
-  \cr
-  \hline
-  EXR\_43&
-  On peut définir une suite d'instructions délimité paramétré. Un bloc d'instruction peut contenir d'autres blocs.
-  \cr
-  \hline
-  EXR\_44&
-  On peut définir une suite d'instructions délimité paramétré. Les instructions contenues dans le bloc sont répétées tant qu'une certaines condtions sont remplies. Un bloc de bouclage peut contenir d'autres blocs.
+  {\bfseries Reconnaissance des commentaires} : Le développeur peut laisser des commentaires dans le code KAWA. Ces commentaire seront reconnus et ignorés par KAWAC lors de la compilation.&
+  Important
+
   \cr
   \hline
 

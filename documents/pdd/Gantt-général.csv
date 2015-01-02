@@ -1,0 +1,30 @@
+N°;Nom_tâche;Durée;Date_début;date_fin;Prédécesseurs;Noms_ressources
+1;Compilateur kawa;89 jours?;20/01/2015 09:00;22/05/2015 18:00;;
+2;Application mode monolithique;39 jours;20/01/2015 09:00;13/03/2015 18:00;;
+3;Recherche sur LLVM;9 jours;20/01/2015 09:00;30/01/2015 18:00;;7 personnes
+4;Analyse lexicale (Lexer);5 jours;02/02/2015 09:00;06/02/2015 18:00;3;1 personne
+5;Analyse syntaxique (Paser);15 jours;02/02/2015 09:00;20/02/2015 18:00;3;3 personnes
+6;Analyse sémantique 1;5 jours;02/02/2015 09:00;06/02/2015 18:00;3;3 personnes
+7;Analyse sémantique 2;10 jours;09/02/2015 09:00;20/02/2015 18:00;6;4 personnes
+8;Tests;5 jours;23/02/2015 09:00;27/02/2015 18:00;7;2 personnes
+9;Génération de IR;5 jours;23/02/2015 09:00;27/02/2015 18:00;7;5 personnes
+10;Back-end;5 jours;02/03/2015 09:00;06/03/2015 18:00;9;7 personnes
+11;Retour client et correction;5 jours;09/03/2015 09:00;13/03/2015 18:00;10;7 personnes
+12;Application mode partagé;50 jours;16/03/2015 09:00;22/05/2015 18:00;;
+13;Analayse syntaxique (Parser);10 jours;16/03/2015 09:00;27/03/2015 18:00;11;3 personnes
+14;Analyse sémantique;15 jours;16/03/2015 09:00;03/04/2015 18:00;11;4 personnes
+15;Génération de IR;5 jours;06/04/2015 09:00;10/04/2015 18:00;14;5 personnes
+16;Tests;5 jours;06/04/2015 09:00;10/04/2015 18:00;14;2 personnes
+17;Back-end;5 jours;13/04/2015 09:00;17/04/2015 18:00;15;7 personnes
+18;Retour client et correction;5 jours;20/04/2015 09:00;24/04/2015 18:00;17;7 personnes
+19;Bibliothèque partagée;20 jours;27/04/2015 09:00;22/05/2015 18:00;;
+20;Sémantique de bibliothèque partagée;5 jours;27/04/2015 09:00;01/05/2015 18:00;18;7 personnes
+21;Génération de IR;5 jours;04/05/2015 09:00;08/05/2015 18:00;20;5 personnes
+22;Tests;5 jours;04/05/2015 09:00;08/05/2015 18:00;20;2 personnes
+23;Back-end ;5 jours;11/05/2015 09:00;15/05/2015 18:00;21;7 personnes
+24;Retour client et correction;5 jours;18/05/2015 09:00;22/05/2015 18:00;23;7 personnes
+;;;;;;
+26;Livrables;51 jours?;06/02/2015 09:00;17/04/2015 18:00;;
+27;Livrable 1;1 jour?;06/03/2015 09:00;06/03/2015 18:00;;
+28;Livrable 2;1 jour?;17/04/2015 09:00;17/04/2015 18:00;;
+29;Livrable 3;;15/05/2015 09:00;15/05/2015 18:00;;

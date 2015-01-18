@@ -4,7 +4,7 @@ RM=rm -f
 PARTS=parts
 all: $(doc).pdf
 
-$(doc).pdf: $(doc).tex $(PARTS)/stb.tex $(PARTS)/pdd.tex $(PARTS)/adr.tex $(PARTS)/cdr.tex
+$(doc).pdf: $(doc).tex $(PARTS)/stb.tex $(PARTS)/pdd.tex $(PARTS)/adr.tex $(PARTS)/cdr.tex $(PARTS)/dal.tex
 	$(CC) $<
 	$(CC) $<
 clean:

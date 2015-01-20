@@ -25,7 +25,6 @@
 %\setbeamercolor{normal text}{bg=gray!10}
 % ... and you can of course change a lot more - see the beamer user manual.
 
-
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -92,7 +91,7 @@
 %%%%%%%%%%%%%%%%
 \section{Introduction}
 % motivation for creating this theme
-  \subsection{Présentation de l'équipe}
+  %\subsection{Présentation de l'équipe}
     \begin{frame}{Introduction}{Présentation de l'équipe}
       \begin{block}{Présentation de l'équipe}
         \begin{figure}[!h]
@@ -105,16 +104,20 @@
 %%%%%%%%%%%%%%%%
 
 \input{parts/stb}
+\input{parts/dal}
 \input{parts/pdd}
 \input{parts/adr}
 \input{parts/cdr}
-\input{parts/dal}
 \section{Conclusion}
 \begin{frame}{Conclusion}
-  Projet LLVM : Compilateur Kawa
-  \begin{center}
-    \insertauthor
-  \end{center}
+  \begin{itemize}
+    \item<1-> Nous allons commencer réalisation pendant le second semestre, tout en ce basant sur la première partie.
+    \item<2-> Les documents seront constamment mis à jour durant cette phase de réalisation.
+  \end{itemize}
+  
+  %\begin{center}
+  %  \insertauthor
+  %\end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%
 

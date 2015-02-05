@@ -1,0 +1,187 @@
+//plusieurs packages
+import Kawa.Collections.* ;
+import Kawa.Map.HashMap;
+
+public static class teste extends inter1 implements interface1 {
+	 /* 
+	 	commentaire
+	 	plusieurs lignes
+	 */
+
+	 // tableau initialisé ou pas 
+	 int var1 [] = {3, 5};
+	 float var2[];
+
+	 // variable simple
+	 float var3;
+	 
+	 // variable simple initialisé
+	 float var4 = 5;
+	 
+	 //plusieurs variables séparés par des virgules
+	 char c1, c2, c3; 
+
+	 // variables de type objet
+	 Teste t1 = new Teste();
+	 Teste t2 = new Teste(int age, char nom, float salaire);
+
+	 //plusieurs variables de type objet séparés par des virgules
+	 Teste t3 = new Teste(int age, char nom, float salaire), t4 = new Teste();
+	 
+	 // tableau d'objets initialisés ou pas 
+	 Teste t5[] = {new Teste(int x), new Teste()};
+	 Teste t6[] = {};
+
+	 // Variable initialisé par une methode d'un objet
+	 int var5 = t1.getAge();
+	 // tableau initialisé par des methodes des objets
+	 float var6 = {t1.getAge(), t2.getAge()};
+
+	 //fonction sans parametres avec des variables locaux et valeur de retour
+	 public char method1(){
+	 	// tableau initialisé ou pas 
+	 	int var1 [] = {3, 5};
+	 	float var2[];
+
+	 	// variable simple
+	 	float var3;
+	 
+	 	// variable simple initialisé
+	 	float var4 = 5;
+	 
+	 	//plusieurs variables séparés par des virgules
+	 	char c1, c2, c3; 
+
+	 	// variables de type objet
+	 	Teste t1 = new Teste();
+	 	Teste t2 = new Teste(int age, char nom, float salaire);
+
+	 	//plusieurs variables de type objet séparés par des virgules
+	 	Teste t3 = new Teste(int age, char nom, float salaire), t4 = new Teste();
+	 
+	 	// tableau d'objets initialisés ou pas 
+	 	Teste t5[] = {new Teste(int x), new Teste()};
+	 	Teste t6[] = {};
+
+	 	// Variable initialisé par une methode d'un objet
+	 	int var5 = t1.getAge();
+	 	// tableau initialisé par des methodes des objets
+	 	float var6 = {t1.getAge(), t2.getAge()};
+	 	// ; est acceptable 
+	 	;
+	 	// if else 
+	 	if(x>y){
+	 		if(y<100){
+	 			float var6;
+	 		}
+	 		else{
+	 			float var7;
+	 		}
+	 	}
+
+	 	// boucle while 
+	 	while(W>10){
+	 		if(x>10){
+	 			byte b ;
+	 		}
+	 	}
+
+	 	//boucle do while 
+	 	do{
+	 		char x;
+	 		int y = 200; 
+	 	}while(z<10);
+
+	 	return z ;
+	 }
+
+	 //void fonction parametrée avec les conditions if else et les boucle while et do while et return ; 
+	 private void methode2(int x, Test t, float [] tableau){
+	 	// if else 
+	 	if(x>y){
+	 		if(y<100){
+	 			float var6;
+	 		}
+	 		else{
+	 			float var7;
+	 		}
+	 	}
+
+	 	// boucle while 
+	 	while(W>10){
+	 		if(x>10){
+	 			byte b ;
+	 		}
+	 		else
+	 			break;
+	 	}
+
+	 	//boucle do while 
+	 	do{
+	 		char x;
+	 		int y = 200; 
+	 	}while(z<10);
+
+	 	return ;
+	 }
+
+	 // constructeur sans parametres avec une boucle while étiqueté
+	 public Teste(){
+	 	int j=3;
+	 	Boucle : while(j<nbMax){
+	 				int k;
+	 			}
+	 }
+
+	 // constructeur avec parametres
+	 public Teste(int [] op1, value Personne p){
+	 	int j=3;
+	 	Boucle : while(j<nbMax){
+	 				int k;
+	 			}
+	 }
+
+	 //fonction avec les possibiltés de la boucle for
+	 protected methode3(int [][] tabl){
+	 	// for avec les 3 parametres
+	 	for(int i=0; i<10; i++){
+	 		i++;
+	 	}
+	 	
+	 	//for avec le 1er et 2em parametre
+	 	for(int j=test.getAge(); j<90; ){
+	 		j++;
+	 	}
+	 	
+	 	//for avec le 1er et 3em parametre
+	 	for(int k=20; ; k--){
+	 		j++;
+	 	}
+
+	 	//for avec le 2er et 3em parametre
+	 	for(;l<varMax; l++){
+	 		j++;
+	 	}
+	 	
+	 	//for avec le 1er parametre
+	 	for(int n; ;){
+	 		l++;
+	 	}
+
+	 	//for avec le 2em parametre
+	 	for(;j!=100;){
+	 		x;
+	 	}
+
+	 	//for avec le 3em parametre
+	 	for(;;j++){
+	 		x;
+	 	}
+
+	 	//for infini
+	 	for(;;){
+	 		k--;
+	 	}
+	 	
+	 }
+}

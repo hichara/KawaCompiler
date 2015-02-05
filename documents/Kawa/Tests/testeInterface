@@ -1,0 +1,20 @@
+//plusieurs packages
+import Kawa.Collections.* ;
+import Kawa.Map.HashMap;
+
+public interface inter extends inter1, inter2 {
+	 // tableau initialisé ou pas 
+	 static int var1 [] = {3, 5};
+	 //float var2, var3; /*erreur*/
+
+	 // variables de type objet
+	 Teste t1 = new Teste();
+	 Teste t2 = new Teste(int age, char nom, float salaire);
+
+	 
+	 //fonction sans parametres
+	 public char method1();
+
+	 //void fonction parametrée 
+	 private void methode2(int x, Test t, float [] tableau);
+}

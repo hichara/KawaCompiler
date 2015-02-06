@@ -1,0 +1,19 @@
+//plusieurs packages
+import Kawa.Collections.* ;
+import Kawa.Map.HashMap;
+
+public static class teste extends inter1 implements interface1, interface2 {
+	 //fonction avec switch
+	 protected int methode4(int var3){
+		switch(chaine) {
+  			case 1:
+    			x++;
+    			break;
+  			case 2:
+    			y++;
+    			break;
+  			default:
+    			z++;
+		}
+	 }
+}

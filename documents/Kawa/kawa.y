@@ -51,7 +51,7 @@
 %type<vstring> Block BlockStatements BlockStatement /*LocalVariableDeclarationStatement*/ Statement
 /*%type<vstring> Catches CatchClauses CatchClause CatchType QualifiedIdentifiers*/
 /*%type<vstring> ResourceSpecification Resources ResourceList Resource*/
-/*%type<vstring> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabels SwitchLabelRest SwitchLabel*/
+%type<vstring> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vstring> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
 /*%type<vstring> Expression  ExpressionOr ExpressionAnd ExpressionEqNeq ExpressionCompEq TermePlus terme facteur*/
@@ -350,7 +350,7 @@ LocalVariableDeclarationStatement:
 Statement: Block 
     	 | TIF '(' Expression ')' Statement %prec THEN
 		 | TIF '(' Expression ')' Statement TELSE Statement
-		 /*| TSWITCH '(' Expression ')' '{' SwitchBlockStatementGroups '}' */
+		 | TSWITCH '(' Expression ')' '{' SwitchBlockStatementGroups '}'
 		 | TWHILE '(' Expression ')' Statement
 		 | TDO Statement TWHILE '(' Expression ')' ';'
 		 | TFOR '(' ForControl ')' Statement
@@ -398,26 +398,17 @@ ResourceList : ';' ResourceList Resource {$$=$2;}
 Resource: VariableModifiers QualifiedIdentifier VariableDeclaratorId '=' Expression
 		;
 */
-/*----------------------------------------Partie switch----------------------------------------------
+/*----------------------------------------Partie switch----------------------------------------------*/
 SwitchBlockStatementGroups: SwitchBlockStatementGroups SwitchBlockStatementGroup
 						  | {$$=" ";}
 						  ;
 
-SwitchBlockStatementGroup: SwitchLabels BlockStatements
+SwitchBlockStatementGroup: SwitchLabel BlockStatements
 						 ;
 
-SwitchLabels: SwitchLabel SwitchLabelRest
-			;
-
-SwitchLabel: TCASE Expression ':'
+SwitchLabel: TCASE Expression ':' 
     	   | TDEFAULT ':'
     	   ;
-
-SwitchLabelRest : SwitchLabelRest SwitchLabel
-			    | {$$=" ";}
-			    ;
-*/
-
 /*------------------------------ partie for -----------------------------------------------------------------*/
 ForControl: ForVarControl ';' Expression ';' 
 		  | ForVarControl ';' Expression ';' ForUpdate 

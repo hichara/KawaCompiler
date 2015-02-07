@@ -23,13 +23,13 @@ public static class teste extends inter1 implements interface1 {
 
 	 // variables de type objet
 	 Teste t1 = new Teste();
-	 Teste t2 = new Teste(age, nom, salaire);
+	 Teste t2 = new Teste(int age, char nom, float salaire);
 
 	 //plusieurs variables de type objet séparés par des virgules
-	 Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
+	 Teste t3 = new Teste(int age, char nom, float salaire), t4 = new Teste();
 	 
 	 // tableau d'objets initialisés ou pas 
-	 Teste t5[] = {new Teste(x), new Teste()};
+	 Teste t5[] = {new Teste(int x), new Teste()};
 	 Teste t6[] = {};
 
 	 // Variable initialisé par une methode d'un objet
@@ -54,13 +54,13 @@ public static class teste extends inter1 implements interface1 {
 
 	 	// variables de type objet
 	 	Teste t1 = new Teste();
-	 	Teste t2 = new Teste(age, nom, salaire);
+	 	Teste t2 = new Teste(int age, char nom, float salaire);
 
 	 	//plusieurs variables de type objet séparés par des virgules
-	 	Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
+	 	Teste t3 = new Teste(int age, char nom, float salaire), t4 = new Teste();
 	 
 	 	// tableau d'objets initialisés ou pas 
-	 	Teste t5[] = {new Teste(x), new Teste()};
+	 	Teste t5[] = {new Teste(int x), new Teste()};
 	 	Teste t6[] = {};
 
 	 	// Variable initialisé par une methode d'un objet
@@ -135,29 +135,17 @@ public static class teste extends inter1 implements interface1 {
 
 	 // constructeur avec parametres
 	 public Teste(int [] op1, value Personne p){
-	 	super();
-	 	super(k, t);
-	 	this.par = 5;
-	 	this.par = getAge();
-	 	this.SetName(name[3]);
-	 	this.getName();
-	 	this.name = NULL;
-	 	boolean b = false; 
 	 	int j=3;
-	 	tabl[3] = 5;
 	 	Boucle : while(j<nbMax){
 	 				int k;
 	 			}
 	 }
 
 	 //fonction avec les possibiltés de la boucle for
-	 protected int methode3(int [][] tabl){
+	 protected methode3(int [][] tabl){
 	 	// for avec les 3 parametres
-	 	for(int i=0; i<getMax()&&j>getMax(); i++){
+	 	for(int i=0; i<10; i++){
 	 		i++;
-	 		x=x+1;
-	 		x=getMax();
-	 		x= setMax(15);
 	 	}
 	 	
 	 	//for avec le 1er et 2em parametre
@@ -171,7 +159,7 @@ public static class teste extends inter1 implements interface1 {
 	 	}
 
 	 	//for avec le 2er et 3em parametre
-	 	for(;l<var.getMax(); l++){
+	 	for(;l<varMax; l++){
 	 		j++;
 	 	}
 	 	
@@ -195,19 +183,5 @@ public static class teste extends inter1 implements interface1 {
 	 		k--;
 	 	}
 	 	
-	 }
-
-	 //fonction avec switch
-	 protected int methode4(int var3){
-		switch(chaine) {
-  			case 1:
-    			x++;
-    			break;
-  			case 2:
-    			y++;
-    			break;
-  			default:
-    			z++;
-		}
 	 }
 }

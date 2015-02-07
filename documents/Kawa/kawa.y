@@ -7,6 +7,8 @@
 	int yyparse();
 	int yylex();
 	int yyerror (char *msg);
+	extern int column;
+	extern int lineno; 
 %}
 
 %token<vstring> ENTIER REEL ID  
@@ -15,12 +17,12 @@
 %token<vstring> TPUBLIC TPRIVATE TPROTECTED
 %token<vstring> TFINAL TABSTRACT TSTATIC /*TCONST TENUM*/ TVALUE
 %token<vstring> TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
-/*%token<vstring> TSUPER TTHIS TTHROW TTHROWS TTRY TCATCH TSYNCHRONIZED*/
+%token<vstring> TSUPER TTHIS /*TTHROW TTHROWS TTRY TCATCH TSYNCHRONIZED*/
 %token<vstring> TIF TELSE
-/*%token<vstring> TFALSE TTRUE*/
+%token<vstring> TFALSE TTRUE
 %token<vstring> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
 %token<vstring> TFOR TWHILE TDO
-%token<vstring> /*TINSTANCEOF TFINALLY*/ TNEW /*TNULL*/ TRETURN
+%token<vstring> /*TINSTANCEOF TFINALLY*/ TNEW TNULL TRETURN
 
 %token<vstring> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vstring> TINC TDEC
@@ -45,17 +47,19 @@
 %type<vstring> MethodDeclaratorRest
 /*%type<vstring> Throws*/ 				
 %type<vstring> ConstructorDeclaratorRest
-%type<vstring> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator /*InterfaceMethodDeclaratorRest*/
-%type<vstring> FormalParameters FormalParameterDecls VariableModifiers VariableModifier FormalParameterDeclsRest VariableDeclaratorId
-%type<vstring> /*VariableDeclarators*/ VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
-%type<vstring> Block BlockStatements BlockStatement /*LocalVariableDeclarationStatement*/ Statement
+%type<vstring> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
+/*%type<vstring> FormalParameters FormalParameterDecls VariableModifiers VariableModifier FormalParameterDeclsRest VariableDeclaratorId*/
+%type<vstring> FormalParameters VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
+%type<vstring> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
+%type<vstring> Block BlockStatements BlockStatement Statement
 /*%type<vstring> Catches CatchClauses CatchClause CatchType QualifiedIdentifiers*/
 /*%type<vstring> ResourceSpecification Resources ResourceList Resource*/
 %type<vstring> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vstring> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
-/*%type<vstring> Expression  ExpressionOr ExpressionAnd ExpressionEqNeq ExpressionCompEq TermePlus terme facteur*/
 %type<vstring> Expression FacteurEffect /*ExpressionCond*/ ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus terme facteur factFinal
+
+%type<vstring> IDExpression TablesIndexe
 
 %union
 {
@@ -63,19 +67,6 @@
 	float vfloat;
 	char* vstring;
 }
-/*
-%nonassoc THEN 
-%nonassoc TELSE
-%left '='
-%left TOR
-%left TAND
-%left TCEQ TCNE
-%left TCGE '>' TCLE '<'
-%left '+' '-'
-%left '%' '*' '/'
-%right MOINUS
-%right TINC TDEC
-*/
 
 %nonassoc THEN 
 %nonassoc TELSE
@@ -114,6 +105,10 @@ Type : BasicType Tables
 	 ;
 
 Tables : '[' ']' Tables {$$=$3;}
+	   | {$$=" ";}
+	   ;
+
+TablesIndexe : '[' ENTIER ']' Tables {$$=" ";}
 	   | {$$=" ";}
 	   ;
 
@@ -199,7 +194,7 @@ InterfaceBodyDeclarations : InterfaceBodyDeclarations InterfaceBodyDeclaration
  						  | {$$=" ";}
  						  ;
 
-InterfaceBodyDeclaration: Modifiers InterfaceMemberDecl /*| ';' {$$=" ";}*/
+InterfaceBodyDeclaration: Modifiers InterfaceMemberDecl
     					;  
 
 /*---------------------------classes Memberes : Methodes, void methods, variables, constructors, classes internes and inrefaces internes---------------*/
@@ -222,10 +217,7 @@ FieldDeclaratorsRest: VariableDeclaratorRest VariableDeclaratorList
 					;
 
 /*-------------------------------------------- partie variables ---------------------------------------------------------*/
-/*
-VariableDeclarators: VariableDeclarator VariableDeclaratorList
-				   ;
-*/
+
 VariableDeclaratorList : ',' VariableDeclarator VariableDeclaratorList {$$=$2;}
 					   | {$$=" ";}
 					   ;
@@ -239,18 +231,11 @@ VariableDeclaratorRest: Tables '=' VariableInitializer
 
 VariableInitializer: ArrayInitializer
 				   | Expression
-				   | ObjectInitializer
-				   | MethodeInitializer
 				   ;
 
 ArrayInitializer: '{' VariableInitializer VariableInitializerList '}' {$$=$2;}
 				| '{' '}' {$$=" ";}
 				;
-ObjectInitializer : TNEW ID Ids FormalParameters
-	   ;
-
-MethodeInitializer : ID Ids FormalParameters
-		;
 
 VariableInitializerList : ',' VariableInitializer VariableInitializerList {$$=$2;} 
 						| {$$=" ";}
@@ -282,7 +267,7 @@ InterfaceMethodOrFieldDecl: Type ID InterfaceMethodOrFieldRest
 						  ;
 
 InterfaceMethodOrFieldRest: ConstantDeclaratorsRest ';'
-    					  | FormalParameters ';' /*InterfaceMethodDeclaratorRest*/
+    					  | FormalParameters ';' 
     					  ;
 
 ConstantDeclaratorsRest: ConstantDeclaratorRest ConstantDeclaratorList
@@ -295,23 +280,27 @@ ConstantDeclarator: ID ConstantDeclaratorRest
 				  ;
 
 ConstantDeclaratorRest: Tables '=' VariableInitializer
+					  | Tables
 					  ;
-
-/*
-InterfaceMethodDeclaratorRest: FormalParameters ';' /*Throws
-							 ; 
-*/
-/*
-VoidInterfaceMethodDeclaratorRest: FormalParameters Throws ';'
-								 ;
-*/  
 
 /*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
 FormalParameters: '(' FormalParameterDecls ')' {$$=$2;}
-				| '(' ')' {$$=" ";}
+				| VoidFormalParametrs
 				;
 
+VoidFormalParametrs : '(' ')' {$$=" ";}
+					;
+
+FormalParametersCalledMethod: '(' FormalParametersCalledMethodDecls ')' {$$=$2;}
+							| VoidFormalParametrs
+							;
+FormalParametersCalledMethodDecls : ID '[' ENTIER ']' TablesIndexe FormalParameterCalledMethodDeclsRest
+								  | Expression FormalParameterCalledMethodDeclsRest
+								  ;
+
 FormalParameterDecls: VariableModifiers Type VariableDeclaratorId FormalParameterDeclsRest
+					;
+
 VariableModifiers : VariableModifiers VariableModifier
 				  | {$$=" ";}
 				  ;
@@ -324,6 +313,10 @@ FormalParameterDeclsRest: ',' FormalParameterDecls {$$=$2;}
 						| {$$=" ";}
 						;
 
+FormalParameterCalledMethodDeclsRest : ',' FormalParametersCalledMethodDecls {$$=$2;}
+									 | {$$=" ";}
+									 ; 
+
 VariableDeclaratorId: ID Tables
 					;
 
@@ -335,18 +328,21 @@ BlockStatements: BlockStatements BlockStatement
 			   | {$$=" ";}
 			   ; 
 
-BlockStatement: Type VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
-    		  /*| ID Ids VariableDeclaratorRest ';' *//*ID Ids '=' Expression ';'*/ /* ID Ids=(Expression,ArrayInitializer,ObjectInitializer,MethodeInitializer)*//* partie de variable déjà déclaré (conflit avec la ligne au dessus) */
+BlockStatement: ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
+			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
+			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' /* des nouveaux variables locaux initialisé ou pas */
+			  /* les 3 premieres lignes remplacent Type VariableDeclarator VariableDeclaratorList ';' qui renvoie un conflit; conflit dans Ids de Type*/
+    		  | ID TablesIndexe '=' Expression ';' {$$ = " ";}
+    		  | Expression ';'
+    		  | TTHIS '.' VariableDeclarator ';' 
+    		  | TTHIS '.' ID FormalParametersCalledMethod ';'
+    		  | TSUPER FormalParametersCalledMethod ';'
     		  | ClassOrInterfaceDeclaration
     		  | ID ':' Statement
     		  | Statement
-    		  | Expression ';'
     		  | ';' {$$ = " ";}
     		  ;
-/*
-LocalVariableDeclarationStatement: 
-								 ;
-*/
+
 Statement: Block 
     	 | TIF '(' Expression ')' Statement %prec THEN
 		 | TIF '(' Expression ')' Statement TELSE Statement
@@ -421,18 +417,23 @@ ForControl: ForVarControl ';' Expression ';'
     	  ;
 
 ForVarControl: Type VariableDeclaratorId  ForVariableDeclaratorsRest
-			 /*| VariableDeclaratorId  ForVariableDeclaratorsRest*/ /* conflit avec la ligne au dessus*/
+			 | ID ForVariableDeclaratorsRest
 			 ;
 
 ForVariableDeclaratorsRest:  VariableDeclaratorList
 						  | '=' VariableInitializer VariableDeclaratorList {$$=$2;}
 						  ;
 
-ForUpdate: Expression StatementExpressionList
+ForUpdate: IDExpression StatementExpressionList
+		 ;
+
 StatementExpressionList : ',' Expression StatementExpressionList{$$=$2;}
 						| {$$=" ";}
 						;   
 
+IDExpression : Expression
+	 		 | ID TablesIndexe '=' Expression
+	 		 ;
 /*-------------------------------------Expression arithmetique----------------------------------------------------*/
 
 Expression : FacteurEffect
@@ -517,16 +518,23 @@ facteur : '~' facteur %prec NBINAIRE {$$=$2;}
 		| TINC ID {$$=$2;}
 		| factFinal
 		;
-/*------------------------
-.
-------------------------
-[]
-------------------------*/
+
 factFinal: '(' Expression ')' {$$=$2;}
 		 | ENTIER 
 		 | REEL
-		 | ID 
+		 | ID
+		 | ObjectInitializer
+		 | MethodeInitializer
+		 | TTRUE
+		 | TFALSE
+		 | TNULL
 		 ;
+
+ObjectInitializer : TNEW ID Ids FormalParametersCalledMethod
+	   ;
+
+MethodeInitializer : ID Ids FormalParametersCalledMethod
+		;
 
 
 %%
@@ -535,7 +543,7 @@ factFinal: '(' Expression ')' {$$=$2;}
 
 int yyerror (char *msg) 
 {
-  printf("erreuuur, %s: '%s' dans la ligne %d\n", msg, yytext, yylineno);
+  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%d]\n", yytext, lineno, column-strlen(yytext));
   return 0;
 }
 

@@ -15,6 +15,46 @@ public class Mere {
 		M_num = 10;
 	}
 	
+	public void toString(){
+		print ("Je suis dans la classe <Mere>");
+	}
+	
+	private void privateInMere(){
+		print ("je ne peux etre appelle uniquement depuis la mere");
+	}
+	
+	protected void protectedInMere(){
+		print("je suis protected venant de mere");
+	}
+	
+	protected void redef(){
+		print("je suis protected et redefini <Mere>");
+	}
+
+	// GETTER && SETTER
+	public char getM_char() {
+		return M_char;
+	}
+
+	public void setM_char(char m_char) {
+		M_char = m_char;
+	}
+
+	public int getM_num() {
+		return M_num;
+	}
+
+	public void setM_num(int m_num) {
+		M_num = m_num;
+	}
+
+	public String getM_nom() {
+		return M_nom;
+	}
+
+	public void setM_nom(String m_nom) {
+		M_nom = m_nom;
+	}
 	
 	
 }

@@ -4,6 +4,10 @@ public class Main {
 
 	public static void main(String[] a){
 		
+		/* *****************************************
+		********** TEST SUR CLASSE SIMPLE **********
+		*******************************************/
+		
 		// Fille
 		
 		// => Doit marcher
@@ -45,12 +49,38 @@ public class Main {
 		Fille f5 = new Fille(20, "20", "10", '2');		// arg3 faux
 		Fille f6 = new Fille(20, "20", 20.0, "20");		// arg4 faux
 		
-		// Erreur sur la visibilité et accessibilité
+		// Erreur sur la visibilitÃ© et accessibilitÃ©
 		print("(P)Lettre de f1 : "+f1.F_lettre);		// lettre est protected
 		f1.numInt = 20;									// numInt est private
 		f1.setCONST('z');  								// CONST est une constance
 		f1.setValue(200);								// setValue() est private
 	
+		
+		/* *****************************************
+		******** TEST SUR HERITAGE SIMPLE **********
+		*******************************************/
+		// => Marche
+		f1.protectedInMere();
+		f1.noErrorProtectedInParent();
+		f1.M_char = 'w';
+		print ("M_char depuis fille : "+f1.getM_char());
+		f1.redef();
+		
+		Mere fMere = new Fille();
+		Mere mere = new Mere();
+		
+		print("Doit etre fille : ");
+		fMere.redef();
+		fMere.toString();
+
+		print("Doit etre mere : ");
+		mere.redef();
+		mere.toString();
+		
+		// => Erreur
+		fMere.noErrorProtectedInParent();		// non visible depuis interface de Mere
+		f1.errorPrivateAttributParent();		// appelle attribut non visible
+		f1.errorPrivateMethodParent();			// appelle methode non visible
 	}
 	
 }

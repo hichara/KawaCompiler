@@ -1,6 +1,6 @@
 package mise_en_jambes;
 
-public class Fille {
+public class Fille extends Mere{
 
 	// Attributs
 	public double F_numDouble;
@@ -19,10 +19,12 @@ public class Fille {
 		F_nom = "100";
 		F_numDouble = 100.0;
 		F_lettre = '1';
+		M_num = 1;
 	}
 	
 	public Fille(int num, String nom, double numD, char lettre){
 		F_value = -1;
+		M_num = -2;
 		this.F_numInt = num;
 		this.F_nom = nom;
 		this.F_numDouble = numD;
@@ -30,11 +32,29 @@ public class Fille {
 	}
 	
 	
-	// Méthode d'affichage
-	public String toString(){
-		print("Je suis dans la classe <Fille> : \n\tCONST = "+F_CONST+" - value = "+F_value+" - numInt = "+F_numInt+" - nom = "+F_nom+" - numDouble = "+F_numDouble+" - lettre = "+F_lettre);
+	// MÃ©thode d'affichage
+	public void toString(){
+		print("Je suis dans la classe <Fille> : \n\tCONST = "+F_CONST+" - value = "+F_value+" - numInt = "+F_numInt+" - nom = "+F_nom+" - numDouble = "+F_numDouble+" - lettre = "+F_lettre+" - M_Num : "+M_num);
+	}
+	
+	// Methodes erronées
+	public void errorPrivateAttributParent(){
+		M_nom = "doit pas marcher";
+		print("1. Si ce msg s'affiche c'est pas bon ! "+M_nom);
 	}
 
+	public void errorPrivateMethodParent(){
+		privateInMere();
+		print("2. Si ce msg s'affiche c'est pas bon !");
+	}
+	
+	public void noErrorProtectedInParent(){
+		protectedInMere();
+	}
+	
+	protected void redef(){
+		print("je suis protege et redéfini <Fille>");
+	}
 	// Getter && Setter
 	public char getLettre() {
 		return F_lettre;

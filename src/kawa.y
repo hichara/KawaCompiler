@@ -12,17 +12,18 @@
 %}
 
 %token<vstring> ENTIER REEL ID  
-%token<vstring> /*STRING*/ TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
+%token<vstring> STRING TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
 %token<vstring> TIMPORT
 %token<vstring> TPUBLIC TPRIVATE TPROTECTED
 %token<vstring> TFINAL TABSTRACT TSTATIC /*TCONST TENUM*/ TVALUE
 %token<vstring> TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
-%token<vstring> TSUPER TTHIS /*TTHROW TTHROWS TTRY TCATCH TSYNCHRONIZED*/
+%token<vstring> TSUPER TTHIS 
 %token<vstring> TIF TELSE
 %token<vstring> TFALSE TTRUE
 %token<vstring> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
 %token<vstring> TFOR TWHILE TDO
-%token<vstring> /*TINSTANCEOF TFINALLY*/ TNEW TNULL TRETURN
+%token<vstring> TNEW TNULL TRETURN
+%token<vstring> TPRINT TMAIN
 
 %token<vstring> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vstring> TINC TDEC
@@ -34,7 +35,7 @@
 
 %type<vstring> Ids ListIds QList
 %type<vstring> Type Tables BasicType
-%type<vstring> Modifier Modifiers Static All Extends ExtendsList Implements			  
+%type<vstring> Modifier Modifiers /*ModifiersMain*/ Static All Extends ExtendsList Implements			  
 %type<vstring> ImportDeclaration 
 
 %type<vstring> TypeDeclaration ClassOrInterfaceDeclaration ClassDeclaration InterfaceDeclaration 
@@ -44,20 +45,16 @@
 %type<vstring> MemberDecl
 %type<vstring> MethodOrFieldDecl MethodOrFieldRest
 %type<vstring> FieldDeclaratorsRest
-%type<vstring> MethodDeclaratorRest
-/*%type<vstring> Throws*/ 				
+%type<vstring> MethodDeclaratorRest MainMethodDeclaratorRest			
 %type<vstring> ConstructorDeclaratorRest
 %type<vstring> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
-/*%type<vstring> FormalParameters FormalParameterDecls VariableModifiers VariableModifier FormalParameterDeclsRest VariableDeclaratorId*/
-%type<vstring> FormalParameters VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
+%type<vstring> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
 %type<vstring> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
-%type<vstring> Block BlockStatements BlockStatement Statement
-/*%type<vstring> Catches CatchClauses CatchClause CatchType QualifiedIdentifiers*/
-/*%type<vstring> ResourceSpecification Resources ResourceList Resource*/
+%type<vstring> Block BlockStatements BlockStatement Statement Print Args ArgsRest
 %type<vstring> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vstring> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
-%type<vstring> Expression FacteurEffect /*ExpressionCond*/ ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus terme facteur factFinal
+%type<vstring> Expression FacteurEffect ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus terme facteur factFinal
 
 %type<vstring> IDExpression TablesIndexe
 
@@ -120,6 +117,7 @@ BasicType : TBYTE
 		  | TFLOAT
 		  | TDOUBLE
 		  | TBOOLEAN
+		  | TSTRING
 		  ;
 
 /*------------- Partie d'encapsulation + final + static + extends ID, ID..... et implements ID, ID , ID... ----------------------------------*/
@@ -134,7 +132,11 @@ Modifier : TPUBLIC
 Modifiers : Modifiers Modifier
 		  | {$$=" ";}
 		  ;
-
+/*
+ModifiersMain : TPUBLIC TSTATIC
+			 | TSTATIC
+			 ;
+*/
 
 Static : TSTATIC
 	   | {$$=" ";}
@@ -185,6 +187,7 @@ ClassBodyDeclarations : ClassBodyDeclarations ClassBodyDeclaration
 					  ;
 
 ClassBodyDeclaration: Modifiers MemberDecl /*| Static Block | ';' {$$=" ";}*/
+					| Modifiers TVOID TMAIN MainMethodDeclaratorRest Block
 					;  
 
 /*--------------------------------- corps d'une interface ---------------------------------------------------*/
@@ -194,7 +197,7 @@ InterfaceBodyDeclarations : InterfaceBodyDeclarations InterfaceBodyDeclaration
  						  | {$$=" ";}
  						  ;
 
-InterfaceBodyDeclaration: Modifiers InterfaceMemberDecl
+InterfaceBodyDeclaration: Modifiers InterfaceMemberDecl /*| ';' {$$=" ";}*/
     					;  
 
 /*---------------------------classes Memberes : Methodes, void methods, variables, constructors, classes internes and inrefaces internes---------------*/
@@ -217,7 +220,10 @@ FieldDeclaratorsRest: VariableDeclaratorRest VariableDeclaratorList
 					;
 
 /*-------------------------------------------- partie variables ---------------------------------------------------------*/
-
+/*
+VariableDeclarators: VariableDeclarator VariableDeclaratorList
+				   ;
+*/
 VariableDeclaratorList : ',' VariableDeclarator VariableDeclaratorList {$$=$2;}
 					   | {$$=" ";}
 					   ;
@@ -247,6 +253,9 @@ MethodDeclaratorRest: FormalParameters /*Throws Block*/
 					/*| FormalParameters Throws ';'*/
 					;
 
+MainMethodDeclaratorRest : MainFormalParametrs
+						 ;
+
 /*---------------------- partie throw pour les exceptions --------------------------------------------------------------
 Throws 				: TTHROWS QualifiedIdentifierList
 					| {$$=" ";}
@@ -267,7 +276,7 @@ InterfaceMethodOrFieldDecl: Type ID InterfaceMethodOrFieldRest
 						  ;
 
 InterfaceMethodOrFieldRest: ConstantDeclaratorsRest ';'
-    					  | FormalParameters ';' 
+    					  | FormalParameters ';' /*InterfaceMethodDeclaratorRest*/
     					  ;
 
 ConstantDeclaratorsRest: ConstantDeclaratorRest ConstantDeclaratorList
@@ -283,10 +292,25 @@ ConstantDeclaratorRest: Tables '=' VariableInitializer
 					  | Tables
 					  ;
 
+/*
+InterfaceMethodDeclaratorRest: FormalParameters ';' /*Throws
+							 ; 
+*/
+/*
+VoidInterfaceMethodDeclaratorRest: FormalParameters Throws ';'
+								 ;
+*/  
+
 /*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
 FormalParameters: '(' FormalParameterDecls ')' {$$=$2;}
 				| VoidFormalParametrs
 				;
+
+MainFormalParametrs : '(' FormalMainParameterDecls ')' {$$=$2;}
+					| VoidFormalParametrs
+					;	
+FormalMainParameterDecls : TSTRING '[' ']' ID
+						 ;
 
 VoidFormalParametrs : '(' ')' {$$=" ";}
 					;
@@ -328,7 +352,8 @@ BlockStatements: BlockStatements BlockStatement
 			   | {$$=" ";}
 			   ; 
 
-BlockStatement: ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
+BlockStatement: Print
+			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
 			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' /* des nouveaux variables locaux initialisé ou pas */
 			  /* les 3 premieres lignes remplacent Type VariableDeclarator VariableDeclaratorList ';' qui renvoie un conflit; conflit dans Ids de Type*/
@@ -343,6 +368,18 @@ BlockStatement: ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList '
     		  | ';' {$$ = " ";}
     		  ;
 
+Print : TPRINT '(' Args ')' ';'
+	  ;
+Args :factFinal ArgsRest
+	 | {}
+	 ;
+ArgsRest : '+' factFinal ArgsRest {$$ = $2;} 
+		 | {$$ = " ";} 
+		 ;
+/*
+LocalVariableDeclarationStatement: 
+								 ;
+*/
 Statement: Block 
     	 | TIF '(' Expression ')' Statement %prec THEN
 		 | TIF '(' Expression ')' Statement TELSE Statement
@@ -518,11 +555,16 @@ facteur : '~' facteur %prec NBINAIRE {$$=$2;}
 		| TINC ID {$$=$2;}
 		| factFinal
 		;
-
+/*------------------------
+.
+------------------------
+[]
+------------------------*/
 factFinal: '(' Expression ')' {$$=$2;}
 		 | ENTIER 
 		 | REEL
-		 | ID
+		 | ID Ids
+		 | STRING
 		 | ObjectInitializer
 		 | MethodeInitializer
 		 | TTRUE

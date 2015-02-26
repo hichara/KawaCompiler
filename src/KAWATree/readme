@@ -1,0 +1,4 @@
+KAWATree permet de gérer l'arbre sémantique et facilite l'écriture d'un programme c++ représentant le code Kawa à fournir au backend.
+
+Utile pour les test.
+Indispensable pour le developpement.

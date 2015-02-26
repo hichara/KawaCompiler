@@ -76,8 +76,11 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "null"					{count(); return (TNULL);}
 "return"				{count(); return (TRETURN);}
 "synchronized"	{count(); /*return (TSYNCHRONIZED);*/}
-"print"         {count(); return (TPRINT);}
 "main"          {count(); return (TMAIN);}
+"printFloat"    {count(); return (TPRINTF);}
+"PrintInt"      {count(); return (TPRINTI);}
+"PrintString"   {count(); return (TPRINTS);}
+"print"         {count(); return (TPRINT);}
 
 {ID}            {count(); yylval.vstring=strdup(yytext); return(ID); }
 

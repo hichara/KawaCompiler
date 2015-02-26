@@ -1,0 +1,26 @@
+import Kawa.Collections.* ;
+
+public class Main extends inter1 implements interface1 {
+	public string str;
+	private int var1;
+	public teste(){
+		this.str="string1";
+		this.var1=5;
+
+	}
+	int getVar1(){
+		return var1;
+	}
+	public static void main(string[] args){
+		Main m = new Main();
+		int i;
+		float j;
+		print("Test de la methode print: str="+m.str+" var1="+m.getVar1());
+		printFloat(3.2);
+		printFloat(j);
+		printInt(2);
+		printInt(i);
+		printString("phrase simple");
+	}
+
+}

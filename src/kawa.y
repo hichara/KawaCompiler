@@ -23,7 +23,7 @@
 %token<vstring> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
 %token<vstring> TFOR TWHILE TDO
 %token<vstring> TNEW TNULL TRETURN
-%token<vstring> TPRINT TMAIN
+%token<vstring> TPRINT TMAIN TPRINTI TPRINTF TPRINTS
 
 %token<vstring> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vstring> TINC TDEC
@@ -50,7 +50,7 @@
 %type<vstring> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
 %type<vstring> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
 %type<vstring> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
-%type<vstring> Block BlockStatements BlockStatement Statement Print Args ArgsRest
+%type<vstring> Block BlockStatements BlockStatement Statement Print Args ArgsRest PrintF ArgsF PrintI ArgsI PrintS ArgsS
 %type<vstring> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vstring> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
@@ -353,6 +353,9 @@ BlockStatements: BlockStatements BlockStatement
 			   ; 
 
 BlockStatement: Print
+			  | PrintF
+			  | PrintI
+			  | PrintS
 			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
 			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=" ";} /* des nouveaux variables locaux initialisé ou pas */
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' /* des nouveaux variables locaux initialisé ou pas */
@@ -376,6 +379,28 @@ Args :factFinal ArgsRest
 ArgsRest : '+' factFinal ArgsRest {$$ = $2;} 
 		 | {$$ = " ";} 
 		 ;
+
+PrintF : TPRINTF '(' ArgsF ')' ';'
+	   ;
+ArgsF : REEL
+	  | ID
+	  | {}
+	  ; 
+
+PrintI : TPRINTI '(' ArgsI ')' ';'
+	   ;
+ArgsI : ENTIER
+	  | ID
+	  | {}
+	  ; 
+
+PrintS : TPRINTS '(' ArgsS ')' ';'
+	   ;
+ArgsS : STRING
+	  | ID
+	  | {}
+	  ; 
+
 /*
 LocalVariableDeclarationStatement: 
 								 ;
@@ -585,7 +610,7 @@ MethodeInitializer : ID Ids FormalParametersCalledMethod
 
 int yyerror (char *msg) 
 {
-  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%ld]\n", yytext, lineno, column-strlen(yytext));
+  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%d]\n", yytext, lineno, column-strlen(yytext));
   return 0;
 }
 

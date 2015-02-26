@@ -1,0 +1,9 @@
+Point d'entrée réalisé par Kheireddine et Abdellatif
+
+Directives:
+
+Se positionner sur le répertoire contenant le dossier PointEntree
+Etape à suivre:
+1- make clean
+2- make
+3-lancer l'executable ./kawac nomFichier.kawa

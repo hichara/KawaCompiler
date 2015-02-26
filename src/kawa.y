@@ -585,7 +585,7 @@ MethodeInitializer : ID Ids FormalParametersCalledMethod
 
 int yyerror (char *msg) 
 {
-  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%d]\n", yytext, lineno, column-strlen(yytext));
+  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%ld]\n", yytext, lineno, column-strlen(yytext));
   return 0;
 }
 

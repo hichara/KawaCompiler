@@ -1,0 +1,254 @@
+\documentclass{../res/adr}
+
+%Import des packages utilisés pour le document
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+
+
+%\usepackage{array}
+%\usepackage{hyperref}
+%\usepackage{tabularx, longtable}
+%\usepackage[table]{xcolor}
+%\usepackage{fancyhdr}
+%\usepackage{lastpage}
+
+\definecolor{gris}{rgb}{0.95, 0.95, 0.95}
+\definecolor{orange}{RGB}{255,127,0}
+
+%Redéfinition des marges
+%\addtolength{\hoffset}{-2cm}
+%\addtolength{\textwidth}{4cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{1cm}
+\addtolength{\headsep}{0.8cm} 
+\addtolength{\footskip}{-0.2cm}
+
+
+%Import page de garde et structures pour la gestion de projet
+%\usepackage{structures}
+
+%Variables
+\logo{../res/logo_univ.png}
+\title{Analyse Des Risques}
+\author{Pierre-Luc \bsc{BLOT}}
+\projet{Compilateur LLVM}
+\projdesc{Langage jouet Kawa}
+\filiere{M1GIL - Conduite de Projet}
+\version{0.2}
+\relecteur{Kheireddine\bsc{BERKANE}}
+%\signataire{Florent \bsc{NICART}}
+\date{\today}
+
+\histentry{0.1}{18/11/2014}{Version initiale.}
+\histentry{0.2}{02/12/2014}{Développement des tables d'analyse des risques}
+
+% -- Début du document -- %
+\begin{document}
+
+%Page de garde
+\maketitle
+\newpage
+%La table des matières
+\tableofcontents
+\newpage
+
+\section{Difficultés connues concernant le projet}
+  \begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
+    \hline
+    \color{white}\cellcolor{blue}\bfseries{Id}&
+    \color{white}\cellcolor{blue}\bfseries{Intitulé}&
+    \color{white}\cellcolor{blue}\bfseries{Niveau de difficulté}\\
+    \cr
+    \hline
+    D\_1&
+    Utilisation de la technologie LLVM&
+    5
+    \cr
+    \hline
+    D\_2&
+    Étude des besoins du client&
+    5
+    \cr
+    \hline
+    D\_3&
+    Développement du projet en C++&
+    4
+    \cr
+    \hline
+    D\_4&
+    Implémentation du polymorphisme&
+    5
+    \cr
+    \hline
+    D\_5&
+    Compilation partagée&
+    5
+    \cr
+    \hline
+    D\_6&
+    Garbage collector&
+    5
+    \cr
+    \hline
+    D\_4&
+    Création de la grammaire&
+    3
+    \cr
+    \hline
+    D\_7&
+    Analyseur lexical&
+    2
+    \cr
+    \hline
+    D\_8&
+    Analyseur syntaxique&
+    3
+    \cr
+    \hline
+    D\_9&
+    Analyseur sémantique&
+    4
+    \cr
+    \hline
+  \end{tabular}\\
+
+\section{Évaluations du projet}
+  \subsection{Particularités du sujet}
+    La particularité de ce projet est de réaliser un compilateur pour un langage de programmation haut niveau reposant sur le pardigme objet et reprenant la syntaxe du langage JAVA. Il est possible d'effectuer des tâches d'optimisation à la C++ qui est
+    lui de plus bas niveau.
+  \subsection{Définition du besoin}
+    Le projet a deux aspects :
+    \begin{itemize}
+        \item montrer que l'on peut compiler un code similaire à java en code natif (sans MV),
+        \item apprendre à utiliser une infrastructure moderne pour le compiler : LLVM
+    \end{itemize}
+     
+
+  %\subsection{La disponibilité des acteurs et des ressources}
+  \subsection{La composition de l'équipe}
+    \subsubsection{Rôles}
+      \begin{itemize}
+        \item Responsable client : Kheireddine
+        \item Responsable Technique : Nasser, Abdellatif ,Madjid
+        \item Testeur : Amzath, Allexandre
+        \item Chef de projet : Pierre-Luc
+      \end{itemize}
+    \subsubsection{Rédacteurs des documents}
+      \begin{itemize}
+        \item STB : Nasser et Kheireddine
+        \item DAL : Nasser et Madjid
+        \item PDD : Pierre-Luc et Kheireddine
+        \item CDR : Allexandre et Amzath
+        \item ADR : Pierre-Luc et Madjid
+      \end{itemize}
+  %\subsection{Nos connaissances techniques}
+    % todo
+  %\subsection{Complexité des solutions techniques à mettre en oeuvre}
+    % todo
+  %\subsection{Les procédés de test}
+    % todo
+  %\subsection{Charge de travail hors projet}
+    % todo
+  %\subsection{Perturbations engendrées par les autres activités}
+    % todo
+
+   % Please add the following required packages to your document preamble:
+\newpage
+
+\section{Analyse des riques}
+    \tabADR{
+            \lineADR{R1}{Incapacité permanente du client}{2}{0}{
+                Le client n'est plus en mesure de suivre le projet.
+            }
+
+            \lineADR{R2}{Projet insatisfaisant/incomplet}{2}{0}{
+                Le projet ne répond pas à toutes les exigences validées par le 
+                client.
+            }
+                
+            \lineADR{R3}{Abandon de l’un des membres}{1}{1}{
+                Un des membres de l’équipe de travail abandonne avant la fin de
+                l’année et se défait donc du projet.
+            }
+            \lineADR{R4}{Retard dans le projet}{1}{2}{
+                Des rendus, soutenances, examens empêchent l’équipe de se 
+                concentrer régulièrement sur le projet.
+            }
+            \lineADR{R5}{Retard dans le projet}{1}{1}{
+                Une sous-équipe peine à réaliser sa tâche, dont dépendent
+                d’autres sections du projet.
+            }
+            \lineADR{R6}{Incapacité d’un membre de l’équipe}{0}{1}{
+                Un membre de l’équipe perd son outil de travail ou ses facultés
+                à travailler.
+            }
+    } % fin tableau ADR
+  
+    \detailsADR{
+        \lineDetailsADR{R1}{
+            Facteurs médicaux ou professionnels indépendants de la volonté de
+            l’équipe
+        }{
+            Rendez-vous rapide avec le nouveau responsable désigné. Explications
+            du cadre du projet et exposé sur le compilateur KAWA.
+            Auto-encadrement préliminaire nécessaire.
+        } % fin de ligne
+        
+        \lineDetailsADR{R2}{
+            \begin{enumerate}
+                \item L’application ne satisfait pas les exigences (compilation
+                défectueuse, lacunes de modélisation)
+                \item La documentation ne satisfait pas les exigences du client
+            \end{enumerate}
+        }{
+            \begin{enumerate}
+                \item Tests exhaustifs réguliers, surveillance régulière et 
+                    inspections fréquentes du client.
+                \item Rédaction la plus exhaustive de tout ce qui a trait à
+                    C++, LLVM, les compilateurs et ELF. Consultation éventuelle
+                    de tutoriels dont s’inspirer.
+            \end{enumerate}
+        } % fin de ligne
+
+        \lineDetailsADR{R3}{
+            Démotivation, résultats insatisfaisants,déménagement, etc...
+        }{
+            Analyse du rôle du membre concerné et délégation de son travail à un
+            ou plusieurs autres. Selon ses responsabilités, prévoir une nouvelle
+            distribution des rôles.
+        } % fin de ligne
+    }
+    \newpage
+    \detailsADR{
+        
+        \lineDetailsADR{R4}{
+            Travaux universitaires chronophages. Mauvaise organisation
+            individuelle.
+        }{
+            Organisation de réunions fixes et non-négociables, afin de ne 
+            prendre aucun retard dans le développement. En dernier recours, 
+            se reposer sur les comptes-rendus.
+        } % fin de ligne
+        \lineDetailsADR{R5}{
+            Difficultés dans la conception des classes LLVM du parser et/ou 
+            dans la génération de l'exécutable ELF et/ou de l’organisation du 
+            travail au sein de la sous-équipe.
+        }{
+            Organisation de réunions extraordinaires afin de tous se pencher sur
+            les difficultés rencontrées. Se donner pour objectif de résoudre le
+            problème à la fin des réunions pour relancer l’activité de la 
+            sous-équipe et garantir le respect du planning.
+        } % fin de ligne
+        
+        \lineDetailsADR{R6}{
+            Facteurs médicaux ou techniques indépendants de la volonté de 
+            l’équipe.
+        }{
+            Si le membre concerné peut communiquer, lui déléguer la co-direction
+            des brainstormings. Sinon, se référer la solution du risque R3.
+        } % fin de ligne
+
+    } % fin details ADR
+\end{document}
+

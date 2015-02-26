@@ -27,17 +27,7 @@
 
 %Variables
 \logo{../res/logo_univ.png}
-\title{Spécification Technique de Besoin}
-\author{Kheireddine \bsc{Berkane}, Pierre-Luc \bsc{BLOT}}
-\projet{Compilateur LLVM}
-\projdesc{Langage jouet Kawa}
-\filiere{M1GIL - Conduite de Projet}
-\version{0.1}
-%\relecteur{Pierre-Luc \bsc{BLOT}}
-%\signataire{Florent \bsc{NICART}}
-\date{\today}
-
-\histentry{0.1}{04/11/2014}{Version initiale.}
+\input{entete}
 
 % -- Début du document -- %
 \begin{document}
@@ -55,9 +45,9 @@
 LLVM est une infrastructure modulaire permettant la réalisation de
 chaînes de compilation et conçue pour l'optimisation. Elle met en oeuvre
 une représentation intermédiaire du code qui permet de découpler les
-langages de l'architecture. Nore objectif est de réaliser, à l'aide de
-l'infrastructure LLVM, un comilateur pour un langage jouet, que nous
-appellerons Kawa, ce dernier doit supporter:
+langages de l'architecture. Notre objectif est de réaliser, à l'aide de
+l'infrastructure LLVM, un compilateur pour un langage jouet, que nous
+appellerons \textbf {Kawa}, ce dernier doit supporter:
  \begin{itemize}
  	\item	Les classes, les classes abstraites, les interfaces
 	\item   L'héritage
@@ -67,15 +57,30 @@ appellerons Kawa, ce dernier doit supporter:
 	\item   Les instructions de contrôle telles ques (if/else, for,
 	  while/do, switch, etc.).
 	\item   Les méthodes seront définies de manière identique à Java
-	  execpté que les paramètres pourront être préfixés du mot clé
+	  excepté que les paramètres pourront être préfixés du mot clé
 	  \bsc{value} (transmission par valeur au lieu de référence)
  \end{itemize}
 
 
-\subsection{Besoins opérationnels}
+%\subsection{Besoins opérationnels}
 \subsection{Objectifs techniques}
-\subsection{Contraintes et recommendations}
-\subsection{Résultats attendus}
+%Descritpion et motivation de l'utilisation de kawa et llvm
+L'objectif à travers le choix du langage \textbf {kawa} qui est similaire  à \textbf {java} (un langage de haut niveau d'abstraction) c'est de permettre une facilité ainsi qu'une rapidité de développement par rapport à d'autres langages de programmation tel que le «C». Le code Java  est compilé dans un langage intermédiaire  Bytecode et est exécuté dans un environnement d'exécution JVM (Java Virtual Machine), dans le cadre de notre projet nous allons montrer que l'on peut compiler un code similaire à java (kawa) en code natif sans passer par une machine virtuelle (MV).
+
+ Cette manière de compilation permet d'avoir un code machine en un seul passage à l'encontre de compilateur «javac» qui produit le code binaire en deux passages, un premier passage  pour générer de pseudo code (bytecode) et le deuxième passage  pour optimiser et traduire localement le bytecode en instructions du processeur de la plate-forme.
+
+Pour réaliser le compilateur du langage \textbf {kawa} nous allons utiliser l'infrastructure \textbf {LLVM}, à travers cette infrastructure moderne nous allons apprendre la compilation d'un langage évolué dans ces différentes étapes jusqu'à la génération de code machine, car LLVM fournit des bibliothèques facilitant l’écriture de front-end (transformation de code source en une représentation intermédiaire \textbf {IR}), ainsi que la partie  back-end (transformation de la représentation intermédiaire en code machine).
+
+Nous allons  bénéficier dans le cadre de ce projet des différents avantages offerts par \textbf {LLVM} et \textbf {Clang} (compilateur c++ basé sur llvm) tels que :
+\begin{itemize}
+\item Les messages d’erreurs sont beaucoup plus compréhensibles en matière de détails ainsi que de précision par rapport à d'autres messages d'erreurs renvoyés par un autre compilateur, exemple (GCC).
+\item La rapidité en temps de la compilation ainsi que l'optimisation de la vitesse d'exécution, clang est trois fois plus rapide que GCC, de plus il consomme moins de ressources (faible utilisation de la mémoire).
+\item Une architecture en bibliothèque du compilateur qui est suffisamment modulaire ce qui rend facile le développement et l'intégration d'autres bibliothèques au sein du compilateur.
+\item La portabilité sur d'autres architectures.
+\end{itemize}
+
+%\subsection{Contraintes et recommendations}
+%\subsection{Résultats attendus}
 
 \section{Documents applicables et de référence}
 % Liste des
@@ -88,13 +93,12 @@ Différents documents de référence :
 \item Le site LLVM \href{http://llvm.org}{llvm.org}.
 \item Le document de spécification du client \href{file:../client/spec1.pdf}{Spec1.pdf}
 \end{itemize}
-
+\newpage
 \section{Terminologie et sigles utilisés}
-\textcolor{blue}{
   \begin{itemize}
-  	\item LLVM : (Low Level Virtual Machine) est une infrastructure de compilateur conçue optimisation à la compilation.
+  	\item LLVM : (Low Level Virtual Machine) est une infrastructure de compilateur conçue pour l'optimisation à la compilation.
 	\item Kawa : langage jouet qui reprend quelques fonctionnalités de java.
-	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par APPELE.
+	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par Apple.
 	\item GIT : logiciel qui permet de stocker un ensemble de fichiers en conservant la chronologie de toutes les modifications qui ont été effectuées dessus.
 	\item ELF : (Executable and Linkable Format) est un format de fichier binaire utilisé pour l'enregistrement de code compilé (objets, exécutables, bibliothèques de fonctions).
 	\item Ubuntu : Distribution linux sur base Debian.
@@ -102,7 +106,6 @@ Différents documents de référence :
 	\item POO : Programmation orientée objet.
 	\item Makefile : Fichier regroupant des instructions de compilation avec gestion de dépendances.
   \end{itemize}
-}
 
 \section{Exigences fonctionnelles}
 \subsection{Présentation de la mission du produit logiciel}
@@ -115,228 +118,49 @@ Différents documents de référence :
   \color{white}\cellcolor{blue}\bfseries{Priorité}\\
   \cr
   \hline EF\_1&
-  Compilation code source Kawa&
-  Développeur Kawa&
+  Afficher l'aide&
+  Utilisateur&
   Indispensable
   \cr
   \hline EF\_2&
-  Compilation classe&
-  Compilateur&
+  Compiler une application en mode monolithique &
+   Utilisateur&
   Indispensable
   \cr
   \hline EF\_3&
-  Compilation classe abstraite& 
-  Compilateur&
-  Important
+  Compiler une application en mode partagé& 
+  Utilisateur&
+  Secondaire
   \cr
   \hline EF\_4&
-  Compilation interface&
-  Compilateur&
-  Important
+  Compiler une bibliothèques partagée&
+  Utilisateur&
+  Secondaire
   \cr
   \hline EF\_5&
-  Compiler notion héritage&
-  Compilateur&
+  Afficher la version du compilateur&
+  Utilisateur&
   Important
   \cr
   \hline EF\_6&
-  Compiler notion polymorphisme&
-  Compilateur&
-  Important
+  Indiquer les chemins des dépendances entre le source de l'application et des modules (classe/interface) externes&
+  Utilisateur&
+  Secondaire
   \cr
   \hline EF\_7&
-  Compiler notion polymorphisme ad hoc&
-  Compilateur&
-  Important
+  Activer l'affichage en couleur&
+  Utilisateur&
+  Secondaire
   \cr
-  \hline EF\_8&
-  Compiler notion polymorphisme de type&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_9&
-  Compiler bloc de controle&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_10&
-  Compiler méthodes&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_11&
-  Compiler méthodes avec paramètres préfixés d'un mot clé \bsc{value}&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_12&
-  Compiler système de type&
-  Compilateur&
-  Important
-  \cr
-  \hline EF\_13&
-  Compiler affectation&
-  Compilateur& Indispensable
-  \cr
-  \hline EF\_14&
-  Compiler opérateurs arithmétiques sur type primitif&
-  Compilateur& Important
-  \cr
+  
   \hline
 \end{tabular}\\
 
-%\newpage
+\newpage
 
-%Cas d'utilisation
-\subsection{Cas d'utilisation 1}
-\ficheGraphic
-{Compilation de classes kawa}                    % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble de classes
-  kawa afin de les précompiler.
-}
-{
-	Ensemble de fichiers source de classes
-	respectant la syntaxe du langage kawa. 
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase1_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 1.
+\input{usecases}
 
-
-%Cas d'utilisation 2
-\subsection{Cas d'utilisation 2}
-\ficheGraphic
-{Compilation d'interface kawa}                    % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble d'interfaces
-  kawa afin de les précompiler.
-}
-{
-	Ensemble de fichiers source d'interfaces
-	respectant la syntaxe du langage kawa. 
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (syntaxe, fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase2_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 2.
-
-
-%Cas d'utilisation
-\subsection{Cas d'utilisation 3}
-\ficheGraphic
-{Compilation d'exécutable}                      % Nom du cas d'utilisation
-{Développeur Kawa}                               % Acteurs concernés
-{                                                % Description
-  Le développeur introduit un ensemble de classes
-  et interfaces kawa précompiler afin de
-  créer un fichier exécutable.
-}
-{
-	Ensemble de fichiers précompilés.
-}                                                % Préconditions
-{Ligne de commande.}                             % Evénements déclenchants
-{Erreur (fichier introuvable, ..), ou 
- succès de la compilation}                       % Conditions d'arrêt
-{0.6}{../res/stb/usecase3_flot_event.png} 		 % Diagramme
-{                                                % Flots d'exceptions
-  \begin{itemize}
-  \item Abandon de l'utilisateur.
-  \end{itemize}
-}
-% Fin de la fiche du cas d'utilisation 3.
-\vspace{0.5cm}
-
-\section{Exigences opérationnelles}
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-\end{tabular}\\
-
-\section{Exigences opérationnelles d'interface}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-\end{tabular}\\
-
-
-\section{Exigences de qualité}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-  EQ\_1&
-  Le compilateur ne plante pas et affiche des messages d'erreurs clairs&
-  Important
-  \cr
-  \hline
-\end{tabular}\\
-
-\section{Exigences de réalisation}
-
-\begin{tabular}{|>{\centering}p{1,5cm}|>{\centering}p{10cm}|>{\centering}p{3cm}|}
-  \hline
-  \color{white}\cellcolor{blue}\bfseries{Id}&
-  \color{white}\cellcolor{blue}\bfseries{Intitulé}&
-  \color{white}\cellcolor{blue}\bfseries{Priorité}\\
-  \cr
-  \hline
-  ER\_1&
-  La compilation produit un exécutable linux au format ELF&
-  Indispensable
-  \cr
-  \hline
-  ER\_2&
-  Pas d'implémentation des cast&
-  \cr
-  \hline
-  ER\_3&
-  Pas d'implémentation de la générécité&
-  \cr
-  \hline
-  ER\_4&
-  Implémentation en code monolithique&
-  Indispensable
-  \cr
-  \hline
-  ER\_5&
-  Implémentation en code partagé&
-  Optionnel
-  \cr
-  \hline
-  ER\_6&
-  Pas d'attributs dans les interfaces. Seulement des méthodes.
-  \cr
-  \hline
-\end{tabular}\\
+\input{exigences}
 
 \end{document}
 

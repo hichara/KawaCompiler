@@ -3,8 +3,6 @@
 
 
 
-
-
 /// Public static 
 
  Value* BinaryOperationGenereter::createAdd(Type *type, Value *o1, Value *o2,  const Twine &Name="", IRBuilder *b) {

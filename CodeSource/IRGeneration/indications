@@ -1,0 +1,7 @@
+
+
+-- les fonctions statics et constructeurs ne sont repertoriées dans les tables adHoc
+   la deduction de la classe d'appel doit etre faite statiquement
+
+-- Le parametre this est automatiquement inserer comme premier parametre d'une methode,
+   sauf dans le cas d'une methode static

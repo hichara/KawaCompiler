@@ -34,9 +34,11 @@ public:
 							        std::vector<Value *> list_args);
 
 
-	static Value *createStaticMethpdeCall(const Twine &className,
+	static Value *createStaticMethodeCall(const Twine &className,
 							        const Twine &functionName,
 							        std::vector<Value *> list_args);
+
+	static Value *createPrintCall(Value *str, BasicBlock *bb);
 
 };
 

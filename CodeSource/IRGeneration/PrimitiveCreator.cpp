@@ -19,3 +19,7 @@ Value* PrimitiveCreator::create(double d, LLVMContext &context) {
 Value* PrimitiveCreator::create(float f, LLVMContext &context) {
 	return ConstantFp::get(Type::getFloatTy(context), f);
 }
+
+Value* PrimitiveCreator::create(std::string str, LLVMContext &context) {
+ return ConstantDataArray::getString (Context, str, true);
+}

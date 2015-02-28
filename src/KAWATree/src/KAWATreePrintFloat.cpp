@@ -6,15 +6,3 @@
  */
 
 #include "KAWATreePrintFloat.h"
-
-class KAWATreePrintFloat : public KAWATreePrint{
-
-	KAWATreePrintFloat::KAWATreePrintFloat() {
-
-	}
-
-	KAWATreePrintFloat::KAWATreePrintFloat(std::list<KAWATreeParam> list) {
-		listParams = list;
-
-	}
-};

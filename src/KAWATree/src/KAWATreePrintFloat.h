@@ -8,7 +8,9 @@
 #ifndef KAWATREEPRINTFLOAT_H_
 #define KAWATREEPRINTFLOAT_H_
 
-class KAWATreePrintFloat {
+#include "KAWATreePrint.h"
+
+class KAWATreePrintFloat: public KAWATreePrint {
 public:
 	KAWATreePrintFloat();
 	virtual ~KAWATreePrintFloat();

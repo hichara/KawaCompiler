@@ -17,7 +17,7 @@ private:
 	KAWATreeType type;
 	void* value;
 public:
-	KAWATreeParam();
+	KAWATreeParam(KAWATreeType t, void* v);
 	virtual ~KAWATreeParam();
 
 	KAWATreeType getType();

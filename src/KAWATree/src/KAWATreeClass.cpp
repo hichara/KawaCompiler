@@ -7,8 +7,13 @@
 
 #include "KAWATreeClass.h"
 #include "KAWATreeCompilerNode.h"
+#include <iostream>
 #include <list>
 
-void KAWATreeClass::addMethod(KAWATreeMethod m){
+KAWATreeClass::KAWATreeClass(std::string n){
+	name = n;
+}
+
+void KAWATreeClass::addMain(KAWATreeMethod m){
 	listMethodes.push_back(m);
 }

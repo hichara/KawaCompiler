@@ -5,8 +5,13 @@
  *      Author: petreale
  */
 
-#include "KAWATreeParam.h"
 #include "KAWATreeType.h"
+#include "KAWATreeParam.h"
+
+KAWATreeParam::KAWATreeParam(KAWATreeType t, void* v){
+	type = t;
+	value = v;
+}
 
 KAWATreeType KAWATreeParam::getType(){
 	return type;

@@ -17,9 +17,18 @@ class KAWATreeProgram : public KAWATreeCompilerNode{
 private:
 	std::list<KAWATreeClass> listClasses;
 public:
-	KAWATreeProgram();
+	KAWATreeProgram(){};
 	virtual ~KAWATreeProgram();
 	void addClass(KAWATreeClass c );
+
+	/*
+	 * Je n'arrive pas à mettre cette méthode dans le .cpp
+	 * Il s'agit d'une redéfinition de la méthode virtuelle
+	 * de la classe mère.
+	 */
+	void debug(){
+		cout << "[Progam Node]\n" << endl;
+	}
 };
 
 #endif /* PROGRAM_H_ */

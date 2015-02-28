@@ -15,7 +15,8 @@ class KAWATreeType: public KAWATreeCompilerNode{
 private:
 	std::string name;
 public:
-	KAWATreeType();
+	KAWATreeType(){};
+	KAWATreeType(std::string n);
 	virtual ~KAWATreeType();
 	std::string getName();
 	void setName(std::string newName);

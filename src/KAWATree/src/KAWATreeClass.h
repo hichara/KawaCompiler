@@ -10,17 +10,20 @@
 
 #include "KAWATreeCompilerNode.h"
 #include "KAWATreeMethod.h"
+#include <iostream>
 #include <list>
 
 using namespace std;
 
 class KAWATreeClass: public KAWATreeCompilerNode{
 private:
+	std::string name;
 	list<KAWATreeMethod> listMethodes;
 public:
-	KAWATreeClass();
+	KAWATreeClass(std::string n);
 	virtual ~KAWATreeClass();
-	void addMethod(KAWATreeMethod m);
+	void addMain(KAWATreeMethod m);
+
 };
 
 #endif /* CLASSE_H_ */

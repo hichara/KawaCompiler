@@ -6,10 +6,13 @@
  */
 
 #include "KAWATreeMethod.h"
-//#include "KAWATreeNodyMethod.h"
 #include <iostream>
 
 using namespace std;
+
+KAWATreeMethod::KAWATreeMethod(std::string n){
+	name = n;
+}
 
 std::string KAWATreeMethod::getName(){
 	return name;

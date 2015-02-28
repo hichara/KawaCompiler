@@ -5,7 +5,12 @@
  *      Author: petreale
  */
 
+#include <iostream>
 #include "KAWATreeType.h"
+
+KAWATreeType::KAWATreeType(std::string n){
+	name = n;
+}
 
 std::string KAWATreeType::getName(){
 	return name;

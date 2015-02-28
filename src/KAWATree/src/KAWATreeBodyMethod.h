@@ -8,10 +8,19 @@
 #ifndef KAWATREEBODYMETHOD_H_
 #define KAWATREEBODYMETHOD_H_
 
-class KAWATreeBodyMethod {
+#include "KAWATreeCompilerNode.h"
+#include "KAWATreeInstruction.h"
+#include <list>
+
+class KAWATreeBodyMethod: public KAWATreeCompilerNode {
+
+private:
+	std::list<KAWATreeInstruction> listInstructions;
+
 public:
 	KAWATreeBodyMethod();
 	virtual ~KAWATreeBodyMethod();
+	void addInstruction(KAWATreeInstruction i);
 };
 
 #endif /* KAWATREEBODYMETHODE_H_ */

@@ -3,7 +3,7 @@ CFLAGS= -Wall -g
 SRCDIR= src
 OBJDIR= obj
 
-all: KAWATreeProgram.o KAWATreePrintInteger.o
+all: KawaTreeHelloWorld KAWATreeProgram.o KAWATreePrintInteger.o KAWATreePrintFloat.o KAWATreePrintString.o
 
 KAWATreeCompilerNode.o: ${SRCDIR}/KAWATreeCompilerNode.cpp ${SRCDIR}/KAWATreeCompilerNode.h
 	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeCompilerNode.cpp -o ${OBJDIR}/KAWATreeCompilerNode.o
@@ -27,7 +27,13 @@ KAWATreePrint.o: ${SRCDIR}/KAWATreePrint.cpp ${SRCDIR}/KAWATreePrint.h KAWATreeI
 	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreePrint.cpp -o ${OBJDIR}/KAWATreePrint.o
 
 KAWATreePrintInteger.o: ${SRCDIR}/KAWATreePrintInteger.cpp ${SRCDIR}/KAWATreePrintInteger.h KAWATreePrint.o
-	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreePrintInteger.cpp -o ${OBJDIR}/KAWATreePrintInteger.o	
+	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreePrintInteger.cpp -o ${OBJDIR}/KAWATreePrintInteger.o
+
+KAWATreePrintFloat.o: ${SRCDIR}/KAWATreePrintFloat.cpp ${SRCDIR}/KAWATreePrintFloat.h KAWATreePrint.o
+	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreePrintFloat.cpp -o ${OBJDIR}/KAWATreePrintFloat.o
+
+KAWATreePrintString.o: ${SRCDIR}/KAWATreePrintString.cpp ${SRCDIR}/KAWATreePrintString.h KAWATreePrint.o
+	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreePrintString.cpp -o ${OBJDIR}/KAWATreePrintString.o
 
 KAWATreeParam.o: ${SRCDIR}/KAWATreeParam.cpp ${SRCDIR}/KAWATreeParam.h KAWATreeType.o
 	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeParam.cpp -o ${OBJDIR}/KAWATreeParam.o
@@ -35,5 +41,7 @@ KAWATreeParam.o: ${SRCDIR}/KAWATreeParam.cpp ${SRCDIR}/KAWATreeParam.h KAWATreeT
 KAWATreeType.o: ${SRCDIR}/KAWATreeType.cpp ${SRCDIR}/KAWATreeType.h
 	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeType.cpp -o ${OBJDIR}/KAWATreeType.o	
 
+KawaTreeHelloWorld:	KawaTreeHelloWorld.cpp KAWATreeProgram.o KAWATreePrintInteger.o KAWATreePrintFloat.o KAWATreePrintString.o
+	${CC} ${CFLAGS} KawaTreeHelloWorld.cpp -o KawaTreeHelloWorld
 clean:
 	@rm ${OBJDIR}/*.o

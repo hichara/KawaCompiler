@@ -6,14 +6,8 @@
  */
 
 #include "KAWATreeBodyMethod.h"
+#include "KAWATreeInstruction.h"
 
-class KAWATreeBodyMethod : public KAWATreeCompilerNode{
-
-	std::list<KAWATreeInstruction> listInstructions;
-
-public:
-	void addInstruction(KAWATreeInstruction i){
-		listInstructions.push_back(i);
-	}
-};
-
+void KAWATreeBodyMethod::addInstruction(KAWATreeInstruction i){
+	listInstructions.push_back(i);
+}

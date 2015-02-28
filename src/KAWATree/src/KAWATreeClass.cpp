@@ -6,15 +6,9 @@
  */
 
 #include "KAWATreeClass.h"
+#include "KAWATreeCompilerNode.h"
 #include <list>
 
-class KAWATreeClass: public KAWATreeCompilerNode{
-
-	std::list<KAWATreeMethod> listMethodes;
-
-public:
-	void addMethod(KAWATreeMethod m){
-		listMethodes.push_back(m);
-	}
-
-};
+void KAWATreeClass::addMethod(KAWATreeMethod m){
+	listMethodes.push_back(m);
+}

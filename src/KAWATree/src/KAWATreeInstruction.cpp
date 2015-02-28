@@ -6,33 +6,22 @@
  */
 
 #include "KAWATreeInstruction.h"
+#include "KAWATreeParam.h"
+#include <iostream>
 
-#include <list>
-#include <string>
+std::string KAWATreeInstruction::getName(){
+	return name;
+}
 
-#include "KAWATreeCompilerNode.h"
+std::list<KAWATreeParam> KAWATreeInstruction::getParams(){
+	return listParams;
+}
 
-class KAWATreeInstruction : public KAWATreeCompilerNode{
+void KAWATreeInstruction::setParams(std::list<KAWATreeParam> newParams){
+	listParams.clear();
+	listParams = newParams;
+}
 
-	protected:
-	std::list<KAWATreeParam> listParams;
-	std::string name;
-
-public:
-	std::string getName(){
-		return name;
-	}
-
-	std::list<KAWATreeParam> getParams(){
-		return listParams;
-	}
-
-	void setParams(	std::list<KAWATreeParam> newParams){
-		listParams = newParams;
-	}
-
-	void addParam(KAWATreeParam p){
-		listParams.push_back(p);
-	}
-
-};
+void KAWATreeInstruction::addParam(KAWATreeParam p){
+	listParams.push_back(p);
+}

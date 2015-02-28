@@ -12,6 +12,8 @@ class KAWATreeCompilerNode {
 public:
 	KAWATreeCompilerNode();
 	virtual ~KAWATreeCompilerNode();
+	void compile();
+	void debug();
 };
 
 #endif /* COMPILERNODE_H_ */

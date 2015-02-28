@@ -6,28 +6,23 @@
  */
 
 #include "KAWATreeMethod.h"
+//#include "KAWATreeNodyMethod.h"
+#include <iostream>
 
-class KAWATreeMethod : public KAWATreeCompilerNode{
+using namespace std;
 
-	std::string name;
-	KAWATreeBodyMethod body;
+std::string KAWATreeMethod::getName(){
+	return name;
+}
 
-public:
-	std::string getName(){
-		return name;
-	}
+void KAWATreeMethod::setName(std::string newName){
+	name = newName;
+}
 
-	void setName(std::string newName){
-		name = newName;
-	}
+KAWATreeBodyMethod KAWATreeMethod::getBody(){
+	return body;
+}
 
-	KAWATreeBodyMethod getBody(){
-			return body;
-	}
-
-	void setBody(KAWATreeBodyMethod newBody){
-		body = newBody;
-	}
-
-
-};
+void KAWATreeMethod::setBody(KAWATreeBodyMethod newBody){
+	body = newBody;
+}

@@ -8,10 +8,14 @@
 #ifndef KAWATREEPRINTINTEGER_H_
 #define KAWATREEPRINTINTEGER_H_
 
-class KAWATreePrintInteger {
+#include "KAWATreePrint.h"
+#include "KAWATreeParam.h"
+
+class KAWATreePrintInteger : public KAWATreePrint{
 public:
 	KAWATreePrintInteger();
 	virtual ~KAWATreePrintInteger();
+	void setParam(KAWATreeParam p);
 };
 
 #endif /* KAWATREEPRINTINTEGER_H_ */

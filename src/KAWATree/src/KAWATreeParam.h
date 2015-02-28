@@ -8,10 +8,21 @@
 #ifndef KAWATREEPARAM_H_
 #define KAWATREEPARAM_H_
 
-class KAWATreeParam {
+#include "KAWATreeCompilerNode.h"
+#include "KAWATreeType.h"
+
+class KAWATreeParam : public KAWATreeCompilerNode{
+
+private:
+	KAWATreeType type;
+	void* value;
 public:
 	KAWATreeParam();
 	virtual ~KAWATreeParam();
+
+	KAWATreeType getType();
+	void* getValue();
+
 };
 
 #endif /* KAWATREEPARAM_H_ */

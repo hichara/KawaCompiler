@@ -6,19 +6,13 @@
  */
 
 #include "KAWATreeParam.h"
+#include "KAWATreeType.h"
 
-class KAWATreeParam : public KAWATreeCompilerNode{
+KAWATreeType KAWATreeParam::getType(){
+	return type;
+}
 
-	KAWATreeType type;
-	void * value;
-
-public:
-	KAWATreeType getType(){
-		return type;
-	}
-
-	void * getValue(){
-		return value;
-	}
-};
+void* KAWATreeParam::getValue(){
+	return value;
+}
 

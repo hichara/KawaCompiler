@@ -6,19 +6,8 @@
  */
 
 #include "KAWATreeProgram.h"
-#include <list>
-#include <iostream>
+//#include "KAWATreeClass.h"
 
-class KAWATreeProgram : public KAWATreeCompilerNode{
-
-	std::list<KAWATreeClass> listClasses;
-
-public:
-	void addClass(KAWATreeClass c ){
-		listClasses.push_back(c);
-	}
-
-
-
-};
-
+void KAWATreeProgram::addClass(KAWATreeClass c ){
+	listClasses.push_back(c);
+}

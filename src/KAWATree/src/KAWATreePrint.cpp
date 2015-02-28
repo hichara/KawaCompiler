@@ -5,8 +5,11 @@
  *      Author: petreale
  */
 
+#include <list>
 #include "KAWATreePrint.h"
+#include "KAWATreeParam.h"
 
-class KAWATreePrint: public KAWATreeInstruction{
-
-};
+void KAWATreePrint::setParam(KAWATreeParam param){
+	listParams.clear();
+	listParams.push_back(param);
+}

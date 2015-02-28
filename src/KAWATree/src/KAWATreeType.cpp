@@ -7,17 +7,12 @@
 
 #include "KAWATreeType.h"
 
-class KAWATreeType: public KAWATreeCompilerNode{
+std::string KAWATreeType::getName(){
+	return name;
+}
 
-	std::string name;
+void KAWATreeType::setName(std::string newName){
+	name=newName;
+}
 
-public:
-	std::string getName(){
-		return name;
-	}
-
-	void setName(std::string newName){
-		name=newName;
-	}
-};
 

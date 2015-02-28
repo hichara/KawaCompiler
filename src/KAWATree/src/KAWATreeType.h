@@ -8,10 +8,17 @@
 #ifndef KAWATREETYPE_H_
 #define KAWATREETYPE_H_
 
-class KAWATreeType {
+#include <iostream>
+#include "KAWATreeCompilerNode.h"
+ 
+class KAWATreeType: public KAWATreeCompilerNode{
+private:
+	std::string name;
 public:
 	KAWATreeType();
 	virtual ~KAWATreeType();
+	std::string getName();
+	void setName(std::string newName);
 };
 
 #endif /* KAWATREETYPE_H_ */

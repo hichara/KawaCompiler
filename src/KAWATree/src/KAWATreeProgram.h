@@ -8,10 +8,18 @@
 #ifndef KAWATreePROGRAM_H_
 #define KAWATreePROGRAM_H_
 
-class KAWATreeProgram {
+#include <list>
+#include <iostream>
+#include "KAWATreeCompilerNode.h"
+#include "KAWATreeClass.h"
+
+class KAWATreeProgram : public KAWATreeCompilerNode{
+private:
+	std::list<KAWATreeClass> listClasses;
 public:
 	KAWATreeProgram();
 	virtual ~KAWATreeProgram();
+	void addClass(KAWATreeClass c );
 };
 
 #endif /* PROGRAM_H_ */

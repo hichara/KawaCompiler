@@ -5,11 +5,5 @@
  *      Author: petreale
  */
 
-#include "KAWATreeCompilerNode.h"
+//#include "KAWATreeCompilerNode.h"
 
-class KAWATreeCompilerNode{
-
-public:
-	void compile();
-	void debug();
-};

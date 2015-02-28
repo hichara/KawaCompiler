@@ -6,7 +6,3 @@
  */
 
 #include "KAWATreePrint.h"
-
-class KAWATreePrint: public KAWATreeInstruction{
-
-};

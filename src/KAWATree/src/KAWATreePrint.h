@@ -8,7 +8,9 @@
 #ifndef KAWATREEPRINT_H_
 #define KAWATREEPRINT_H_
 
-class KAWATreePrint {
+#include "KAWATreeInstruction.h"
+
+class KAWATreePrint: public KAWATreeInstruction{
 public:
 	KAWATreePrint();
 	virtual ~KAWATreePrint();

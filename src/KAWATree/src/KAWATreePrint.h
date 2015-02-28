@@ -8,9 +8,12 @@
 #ifndef KAWATREEPRINT_H_
 #define KAWATREEPRINT_H_
 
+#include <list>
 #include "KAWATreeInstruction.h"
 
 class KAWATreePrint: public KAWATreeInstruction{
+protected:
+	void setParam(KAWATreeParam param);
 public:
 	KAWATreePrint();
 	virtual ~KAWATreePrint();

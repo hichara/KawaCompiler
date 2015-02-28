@@ -6,18 +6,8 @@
  */
 
 #include "KAWATreePrintInteger.h"
+#include "KAWATreeParam.h"
 
-class KAWATreePrintInteger : public KAWATreePrint{
-
-	KAWATreePrintInteger::KAWATreePrintInteger() {
-
-	}
-
-	KAWATreePrintInteger::KAWATreePrintInteger(std::list<KAWATreeParam> list) {
-		listParams = list;
-
-	}
-};
-
-
-
+void KAWATreePrintInteger::setParam(KAWATreeParam p){
+	addParam(p);
+}

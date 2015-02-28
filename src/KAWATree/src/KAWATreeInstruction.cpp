@@ -18,6 +18,7 @@ std::list<KAWATreeParam> KAWATreeInstruction::getParams(){
 }
 
 void KAWATreeInstruction::setParams(std::list<KAWATreeParam> newParams){
+	listParams.clear();
 	listParams = newParams;
 }
 

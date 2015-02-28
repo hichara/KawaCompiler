@@ -16,7 +16,7 @@
 class KAWATreeInstruction: public KAWATreeCompilerNode {
 protected:
 	std::list<KAWATreeParam> listParams;
-	std::string name;	
+	std::string name;
 public:
 	KAWATreeInstruction();
 	virtual ~KAWATreeInstruction();

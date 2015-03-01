@@ -28,11 +28,6 @@ class HelloWorldProgram{
 		void run();
 };
 
-void Callback(void *data) {
-    std::string &s = *(static_cast<std::string*>(data));
-    std::cout << s;
-}
-
 HelloWorldProgram::HelloWorldProgram(){
 	// création d'un programme vide
 	KAWATreeProgram program;

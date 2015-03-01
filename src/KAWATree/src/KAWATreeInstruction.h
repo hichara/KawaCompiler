@@ -18,8 +18,8 @@ protected:
 	std::list<KAWATreeParam> listParams;
 	std::string name;
 public:
-	KAWATreeInstruction();
-	virtual ~KAWATreeInstruction();
+	KAWATreeInstruction(){};
+	~KAWATreeInstruction(){};
 	std::string getName();
 	
 	std::list<KAWATreeParam> getParams();

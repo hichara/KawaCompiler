@@ -17,7 +17,7 @@ private:
 	KAWATreeBodyMethod body;
 public:
 	KAWATreeMethod(std::string n);
-	virtual ~KAWATreeMethod();
+	~KAWATreeMethod(){};
 
 	std::string getName();
 	void setName(std::string newName);

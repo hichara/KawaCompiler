@@ -18,7 +18,7 @@ private:
 	std::list<KAWATreeClass> listClasses;
 public:
 	KAWATreeProgram(){};
-	virtual ~KAWATreeProgram();
+	~KAWATreeProgram(){};
 	void addClass(KAWATreeClass c );
 
 	/*

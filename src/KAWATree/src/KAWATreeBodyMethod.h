@@ -18,8 +18,8 @@ private:
 	std::list<KAWATreeInstruction> listInstructions;
 
 public:
-	KAWATreeBodyMethod();
-	virtual ~KAWATreeBodyMethod();
+	KAWATreeBodyMethod(){};
+	~KAWATreeBodyMethod(){};
 	void addInstruction(KAWATreeInstruction i);
 };
 

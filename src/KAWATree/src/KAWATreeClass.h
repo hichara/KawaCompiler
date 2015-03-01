@@ -20,8 +20,9 @@ private:
 	std::string name;
 	list<KAWATreeMethod> listMethodes;
 public:
+	
 	KAWATreeClass(std::string n);
-	virtual ~KAWATreeClass();
+	~KAWATreeClass(){};
 	void addMain(KAWATreeMethod m);
 
 };

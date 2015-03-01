@@ -17,7 +17,7 @@ private:
 public:
 	KAWATreeType(){};
 	KAWATreeType(std::string n);
-	virtual ~KAWATreeType();
+	~KAWATreeType(){};
 	std::string getName();
 	void setName(std::string newName);
 };

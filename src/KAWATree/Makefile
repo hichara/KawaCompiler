@@ -39,9 +39,10 @@ KAWATreeParam.o: ${SRCDIR}/KAWATreeParam.cpp ${SRCDIR}/KAWATreeParam.h KAWATreeT
 	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeParam.cpp -o ${OBJDIR}/KAWATreeParam.o
 
 KAWATreeType.o: ${SRCDIR}/KAWATreeType.cpp ${SRCDIR}/KAWATreeType.h
-	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeType.cpp -o ${OBJDIR}/KAWATreeType.o	
+	${CC} ${CFLAGS} -c ${SRCDIR}/KAWATreeType.cpp -o ${OBJDIR}/KAWATreeType.o
 
-KawaTreeHelloWorld:	KawaTreeHelloWorld.cpp KAWATreeProgram.o KAWATreePrintInteger.o KAWATreePrintFloat.o KAWATreePrintString.o
-	${CC} ${CFLAGS} KawaTreeHelloWorld.cpp -o KawaTreeHelloWorld
+KawaTreeHelloWorld:	KawaTreeHelloWorld.cpp ${SRCDIR}/*.h KAWATreeClass.o KAWATreeProgram.o KAWATreePrintInteger.o KAWATreePrintFloat.o KAWATreePrintString.o
+	${CC} ${CFLAGS} ${SRCDIR}/*.cpp KawaTreeHelloWorld.cpp -o KawaTreeHelloWorld
+
 clean:
 	@rm ${OBJDIR}/*.o

@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+public:
+	static Value *NewInstance();
+}

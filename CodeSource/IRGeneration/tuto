@@ -1,0 +1,235 @@
+Juste pour etre sur, incluez tout ça par defaut.
+
+#include "llvm/IR/Verifier.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
+#include "llvm/ExecutionEngine/Interpreter.h"
+#include "llvm/ExecutionEngine/JIT.h"
+#include "llvm/IR/Constants.h"
+#include "llvm/IR/DerivedTypes.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/Support/raw_ostream.h"
+
+
+Apres avoir creer un element vous pouvez vous servir de la fonction
+dump pour afficher sur stderr la contenue de votre variable.
+
+------------------------------------------------
+------------------------------------------------
+
+
+*Fonctions a faire appel en debut de programme.
+
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/IR/LLVMContext.h"
+
+ InitializeNativeTarget(); -- Pour faire du JIT
+ LLVMContext Context;
+
+------------------------------------------------
+------------------------------------------------
+
+*Creation d'un nouveau module
+*Le module sert à ordonner le code IR, on y inserera nos fonction et nos variables globales
+
+
+#include "llvm/IR/Module.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Verifier.h"
+
+Module *M = new Module("Nom du module", Context);
+
+
+*Apres avoir construit le module il sera utile de tester si il a bien été formé.
+
+
+ if (verifyModule(*M)) {
+   //Traiter l'erreur
+   return 0;
+ }
+
+
+
+------------------------------------------------
+------------------------------------------------
+
+La classe Builder est une abstract factory permettant de creer des instructions,
+chaque instruction des concatenée a la fin du point d'insertion courant et une
+reference vers le noeud est retournée et est reutilisable.
+
+IRBuilder<> builder(getGlobalContext());
+
+ou
+
+IRBuilder<> builder(BasicBlock *BB);
+
+ou 
+
+IRBuilder<> builder(LLVMContext &context);
+
+
+On peut specifier au builder à quel endroit inserer automatiquement les instructions crées.
+
+buidler.SetInsertPoint (BasicBlock *TheBB)
+
+
+
+---------------------------------------
+
+
+Les instruction qui nous interessent : 
+
+Insert un element dans un tableau
+Value * IRBuilder::CreateInsertElement (Value *Vec, Value *NewElt, Value *Idx, const Twine &Name="")
+
+Creation d'une instruction getelementptr
+static GetElementPtrInst *  GetElementPtrInst::Create (Value *Ptr, ArrayRef< Value * > IdxList, const Twine &NameStr, BasicBlock *InsertAtEnd);
+
+Creation d'une instruction store
+StoreInst * CreateStore (Value *Val, Value *Ptr, bool isVolatile=false)
+
+Creation d'une instruction Load
+LoadInst * CreateLoad (Value *Ptr, const char *Name)
+
+Create d'une instruction de castage
+On utilisera l'abstract factory CastInst
+Value* CreateFPToSI (Value *V, Type *DestTy, const Twine &Name="") : float to int
+Value* CreateFPExt (Value *V, Type *DestTy, const Twine &Name="") : float to double
+Value* CreateFPTrunc (Value *V, Type *DestTy, const Twine &Name="") : double to float
+
+
+Creation d'un banchement
+CreateCondBr (Value *Cond, BasicBlock *True, BasicBlock *False, MDNode *BranchWeights=nullptr);
+
+Pour cree des operation binaire, c'est : CreateAdd, CreateMul, CreateUDiv etc...
+
+
+
+------------------------------------------------
+------------------------------------------------
+
+Pour la creation de type premitifs je conseil l'utilisation de la classe factory Type.
+Bien que chaqun des types primitifs ait une classe les representants.
+
+
+#inclue <Type.h>
+#include <DerivedTypes.h>
+
+Generation Type Constante :
+ Type::get<type>Ty(context)
+
+ type = Void | Int8 | Int32 | Int64 | Float | Double...ect
+
+Consulter la page http://llvm.org/docs/doxygen/html/classllvm_1_1Type.html
+
+La construction d'un pointeur de type se fait grace a la classe PointerType et au type à pointer.
+
+Exemple :
+
+*This creates the i8* type
+PointerType* PointerTy = PointerType::get(IntegerType::get(&context, 8), 0);
+
+*This creates the i8** type
+PointerType* PointerPtrTy = PointerType::get(PointerTy, 0);
+
+
+La creation d'un structure se fait de la façon suivante :
+
+ StructureType *new_type = StructType::create(context, "Mon_type");
+ 
+ std::vector<Type*> array_type(nb_type, 
+                             type1, type2,...);
+
+ new_type->setBody(array_type);
+
+------------------------------------------------
+------------------------------------------------
+
+Les fonctions suivront les regles suivantes :
+
+ - Dans classe A, foo(type1 arg1, type2 arg2, ..., typen argn) deviendra
+	@A.foo.type1.type1.typ2......typen(%type1 %arg1, %type2 %arg2,...,%arg1%typen %argn)
+ - Les regles d'appels sémaniques, visibilité, heritages se feront à la construction de l'arbre syntaxique
+
+Les fonctins se contruisent en definissant leur type de retour, le type des arguments et le nom des argurments.
+  
+* Ici on cree un vecteur contenant 
+  std::vector<Type*> Doubles(Args.size(), 
+                             Type::getDoubleTy(getGlobalContext()));
+
+* Ici on cree un le type de la fonction.
+  Premier arg : type de retour
+  Deuxieme arg : liste des types d'arguments
+  Troisieme arg : boolean determinant si on a des arguments optionnelles.
+
+  FunctionType *FT = FunctionType::get(Type::getDoubleTy(getGlobalContext()),
+                                       Doubles, false);
+  
+  Function *F = Function::Create(FT, Function::ExternalLinkage /* Voir enum llvm::GlobalValue::LinkageTypes*/, Name, TheModule);
+
+* Apres avoir creer la fonction, il faut renommer les arguments de la manière suivante.
+
+  for (Function::arg_iterator AI = F->arg_begin(); Idx != Args.size();
+       ++AI, ++Idx) {
+    AI->setName(Args[Idx])
+  }
+ 
+
+Pour ajouter des options a la fonction on utilsera les fonctions setAttributes 
+(AttributeSet attrs) sur la fonction. Se repportter a la partie destinée aux attributs.
+
+On peut obtenir ou creer une fonction grace a la methde suivante.
+Function *F = cast<function>module->getOrInsertFunction (StringRefName, FunctionType *T, AttributeSet AttributeList);
+
+
+Les fonction sont convertibles en i8* et appellables.
+
+------------------------------------------------
+------------------------------------------------
+
+La definition de variables globales se fait de la maniere suivante.
+
+
+GlobalVariable* gvar_ptr_abc = new GlobalVariable(/*Module=*/*mod, 
+/*Type=*/PointerTy_0,
+/*isConstant=*/false,
+/*Linkage=*/GlobalValue::CommonLinkage,
+/*Initializer=*/0, // has initializer, specified below
+/*Name=*/"abc");
+gvar_ptr_abc->setAlignment(4);
+
+// Constant Definitions
+ConstantPointerNull* const_ptr_2 = ConstantPointerNull::get(PointerTy_0);
+
+// Global Variable Definitions
+gvar_ptr_abc->setInitializer(const_ptr_2);
+
+Alternative :
+
+On peut ajouter une variable global à un module grace à 
+Module::getOrInsertGlobal(StringRef   Name, Type *Ty)   
+
+------------------------------------------------
+------------------------------------------------
+
+Creation d'arrayType
+
+ArrayType::get(Type*, unsigned nb);
+
+ou 
+
+IRBuilder::CreateVectorSplat (unsigned NumElts, Value *V, const Twine &Name="");
+
+------------------------------------------------
+------------------------------------------------
+
+Partie sur les attriubuts
+
+------------------------------------------------
+------------------------------------------------
+
+
+
+

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <list>
  
+using namespace std;
 class KAWATreeInstruction: public KAWATreeCompilerNode {
 protected:
 	std::list<KAWATreeParam> listParams;
@@ -25,7 +26,6 @@ public:
 	std::list<KAWATreeParam> getParams();
 	void setParams(	std::list<KAWATreeParam> newParams);
 	void addParam(KAWATreeParam p);
-	
 };
 
 #endif /* KAWATREEINSTRUCTION_H_ */

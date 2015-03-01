@@ -11,6 +11,8 @@
 #include <iostream>
 #include "KAWATreeBodyMethod.h" 
 
+using namespace std;
+
 class KAWATreeMethod {
 private:
 	std::string name;
@@ -23,7 +25,10 @@ public:
 	void setName(std::string newName);
 	KAWATreeBodyMethod getBody();
 	void setBody(KAWATreeBodyMethod newBody);
-
+	void debug(){
+		cout << "\t\t[ Method: " << name << " ]" << endl;
+		body.debug();
+	}
 };
 
 #endif /* METHODE_H_ */

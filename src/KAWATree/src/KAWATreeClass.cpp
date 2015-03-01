@@ -14,6 +14,10 @@ KAWATreeClass::KAWATreeClass(std::string n){
 	name = n;
 }
 
+std::string KAWATreeClass::getName() {
+	return name;
+}
+
 void KAWATreeClass::addMain(KAWATreeMethod m){
 	listMethodes.push_back(m);
 }

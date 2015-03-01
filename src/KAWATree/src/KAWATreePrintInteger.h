@@ -12,8 +12,13 @@
 
 class KAWATreePrintInteger : public KAWATreePrint{
 public:
-	KAWATreePrintInteger();
+	KAWATreePrintInteger(){
+		name = "PrintInteger";
+	}
 	virtual ~KAWATreePrintInteger();
+	void debug(){
+		cout << "\t\t\t\t[Instruction: " << name << "]" << endl;
+	}
 };
 
 #endif /* KAWATREEPRINTINTEGER_H_ */

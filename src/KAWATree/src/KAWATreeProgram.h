@@ -18,7 +18,7 @@ private:
 	std::list<KAWATreeClass> listClasses;
 public:
 	KAWATreeProgram(){};
-	~KAWATreeProgram(){};
+	virtual ~KAWATreeProgram(){};
 	void addClass(KAWATreeClass c );
 
 	/*
@@ -27,7 +27,11 @@ public:
 	 * de la classe mère.
 	 */
 	void debug(){
-		cout << "[Progam Node]\n" << endl;
+		cout << "[Progam]" << endl;
+		std::list<KAWATreeClass>::iterator it;
+		for (it = listClasses.begin(); it != listClasses.end(); it++){
+			it->debug();
+		}
 	}
 };
 

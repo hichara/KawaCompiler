@@ -22,8 +22,16 @@ private:
 public:
 	
 	KAWATreeClass(std::string n);
-	~KAWATreeClass(){};
+	virtual ~KAWATreeClass(){};
 	void addMain(KAWATreeMethod m);
+	std::string getName();
+	void debug(){
+		cout << "\t[Class: " << name << " ]" <<endl;
+		std::list<KAWATreeMethod>::iterator it;
+		for (it = listMethodes.begin(); it != listMethodes.end(); it++){
+			it->debug();
+		}
+	};
 
 };
 

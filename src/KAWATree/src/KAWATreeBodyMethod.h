@@ -12,6 +12,8 @@
 #include "KAWATreeInstruction.h"
 #include <list>
 
+using namespace std;
+
 class KAWATreeBodyMethod: public KAWATreeCompilerNode {
 
 private:
@@ -21,6 +23,14 @@ public:
 	KAWATreeBodyMethod(){};
 	~KAWATreeBodyMethod(){};
 	void addInstruction(KAWATreeInstruction i);
+
+	void debug(){
+		cout << "\t\t\t[BodyMethod]" << endl;
+		std::list<KAWATreeInstruction>::iterator it;
+		for (it = listInstructions.begin(); it != listInstructions.end(); it++){
+			it->debug();
+		}
+	}
 };
 
 #endif /* KAWATREEBODYMETHODE_H_ */

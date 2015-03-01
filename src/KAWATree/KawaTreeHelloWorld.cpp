@@ -21,6 +21,7 @@ using namespace std;
 
 class HelloWorldProgram{
 	private:
+		// création d'un programme vide
 		KAWATreeProgram program;
 	public:
 		HelloWorldProgram();
@@ -29,9 +30,7 @@ class HelloWorldProgram{
 };
 
 HelloWorldProgram::HelloWorldProgram(){
-	// création d'un programme vide
-	KAWATreeProgram program;
-
+	// program
 		// création d'une classe principale
 		KAWATreeClass mainClass("MainClass");
 

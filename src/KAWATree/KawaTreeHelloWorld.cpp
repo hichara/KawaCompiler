@@ -41,7 +41,7 @@ HelloWorldProgram::HelloWorldProgram(){
 				KAWATreeBodyMethod bodyMain;
 
 					// définition de l'instruction printString("Hello World !")
-					KAWATreePrintString printString;
+					KAWATreePrintString* printString = new KAWATreePrintString;
 					
 						KAWATreeType typeString("string");
 						
@@ -50,14 +50,14 @@ HelloWorldProgram::HelloWorldProgram(){
 						void* valueStr = (void*) s;
 						KAWATreeParam paramStr(typeString, valueStr);
 
-						printString.addParam(paramStr);
+						printString->addParam(paramStr);
 					
 					bodyMain.addInstruction(printString);
 					// fin de définition
 
 
 					// définition de l'instruction printInteger(42)
-					KAWATreePrintInteger printInteger;
+					KAWATreePrintInteger* printInteger = new KAWATreePrintInteger;
 
 						KAWATreeType typeInteger("int");
 						int* integer = (int*) malloc(sizeof(int));
@@ -66,13 +66,13 @@ HelloWorldProgram::HelloWorldProgram(){
 						void* valueInt = (void*) integer;
 						KAWATreeParam paramInteger(typeInteger, valueInt);
 						
-						printInteger.addParam(paramInteger);
+						printInteger->addParam(paramInteger);
 
 					bodyMain.addInstruction(printInteger);
 					// fin de définition
 
 					// définition de l'instruction printFloat(13.37)
-					KAWATreePrintFloat printFloat;
+					KAWATreePrintFloat* printFloat = new KAWATreePrintFloat;
 						KAWATreeType typeFloat("float");
 						double* doubleVal = (double*) malloc(sizeof(double));
 						*doubleVal = 13.37;
@@ -80,7 +80,7 @@ HelloWorldProgram::HelloWorldProgram(){
 						void* valueDouble = (void*) doubleVal;
 						KAWATreeParam paramFloat(typeFloat, valueDouble);		
 
-						printFloat.addParam(paramFloat);
+						printFloat->addParam(paramFloat);
 
 					bodyMain.addInstruction(printFloat);
 					// fin de définition

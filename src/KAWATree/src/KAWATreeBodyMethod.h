@@ -17,18 +17,18 @@ using namespace std;
 class KAWATreeBodyMethod: public KAWATreeCompilerNode {
 
 private:
-	std::list<KAWATreeInstruction> listInstructions;
+	std::list<KAWATreeInstruction*> listInstructions;
 
 public:
 	KAWATreeBodyMethod(){};
 	~KAWATreeBodyMethod(){};
-	void addInstruction(KAWATreeInstruction i);
+	void addInstruction(KAWATreeInstruction* i);
 
 	virtual void debug(){
 		cout << "\t\t\t[BodyMethod]" << endl;
-		std::list<KAWATreeInstruction>::iterator it;
+		std::list<KAWATreeInstruction*>::iterator it;
 		for (it = listInstructions.begin(); it != listInstructions.end(); it++){
-			it->debug();
+			(*it)->debug();
 		}
 	}
 };

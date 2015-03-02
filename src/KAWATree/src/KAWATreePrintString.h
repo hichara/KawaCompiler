@@ -9,13 +9,17 @@
 #define KAWATREEPRINTSTRING_H_
 
 #include "KAWATreePrint.h"
+#include "KAWATreeCompilerNode.h"
 
-class KAWATreePrintString: public KAWATreePrint {
+class KAWATreePrintString: public KAWATreePrint, public KAWATreeCompilerNode {
 public:
 	KAWATreePrintString(){
 		name = "print_string";
 	};
 	~KAWATreePrintString(){};
+	virtual void debug(){
+		cout << "\t\t\t\t[PrintInstruction: " << name << "]" << endl;
+	}
 };
 
 #endif /* KAWATREEPRINTSTRING_H_ */

@@ -17,9 +17,6 @@ protected:
 public:
 	KAWATreePrint(){};
 	virtual ~KAWATreePrint(){};
-	virtual void debug(){
-		cout << "\t\t\t\t[PrintInstruction: " << name << "]" << endl;
-	}
 };
 
 #endif /* KAWATREEPRINT_H_ */

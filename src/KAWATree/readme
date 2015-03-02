@@ -8,8 +8,8 @@ Code non fini
 Ne pas oublier le répertoire obj pour la compile
 
 
-Problèmes
----------
+Problème résolu
+---------------
 
 Le bug rencontré ici est subtile. En gros dans le programme il y a un PrintString qui hérite de Print qui hérite de Instruction. Instruction implémente CompilerNode qui possède une méthode virtuelle debug. Le BodyMethod contient une liste d'Instruction sur laquelle une à une les Instructions appelleront leur méthode debug.
 Je comptais sur le polymorphisme de PrintString pour y définir debug, mais cela ne fonctionne pas.

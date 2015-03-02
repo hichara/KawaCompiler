@@ -8,6 +8,6 @@
 #include "KAWATreeBodyMethod.h"
 #include "KAWATreeInstruction.h"
 
-void KAWATreeBodyMethod::addInstruction(KAWATreeInstruction i){
+void KAWATreeBodyMethod::addInstruction(KAWATreeInstruction* i){
 	listInstructions.push_back(i);
 }

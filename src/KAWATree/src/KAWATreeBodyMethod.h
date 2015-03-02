@@ -24,7 +24,7 @@ public:
 	~KAWATreeBodyMethod(){};
 	void addInstruction(KAWATreeInstruction i);
 
-	void debug(){
+	virtual void debug(){
 		cout << "\t\t\t[BodyMethod]" << endl;
 		std::list<KAWATreeInstruction>::iterator it;
 		for (it = listInstructions.begin(); it != listInstructions.end(); it++){

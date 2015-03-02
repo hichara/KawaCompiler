@@ -12,8 +12,10 @@
 
 class KAWATreePrintString: public KAWATreePrint {
 public:
-	KAWATreePrintString();
-	virtual ~KAWATreePrintString();
+	KAWATreePrintString(){
+		name = "print_string";
+	};
+	~KAWATreePrintString(){};
 };
 
 #endif /* KAWATREEPRINTSTRING_H_ */

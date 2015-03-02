@@ -12,8 +12,10 @@
 
 class KAWATreePrintFloat: public KAWATreePrint {
 public:
-	KAWATreePrintFloat();
-	virtual ~KAWATreePrintFloat();
+	KAWATreePrintFloat(){
+		name = "PrintFloat";
+	};
+	~KAWATreePrintFloat(){};
 };
 
 #endif /* KAWATREEPRINTFLOAT_H_ */

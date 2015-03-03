@@ -8,6 +8,6 @@
 #include "KAWATreeProgram.h"
 //#include "KAWATreeClass.h"
 
-void KAWATreeProgram::addClass(KAWATreeClass c ){
+void KAWATreeProgram::addClass(KAWATreeClass* c ){
 	listClasses.push_back(c);
 }

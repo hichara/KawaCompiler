@@ -13,15 +13,15 @@ std::string KAWATreeInstruction::getName(){
 	return name;
 }
 
-std::list<KAWATreeParam> KAWATreeInstruction::getParams(){
+std::list<KAWATreeParam*> KAWATreeInstruction::getParams(){
 	return listParams;
 }
 
-void KAWATreeInstruction::setParams(std::list<KAWATreeParam> newParams){
+void KAWATreeInstruction::setParams(std::list<KAWATreeParam*> newParams){
 	listParams.clear();
 	listParams = newParams;
 }
 
-void KAWATreeInstruction::addParam(KAWATreeParam p){
+void KAWATreeInstruction::addParam(KAWATreeParam* p){
 	listParams.push_back(p);
 }

@@ -18,6 +18,6 @@ std::string KAWATreeClass::getName() {
 	return name;
 }
 
-void KAWATreeClass::addMain(KAWATreeMethod m){
+void KAWATreeClass::addMain(KAWATreeMethod* m){
 	listMethodes.push_back(m);
 }

@@ -1,9 +1,8 @@
-#include "VariableNameBuilder.h"
+#include "NameBuilder.h"
 
 
-#include <cstring> 
 
-std::string buildMethodeName(std::string className,
+std::string NameBuilder::buildMethodeName(std::string className,
 										 std::string name,
 										 std::string ret_type,
 										 std::vector<std::string> list_type) {
@@ -44,7 +43,7 @@ std::string NameBuilder::buildConstructorName(std::string className,
 	if(className == "")
 		return "";
 
-	result = CONSTRUCTOR_PREFIX + className;
+	result = "KawaConstructor" + className;
 
 	if (list_type.size() == 0)
 		return result + "+" + KAWA_VOID;
@@ -52,7 +51,7 @@ std::string NameBuilder::buildConstructorName(std::string className,
 	for(std::std::vector<std::string>::iterator it = list_type.begin();
 		it != list_type.end(); ++it) {
 
-		tmp = LLVMTypeToStr(StrToLLVMType(*it));;
+		tmp = LLVMTypeToStr(TypeGenerator::StrToLLVMType(*it));;
 		if(tmp == "")
 			KawaUtilitary::stopGenerationIR(UNKNOWN_TYPE);
 
@@ -67,25 +66,42 @@ std::string NameBuilder::buildConstructorName(std::string className,
 // L'index est suceptible d'etre le meme pour toute les tables issues de la meme famille
 std::string NameBuilder::buildMethodeIndexName(std::string functionBuiltName) {
 
-	return METHODE_INDEX_PREFIX + functionBuiltName;
+	std::string res;
+
+	res = METHODE_INDEX_PREFIX + functionBuiltName;
+
+	return res;
 }
 
 
-std::string NameBuilder::buildAdHocTableName(std::string classA,  // Classe dynamique 
-									   std::string classB) { // Classe statique
+std::string NameBuilder::buildAdHocTableName(std::string classStatic,
+	    									 std::string classDynamique) {
 
-	if(classA == "" || classB == "")
-		result "";
+	if(classStatic == "" || classDynamique == "")
+		return "";
 
-	return ADHOCTABLE_PREFIX + "_" + classA + "_" + classB;
+	std::string res;
+	res = ADHOCTABLE_PREFIX + "_" + classStatic + "_" + classDynamique;
+
+	return res;
 }
 	
-std::string NameBuilder::buildStaticVariableName(std::string className,
-										 std::string name,
-										 std::string ret_type,
-										 std::vector<std::string> list_type) {
+std::string NameBuilder::buildAttributIndexName(std::string className, std::string name) {
+	std::string res;
 
-	return STATIC + "_" + buildMethodeName(className, name, ret_type, list_type);
+	res = ATTRIBUT_INDEX_PREFIX +"_" + className + "_" + name;
+
+	return res;
+}
+
+std::string NameBuilder::buildStaticVariableName(std::string className, 
+									std::string name) {
+
+	std::string res;
+
+	res STATIC + "_" + className + "_" + name;
+
+	return res;
 }
 
 
@@ -94,8 +110,11 @@ std::string NameBuilder::buildClassTypeName(std::string className) {
 
 	if(className == "")
 		return "";
+	std::string res;
 
-	return KAWA_CLASS_PREFIX + className;
+	res = KAWA_CLASS_PREFIX + className;
+
+	return res;
 }
 
 
@@ -104,7 +123,11 @@ std::string NameBuilder::buildClassStructTypeName(std::string className) {
 	if(className == "")
 		return "";
 
-	return KAWA_CLASS_STRUCT_PREFIX + className;
+	std::string res;
+
+	res = KAWA_CLASS_STRUCT_PREFIX + className;
+
+	return res;
 }
 
 
@@ -128,7 +151,6 @@ std::string NameBuilder::LLVMTypeToStr(Type* type) {
 
 	return "";
 }
-
 
 
 

@@ -45,9 +45,6 @@ public:
 						std::string functionName,
 						std::vector<BasicBlock*> list_block);
 
-	static Value *getFunctionIndex(Module *module, std::string name);
-
-	static Value *createFonctionIndex(Module *module, std::string name, int index); 
 };
 
 

@@ -21,7 +21,7 @@ Twine *KawaUtilitary::appendTwine(const Twine &str1,  Twine *str2) {
 }
 
 
-void KawaUtilitary::stopGenerationIR(string err) {
+void KawaUtilitary::stopGenerationIR(std::string err) {
 
 	std::cerr << err << "\n";
 

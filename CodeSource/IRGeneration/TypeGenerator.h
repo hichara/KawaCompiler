@@ -9,13 +9,18 @@
 class TypeGenerator {
 
 public:
-	static StructType *createClassType(std::string name, std::vector<std::string> list,
-				std::vector<bool> list_val);
+	static StructType* TypeGenerator::createClassType(Module *module,
+						std::string className,
+						std::vector<std::string> att_names, 
+						std::vector<std::string> list_types, 
+						std::vector<bool> isValue,
+						std::vector<bool> isStatic);
 
-	static Type *StrToLLVMType(std::string type, Module *module);
+	static Type* StrToLLVMType(Module *module, std::string type);
 
-private:
-	static StructType *createStructType(std::string name, std::vector<std::string> list,
-				std::vector<bool> list_val);
+	static Value* createStaticAttribute(Module *module, std::string className,
+						 std::string attributName, std::string type);
 
+	static Value* createClassAttributIndex(Module *module, std::string className, 
+						std::string attName, bool isStatic, int i);
 }

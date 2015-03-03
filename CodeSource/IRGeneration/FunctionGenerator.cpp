@@ -27,7 +27,7 @@ Function *createMethode(Module *module, int index, bool isStatic,
 			: NameBuilder::buildFunctionName(className, name, args_types)
 			? NameBuilder::buildStaticFunctionName(className, name, args_types);
 
-	createFonctionIndex(module, functionName, index);
+	GlobalVariableGenerator::createIndex(module, functionName, index);
 
 	Funtion *f = module->getFonction(functionName);
 

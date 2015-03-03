@@ -1,42 +1,65 @@
-#include "StructureClassGenerator.h"
+#include "TypeGenerator.h"
 
 
 
 
 
+// Cree le type associé a une instance de classe et la structure contenant les attributs
+StructType *TypeGenerator::createClassType(Module *module,
+					std::string className,
+					std::vector<std::string> att_names,
+					std::vector<std::string> list_types, 
+					std::vector<bool> isValue,
+					std::vector<bool> isStatic) {
 
-
-
-
-Type *TypeGenerator::createClassType(Module *module,
-					std::string name, 
-					std::vector<std::string> list_type,
-					std::vector<bool> list_val) {
-
-	if(list_val.size() == 0)
+	if(isValue.size() == 0)
 		return NULL;
 
-	if(list_type.size() == 0)
+	if(isValue.size() != list_type.size() ||
+	   isValue.size() != isStatic.size() ||
+	   isValue.size() != att_names.size())
 		return NULL;
 
-	if(list_val.size() != list_type)
-		return NULL;
+    std::string name_class =
+    	NameBuilder::buildClassTypeName(className);
+
+    StructType *maClass = StrToLLVMType(name_class);
+
+	if(!maClass->isOpaque())
+		KawaUtilitary::stopGenerationIR(CLASS_AREADY EXIST);
+
+	std::string name_struct =
+		 NameBuilder::buildStructTypeName(className);
+
 
 	std::vector<Type*> res;
+	std::string attName, indexName;
 	Type *t;
+
+	int indexAtt = 0;
 
 	for(int i = 0; i < list_type.size(); i++) {
 		
 		t = StrToLLVMType(list_type[i]);
 
-		if(!list_val[i])
-			t = t->getPointerTo();
+		if(!isValue[i])
+			t = t->getPointerTo();		
 		
-		res.push_back(t);
-	}
+		if(!isStatic[i]) {
+			res.push_back(t);
+			indexName = NameBuilder::buildAttributIndexName(
+				className, att_names[i]); 
 
-	std::string name_struct =
-		 NameBuilder::buildStructTypeName(name);
+			GlobalVariableGenerator::createIndex(module, indexName, indexAtt);
+			indexAtt++;
+		} else {
+			attName = NameBuilder::buildStaticVariableName(
+				className, att_names[i]);
+
+			GlobalVariableGenerator::createStaticAttribute(
+				module, attName, list_types[i]);
+		}
+	}
 
     StructType *maClassStruct = 
     	StructType::create(
@@ -45,23 +68,12 @@ Type *TypeGenerator::createClassType(Module *module,
     		name_struct);
 
     std::vector<Type *> ar2;	
-
-    ar2.push_back(montype->getPointerTy());
+    ar2.push_back(maClassStruct->getPointerTy());
     ar2.push_back(Type::getInt8Ty()->getPointerTo());
 
-    std::string name_class =
-    	NameBuilder::buildClassTypeName(name);
+    maClass->setBody(ar2);
 
-    StructType *maClass = StrToLLVMType(name_class);
-
-
-    return monClass;
-}
-
-Type *TypeGenerator::createClassStructType(std::string name, 
-	std::vector<std::string> list,
-	std::vector<bool> list_val) {
-
+    return maClass;
 }
 
 
@@ -93,3 +105,5 @@ Type *TypeGenerator::StrToLLVMType(Module *module, std::string type) {
 
 	return NULL;
 }
+
+

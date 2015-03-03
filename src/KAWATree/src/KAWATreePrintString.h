@@ -18,7 +18,12 @@ public:
 	};
 	~KAWATreePrintString(){};
 	virtual void debug(){
-		cout << "\t\t\t\t[PrintInstruction: " << name << "]" << endl;
+		std::list<KAWATreeParam*>::iterator param = listParams.begin();
+		void* value =  (*param)->getValue();
+		std::string sz = *((std::string*) value);
+		cout << "\t\t\t\t[PrintString]" << endl
+			 << "\t\t\t\t > output: " << sz << endl;
+
 	}
 };
 

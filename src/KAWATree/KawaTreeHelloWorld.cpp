@@ -45,10 +45,9 @@ HelloWorldProgram::HelloWorldProgram(){
 					
 						KAWATreeType* typeString = new KAWATreeType("string");
 						
-						char s[] = "Hello world !";
-						//Callback( static_cast<void*>(&valueStr) );
-						void* valueStr = (void*) s;
-						KAWATreeParam* paramStr = new KAWATreeParam(typeString, valueStr);
+						
+						std::string* valueStr = new std::string("Hello world !");
+						KAWATreeParam* paramStr = new KAWATreeParam(typeString, (void*) valueStr);
 
 						printString->addParam(paramStr);
 					
@@ -74,7 +73,7 @@ HelloWorldProgram::HelloWorldProgram(){
 					// définition de l'instruction printFloat(13.37)
 					KAWATreePrintFloat* printFloat = new KAWATreePrintFloat;
 						KAWATreeType* typeFloat = new KAWATreeType("float");
-						double* doubleVal = (double*) malloc(sizeof(double));
+						float* doubleVal = (float*) malloc(sizeof(float));
 						*doubleVal = 13.37;
 
 						void* valueDouble = (void*) doubleVal;

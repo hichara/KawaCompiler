@@ -3,9 +3,10 @@ KAWATree permet de gérer l'arbre sémantique et facilite l'écriture d'un progr
 Utile pour les test.
 Indispensable pour le developpement.
 
-Code non fini
+Les debug sont terminés. Ils permettent de tester si la programme monté en mémoire est celui qui est écrit en C++.
+Par exemple, controler si le programme virtuel kawa monté en mémoire dans KawaTreeHelloWorld est bien celui souhaité.
 
-Ne pas oublier le répertoire obj pour la compile
+Ne pas oublier le répertoire obj pour la compile.
 
 
 Problème résolu

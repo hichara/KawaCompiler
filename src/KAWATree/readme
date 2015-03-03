@@ -6,8 +6,6 @@ Indispensable pour le developpement.
 Les debug sont terminés. Ils permettent de tester si la programme monté en mémoire est celui qui est écrit en C++.
 Par exemple, controler si le programme virtuel kawa monté en mémoire dans KawaTreeHelloWorld est bien celui souhaité.
 
-Ne pas oublier le répertoire obj pour la compile.
-
 
 Problème résolu
 ---------------

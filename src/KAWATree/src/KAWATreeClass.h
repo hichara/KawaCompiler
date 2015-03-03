@@ -8,6 +8,7 @@
 #ifndef KAWATreeCLASS_H_
 #define KAWATreeCLASS_H_
 
+#include "KAWATreeCompiler.h"
 #include "KAWATreeCompilerNode.h"
 #include "KAWATreeMethod.h"
 #include <iostream>
@@ -32,7 +33,13 @@ public:
 			(*it)->debug();
 		}
 	};
-
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+		std::list<KAWATreeMethod*>::iterator it;
+		for (it = listMethodes.begin(); it != listMethodes.end(); it++){
+			(*it)->compile(compiler);
+		}
+	}
 };
 
 #endif /* CLASSE_H_ */

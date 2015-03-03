@@ -23,6 +23,10 @@ public:
 		cout << "\t\t\t\t[PrintFloat]" << endl
 			 << "\t\t\t\t > output: " << fFloat << endl;
 	}
+
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+	}
 };
 
 #endif /* KAWATREEPRINTFLOAT_H_ */

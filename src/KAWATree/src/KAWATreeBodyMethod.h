@@ -31,6 +31,13 @@ public:
 			(*it)->debug();
 		}
 	}
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+		std::list<KAWATreeInstruction*>::iterator it;
+		for (it = listInstructions.begin(); it != listInstructions.end(); it++){
+			(*it)->compile(compiler);
+		}
+	}
 };
 
 #endif /* KAWATREEBODYMETHODE_H_ */

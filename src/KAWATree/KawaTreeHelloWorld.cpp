@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <iostream>
+#include "src/KAWATreeCompiler.h"
+#include "src/KAWATreeMonolithicCompiler.h"
 #include "src/KAWATreeCompilerNode.h"
 #include "src/KAWATreeProgram.h"
 #include "src/KAWATreeClass.h"
@@ -30,7 +32,7 @@ class HelloWorldProgram{
 };
 
 HelloWorldProgram::HelloWorldProgram(){
-	program = new KAWATreeProgram;
+    program = new KAWATreeProgram;
 		// création d'une classe principale
 		KAWATreeClass* mainClass = new KAWATreeClass("MainClass");
 
@@ -95,10 +97,10 @@ HelloWorldProgram::HelloWorldProgram(){
 }
 
 void HelloWorldProgram::run(){
-	//*
+	/*
 	program->debug();
 	/*/
-	program.compile();
+	program->compile(new KAWATreeMonolithicCompiler);
 	//*/
 }
 

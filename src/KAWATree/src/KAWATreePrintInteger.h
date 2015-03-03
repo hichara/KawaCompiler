@@ -24,6 +24,9 @@ public:
 			 << "\t\t\t\t > output: " << dInteger << endl;
 	}
 	
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+	}
 };
 
 #endif /* KAWATREEPRINTINTEGER_H_ */

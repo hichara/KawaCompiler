@@ -8,6 +8,7 @@
 #ifndef KAWATREEINSTRUCTION_H_
 #define KAWATREEINSTRUCTION_H_
 
+#include "KAWATreeCompiler.h"
 #include "KAWATreeCompilerNode.h"
 #include "KAWATreeParam.h"
 #include <iostream>

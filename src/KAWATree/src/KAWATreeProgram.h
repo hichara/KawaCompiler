@@ -10,12 +10,14 @@
 
 #include <list>
 #include <iostream>
+#include "KAWATreeCompiler.h"
 #include "KAWATreeCompilerNode.h"
 #include "KAWATreeClass.h"
 
 class KAWATreeProgram : public KAWATreeCompilerNode{
 private:
 	std::list<KAWATreeClass*> listClasses;
+
 public:
 	KAWATreeProgram(){};
 	virtual ~KAWATreeProgram(){};
@@ -31,6 +33,14 @@ public:
 		std::list<KAWATreeClass*>::iterator it;
 		for (it = listClasses.begin(); it != listClasses.end(); it++){
 			(*it)->debug();
+		}
+	}
+
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+		std::list<KAWATreeClass*>::iterator it;
+		for (it = listClasses.begin(); it != listClasses.end(); it++){
+			(*it)->compile(compiler);
 		}
 	}
 };

@@ -29,6 +29,10 @@ public:
 		cout << "\t\t[ Method: " << name << " ]" << endl;
 		body->debug();
 	}
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+		body->compile(compiler);
+	}
 };
 
 #endif /* METHODE_H_ */

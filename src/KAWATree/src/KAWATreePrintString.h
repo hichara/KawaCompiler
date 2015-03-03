@@ -25,6 +25,9 @@ public:
 			 << "\t\t\t\t > output: " << sz << endl;
 
 	}
+	void compile(KAWATreeCompiler* compiler){
+		compiler->compile(this);
+	}
 };
 
 #endif /* KAWATREEPRINTSTRING_H_ */

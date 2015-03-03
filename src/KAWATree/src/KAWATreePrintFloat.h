@@ -16,6 +16,13 @@ public:
 		name = "PrintFloat";
 	};
 	~KAWATreePrintFloat(){};
+	virtual void debug(){
+		std::list<KAWATreeParam*>::iterator param = listParams.begin();
+		void* value =  (*param)->getValue();
+		float fFloat = *((float*) value);
+		cout << "\t\t\t\t[PrintFloat]" << endl
+			 << "\t\t\t\t > output: " << fFloat << endl;
+	}
 };
 
 #endif /* KAWATREEPRINTFLOAT_H_ */

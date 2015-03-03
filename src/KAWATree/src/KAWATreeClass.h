@@ -18,18 +18,18 @@ using namespace std;
 class KAWATreeClass: public KAWATreeCompilerNode{
 private:
 	std::string name;
-	list<KAWATreeMethod> listMethodes;
+	list<KAWATreeMethod*> listMethodes;
 public:
 	
 	KAWATreeClass(std::string n);
 	virtual ~KAWATreeClass(){};
-	void addMain(KAWATreeMethod m);
+	void addMain(KAWATreeMethod* m);
 	std::string getName();
 	void debug(){
 		cout << "\t[Class: " << name << " ]" <<endl;
-		std::list<KAWATreeMethod>::iterator it;
+		std::list<KAWATreeMethod*>::iterator it;
 		for (it = listMethodes.begin(); it != listMethodes.end(); it++){
-			it->debug();
+			(*it)->debug();
 		}
 	};
 

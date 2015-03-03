@@ -15,11 +15,11 @@
 
 class KAWATreeProgram : public KAWATreeCompilerNode{
 private:
-	std::list<KAWATreeClass> listClasses;
+	std::list<KAWATreeClass*> listClasses;
 public:
 	KAWATreeProgram(){};
 	virtual ~KAWATreeProgram(){};
-	void addClass(KAWATreeClass c );
+	void addClass(KAWATreeClass* c );
 
 	/*
 	 * Je n'arrive pas à mettre cette méthode dans le .cpp
@@ -28,9 +28,9 @@ public:
 	 */
 	void debug(){
 		cout << "[Progam]" << endl;
-		std::list<KAWATreeClass>::iterator it;
+		std::list<KAWATreeClass*>::iterator it;
 		for (it = listClasses.begin(); it != listClasses.end(); it++){
-			it->debug();
+			(*it)->debug();
 		}
 	}
 };

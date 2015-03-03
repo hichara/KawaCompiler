@@ -9,7 +9,7 @@
 #include "KAWATreePrint.h"
 #include "KAWATreeParam.h"
 
-void KAWATreePrint::setParam(KAWATreeParam param){
+void KAWATreePrint::setParam(KAWATreeParam* param){
 	listParams.clear();
 	listParams.push_back(param);
 }

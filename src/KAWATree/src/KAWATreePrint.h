@@ -13,7 +13,7 @@
 
 class KAWATreePrint: public KAWATreeInstruction{
 protected:
-	void setParam(KAWATreeParam param);
+	void setParam(KAWATreeParam* param);
 public:
 	KAWATreePrint(){};
 	virtual ~KAWATreePrint(){};

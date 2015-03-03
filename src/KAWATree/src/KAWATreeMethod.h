@@ -16,18 +16,18 @@ using namespace std;
 class KAWATreeMethod {
 private:
 	std::string name;
-	KAWATreeBodyMethod body;
+	KAWATreeBodyMethod* body;
 public:
 	KAWATreeMethod(std::string n);
 	~KAWATreeMethod(){};
 
 	std::string getName();
 	void setName(std::string newName);
-	KAWATreeBodyMethod getBody();
-	void setBody(KAWATreeBodyMethod newBody);
+	KAWATreeBodyMethod* getBody();
+	void setBody(KAWATreeBodyMethod* newBody);
 	void debug(){
 		cout << "\t\t[ Method: " << name << " ]" << endl;
-		body.debug();
+		body->debug();
 	}
 };
 

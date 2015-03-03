@@ -22,7 +22,7 @@ using namespace std;
 class HelloWorldProgram{
 	private:
 		// création d'un programme vide
-		KAWATreeProgram program;
+		KAWATreeProgram* program;
 	public:
 		HelloWorldProgram();
 		~HelloWorldProgram(){};
@@ -30,74 +30,73 @@ class HelloWorldProgram{
 };
 
 HelloWorldProgram::HelloWorldProgram(){
-	// program
+	program = new KAWATreeProgram;
 		// création d'une classe principale
-		KAWATreeClass mainClass("MainClass");
+		KAWATreeClass* mainClass = new KAWATreeClass("MainClass");
 
 			// création de la méthode main de la classe
-			KAWATreeMethod mainMethod("main");
+			KAWATreeMethod* mainMethod = new KAWATreeMethod("main");
 
 				// écriture du corps de la méthode
-				KAWATreeBodyMethod bodyMain;
+				KAWATreeBodyMethod* bodyMain = new KAWATreeBodyMethod;
 
 					// définition de l'instruction printString("Hello World !")
 					KAWATreePrintString* printString = new KAWATreePrintString;
 					
-						KAWATreeType typeString("string");
+						KAWATreeType* typeString = new KAWATreeType("string");
 						
-						char s[] = "Hello world !";
-						//Callback( static_cast<void*>(&valueStr) );
-						void* valueStr = (void*) s;
-						KAWATreeParam paramStr(typeString, valueStr);
+						
+						std::string* valueStr = new std::string("Hello world !");
+						KAWATreeParam* paramStr = new KAWATreeParam(typeString, (void*) valueStr);
 
 						printString->addParam(paramStr);
 					
-					bodyMain.addInstruction(printString);
+					bodyMain->addInstruction(printString);
 					// fin de définition
 
 
 					// définition de l'instruction printInteger(42)
 					KAWATreePrintInteger* printInteger = new KAWATreePrintInteger;
 
-						KAWATreeType typeInteger("int");
+						KAWATreeType* typeInteger = new KAWATreeType("int");
 						int* integer = (int*) malloc(sizeof(int));
 						*integer = 42;
 
 						void* valueInt = (void*) integer;
-						KAWATreeParam paramInteger(typeInteger, valueInt);
+						KAWATreeParam* paramInteger = new KAWATreeParam(typeInteger, valueInt);
 						
 						printInteger->addParam(paramInteger);
 
-					bodyMain.addInstruction(printInteger);
+					bodyMain->addInstruction(printInteger);
 					// fin de définition
 
 					// définition de l'instruction printFloat(13.37)
 					KAWATreePrintFloat* printFloat = new KAWATreePrintFloat;
-						KAWATreeType typeFloat("float");
-						double* doubleVal = (double*) malloc(sizeof(double));
+						KAWATreeType* typeFloat = new KAWATreeType("float");
+						float* doubleVal = (float*) malloc(sizeof(float));
 						*doubleVal = 13.37;
 
 						void* valueDouble = (void*) doubleVal;
-						KAWATreeParam paramFloat(typeFloat, valueDouble);		
+						KAWATreeParam* paramFloat = new KAWATreeParam(typeFloat, valueDouble);		
 
 						printFloat->addParam(paramFloat);
 
-					bodyMain.addInstruction(printFloat);
+					bodyMain->addInstruction(printFloat);
 					// fin de définition
 
 			// affectation du corps de la méthode main
-			mainMethod.setBody(bodyMain);
+			mainMethod->setBody(bodyMain);
 
 		// ajout de la méthode main à la classe
-		mainClass.addMain(mainMethod);	
+		mainClass->addMain(mainMethod);	
 
 	// ajout de la classe au programme
-	program.addClass(mainClass);
+	program->addClass(mainClass);
 }
 
 void HelloWorldProgram::run(){
 	//*
-	program.debug();
+	program->debug();
 	/*/
 	program.compile();
 	//*/

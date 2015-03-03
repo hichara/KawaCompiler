@@ -14,13 +14,13 @@
 class KAWATreeParam : public KAWATreeCompilerNode{
 
 private:
-	KAWATreeType type;
+	KAWATreeType* type;
 	void* value;
 public:
-	KAWATreeParam(KAWATreeType t, void* v);
+	KAWATreeParam(KAWATreeType* t, void* v);
 	~KAWATreeParam(){};
 
-	KAWATreeType getType();
+	KAWATreeType* getType();
 	void* getValue();
 
 };

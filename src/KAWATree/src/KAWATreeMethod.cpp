@@ -22,10 +22,10 @@ void KAWATreeMethod::setName(std::string newName){
 	name = newName;
 }
 
-KAWATreeBodyMethod KAWATreeMethod::getBody(){
+KAWATreeBodyMethod* KAWATreeMethod::getBody(){
 	return body;
 }
 
-void KAWATreeMethod::setBody(KAWATreeBodyMethod newBody){
+void KAWATreeMethod::setBody(KAWATreeBodyMethod* newBody){
 	body = newBody;
 }

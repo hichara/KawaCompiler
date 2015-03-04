@@ -6,6 +6,8 @@
 #ifndef KAWATREECOMPILER_H_
 #define KAWATREECOMPILER_H_
 
+#include "./IRGen/IRGen.h"
+
 class KAWATreeProgram;
 class KAWATreeClass;
 class KAWATreeMethod;
@@ -16,10 +18,12 @@ class KAWATreePrintString;
 class KAWATreeParam;
 class KAWATreeType;
 
+
 class KAWATreeCompiler {
 public:
 	KAWATreeCompiler(){};
 	~KAWATreeCompiler(){};
+
     virtual void compile(KAWATreeProgram* p) = 0;
     virtual void compile(KAWATreeClass* c) = 0;
     virtual void compile(KAWATreeMethod* m) = 0;

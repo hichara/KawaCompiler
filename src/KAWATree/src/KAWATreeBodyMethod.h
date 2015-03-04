@@ -31,6 +31,7 @@ public:
 			(*it)->debug();
 		}
 	}
+	
 	void compile(KAWATreeCompiler* compiler){
 		compiler->compile(this);
 		std::list<KAWATreeInstruction*>::iterator it;

@@ -1,3 +1,6 @@
+#ifndef KAWA_PRIM_VAL_CON
+#define KAWA_PRIM_VAL_CON
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -43,3 +46,4 @@ private:
 };
 
 
+#endif

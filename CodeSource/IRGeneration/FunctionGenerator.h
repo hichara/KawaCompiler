@@ -1,3 +1,6 @@
+#ifndef KAWA_GENE_FNC
+#define KAWA_GENE_FNC
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -58,4 +61,4 @@ public:
 
 
 
-
+#endif

@@ -30,7 +30,7 @@ Modifes apportées :
 - KAWATreeMonolithicCompiler : Ajout constructeur prenant en parametre le nom voulu pour le module
 - KAWATreeMonolithicCompiler : Modif des fonction de compile
 - MakeFile : ajout des flags de compilation
-- KawaTreeHelloWorld : Modif ligne 
+- KawaTreeHelloWorld : Modif de la methode run pour afficher le  module
 
 
 
@@ -40,3 +40,7 @@ Remarques
 - Pour KAWATreeBodyMethod, il faudrait un lien vers le l'objet KAWATreeMethod parent
 - Pour les instruction il faudrait une liaison entre l'instruction et le bloc auquel il apparatient
 - Impossible d'accerder aux memebres externes des element
+- Rajouter une expression de retour : j'ai du bricoler pour concatener le retour
+
+Mode d'emploie
+

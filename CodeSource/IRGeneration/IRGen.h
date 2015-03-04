@@ -1,5 +1,9 @@
-#ifndef KAWA_GEN_PRIM_CREATOR
-#define KAWA_GEN_PRIM_CREATOR
+#ifndef IR_GEN_H__
+#define IR_GEN_H__
+
+/**
+ * Conitent les includes nécéssaires à la generation de code
+ */
 
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
@@ -13,27 +17,7 @@
 #include "llvm/PassManager.h"
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Transforms/Scalar.h"
-#include <cctype>
-#include <cstdio>
-#include <map>
-#include <string>
-#include <vector>
-
 #include "llvm/IR/Type.h"
-
-using namespace llvm;
-
-
-class  PrimitiveCreator {
-
-public:
-	static Value* create(int i, LLVMContext &context);
-	static Value* create(double d, LLVMContext &context);
-	static Value* create(float f, LLVMContext &context);
-	static Value* create(std::string str, LLVMContext &context);
-};
-
-
 
 
 #endif

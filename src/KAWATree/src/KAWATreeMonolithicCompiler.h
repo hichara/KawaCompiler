@@ -11,9 +11,14 @@
 #include "KAWATreeClass.h"
 #include "KAWATreeParam.h"
 #include "KAWATreePrintString.h"
+#include "KAWATreePrintFloat.h"
+#include "KAWATreePrintInteger.h"
+
+
 
 #include "./IRGen/IRGen.h"
 #include "./IRGen/FunctionGenerator.h"
+#include "./IRGen/CallGenerator.h"
 #include "./IRGen/PrimitiveCreator.h"
  
 using namespace std;
@@ -24,6 +29,7 @@ private:
 
     llvm::LLVMContext &Context = llvm::getGlobalContext();
     llvm::Module *module;
+    llvm::BasicBlock *currentBlock;
 public:
     KAWATreeMonolithicCompiler() {}
 
@@ -36,8 +42,7 @@ public:
 //		cout << "> Compile Program block" << endl;
 	}
 
-    virtual void compile(KAWATreeClass* c){
-
+    virtual void compile(KAWATreeClass* c) {
 //    	cout << "> Compile Class " << c->getName() << " block" << endl;
     }
 
@@ -49,35 +54,53 @@ public:
         } else {
             cout << "> Compile Method block :"  << m->getName() << endl;
         }
-
     }
 
     virtual void compile(KAWATreeBodyMethod* b){
 //    	cout << "> Compile BodyMethod block" << endl;
         llvm::Function *f = FunctionGenerator::getMainFunction(module);
         f->deleteBody();
-        llvm::BasicBlock::Create(module->getContext(), "", f);
+        currentBlock = llvm::BasicBlock::Create(module->getContext(), "entry", f);
     }
 
+
     virtual void compile(KAWATreePrintInteger* pi) {
-    	cout << "> Compile PrintInteger block" << endl;
+//    	cout << "> Compile PrintInteger block" << endl;
+
+        KAWATreeParam* param = pi->getParam();
+        void* value =  param->getValue();
+        int f = *((int*)value);
+        std::string s = std::to_string(f);
+        llvm::Value *v = PrimitiveCreator::create(s, module->getContext());
+        CallGenerator::createPrintCall(module, v, currentBlock);
     }
 
     virtual void compile(KAWATreePrintFloat* pf){
-    	cout << "> Compile PrintFloat block" << endl;
+//    	cout << "> Compile PrintFloat block" << endl;
+        KAWATreeParam* param = pf->getParam();
+        void* value =  param->getValue();
+        float f = *((float*)value);
+        std::string s = std::to_string(f);
+        llvm::Value *v = PrimitiveCreator::create(s, module->getContext());
+        CallGenerator::createPrintCall(module, v, currentBlock);
     }
 
     virtual void compile(KAWATreePrintString* ps){
+//        cout << "> Compile PrintString block" << endl
+//            << "\t => " << sz << endl;
+
         KAWATreeParam* param = ps->getParam();
         void* value =  param->getValue();
-        std::string sz = *((std::string*) value);
+        std::string s = *((std::string*) value);
 
-    	cout << "> Compile PrintString block" << endl
-             << "\t => " << sz << endl;
+        llvm::Value *v = PrimitiveCreator::create(s, module->getContext());
+        CallGenerator::createPrintCall(module, v, currentBlock);
     }
+
     virtual void compile(KAWATreeParam* p){
     	cout << "> Compile Param block" << endl;
     }
+
     virtual void compile(KAWATreeType* t){
     	cout << "> Compile Type block" << endl;
     }

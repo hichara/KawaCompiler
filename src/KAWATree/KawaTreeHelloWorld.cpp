@@ -19,6 +19,8 @@
 #include "src/KAWATreePrintFloat.h"
 #include "src/KAWATreePrintString.h"
 
+#include "src/IRGen/IRGen.h"
+
 using namespace std;
 
 class HelloWorldProgram{
@@ -100,8 +102,19 @@ void HelloWorldProgram::run(){
 	/*
 	program->debug();
 	/*/
-	program->compile(new KAWATreeMonolithicCompiler);
-	//*/
+	KAWATreeMonolithicCompiler *compiler = new KAWATreeMonolithicCompiler();
+	program->compile(compiler);
+	llvm::Module *module = compiler->getModule();
+	llvm::LLVMContext &Context = module->getContext();
+
+	//Complete le return de la fontion Main
+	Constant *zero = ConstantInt::get(Type::getInt32Ty(Context), 0);
+	llvm::Function *f = FunctionGenerator::getMainFunction(module);
+	llvm::BasicBlock &bb = f->getEntryBlock();
+	ReturnInst::Create(Context, zero, &bb);
+	
+	//Affichage du module sur std:cerr :/
+	module->dump();
 }
 
 int main(){

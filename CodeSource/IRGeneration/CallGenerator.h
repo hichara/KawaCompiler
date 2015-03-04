@@ -1,3 +1,6 @@
+#ifndef KAWA_GEN_CALL
+#define KAWA_GEN_CALL
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -40,3 +43,4 @@ public:
 };
 
 
+#endif

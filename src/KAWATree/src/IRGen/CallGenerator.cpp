@@ -40,24 +40,27 @@ Value* CallGenerator::createPrintCall(Module *module, Value *str, BasicBlock *bb
 	LLVMContext &ctx = str->getContext();
 	
 	Type *t = str->getType();
-	if(!t->isPointerTy())
-		std::cerr << "Erreur lors de l'appel du print" << "\n";
-
+	if(!t->isArrayTy()) {
+		std::cerr << "Error call print :";
+		std::cerr << "args type = ";
+		t->dump();
+		std::cerr << "Type expected [n * i8]";
 		return NULL;
+	}
 
-	Constant *zero = ConstantInt::get(Type::getInt32Ty(ctx), 0);
+	std::vector<Value *> args;
 
-	std::vector<Value *> idx, args;
-	idx.push_back(zero);
-	idx.push_back(zero);
+	Function *f = FunctionGenerator::getPrintFunction(module); 
 
-	Value *v = GetElementPtrInst::Create(str, idx, "", bb);
+    AllocaInst *a = new AllocaInst(str->getType(), "",bb);
 
-	args.push_back(v);
+    new StoreInst(str, a, bb);
 
-	Function *f = FunctionGenerator::getPrintFunction(module);
+    Value *v = new BitCastInst(a, Type::getInt8Ty(ctx)->getPointerTo(), "", bb);
 
-	return CallInst::Create(f, args, "",bb);
+    args.push_back(v);
+
+    return CallInst::Create(f, args, "",bb);
 }
 
 

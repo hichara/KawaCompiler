@@ -1,3 +1,6 @@
+#ifndef KAWA_GEN_PRIM_CREATOR
+#define KAWA_GEN_PRIM_CREATOR
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -33,3 +36,4 @@ public:
 
 
 
+#endif

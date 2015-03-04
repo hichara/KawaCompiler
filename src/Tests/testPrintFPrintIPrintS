@@ -16,11 +16,11 @@ public class Main extends inter1 implements interface1 {
 		int i;
 		float j;
 		print("Test de la methode print: str="+m.str+" var1="+m.getVar1());
-		printF(3.2);
-		printF(j);
-		printI(2);
-		printI(i);
-		printS("phrase simple");
+		printFloat(3.2);
+		printFloat(j);
+		printInt(2);
+		printInt(i);
+		printString("phrase simple");
 	}
 
 }

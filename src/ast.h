@@ -2,208 +2,223 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+using namespace std;
 
-typedef std::string String;
+enum TYPE{
+	CLASS,
+    ABSTRACTCLASS,
+    INTERFACE,
+    EXPRESSION,
+    EXPRESSIONUNAIRE,
+    EXPRESSIONBINAIRE,
+    CALLMETHODE,
+    VARIABLE,
+    PRIMITIF,
+    STRING,
+    BOOLEAN,
+    ENTIER,
+    FLOAT,
+    CHAR,
+    NULLVAL
+};
 
-typedef std::vector<InterfaceAST> InterfaceList ;
-typedef std::vector<MethodeAST> MethodeList;
-typedef std::vector<PrototypeAST> PrototypeList;
-typedef std::vector<ConstructorAST> ConstructorList;
-//typedef std::vector<InstructionAST> BlockList;
-typedef std::vector<ExprAST*> ExprList;
-typedef std::vector<VariableAST*> VariableList;
-typedef std::vector<AttributAST*> AttributList 
+enum VISIBILITY{
+    PUBLIC,
+    PROTECTED,
+    PRIVATE  
+};
+
+enum OPERATOR{
+    TPLUS,      // +
+    TMINUS,     // -             
+    TMUL,       // *            
+    TDIV,       // /            
+    TMOD,       // %            
+    TEQ,        // =             
+    TPLUSEQ,    // +=        
+    TMINUSEQ,   // -=       
+    TMULEQ,     // *=         
+    TDIVEQ,     // /=         
+    TMODEQ,     // %=         
+    TINC,       // ++           
+    TDEC,       // --           
+    TCEQ,       // ==           
+    TCNE,       // !=           
+    TCL,        // <             
+    TCLE,       // <=           
+    TCG,        // >             
+    TCGE,       // >=            
+    TOR,        // ||              
+    TAND,       // &&             
+    TNEG,       // !              
+    TANDBIN,    // &           
+    TANDBINEQ,  // &=        
+    TORBIN,     // |            
+    TORBINEQ,   // |=         
+    TXORBIN,    // ^           
+    TXORBINEQ,  // ^=        
+    TDECAL,     // <<           
+    TDECALEQ,   // <<=        
+    TDECAR,     // >>           
+    TDECAREQ,   // >>=        
+    TDECALNS,   // >>>        
+    TDECALNSEQ  // >>>=      
+};
+
+typedef string String;
 
 class AST{
     private:
-        const int type;
-        const bool computed;
-        const bool compute;
+        int type;
+        bool computed;
+        bool compute;
     public:
-        virtual int getTypeAST() const{}
-        virtual bool isComputed() const {}
-        virtual bool canCompute() const{}
+        // constructeurs
+        AST(int type, bool computed, bool compute);
+        AST(const AST& a);
+        AST();
+
+        //methodes
+        virtual int getTypeAST() const{
+            return type; 
+        }
+
+        virtual bool isComputed() const {
+            return computed;
+        }
+        
+        virtual bool canCompute() const{
+            return compute;
+        }
+
+        //desctructeur
+        ~AST();
 };
+
+class ConstructorAST : public AST{
+    //Les fonctions redéfinis de la classe mere
+    int getTypeAST() const;
+    bool isComputed() const;
+    bool canCompute() const;
+};
+
+typedef vector<AST*> MethodeList;
+typedef vector<AST*> PrototypeList;
+typedef vector<AST*> ConstructorList;
+//typedef std::vector<InstructionAST> BlockList;
+typedef vector<AST*> AttributList ;
+
+
+class InterfaceAST : public AST{
+    private:
+        String* name;
+        int visibility;
+        vector<InterfaceAST*> interfacesParents;
+        PrototypeList prototypes;
+
+    public:
+        // constructeurs
+        InterfaceAST(int type, bool computed, bool compute, String* name, int visibility, vector<InterfaceAST*> interfacesParents, PrototypeList prototypes );
+        InterfaceAST(const InterfaceAST& interface);
+        InterfaceAST();
+
+        //getters
+        String* getName() const;
+        int getVisibility() const;
+        vector<InterfaceAST*> getInterfacesParents() const;
+        PrototypeList getPrototypes() const;
+
+        //Setters
+        void setInterfaces(vector<InterfaceAST*>& interfacesParents);
+        void setPrototypes(PrototypeList& prototypes);
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
+
+        //desctructeur
+        ~InterfaceAST();
+};
+typedef vector<InterfaceAST*> InterfaceList ;
 
 class ConcreteClassAST : public AST{
     private:
-        const String& name;
-        const int visibility;
-        const bool final;
-        ConcreteClasseAST parent;
+        String* name;
+        int visibility;
+        bool final;
+        ConcreteClassAST* parent;
         InterfaceList interfaces;
         AttributList attributs;
         ConstructorList constructors;
         MethodeList methodes;
     public:
         // constructeurs
-        ConcreteClasseAST(int type, bool computed, bool compute, String& name, int visibility, bool final, ConcreteClasseAST& parent, InterfaceList& interfaces, AttributList& attributs, ConstructorList& constructors, MethodeList& methodes ) : type(type), computed(computed), compute(compute){
-        	name(name);
-        	visibility(visibility);
-        	final(final); 
-        	parent(parent); 
-        	interfaces(interfaces); 
-        	attributs(attributs); 
-        	constructors(constructors);
-        	methodes(methodes);
-        }
-
-        ConcreteClasseAST(){
-        	perent(NULL);
-        	interfaces(NULL); 
-        	attributs(NULL); 
-        	constructors(NULL); 
-        	methodes(NULL);
-        } 
+        ConcreteClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes ) ;
+        ConcreteClassAST(const ConcreteClassAST& c);
+        ConcreteClassAST();
 
         //getters
-        String getName() const {
-            return name;
-        }
-
-        int getVisibility() const {
-            return visibility;
-        }
-
-        ConcreteClasseAST getParent() const {
-            return parent;
-        }
-
-        InterfaceList getIntefaces() const {
-            return interfaces;
-        }
-
-        AttributList getAttributs() const {
-            return attributs;
-        }
-
-        ConstructorList getConstructors() const {
-            return constructors;
-        }
-
-        PrototypeList getMethodes() const {
-            return methodes;
-        }
+        String* getName() const ;
+        int getVisibility() const ;
+        bool isFinal() const ; 
+        ConcreteClassAST* getParent() const ;
+        InterfaceList getInterfaces() const ;
+        AttributList getAttributs() const ;
+        ConstructorList getConstructors() const ;
+        PrototypeList getMethodes() const ;
 
         //Setters
-        void setParent(ConcreteClassAST& parent){
-            parent(parent);
-        }
-
-        void setIntefaces(InterfaceList& interfaces){
-            interfaces(interfaces);
-        }
-
-        void setAttributs(AttributList& attributs){
-            attributs(attributs);
-        }
-
-        void setConstructors(ConstructorList& constructors){
-            constructors(constructors);
-        }
-
-        void setMethodes(MethodeList& methodes){
-            return methodes(methodes);
-        }
+        void setParent(ConcreteClassAST* parent);
+        void setInterfaces(InterfaceList& interfaces);
+        void setAttributs(AttributList& attributs);
+        void setConstructors(ConstructorList& constructors);
+        void setMethodes(MethodeList& methodes);
 
         //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
 
         //desctructeur
-        ~ConcreteClassAST(){
-            interfaces.clear();
-            attributs.clear();
-            constructors.clear();
-            methodes.clear();
-        }
+        ~ConcreteClassAST();
 
 };
 
-class InterfaceAST : public AST{
+class AbstractClassAST : public ConcreteClassAST{
     private:
-        const String& name;
-        const int visibility;
-        InterfaceList interfacesParents;
         PrototypeList prototypes;
-
     public:
         // constructeurs
-        InterfaceAST(int type, bool computed, bool compute, String& name, int visibility, InterfaceList& interfacesParents, PrototypeList& prototypes ) : type(type), computed(computed), compute(compute){
-        	name(name);
-        	visibility(visibility);
-        	interfacesParents(interfacesParents);
-        	prototypes(prototypes);
-        }
-
-        InterfaceAST(){
-        interfacesParents(NULL);   
-        prototypes(NULL){}	
-        }
-
-        //getters
-        String getName() const {
-            return name;
-        }
-
-        String getVisibility() const {
-            return visibility;
-        }
-
-        InterfaceParents getIntefacesParents() const {
-            return interfacesParents;
-        }
-
-        PrototypeList getPrototypes() const {
-            return prototypes;
-        }
-
-        //Setters
-        void setIntefaces(InterfaceList& interfacesParents){
-            interfacesParents(interfacesParents);
-        }
-
-        void setPrototypes(PrototypeList& prototypes){
-            prototypes(prototypes);
-        }
+        AbstractClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes, PrototypeList prototypes) ;
+        AbstractClassAST(const AbstractClassAST& ac);
+        AbstractClassAST();
 
         //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
 
         //desctructeur
-        ~InterfaceAST(){
-            interfaces.clear();
-            variables.clear();
-            prototypes.clear();
-        }
-};
-
-class AbstractClasseAST : public ConcreteClasseAST, public InterfaceAST{
-    
+        ~AbstractClassAST();
 };
 
 class ExprAST : public AST{ 
-     
+    public:
+        // constructeurs
+        ExprAST(int type, bool computed, bool compute) ;
+        ExprAST(const ExprAST& exp);
+        ExprAST();
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
+
+        //desctructeur
+        ~ExprAST();       
 };
+typedef vector<ExprAST*> ExprList;
 
 class ExprUnaireAST : public ExprAST{ 
     private:
@@ -211,50 +226,26 @@ class ExprUnaireAST : public ExprAST{
         int Operator;
     public:
         //constructeurs 
-        ExprUnaireAST(int type, bool computed, bool compute, ExprAST* operande, int Operator) : type(type), computed(computed), compute(compute){
-        	operande(perande);
-        	Operator(Operator);
-        }
-
-        ExprUnaireAST(){}
+        ExprUnaireAST(int type, bool computed, bool compute, ExprAST* operande, int Operator);
+        ExprUnaireAST(const ExprUnaireAST& exp);
+        ExprUnaireAST();
         
         //getters
-        ExprAST* getOperande() const {
-            return operande;
-        }
-
-        int getOperator() const {
-            return Operator;
-        }
+        ExprAST* getOperande() const ;
+        int getOperator() const ;
 
         //setters 
-        void setOperande(ExprAST* operande){
-            operande(operande);
-        }
-
-        void setOperator(int Operator){
-            Operator=Operator;
-        }
+        void setOperande(ExprAST* operande);
+        void setOperator(int Operator);
 
         //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
 
         //desctructeur
-        ~ExprUnaireAST(){
-        	delete operande;
-        }
+        ~ExprUnaireAST();
 };
-
 
 class ExprBinaireAST : public ExprAST{ 
     private:
@@ -263,224 +254,153 @@ class ExprBinaireAST : public ExprAST{
         int Operator;
     private:
         //constructeurs 
-        ExprBinaireAST(int type, bool computed, bool compute, ExprAST* leftOp, ExprAST* rightOp, int Operator) : type(type), computed(computed), compute(compute){
-        	leftOp(leftOp); 
-        	rightOp(rightOp); 
-        	Operator(Operator); 
-        }
-
-        ExprBinaireAST(){}
+        ExprBinaireAST(int type, bool computed, bool compute, ExprAST* leftOp, ExprAST* rightOp, int Operator) ;
+        ExprBinaireAST(const ExprBinaireAST& exp);
+        ExprBinaireAST();
         
         //getters
-        ExprAST* getLeftOp(){
-            return leftOp;
-        }
-
-        ExprAST* getRightOp(){
-            return rightOp;
-        }
-
-        int getOperator(){
-            return Operator;
-        }
+        ExprAST* getLeftOp();
+        ExprAST* getRightOp();
+        int getOperator();
 
         //setters 
-        void setLeftOp(ExprAST* leftOp){
-            leftOp(leftOp);
-        }
-
-
-        void setLOperande(ExprAST* rightOp){
-            rightOp(rightOp);
-        }
-
-        void setOperator(int Operator){
-            Operator(Operator);
-        }
+        void setLeftOp(ExprAST* leftOp);
+        void setLOperande(ExprAST* rightOp);
+        void setOperator(int Operator);
 
         //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
 
         //desctructeur
-        ~ExprBinaireAST(){
-        	delete leftOp;
-        	delete rightOp;
-        }
-};
-
-class InstanceObjet : public ExprAST{ 
-   ;
-        
-        //getters
-
-        //setters 
-
-        //Les fonctions redéfinis de la classe mere
-
-        //desctructeur
-};
-
-
-class CallMethodeAST : public ExprAST{ 
-    private:
-        const String& methodName;
-        ExprList args;
-        VariableAST caller;
-    public:
-        //constructeurs
-        CallMethodeAST(int type, bool computed, bool compute, String& methodName, ExpressionList args, VariableAST caller) : type(type), computed(computed), compute(compute){
-        	methodName(methodName);
-        	args(args); 
-        	caller(caller);
-        }
-        
-        CallMethodeAST(){
-        	args(NULL);
-        	caller(NULL);
-        }
-
-        //getters
-        String getMethodeName() const {
-            return methodName;
-        }
-
-        ExprList getArgs() const {
-            return args; 
-        }
-
-        AST getCaller() const {
-            return caller;
-        }
-        
-        //setters 
-        void setArgs(ExprList args){
-            args(args);
-        }
-
-        void setCaller(VariableAST caller){
-            caller(caller); 
-        }
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
-
-        //desctructeur
-        ~CallMethodeAST(){
-            args.clear();
-        }
+        ~ExprBinaireAST();
 };
 
 class VariableAST : public ExprAST{ 
     private:
-        const String& typeVar;
-        const String& name;
+        String* typeVar;
+        String* name;
         ExprAST* assignmentExpr;
 
     public:
+        //constructeurs
+        VariableAST(int type, bool computed, bool compute, String* typeVar, String* name, ExprAST* assignmentExpr);
+        VariableAST(const VariableAST& var);
+        VariableAST();
+
         //getters
-    	String getTypeVar() const {
-    		return typeVar;
-    	}
+        String* getTypeVar() const;
+        String* getName() const;
+        ExprAST* getAssignmentExpr() const;
 
-    	String getName() const {
-    		return name;
-    	}
-
-    	ExprAST* getAssignmentExpr() const {
-    		return assignmentExpr; 
-    	}
         //setters 
-    	ExprAST* setAssignmentExpr(){
-    		assignmentExpr=(assignmentExpr); 
-    	}
+        void setAssignmentExpr(ExprAST* assignmentExpr);
 
         //Les fonctions redéfinis de la classe mere
-    	int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
 
         //desctructeur
-        ~VariableAST(){
-        	delete assignmentExpr;
-        }
+        ~VariableAST();
  
+};
+typedef vector<VariableAST*> VariableList;
+
+
+class InstanceObjetAST : public ExprAST{ 
+    private:
+        ConstructorAST* constructor;
+        VariableList params;
+
+    public:
+        //constructeurs
+        InstanceObjetAST(int type, bool computed, bool compute, ConstructorAST* constructor, VariableList params);
+        InstanceObjetAST(const InstanceObjetAST& ia);
+        InstanceObjetAST();
+        
+        //getters
+        ConstructorAST* getConstructor() const;
+        VariableList getParams() const;
+
+        //setters 
+        void setConstructor(ConstructorAST* constructor);
+        void setParams(VariableList params);
+        
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
+
+        //desctructeur
+        ~InstanceObjetAST();
+};
+
+class CallMethodeAST : public ExprAST{ 
+    private:
+        String* methodName;
+        ExprList args;
+        VariableAST caller;
+    public:
+        //constructeurs
+        CallMethodeAST(int type, bool computed, bool compute, String* methodName, ExprList args, VariableAST caller);
+        CallMethodeAST(const CallMethodeAST& cm);
+        CallMethodeAST();
+
+        //getters
+        String* getMethodeName() const ;
+        ExprList getArgs() const;
+        VariableAST getCaller() const;
+        
+        //setters 
+        void setArgs(ExprList args);
+        void setCaller(VariableAST caller);
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
+
+        //desctructeur
+        ~CallMethodeAST();
 };
 
 class Primitif : public ExprAST{ 
 	public: 
 		//constructeurs
-        Primitif(int type, bool computed, bool compute) : type(type), computed(computed), compute(compute){}
-        Primitif(){}
+        Primitif(int type, bool computed, bool compute);
+        Primitif(const Primitif& pr);
+        Primitif();
 
  		//Les fonctions redéfinis de la classe mere
-    	int getTypeAST() const{
-        	return type; 
-        }
-
-        bool isComputed() const {
-        	return computed;
-        }
-        
-        bool canCompute() const{
-        	return compute;
-        }
+    	int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
 
  		//desctructeur
-        ~Primitif(){}
+        ~Primitif();
 };
+
 
 class StringAST : public Primitif{ 
     private:
-        String value;
+        String* value;
     
     public:
     	//construceurs
-    	StringAST( String& value ) {
-         value(value);
-     	}
-
-     	StringAST(){}
+    	StringAST(int type, bool computed, bool compute, String* value );
+        StringAST(const StringAST& sa);
+     	StringAST();
         
         //getters
-     	String getValue() const {
-     		return value;
-     	}
+     	String* getValue() const;
         
         //setters
-        void setValue(String& value){
-     		value(value);
-     	}
+        void setValue(String* value);
 
         //desctructeur
-        ~StringAST(){}
+        ~StringAST();
 };
 
 class BooleanAST : public Primitif{ 
@@ -489,24 +409,18 @@ class BooleanAST : public Primitif{
  
     public:
     	//constructeurs
-    	BooleanAST( bool value ) {
-    		value(value);
-    	}
-
-    	BooleanAST(){}
+    	BooleanAST(int type, bool computed, bool compute, bool value );
+        BooleanAST(const BooleanAST& ba);
+    	BooleanAST();
         
         //getters
-        bool getValue() const {
-     		return value;
-     	}
+        bool getValue() const;
         
         //setters
-        void setValue(bool value){
-     		value(value);
-     	}
+        void setValue(bool value);
 
         //desctructeur
-        ~BooleanAST(){}
+        ~BooleanAST();
 };
 
 class EntierAST : public Primitif{ 
@@ -515,24 +429,18 @@ class EntierAST : public Primitif{
  
     public:
     	//constructeurs
-    	EntierAST( int value ) {
-    		value(value);
-    	}
-
-    	EntierAST(){}
+    	EntierAST(int type, bool computed, bool compute, int value );
+        EntierAST(const EntierAST& ea);
+    	EntierAST();
         
         //getters
-        int getValue() const {
-     		return value;
-     	}
+        int getValue() const;
         
         //setters
-        void setValue(int value){
-     		value(value);
-     	}
+        void setValue(int value);
 
         //desctructeur
-        ~EntierAST(){}
+        ~EntierAST();
 };
 
 
@@ -542,24 +450,18 @@ class FlottantAST : public Primitif{
  
     public:
     	//constructeurs
-    	FlottantAST( float value ) {
-    		value(value);
-    	}
-
-    	FlottantAST(){}
+    	FlottantAST(int type, bool computed, bool compute, float value );
+        FlottantAST(const FlottantAST& fa);
+    	FlottantAST();
         
         //getters
-        float getValue() const {
-     		return value;
-     	}
+        float getValue() const;
         
         //setters
-        void setValue(float value){
-     		value(value);
-     	}
+        void setValue(float value);
 
         //desctructeur
-        ~FlottantAST(){}
+        ~FlottantAST();
 };
 
 class CharAST : public Primitif{ 
@@ -568,23 +470,17 @@ class CharAST : public Primitif{
  
     public:
     	//constructeurs
-    	CharAST( char value ) {
-    		value(value);
-    	}
-
-    	CharAST(){}
+    	CharAST(int type, bool computed, bool compute, char value );
+        CharAST(const CharAST& ca);
+    	CharAST();
         
         //getters
-        char getValue() const {
-     		return value;
-     	}
+        char getValue() const;
         
         //setters
-        void setValue(char value){
-     		value(value);
-     	}
+        void setValue(char value);
 
         //desctructeur
-        ~CharAST(){}
+        ~CharAST();
 };
 

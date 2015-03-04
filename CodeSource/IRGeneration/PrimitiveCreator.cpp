@@ -1,4 +1,4 @@
-#include "PrimitiveOperation.h"
+#include "PrimitiveCreator.h"
 
 
 
@@ -11,16 +11,18 @@ Value* PrimitiveCreator::create(int i, LLVMContext &context) {
 
 // Cree un double
 Value* PrimitiveCreator::create(double d, LLVMContext &context) {
-	return ConstantFp::get(Type::getDoubleTy(context), d);
+	return ConstantFP::get(Type::getDoubleTy(context), d);
 }
 
 
 // Cree un Float
 Value* PrimitiveCreator::create(float f, LLVMContext &context) {
-	return ConstantFp::get(Type::getFloatTy(context), f);
+	return ConstantFP::get(Type::getFloatTy(context), f);
 }
 
 // Cree une string
 Value* PrimitiveCreator::create(std::string str, LLVMContext &context) {
-	 return ConstantDataArray::getString (Context, str, true);
+	 return ConstantDataArray::getString (context, str, true);
 }
+
+

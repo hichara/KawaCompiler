@@ -1,49 +1,57 @@
 #include "CallGenerator.h"
+#include "FunctionGenerator.h"
 
 
 
 
+Value* CallGenerator::createMethodeCall(Module *module, Value *instance,
+					 std::vector<Value*> args, int index, BasicBlock *bb) {
 
-Value* CallGenerator::createMethodeCall(const Twine &className,
-							        const Twine &functionName,
-							        std::vector<Value *> list_args,
-							        Value* callTable, int index);
-
-Value* CallGenerator::createRegularMethodeCall(const Twine &className,
-							        const Twine &functionName,
-							        std::vector<Value *> list_args);
-
-
-Value* CallGenerator::createStaticMethodeCall(Module *module,
-									std::string fncName,
-							        std::vector<Value *> list_args) {
-
-	Function *f = module->getFunction(fncName);
-
-	return CallInst::Create(f, args);
+	return NULL;
 }
 
 
-// Value representant une chaine de caractere
-Value* CallGenerator::createPrintCall(Value *str) {
-	if(str->getType() != Type::getInt8Type())
-		KawUtilitary::stopGenerationIR(INVALID_ARGS);
+Value* CallGenerator::createMethodeCall(Module *module, Value *instance,
+					 std::vector<Value*> args, Value *index, BasicBlock *bb) {
 
-	LLVMContext &context = str->getContext();
-
-	std::vector<Value*> idx;
-
-	Constant *z0 = ConstantInt::get(Type::getInt32Ty(context), 0);
-
-	idx.push_back(z0);
-	idx.push_back(z0);
-
-	Value *v = GetElementPtrInst(str, idx);
-
-	std::vector<Value*> args;
-	args.push_back(str);
-
-	return CallInst::Create(Value *Func, args);
+	return NULL;
 }
+
+
+Value* CallGenerator::createStaticMethodeCall(Module *module, std::string funcName,
+					   std::vector<Value *> list_args, BasicBlock *bb) {
+
+	return NULL;
+}
+
+
+// Cree un Instruction d'appelle d'affichage
+// Il faudra faire attention au type passée.
+// str doit etre de type [n * i8]*
+Value* CallGenerator::createPrintCall(Module *module, Value *str, BasicBlock *bb) {
+
+	LLVMContext &ctx = str->getContext();
+	
+	Type *t = str->getType();
+	if(!t->isPointerTy())
+		std::cerr << "Erreur lors de l'appel du print" << "\n";
+
+		return NULL;
+
+	Constant *zero = ConstantInt::get(Type::getInt32Ty(ctx), 0);
+
+	std::vector<Value *> idx, args;
+	idx.push_back(zero);
+	idx.push_back(zero);
+
+	Value *v = GetElementPtrInst::Create(str, idx, "", bb);
+
+	args.push_back(v);
+
+	Function *f = FunctionGenerator::getPrintFunction(module);
+
+	return CallInst::Create(f, args, "",bb);
+}
+
 
 

@@ -1,11 +1,9 @@
 #include "FunctionGenerator.h"
 
-#include "NameBuilder.h"
 
 
-
-
-Function *createMethode(Module *module, int index, bool isStatic,
+/*
+Function* FunctionGenerator::createMethode(Module *module, int index, bool isStatic,
 									std::string className,
 									std::string name,
 									std::string ret_type,
@@ -63,10 +61,11 @@ Function *createMethode(Module *module, int index, bool isStatic,
 	}
 
 	return f;
+	return NULL;
 }
 
 
-Function *createConstructor(Module *module,
+Function* FunctionGenerator::createConstructor(Module *module,
 								std::string className,
 								std::vector<std::string> args_types,									
 								std::vector<std::string> args_names) {
@@ -109,15 +108,17 @@ Function *createConstructor(Module *module,
 		AI->setName(args_names[Idx + 1]);
 	}
 
-	return f;
+	return f; 
+	return NULL;
 }
 
-Function *getFonction(Module *module, std::string name) {
+
+Function* FunctionGenerator::getFonction(Module *module, std::string name) {
 	return module->getFonction(name);
 }
 
 void addBlock(Function *f, BasicBlock *block) {
-	block->insertInto(f);
+//	block->insertInto(f);
 }
 
 void setBody(Function *f, BasicBlock* block) {
@@ -133,7 +134,7 @@ void setBody(Function *f, std::std::vector<BasicBlock *> list_b) {
 	}
 }
 
-void setBody(Function *f, std::vector<Instruction *> list_inst;) {
+void FunctionGenerator::setBody(Function *f, std::vector<Instruction *> list_inst;) {
 
 	f->deleteBody();
 
@@ -146,6 +147,65 @@ void setBody(Function *f, std::vector<Instruction *> list_inst;) {
 	}
 }
 
-Value *getFunctionIndex(Module *module, std::string name) {
+Value* FunctionGenerator::getFunctionIndex(Module *module, std::string name) {
 
+}*/
+
+
+Function* FunctionGenerator::createMainFunction(Module *module) {
+  Function *f = module->getFunction("puts");
+
+  if(f != NULL)
+  	return f;
+
+  LLVMContext &context = module->getContext();
+
+  std::vector<Type *> empty;
+
+  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), empty, false);
+
+  f = Function::Create(ft, GlobalValue::ExternalLinkage ,"main", module);
+
+  return f;
+}
+
+Function* FunctionGenerator::getMainFunction(Module *module) {
+	Function *f = module->getFunction("main");
+
+	if(f == NULL)
+		f = createMainFunction(module);
+
+	return f;
+}
+
+
+Function* FunctionGenerator::createPrintFunction(Module *module) {
+  
+  Function *f = module->getFunction("puts");
+
+  if(f != NULL)
+  	return f;
+
+  LLVMContext &context = module->getContext();
+
+  std::vector<Type *> type_args;
+  type_args.push_back(
+      Type::getInt8Ty(context)->getPointerTo());
+
+  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), type_args, false);
+
+  f = Function::Create(ft, GlobalValue::ExternalLinkage, "puts", module);
+
+  f->addFnAttr(Attribute::NoUnwind);
+
+  return f;
+}
+
+Function* FunctionGenerator::getPrintFunction(Module *module) {
+	Function *f = module->getFunction("puts");
+
+	if(f == NULL)
+		f = createPrintFunction(module);
+
+	return f;
 }

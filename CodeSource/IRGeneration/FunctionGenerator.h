@@ -18,28 +18,34 @@
 
 #include "llvm/IR/Type.h"
 
+using namespace llvm;
 
 
-
-class FunctionCodeGenerator {
+class FunctionGenerator {
 
 public:
-	static Function *createFonction(Module *module, int index table,
+	static Function *createFonction(Module *module, int index,
 									std::string className,
 									std::string name,
 									std::string ret_type, 
 									std::vector<std::string> args_types,									
 									std::vector<std::string> args_names);
 
+	static Function *getFunction(Module *module, std::string name);
 
-	static Function *getFonction(Module *module,
+	static Function *createMainFunction(Module *module);
+
+	static Function *getMainFunction(Module *module);
+
+	static Function *createPrintFunction(Module *module);
+
+	static Function *getPrintFunction(Module *module);
+
+	static Function *getFunction(Module *module,
 				 				 std::string className,
 				 				 std::string name,
 				 				 std::string ret_type,
 				 				 std::vector<std::string> list_type);
-
-
-	static Function *getFonction(Module *module, std::string name);
 
 	static void setBody(Module *module,
 						std::string functionName,

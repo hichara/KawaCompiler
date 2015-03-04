@@ -16,29 +16,27 @@
 #include <string>
 #include <vector>
 #include "llvm/IR/Type.h"
+#include <iostream>
+
+
+using namespace llvm;
 
 
 
-
-class CallGenerater {
+class CallGenerator {
 
 
 public:
-	static Value *createMethodeCall(const Twine &className,
-							        const Twine &functionName,
-							        std::vector<Value *> list_args,
-							        Value* callTable, int index);
+	static Value *createMethodeCall(Module *module, Value *instance,
+							std::vector<Value*> args, int index, BasicBlock *b);
 
-	static Value *createRegularMethodeCall(const Twine &className,
-							        const Twine &functionName,
-							        std::vector<Value *> list_args);
+	static Value *createMethodeCall(Module *module, Value *instance,
+						 std::vector<Value*> args, Value *index, BasicBlock *b);
 
+	static Value *createStaticMethodeCall(Module *module, std::string funcName,
+					        std::vector<Value *> list_args, BasicBlock *b);
 
-	static Value *createStaticMethodeCall(const Twine &className,
-							        const Twine &functionName,
-							        std::vector<Value *> list_args);
-
-	static Value *createPrintCall(Value *str);
+	static Value *createPrintCall(Module *module, Value *str, BasicBlock *b);
 };
 
 

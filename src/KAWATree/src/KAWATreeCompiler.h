@@ -6,6 +6,7 @@
 #ifndef KAWATREECOMPILER_H_
 #define KAWATREECOMPILER_H_
 
+
 class KAWATreeProgram;
 class KAWATreeClass;
 class KAWATreeMethod;
@@ -15,6 +16,7 @@ class KAWATreePrintFloat;
 class KAWATreePrintString;
 class KAWATreeParam;
 class KAWATreeType;
+
 
 class KAWATreeCompiler {
 public:

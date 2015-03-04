@@ -11,7 +11,7 @@ KawaTreeHelloWorld:	KawaTreeHelloWorld.cpp ${SRCDIR}/*.h
 
 buildExec:
 	./KawaTreeHelloWorld 2> KawaTreeHelloWorld.ll
-	llc-3.5 KawaTreeHelloWorld.ll
+	llc KawaTreeHelloWorld.ll
 	gcc KawaTreeHelloWorld.s -o HelloWorld
 
 clean:

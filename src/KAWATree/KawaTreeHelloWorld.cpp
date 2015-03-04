@@ -97,10 +97,11 @@ HelloWorldProgram::HelloWorldProgram(){
 }
 
 void HelloWorldProgram::run(){
-//	program->debug();
-	
+	/*
+	program->debug();
+	/*/
 	program->compile(new KAWATreeMonolithicCompiler);
-
+	//*/
 }
 
 int main(){

@@ -9,6 +9,8 @@
 #include <iostream>
 #include "KAWATreeCompiler.h"
 #include "KAWATreeClass.h"
+#include "KAWATreeParam.h"
+#include "KAWATreePrintString.h"
 
 #include "./IRGen/IRGen.h"
 #include "./IRGen/FunctionGenerator.h"
@@ -66,7 +68,12 @@ public:
     }
 
     virtual void compile(KAWATreePrintString* ps){
-    	cout << "> Compile PrintString block" << endl;
+        KAWATreeParam* param = ps->getParam();
+        void* value =  param->getValue();
+        std::string sz = *((std::string*) value);
+
+    	cout << "> Compile PrintString block" << endl
+             << "\t => " << sz << endl;
     }
     virtual void compile(KAWATreeParam* p){
     	cout << "> Compile Param block" << endl;

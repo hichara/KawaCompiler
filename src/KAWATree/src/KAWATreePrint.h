@@ -17,6 +17,10 @@ protected:
 public:
 	KAWATreePrint(){};
 	virtual ~KAWATreePrint(){};
+	KAWATreeParam* getParam() {
+		std::list<KAWATreeParam*>::iterator param = listParams.begin();
+		return *param;
+	}
 };
 
 #endif /* KAWATREEPRINT_H_ */

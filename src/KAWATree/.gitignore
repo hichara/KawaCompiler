@@ -1,4 +1,5 @@
 KawaTreeHelloWorld
 *.s
 *.ll
+*.o
 

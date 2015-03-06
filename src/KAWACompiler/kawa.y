@@ -1,24 +1,41 @@
 %{
+#include <iostream>
 #include <sstream>
 #include <stdio.h>
 #include <string>
 #include <vector>
 #include "testClasse.h"
+#include "../KAWATree/src/KAWATreeCompiler.h"
+#include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
+#include "../KAWATree/src/KAWATreeCompilerNode.h"
+#include "../KAWATree/src/KAWATreeProgram.h"
+#include "../KAWATree/src/KAWATreeClass.h"
+#include "../KAWATree/src/KAWATreeMethod.h"
+#include "../KAWATree/src/KAWATreeBodyMethod.h"
+#include "../KAWATree/src/KAWATreeInstruction.h"
+#include "../KAWATree/src/KAWATreeParam.h"
+#include "../KAWATree/src/KAWATreeType.h"
+#include "../KAWATree/src/KAWATreePrintInteger.h"
+#include "../KAWATree/src/KAWATreePrintFloat.h"
+#include "../KAWATree/src/KAWATreePrintString.h"
+
+using namespace std;
 
 typedef std::string String;
 
 	int yylex();
 	int yyerror( const char* err );
 	extern int column;
-	extern int lineno; 
+	extern int lineno;
+	KAWATreeProgram* program = new KAWATreeProgram;
 %}
 
-%token<vint> ENTIER REEL ID  
+%token<vint> ENTIER REEL  
 %token<vint> STRING TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
 %token<vint> TIMPORT
 %token<vint> TPUBLIC TPRIVATE TPROTECTED
 %token<vint> TFINAL TABSTRACT TSTATIC /*TCONST TENUM*/ TVALUE
-%token<vint> TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
+%token<vstring> ID TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
 %token<vint> TSUPER TTHIS 
 %token<vint> TIF TELSE
 %token<vint> TFALSE TTRUE
@@ -64,7 +81,9 @@ typedef std::string String;
 {
 	int vint;
 	float vfloat;
-	String* vstring;
+	std::string* vstring;
+	KAWATreeProgram* program;
+	KAWATreeClass* clazz;
 }
 
 %nonassoc THEN 
@@ -169,14 +188,14 @@ ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0;}
 				  ; 
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
-TypeDeclaration : ImportDeclaration ClassOrInterfaceDeclaration { $$=0; new Node();printf("Premier test de la grammaire compilée avec CLang \n");}
+TypeDeclaration : ImportDeclaration ClassOrInterfaceDeclaration { $$=0; }
 				;
 
 ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0;}
 						    | Modifiers InterfaceDeclaration {$$=0;}
 							;
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody {$$=0;}
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { $$ = new KAWATreeClass(*$2); program->addClass( $$ ); }
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}
@@ -370,7 +389,7 @@ BlockStatement: Print {$$=0;}
     		  | ';' {$$=0;}
     		  ;
 
-Print : TPRINT '(' Args ')' ';' {$$=0;}
+Print : TPRINT '(' Args ')' ';' {cout << "Print: " << $1 << endl; $$=0;}
 	  ;
 Args :factFinal ArgsRest {$$=0;}
 	 | {$$=0;}

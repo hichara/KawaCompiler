@@ -4,9 +4,33 @@
 #include <string>
 #include <vector>
 #include "testClasse.h"
+#include "../KAWATree/src/KAWATreeCompiler.h"
+#include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
+#include "../KAWATree/src/KAWATreeCompilerNode.h"
+#include "../KAWATree/src/KAWATreeProgram.h"
+#include "../KAWATree/src/KAWATreeClass.h"
+#include "../KAWATree/src/KAWATreeMethod.h"
+#include "../KAWATree/src/KAWATreeBodyMethod.h"
+#include "../KAWATree/src/KAWATreeInstruction.h"
+#include "../KAWATree/src/KAWATreeParam.h"
+#include "../KAWATree/src/KAWATreeType.h"
+#include "../KAWATree/src/KAWATreePrintInteger.h"
+#include "../KAWATree/src/KAWATreePrintFloat.h"
+#include "../KAWATree/src/KAWATreePrintString.h"
 #include "kawa.hpp"
 
 typedef std::string String;
+
+inline int strToken( int token ){
+    yylval.vstring = new std::string( yytext, yyleng );
+    /*
+    if( debugTokens ){
+        printf("TOKEN\tIDENTIFIER\t%d\t%s\n", token, yytext);
+    }
+    */
+
+    return token;
+}
 
 int column=1; int lineno=1;
 
@@ -84,7 +108,7 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "print"         {count(); return (TPRINT);}
 "main"          {count(); return (TMAIN);}
 
-{ID}            {count(); yylval.vint=0; return(ID); }
+{ID}            {count(); return strToken(ID); }
 
 
 \"[^\n\"]*\"		{count(); return (STRING);}

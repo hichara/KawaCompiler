@@ -1,0 +1,19 @@
+CC= clang++
+CFLAGS= -Wall -g -Wno-c++11-extensions 
+LDFLAGS= -lm -ldl `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
+KAWATreeSrcDir= ../KAWATree/src
+IRDIR= ../KAWATree/src/IRGen
+
+all: kawac
+
+clean: 
+	@rm -f kawa.cpp kawa.hpp kawac tokens.cpp
+
+lexer: parser tokens.l
+	lex -o tokens.cpp tokens.l kawa.hpp
+
+parser: kawa.y 
+	bison -d -o kawa.cpp kawa.y
+
+kawac: lexer 
+	${CC} ${CFLAGS} ${IRDIR}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp main.cpp ${LDFLAGS}

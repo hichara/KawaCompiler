@@ -195,7 +195,7 @@ ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0;}
 						    | Modifiers InterfaceDeclaration {$$=0;}
 							;
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { $$ = new KAWATreeClass(*$2); program->addClass( $$ ); }
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { cout << "CLASS NAME: " << *$2 << endl; }
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}

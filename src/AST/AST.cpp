@@ -808,16 +808,18 @@
      
         // constructeurs
 
-	PrototypeAST::PrototypeAST(int type, bool computed, bool compute,String* name, int visibility, String* returnType,VariableList args) : AST(type, computed, compute){
+	PrototypeAST::PrototypeAST(int type, bool computed, bool compute,String* name, int visibility,bool Static, String* returnType,VariableList args) : AST(type, computed, compute){
         	this->name=name;
         	this->visibility=visibility;
+            this->Static=Static;
         	this->returnType=returnType;
 			this->args=args;
 		}
 	
-	PrototypeAST::PrototypeAST(String* name, int visibility, String* returnType,VariableList args){
+	PrototypeAST::PrototypeAST(String* name, int visibility,bool Static, String* returnType,VariableList args){
         	this->name=name;
         	this->visibility=visibility;
+            this->Static=Static;
         	this->returnType=returnType;
 			this->args=args;
 		}	
@@ -849,6 +851,23 @@
 	void PrototypeAST::setArgs(VariableList args){
 	this->args=args;
 	}
+
+    //setters
+    void PrototypeAST::setName(String* name){
+        this->name=name;
+    }
+
+    void PrototypeAST::setVisibility(int visibility){
+        this->visibility=visibility;
+    }
+
+    void PrototypeAST::setStatic(bool Static){
+        this->Static=Static;
+    }
+
+    void PrototypeAST::setReturnType(String* returnType){
+        this->returnType=returnType;
+    }
 
 	//Les fonctions redéfinis de la classe mere
         int PrototypeAST::getTypeAST() const{
@@ -1278,5 +1297,47 @@
 
 	    //destructeur
 		ExpressionConditionnelleAST::~ExpressionConditionnelleAST(){}
+
+/****************************************************************************************************************************/
+   /****************************************** PrintStringAST  ********************************************************************/
+     /****************************************************************************************************************************/
+     //Constructeurs
+        PrintStringAST::PrintStringAST(int type, bool computed, bool compute,StringAST* arg):InstructionAST(type, computed, compute) {
+            this->arg=arg;
+
+        }
+        PrintStringAST::PrintStringAST(StringAST* arg){
+            this->arg=arg;
+        }
+        PrintStringAST::PrintStringAST(){}
+
+        //getters;
+        StringAST* PrintStringAST::getArg(){
+            return arg;
+        }
+
+        //setters on);
+
+        void PrintStringAST::setArg(StringAST* argm){
+            this->arg=argm;
+        }
+
+        //Les fonctions redéfinis de la classe mere
+        int PrintStringAST::getTypeAST() const{
+            return getTypeAST(); 
+        }
+
+        bool PrintStringAST::isComputed() const {
+            return isComputed();
+        }
+        
+        bool PrintStringAST::canCompute() const{
+            return canCompute();
+        }
+
+        //destructeur
+        PrintStringAST::~PrintStringAST(){
+            delete arg;
+        }
 
 

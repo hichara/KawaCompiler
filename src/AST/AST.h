@@ -219,15 +219,16 @@ class PrototypeAST : public AST{
     
         String* name;
         int visibility;
+        bool Static;//Ajout de cet attribut (qui n'était pas dans DAL) 
         String* returnType;
         VariableList args;
     
     public:
         // constructeurs
 
-    PrototypeAST(int type, bool computed, bool compute,String* name, int visibility, String* returnType,VariableList args);
+    PrototypeAST(int type, bool computed, bool compute,String* name, int visibility,bool Static, String* returnType,VariableList args);
     
-    PrototypeAST(String* name, int visibility, String* returnType,VariableList args);   
+    PrototypeAST(String* name, int visibility,bool Static, String* returnType,VariableList args);   
 
     PrototypeAST();
 
@@ -237,12 +238,22 @@ class PrototypeAST : public AST{
 
      int getVisibility() const;
 
+     bool isStatic() const;
+
      String* getReturnType() const;
 
     VariableList getArgs(); 
 
 
     //setters
+    void setName(String* name);
+
+    void setVisibility(int visibility);
+
+    void setStatic(bool Static);
+
+    void setReturnType(String* returnType);
+
     void setArgs(VariableList args);
 
     //Les fonctions redéfinis de la classe mere
@@ -860,6 +871,31 @@ class ExpressionConditionnelleAST : public InstructionAST{
 
 };
 
+class PrintStringAST : public InstructionAST{
+    private:
+        StringAST* arg;
+
+    public:
+        //Constructeurs
+        PrintStringAST(int type, bool computed, bool compute,StringAST* arg);
+        PrintStringAST(StringAST* arg);
+        PrintStringAST();
+
+        //getters;
+        StringAST* getArg();
+
+        //setters on);
+        void setArg(StringAST* argm);
+
+         //Les fonctions redéfinis de la classe mere(AST)
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
+
+        //destructeur
+        ~PrintStringAST();
+
+};
 
 
 

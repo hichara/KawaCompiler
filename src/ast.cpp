@@ -406,51 +406,51 @@
         }
 
           /****************************************************************************************************************************/
-         /****************************************** InstanceObjetAST ****************************************************************/
+         /****************************************** InstanceObjectAST ****************************************************************/
         /****************************************************************************************************************************/
         //constructeurs
-        InstanceObjetAST::InstanceObjetAST(int type, bool computed, bool compute, ConstructorAST* constructor, VariableList params): ExprAST(type, computed, compute){
+        InstanceObjectAST::InstanceObjectAST(int type, bool computed, bool compute, ConstructorAST* constructor, VariableList params): ExprAST(type, computed, compute){
             constructor=constructor;
             params=params;
         } 
-        InstanceObjetAST::InstanceObjetAST(const InstanceObjetAST& ia):ExprAST(ia.getTypeAST(), ia.isComputed(), ia.canCompute()){
+        InstanceObjectAST::InstanceObjectAST(const InstanceObjectAST& ia):ExprAST(ia.getTypeAST(), ia.isComputed(), ia.canCompute()){
             constructor=ia.constructor;
             params=ia.params;
         }
-        InstanceObjetAST::InstanceObjetAST(){}
+        InstanceObjectAST::InstanceObjectAST(){}
         
         //getters
-        ConstructorAST* InstanceObjetAST::getConstructor() const{
+        ConstructorAST* InstanceObjectAST::getConstructor() const{
             return constructor;
         }
 
-        VariableList InstanceObjetAST::getParams() const{
+        VariableList InstanceObjectAST::getParams() const{
             return params;
         }
 
         //setters 
-        void InstanceObjetAST::setConstructor(ConstructorAST* constructor){
+        void InstanceObjectAST::setConstructor(ConstructorAST* constructor){
             constructor=constructor;
         }
-        void InstanceObjetAST::setParams(VariableList params){
+        void InstanceObjectAST::setParams(VariableList params){
             params=params;
         }
         
         //Les fonctions redéfinis de la classe mere
-        int InstanceObjetAST::getTypeAST() const{
+        int InstanceObjectAST::getTypeAST() const{
             return getTypeAST(); 
         }
 
-        bool InstanceObjetAST::isComputed() const {
+        bool InstanceObjectAST::isComputed() const {
             return isComputed();
         }
         
-        bool InstanceObjetAST::canCompute() const{
+        bool InstanceObjectAST::canCompute() const{
             return canCompute();
         }
 
         //desctructeur
-        InstanceObjetAST::~InstanceObjetAST(){
+        InstanceObjectAST::~InstanceObjectAST(){
             delete constructor;
             params.clear();
         }
@@ -459,7 +459,7 @@
          /****************************************** CallMethodeAST ******************************************************************/
         /****************************************************************************************************************************/
         //constructeurs
-        CallMethodeAST::CallMethodeAST(int type, bool computed, bool compute, String* methodName, ExprList args, VariableAST caller) : ExprAST(type, computed, compute){
+        CallMethodeAST::CallMethodeAST(int type, bool computed, bool compute, String* methodName, ExprList args, VariableAST* caller) : ExprAST(type, computed, compute){
         	methodName=methodName;
         	args=args; 
         	caller=caller;
@@ -481,7 +481,7 @@
             return args; 
         }
 
-        VariableAST CallMethodeAST::getCaller() const {
+        VariableAST* CallMethodeAST::getCaller() const {
             return caller;
         }
         
@@ -490,7 +490,7 @@
             args=args;
         }
 
-        void CallMethodeAST::setCaller(VariableAST caller){
+        void CallMethodeAST::setCaller(VariableAST* caller){
             caller=caller; 
         }
 
@@ -509,6 +509,7 @@
 
         //desctructeur
         CallMethodeAST::~CallMethodeAST(){
+            delete caller;
             delete methodName;
             args.clear();
         }

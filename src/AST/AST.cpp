@@ -85,7 +85,7 @@
             return constructors;
         }
 
-        PrototypeList ConcreteClassAST::getMethodes() const {
+        MethodeList ConcreteClassAST::getMethodes() const {
             return methodes;
         }
 

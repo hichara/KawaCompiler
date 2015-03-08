@@ -104,108 +104,10 @@ class AST{
 
 /*************** Partie Droite  ************************/
 
-typedef vector<AST*> MethodeList;
-typedef vector<AST*> PrototypeList;
-typedef vector<AST*> ConstructorList;
+
+
+
 //typedef std::vector<InstructionAST> BlockList;
-typedef vector<AST*> AttributList ;
-
-
-
-
-class InterfaceAST : public AST{
-    private:
-        String* name;
-        int visibility;
-        vector<InterfaceAST*> interfacesParents;
-        PrototypeList prototypes;
-
-    public:
-        // constructeurs
-        InterfaceAST(int type, bool computed, bool compute, String* name, int visibility, vector<InterfaceAST*> interfacesParents, PrototypeList prototypes );
-        InterfaceAST(const InterfaceAST& interface);
-        InterfaceAST();
-
-        //getters
-        String* getName() const;
-        int getVisibility() const;
-        vector<InterfaceAST*> getInterfacesParents() const;
-        PrototypeList getPrototypes() const;
-
-        //Setters
-        void setInterfaces(vector<InterfaceAST*>& interfacesParents);
-        void setPrototypes(PrototypeList& prototypes);
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const;
-        bool canCompute() const;
-
-        //desctructeur
-        ~InterfaceAST();
-};
-typedef vector<InterfaceAST*> InterfaceList ;
-
-class ConcreteClassAST : public AST{
-    private:
-        String* name;
-        int visibility;
-        bool final;
-        ConcreteClassAST* parent;
-        InterfaceList interfaces;
-        AttributList attributs;
-        ConstructorList constructors;
-        MethodeList methodes;
-    public:
-        // constructeurs
-        ConcreteClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes ) ;
-        ConcreteClassAST(const ConcreteClassAST& c);
-        ConcreteClassAST();
-
-        //getters
-        String* getName() const ;
-        int getVisibility() const ;
-        bool isFinal() const ; 
-        ConcreteClassAST* getParent() const ;
-        InterfaceList getInterfaces() const ;
-        AttributList getAttributs() const ;
-        ConstructorList getConstructors() const ;
-        PrototypeList getMethodes() const ;
-
-        //Setters
-        void setParent(ConcreteClassAST* parent);
-        void setInterfaces(InterfaceList& interfaces);
-        void setAttributs(AttributList& attributs);
-        void setConstructors(ConstructorList& constructors);
-        void setMethodes(MethodeList& methodes);
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const ;
-        bool canCompute() const;
-
-        //desctructeur
-        ~ConcreteClassAST();
-
-};
-
-class AbstractClassAST : public ConcreteClassAST{
-    private:
-        PrototypeList prototypes;
-    public:
-        // constructeurs
-        AbstractClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes, PrototypeList prototypes) ;
-        AbstractClassAST(const AbstractClassAST& ac);
-        AbstractClassAST();
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const ;
-        bool canCompute() const;
-
-        //desctructeur
-        ~AbstractClassAST();
-};
 
 class ExprAST : public AST{ 
     public:
@@ -312,6 +214,48 @@ class VariableAST : public ExprAST{
 };
 typedef vector<VariableAST*> VariableList;
 
+class PrototypeAST : public AST{
+    private:
+    
+        String* name;
+        int visibility;
+        String* returnType;
+        VariableList args;
+    
+    public:
+        // constructeurs
+
+    PrototypeAST(int type, bool computed, bool compute,String* name, int visibility, String* returnType,VariableList args);
+    
+    PrototypeAST(String* name, int visibility, String* returnType,VariableList args);   
+
+    PrototypeAST();
+
+    //getters
+    
+     String* getName() const;
+
+     int getVisibility() const;
+
+     String* getReturnType() const;
+
+    VariableList getArgs(); 
+
+
+    //setters
+    void setArgs(VariableList args);
+
+    //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
+
+    //destructeur
+    ~PrototypeAST();
+
+};
+typedef vector<PrototypeAST*> PrototypeList;
+
 
 class InstructionAST : public AST{ 
 
@@ -405,6 +349,7 @@ class ConstructorAST : public AST{
 	~ConstructorAST() ;
 
 };
+typedef vector<ConstructorAST*> ConstructorList;
 
 class InstanceObjetAST : public ExprAST{ 
     private:
@@ -622,101 +567,12 @@ class AttributAST : public AST{
 	~AttributAST();
 
 };
+typedef vector<AttributAST*> AttributList ;
 
 
-
- /*********************** Partie juste pour ne pas avoir des erreur de compliation ***********************/
-	/*************** Redandances des classes *************************/
-/*class ExprAST : public AST{ 
-    public:
-        // constructeurs
-        ExprAST(int type, bool computed, bool compute) ;
-        ExprAST(const ExprAST& exp);
-        ExprAST();
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const ;
-        bool canCompute() const;
-
-        //desctructeur
-        ~ExprAST();       
-};
-
-class VariableAST : public ExprAST{ 
-    private:
-        String* typeVar;
-        String* name;
-        ExprAST* assignmentExpr;
-
-    public:
-        //constructeurs
-        VariableAST(int type, bool computed, bool compute, String* typeVar, String* name, ExprAST* assignmentExpr);
-        VariableAST(const VariableAST& var);
-        VariableAST();
-
-        //getters
-        String* getTypeVar() const;
-        String* getName() const;
-        ExprAST* getAssignmentExpr() const;
-
-        //setters 
-        void setAssignmentExpr(ExprAST* assignmentExpr);
-
-        //Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const;
-        bool canCompute() const;
-
-        //desctructeur
-        ~VariableAST();
  
-};
 
 
-typedef std::vector<VariableAST*> VariableList;*/
-class PrototypeAST : public AST{
-    private:
-	
-		String* name;
-		int visibility;
-		String* returnType;
-		VariableList args;
-	
-    public:
-        // constructeurs
-
-	PrototypeAST(int type, bool computed, bool compute,String* name, int visibility, String* returnType,VariableList args);
-	
-	PrototypeAST(String* name, int visibility, String* returnType,VariableList args);	
-
-	PrototypeAST();
-
-	//getters
-	
-	 String* getName() const;
-
-     int getVisibility() const;
-
-	 String* getReturnType() const;
-
-	VariableList getArgs();	
-
-
-	//setters
-	void setArgs(VariableList args);
-
-	//Les fonctions redéfinis de la classe mere
-        int getTypeAST() const;
-        bool isComputed() const;
-        bool canCompute() const;
-
-	//destructeur
-	~PrototypeAST();
-
-};
-
-	
 class MethodeAST : public AST{
     private:
 	BlockInstructionAST* blockInstructions;
@@ -750,6 +606,103 @@ class MethodeAST : public AST{
 	~MethodeAST();
 
 };
+typedef vector<MethodeAST*> MethodeList;
+
+class InterfaceAST : public AST{
+    private:
+        String* name;
+        int visibility;
+        vector<InterfaceAST*> interfacesParents;
+        PrototypeList prototypes;
+
+    public:
+        // constructeurs
+        InterfaceAST(int type, bool computed, bool compute, String* name, int visibility, vector<InterfaceAST*> interfacesParents, PrototypeList prototypes );
+        InterfaceAST(const InterfaceAST& interface);
+        InterfaceAST();
+
+        //getters
+        String* getName() const;
+        int getVisibility() const;
+        vector<InterfaceAST*> getInterfacesParents() const;
+        PrototypeList getPrototypes() const;
+
+        //Setters
+        void setInterfaces(vector<InterfaceAST*>& interfacesParents);
+        void setPrototypes(PrototypeList& prototypes);
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const;
+        bool canCompute() const;
+
+        //desctructeur
+        ~InterfaceAST();
+};
+typedef vector<InterfaceAST*> InterfaceList ;
+
+
+class ConcreteClassAST : public AST{
+    private:
+        String* name;
+        int visibility;
+        bool final;
+        ConcreteClassAST* parent;
+        InterfaceList interfaces;
+        AttributList attributs;
+        ConstructorList constructors;
+        MethodeList methodes;
+    public:
+        // constructeurs
+        ConcreteClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes ) ;
+        ConcreteClassAST(const ConcreteClassAST& c);
+        ConcreteClassAST();
+
+        //getters
+        String* getName() const ;
+        int getVisibility() const ;
+        bool isFinal() const ; 
+        ConcreteClassAST* getParent() const ;
+        InterfaceList getInterfaces() const ;
+        AttributList getAttributs() const ;
+        ConstructorList getConstructors() const ;
+        MethodeList getMethodes() const ;
+
+        //Setters
+        void setParent(ConcreteClassAST* parent);
+        void setInterfaces(InterfaceList& interfaces);
+        void setAttributs(AttributList& attributs);
+        void setConstructors(ConstructorList& constructors);
+        void setMethodes(MethodeList& methodes);
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
+
+        //desctructeur
+        ~ConcreteClassAST();
+
+};
+
+class AbstractClassAST : public ConcreteClassAST{
+    private:
+        PrototypeList prototypes;
+    public:
+        // constructeurs
+        AbstractClassAST(int type, bool computed, bool compute, String* name, int visibility, bool final, ConcreteClassAST* parent, InterfaceList interfaces, AttributList attributs, ConstructorList constructors, MethodeList methodes, PrototypeList prototypes) ;
+        AbstractClassAST(const AbstractClassAST& ac);
+        AbstractClassAST();
+
+        //Les fonctions redéfinis de la classe mere
+        int getTypeAST() const;
+        bool isComputed() const ;
+        bool canCompute() const;
+
+        //desctructeur
+        ~AbstractClassAST();
+};
+
 
 class DeclarationAST : public InstructionAST{
     private:

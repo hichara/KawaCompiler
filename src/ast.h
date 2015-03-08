@@ -13,6 +13,7 @@ enum TYPE{
     EXPRESSIONBINAIRE,
     CALLMETHODE,
     VARIABLE,
+    INSTANCEOBJECT,
     PRIMITIF,
     STRING,
     BOOLEAN,
@@ -309,16 +310,16 @@ class VariableAST : public ExprAST{
 typedef vector<VariableAST*> VariableList;
 
 
-class InstanceObjetAST : public ExprAST{ 
+class InstanceObjectAST : public ExprAST{ 
     private:
         ConstructorAST* constructor;
         VariableList params;
 
     public:
         //constructeurs
-        InstanceObjetAST(int type, bool computed, bool compute, ConstructorAST* constructor, VariableList params);
-        InstanceObjetAST(const InstanceObjetAST& ia);
-        InstanceObjetAST();
+        InstanceObjectAST(int type, bool computed, bool compute, ConstructorAST* constructor, VariableList params);
+        InstanceObjectAST(const InstanceObjectAST& ia);
+        InstanceObjectAST();
         
         //getters
         ConstructorAST* getConstructor() const;
@@ -334,28 +335,28 @@ class InstanceObjetAST : public ExprAST{
         bool canCompute() const;
 
         //desctructeur
-        ~InstanceObjetAST();
+        ~InstanceObjectAST();
 };
 
 class CallMethodeAST : public ExprAST{ 
     private:
         String* methodName;
         ExprList args;
-        VariableAST caller;
+        VariableAST* caller;
     public:
         //constructeurs
-        CallMethodeAST(int type, bool computed, bool compute, String* methodName, ExprList args, VariableAST caller);
+        CallMethodeAST(int type, bool computed, bool compute, String* methodName, ExprList args, VariableAST* caller);
         CallMethodeAST(const CallMethodeAST& cm);
         CallMethodeAST();
 
         //getters
         String* getMethodeName() const ;
         ExprList getArgs() const;
-        VariableAST getCaller() const;
+        VariableAST* getCaller() const;
         
         //setters 
         void setArgs(ExprList args);
-        void setCaller(VariableAST caller);
+        void setCaller(VariableAST* caller);
 
         //Les fonctions redéfinis de la classe mere
         int getTypeAST() const;

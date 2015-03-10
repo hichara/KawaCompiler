@@ -90,34 +90,37 @@ extern int yydebug;
     TRETURN = 300,
     TPRINT = 301,
     TMAIN = 302,
-    TPLUSEQ = 303,
-    TMINUSEQ = 304,
-    TMULEQ = 305,
-    TDIVEQ = 306,
-    TMODEQ = 307,
-    TINC = 308,
-    TDEC = 309,
-    TCEQ = 310,
-    TCNE = 311,
-    TCLE = 312,
-    TCGE = 313,
-    TOR = 314,
-    TAND = 315,
-    TANDBINEQ = 316,
-    TORBINEQ = 317,
-    TXORBINEQ = 318,
-    TDECAL = 319,
-    TDECALEQ = 320,
-    TDECAR = 321,
-    TDECAREQ = 322,
-    TDECALNS = 323,
-    TDECALNSEQ = 324,
-    THEN = 325,
-    COND = 326,
-    NBINAIRE = 327,
-    NLOGIC = 328,
-    MOINUS = 329,
-    PLUS = 330
+    TPRINTI = 303,
+    TPRINTF = 304,
+    TPRINTS = 305,
+    TPLUSEQ = 306,
+    TMINUSEQ = 307,
+    TMULEQ = 308,
+    TDIVEQ = 309,
+    TMODEQ = 310,
+    TINC = 311,
+    TDEC = 312,
+    TCEQ = 313,
+    TCNE = 314,
+    TCLE = 315,
+    TCGE = 316,
+    TOR = 317,
+    TAND = 318,
+    TANDBINEQ = 319,
+    TORBINEQ = 320,
+    TXORBINEQ = 321,
+    TDECAL = 322,
+    TDECALEQ = 323,
+    TDECAR = 324,
+    TDECAREQ = 325,
+    TDECALNS = 326,
+    TDECALNSEQ = 327,
+    THEN = 328,
+    COND = 329,
+    NBINAIRE = 330,
+    NLOGIC = 331,
+    MOINUS = 332,
+    PLUS = 333
   };
 #endif
 
@@ -134,7 +137,7 @@ union YYSTYPE
 	KAWATreeProgram* program;
 	KAWATreeClass* clazz;
 
-#line 138 "kawa.hpp" /* yacc.c:1909  */
+#line 141 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

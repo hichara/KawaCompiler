@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "testClasse.h"
+#include "../AST/AST.h"
 #include "../KAWATree/src/KAWATreeCompiler.h"
 #include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
 #include "../KAWATree/src/KAWATreeCompilerNode.h"
@@ -42,7 +42,7 @@ typedef std::string String;
 %token<vint> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
 %token<vint> TFOR TWHILE TDO
 %token<vint> TNEW TNULL TRETURN
-%token<vint> TPRINT TMAIN
+%token<vint> TPRINT TMAIN TPRINTI TPRINTF TPRINTS
 
 %token<vint> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vint> TINC TDEC
@@ -69,7 +69,7 @@ typedef std::string String;
 %type<vint> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
 %type<vint> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
 %type<vint> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
-%type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest
+%type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest PrintF ArgsF PrintI ArgsI PrintS ArgsS
 %type<vint> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vint> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
@@ -374,6 +374,9 @@ BlockStatements: BlockStatements BlockStatement {$$=0;}
 			   ; 
 
 BlockStatement: Print {$$=0;}
+			  | PrintS {$$=0; cout<< "BlockStatement ---> PrintS\n";} 
+			  | PrintF {$$=0;} 
+			  | PrintI {$$=0;}
 			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
 			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}/* des nouveaux variables locaux initialisé ou pas */
@@ -397,6 +400,28 @@ Args :factFinal ArgsRest {$$=0;}
 ArgsRest : '+' factFinal ArgsRest {$$=0;} 
 		 | {$$=0;}
 		 ;
+
+PrintF : TPRINTF '(' ArgsF ')' ';'
+	   ;
+ArgsF : REEL {$$=0;}
+	  | ID {$$=0;}
+	  | {$$=0;} 
+	  ; 
+
+PrintI : TPRINTI '(' ArgsI ')' ';'
+	   ;
+ArgsI : ENTIER {$$=0;}
+	  | ID {$$=0;}
+	  | {$$=0;}
+	  ; 
+
+PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; cout<<"PrintS-->TPRINTS ( Args ) \n";}
+	   ;
+ArgsS : STRING {$$=0;   cout<<"Args ---> STRING \n";}
+	  | ID {$$=0;}
+	  | {$$=0;}
+	  ; 
+
 /*
 LocalVariableDeclarationStatement: 
 								 ;

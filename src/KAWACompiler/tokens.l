@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "testClasse.h"
+#include "../AST/AST.h"
 #include "../KAWATree/src/KAWATreeCompiler.h"
 #include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
 #include "../KAWATree/src/KAWATreeCompilerNode.h"
@@ -105,6 +105,9 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "null"					{count(); return (TNULL);}
 "return"				{count(); return (TRETURN);}
 "synchronized"	{count(); /*return (TSYNCHRONIZED);*/}
+"printString"   {count(); return (TPRINTS);}
+"printInt"      {count(); return (TPRINTI);}
+"printFloat"    {count(); return (TPRINTF);}
 "print"         {count(); return (TPRINT);}
 "main"          {count(); return (TMAIN);}
 

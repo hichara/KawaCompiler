@@ -1,0 +1,8 @@
+package titi;
+
+class MainClass{
+	public static int main() {
+		println("Eureka, he is alive !");
+		return 0;
+	}
+}

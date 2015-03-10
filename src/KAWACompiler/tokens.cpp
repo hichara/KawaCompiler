@@ -2612,10 +2612,10 @@ extern int yydebug;
     TNULL = 299,
     TRETURN = 300,
     TPRINT = 301,
-    TMAIN = 302,
-    TPRINTI = 303,
-    TPRINTF = 304,
-    TPRINTS = 305,
+    TPRINTI = 302,
+    TPRINTF = 303,
+    TPRINTS = 304,
+    TMAIN = 305,
     TPLUSEQ = 306,
     TMINUSEQ = 307,
     TMULEQ = 308,
@@ -2652,15 +2652,19 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 81 "kawa.y" /* yacc.c:1909  */
+#line 104 "kawa.y" /* yacc.c:1909  */
 
 	int vint;
 	float vfloat;
 	std::string* vstring;
 	KAWATreeProgram* program;
 	KAWATreeClass* clazz;
+	KAWATreePrintString* vKAWATreePrintString;
+	KAWATreePrintInteger* vKAWATreePrintInteger;
+	KAWATreePrintFloat* vKAWATreePrintFloat;
+	KAWATreeParam* vKAWATreeParam;
 
-#line 141 "kawa.hpp" /* yacc.c:1909  */
+#line 145 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

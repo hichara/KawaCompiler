@@ -100,7 +100,9 @@ KAWATreeParam* paramInteger;
 
 KAWATreePrintFloat* printFloat;
 KAWATreeType* typeFloat;
-KAWATreeParam* paramFloat;		
+KAWATreeParam* paramFloat;	
+
+
 
 
 
@@ -112,7 +114,7 @@ typedef std::string String;
 	extern int lineno;
 	KAWATreeProgram* program = new KAWATreeProgram;
 
-#line 116 "kawa.cpp" /* yacc.c:339  */
+#line 118 "kawa.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -231,7 +233,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 104 "kawa.y" /* yacc.c:355  */
+#line 106 "kawa.y" /* yacc.c:355  */
 
 	int vint;
 	float vfloat;
@@ -243,7 +245,7 @@ union YYSTYPE
 	KAWATreePrintFloat* vKAWATreePrintFloat;
 	KAWATreeParam* vKAWATreeParam;
 
-#line 247 "kawa.cpp" /* yacc.c:355  */
+#line 249 "kawa.cpp" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -258,7 +260,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 262 "kawa.cpp" /* yacc.c:358  */
+#line 264 "kawa.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -563,31 +565,31 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   137,   137,   138,   141,   142,   145,   148,   149,   152,
-     153,   156,   157,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   172,   173,   174,   175,   176,   177,   180,   181,
-     189,   190,   193,   194,   195,   199,   200,   203,   204,   208,
-     209,   213,   214,   218,   221,   222,   225,   228,   232,   233,
-     234,   237,   238,   242,   244,   245,   248,   252,   253,   254,
-     255,   256,   259,   262,   263,   267,   275,   276,   279,   282,
-     283,   286,   287,   290,   291,   294,   295,   300,   304,   314,
-     317,   318,   319,   320,   323,   326,   327,   330,   332,   333,
-     336,   339,   340,   353,   354,   357,   358,   360,   363,   366,
-     367,   369,   370,   373,   376,   377,   380,   381,   384,   385,
-     388,   389,   392,   396,   399,   400,   403,   404,   405,   406,
-     407,   408,   409,   411,   412,   413,   414,   415,   416,   417,
-     418,   419,   422,   424,   425,   427,   428,   431,   433,   434,
-     435,   438,   440,   441,   442,   445,   447,   448,   449,   456,
-     457,   458,   459,   460,   461,   462,   463,   464,   465,   466,
-     467,   468,   508,   509,   512,   515,   516,   519,   520,   521,
-     522,   523,   524,   525,   526,   529,   530,   533,   534,   537,
-     540,   541,   544,   545,   549,   552,   553,   554,   555,   556,
-     557,   558,   559,   560,   561,   562,   564,   572,   573,   576,
-     577,   580,   581,   584,   585,   588,   589,   592,   593,   594,
-     597,   598,   599,   600,   601,   604,   605,   606,   607,   610,
-     611,   612,   615,   616,   617,   618,   621,   622,   623,   624,
-     625,   626,   627,   628,   629,   636,   637,   638,   639,   640,
-     641,   642,   643,   644,   645,   648,   651
+       0,   139,   139,   140,   143,   144,   147,   150,   151,   154,
+     155,   158,   159,   162,   163,   164,   165,   166,   167,   168,
+     169,   170,   174,   175,   176,   177,   178,   179,   182,   183,
+     191,   192,   195,   196,   197,   201,   202,   205,   206,   210,
+     211,   215,   216,   220,   223,   224,   227,   230,   234,   235,
+     236,   239,   240,   244,   246,   247,   250,   254,   255,   256,
+     257,   258,   261,   264,   265,   269,   277,   278,   281,   284,
+     285,   288,   289,   292,   293,   296,   297,   302,   306,   316,
+     319,   320,   321,   322,   325,   328,   329,   332,   334,   335,
+     338,   341,   342,   355,   356,   359,   360,   362,   365,   368,
+     369,   371,   372,   375,   378,   379,   382,   383,   386,   387,
+     390,   391,   394,   398,   401,   402,   405,   406,   407,   408,
+     409,   410,   411,   413,   414,   415,   416,   417,   418,   419,
+     420,   421,   424,   426,   427,   429,   430,   433,   435,   436,
+     437,   440,   442,   443,   444,   447,   449,   450,   451,   458,
+     459,   460,   461,   462,   463,   464,   465,   466,   467,   468,
+     469,   470,   510,   511,   514,   517,   518,   521,   522,   523,
+     524,   525,   526,   527,   528,   531,   532,   535,   536,   539,
+     542,   543,   546,   547,   551,   554,   555,   556,   557,   558,
+     559,   560,   561,   562,   563,   564,   566,   574,   575,   578,
+     579,   582,   583,   586,   587,   590,   591,   594,   595,   596,
+     599,   600,   601,   602,   603,   606,   607,   608,   609,   612,
+     613,   614,   617,   618,   619,   620,   623,   624,   625,   626,
+     627,   628,   629,   630,   631,   638,   639,   640,   641,   642,
+     643,   644,   645,   646,   647,   650,   653
 };
 #endif
 
@@ -1758,1471 +1760,1471 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 137 "kawa.y" /* yacc.c:1646  */
+#line 139 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1764 "kawa.cpp" /* yacc.c:1646  */
+#line 1766 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 138 "kawa.y" /* yacc.c:1646  */
+#line 140 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1770 "kawa.cpp" /* yacc.c:1646  */
+#line 1772 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 141 "kawa.y" /* yacc.c:1646  */
+#line 143 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1776 "kawa.cpp" /* yacc.c:1646  */
+#line 1778 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 142 "kawa.y" /* yacc.c:1646  */
+#line 144 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1782 "kawa.cpp" /* yacc.c:1646  */
+#line 1784 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 145 "kawa.y" /* yacc.c:1646  */
+#line 147 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1788 "kawa.cpp" /* yacc.c:1646  */
+#line 1790 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 148 "kawa.y" /* yacc.c:1646  */
+#line 150 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1794 "kawa.cpp" /* yacc.c:1646  */
+#line 1796 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 149 "kawa.y" /* yacc.c:1646  */
+#line 151 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1800 "kawa.cpp" /* yacc.c:1646  */
+#line 1802 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 152 "kawa.y" /* yacc.c:1646  */
+#line 154 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1806 "kawa.cpp" /* yacc.c:1646  */
+#line 1808 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 153 "kawa.y" /* yacc.c:1646  */
+#line 155 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1812 "kawa.cpp" /* yacc.c:1646  */
+#line 1814 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 156 "kawa.y" /* yacc.c:1646  */
+#line 158 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1818 "kawa.cpp" /* yacc.c:1646  */
+#line 1820 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 157 "kawa.y" /* yacc.c:1646  */
+#line 159 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1824 "kawa.cpp" /* yacc.c:1646  */
+#line 1826 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 160 "kawa.y" /* yacc.c:1646  */
+#line 162 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1830 "kawa.cpp" /* yacc.c:1646  */
+#line 1832 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 161 "kawa.y" /* yacc.c:1646  */
+#line 163 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1836 "kawa.cpp" /* yacc.c:1646  */
+#line 1838 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 162 "kawa.y" /* yacc.c:1646  */
+#line 164 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1842 "kawa.cpp" /* yacc.c:1646  */
+#line 1844 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 163 "kawa.y" /* yacc.c:1646  */
+#line 165 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1848 "kawa.cpp" /* yacc.c:1646  */
+#line 1850 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 164 "kawa.y" /* yacc.c:1646  */
+#line 166 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1854 "kawa.cpp" /* yacc.c:1646  */
+#line 1856 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 165 "kawa.y" /* yacc.c:1646  */
+#line 167 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1860 "kawa.cpp" /* yacc.c:1646  */
+#line 1862 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 166 "kawa.y" /* yacc.c:1646  */
+#line 168 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1866 "kawa.cpp" /* yacc.c:1646  */
+#line 1868 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 167 "kawa.y" /* yacc.c:1646  */
+#line 169 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1872 "kawa.cpp" /* yacc.c:1646  */
+#line 1874 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 168 "kawa.y" /* yacc.c:1646  */
+#line 170 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1878 "kawa.cpp" /* yacc.c:1646  */
+#line 1880 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 172 "kawa.y" /* yacc.c:1646  */
+#line 174 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1884 "kawa.cpp" /* yacc.c:1646  */
+#line 1886 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 173 "kawa.y" /* yacc.c:1646  */
+#line 175 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1890 "kawa.cpp" /* yacc.c:1646  */
+#line 1892 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 174 "kawa.y" /* yacc.c:1646  */
+#line 176 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1896 "kawa.cpp" /* yacc.c:1646  */
+#line 1898 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 175 "kawa.y" /* yacc.c:1646  */
+#line 177 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1902 "kawa.cpp" /* yacc.c:1646  */
+#line 1904 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 176 "kawa.y" /* yacc.c:1646  */
+#line 178 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1908 "kawa.cpp" /* yacc.c:1646  */
+#line 1910 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 177 "kawa.y" /* yacc.c:1646  */
+#line 179 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1914 "kawa.cpp" /* yacc.c:1646  */
+#line 1916 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 180 "kawa.y" /* yacc.c:1646  */
+#line 182 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1920 "kawa.cpp" /* yacc.c:1646  */
+#line 1922 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 181 "kawa.y" /* yacc.c:1646  */
+#line 183 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1926 "kawa.cpp" /* yacc.c:1646  */
+#line 1928 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 189 "kawa.y" /* yacc.c:1646  */
+#line 191 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1932 "kawa.cpp" /* yacc.c:1646  */
+#line 1934 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 190 "kawa.y" /* yacc.c:1646  */
+#line 192 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1938 "kawa.cpp" /* yacc.c:1646  */
+#line 1940 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 193 "kawa.y" /* yacc.c:1646  */
+#line 195 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1944 "kawa.cpp" /* yacc.c:1646  */
+#line 1946 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 194 "kawa.y" /* yacc.c:1646  */
+#line 196 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1950 "kawa.cpp" /* yacc.c:1646  */
+#line 1952 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 195 "kawa.y" /* yacc.c:1646  */
+#line 197 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1956 "kawa.cpp" /* yacc.c:1646  */
+#line 1958 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 199 "kawa.y" /* yacc.c:1646  */
+#line 201 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1962 "kawa.cpp" /* yacc.c:1646  */
+#line 1964 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 200 "kawa.y" /* yacc.c:1646  */
+#line 202 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1968 "kawa.cpp" /* yacc.c:1646  */
+#line 1970 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 203 "kawa.y" /* yacc.c:1646  */
+#line 205 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1974 "kawa.cpp" /* yacc.c:1646  */
+#line 1976 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 204 "kawa.y" /* yacc.c:1646  */
+#line 206 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1980 "kawa.cpp" /* yacc.c:1646  */
+#line 1982 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 208 "kawa.y" /* yacc.c:1646  */
+#line 210 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1986 "kawa.cpp" /* yacc.c:1646  */
+#line 1988 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 209 "kawa.y" /* yacc.c:1646  */
+#line 211 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1992 "kawa.cpp" /* yacc.c:1646  */
+#line 1994 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 213 "kawa.y" /* yacc.c:1646  */
+#line 215 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 1998 "kawa.cpp" /* yacc.c:1646  */
+#line 2000 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 214 "kawa.y" /* yacc.c:1646  */
+#line 216 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2004 "kawa.cpp" /* yacc.c:1646  */
+#line 2006 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 218 "kawa.y" /* yacc.c:1646  */
+#line 220 "kawa.y" /* yacc.c:1646  */
     { (yyval.vint)=0; }
-#line 2010 "kawa.cpp" /* yacc.c:1646  */
+#line 2012 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 221 "kawa.y" /* yacc.c:1646  */
+#line 223 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; program->addClass(mainClass);}
-#line 2016 "kawa.cpp" /* yacc.c:1646  */
+#line 2018 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 222 "kawa.y" /* yacc.c:1646  */
+#line 224 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2022 "kawa.cpp" /* yacc.c:1646  */
+#line 2024 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 225 "kawa.y" /* yacc.c:1646  */
+#line 227 "kawa.y" /* yacc.c:1646  */
     { mainClass = new KAWATreeClass(*(yyvsp[-3].vstring)); mainClass->addMain(mainMethod); cout << "CLASS NAME: " << *(yyvsp[-3].vstring) << endl; }
-#line 2028 "kawa.cpp" /* yacc.c:1646  */
+#line 2030 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 228 "kawa.y" /* yacc.c:1646  */
+#line 230 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2034 "kawa.cpp" /* yacc.c:1646  */
+#line 2036 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 232 "kawa.y" /* yacc.c:1646  */
+#line 234 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2040 "kawa.cpp" /* yacc.c:1646  */
+#line 2042 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 233 "kawa.y" /* yacc.c:1646  */
+#line 235 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2046 "kawa.cpp" /* yacc.c:1646  */
+#line 2048 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 234 "kawa.y" /* yacc.c:1646  */
+#line 236 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2052 "kawa.cpp" /* yacc.c:1646  */
+#line 2054 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 237 "kawa.y" /* yacc.c:1646  */
+#line 239 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2058 "kawa.cpp" /* yacc.c:1646  */
+#line 2060 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 238 "kawa.y" /* yacc.c:1646  */
+#line 240 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; mainMethod = new KAWATreeMethod(*(yyvsp[-2].vstring)); mainMethod->setBody(bodyMain);}
-#line 2064 "kawa.cpp" /* yacc.c:1646  */
+#line 2066 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 242 "kawa.y" /* yacc.c:1646  */
+#line 244 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2070 "kawa.cpp" /* yacc.c:1646  */
+#line 2072 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 244 "kawa.y" /* yacc.c:1646  */
+#line 246 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2076 "kawa.cpp" /* yacc.c:1646  */
+#line 2078 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 245 "kawa.y" /* yacc.c:1646  */
+#line 247 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2082 "kawa.cpp" /* yacc.c:1646  */
+#line 2084 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 252 "kawa.y" /* yacc.c:1646  */
+#line 254 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2088 "kawa.cpp" /* yacc.c:1646  */
+#line 2090 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 253 "kawa.y" /* yacc.c:1646  */
+#line 255 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2094 "kawa.cpp" /* yacc.c:1646  */
+#line 2096 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 254 "kawa.y" /* yacc.c:1646  */
+#line 256 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2100 "kawa.cpp" /* yacc.c:1646  */
+#line 2102 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 255 "kawa.y" /* yacc.c:1646  */
+#line 257 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2106 "kawa.cpp" /* yacc.c:1646  */
+#line 2108 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 256 "kawa.y" /* yacc.c:1646  */
+#line 258 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2112 "kawa.cpp" /* yacc.c:1646  */
+#line 2114 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 259 "kawa.y" /* yacc.c:1646  */
+#line 261 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2118 "kawa.cpp" /* yacc.c:1646  */
+#line 2120 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 262 "kawa.y" /* yacc.c:1646  */
+#line 264 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2124 "kawa.cpp" /* yacc.c:1646  */
+#line 2126 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 263 "kawa.y" /* yacc.c:1646  */
+#line 265 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2130 "kawa.cpp" /* yacc.c:1646  */
+#line 2132 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 267 "kawa.y" /* yacc.c:1646  */
+#line 269 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2136 "kawa.cpp" /* yacc.c:1646  */
+#line 2138 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 275 "kawa.y" /* yacc.c:1646  */
+#line 277 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2142 "kawa.cpp" /* yacc.c:1646  */
+#line 2144 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 276 "kawa.y" /* yacc.c:1646  */
+#line 278 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2148 "kawa.cpp" /* yacc.c:1646  */
+#line 2150 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 279 "kawa.y" /* yacc.c:1646  */
+#line 281 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2154 "kawa.cpp" /* yacc.c:1646  */
+#line 2156 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 282 "kawa.y" /* yacc.c:1646  */
+#line 284 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2160 "kawa.cpp" /* yacc.c:1646  */
+#line 2162 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 283 "kawa.y" /* yacc.c:1646  */
+#line 285 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2166 "kawa.cpp" /* yacc.c:1646  */
+#line 2168 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 286 "kawa.y" /* yacc.c:1646  */
+#line 288 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2172 "kawa.cpp" /* yacc.c:1646  */
+#line 2174 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 287 "kawa.y" /* yacc.c:1646  */
+#line 289 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2178 "kawa.cpp" /* yacc.c:1646  */
+#line 2180 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 290 "kawa.y" /* yacc.c:1646  */
+#line 292 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-2].vint);}
-#line 2184 "kawa.cpp" /* yacc.c:1646  */
+#line 2186 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 291 "kawa.y" /* yacc.c:1646  */
+#line 293 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2190 "kawa.cpp" /* yacc.c:1646  */
+#line 2192 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 294 "kawa.y" /* yacc.c:1646  */
+#line 296 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2196 "kawa.cpp" /* yacc.c:1646  */
+#line 2198 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 295 "kawa.y" /* yacc.c:1646  */
+#line 297 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2202 "kawa.cpp" /* yacc.c:1646  */
+#line 2204 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 300 "kawa.y" /* yacc.c:1646  */
+#line 302 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2208 "kawa.cpp" /* yacc.c:1646  */
+#line 2210 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 304 "kawa.y" /* yacc.c:1646  */
+#line 306 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2214 "kawa.cpp" /* yacc.c:1646  */
+#line 2216 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 314 "kawa.y" /* yacc.c:1646  */
+#line 316 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2220 "kawa.cpp" /* yacc.c:1646  */
+#line 2222 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 317 "kawa.y" /* yacc.c:1646  */
+#line 319 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2226 "kawa.cpp" /* yacc.c:1646  */
+#line 2228 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 318 "kawa.y" /* yacc.c:1646  */
+#line 320 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2232 "kawa.cpp" /* yacc.c:1646  */
+#line 2234 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 319 "kawa.y" /* yacc.c:1646  */
+#line 321 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2238 "kawa.cpp" /* yacc.c:1646  */
+#line 2240 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 320 "kawa.y" /* yacc.c:1646  */
+#line 322 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2244 "kawa.cpp" /* yacc.c:1646  */
+#line 2246 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 323 "kawa.y" /* yacc.c:1646  */
+#line 325 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2250 "kawa.cpp" /* yacc.c:1646  */
+#line 2252 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 326 "kawa.y" /* yacc.c:1646  */
+#line 328 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2256 "kawa.cpp" /* yacc.c:1646  */
+#line 2258 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 327 "kawa.y" /* yacc.c:1646  */
+#line 329 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2262 "kawa.cpp" /* yacc.c:1646  */
+#line 2264 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 330 "kawa.y" /* yacc.c:1646  */
+#line 332 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2268 "kawa.cpp" /* yacc.c:1646  */
+#line 2270 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 332 "kawa.y" /* yacc.c:1646  */
+#line 334 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2274 "kawa.cpp" /* yacc.c:1646  */
+#line 2276 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 333 "kawa.y" /* yacc.c:1646  */
+#line 335 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2280 "kawa.cpp" /* yacc.c:1646  */
+#line 2282 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 336 "kawa.y" /* yacc.c:1646  */
+#line 338 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2286 "kawa.cpp" /* yacc.c:1646  */
+#line 2288 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 339 "kawa.y" /* yacc.c:1646  */
+#line 341 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2292 "kawa.cpp" /* yacc.c:1646  */
+#line 2294 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 340 "kawa.y" /* yacc.c:1646  */
+#line 342 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2298 "kawa.cpp" /* yacc.c:1646  */
+#line 2300 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 353 "kawa.y" /* yacc.c:1646  */
+#line 355 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2304 "kawa.cpp" /* yacc.c:1646  */
+#line 2306 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 354 "kawa.y" /* yacc.c:1646  */
+#line 356 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2310 "kawa.cpp" /* yacc.c:1646  */
+#line 2312 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 357 "kawa.y" /* yacc.c:1646  */
+#line 359 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2316 "kawa.cpp" /* yacc.c:1646  */
+#line 2318 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 358 "kawa.y" /* yacc.c:1646  */
+#line 360 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2322 "kawa.cpp" /* yacc.c:1646  */
+#line 2324 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 360 "kawa.y" /* yacc.c:1646  */
+#line 362 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2328 "kawa.cpp" /* yacc.c:1646  */
+#line 2330 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 363 "kawa.y" /* yacc.c:1646  */
+#line 365 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2334 "kawa.cpp" /* yacc.c:1646  */
+#line 2336 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 366 "kawa.y" /* yacc.c:1646  */
+#line 368 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2340 "kawa.cpp" /* yacc.c:1646  */
+#line 2342 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 367 "kawa.y" /* yacc.c:1646  */
+#line 369 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2346 "kawa.cpp" /* yacc.c:1646  */
+#line 2348 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 369 "kawa.y" /* yacc.c:1646  */
+#line 371 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2352 "kawa.cpp" /* yacc.c:1646  */
+#line 2354 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 370 "kawa.y" /* yacc.c:1646  */
+#line 372 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2358 "kawa.cpp" /* yacc.c:1646  */
+#line 2360 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 373 "kawa.y" /* yacc.c:1646  */
+#line 375 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2364 "kawa.cpp" /* yacc.c:1646  */
+#line 2366 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 376 "kawa.y" /* yacc.c:1646  */
+#line 378 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2370 "kawa.cpp" /* yacc.c:1646  */
+#line 2372 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 377 "kawa.y" /* yacc.c:1646  */
+#line 379 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2376 "kawa.cpp" /* yacc.c:1646  */
+#line 2378 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 380 "kawa.y" /* yacc.c:1646  */
+#line 382 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2382 "kawa.cpp" /* yacc.c:1646  */
+#line 2384 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 381 "kawa.y" /* yacc.c:1646  */
+#line 383 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2388 "kawa.cpp" /* yacc.c:1646  */
+#line 2390 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 384 "kawa.y" /* yacc.c:1646  */
+#line 386 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[0].vint);}
-#line 2394 "kawa.cpp" /* yacc.c:1646  */
+#line 2396 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 385 "kawa.y" /* yacc.c:1646  */
+#line 387 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2400 "kawa.cpp" /* yacc.c:1646  */
+#line 2402 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 388 "kawa.y" /* yacc.c:1646  */
+#line 390 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[0].vint);}
-#line 2406 "kawa.cpp" /* yacc.c:1646  */
+#line 2408 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 389 "kawa.y" /* yacc.c:1646  */
+#line 391 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2412 "kawa.cpp" /* yacc.c:1646  */
+#line 2414 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 392 "kawa.y" /* yacc.c:1646  */
+#line 394 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2418 "kawa.cpp" /* yacc.c:1646  */
+#line 2420 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 396 "kawa.y" /* yacc.c:1646  */
+#line 398 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=(yyvsp[-1].vint);}
-#line 2424 "kawa.cpp" /* yacc.c:1646  */
+#line 2426 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 399 "kawa.y" /* yacc.c:1646  */
+#line 401 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2430 "kawa.cpp" /* yacc.c:1646  */
+#line 2432 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 400 "kawa.y" /* yacc.c:1646  */
+#line 402 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2436 "kawa.cpp" /* yacc.c:1646  */
+#line 2438 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 403 "kawa.y" /* yacc.c:1646  */
+#line 405 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; }
-#line 2442 "kawa.cpp" /* yacc.c:1646  */
+#line 2444 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 404 "kawa.y" /* yacc.c:1646  */
+#line 406 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; bodyMain->addInstruction((yyvsp[0].vKAWATreePrintString)); }
-#line 2448 "kawa.cpp" /* yacc.c:1646  */
+#line 2450 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 405 "kawa.y" /* yacc.c:1646  */
+#line 407 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; bodyMain->addInstruction((yyvsp[0].vKAWATreePrintFloat)); }
-#line 2454 "kawa.cpp" /* yacc.c:1646  */
+#line 2456 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 406 "kawa.y" /* yacc.c:1646  */
+#line 408 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0; bodyMain->addInstruction((yyvsp[0].vKAWATreePrintInteger)); }
-#line 2460 "kawa.cpp" /* yacc.c:1646  */
+#line 2462 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 407 "kawa.y" /* yacc.c:1646  */
+#line 409 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2466 "kawa.cpp" /* yacc.c:1646  */
+#line 2468 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 408 "kawa.y" /* yacc.c:1646  */
+#line 410 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2472 "kawa.cpp" /* yacc.c:1646  */
+#line 2474 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 409 "kawa.y" /* yacc.c:1646  */
+#line 411 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2478 "kawa.cpp" /* yacc.c:1646  */
+#line 2480 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 411 "kawa.y" /* yacc.c:1646  */
+#line 413 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2484 "kawa.cpp" /* yacc.c:1646  */
+#line 2486 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 412 "kawa.y" /* yacc.c:1646  */
+#line 414 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2490 "kawa.cpp" /* yacc.c:1646  */
+#line 2492 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 413 "kawa.y" /* yacc.c:1646  */
+#line 415 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2496 "kawa.cpp" /* yacc.c:1646  */
+#line 2498 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 414 "kawa.y" /* yacc.c:1646  */
+#line 416 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2502 "kawa.cpp" /* yacc.c:1646  */
+#line 2504 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 415 "kawa.y" /* yacc.c:1646  */
+#line 417 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2508 "kawa.cpp" /* yacc.c:1646  */
+#line 2510 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 416 "kawa.y" /* yacc.c:1646  */
+#line 418 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2514 "kawa.cpp" /* yacc.c:1646  */
+#line 2516 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 417 "kawa.y" /* yacc.c:1646  */
+#line 419 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2520 "kawa.cpp" /* yacc.c:1646  */
+#line 2522 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 418 "kawa.y" /* yacc.c:1646  */
+#line 420 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2526 "kawa.cpp" /* yacc.c:1646  */
+#line 2528 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 419 "kawa.y" /* yacc.c:1646  */
+#line 421 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2532 "kawa.cpp" /* yacc.c:1646  */
+#line 2534 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 422 "kawa.y" /* yacc.c:1646  */
+#line 424 "kawa.y" /* yacc.c:1646  */
     {cout << "Print: " << (yyvsp[-4].vint) << endl; (yyval.vint)=0;}
-#line 2538 "kawa.cpp" /* yacc.c:1646  */
+#line 2540 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 424 "kawa.y" /* yacc.c:1646  */
+#line 426 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2544 "kawa.cpp" /* yacc.c:1646  */
+#line 2546 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 425 "kawa.y" /* yacc.c:1646  */
+#line 427 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2550 "kawa.cpp" /* yacc.c:1646  */
+#line 2552 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 427 "kawa.y" /* yacc.c:1646  */
+#line 429 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2556 "kawa.cpp" /* yacc.c:1646  */
+#line 2558 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 428 "kawa.y" /* yacc.c:1646  */
+#line 430 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2562 "kawa.cpp" /* yacc.c:1646  */
+#line 2564 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 431 "kawa.y" /* yacc.c:1646  */
+#line 433 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreePrintFloat)=0; printFloat = new KAWATreePrintFloat; printFloat->addParam(paramFloat);}
-#line 2568 "kawa.cpp" /* yacc.c:1646  */
+#line 2570 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 433 "kawa.y" /* yacc.c:1646  */
+#line 435 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0; typeFloat = new KAWATreeType("float"); float* doubleVal = (float*) malloc(sizeof(float)); *doubleVal = (yyvsp[0].vint); void* valueDouble = (void*) doubleVal; paramFloat = new KAWATreeParam(typeFloat, valueDouble);}
-#line 2574 "kawa.cpp" /* yacc.c:1646  */
+#line 2576 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 434 "kawa.y" /* yacc.c:1646  */
+#line 436 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2580 "kawa.cpp" /* yacc.c:1646  */
+#line 2582 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 435 "kawa.y" /* yacc.c:1646  */
+#line 437 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2586 "kawa.cpp" /* yacc.c:1646  */
+#line 2588 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 438 "kawa.y" /* yacc.c:1646  */
+#line 440 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreePrintInteger)=0; printInteger = new KAWATreePrintInteger; printInteger->addParam(paramInteger);}
-#line 2592 "kawa.cpp" /* yacc.c:1646  */
+#line 2594 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 440 "kawa.y" /* yacc.c:1646  */
+#line 442 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0; typeInteger = new KAWATreeType("int"); int* integer = (int*) malloc(sizeof(int)); *integer = (yyvsp[0].vint); void* valueInt = (void*) integer; paramInteger = new KAWATreeParam(typeInteger, valueInt);}
-#line 2598 "kawa.cpp" /* yacc.c:1646  */
+#line 2600 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 441 "kawa.y" /* yacc.c:1646  */
+#line 443 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2604 "kawa.cpp" /* yacc.c:1646  */
+#line 2606 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 442 "kawa.y" /* yacc.c:1646  */
+#line 444 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2610 "kawa.cpp" /* yacc.c:1646  */
+#line 2612 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 445 "kawa.y" /* yacc.c:1646  */
+#line 447 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreePrintString)=0; printString = new KAWATreePrintString; printString->addParam(paramStr);}
-#line 2616 "kawa.cpp" /* yacc.c:1646  */
+#line 2618 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 447 "kawa.y" /* yacc.c:1646  */
+#line 449 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0; typeString = new KAWATreeType("string"); paramStr = new KAWATreeParam(typeString, (void*) (yyvsp[0].vint));}
-#line 2622 "kawa.cpp" /* yacc.c:1646  */
+#line 2624 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 147:
-#line 448 "kawa.y" /* yacc.c:1646  */
+#line 450 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2628 "kawa.cpp" /* yacc.c:1646  */
+#line 2630 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 148:
-#line 449 "kawa.y" /* yacc.c:1646  */
+#line 451 "kawa.y" /* yacc.c:1646  */
     {(yyval.vKAWATreeParam)=0;}
-#line 2634 "kawa.cpp" /* yacc.c:1646  */
+#line 2636 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 456 "kawa.y" /* yacc.c:1646  */
+#line 458 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2640 "kawa.cpp" /* yacc.c:1646  */
+#line 2642 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 457 "kawa.y" /* yacc.c:1646  */
+#line 459 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2646 "kawa.cpp" /* yacc.c:1646  */
+#line 2648 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 151:
-#line 458 "kawa.y" /* yacc.c:1646  */
+#line 460 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2652 "kawa.cpp" /* yacc.c:1646  */
+#line 2654 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 152:
-#line 459 "kawa.y" /* yacc.c:1646  */
+#line 461 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2658 "kawa.cpp" /* yacc.c:1646  */
+#line 2660 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 460 "kawa.y" /* yacc.c:1646  */
+#line 462 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2664 "kawa.cpp" /* yacc.c:1646  */
+#line 2666 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 461 "kawa.y" /* yacc.c:1646  */
+#line 463 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2670 "kawa.cpp" /* yacc.c:1646  */
+#line 2672 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 462 "kawa.y" /* yacc.c:1646  */
+#line 464 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2676 "kawa.cpp" /* yacc.c:1646  */
+#line 2678 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 463 "kawa.y" /* yacc.c:1646  */
+#line 465 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2682 "kawa.cpp" /* yacc.c:1646  */
+#line 2684 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 464 "kawa.y" /* yacc.c:1646  */
+#line 466 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2688 "kawa.cpp" /* yacc.c:1646  */
+#line 2690 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 465 "kawa.y" /* yacc.c:1646  */
+#line 467 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2694 "kawa.cpp" /* yacc.c:1646  */
+#line 2696 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 466 "kawa.y" /* yacc.c:1646  */
+#line 468 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2700 "kawa.cpp" /* yacc.c:1646  */
+#line 2702 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 467 "kawa.y" /* yacc.c:1646  */
+#line 469 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2706 "kawa.cpp" /* yacc.c:1646  */
+#line 2708 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 468 "kawa.y" /* yacc.c:1646  */
+#line 470 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2712 "kawa.cpp" /* yacc.c:1646  */
+#line 2714 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 508 "kawa.y" /* yacc.c:1646  */
+#line 510 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2718 "kawa.cpp" /* yacc.c:1646  */
+#line 2720 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 509 "kawa.y" /* yacc.c:1646  */
+#line 511 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2724 "kawa.cpp" /* yacc.c:1646  */
+#line 2726 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 512 "kawa.y" /* yacc.c:1646  */
+#line 514 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2730 "kawa.cpp" /* yacc.c:1646  */
+#line 2732 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 515 "kawa.y" /* yacc.c:1646  */
+#line 517 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2736 "kawa.cpp" /* yacc.c:1646  */
+#line 2738 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 516 "kawa.y" /* yacc.c:1646  */
+#line 518 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2742 "kawa.cpp" /* yacc.c:1646  */
+#line 2744 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 519 "kawa.y" /* yacc.c:1646  */
+#line 521 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2748 "kawa.cpp" /* yacc.c:1646  */
+#line 2750 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 520 "kawa.y" /* yacc.c:1646  */
+#line 522 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2754 "kawa.cpp" /* yacc.c:1646  */
+#line 2756 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 521 "kawa.y" /* yacc.c:1646  */
+#line 523 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2760 "kawa.cpp" /* yacc.c:1646  */
+#line 2762 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 522 "kawa.y" /* yacc.c:1646  */
+#line 524 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2766 "kawa.cpp" /* yacc.c:1646  */
+#line 2768 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 523 "kawa.y" /* yacc.c:1646  */
+#line 525 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2772 "kawa.cpp" /* yacc.c:1646  */
+#line 2774 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 172:
-#line 524 "kawa.y" /* yacc.c:1646  */
+#line 526 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2778 "kawa.cpp" /* yacc.c:1646  */
+#line 2780 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 173:
-#line 525 "kawa.y" /* yacc.c:1646  */
+#line 527 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2784 "kawa.cpp" /* yacc.c:1646  */
+#line 2786 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 174:
-#line 526 "kawa.y" /* yacc.c:1646  */
+#line 528 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2790 "kawa.cpp" /* yacc.c:1646  */
+#line 2792 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 175:
-#line 529 "kawa.y" /* yacc.c:1646  */
+#line 531 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2796 "kawa.cpp" /* yacc.c:1646  */
+#line 2798 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 176:
-#line 530 "kawa.y" /* yacc.c:1646  */
+#line 532 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2802 "kawa.cpp" /* yacc.c:1646  */
+#line 2804 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 177:
-#line 533 "kawa.y" /* yacc.c:1646  */
+#line 535 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2808 "kawa.cpp" /* yacc.c:1646  */
+#line 2810 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 178:
-#line 534 "kawa.y" /* yacc.c:1646  */
+#line 536 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2814 "kawa.cpp" /* yacc.c:1646  */
+#line 2816 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 179:
-#line 537 "kawa.y" /* yacc.c:1646  */
+#line 539 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2820 "kawa.cpp" /* yacc.c:1646  */
+#line 2822 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 180:
-#line 540 "kawa.y" /* yacc.c:1646  */
+#line 542 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2826 "kawa.cpp" /* yacc.c:1646  */
+#line 2828 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 181:
-#line 541 "kawa.y" /* yacc.c:1646  */
+#line 543 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2832 "kawa.cpp" /* yacc.c:1646  */
+#line 2834 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 182:
-#line 544 "kawa.y" /* yacc.c:1646  */
+#line 546 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2838 "kawa.cpp" /* yacc.c:1646  */
+#line 2840 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 183:
-#line 545 "kawa.y" /* yacc.c:1646  */
+#line 547 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2844 "kawa.cpp" /* yacc.c:1646  */
+#line 2846 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 184:
-#line 549 "kawa.y" /* yacc.c:1646  */
+#line 551 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2850 "kawa.cpp" /* yacc.c:1646  */
+#line 2852 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 185:
-#line 552 "kawa.y" /* yacc.c:1646  */
+#line 554 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2856 "kawa.cpp" /* yacc.c:1646  */
+#line 2858 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 186:
-#line 553 "kawa.y" /* yacc.c:1646  */
+#line 555 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2862 "kawa.cpp" /* yacc.c:1646  */
+#line 2864 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 187:
-#line 554 "kawa.y" /* yacc.c:1646  */
+#line 556 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2868 "kawa.cpp" /* yacc.c:1646  */
+#line 2870 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 188:
-#line 555 "kawa.y" /* yacc.c:1646  */
+#line 557 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2874 "kawa.cpp" /* yacc.c:1646  */
+#line 2876 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 189:
-#line 556 "kawa.y" /* yacc.c:1646  */
+#line 558 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2880 "kawa.cpp" /* yacc.c:1646  */
+#line 2882 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 190:
-#line 557 "kawa.y" /* yacc.c:1646  */
+#line 559 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2886 "kawa.cpp" /* yacc.c:1646  */
+#line 2888 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 191:
-#line 558 "kawa.y" /* yacc.c:1646  */
+#line 560 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2892 "kawa.cpp" /* yacc.c:1646  */
+#line 2894 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 192:
-#line 559 "kawa.y" /* yacc.c:1646  */
+#line 561 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2898 "kawa.cpp" /* yacc.c:1646  */
+#line 2900 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 193:
-#line 560 "kawa.y" /* yacc.c:1646  */
+#line 562 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2904 "kawa.cpp" /* yacc.c:1646  */
+#line 2906 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 194:
-#line 561 "kawa.y" /* yacc.c:1646  */
+#line 563 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2910 "kawa.cpp" /* yacc.c:1646  */
+#line 2912 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 195:
-#line 562 "kawa.y" /* yacc.c:1646  */
+#line 564 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2916 "kawa.cpp" /* yacc.c:1646  */
+#line 2918 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 196:
-#line 564 "kawa.y" /* yacc.c:1646  */
+#line 566 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2922 "kawa.cpp" /* yacc.c:1646  */
+#line 2924 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 197:
-#line 572 "kawa.y" /* yacc.c:1646  */
+#line 574 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2928 "kawa.cpp" /* yacc.c:1646  */
+#line 2930 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 198:
-#line 573 "kawa.y" /* yacc.c:1646  */
+#line 575 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2934 "kawa.cpp" /* yacc.c:1646  */
+#line 2936 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 199:
-#line 576 "kawa.y" /* yacc.c:1646  */
+#line 578 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2940 "kawa.cpp" /* yacc.c:1646  */
+#line 2942 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 200:
-#line 577 "kawa.y" /* yacc.c:1646  */
+#line 579 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2946 "kawa.cpp" /* yacc.c:1646  */
+#line 2948 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 201:
-#line 580 "kawa.y" /* yacc.c:1646  */
+#line 582 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2952 "kawa.cpp" /* yacc.c:1646  */
+#line 2954 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 202:
-#line 581 "kawa.y" /* yacc.c:1646  */
+#line 583 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2958 "kawa.cpp" /* yacc.c:1646  */
+#line 2960 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 203:
-#line 584 "kawa.y" /* yacc.c:1646  */
+#line 586 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2964 "kawa.cpp" /* yacc.c:1646  */
+#line 2966 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 204:
-#line 585 "kawa.y" /* yacc.c:1646  */
+#line 587 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2970 "kawa.cpp" /* yacc.c:1646  */
+#line 2972 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 205:
-#line 588 "kawa.y" /* yacc.c:1646  */
+#line 590 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2976 "kawa.cpp" /* yacc.c:1646  */
+#line 2978 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 206:
-#line 589 "kawa.y" /* yacc.c:1646  */
+#line 591 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2982 "kawa.cpp" /* yacc.c:1646  */
+#line 2984 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 207:
-#line 592 "kawa.y" /* yacc.c:1646  */
+#line 594 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2988 "kawa.cpp" /* yacc.c:1646  */
+#line 2990 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 208:
-#line 593 "kawa.y" /* yacc.c:1646  */
+#line 595 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 2994 "kawa.cpp" /* yacc.c:1646  */
+#line 2996 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 209:
-#line 594 "kawa.y" /* yacc.c:1646  */
+#line 596 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3000 "kawa.cpp" /* yacc.c:1646  */
+#line 3002 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 210:
-#line 597 "kawa.y" /* yacc.c:1646  */
+#line 599 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3006 "kawa.cpp" /* yacc.c:1646  */
+#line 3008 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 211:
-#line 598 "kawa.y" /* yacc.c:1646  */
+#line 600 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3012 "kawa.cpp" /* yacc.c:1646  */
+#line 3014 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 212:
-#line 599 "kawa.y" /* yacc.c:1646  */
+#line 601 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3018 "kawa.cpp" /* yacc.c:1646  */
+#line 3020 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 213:
-#line 600 "kawa.y" /* yacc.c:1646  */
+#line 602 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3024 "kawa.cpp" /* yacc.c:1646  */
+#line 3026 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 214:
-#line 601 "kawa.y" /* yacc.c:1646  */
+#line 603 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3030 "kawa.cpp" /* yacc.c:1646  */
+#line 3032 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 215:
-#line 604 "kawa.y" /* yacc.c:1646  */
+#line 606 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3036 "kawa.cpp" /* yacc.c:1646  */
+#line 3038 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 216:
-#line 605 "kawa.y" /* yacc.c:1646  */
+#line 607 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3042 "kawa.cpp" /* yacc.c:1646  */
+#line 3044 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 217:
-#line 606 "kawa.y" /* yacc.c:1646  */
+#line 608 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3048 "kawa.cpp" /* yacc.c:1646  */
+#line 3050 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 218:
-#line 607 "kawa.y" /* yacc.c:1646  */
+#line 609 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3054 "kawa.cpp" /* yacc.c:1646  */
+#line 3056 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 219:
-#line 610 "kawa.y" /* yacc.c:1646  */
+#line 612 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3060 "kawa.cpp" /* yacc.c:1646  */
+#line 3062 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 220:
-#line 611 "kawa.y" /* yacc.c:1646  */
+#line 613 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3066 "kawa.cpp" /* yacc.c:1646  */
+#line 3068 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 221:
-#line 612 "kawa.y" /* yacc.c:1646  */
+#line 614 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3072 "kawa.cpp" /* yacc.c:1646  */
+#line 3074 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 222:
-#line 615 "kawa.y" /* yacc.c:1646  */
+#line 617 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3078 "kawa.cpp" /* yacc.c:1646  */
+#line 3080 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 223:
-#line 616 "kawa.y" /* yacc.c:1646  */
+#line 618 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3084 "kawa.cpp" /* yacc.c:1646  */
+#line 3086 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 224:
-#line 617 "kawa.y" /* yacc.c:1646  */
+#line 619 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3090 "kawa.cpp" /* yacc.c:1646  */
+#line 3092 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 225:
-#line 618 "kawa.y" /* yacc.c:1646  */
+#line 620 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3096 "kawa.cpp" /* yacc.c:1646  */
+#line 3098 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 226:
-#line 621 "kawa.y" /* yacc.c:1646  */
+#line 623 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3102 "kawa.cpp" /* yacc.c:1646  */
+#line 3104 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 227:
-#line 622 "kawa.y" /* yacc.c:1646  */
+#line 624 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3108 "kawa.cpp" /* yacc.c:1646  */
+#line 3110 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 228:
-#line 623 "kawa.y" /* yacc.c:1646  */
+#line 625 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3114 "kawa.cpp" /* yacc.c:1646  */
+#line 3116 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 229:
-#line 624 "kawa.y" /* yacc.c:1646  */
+#line 626 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3120 "kawa.cpp" /* yacc.c:1646  */
+#line 3122 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 230:
-#line 625 "kawa.y" /* yacc.c:1646  */
+#line 627 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3126 "kawa.cpp" /* yacc.c:1646  */
+#line 3128 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 231:
-#line 626 "kawa.y" /* yacc.c:1646  */
+#line 628 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3132 "kawa.cpp" /* yacc.c:1646  */
+#line 3134 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 232:
-#line 627 "kawa.y" /* yacc.c:1646  */
+#line 629 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3138 "kawa.cpp" /* yacc.c:1646  */
+#line 3140 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 233:
-#line 628 "kawa.y" /* yacc.c:1646  */
+#line 630 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3144 "kawa.cpp" /* yacc.c:1646  */
+#line 3146 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 234:
-#line 629 "kawa.y" /* yacc.c:1646  */
+#line 631 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3150 "kawa.cpp" /* yacc.c:1646  */
+#line 3152 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 235:
-#line 636 "kawa.y" /* yacc.c:1646  */
+#line 638 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3156 "kawa.cpp" /* yacc.c:1646  */
+#line 3158 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 236:
-#line 637 "kawa.y" /* yacc.c:1646  */
+#line 639 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3162 "kawa.cpp" /* yacc.c:1646  */
+#line 3164 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 237:
-#line 638 "kawa.y" /* yacc.c:1646  */
+#line 640 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3168 "kawa.cpp" /* yacc.c:1646  */
+#line 3170 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 238:
-#line 639 "kawa.y" /* yacc.c:1646  */
+#line 641 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3174 "kawa.cpp" /* yacc.c:1646  */
+#line 3176 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 239:
-#line 640 "kawa.y" /* yacc.c:1646  */
+#line 642 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3180 "kawa.cpp" /* yacc.c:1646  */
+#line 3182 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 240:
-#line 641 "kawa.y" /* yacc.c:1646  */
+#line 643 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3186 "kawa.cpp" /* yacc.c:1646  */
+#line 3188 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 241:
-#line 642 "kawa.y" /* yacc.c:1646  */
+#line 644 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3192 "kawa.cpp" /* yacc.c:1646  */
+#line 3194 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 242:
-#line 643 "kawa.y" /* yacc.c:1646  */
+#line 645 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3198 "kawa.cpp" /* yacc.c:1646  */
+#line 3200 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 243:
-#line 644 "kawa.y" /* yacc.c:1646  */
+#line 646 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3204 "kawa.cpp" /* yacc.c:1646  */
+#line 3206 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 244:
-#line 645 "kawa.y" /* yacc.c:1646  */
+#line 647 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3210 "kawa.cpp" /* yacc.c:1646  */
+#line 3212 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 245:
-#line 648 "kawa.y" /* yacc.c:1646  */
+#line 650 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3216 "kawa.cpp" /* yacc.c:1646  */
+#line 3218 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 246:
-#line 651 "kawa.y" /* yacc.c:1646  */
+#line 653 "kawa.y" /* yacc.c:1646  */
     {(yyval.vint)=0;}
-#line 3222 "kawa.cpp" /* yacc.c:1646  */
+#line 3224 "kawa.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 3226 "kawa.cpp" /* yacc.c:1646  */
+#line 3228 "kawa.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3450,7 +3452,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 655 "kawa.y" /* yacc.c:1906  */
+#line 657 "kawa.y" /* yacc.c:1906  */
 
 
 /*#include "lex.yy.c"*/

@@ -129,7 +129,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 104 "kawa.y" /* yacc.c:1909  */
+#line 106 "kawa.y" /* yacc.c:1909  */
 
 	int vint;
 	float vfloat;

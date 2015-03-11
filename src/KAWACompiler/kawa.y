@@ -21,7 +21,17 @@
 
 using namespace std;
 
+
+
 typedef std::string String;
+
+KAWATreeProgram* program ;
+KAWATreeClass* mainClass ;
+KAWATreeMethod* mainMethod;
+KAWATreeBodyMethod* bodyMain;
+KAWATreePrintString* printString;
+
+
 
 	int yylex();
 	int yyerror( const char* err );

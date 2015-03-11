@@ -21,6 +21,27 @@
 
 using namespace std;
 
+<<<<<<< HEAD
+=======
+KAWATreeClass* mainClass;
+KAWATreeMethod* mainMethod;
+KAWATreeBodyMethod* bodyMain = new KAWATreeBodyMethod;
+
+KAWATreePrintString* printString;
+KAWATreeType* typeString;
+KAWATreeParam* paramStr;
+
+KAWATreePrintInteger* printInteger;
+KAWATreeType* typeInteger;
+KAWATreeParam* paramInteger;
+
+KAWATreePrintFloat* printFloat;
+KAWATreeType* typeFloat;
+KAWATreeParam* paramFloat;	
+
+
+
+>>>>>>> 9b76aa47ee5680b6a87b17912171c3263bc8372d
 
 
 typedef std::string String;
@@ -52,7 +73,8 @@ KAWATreePrintString* printString;
 %token<vint> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
 %token<vint> TFOR TWHILE TDO
 %token<vint> TNEW TNULL TRETURN
-%token<vint> TPRINT TMAIN TPRINTI TPRINTF TPRINTS
+%token<vint> TPRINT TPRINTI TPRINTF TPRINTS
+%token<vstring> TMAIN
 
 %token<vint> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vint> TINC TDEC
@@ -79,7 +101,11 @@ KAWATreePrintString* printString;
 %type<vint> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
 %type<vint> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
 %type<vint> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
-%type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest PrintF ArgsF PrintI ArgsI PrintS ArgsS
+%type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest  
+%type<vKAWATreeParam> ArgsS ArgsI ArgsF
+%type<vKAWATreePrintString> PrintS
+%type<vKAWATreePrintInteger> PrintI
+%type<vKAWATreePrintFloat> PrintF
 %type<vint> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
 %type<vint> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
 
@@ -94,6 +120,10 @@ KAWATreePrintString* printString;
 	std::string* vstring;
 	KAWATreeProgram* program;
 	KAWATreeClass* clazz;
+	KAWATreePrintString* vKAWATreePrintString;
+	KAWATreePrintInteger* vKAWATreePrintInteger;
+	KAWATreePrintFloat* vKAWATreePrintFloat;
+	KAWATreeParam* vKAWATreeParam;
 }
 
 %nonassoc THEN 
@@ -201,11 +231,11 @@ ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0;}
 TypeDeclaration : ImportDeclaration ClassOrInterfaceDeclaration { $$=0; }
 				;
 
-ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0;}
+ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0; program->addClass(mainClass);}
 						    | Modifiers InterfaceDeclaration {$$=0;}
 							;
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { cout << "CLASS NAME: " << *$2 << endl; }
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { mainClass = new KAWATreeClass(*$2); mainClass->addMain(mainMethod); cout << "CLASS NAME: " << *$2 << endl; }
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}
@@ -218,7 +248,7 @@ ClassBodyDeclarations : ClassBodyDeclarations ClassBodyDeclaration {$$=0;}
 					  ;
 
 ClassBodyDeclaration: Modifiers MemberDecl {$$=0;} /*| Static Block | ';' {$$=0;}*/
-					| Modifiers TVOID TMAIN MainMethodDeclaratorRest Block {$$=0;}
+					| Modifiers TVOID TMAIN MainMethodDeclaratorRest Block {$$=0; mainMethod = new KAWATreeMethod(*$3); mainMethod->setBody(bodyMain);}
 					;  
 
 /*--------------------------------- corps d'une interface ---------------------------------------------------*/
@@ -383,10 +413,10 @@ BlockStatements: BlockStatements BlockStatement {$$=0;}
 			   | {$$=0;}
 			   ; 
 
-BlockStatement: Print {$$=0;}
-			  | PrintS {$$=0; cout<< "BlockStatement ---> PrintS\n";} 
-			  | PrintF {$$=0;} 
-			  | PrintI {$$=0;}
+BlockStatement: Print {$$=0; }
+			  | PrintS {$$=0; bodyMain->addInstruction($1); } 
+			  | PrintF {$$=0; bodyMain->addInstruction($1); } 
+			  | PrintI {$$=0; bodyMain->addInstruction($1); }
 			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
 			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}/* des nouveaux variables locaux initialisé ou pas */
@@ -411,23 +441,23 @@ ArgsRest : '+' factFinal ArgsRest {$$=0;}
 		 | {$$=0;}
 		 ;
 
-PrintF : TPRINTF '(' ArgsF ')' ';'
+PrintF : TPRINTF '(' ArgsF ')' ';' {$$=0; printFloat = new KAWATreePrintFloat; printFloat->addParam(paramFloat);}
 	   ;
-ArgsF : REEL {$$=0;}
+ArgsF : REEL {$$=0; typeFloat = new KAWATreeType("float"); float* doubleVal = (float*) malloc(sizeof(float)); *doubleVal = $1; void* valueDouble = (void*) doubleVal; paramFloat = new KAWATreeParam(typeFloat, valueDouble);}
 	  | ID {$$=0;}
 	  | {$$=0;} 
 	  ; 
 
-PrintI : TPRINTI '(' ArgsI ')' ';'
+PrintI : TPRINTI '(' ArgsI ')' ';' {$$=0; printInteger = new KAWATreePrintInteger; printInteger->addParam(paramInteger);}
 	   ;
-ArgsI : ENTIER {$$=0;}
+ArgsI : ENTIER {$$=0; typeInteger = new KAWATreeType("int"); int* integer = (int*) malloc(sizeof(int)); *integer = $1; void* valueInt = (void*) integer; paramInteger = new KAWATreeParam(typeInteger, valueInt);}
 	  | ID {$$=0;}
 	  | {$$=0;}
 	  ; 
 
-PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; cout<<"PrintS-->TPRINTS ( Args ) \n";}
+PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; printString = new KAWATreePrintString; printString->addParam(paramStr);}
 	   ;
-ArgsS : STRING {$$=0;   cout<<"Args ---> STRING \n";}
+ArgsS : STRING {$$=0; typeString = new KAWATreeType("string"); paramStr = new KAWATreeParam(typeString, (void*) $1);}
 	  | ID {$$=0;}
 	  | {$$=0;}
 	  ; 

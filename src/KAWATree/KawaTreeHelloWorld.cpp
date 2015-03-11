@@ -34,6 +34,7 @@ class HelloWorldProgram{
 };
 
 HelloWorldProgram::HelloWorldProgram(){
+	
     program = new KAWATreeProgram;
 		// création d'une classe principale
 		KAWATreeClass* mainClass = new KAWATreeClass("MainClass");
@@ -96,6 +97,7 @@ HelloWorldProgram::HelloWorldProgram(){
 
 	// ajout de la classe au programme
 	program->addClass(mainClass);
+
 }
 
 void HelloWorldProgram::run(){

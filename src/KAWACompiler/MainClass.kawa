@@ -1,5 +1,5 @@
 public class MainClass {
 	public static void main(){
-		printS("Hello world in kawa lang !");
+		printString("Hello world in kawa lang !");
 	}
 }

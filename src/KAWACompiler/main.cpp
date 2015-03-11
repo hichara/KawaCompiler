@@ -1,34 +1,29 @@
-/*int main(int argc, char** argv)
-{ 
-	++argv, --argc;
-	if(argc>0)
-		yyin = fopen(argv[0], "r");
-	else
-		yyin = stdin;
-
-
- yyparse();
- return 0;
-}
-*/
-
-#include "testClasse.h"
-
-
-#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
+#include <string>
+#include <fstream>
+#include <vector>
+#include "../AST/AST.h"
+#include "../KAWATree/src/KAWATreeCompiler.h"
+#include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
+#include "../KAWATree/src/KAWATreeCompilerNode.h"
+#include "../KAWATree/src/KAWATreeProgram.h"
+#include "../KAWATree/src/KAWATreeClass.h"
+#include "../KAWATree/src/KAWATreeMethod.h"
+#include "../KAWATree/src/KAWATreeBodyMethod.h"
+#include "../KAWATree/src/KAWATreeInstruction.h"
+#include "../KAWATree/src/KAWATreeParam.h"
+#include "../KAWATree/src/KAWATreeType.h"
+#include "../KAWATree/src/KAWATreePrintInteger.h"
+#include "../KAWATree/src/KAWATreePrintFloat.h"
+#include "../KAWATree/src/KAWATreePrintString.h"
+
+
 
 using namespace std;
 
 extern int yyparse();
-
-std::string line = "---------------------------";
-
-void printAST(){
-    cout << line << "\nAbstract Sintax Tree\n" << line << "\n";
-}
 
 int main( int argc, char** argv ){
 

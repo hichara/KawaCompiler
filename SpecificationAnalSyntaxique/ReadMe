@@ -1,0 +1,38 @@
+Spécifications : sur la partie analyse syntaxique 
+réaliser par Kheireddine et Abdellatif.
+
+
+/********** Grammaire ******************/
+ Le fichier kawa.y assure la syntaxe du langage kawa ainsi que le programme minimaliste (notre 1 ier objectif) vous verrez que ce fichier contient des prints (cout <<"Règle"<<endl;) permettant d'afficher toutes les règles invoquées par ce programme.
+
+ Nous pouvons assurer toutes les entités du langages en parsant le mini programme.
+
+
+/*************** Remarques  **************/
+
+/*** Remarque 1 ***/
+
+Tout ce qui était mentionnait dans l'ancien document DAL (diagramme UML) nous pouvons l'assurer et l'intégrer dans le fichier (kawa.y) ainsi que toutes les spécifications exprimées par Nasser le jeudi 12/03/2015 car elle sont incluses dans le diagramme UML. Mais pour ce faire (Intégration dans le kawa.y) il nous faudra un kawaTree qui respecte les spécifications du Bison (Analyse ascendante LR) car on commence le parsing de bas vers le haut.
+Donc Kawatree fait l'objet de regrouper l'aspect construction de l'arbre (notre partie), la décoration de l'arbre (Analyse sémantique) ainsi que la partie génération de code intermédiaire.
+
+/*** Remarque 2 ***/
+
+Concernant les spécifications de Nasser pour la classe nous ne pouvons pas fournir les noeuds (classe parent de type (ConcrateClasseAST) et interfaces de type (Liste des InterfaceAST)) car en parsant on peut récupérer juste les noms de ces dernières et non pas les nœuds.
+
+/*** Remarque 3 ***/
+
+Amibiguité concernant les blocks conditionnelles on n'a pas compris ce qu'il veut exactement Nasser.
+
+
+/*** Remarque 4 ***/
+
+Il ne y a aucune spécification portant sur les Import (Packages) pourtant le langage kawa il permet les import des packages.
+
+
+
+
+
+
+
+
+

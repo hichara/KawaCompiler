@@ -33,9 +33,10 @@ int main( int argc, char** argv ){
     }
 
     yyparse();
-    KAWATreeCompiler* compiler = new KAWATreeMonolithicCompiler;
-    if ( program->checkSemantic() )
+    //KAWATreeCompiler* compiler = new KAWATreeMonolithicCompiler;
+    /*if ( program->checkSemantic() )
     	compiler->compile(program);
+    */
     //fout.close();
 
     return 0;

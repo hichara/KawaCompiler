@@ -1,4 +1,5 @@
 //plusieurs packages
+package Test;
 import Kawa.Collections.* ;
 import Kawa.Map.HashMap;
 

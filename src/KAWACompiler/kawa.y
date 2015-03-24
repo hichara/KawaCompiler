@@ -41,7 +41,8 @@ KAWATreeParam* paramFloat;
 
 
 	int yylex();
-	int yyerror( const char* err );
+	extern char* yytext;
+	int yyerror(const char* err );
 	extern int column;
 	extern int lineno;
 	KAWATreeProgram* program = new KAWATreeProgram;
@@ -49,7 +50,7 @@ KAWATreeParam* paramFloat;
 
 %token<vint> ENTIER REEL  
 %token<vint> STRING TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
-%token<vint> TIMPORT
+%token<vint> TIMPORT TPACKAGE
 %token<vint> TPUBLIC TPRIVATE TPROTECTED
 %token<vint> TFINAL TABSTRACT TSTATIC /*TCONST TENUM*/ TVALUE
 %token<vstring> ID TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
@@ -70,6 +71,7 @@ KAWATreeParam* paramFloat;
 %token<vint> TANDBINEQ TORBINEQ
 %token<vint> TXORBINEQ TDECAL TDECALEQ TDECAR TDECAREQ TDECALNS TDECALNSEQ
 
+%type<vint> Program Package
 %type<vint> Ids ListIds QList
 %type<vint> Type Tables BasicType
 %type<vint> Modifier Modifiers /*ModifiersMain*/ Static All Extends ExtendsList Implements			  
@@ -129,19 +131,13 @@ KAWATreeParam* paramFloat;
 %right NBINAIRE NLOGIC MOINUS PLUS
 %right TINC TDEC
 
-%start TypeDeclaration;
+%start Program;
 %%
 
-/* RMQ : il faudra utiliser ça */
-
-/*
-%start program
-
-%%
-
-program : stmts                         { programBlock = $1; }
-
-*/
+Program : Package TypeDeclaration
+		;
+Package : TPACKAGE ID ';'
+		;
 
 /*-----------------------------------ID et ID.ID.ID... et ID,ID,ID... --------------------------------------------------*/
 Ids : '.' ID Ids {$$=0;}
@@ -232,7 +228,7 @@ ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0; program->addClas
 						    | Modifiers InterfaceDeclaration {$$=0;}
 							;
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { KAWATreeClass* c = new KAWATreeClass(*$2); $$->addMain(c); $$ = c; cout << "CLASS NAME: " << *$2 << endl; }
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { KAWATreeClass* c = new KAWATreeClass(*$2); /*$$->addMain(c); $$ = c*/; cout << "CLASS NAME: " << *$2 << endl; }
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}
@@ -668,7 +664,7 @@ MethodeInitializer : ID Ids FormalParametersCalledMethod {$$=0;}
 
 int yyerror( const char* err )
 {
-  printf("Erreur syntaxique: '%s' est imprévu dans la ligne [%d] colonne [%d]\n", err, lineno, column);
+  printf("Erreur syntaxique: \'%s\' est imprévu dans la ligne [%d] colonne [%d]\n", yytext, lineno, column-strlen(yytext));
   return 0;
 }
 

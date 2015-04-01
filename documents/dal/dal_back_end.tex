@@ -1,8 +1,11 @@
-\documentclass{report}
+\documentclass{article}
 \usepackage[utf8]{inputenc}    
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}     
-      
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
 
 \begin{document}
        
@@ -50,8 +53,8 @@ en assembleur. Le code assembleur peut ensuite être traduit en code machine.
 Cette chaine de compilation est composée des éléments suivant :
 
 \begin{itemize}
- \item \textbf{llc}compile le fichier source en un fichier assembleur que l'on peut passer à un linker pour generer un executable
- \item \textbf{clang}compilateur permettant de compiler le code assembleur.
+ \item \textbf{llc} compile le fichier source en un fichier assembleur que l'on peut passer à un linker pour generer un executable
+ \item \textbf{clang} compilateur permettant de compiler le code assembleur.
 \end{itemize}
 
 
@@ -72,35 +75,250 @@ il implémente différent algoriithme. \\
 
 \subsection{Fonctionnment des générateurs de code IR}
 
-   \subsubsection{Fonctionnement du NameBuilder }
-   L'implémentation des méthodes de cette classe nécéssite la définition de contracts de nommage, permettant
-   d'éviter toutes ambiguté entre les viariables qui seront générées. Ce composant est u
+   Les générateurs de code IR sont des classes outils permettant la génération de code. Ces classes contiennent uniquement des fonctions statiques.
+
+   \subsubsection{Fonctionnement du NameBuilder}
+   L'implémentation des méthodes de cette classe nécéssite la définition de contracts de nommage, permettant d'éviter toutes ambiguté entre les viariables qui seront générées. Ce composant est utilisé par les autres classes de la famille de génération.\\Ces fonction : \
+   \begin{enumerate}
+   \item \textbf{buildFunctionName}: Construit un nom pour une fonction normale.
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+       \item[+] string : nom de la fonction
+       \item[+] string : type de retour
+       \item[+] vector<string> : liste des types des paramètres
+     \end{enumerate}
+     \item \textbf{Indications} : 
+   \end{itemize}
+
+   \item \textbf{buildConstructorName}: Construit le nom des fonctions permettant d'obtenir de des instances d'un objet.
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+       \item[+] vector<string> : liste des types des paramètres
+     \end{enumerate}
+     \item \textbf{Indications} :
+   \end{itemize}
+
+   \item \textbf{buildSubConstructorName}: construit le nom des fonctions permettant d'initialiser les nouvelles instances d'objets de des instances d'un objet.
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+       \item[+] vector<string> : liste des types des paramètres
+     \end{enumerate}
+     \item \textbf{Indications} :
+   \end{itemize}
+
+   \item \textbf{buildFunctionIndexName}: construit le nom d'un index de fonction
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la fonction bien contruit par le name builder
+     \end{enumerate}
+     \item \textbf{Indications} : 
+   \end{itemize}
+
+   \item \textbf{buildAdHocTableName}: construit le nom d'une table adHoc
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la class static
+       \item[+] string : nom de la class dynamique
+     \end{enumerate}
+     \item \textbf{Indications} :
+   \end{itemize}
+
+   \item \textbf{buildStaticVariableName}: construit le nom de la variable globale représentant une variable statique.
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : classe de la variable statique
+       \item[+] string : nom de la variable
+     \end{enumerate}
+     \item \textbf{Indications} :
+   \end{itemize}
+
+
+   \item \textbf{buildAttributIndexName}: construit le nom de la variable globale représentant l'index d'un attribut.
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+       \item[+] string : nom de la variable
+     \end{enumerate}
+     \item \textbf{Indications} : ???
+   \end{itemize}
+
+   \item \textbf{buildClassTypeName}: construit le nom de la classe pour le module
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+     \end{enumerate}
+     \item \textbf{Indications} : Exemple : A devient KAWA\_CLASS\_A
+   \end{itemize}
+
+   \item \textbf{buildClassStructTypeName}: construit le nom de la structure repésentant les membres d'une classe
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+     \end{enumerate}
+   \end{itemize}
+
+   \item \textbf{LLVMTypeToStr}: construit le nom d'un type à partir d'un type LLVM
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Type* : type llvm à transformer
+     \end{enumerate}
+     \item \textbf{Indications} : float -> KawaFloat, i32 -> kawaInt, KAWA\_CLASS\_A -> A
+   \end{itemize}
+
+   \item \textbf{strToKawaType}: construit le nom pleinement qualifié d'un type pour le compilateur kawa
+   \begin{itemize}
+     \item \textbf{Type de retour}: string
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom du type à transformer
+     \end{enumerate}
+     \item \textbf{Indications} : int -> KawaInt, float -> KawaFloat
+   \end{itemize}
+
+   \end{enumerate}
+
 
 
    \subsubsection{Fonctionnement du TypeGenerator}
    Ce composant permet de creer et d'obtenir des objets de typages d'un module llvm.
    Les types primitifs bool, int, char, float, double et string et tableaux représentant respectivement les types 
-   llvm i8, i32, i8, float, double, i8*, [nb x type]. On les obtient graçe au à la classe Type de l'api de LLVM.
-   \\
+   llvm i8, i32, i8, float, double, i8*, [nb x type]. On les obtient grâçe à la classe Type de l'api de LLVM.
    Le structure principale de la classes est composée d'une référence vers un sous type contenant les
    attributs de la classe et une référence vers un tableau adHoc. Les méthodes et attributs statics 
    sont quant à eux représentés par des variables globales.La génération d'une classe entrainera 
    la génération de variables globales représentant les indexes des attributs dans la structure.
    Enfin le nommage de ces variables globales sera géré par le NameBuilder.
-    \small{(Voir l'annexe pour un exemple)}
+    \small{(Voir l'annexe pour un exemple)} \\Ces Fonctions :\
+
+   \begin{enumerate} 
+    \item \textbf{createClassType} : cree une structure représentant une classe
+   \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Structuretype*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string : nom de la classe
+       \item[+] vector<string> : liste des noms de attributs
+       \item[+] vector<string> : liste des noms des types
+       \item[+] vector<bool> : attributs statiques ou non
+     \end{enumerate}
+     \item \textbf{Indications} : \small{(Voir l'annexe pour un exemple)}
+   \end{itemize}
+
+    \item \textbf{strToLLVMType} : retourne un type LLVM associé à un nom. Un type opaque est crée sinon la structrure n'existe pas.
+   \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Structuretype*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Module : module dans lequel sera fait l'operation
+       \item[+] string : nom du type
+     \end{enumerate}
+     \item \textbf{Indications} : le nom du devra être un nom produit par le NameBuilder
+   \end{itemize}
+
+   \end{enumerate}
 
    \subsubsection{Fonctionnement du PrimitiveCreator}
    Ce composant permet de creer des objets LLVM représentant des valeurs primitives.
    Les classes LLVM à utiliser sont : ConstantInt, ConstantFP, ConstantDataArray
    \small{(Voir l'annexe pour un exemple)}
 
+   \begin{enumerate} 
+    \item \textbf{create} : Cree un objet LLVM représentant une valeur primitive.
+   \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Value*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] string|float|double|int|char : valeur primitive
+       \item[+] LLVM::Context : context de création de l'objet
+     \end{enumerate}
+     \item \textbf{Indications} : la fonction est à surchargée pour chaque cas
+   \end{itemize}
+
+   \end{enumerate}
+
+
    \subsubsection{Fonctionnement du PrimitiveConverteur}
-   Ce composant à pour role de creer les opérations de conversion d'un type vers l'autre. Le LLVM IR code ne supporte nativement les opérations binaires intertypées. Il faudra se servir de l'objet IRBuilder pour faciliter l'implémentation de la conversion.
-   \small{(Voir l'annexe pour un exemple)}
+   Ce composant à pour role de creer les opérations de conversion d'un type vers l'autre.Le LLVM IR code ne supporte nativement les opérations binaires intertypées. Il faudra se servir de l'objet IRBuilder pour faciliter l'implémentation de la conversion. \small{(Voir l'annexe pour un exemple)}
+
+   \begin{enumerate} 
+    \item \textbf{convertFormTo} : Convertie une valeur primitive d'un type à l'autre
+   \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Value*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Type*  : type de départ
+       \item[+] LLVM::Type*  : type cible
+       \item[+] LLVM::Value* : valeur  convertir
+       \item[+] LLVM::BasiBlock* : bloc d'instruction dans lequel s'effectue la conversion.  
+     \end{enumerate}
+     \item \textbf{Indications} : 
+     \end{itemize}
+   \end{enumerate}
 
    \subsubsection{Fonctionnement du PrimitiveBinaryOperation}
-   Ce composant permet la génération des opérations primitives.L'utilisation d'un IRBuilder est conseillée.
-   \small{(Voir l'annexe pour un exemple)}
+   Ce composant permet la génération des opérations primitives.L'utilisation d'un IRBuilder est conseillée. \small{(Voir l'annexe pour un exemple)}
+
+   \begin{enumerate} 
+    \item \textbf{create[Add|Mul|Sub|Div|Mod]} : cree un[e] [addition|produit|soustraction|division|reste] 
+    \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Value*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Type*  : type vers lequel sera convertie le résultat
+       \item[+] LLVM::Value* : opérande gauche
+       \item[+] LLVM::Value* : opérande droite 
+       \item[+] LLVM::BasicBlock* : bloc dans lequel effectuer l'opération
+     \end{enumerate}
+     \item \textbf{Indications} : le bloc ne devrait jamais être null
+     \end{itemize}
+
+    \item \textbf{create[And|Xor|Not|Eq|Or|Sup|Inf|SOE|IOE]} : cree une opération de comparaison
+    \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Value*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Value* : opérande gauche
+       \item[+] LLVM::Value* : opérande droite (sauf pour Not)
+       \item[+] LLVM::BasicBlock* : bloc dans lequel effectuer l'opération
+     \end{enumerate}
+     \item \textbf{Indications} : la valeur llvm retournée est toujours un entier llvm. SOE = Superieur ou égal. IOE = Inferieur ou égal.
+     \end{itemize}
+
+    \item \textbf{valToBool} : transforme une valeur en un boolean
+    \begin{itemize}
+     \item \textbf{Type de retour}: LLVM::Value*
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] LLVM::Value* : valeur à transformer
+       \item[+] LLVM::BasicBlock* : bloc dans lequel effectuer l'opération
+     \end{enumerate}
+     \item \textbf{Indications} : false si égal à 0 ou null, sinon true
+     \end{itemize}
+
+   \end{enumerate}
 
 
    \subsubsection{Fonctionnement du FunctionGenerator}
@@ -108,17 +326,258 @@ il implémente différent algoriithme. \\
    De plus il permet aussi de déclarer et d'obtenir ades fonctions des librairies présentent sur le système comme, strlen, strcpy, strcat..etc
    \small{(Voir l'annexe pour un exemple)}
 
+
+  \begin{enumerate}
+
+  \item \textbf{createFunction}: Cree une fonction dans un module llvm.
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Function
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] Module module : module dans lequel est contruit la fonction
+      \item[+] bool isStatic : la fonction est statique
+      \item[+] string className : le nom de la classe
+      \item[+] string ret\_type : type de retour de la fonction
+      \item[+] vector<string> arg\_types: liste des types des paramètres
+      \item[+] vector<string> arg\_names : liste des noms des paramètres 
+    \end{enumerate}
+    \item \textbf{Indications} : Le nom de la fonction produite est le nom de la fonction produite est générée avec le \textbf{NameBuilder}    
+  \end{itemize} 
+
+  \item \textbf{createContructor}: cree une fonction d'instanciation de classe.
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Function
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] Module module : module dans lequel est contruit la fonction
+      \item[+] string className : nom de la classe
+      \item[+] vector<string> args\_types : types des arguments
+      \item[+] vector<string> args\_names : nom des arguments
+    \end{enumerate}
+    \item \textbf{Indications} : Le nom de la fonction produite est le nom de la fonction produite est générée avec le \textbf{NameBuilder}. La construction d'un objet est faîte par deux fonctions différentes. L'une automatiquement générée, permettant l'allocaction d'un nouvel objet, et une fonction d'initilisation de l'objet. Le corps de cette dernère est à définir.
+  \end{itemize}
+
+   \item \textbf{getFunction}: Retourne une function du module à partir de son nom dans le module, \textbf{null} sinon
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Function
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] Module module : module dans lequel est contruit la fonction
+      \item[+] string className : nom pleinement qualifié de la fonction à chercher.
+    \end{enumerate}
+    \item \textbf{Indications} : le nom de la fonction à retourner devra être contruite avec le \textbf{NameBuilder}    
+  \end{itemize}
+
+  \item \textbf{getOrCreateMainFunction} : crée ou retourne la fonction \textbf{main}
+  \begin{itemize}
+    \item \textbf{Type de retour} : LLVM::Function
+    \item \textbf{Paramètres} :
+    \begin{enumerate}
+      \item[+] LLVM::Module : le module dans lequel creer ou obtenir la fonction
+    \end{enumerate}
+    \item \textbf{Indications} : Il s'agit de la fonction de point d'entrer du programme.      
+  \end{itemize}
+
+  \item \textbf{getOrCreatePutsFunction} : crée ou retourne la fonction \textbf{puts}
+  \begin{itemize}
+    \item \textbf{Type de retour} : LLVM::Function
+    \item \textbf{Paramètres} :
+    \begin{enumerate}
+      \item[+] LLVM::Module : le module dans lequel creer ou obtenir la fonction
+    \end{enumerate}
+    \item \textbf{Indications} : La fonction permet de l'affichage de chaînes de caractères. La fonction est implémentée par des librairies locales et chargée par clang.    
+  \end{itemize}
+
+  \item \textbf{getOrCreateStrlenFunction} : crée ou retourne la fonction \textbf{strlen}
+  \begin{itemize}
+    \item \textbf{Type de retour} : LLVM::Function
+    \item \textbf{Paramètres} :
+    \begin{enumerate}
+      \item[+] LLVM::Module : le module dans lequel creer ou obtenir la fonction
+    \end{enumerate}
+    \item \textbf{Indications} : La fonction permet de calculer la longueur d'une chaine de caractère. La fonction est implémentée par des librairies locales et chargée par clang.
+  \end{itemize}
+
+  \item \textbf{getOrCreateStrcatFunction} : crée ou retourne la fonction \textbf{strcat}
+  \begin{itemize}
+    \item \textbf{Type de retour} : LLVM::Function
+    \item \textbf{Paramètres} :
+    \begin{enumerate}
+      \item[+] LLVM::Module : le module dans lequel creer ou obtenir la fonction
+    \end{enumerate}
+    \item \textbf{Indications} : La fonction permet de concatener deux chaines de caractères. La fonction est implémentée par des librairies locales et chargée par clang.
+  \end{itemize}
+
+  \item \textbf{setFunctionBody} : permet de définir le corps d'une fonction
+  \begin{itemize}
+    \item \textbf{Type de retour} : void
+    \item \textbf{Paramètres} :
+    \begin{enumerate}
+      \item[+] LLVM::Module : le module dans lequel creer ou obtenir la fonction
+      \item[+] vector<LLVM::BasicBlock*> : La liste des blocs llvm comportant les instructions d'une fonction
+    \end{enumerate}
+    \item \textbf{Indications} : cette fonction s'appliquera aussi aux constructeurs.
+  \end{itemize}
+
+  \end{enumerate}
+
    \subsubsection{Fonctionnement du CallGenerator}
-   Ce composant permet de generer les appels de méthodes et de constructeurs. (A completer)
+   Ce composant permet de génerer les appels aux méthodes et au chargement d'attributs. Le composant fonctionne de la manière suivante.
+  \begin{itemize}
+    \item Les appels aux membres static sont directes. Une résolution de nom est suffisante pour obtenir l'adresse de l'objet cible. Les méthodes et les attributs static sont des variables globales dans le module, et repérables par leur nom.
+
+    \item Les attributs et méthodes non statics sont contenus des structures et tableaux représentant les classe et les tables adHoc permettant d'implementer le principe de polymorphisme. Leur position dans  la structure doivent pouvoir être determiner afin de les charger. Pour cela il faut employer la méthode getIndexOfMember de \textbf{GloabalGenerator}.
+
+    \item Les appels aux constructeurs d'objets sont traités comme des appels statics.
+
+    \item (A completer)
+  \end{itemize} 
+
    \small{(Voir l'annexe pour un exemple)}
+
+  \begin{enumerate}
+  \item \textbf{callStaticMethode}: cree un appel static sur une méthode
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] ???
+    \end{enumerate}
+    \item \textbf{Indications} : ??? 
+  \end{itemize} 
+
+  \item \textbf{callMethode}: cree un appel non static sur une méthode
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] ???
+    \end{enumerate}
+    \item \textbf{Indications} : ??? 
+  \end{itemize}
+
+  \item \textbf{loadStaticAttribut}: charge un attribut static
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] ???
+    \end{enumerate}
+    \item \textbf{Indications} : ??? 
+  \end{itemize} 
+
+  \item \textbf{loadAttribut}: charge un attribut non static
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] ???
+    \end{enumerate}
+    \item \textbf{Indications} : ??? 
+  \end{itemize} 
+
+
+  \end{enumerate}
+
+
 
    \subsubsection{Fonctionnement du GlobalVariableGenerator}
    Ce composant permet la génération des variables globales nécéssaire à la sémentique du programme.
    Il permet de declarer des variables statics, les tables AdHoc, et les indexes de membres. La compilation en mode Monilithique ét partagé divergera à ce niveau au niveau de atributs des variables.
-   \small{(Voir l'annexe pour un exemple)}
+   \small{(Voir l'annexe pour un exemple)}\\Ses fonctions :\
 
-   \subsubsection{Fonctionnnement des BlocGenérator}
-   (A completer)
+  \begin{enumerate}
+  \item \textbf{getOrCreateStaticAttribut}: cree ou retourne un attribut static
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module llvm dans lequel effectuer l'opération
+      \item[+] string : nom de la classe
+      \item[+] string : nom de l'attribut
+      \item[+] string : nom du type de l'attribut
+    \end{enumerate}
+    \item \textbf{Indications} : 
+  \end{itemize} 
+
+  \item \textbf{createAdHocTable}: cree une table adHoc référençant les fonction correspendant au couple static-dynamique de deux classes
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module dans lequel creer le tableau
+      \item[+] string : nom de la classe statique
+      \item[+] string : nom de la classe dynamique
+      \item[+] vector<LLVM::Function *> : liste des fonctions de la table
+    \end{enumerate}
+    \item \textbf{Indications} : le nom des classes doivent avoir été générée avec le NameBuilder. A l'issue de l'opération, chacune des fonction se verra affecté un index par rapport à sa position dans la liste. Il est donc nécéssaire que la liste des fonctions soient ordonnées.
+  \end{itemize}
+
+  \item \textbf{getAdHocTable}: permet d'obtenir une table adHoc
+    \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module dans lequel creer le tableau
+      \item[+] string : nom de la classe statique
+      \item[+] string : nom de la classe dynamique
+    \end{enumerate}
+    \item \textbf{Indications} : le nom des classes doivent avoir été généré avec le NameBuilder.
+  \end{itemize}
+
+  \item \textbf{getAdHocTable}: permet d'obtenir une table adHoc
+    \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module dans lequel creer le tableau
+      \item[+] string : nom de la classe statique
+      \item[+] string : nom de la classe dynamique
+    \end{enumerate}
+    \item \textbf{Indications} : le nom des classes doivent avoir été généré avec le NameBuilder.
+  \end{itemize}
+
+  \item \textbf{createIndexOfMember}: permet de creer un index pour un élément global dans un module llvm
+    \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module dans lequel creer le tableau
+      \item[+] string : nom de l'élément
+      \item[+] int : index
+    \end{enumerate}
+    \item \textbf{Indications} : le nom de l'élément doit avoir été générée avec le NameBuilder.
+  \end{itemize}
+
+  \item \textbf{getIndexOfMember}: permet d'obtenir un objet llvm représentant un entier correspondant à l'index
+    \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Module : module dans lequel creer le tableau
+      \item[+] string : nom de l'élément
+    \end{enumerate}
+    \item \textbf{Indications} : le nom de l'élément doit avoir été générée avec le NameBuilder.
+  \end{itemize}
+
+  \end{enumerate}
+
+   \subsubsection{Fonctionnnement du BlockGenerator}
+
+   Ce composant permet d'ajancer les bloc d'instruction LLVM lors de la génération du code d' instructions conditionelles.
+   \\Liste des fonctions :\
+  
+  \begin{enumerate}
+  \item \textbf{???}: ???
+  \begin{itemize}
+    \item \textbf{Type de retour}: ????
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] ???
+    \end{enumerate}
+    \item \textbf{Indications} : ??? 
+  \end{itemize} 
+  \end{enumerate}
 
     
 \end{document}

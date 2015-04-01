@@ -77,7 +77,7 @@ KAWATreeParam* paramFloat;
 %type<vint> Modifier Modifiers /*ModifiersMain*/ Static All Extends ExtendsList Implements			  
 %type<vint> ImportDeclaration 
 
-%type<vint> TypeDeclaration ClassOrInterfaceDeclaration ClassDeclaration InterfaceDeclaration 
+%type<vint> ClassOrInterfaceDeclaration ClassDeclaration InterfaceDeclaration 
 %type<vint> ClassBody ClassBodyDeclarations ClassBodyDeclaration
 
 %type<vint> InterfaceBody InterfaceBodyDeclarations InterfaceBodyDeclaration
@@ -86,7 +86,7 @@ KAWATreeParam* paramFloat;
 %type<vint> FieldDeclaratorsRest
 %type<vint> MethodDeclaratorRest MainMethodDeclaratorRest			
 %type<vint> ConstructorDeclaratorRest
-%type<vint> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
+%type<vint> InterfaceMemberDecl /*InterfaceMethodOrFieldDecl*/ /*InterfaceMethodOrFieldRest*/ /*ConstantDeclaratorsRest ConstantDeclaratorList ConstantDeclaratorRest ConstantDeclarator*/ 
 %type<vint> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
 %type<vint> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
 %type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest  
@@ -95,7 +95,7 @@ KAWATreeParam* paramFloat;
 %type<vKAWATreePrintInteger> PrintI
 %type<vKAWATreePrintFloat> PrintF
 %type<vint> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
-%type<vint> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
+%type<vint> ForControl ForVarControl /*ForVariableDeclaratorsRest*/ ForUpdate StatementExpressionList
 
 %type<vint> Expression FacteurEffect ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus terme facteur factFinal
 
@@ -134,7 +134,7 @@ KAWATreeParam* paramFloat;
 %start Program;
 %%
 
-Program : Package TypeDeclaration
+Program : Package ImportDeclaration ClassOrInterfaceDeclaration{ $$=0; cout<<"Program ---> Package ImportDeclaration ClassOrInterfaceDeclaration"<< endl;}
 		;
 Package : TPACKAGE ID ';'
 		;
@@ -159,7 +159,7 @@ Tables : '[' ']' Tables {$$=0;}
 	   | {$$=0;}
 	   ;
 
-TablesIndexe : '[' ENTIER ']' Tables {$$=0;}
+TablesIndexe : '[' ENTIER ']' TablesIndexe {$$=0;}
 	   | {$$=0;}
 	   ;
 
@@ -221,8 +221,6 @@ ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0;}
 				  ; 
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
-TypeDeclaration : ImportDeclaration ClassOrInterfaceDeclaration { $$=0; cout<<"ImportDeclaration-->Epsilone "<< endl;  }
-				;
 
 ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0; program->addClass(mainClass); cout<< "ClassOrInterfaceDeclaration -->Modifiers ClassDeclaration "<< endl;}
 						    | Modifiers InterfaceDeclaration {$$=0;}
@@ -320,40 +318,9 @@ Throws 				: TTHROWS QualifiedIdentifierList
 ConstructorDeclaratorRest: FormalParameters  {$$=0;} /*Throws Block*/
 						 ;
 /*------------------interface membres : Methodes, void methods, variables, classes internes and inrefaces internes ------------------------*/
-InterfaceMemberDecl: InterfaceMethodOrFieldDecl {$$=0;}
-    			   | TVOID ID FormalParameters ';' {$$=0;}/*Throws*/
-    			   | ClassDeclaration {$$=0;}/*-------- classes internes ----------*/
-    			   | InterfaceDeclaration {$$=0;}/*-------- interfaces internes ----------*/
+InterfaceMemberDecl: Type ID FormalParameters';'
+    			   | TVOID ID FormalParameters ';' {$$=0;}
     			   ;
-
-InterfaceMethodOrFieldDecl: Type ID InterfaceMethodOrFieldRest {$$=0;}
-						  ;
-
-InterfaceMethodOrFieldRest: ConstantDeclaratorsRest ';' {$$=0;}
-    					  | FormalParameters ';' {$$=0;}/*InterfaceMethodDeclaratorRest*/
-    					  ;
-
-ConstantDeclaratorsRest: ConstantDeclaratorRest ConstantDeclaratorList {$$=0;}
-					   ;
-ConstantDeclaratorList : ',' ConstantDeclarator ConstantDeclaratorList {$$=$2;}
-					   | {$$=0;}
-					   ;
-
-ConstantDeclarator: ID ConstantDeclaratorRest {$$=0;}
-				  ;
-
-ConstantDeclaratorRest: Tables '=' VariableInitializer {$$=0;}
-					  | Tables {$$=0;}
-					  ;
-
-/*
-InterfaceMethodDeclaratorRest: FormalParameters ';' {$$=0;}/*Throws
-							 ; 
-*/
-/*
-VoidInterfaceMethodDeclaratorRest: FormalParameters Throws ';'
-								 ;
-*/  
 
 /*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
 FormalParameters: '(' FormalParameterDecls ')' {$$=$2;}
@@ -532,18 +499,21 @@ ForControl: ForVarControl ';' Expression ';' {$$=0;}
     	  | ';' ';' ForUpdate {$$=0;}
     	  ;
 
-ForVarControl: Type VariableDeclaratorId  ForVariableDeclaratorsRest {$$=0;}
-			 | ID ForVariableDeclaratorsRest {$$=0;}
+ForVarControl: Type VariableDeclaratorId VariableDeclaratorList {$$=0;}
+			 | Type VariableDeclaratorId '=' VariableInitializer VariableDeclaratorList {$$=0;}
+			 | ID VariableDeclaratorList {$$=0;}
+			 | ID '=' VariableInitializer VariableDeclaratorList  {$$=0;}
 			 ;
-
-ForVariableDeclaratorsRest:  VariableDeclaratorList {$$=0;}
+/*
+ForVariableDeclaratorsRest: VariableDeclaratorList {$$=0;}
 						  | '=' VariableInitializer VariableDeclaratorList {$$=0;}
 						  ;
+						  */
 
 ForUpdate: IDExpression StatementExpressionList {$$=0;}
 		 ;
 
-StatementExpressionList : ',' Expression StatementExpressionList {$$=0;}
+StatementExpressionList : ',' IDExpression StatementExpressionList {$$=0;}
 						| {$$=0;}
 						;   
 

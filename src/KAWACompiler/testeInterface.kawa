@@ -1,0 +1,13 @@
+//plusieurs packages
+package TestInterface;
+import Kawa.Collections.* ;
+import Kawa.Map.HashMap;
+
+public interface inter extends inter1, inter2 {
+	 
+	 //fonction sans parametres
+	 public char method1();
+                          
+	 //void fonction parametrée 
+	 void methode2(int x, Test t, float [] tableau);
+}

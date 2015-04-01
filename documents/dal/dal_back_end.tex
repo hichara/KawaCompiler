@@ -8,7 +8,7 @@
 \usepackage{mathrsfs}
 
 \begin{document}
-       
+
 \section{Architecture du back end}
 
 Le back-end est composé de deux parties. La premiere partie dont le rôle est de générer le code intermédiare, et une deuxieme partie dont le rôle est de transformer le code en code machine au format ELF. 
@@ -57,8 +57,47 @@ Cette chaine de compilation est composée des éléments suivant :
  \item \textbf{clang} compilateur permettant de compiler le code assembleur.
 \end{itemize}
 
+\section{Fonctionnment dynamic}
 
-\section{Fonctionnment dynamic du back end}
+\section{Enchainement des composants du compilateur}
+
+Le compilateur suivra la châine simple de compilation suivante :
+
+   \begin{enumerate}
+   \item \textbf{Parsage des fichiers dont les noms ont été donnés en argument}
+   \begin{itemize}
+     \item \textbf{Nom de la fonction}: parse
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] KawaTree* : la structure qui contiendra le squelette du programme 
+       \item[+] vector<string> : liste des noms des fichiers
+     \end{enumerate}
+     \item \textbf{Indication} : échoue si le programme est mal formé. Le KawaTree est alimenté, et est prêt pour l'analyse syntaxique.  
+   \end{itemize}
+
+   \item \textbf{Analyse syntaxique}
+   \begin{itemize}
+     \item \textbf{Nom de la fonction}: syntaxAnalyse
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] KawaTree* : la structure qui contenant le squelette du programme 
+     \end{enumerate}
+     \item \textbf{Indication} : si aucune érreur est détectée, le KawaTree a été décorer et contient toutes les informations nécéssaire pour la génération du code intermédiaire. 
+   \end{itemize}
+
+   \item \textbf{Génération du code intermédiaire}
+   \begin{itemize}
+     \item \textbf{Nom de la fonction}: generateIRCode
+     \item \textbf{Paramètres}:
+     \begin{enumerate}
+       \item[+] KawaTree* : la structure qui contenant le squelette du programme, décoré.
+     \end{enumerate}
+     \item \textbf{Indication} : un fichier .ll contenant le code intermédiaire est généré.
+   \end{itemize}
+
+   \item \textbf{Optimisation et compilation du code intermédiare.}
+
+   \end{enumerate}
 
 \subsection{Fonctionnment dynamic du IRCompiler}
 

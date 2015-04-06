@@ -853,7 +853,7 @@ Le IRCompiler parcourra le composant \textbf{KawaTree} de la manière suivante.
 
   \end{enumerate}
 
-   \subsubsection{Fonctionnnement du BlockGenerator}
+   \subsubsection{Fonctionnnement du BlocGenerator}
 
    Ce composant permet d'ajancer les bloc d'instruction LLVM lors de la génération du code d' instructions conditionelles.
    \\Liste des fonctions :\
@@ -866,7 +866,6 @@ Le IRCompiler parcourra le composant \textbf{KawaTree} de la manière suivante.
     \begin{enumerate}
       \item[+] LLVM::Context
     \end{enumerate}
-    \item \textbf{Indications} : ??? 
   \end{itemize}
 
   \item \textbf{create[IF|ELSE|For|While]}: crée un bloc [IF|ELSE|For|While]
@@ -902,5 +901,68 @@ Le IRCompiler parcourra le composant \textbf{KawaTree} de la manière suivante.
 
   \end{enumerate}
 
+   \subsubsection{Fonctionnnement du BasicInstructionGenerator}
+
+   Ce composant s'occupe de la génération d'instructions basiques tel que la déclaration, affectation, et chargement de variables. \\
+   Ces fonctions : \
+
+  \begin{enumerate}
+  \item \textbf{createDeclaration}: crée une déclaration
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] string : nom de la variable
+      \item[+] LLVM::Type* : type llvm de la variable
+      \item[+] LLVM::BasicBlock* : bloc d'instruction
+    \end{enumerate}
+  \end{itemize}
+
+  \item \textbf{createAffectation}: crée une affectation
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] string : nom de la variable
+      \item[+] LLVM::Value* : addresse vers laquelle effectuer l'affectation
+      \item[+] LLVM::Value* : expression à affecter
+      \item[+] LLVM::BasicBlock* : bloc d'instruction
+    \end{enumerate}
+  \end{itemize}
+
+  \item \textbf{createLoadAttribut}: genère l'accès un attribut 
+   \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Value* : variable à expplorer
+      \item[+] LLVM::Value* : entier llvm representant l'index de l'attribut
+      \item[+] LLVM::BasicBlock* : bloc d'instruction
+    \end{enumerate}
+
+  \item \textbf{createLoadVAlue}: charge la valeur d'une variable
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::Value* : adresse de la variable
+      \end{enumerate}
+  \end{itemize}
+
+  \item \textbf{createReturn}: cree une instruction de retour
+  \begin{itemize}
+    \item \textbf{Type de retour}: LLVM::Value*
+    \item \textbf{Paramètres}:
+    \begin{enumerate}
+      \item[+] LLVM::BasicBlock : bloc d'instruction courant.
+      \item[+] LLVM::Value* : valeur à retourner. Si null, l'instruction est un return void.
+      \end{enumerate}
+  \end{itemize}
+
+
+  \end{itemize}
+
+
+  \end{enumerate}
 
 \end{document}

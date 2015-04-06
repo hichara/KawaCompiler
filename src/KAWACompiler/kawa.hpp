@@ -93,35 +93,34 @@ extern int yydebug;
     TPRINTI = 303,
     TPRINTF = 304,
     TPRINTS = 305,
-    TMAIN = 306,
-    TPLUSEQ = 307,
-    TMINUSEQ = 308,
-    TMULEQ = 309,
-    TDIVEQ = 310,
-    TMODEQ = 311,
-    TINC = 312,
-    TDEC = 313,
-    TCEQ = 314,
-    TCNE = 315,
-    TCLE = 316,
-    TCGE = 317,
-    TOR = 318,
-    TAND = 319,
-    TANDBINEQ = 320,
-    TORBINEQ = 321,
-    TXORBINEQ = 322,
-    TDECAL = 323,
-    TDECALEQ = 324,
-    TDECAR = 325,
-    TDECAREQ = 326,
-    TDECALNS = 327,
-    TDECALNSEQ = 328,
-    THEN = 329,
-    COND = 330,
-    NBINAIRE = 331,
-    NLOGIC = 332,
-    MOINUS = 333,
-    PLUS = 334
+    TPLUSEQ = 306,
+    TMINUSEQ = 307,
+    TMULEQ = 308,
+    TDIVEQ = 309,
+    TMODEQ = 310,
+    TINC = 311,
+    TDEC = 312,
+    TCEQ = 313,
+    TCNE = 314,
+    TCLE = 315,
+    TCGE = 316,
+    TOR = 317,
+    TAND = 318,
+    TANDBINEQ = 319,
+    TORBINEQ = 320,
+    TXORBINEQ = 321,
+    TDECAL = 322,
+    TDECALEQ = 323,
+    TDECAR = 324,
+    TDECAREQ = 325,
+    TDECALNS = 326,
+    TDECALNSEQ = 327,
+    THEN = 328,
+    COND = 329,
+    NBINAIRE = 330,
+    NLOGIC = 331,
+    MOINUS = 332,
+    PLUS = 333
   };
 #endif
 
@@ -130,7 +129,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 105 "kawa.y" /* yacc.c:1909  */
+#line 98 "kawa.y" /* yacc.c:1909  */
 
 	int vint;
 	float vfloat;
@@ -142,7 +141,7 @@ union YYSTYPE
 	KAWATreePrintFloat* vKAWATreePrintFloat;
 	KAWATreeParam* vKAWATreeParam;
 
-#line 146 "kawa.hpp" /* yacc.c:1909  */
+#line 145 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

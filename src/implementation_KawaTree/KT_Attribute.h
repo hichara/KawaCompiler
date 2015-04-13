@@ -8,6 +8,7 @@
 
 #include "KT_VarOrAttr.h"
 #include "KT_Modifier.h"
+#include "KT_Type.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -20,32 +21,32 @@ public:
 	KT_Attribute ();
     int index;
     
-    string * getName();
+    string* getName();
     
     int getIndex();
     
-    KT_Type * getType();
+    KT_Type* getType();
     
-    KT_Modifier * getModifier();
+    KT_Modifier* getModifier();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(string* var);
     
     /**
      * @param KT_Type *
      */
-    void setType(KT_Type * var);
+    void setType(KT_Type* var);
     
     /**
      * @param KT_Modifier *
      */
-    void setModifier(KT_Modifier * var);
+    void setModifier(KT_Modifier* var);
 private: 
-    string * name;
+    string* name;
     KT_Modifier* modifier;
-	KT_Type * type;
+	KT_Type* type;
 };
 
 #endif //_KT_ATTRIBUTE_H

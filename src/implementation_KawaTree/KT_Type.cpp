@@ -21,7 +21,7 @@ bool KT_Type::isBasicType() {
 /**
  * @return string *
  */
-string * KT_Type::getTypeName() {
+string* KT_Type::getTypeName() {
     return typeName;
 }
 
@@ -35,7 +35,7 @@ int KT_Type::getArrayDim() {
 /**
  * @return PARSER_Array *
  */
-PARSER_Array * KT_Type::getArray() {
+PARSER_Array* KT_Type::getArray() {
     return Array;
 }
 
@@ -49,7 +49,7 @@ void KT_Type::setBasicType(bool var) {
 /**
  * @param string *
  */
-void KT_Type::setTypeName(string * var) {
+void KT_Type::setTypeName(string* var) {
 	typeName=var;
 }
 

@@ -7,10 +7,8 @@
 #define _KT_FORSTATEMENT_H
 
 #include "KT_BlockStatement.h"
-#include "KT_BlockStatement.h"
 #include "KT_Variable.h"
 #include "KT_IDExpression.h"
-#include "KT_Expression.h"
 #include "KT_Expression.h"
 #include "PARSER_ForControl.h"
 #include <stdio.h>
@@ -23,36 +21,36 @@ class KT_ForStatement: public KT_BlockStatement {
 public: 
     KT_ForStatement();
 	
-    KT_BlockStatement * getBlockStatement();
+    KT_BlockStatement* getBlockStatement();
     
-    vector<KT_Variable *> getInitFor();
+    vector<KT_Variable*> getInitFor();
     
-    vector<KT_IDExpression *> getUpdate();
+    vector<KT_IDExpression*> getUpdate();
     
-    KT_Expression * getCondition();
+    KT_Expression* getCondition();
     
-    PARSER_ForControl * getForControl();
+    PARSER_ForControl* getForControl();
     
     /**
      * @param KT_Expression *
      */
-    void setCondition( KT_Expression * var );
+    void setCondition( KT_Expression* var );
     
     /**
      * @param KT_BlockStatement *
      */
-    void setBlockStatement(KT_BlockStatement * var);
+    void setBlockStatement(KT_BlockStatement* var);
     
     /**
      * @param PARSER_ForControl *
      */
-    void setForControl(PARSER_ForControl * var);
+    void setForControl(PARSER_ForControl* var);
 private: 
     KT_BlockStatement* blockStatement;
-    Vector<KT_Variable *> initFor;
-    Vector<KT_IDExpression *> update;
-    KT_Expression * condition;
-    PARSER_ForControl * forControl;
+    vector<KT_Variable*> initFor;
+    vector<KT_IDExpression*> update;
+    KT_Expression* condition;
+    PARSER_ForControl* forControl;
 };
 
 #endif //_KT_FORSTATEMENT_H

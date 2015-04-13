@@ -18,21 +18,21 @@ public:
     
     KT_Param();
 
-    string * getName();
+    string* getName();
     
-    KT_Type * getParamType();
+    KT_Type* getParamType();
 
     KT_Modifier* getParamModifier();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(string* var);
     
     /**
      * @param KT_Type *
      */
-    void setParamType(KT_Type * var);
+    void setParamType(KT_Type* var);
 
     /**
      * @param KT_Modifier*
@@ -40,7 +40,7 @@ public:
     void setParamModifier(KT_Modifier* var);
 
 private: 
-    string * name;
+    string* name;
     KT_Modifier* paramModifier;
     KT_Type* paramType;
 };

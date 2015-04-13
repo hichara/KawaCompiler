@@ -10,15 +10,9 @@
 #include <vector>
 using namespace std;
 
-class PARSER_MemberDec {
+class PARSER_MemberDec{
 public: 
-    
     PARSER_MemberDec();
-
-    /**
-     * @param KT_Class *
-     */
-    void addToKTClass(KT_Class * var);
 };
 
 #endif //_PARSER_MEMBERDEC_H

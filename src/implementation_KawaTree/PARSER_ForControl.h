@@ -7,6 +7,8 @@
 #define _PARSER_FORCONTROL_H
 
 #include "KT_Variable.h"
+#include "KT_Expression.h"
+#include "KT_IDExpression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -17,20 +19,20 @@ public:
     
     PARSER_ForControl();
 
-    KT_Expression * getCondition();
+    KT_Expression* getCondition();
     
-    vector<KT_IDExpression *> getUpDate();
+    vector<KT_IDExpression*> getUpDate();
     
-    vector<KT_Variable *> getInitFor();
+    vector<KT_Variable*> getInitFor();
     
     /**
      * @param KT_Expression *
      */
-    void setCondition(KT_Expression * var);
+    void setCondition(KT_Expression* var);
 private: 
-    KT_Expression * condition;
+    KT_Expression* condition;
     vector<KT_IDExpression*> upDate;
-    vector<KT_Variable *> initFor;
+    vector<KT_Variable*> initFor;
 };
 
 #endif //_PARSER_FORCONTROL_H

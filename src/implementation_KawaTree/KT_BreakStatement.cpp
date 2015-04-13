@@ -25,7 +25,7 @@ bool KT_BreakStatement::isIdExist() {
 /**
  * @return string *
  */
-string * KT_BreakStatement::getId() {
+string* KT_BreakStatement::getId() {
     return this-> id;
 }
 
@@ -39,6 +39,6 @@ void KT_BreakStatement::setIdExist( bool var) {
 /**
  * @param string *
  */
-void KT_BreakStatement::setId(string * var) {
+void KT_BreakStatement::setId(string* var) {
 	this->id=var;
 }

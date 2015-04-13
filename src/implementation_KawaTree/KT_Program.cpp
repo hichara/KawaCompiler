@@ -14,6 +14,6 @@ KT_Program::KT_Program(){}
 /**
  * @return vector<KT_Package *>
  */
-vector<KT_Package *> KT_Program::getPackages() {
+vector<KT_Package*> KT_Program::getPackages() {
     return packages;
 }

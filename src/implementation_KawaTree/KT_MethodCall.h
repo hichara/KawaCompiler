@@ -20,20 +20,20 @@ public:
     
     KT_MethodCall();
     
-    vector<string *> getName();
+    vector<string*> getName();
     
-    KT_SimpleMethod * getMethod();
+    KT_SimpleMethod* getMethod();
     
-    KT_VarOrAttr * getCaller();
+    KT_VarOrAttr* getCaller();
     
-    vector<KT_ParamsMethodCall *> getParams();
+    vector<KT_ParamsMethodCall*> getParams();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(vector<string*> var);
 private: 
-    vector<string *> name;
+    vector<string*> name;
     vector<KT_ParamsMethodCall*> params;
     KT_SimpleMethod* methodCall;
     KT_VarOrAttr* caller;

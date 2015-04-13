@@ -14,27 +14,27 @@ KT_WhileStatement::KT_WhileStatement(){}
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_WhileStatement::getCondition() {
+KT_Expression* KT_WhileStatement::getCondition() {
     return condition;
 }
 
 /**
  * @return KT_BlockStatement *
  */
-KT_BlockStatement * KT_WhileStatement::getWBStatement() {
-    return setWBStatement;
+KT_BlockStatement* KT_WhileStatement::getWBStatement() {
+    return wBStatement;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_WhileStatement::setCondition(KT_Expression * var) {
+void KT_WhileStatement::setCondition(KT_Expression* var) {
 	condition=var;
 }
 
 /**
  * @param KT_BlockStatement *
  */
-void KT_WhileStatement::setWBStatement(KT_BlockStatement * var) {
-	setWBStatement = var;
+void KT_WhileStatement::setWBStatement(KT_BlockStatement* var) {
+	wBStatement=var;
 }

@@ -5,6 +5,8 @@
 
 #ifndef _KT_SWITCHBLOCKSTATEMENT_H
 #define _KT_SWITCHBLOCKSTATEMENT_H
+#include "KT_Block.h"
+#include "KT_Expression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -17,9 +19,9 @@ public:
     
     bool isCaseExist();
     
-    KT_Block * getBlock();
+    KT_Block* getBlock();
     
-    KT_Expression * getExpression();
+    KT_Expression* getExpression();
     
     /**
      * @param bool
@@ -29,16 +31,16 @@ public:
     /**
      * @param KT_Block *
      */
-    void setBlick(KT_Block * var);
+    void setBlick(KT_Block* var);
     
     /**
      * @param KT_Expression *
      */
-    void setExpression(KT_Expression * var);
+    void setExpression(KT_Expression* var);
 private: 
     bool caseExist;
-    KT_Block * block;
-    KT_Expression * expression;
+    KT_Block* block;
+    KT_Expression* expression;
 };
 
 #endif //_KT_SWITCHBLOCKSTATEMENT_H

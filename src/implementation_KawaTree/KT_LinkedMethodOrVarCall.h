@@ -16,6 +16,7 @@ using namespace std;
 class KT_LinkedMethodOrVarCall: public KT_FactFinal {
 public: 
     
+	KT_LinkedMethodOrVarCall();
     vector<KT_MethodOrVarCall*> getMixedCall();
     
 private: 

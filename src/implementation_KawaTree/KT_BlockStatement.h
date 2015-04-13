@@ -21,7 +21,7 @@ public:
     /**
      * @param StatementVisitor
      */
-    void accept( StatementVisitor);
+    void accept( /*StatementVisitor*/);
 };
 
 #endif //_KT_BLOCKSTATEMENT_H

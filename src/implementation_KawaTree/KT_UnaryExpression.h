@@ -17,14 +17,14 @@ public:
     
     KT_UnaryExpression();
 
-    KT_Expression * getExpression();
+    KT_Expression* getExpression();
     
     /**
      * @param KT_Expression *
      */
-    void setExpression(KT_Expression * var);
+    void setExpression(KT_Expression* var);
 private: 
-    KT_Expression * expression;
+    KT_Expression* expression;
 };
 
 #endif //_KT_UNARYEXPRESSION_H

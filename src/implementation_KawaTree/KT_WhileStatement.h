@@ -7,6 +7,7 @@
 #define _KT_WHILESTATEMENT_H
 
 #include "KT_BlockStatement.h"
+#include "KT_Expression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -17,22 +18,22 @@ public:
     
     KT_WhileStatement();
     
-    KT_Expression * getCondition();
+    KT_Expression* getCondition();
     
-    KT_BlockStatement * getWBStatement();
+    KT_BlockStatement* getWBStatement();
     
     /**
      * @param KT_Expression *
      */
-    void setCondition(KT_Expression * var);
+    void setCondition(KT_Expression* var);
     
     /**
      * @param KT_BlockStatement *
      */
-    void setWBStatement(KT_BlockStatement * var);
+    void setWBStatement(KT_BlockStatement* var);
 private: 
-    KT_Expression * condition;
-    KT_BlockStatement* setWBStatement;
+    KT_Expression* condition;
+    KT_BlockStatement* wBStatement;
 
 };
 

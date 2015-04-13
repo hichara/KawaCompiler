@@ -6,14 +6,14 @@
 #ifndef _KT_EXPRESSIONGE_H
 #define _KT_EXPRESSIONGE_H
 
-#include "BooleanExpression.h"
+#include "KT_BooleanExpression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
 using namespace std;
 
 
-class KT_ExpressionGE: public BooleanExpression {
+class KT_ExpressionGE: public KT_BooleanExpression {
 public:
 	KT_ExpressionGE();
 };

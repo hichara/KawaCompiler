@@ -18,16 +18,16 @@ public:
     
     KT_Variable();
     
-    vector<string *> getName();
+    vector<string*> getName();
     
     bool isFinal();
     
-    KT_Type * getType();
+    KT_Type* getType();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(vector<string*> var);
     
     /**
      * @param bool
@@ -37,9 +37,9 @@ public:
     /**
      * @param KT_Type *
      */
-    void setType(KT_Type * var);
+    void setType(KT_Type* var);
 private: 
-    vector<string *> name;
+    vector<string*> name;
     bool Final;
     KT_Type* type;
 };

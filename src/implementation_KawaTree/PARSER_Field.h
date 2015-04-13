@@ -21,14 +21,14 @@ public:
     /**
      * @param KT_Variable *
      */
-    void addVariable(KT_Variable * var);
+    void addVariable(KT_Variable* var);
     
     /**
      * @param KT_Type *
      */
-    void upDateType(KT_Type * var);
+    void upDateType(KT_Type* var);
     
-    vector<KT_Variables *> getVariables();
+    vector<KT_Variable*> getVariables();
 private: 
     vector<KT_Variable*> variables;
 };

@@ -18,7 +18,7 @@ using namespace std;
 /**
  * @return string *
  */
-string * KT_Attribute::getName() {
+string* KT_Attribute::getName() {
     return this-> name;
 }
 
@@ -32,34 +32,34 @@ int KT_Attribute::getIndex() {
 /**
  * @return KT_Type *
  */
-KT_Type * KT_Attribute::getType() {
+KT_Type* KT_Attribute::getType() {
     return this-> type;
 }
 
 /**
  * @return KT_Modifier *
  */
-KT_Modifier * KT_Attribute::getModifier() {
+KT_Modifier* KT_Attribute::getModifier() {
     return this-> modifier;
 }
 
 /**
  * @param string *
  */
-void KT_Attribute::setName( string * var) {
+void KT_Attribute::setName( string* var) {
 	this-> name= var;
 }
 
 /**
  * @param KT_Type *
  */
-void KT_Attribute::setType(KT_Type * var) {
+void KT_Attribute::setType(KT_Type* var) {
 	this-> type= var;
 }
 
 /**
  * @param KT_Modifier *
  */
-void KT_Attribute::setModifier(KT_Modifier * var) {
-	this-> modifier= var
+void KT_Attribute::setModifier(KT_Modifier* var) {
+	this->modifier = var;
 }

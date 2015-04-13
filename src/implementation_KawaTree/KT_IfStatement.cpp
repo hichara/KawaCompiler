@@ -19,28 +19,27 @@ using namespace std;
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_IfStatement::getCondition() {
+KT_Expression* KT_IfStatement::getCondition() {
     return this-> condition;
 }
 
 /**
  * @return KT_BlockStatement *
  */
-KT_BlockStatement * KT_IfStatement::getBStatement() {
+KT_BlockStatement* KT_IfStatement::getBStatement() {
     return this-> bStatement;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_IfStatement::setCondition(KT_Expression * var) {
+void KT_IfStatement::setCondition(KT_Expression* var) {
 	this-> condition= var;
 }
 
 /**
  * @param KT_BlockStatement *
  */
-void KT_IfStatement::setBStatelent(null KT_BlockStatement * var) {
-this-> bStatement= var;
-
+void KT_IfStatement::setBStatelent(KT_BlockStatement* var) {
+	this-> bStatement= var;
 }

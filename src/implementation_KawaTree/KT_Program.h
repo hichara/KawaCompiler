@@ -17,7 +17,7 @@ public:
     
     KT_Program();
     
-    vector<KT_Package *> getPackages();
+    vector<KT_Package*> getPackages();
 private: 
     vector<KT_Package*> packages;
 };

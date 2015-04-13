@@ -18,12 +18,12 @@ class KT_ArrayInitilizer: public KT_FactFinal {
 public: 
     KT_ArrayInitilizer();
 	
-    KT_IndexedArray * getIndexedArray();
+    KT_IndexedArray* getIndexedArray();
     
     /**
      * @param KT_IndexedArray *
      */
-    void setIndexedArray( KT_IndexedArray * var);
+    void setIndexedArray( KT_IndexedArray* var);
 private: 
     KT_IndexedArray* indexedArray;
 };

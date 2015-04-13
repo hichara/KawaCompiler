@@ -20,9 +20,11 @@ public:
     /**
      * @param ExprVisitor
      */
-    void accept( ExprVisitor);
+    void accept( /*ExprVisitor*/);
     
-    string * calculReturnType();
+    string* calculReturnType();
+private:
+	string* returnType;
 };
 
 #endif //_KT_EXPRESSION_H

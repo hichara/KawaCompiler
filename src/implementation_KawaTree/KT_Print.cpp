@@ -14,6 +14,6 @@ KT_Print::KT_Print(){}
 /**
  * @return vector<FactFinal *>
  */
-vector<FactFinal *> KT_Print::getArgs() {
+vector<KT_FactFinal*> KT_Print::getArgs() {
     return args;
 }

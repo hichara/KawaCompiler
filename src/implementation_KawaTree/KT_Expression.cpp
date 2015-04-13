@@ -18,13 +18,13 @@ using namespace std;
 /**
  * @param ExprVisitor
  */
-void KT_Expression::accept( ExprVisitor) {
+void KT_Expression::accept( /*ExprVisitor*/) {
 
 }
 
 /**
  * @return string *
  */
-string * KT_Expression::calculReturnType() {
-    return null;
+string* KT_Expression::calculReturnType() {
+    return returnType;
 }

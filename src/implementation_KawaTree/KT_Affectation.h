@@ -20,26 +20,26 @@ class KT_Affectation: public KT_IDExpression {
 public: 
 	KT_Affectation();
     
-    KT_Expression * getLExpression();
+    KT_Expression* getLExpression();
     
-    KT_VarOrAttr * getVarOrAttr();
+    KT_VarOrAttr* getVarOrAttr();
     
-    KT_Expression * getrExpression();
-    
-    /**
-     * @param KT_Expression *
-     */
-    void setLExpression(KT_Expression * var);
+    KT_Expression* getrExpression();
     
     /**
      * @param KT_Expression *
      */
-    void setRExpression(KT_Expression * var);
+    void setLExpression(KT_Expression* var);
+    
+    /**
+     * @param KT_Expression *
+     */
+    void setRExpression(KT_Expression* var);
 	
 private: 
-    KT_VarOrAttr reference;
-    KT_Expression lExpression;
-    KT_Expression rExpression;
+    KT_VarOrAttr* reference;
+    KT_Expression* lExpression;
+    KT_Expression* rExpression;
 };
 
 #endif //_KT_AFFECTATION_H

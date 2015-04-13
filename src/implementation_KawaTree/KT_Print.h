@@ -7,6 +7,7 @@
 #define _KT_PRINT_H
 
 #include "KT_Statement.h"
+#include "KT_FactFinal.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -17,9 +18,9 @@ public:
     
     KT_Print();
     
-    vector<FactFinal *> getArgs();
+    vector<KT_FactFinal*> getArgs();
 private: 
-    vector<FactFinal *> args;
+    vector<KT_FactFinal*> args;
 };
 
 #endif //_KT_PRINT_H

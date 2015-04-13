@@ -11,10 +11,10 @@
 using namespace std;
 
 enum VISIBILITY{
-    PUBLIC,
-    PROTECTED,
-    PRIVATE
-}
+	PUBLIC,
+	PROTECTED,
+	PRIVATE
+};
 
 class KT_Modifier {
 public: 

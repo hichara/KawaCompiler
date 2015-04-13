@@ -17,27 +17,27 @@ KT_BinaryExpression::KT_BinaryExpression() {}
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_BinaryExpression::getLExpression() {
+KT_Expression* KT_BinaryExpression::getLExpression() {
     return this-> lExpression;
 }
 
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_BinaryExpression::getRExpression() {
+KT_Expression* KT_BinaryExpression::getRExpression() {
     return this-> rExpression;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_BinaryExpression::setLExpression(KT_Expression * var) {
+void KT_BinaryExpression::setLExpression(KT_Expression* var) {
 	this-> lExpression=var;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_BinaryExpression::setRExpression(KT_Expression * var) {
+void KT_BinaryExpression::setRExpression(KT_Expression* var) {
 	this-> rExpression=var;
 }

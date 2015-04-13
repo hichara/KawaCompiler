@@ -14,6 +14,8 @@ using namespace std;
 
 
 class KT_FactFinal: public KT_Expression {
+public:
+	KT_FactFinal();
 };
 
 #endif //_KT_FACTFINAL_H

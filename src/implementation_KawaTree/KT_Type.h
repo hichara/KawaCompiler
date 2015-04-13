@@ -19,11 +19,11 @@ public:
 
     bool isBasicType();
     
-    string * getTypeName();
+    string* getTypeName();
     
     int getArrayDim();
     
-    PARSER_Array * getArray();
+    PARSER_Array* getArray();
     
     
     /**
@@ -34,7 +34,7 @@ public:
     /**
      * @param string *
      */
-    void setTypeName(string * var);
+    void setTypeName(string* var);
     
     /**
      * @param int
@@ -48,7 +48,7 @@ public:
     
 private: 
     bool basicType;
-    string * typeName;
+    string* typeName;
     int arrayDim;
     PARSER_Array* Array;
 };

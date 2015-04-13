@@ -18,13 +18,13 @@ KT_ID::KT_ID() {}
 /**
  * @return vector<string *>
  */
-vector<string *> KT_ID::getValue() {
+vector<string*> KT_ID::getValue() {
     return this-> value;
 }
 
 /**
  * @return void
  */
-void KT_ID::setValue(vector<string *>& var){
+void KT_ID::setValue(vector<string*>& var){
     this-> value=var;
 }

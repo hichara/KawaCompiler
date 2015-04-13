@@ -1,3 +1,4 @@
+
 /**
  * Project Untitled
  */
@@ -13,4 +14,4 @@ using namespace std;
  * KT_Addition implementation
  */
 
- KT_Addition::KT_Addition  () {}
+ KT_Addition::KT_Addition(){}

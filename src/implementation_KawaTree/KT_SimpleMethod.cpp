@@ -14,7 +14,7 @@ KT_SimpleMethod::KT_SimpleMethod(){}
 /**
  * @return string *
  */
-string * KT_SimpleMethod::getName() {
+string* KT_SimpleMethod::getName() {
     return name;
 }
 
@@ -28,27 +28,27 @@ int KT_SimpleMethod::getIndex() {
 /**
  * @return vector<KT_Param *>
  */
-vector<KT_Param *> KT_SimpleMethod::getParams() {
+vector<KT_Param*> KT_SimpleMethod::getParams() {
     return params;
 }
 
 /**
  * @return KT_Block *
  */
-KT_Block * KT_SimpleMethod::getBlock() {
+KT_Block* KT_SimpleMethod::getBlock() {
     return block;
 }
 
 /**
  * @param string *
  */
-void KT_SimpleMethod::setName(string * var) {
+void KT_SimpleMethod::setName(string* var) {
 	name=var;
 }
 
 /**
  * @param KT_Block *
  */
-void KT_SimpleMethod::setBlock(KT_Block * var) {
+void KT_SimpleMethod::setBlock(KT_Block* var) {
 	block=var;
 }

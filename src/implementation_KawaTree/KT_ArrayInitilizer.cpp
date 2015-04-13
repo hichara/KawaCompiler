@@ -17,13 +17,13 @@ using namespace std;
 /**
  * @return KT_IndexedArray *
  */
-KT_IndexedArray * KT_ArrayInitilizer::getIndexedArray() {
+KT_IndexedArray* KT_ArrayInitilizer::getIndexedArray() {
     return this-> indexedArray;
 }
 
 /**
  * @param KT_IndexedArray *
  */
-void KT_ArrayInitilizer::setIndexedArray(KT_IndexedArray * var) {
-	this-> indexedArray-> var;
+void KT_ArrayInitilizer::setIndexedArray(KT_IndexedArray* var) {
+	this-> indexedArray= var;
 }

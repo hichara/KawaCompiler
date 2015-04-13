@@ -21,7 +21,7 @@ bool KT_ReturnStatement::isVoidReturn() {
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_ReturnStatement::getReturnExpression() {
+KT_Expression* KT_ReturnStatement::getReturnExpression() {
     return returnExppression;
 }
 
@@ -35,6 +35,6 @@ void KT_ReturnStatement::setIsVoidReturn( bool var) {
 /**
  * @param Kt_Expression *
  */
-void KT_ReturnStatement::setReturnExpression(Kt_Expression * var) {
+void KT_ReturnStatement::setReturnExpression(KT_Expression* var) {
 	returnExppression=var;
 }

@@ -18,28 +18,28 @@ using namespace std;
 /**
  * @return string *
  */
-string * KT_ConstructorCall::getName() {
+string* KT_ConstructorCall::getName() {
     return this-> name;
 }
 
 /**
  * @return KT_Constructor *
  */
-KT_Constructor * KT_ConstructorCall::getMethod() {
-    return null;
+KT_Constructor* KT_ConstructorCall::getMethod() {
+    return NULL;
 }
 
 /**
  * @return vector<KT_ParamsMethodCall *>
  */
-vector<KT_ParamsMethodCall *> KT_ConstructorCall::getParams() {
+vector<KT_ParamsMethodCall*> KT_ConstructorCall::getParams() {
     return this->params;
 }
 
 /**
  * @param string *
  */
-void KT_ConstructorCall::setName( string * var) {
+void KT_ConstructorCall::setName( string* var) {
 	this-> name=var;
 }
 
@@ -47,8 +47,8 @@ void KT_ConstructorCall::setName( string * var) {
  * @param string *
  */
 
-void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall *> &var) {
+void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> &var) {
 
-this->params =var;
+	this->params =var;
 }
 

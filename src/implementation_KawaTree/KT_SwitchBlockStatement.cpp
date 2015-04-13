@@ -21,14 +21,14 @@ bool KT_SwitchBlockStatement::isCaseExist() {
 /**
  * @return KT_Block *
  */
-KT_Block * KT_SwitchBlockStatement::getBlock() {
+KT_Block* KT_SwitchBlockStatement::getBlock() {
     return block;
 }
 
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_SwitchBlockStatement::getExpression() {
+KT_Expression* KT_SwitchBlockStatement::getExpression() {
     return expression;
 }
 
@@ -42,13 +42,13 @@ void KT_SwitchBlockStatement::setCaseExist( bool var) {
 /**
  * @param KT_Block *
  */
-void KT_SwitchBlockStatement::setBlick(KT_Block * var) {
-	block=var:
+void KT_SwitchBlockStatement::setBlick(KT_Block* var) {
+	block = var;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_SwitchBlockStatement::setExpression(KT_Expression * var) {
+void KT_SwitchBlockStatement::setExpression(KT_Expression* var) {
 	expression=var;
 }

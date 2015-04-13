@@ -18,6 +18,6 @@ using namespace std;
 /**
  * @param StatementVisitor
  */
-void KT_BlockStatement::accept( StatementVisitor) {
+void KT_BlockStatement::accept( /*StatementVisitor*/) {
 
 }

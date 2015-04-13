@@ -14,14 +14,14 @@ KT_Param::KT_Param(){}
 /**
  * @return string *
  */
-string * KT_Param::getName() {
+string* KT_Param::getName() {
     return name;
 }
 
 /**
  * @return KT_Type *
  */
-KT_Type * KT_Param::getParamType() {
+KT_Type* KT_Param::getParamType() {
     return paramType;
 }
 
@@ -35,14 +35,14 @@ KT_Modifier* KT_Param::getParamModifier() {
 /**
  * @param string *
  */
-void KT_Param::setName(string * var) {
+void KT_Param::setName(string* var) {
 	name=var;
 }
 
 /**
  * @param KT_Type *
  */
-void KT_Param::setParamType(KT_Type * var) {
+void KT_Param::setParamType(KT_Type* var) {
 	paramType=var;
 }
 

@@ -14,35 +14,35 @@
 #include <vector>
 using namespace std;
 
-class KT_Prtotype {
+class KT_Prototype {
 public: 
     
-    KT_Prtotype();
+    KT_Prototype();
 
-    string * getName();
+    string* getName();
     
-    KT_Type * getReturnType();
+    KT_Type* getReturnType();
     
-    vector<KT_Params *> getParams();
+    vector<KT_Param*> getParams();
     
-    KT_Modifier * getModifier();
+    KT_Modifier* getModifier();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(string* var);
     
     /**
      * @param KT_Type *
      */
-    void setReturnType(KT_Type * var);
+    void setReturnType(KT_Type* var);
     
     /**
      * @param KT_Modifier *
      */
-    void setModifier(KT_Modifier * var);
+    void setModifier(KT_Modifier* var);
 private: 
-    string * name;
+    string* name;
     vector<KT_Param*> params;
     KT_Type* returnType;
     KT_Modifier* modifier;

@@ -19,35 +19,35 @@ using namespace std;
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_Affectation::getLExpression() {
+KT_Expression* KT_Affectation::getLExpression() {
     return this->lExpression;
 }
 
 /**
  * @return KT_VarOrAttr *
  */
-KT_VarOrAttr * KT_Affectation::getVarOrAttr() {
-    return null;
+KT_VarOrAttr* KT_Affectation::getVarOrAttr() {
+    return reference;
 }
 
 /**
  * @return KT_Expression *
  */
-KT_Expression * KT_Affectation::getrExpression() {
+KT_Expression* KT_Affectation::getrExpression() {
     return this->rExpression;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_Affectation::setLExpression(KT_Expression * var) {
+void KT_Affectation::setLExpression(KT_Expression* var) {
 	this->lExpression=var;
 }
 
 /**
  * @param KT_Expression *
  */
-void KT_Affectation::setRExpression(null KT_Expression * var) {
+void KT_Affectation::setRExpression(KT_Expression* var) {
 	this->rExpression=var;
 }
 

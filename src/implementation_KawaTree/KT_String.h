@@ -17,14 +17,14 @@ public:
     
     KT_String();
     
-    string * getValue();
+    string* getValue();
     
     /**
      * @param string *
      */
-    void setValue(string * var);
+    void setValue(string* var);
 private: 
-    string * value;
+    string* value;
 };
 
 #endif //_KT_STRING_H

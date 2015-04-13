@@ -19,25 +19,25 @@ class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
 public: 
 	KT_ConstructorCall ();
     
-    string * getName();
+    string* getName();
     
-    KT_Constructor * getMethod();
+    KT_Constructor* getMethod();
     
-    vector<KT_ParamsMethodCall *> getParams();
+    vector<KT_ParamsMethodCall*> getParams();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(string* var);
 	
 	/**
      * @param vector<KT_ParamsMethodCall *>
      */
-    void setParams(vector<KT_ParamsMethodCall *>& var);
+    void setParams(vector<KT_ParamsMethodCall*>& var);
 	
 private: 
-    string * name;
-    vector<KT_ParamsMethodCall *> params;
+    string* name;
+    vector<KT_ParamsMethodCall*> params;
 };
 
 #endif //_KT_CONSTRUCTORCALL_H

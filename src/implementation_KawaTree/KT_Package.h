@@ -8,7 +8,6 @@
 
 #include "KT_Class.h"
 #include "KT_Interface.h"
-#include "KT_ClasseOrInterface.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -19,18 +18,18 @@ public:
 
     KT_Package();
     
-    string * getName();
+    string* getName();
     
-    vector<KT_Interface *> getInterfaces();
+    vector<KT_Interface*> getInterfaces();
     
-    vector<KT_Class *> getClasses();
+    vector<KT_Class*> getClasses();
     
     /**
      * @param string *
      */
-    void setName(string * var);
+    void setName(string* var);
 private: 
-    string * name;
+    string* name;
     vector<KT_Class*> classes;
     vector<KT_Interface*> interfaces;
 };

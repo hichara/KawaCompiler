@@ -1,0 +1,46 @@
+/**
+ * Project Untitled
+ */
+
+
+#ifndef _KT_INTERFACE_H
+#define _KT_INTERFACE_H
+
+#include "KT_ClasseOrInterface.h"
+#include "KT_Modifier.h"
+#include "KT_Prtotype.h"
+#include <stdio.h>
+#include <string>
+#include <vector>
+using namespace std;
+
+class KT_Interface{
+public: 
+    
+    KT_Interface(); 
+
+    string * getName();
+    
+    vector<string *> getInterfacesparent();
+    
+    vector<KT_Prototype *> getPrototypes();
+    
+    KT_Modifier * getModifier();
+    
+    /**
+     * @param string *
+     */
+    void setName(string * var);
+    
+    /**
+     * @param KT_Modifier *
+     */
+    void setModifier(KT_Modifier * var);
+private: 
+    string * name;
+    vector<string *> InterfacesParent;
+    KT_Modifier modifier;
+    vector<KT_Prtotype *> prototypes;
+};
+
+#endif //_KT_INTERFACE_H

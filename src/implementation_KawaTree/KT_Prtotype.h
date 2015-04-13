@@ -1,0 +1,51 @@
+/**
+ * Project Untitled
+ */
+
+
+#ifndef _KT_PRTOTYPE_H
+#define _KT_PRTOTYPE_H
+
+#include "KT_Param.h"
+#include "KT_Type.h"
+#include "KT_Modifier.h"
+#include <stdio.h>
+#include <string>
+#include <vector>
+using namespace std;
+
+class KT_Prtotype {
+public: 
+    
+    KT_Prtotype();
+
+    string * getName();
+    
+    KT_Type * getReturnType();
+    
+    vector<KT_Params *> getParams();
+    
+    KT_Modifier * getModifier();
+    
+    /**
+     * @param string *
+     */
+    void setName(string * var);
+    
+    /**
+     * @param KT_Type *
+     */
+    void setReturnType(KT_Type * var);
+    
+    /**
+     * @param KT_Modifier *
+     */
+    void setModifier(KT_Modifier * var);
+private: 
+    string * name;
+    vector<KT_Param*> params;
+    KT_Type* returnType;
+    KT_Modifier* modifier;
+};
+
+#endif //_KT_PRTOTYPE_H

@@ -1,5 +1,5 @@
 CC=pdflatex
-doc=STB
+doc=Archi_globale
 RM=rm -f
 
 all: $(doc).pdf

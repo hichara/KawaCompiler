@@ -1,0 +1,66 @@
+\documentclass{../res/univ-projet}
+
+%Import des packages utilisés pour le document
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage{array}
+%\usepackage{hyperref}
+%\usepackage{tabularx, longtable}
+%\usepackage[table]{xcolor}
+%\usepackage{fancyhdr}
+%\usepackage{lastpage}
+
+\definecolor{gris}{rgb}{0.95, 0.95, 0.95}
+
+%Redéfinition des marges
+%\addtolength{\hoffset}{-2cm}
+%\addtolength{\textwidth}{4cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{1cm}
+\addtolength{\headsep}{0.8cm} 
+\addtolength{\footskip}{-0.2cm}
+
+
+%Import page de garde et structures pour la gestion de projet
+%\usepackage{structures}
+
+%Variables
+\logo{../res/logo_univ.png}
+\input{entete}
+
+% -- Début du document -- %
+\begin{document}
+
+%Page de garde
+\maketitle
+\newpage
+%La table des matières
+\tableofcontents
+\newpage
+
+\section{Architecture golbale}
+
+% Présentation succinte du sujet et hyp de travail.
+Dans le cadre de ce projet, nous avons mené des recherches sur le fonctionnement du compilateur ainsi que la plate forme LLVM afin de répondre aux besoins du client qui sont la compilation du langage kawa en code native.
+Pour cela nous avons proposé une architecture modulaire qui nous permet de découpler les traitement sur le programme source selon des phases d'analyses (analyse lexicale,analyse syntaxique ...) ainsi que de rendre la partie réalisation et maintenance du compilateur plus flexible et facile à faire évoluer dans le futur.\\
+Les modules se communiquent entre eux via des interfaces de connexion, un module orchestre les appels et l'ordre d’exécution des autres modules afin d'avoir toute la chaîne de compilation.\\
+
+Notre architecture est constituée principalement de: 
+
+ \begin{itemize}
+ 	\item	Module d'analyse syntaxique (parseur)
+	\item   Module d'analyse sémantique
+	\item   Module de génération de code intermédiaire et back-end
+	\item   Une structure (collection de classes) qui représente l'arbre en mémoire
+ \end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.80]{archi.PNG}
+\caption[Architecture globale.]{Architecture globale.}
+\end{figure}
+
+
+\end{document}
+

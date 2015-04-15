@@ -1,0 +1,24 @@
+; ModuleID = 'Nasser Module'
+
+define i32 @main() {
+entry:
+  %0 = alloca i8, i32 15
+  %zb = load i8* %0
+  %1 = alloca [10 x i8]
+  store [10 x i8] c"\0AZapaato\0A\00", [10 x i8]* %1
+  %2 = bitcast [10 x i8]* %1 to i8*
+  %3 = call i32 @puts(i8* %2)
+  ret i32 0
+}
+
+; Function Attrs: nounwind
+declare i32 @puts(i8*) #0
+
+; Function Attrs: nounwind
+declare i32 @strlen(i8*) #0
+
+declare i8* @strcat(i8*, i8*)
+
+attributes #0 = { nounwind }
+  %0 = alloca i8, i32 15
+i8*i8

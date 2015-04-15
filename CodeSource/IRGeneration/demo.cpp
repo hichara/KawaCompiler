@@ -150,7 +150,11 @@ int main() {
             int_t,
             "My_table");
 
+ int elsr[] = {25, 4, 8};
 
+ Constant *vcd = ConstantDataArray::get(Context, elsr);
+
+ vcd->dump();
 /*
   iplist<GlobalVariable> &g = myModule->getGlobalList();
 

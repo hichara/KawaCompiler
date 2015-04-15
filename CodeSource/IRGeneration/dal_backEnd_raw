@@ -1,0 +1,212 @@
+
+Architecture statique du back end
+
+Le back-end est composé de deux parties. La premiere partie dont le rôle est de générer le code intermédiare, et une deuxieme partie dont le rôle est de transformer le code en code machine. au format ELF
+
+
+- Le générateur du code intermédiaire LLVM : 
+
+il traduit l'arbre syntaxique du programme en code intermédiaire LLVM.
+Ce dernier est composé de deux sous-parties :
+	* IRCompiler : le IRCompiler fait appel aux composants de la famille de classes de génération de code IR.
+ 	* La famille de générateurs : différentes classes de génération de code
+ 
+ -- Composition du IRCompiler
+
+ Le IRCompiler est responsable des algorithmes de génération de code IR. Selon le mode de compilation,
+ il implémente différent algoriithme.
+	** MonolithiqueIRCompiler : Compilateur en mode monolithique. Il produit un fichier .ll unique contenant le code intermédiaire représentant toute les classes compilées. 
+	** SharedIRCompiler : Compilateur en mode partagé, génére plusieurs fichiers .ll représentant les classes à compilées.
+
+--Famille de génération de code :
+
+Il s'agit d'une sur-couche aux classes de génération de code déja existantes. Elle est composée d'un ensemble de classes implémentant l'ensemble des spécifications qui suivent. Les spécification pourront être implémentées séparément pour le mode monolithique, et pour le mode partagé :
+
+- AffectationGenerator : gère les opérations d'affectation
+- BlockGenerator : gère la construction des blocs d'instruction
+- CallGenerator : gère les appels de méthodes et de constructeurs
+- FunctionGenerator : gère la creation de fonction et de méthodes
+- GlobalVariableGenerator : gère la creation de variables gloabales nécéssaire à la cohésion du programme
+- NameBuilder : gère le nommage des elements du code intermédiare
+- PrimitiveBinaryOperation : gère les opérations binaire
+- PrimitiveCreator : gere la création des primitives
+- PrimitiveValueConverter : gere la convertion des valeurs primitieves
+- TypeGenerator : gere le creation et l'accès au typage LLVM
+
+
+- La chaine de compilation du code IR :
+
+LLVM nous fournit des outils de compilation permettant de traduit du code IR LLVM bien formé
+en assembleur. Le code assembleur peut ensuite être traduit en code machine.
+Cette chaine de compilation est composée des éléments suivant :
+ - llc : compile le fichier source en un fichier assembleur
+ 		 que l'on peut passer à un linker pour generer un executable
+ -clang[gcc] : compilateur permettant de compiler le code assembleur.
+
+
+
+Fonctionnment dynamic du back end
+
+Cette partie suit l'analyse syntaxique du programme.
+
+-IRCompiler
+
+Le IRCompiler prendra en entrée un arbre syntaxique représentant la structure du programme à compiler.
+Le noeuds de l'arbre de cet arbre doivent implémenter les interfaces de la famille d'interface AST. (Voir annexe).
+Au cours de la production, on decorera l'arbre syntaxique avec de objets LLVM de rendre les noeud réutilisables
+pour la production de code.
+La production du code LLVM IR d'un noeud de l'arbre syntaxique, produira la production en cascade des noeuds fils de ce noeud.
+
+
+- Les ouitls de génération du code IR :
+
+Ils sont capables de générer du code intermédiaire LLVM en ne dépendant uniquement que des paramètres qui leurs sont fournis.
+Ces eléméent peuvent êtres possiblement implémenter plus ou moins différemment selon le mode de compilation.
+
+ * Fonctionnement du NameBuilder :
+   L'implémentation des méthodes de cette classe nécéssite la définition de contracts de nommage, permettant
+   d'éviter toutes ambiguté entre les viariables qui seront générées. Ce composant est u
+
+
+ * Fonctionnement du TypeGenerator :
+   Ce composant permet de creer et d'obtenir des objets de typages d'un module llvm.
+   Les types primitifs bool, int, char, float, double et string et tableaux représentant respectivement les types 
+   llvm i8, i32, i8, float, double, i8*, [nb x type]. On les obtient graçe au à la classe Type de l'api de LLVM.
+   Les classes kawa sont traduites de la façon suivante :
+
+   Le structure principale de la classes est composée d'une référence vers un sous type contenant les
+   attributs de la classe et une référence vers un tableau adHoc. Les méthodes et attributs statics 
+   sont quant à eux représentés par des variables globales.La génération d'une classe entrainera 
+   la génération de variables globales représentant les indexes des attributs dans la structure.
+   Enfin le nommage de ces variables globales sera géré par le NameBuilder.
+
+ * Fonctionnement du PrimitiveCreator :
+   Ce composant permet de creer des objets LLVM représentant des valeurs primitives.
+   Les classes LLVM à utiliser sont : ConstantInt, ConstantFP, ConstantDataArray
+
+ * Fonctionnement du PrimitiveConverteur :
+   Ce composant à pour role de creer les opérations de conversion d'un type vers l'autre. Le LLVM IR code ne supporte nativement les opérations binaires intertypées. Il faudra se servir de l'objet IRBuilder pour faciliter l'implémentation de la conversion.
+
+ * Fonctionnement du PrimitiveBinaryOperation :
+   Ce composant permet la génération des opérations primitives.L'utilisation d'un IRBuilder est conseillée.
+
+
+ * Fonctionnement du FunctionGenerator :
+   Ce composant permet de declarer et d'avoir accès au composant d'un module. Il utilise Namebuilder pour generer le nom du code de la fonction dans le code IR. La génération d'une méthode non statique ajoute un paramètre supplémentaire représentant l'objet "this". La génération d'un constructeur génére deux fonction llvm. L'une créant et renvoyant une instance de l'objet creer, et une function appelée par la précédente permettant l'initialisation de l'instance. Cette fonction prendra un paramètre supplémentaire représentant l'objet à initialiser.
+   De plus il permet aussi de déclarer et d'obtenir ades fonctions des librairies présentent sur le système comme, strlen, sqrt, strcpy, strcat..etc
+
+ * Fonctionnement du CallGenerator :
+   Ce composant permet de generer les appels de méthodes et de constructeurs. (A completer)
+
+ * Fonctionnement du GlobalVariableGenerator :
+   Ce composant permet la génération des variables globales nécéssaire à la sémentique du programme.
+   Il permet de declarer des variables statics, les tables AdHoc, et les indexes de membres. La compilation en mode Monilithique ét partagé divergera à ce niveau au niveau de atributs des variables.
+
+ * Fonctionnnement des BlocGenérator :
+   (A completer)
+
+
+
+Chacun des générateurs de code utilise des objets objets de la bibliothèque llvm afin de produire du code LLVM
+
+- Chaine de compilation finale
+
+En fin de génération du code LLVM, on fera appel aux commandes:
+ - llc nom_du_module.ll [liste des autres fichier .ll]
+ - clang[gcc] nom_du_module.s [liste des autres fichiers .ll] -o nom_du_programme
+
+
+----------------------------------------------------------------------------
+
+Traduction d'un classe kawa en class LLVM
+
+
+Class A implement B {
+	
+	int   i;
+	float f;
+	B     b;
+	value C c;
+
+	A(int i, flaot f, B b) {
+	  this.i = i;
+	  this.f = f;
+	  this.b = b;
+	}
+
+	B getNewInstance() {
+	  int a = i * 2;
+	  float b; 
+	  if(b.methodeBool() == true) {
+	    b = 8.0;
+	  } else {
+	    b = 7.5;
+	  }
+
+	  return new A(a, b, this.b);
+	}
+
+	static int return20() {
+	  float f = 15;
+	  return f;
+	}
+}
+
+
+Traduction en LLVM IR
+
+@class_A_index_i = i32 0;
+@class_A_index_f = i32 1;
+@class_A_index_b = i32 3;
+@class_A_index_c = i32 4;
+
+%kawa_class_A = type {%kawa_struct_class_A* , i8* }
+%kawa_class_B = type {%kawa_struct_class_B* , i8* }
+%kawa_class_C = type {%kawa_struct_class_C* , i8* }
+
+
+%kawa_struct_class_A = type {i32, float , %kawa_class_B* , %kawa_class_C }
+
+@AdHocTable_class_A_A = [1 * i8*] [i8* (bitcast (<signature> to i8*)), ...] 
+
+%kawa_class_A* @kawa_constructeur_A+KawaInt+KawaFloat+KawaClass_B(i, ) // Attributs
+{
+	entry:
+
+	%instance = alloc %kawa_class_A
+
+	call void @kawa_sub_constructeur_A+KawaInt+KawaFloat+KawClassB(%instance, %i, %f, %b)
+
+	return %instance;
+}
+
+void @kawa_sub_constructeur_A+KawaInt+KawaFloat+KawClassB(%kawa_class_A* this, i32 i, float f, %kawa_class_B* b) {
+	entry :
+
+	%0 = load i32* @class_A_index_i;
+	%1 = getelementptr %kawa_class_A* this, i32 0, i32 0, i32 %0, 
+	store i32 %i, %1
+
+	%0 = load i32* @class_A_index_f;
+	%1 = getelementptr %kawa_class_A* this, i32 0, i32 0, i32 %0, 
+	store i32 %i, %1
+
+	%0 = load i32* @class_A_index_b;
+	%1 = getelementptr %kawa_class_A* this, i32 0, i32 0, i32 %0, 
+	store i32 %i, %1
+
+	ret void
+}
+
+i32 @static_class_A_return20_ret:KawaInt() {
+	%f = alloc float
+	%1 = i32 15
+	%2 = SiToFP %1;
+	store %2, float* %f
+
+	%3 = load i32* %f
+	%4 = FPtoSI %3
+
+	ret %4
+}
+

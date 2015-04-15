@@ -1,6 +1,3 @@
-#ifndef KAWA_GEN_CALL
-#define KAWA_GEN_CALL
-
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -39,8 +36,17 @@ public:
 	static Value *createStaticMethodeCall(Module *module, std::string funcName,
 					        std::vector<Value *> list_args, BasicBlock *b);
 
+
+	/**
+	* Appel affichage chaine de caractère.
+	* L'argument src doit être de type i8*
+	*/
 	static Value *createPrintCall(Module *module, Value *str, BasicBlock *b);
+
+	/**
+	*  Appal le constructeur.
+	*/
+	static Value *callConstructor(Module *module, std::vector<Value*> args, BasicBlock *b);
 };
 
 
-#endif

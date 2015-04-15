@@ -1,13 +1,14 @@
 #include "NameBuilder.h"
 
 
-
-std::string NameBuilder::buildMethodeName(std::string className,
+std::string NameBuilder::buildFunctionName(std::string className,
 										 std::string name,
 										 std::string ret_type,
-										 std::vector<std::string> list_type) {
+										 std::vector<std::string> list_type,
+										 bool isStatic) {
 
-	std::string result, tmp;
+	std::stringstream result;
+	std::string tmp;
 
 	if(className == "")
 		return "";
@@ -15,63 +16,105 @@ std::string NameBuilder::buildMethodeName(std::string className,
 	if(name == "")
 		return "";
 
-	result = className + '.' + name + "_ret:" 
-			+ LLVMTypeToStr(StrToLLVMType(ret_type));
+	result << className << '.' << name << "_ret:";
+	result << strToKawaType(ret_type);
 
 	if (list_type.size() == 0) {
-		return result + "+" + KAWA_VOID;
+		result << "+" << KAWA_VOID;
+		result.str();
 	}
 
-	for(std::std::vector<std::string>::iterator it = list_type.begin();
+	for(std::vector<std::string>::iterator it = list_type.begin();
 		it != list_type.end(); ++it) {
 
-		tmp = LLVMTypeToStr(StrToLLVMType(*it));;
+		tmp = strToKawaType((*it));;
 		if(tmp == "")
-			KawaUtilitary::stopGenerationIR(UNKNOWN_TYPE);
+			return "";
 
-		result = result + "+" + tmp;
+		result << result.str() << "+" << tmp;
 	}
 
-	return result;
+	if(isStatic)
+		result << STATIC << "_" << result.str(); 
+
+	return result.str();
 }
+
 
 std::string NameBuilder::buildConstructorName(std::string className, 
 							     std::vector<std::string> list_type) {
 
-	std::string result, tmp;
+	std::string tmp;
+	std::stringstream result;
 
 	if(className == "")
 		return "";
 
-	result = "KawaConstructor" + className;
+	result << CONSTRUCTOR_PREFIX << className;
 
-	if (list_type.size() == 0)
-		return result + "+" + KAWA_VOID;
+	if (list_type.size() == 0) {
+		result << "+" << KAWA_VOID;
 
-	for(std::std::vector<std::string>::iterator it = list_type.begin();
-		it != list_type.end(); ++it) {
-
-		tmp = LLVMTypeToStr(TypeGenerator::StrToLLVMType(*it));;
-		if(tmp == "")
-			KawaUtilitary::stopGenerationIR(UNKNOWN_TYPE);
-
-		result = result + "+" + tmp;
+		return result.str();
 	}
 
-	return result;
+	for(std::vector<std::string>::iterator it = list_type.begin();
+		it != list_type.end(); ++it) {
+
+		tmp = strToKawaType((*it));
+
+		if(tmp == "")
+			return "";
+
+		result << result.str() << "+" << tmp;
+	}
+
+	return result.str();
+}
+
+
+std::string NameBuilder::buildSubConstructorName(std::string className, 
+								std::vector<std::string> list_type) {
+	std::string tmp;
+	std::stringstream result;
+
+	if(className == "")
+		return "";
+
+	result << SUB_CONSTRUCTOR_PREFIX << className;
+
+	if (list_type.size() == 0) {
+		result << "+" << KAWA_VOID;
+
+		return result.str();
+	}
+
+	for(std::vector<std::string>::iterator it = list_type.begin();
+		it != list_type.end(); ++it) {
+
+		tmp = strToKawaType((*it));
+
+		if(tmp == "")
+			return "";
+
+		result << result.str() << "+" << tmp;
+	}
+
+	return result.str();	
 }
 
 
 
 // L'index est suceptible d'etre le meme pour toute les tables issues de la meme famille
-std::string NameBuilder::buildMethodeIndexName(std::string functionBuiltName) {
+std::string NameBuilder::buildFunctionIndexName(std::string functionBuiltName) {
 
-	std::string res;
+	std::stringstream res;
 
-	res = METHODE_INDEX_PREFIX + functionBuiltName;
+	res << METHODE_INDEX_PREFIX << functionBuiltName;
 
-	return res;
+	return res.str();
 }
+
 
 
 std::string NameBuilder::buildAdHocTableName(std::string classStatic,
@@ -80,41 +123,44 @@ std::string NameBuilder::buildAdHocTableName(std::string classStatic,
 	if(classStatic == "" || classDynamique == "")
 		return "";
 
-	std::string res;
-	res = ADHOCTABLE_PREFIX + "_" + classStatic + "_" + classDynamique;
+	std::stringstream res;
+	res << ADHOCTABLE_PREFIX << "_" << classStatic << "_" << classDynamique;
 
-	return res;
+	return res.str();
 }
 	
 std::string NameBuilder::buildAttributIndexName(std::string className, std::string name) {
-	std::string res;
 
-	res = ATTRIBUT_INDEX_PREFIX +"_" + className + "_" + name;
+	std::stringstream res;
 
-	return res;
+	res << ATTRIBUT_INDEX_PREFIX << "_" << className << "_" << name;
+
+	return res.str();
 }
+
+
 
 std::string NameBuilder::buildStaticVariableName(std::string className, 
 									std::string name) {
 
-	std::string res;
+	std::stringstream res;
 
-	res STATIC + "_" + className + "_" + name;
+	res << STATIC << "_" << className << "_" << name;
 
-	return res;
+	return res.str();
 }
-
 
 
 std::string NameBuilder::buildClassTypeName(std::string className) {
 
 	if(className == "")
 		return "";
-	std::string res;
 
-	res = KAWA_CLASS_PREFIX + className;
+	std::stringstream result;
 
-	return res;
+	result << KAWA_CLASS_PREFIX << className;
+
+	return result.str();
 }
 
 
@@ -123,36 +169,64 @@ std::string NameBuilder::buildClassStructTypeName(std::string className) {
 	if(className == "")
 		return "";
 
-	std::string res;
+	std::stringstream res;
 
-	res = KAWA_CLASS_STRUCT_PREFIX + className;
+	res << KAWA_CLASS_STRUCT_PREFIX << className;
 
-	return res;
+	return res.str();
 }
 
 
+std::string NameBuilder::strToKawaType(std::string type) {
+
+	std::stringstream result;
+
+	if(type == FLOAT)
+		result << KAWA_FLOAT;
+
+	else if(type == INT)
+		result << KAWA_INT;
+
+	else if(type == CHAR)
+		result << KAWA_CHAR;
+
+	else if(type == DOUBLE)
+		result << KAWA_DOUBLE;
+
+	else if(type == STRING)
+		result << KAWA_STRING;
+
+	else
+		result << buildClassTypeName(type);
+
+	return result.str();
+}
 
 std::string NameBuilder::LLVMTypeToStr(Type* type) {
 
-	if(type->isVoidTy())
-		return KAWA_VOID;
+	LLVMContext &c = type->getContext();
 
-	if(type->isIntegerTy())
+	if(type == (Type*)Type::getInt32Ty(c))
 		return KAWA_INT;
 
-	if(type->isDoubleTy())
+	if(type == (Type*)Type::getInt8Ty(c))
+		return KAWA_CHAR;
+
+	if(type == (Type*)Type::getVoidTy(c))
+		return KAWA_VOID;
+
+	if(type == (Type*)Type::getFloatTy(c))
+		return KAWA_FLOAT;
+
+	if(type == (Type*)Type::getDoubleTy(c))
 		return KAWA_DOUBLE;
 
-	if(type->isFloatTy())
-		return KAWA_FLOAT;
+	if(type == (Type*)Type::getInt8PtrTy(c))
+		return KAWA_STRING;
 
 	if(type->isStructTy())
 		return KAWA_CLASS_PREFIX + (type->getStructName()).str();
 
 	return "";
 }
-
-
-
-
 

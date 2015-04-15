@@ -1,6 +1,3 @@
-#ifndef KAWA_PRIM_VAL_CON
-#define KAWA_PRIM_VAL_CON
-
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -29,6 +26,7 @@ using namespace llvm;
 class PrimitiveValueConverter {
 
 public:
+	static Value* convertTo(Type *target, Value o1, BasicBlock *b);
 	static Value* convertFromTo(Type *t1, Type *t2, Value *v, BasicBlock *b);
 
 private:
@@ -43,7 +41,9 @@ private:
 	static Value* convertFromDoubleToInt(Value *v, BasicBlock *b);
 	static Value* convertFromDoubleToFloat(Value *v, BasicBlock *b);
 	static Value* convertFromDoubleToDouble(Value *v, BasicBlock *b);
+
+	static Value* convertFromIntToStr(Value *v, BasicBlock *b);
+	static Value* convertFromFloatToStr(Value *v, BasicBlock *b);
 };
 
 
-#endif

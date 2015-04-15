@@ -7,6 +7,7 @@
 #define _KT_TYPE_H
 
 #include "PARSER_Array.h"
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -45,6 +46,8 @@ public:
      * @param PARSER_Array*
      */
     void setArray(PARSER_Array* var);
+
+	void toString();
     
 private: 
     bool basicType;

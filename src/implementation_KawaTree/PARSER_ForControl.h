@@ -29,6 +29,16 @@ public:
      * @param KT_Expression *
      */
     void setCondition(KT_Expression* var);
+
+    /**
+     * @param vector<KT_IDExpression*>
+     */
+    void setUpDate(vector<KT_IDExpression*>& var);
+
+    /**
+     * @param vector<KT_Variable*>
+     */
+    void setInitFor(vector<KT_Variable*>& var);
 private: 
     KT_Expression* condition;
     vector<KT_IDExpression*> upDate;

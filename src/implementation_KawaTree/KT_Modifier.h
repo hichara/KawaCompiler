@@ -5,6 +5,7 @@
 
 #ifndef _KT_MODIFIER_H
 #define _KT_MODIFIER_H
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -48,6 +49,8 @@ public:
      * @param int
      */
     void setVisibility(int var);
+
+	void toString();
     
 private: 
     bool Static;

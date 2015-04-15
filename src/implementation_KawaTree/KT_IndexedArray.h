@@ -23,6 +23,11 @@ public:
      * @param int
      */
     void setDimension(int var);
+
+    /**
+     * @param vector<int>
+     */
+    void setIndex(vector<int>& var);
 private: 
     int dimension;
     vector<int> index;

@@ -7,6 +7,7 @@
 #define _KT_BLOCK_H
 
 #include "KT_BlockStatement.h"
+#include <iostream>
 #include "KT_Statement.h"
 #include <stdio.h>
 #include <string>
@@ -21,6 +22,8 @@ public:
     vector<KT_Statement*> getStatements();
 	
 	void setStatements(vector<KT_Statement*> &var);
+
+	virtual void toString() ;
 private: 
     vector<KT_Statement*> statements;
 };

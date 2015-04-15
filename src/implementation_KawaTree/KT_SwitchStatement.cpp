@@ -31,3 +31,10 @@ vector<KT_SwitchBlockStatement*> KT_SwitchStatement::getSwitchBStatements() {
 void KT_SwitchStatement::setCondition(KT_Expression* var) {
 	condition=var;
 }
+
+/**
+ * @param vector<KT_SwitchBlockStatement*>
+ */
+void KT_SwitchStatement::setSwitchBStatements(vector<KT_SwitchBlockStatement*> var) {
+	switchBStatements=var;
+}

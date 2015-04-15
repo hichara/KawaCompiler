@@ -128,3 +128,42 @@ void KT_Class::setParentInterfaces(vector<string*>& var) {
 void KT_Class::setModifier(KT_Modifier* var) {
 	this->modifiers = var;
 }
+
+void KT_Class::toString() {
+	
+	cout << "--------------------" << endl;
+	modifiers->toString();
+	cout << " Classe : " << *name << endl;
+	cout << "---------------------"<< endl;
+
+	cout << "Classe mere : " << *ParentClass << endl;
+	cout << "interfaces meres : " ;
+	for (vector<string*>::iterator it = ParentInterfaces.begin(); it != ParentInterfaces.end(); ++it){
+		//(*it)->toString();
+		cout << *(*it) <<" ";
+	}
+	cout << endl;
+	
+	cout << "  Attributes : " << endl;
+	cout << "---------------------" << endl;
+	for (vector<KT_Attribute*>::iterator it = attributes.begin(); it != attributes.end(); ++it){
+		(*it)->toString();
+		cout << endl;
+	}
+	
+	cout << endl;
+	cout << "  Constructeurs: "  << endl;
+	cout << "---------------------" << endl;
+	for (vector<KT_Constructor*>::iterator it = constructors.begin(); it != constructors.end(); ++it){
+		(*it)->toString();
+	}
+	
+	
+	cout << endl;
+	cout << "  Methodes: " << *name << endl;
+	cout << "---------------------" << endl;
+	for (vector<KT_SimpleMethod*>::iterator it = SimpleMethods.begin(); it != SimpleMethods.end(); ++it){
+		(*it)->toString();
+	}
+	
+}

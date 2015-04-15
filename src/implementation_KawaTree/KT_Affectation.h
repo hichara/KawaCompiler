@@ -22,7 +22,7 @@ public:
     
     KT_Expression* getLExpression();
     
-    KT_VarOrAttr* getVarOrAttr();
+    KT_VarOrAttr* getReference();
     
     KT_Expression* getrExpression();
     
@@ -35,6 +35,11 @@ public:
      * @param KT_Expression *
      */
     void setRExpression(KT_Expression* var);
+
+    /**
+     * @param KT_VarOrAttr*
+     */
+    void setReference(KT_VarOrAttr* var);
 	
 private: 
     KT_VarOrAttr* reference;

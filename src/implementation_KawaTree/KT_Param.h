@@ -7,6 +7,7 @@
 #define _KT_PARAM_H
 
 #include "KT_Modifier.h"
+#include <iostream>
 #include "KT_Type.h"
 #include <stdio.h>
 #include <string>
@@ -38,6 +39,8 @@ public:
      * @param KT_Modifier*
      */
     void setParamModifier(KT_Modifier* var);
+
+	void toString();
 
 private: 
     string* name;

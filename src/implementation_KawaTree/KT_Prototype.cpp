@@ -60,3 +60,10 @@ void KT_Prototype::setReturnType(KT_Type* var) {
 void KT_Prototype::setModifier(KT_Modifier* var) {
 	modifier=var;
 }
+
+/**
+ * @param vector<KT_Param*> 
+ */
+void KT_Prototype::setParams(vector<KT_Param*>& var) {
+	params=var;
+}

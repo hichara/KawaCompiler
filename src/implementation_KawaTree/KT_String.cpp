@@ -24,3 +24,7 @@ string* KT_String::getValue() {
 void KT_String::setValue(string* var) {
 	value=var;
 }
+
+void KT_String::toString() {
+	cout << " String de valeur : " << *value << endl;
+}

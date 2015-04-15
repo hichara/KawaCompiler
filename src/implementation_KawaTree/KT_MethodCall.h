@@ -32,6 +32,22 @@ public:
      * @param string *
      */
     void setName(vector<string*> var);
+
+    /**
+     * @param vector<KT_ParamsMethodCall*>
+     */
+    void setParams(vector<KT_ParamsMethodCall*>& var);
+
+    /**
+     * @param KT_SimpleMethod*
+     */
+    void setMethodCall(KT_SimpleMethod* var);
+
+    /**
+     * @param KT_VarOrAttr*
+     */
+    void setCaller(KT_VarOrAttr* var);
+
 private: 
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;

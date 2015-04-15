@@ -23,6 +23,7 @@ public:
      * @param string *
      */
     void setValue(string* var);
+	virtual void toString() ;	
 private: 
     string* value;
 };

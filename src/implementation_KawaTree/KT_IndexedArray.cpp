@@ -31,3 +31,10 @@ vector<int> KT_IndexedArray::getIndex() {
 void KT_IndexedArray::setDimension( int var) {
 	dimension=var;
 }
+
+/**
+ * @param vector<int>
+ */
+void KT_IndexedArray::setIndex(vector<int>& var){
+	index=var;
+}

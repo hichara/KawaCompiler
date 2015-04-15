@@ -7,6 +7,7 @@
 #define _KT_CONSTRUCTOR_H
 
 #include "PARSER_MemberDec.h"
+#include <iostream>
 #include "KT_Param.h"
 #include "KT_Modifier.h"
 #include "KT_Block.h"
@@ -48,6 +49,8 @@ public:
      * @param KT_Block
      */
     void setBlock(KT_Block* var);
+
+	void toString();
 private: 
     string* name;
     vector<KT_Param*> params;

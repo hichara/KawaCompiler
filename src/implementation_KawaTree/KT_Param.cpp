@@ -52,3 +52,9 @@ void KT_Param::setParamType(KT_Type* var) {
 void KT_Param::setParamModifier(KT_Modifier* var) {
 	paramModifier=var;
 }
+
+void KT_Param::toString() {
+	paramModifier->toString();
+	paramType->toString();
+	cout << *name;
+}

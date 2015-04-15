@@ -10,3 +10,9 @@
  */
 
 KT_Statement::KT_Statement(){}
+
+/*
+void KT_Statement::toString(){
+	cout << "to string DE STATEMENT" << endl;
+}
+*/

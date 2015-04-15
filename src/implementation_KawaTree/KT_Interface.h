@@ -32,9 +32,19 @@ public:
     void setName(string* var);
     
     /**
+     * @param vector<string*>
+     */
+    void setInterfacesparent(vector<string*>& var);
+
+    /**
      * @param KT_Modifier *
      */
     void setModifier(KT_Modifier* var);
+
+    /**
+     * @param vector<KT_Prototype*>
+     */
+    void setPrototypes(vector<KT_Prototype*>& var);
 private: 
     string * name;
     vector<string*> InterfacesParent;

@@ -18,6 +18,11 @@ public:
     
 	KT_LinkedMethodOrVarCall();
     vector<KT_MethodOrVarCall*> getMixedCall();
+
+    /**
+     * @param vector<KT_MethodOrVarCall*>
+     */
+    void setMixedCall(vector<KT_MethodOrVarCall*>& var);
     
 private: 
     vector<KT_MethodOrVarCall*> mixteCall;

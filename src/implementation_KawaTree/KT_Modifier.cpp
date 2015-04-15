@@ -9,7 +9,12 @@
  * KT_Modifier implementation
  */
 
-KT_Modifier::KT_Modifier(){}
+KT_Modifier::KT_Modifier(){
+	Static = false;
+	Abstract = false;
+	Final = false;
+	visibility = 0;
+}
 
 /**
  * @return bool
@@ -67,3 +72,18 @@ void KT_Modifier::setFinal(bool var) {
 void KT_Modifier::setVisibility( int var) {
 	visibility=var;
 }
+
+void KT_Modifier::toString(){
+	if (visibility==1)
+		cout << "Public ";
+	if (visibility == 3)
+		cout << "Private ";
+	if (visibility == 2)
+		cout << "Protected ";
+	if (isFinal())
+		cout << "Final ";
+	if (isAbstract())
+		cout << "Abstract ";
+	if (isStatic())
+		cout << "Static ";
+}		

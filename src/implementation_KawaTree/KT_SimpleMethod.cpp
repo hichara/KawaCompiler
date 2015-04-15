@@ -40,6 +40,20 @@ KT_Block* KT_SimpleMethod::getBlock() {
 }
 
 /**
+* @return KT_Modifier*
+*/
+KT_Modifier* KT_SimpleMethod::getModifier() {
+	return modifier;
+}
+
+/**
+* @return KT_Type*
+*/
+KT_Type* KT_SimpleMethod::getType() {
+	return type;
+}
+
+/**
  * @param string *
  */
 void KT_SimpleMethod::setName(string* var) {
@@ -51,4 +65,37 @@ void KT_SimpleMethod::setName(string* var) {
  */
 void KT_SimpleMethod::setBlock(KT_Block* var) {
 	block=var;
+}
+
+/**
+* @param KT_Modifier*
+*/
+void KT_SimpleMethod::setModifier(KT_Modifier* var) {
+	modifier = var;
+}
+
+/**
+* @param KT_Type*
+*/
+void KT_SimpleMethod::setType(KT_Type* var) {
+	type = var;
+}
+
+/**
+* @param vector<KT_Param*>&
+*/
+void KT_SimpleMethod::setParams(vector<KT_Param*>& var) {
+	params = var;
+}
+
+void KT_SimpleMethod::toString() {
+	modifier->toString();
+	type->toString();
+	cout << *name << " (";
+	for (vector<KT_Param*>::iterator it = params.begin(); it != params.end(); ++it){
+		(*it)->toString();
+	}
+	cout << ")" << endl;
+	cout << "Methode Block : " << endl;
+	block->toString();
 }

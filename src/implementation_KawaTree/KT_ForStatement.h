@@ -45,6 +45,17 @@ public:
      * @param PARSER_ForControl *
      */
     void setForControl(PARSER_ForControl* var);
+
+    /**
+     * @param vector<KT_Variable*>
+     */
+    void setInitFor(vector<KT_Variable*>& var);
+
+    /**
+     * @param vector<KT_IDExpression*>
+     */
+    void setUpdate(vector<KT_IDExpression*>& var);
+
 private: 
     KT_BlockStatement* blockStatement;
     vector<KT_Variable*> initFor;

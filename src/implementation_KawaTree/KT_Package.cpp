@@ -38,3 +38,27 @@ vector<KT_Class*> KT_Package::getClasses() {
 void KT_Package::setName(string* var) {
 	name=var;
 }
+
+/**
+* @param vector<KT_Interface*>
+*/
+void KT_Package::setInterfaces(vector<KT_Interface*>& var) {
+	interfaces = var;
+}
+
+/**
+* @param vector<KT_Class*>
+*/
+void KT_Package::setClasses(vector<KT_Class*>& var) {
+	classes = var;
+}
+
+void KT_Package::toString() {
+	cout << "***********************" << endl;
+	cout << "Package : " << *name << endl;
+	cout << "***********************" << endl;
+	for (vector<KT_Class*>::iterator it = classes.begin(); it != classes.end(); ++it){
+		(*it)->toString();
+	}
+
+}

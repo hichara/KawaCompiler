@@ -6,6 +6,7 @@
 #ifndef _KT_CLASS_H
 #define _KT_CLASS_H
 
+#include <iostream>
 #include "KT_Attribute.h"
 #include "KT_SimpleMethod.h"
 #include "KT_Constructor.h"
@@ -75,6 +76,8 @@ public:
 	* @param KT_Modifier *
 	*/
 	void setModifier(KT_Modifier* var);
+
+	void toString();
 private: 
     string* name;
     string* ParentClass;

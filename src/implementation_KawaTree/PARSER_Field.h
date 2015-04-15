@@ -27,6 +27,11 @@ public:
      * @param KT_Type *
      */
     void upDateType(KT_Type* var);
+
+    /**
+     * @param vector<KT_Variable*>
+     */
+    void setVariables(vector<KT_Variable*>& var);
     
     vector<KT_Variable*> getVariables();
 private: 

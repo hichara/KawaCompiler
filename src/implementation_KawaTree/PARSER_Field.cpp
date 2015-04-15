@@ -23,7 +23,6 @@ void PARSER_Field::addVariable(KT_Variable* var) {
  */
 void PARSER_Field::upDateType(KT_Type* var) {
 	for(vector<KT_Variable*>::iterator it = variables.begin(); it != variables.end();++it){
-		//KT_Variable& el = *it;
 		(*it)->setType(var);
 	}
 }
@@ -33,4 +32,11 @@ void PARSER_Field::upDateType(KT_Type* var) {
  */
 vector<KT_Variable*> PARSER_Field::getVariables() {
     return variables;
+}
+
+/**
+ * @param vector<KT_Variable*>
+ */
+void PARSER_Field::setVariables(vector<KT_Variable*>& var) {
+	variables = var;
 }

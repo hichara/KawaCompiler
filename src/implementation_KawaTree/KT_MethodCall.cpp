@@ -45,3 +45,24 @@ vector<KT_ParamsMethodCall*> KT_MethodCall::getParams() {
 void KT_MethodCall::setName(vector<string*> var) {
 	name= var;
 }
+
+/**
+ * @param vector<KT_ParamsMethodCall*>
+ */
+void KT_MethodCall::setParams(vector<KT_ParamsMethodCall*>& var){
+	params= var;
+}
+
+/**
+ * @param KT_SimpleMethod*
+ */
+void KT_MethodCall::setMethodCall(KT_SimpleMethod* var) {
+	methodCall= var;
+}
+
+/**
+ * @param KT_VarOrAttr*
+ */
+void KT_MethodCall::setCaller(KT_VarOrAttr* var) {
+	caller = var;
+}

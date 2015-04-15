@@ -41,6 +41,11 @@ public:
      * @param KT_Modifier *
      */
     void setModifier(KT_Modifier* var);
+
+    /**
+     * @param vector<KT_Param*>
+     */
+    void setParams(vector<KT_Param*>& var);
 private: 
     string* name;
     vector<KT_Param*> params;

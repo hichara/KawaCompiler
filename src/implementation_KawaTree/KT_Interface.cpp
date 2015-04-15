@@ -52,3 +52,17 @@ void KT_Interface::setName(string* var) {
 void KT_Interface::setModifier(KT_Modifier* var) {
 	modifier=var;
 }
+
+/**
+ * @param vector<string*>
+ */
+void KT_Interface::setInterfacesparent(vector<string*>& var) {
+	InterfacesParent=var;
+}
+
+/**
+ * @param vector<KT_Prototype*>
+ */
+void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
+	prototypes=var;
+}

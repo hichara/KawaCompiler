@@ -66,3 +66,16 @@ void KT_Type::setArrayDim(int var) {
 void KT_Type::setArray(PARSER_Array* var) {
 	Array=var;
 }
+
+/**
+* @param int
+*/
+void KT_Type::toString() {
+	if (typeName != NULL)
+		cout << *typeName;
+	else
+		cout << "Type non définit ";
+	
+	cout<< " dimension: " << arrayDim << " ";
+
+}

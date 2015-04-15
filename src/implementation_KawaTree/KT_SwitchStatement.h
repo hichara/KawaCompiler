@@ -24,6 +24,11 @@ public:
      * @param KT_Exptession *
      */
     void setCondition(KT_Expression* var);
+
+    /**
+     * @param vector<KT_SwitchBlockStatement*>
+     */
+    void setSwitchBStatements(vector<KT_SwitchBlockStatement*> var);
 private: 
     KT_Expression* condition;
     vector<KT_SwitchBlockStatement*> switchBStatements;

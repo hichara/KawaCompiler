@@ -67,3 +67,16 @@ void KT_Constructor::setParams(vector<KT_Param*> var) {
 void KT_Constructor::setBlock(KT_Block* var) {
 	block = var;
 }
+
+void KT_Constructor::toString(){
+	modifier->toString();
+	cout << *name << " (";
+	for (vector<KT_Param*>::iterator it = params.begin(); it != params.end(); ++it){
+		(*it)->toString();
+		cout << ", ";
+	}
+	cout << ")" << endl;
+	cout << " Block de Constructeur " <<endl;
+	block->toString();
+
+}

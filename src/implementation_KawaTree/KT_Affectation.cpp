@@ -26,7 +26,7 @@ KT_Expression* KT_Affectation::getLExpression() {
 /**
  * @return KT_VarOrAttr *
  */
-KT_VarOrAttr* KT_Affectation::getVarOrAttr() {
+KT_VarOrAttr* KT_Affectation::getReference() {
     return reference;
 }
 
@@ -50,4 +50,12 @@ void KT_Affectation::setLExpression(KT_Expression* var) {
 void KT_Affectation::setRExpression(KT_Expression* var) {
 	this->rExpression=var;
 }
+
+/**
+ * @param KT_VarOrAttr*
+ */
+void KT_Affectation::setReference(KT_VarOrAttr* var) {
+	reference=var;
+}
+
 

@@ -6,6 +6,7 @@
 #ifndef _KT_PROGRAM_H
 #define _KT_PROGRAM_H
 
+#include <iostream>
 #include "KT_Package.h"
 #include <stdio.h>
 #include <string>
@@ -18,6 +19,13 @@ public:
     KT_Program();
     
     vector<KT_Package*> getPackages();
+
+	/**
+	* @param vector<KT_Package*>
+	*/
+	void setPackages(vector<KT_Package*>& var);
+
+	void toString();
 private: 
     vector<KT_Package*> packages;
 };

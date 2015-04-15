@@ -18,6 +18,11 @@ public:
 	KT_Super();
 	
 	vector<KT_ParamsMethodCall*> getParams();
+
+	/**
+     * @param vector<KT_ParamsMethodCall*>
+     */
+    void setParams(vector<KT_ParamsMethodCall*> var);
 private: 
     vector<KT_ParamsMethodCall*> params;
 };

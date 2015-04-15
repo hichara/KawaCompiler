@@ -44,6 +44,13 @@ KT_Modifier* KT_Attribute::getModifier() {
 }
 
 /**
+* @return KT_Expression*
+*/
+KT_Expression* KT_Attribute::getValue() {
+	return this->value;
+}
+
+/**
  * @param string *
  */
 void KT_Attribute::setName( string* var) {
@@ -62,4 +69,18 @@ void KT_Attribute::setType(KT_Type* var) {
  */
 void KT_Attribute::setModifier(KT_Modifier* var) {
 	this->modifier = var;
+}
+
+/**
+* @param KT_Expression*
+*/
+void KT_Attribute::setValue(KT_Expression* var) {
+	this->value = var;
+}
+
+
+void KT_Attribute::toString(){
+	modifier->toString();
+	type->toString();
+	cout << *name;
 }

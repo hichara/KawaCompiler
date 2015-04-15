@@ -8,6 +8,7 @@
 
 #include "KT_VarOrAttr.h"
 #include "KT_Modifier.h"
+#include "KT_Expression.h"
 #include "KT_Type.h"
 #include <stdio.h>
 #include <string>
@@ -28,6 +29,8 @@ public:
     KT_Type* getType();
     
     KT_Modifier* getModifier();
+
+	KT_Expression* getValue();
     
     /**
      * @param string *
@@ -43,10 +46,18 @@ public:
      * @param KT_Modifier *
      */
     void setModifier(KT_Modifier* var);
+
+	/**
+	* @param KT_Expression*
+	*/
+	void setValue(KT_Expression* var);
+
+	void toString();
 private: 
     string* name;
     KT_Modifier* modifier;
 	KT_Type* type;
+	KT_Expression* value;
 };
 
 #endif //_KT_ATTRIBUTE_H

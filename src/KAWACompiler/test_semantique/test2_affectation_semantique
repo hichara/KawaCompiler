@@ -1,0 +1,40 @@
+package TestAST;
+public class testdeclarationaffectationaffichage 
+{
+
+	final int is = 2;
+
+	public static void affiche(String S){
+		String ss= "String="+S;
+		printS(ss);
+
+		}
+//***********>ne dois pas marcher car is est de type final 
+		is = is + 10;
+
+//------------>ne doit pas marcher car la methode affiche attends un string en parametre
+					affiche(i);
+
+//----------->ne dois pas marcher car (j) n'est pas déclarer
+				
+				j = l+10;
+				affiche1(j);
+
+//------------->ne doit pas marcher car la méthode affiche attends un parametre 
+		affiche();
+
+//----------------> ne dois pas marcher car entier2 ne corresponds à aucun tableau 
+		entier2[0]=15;
+
+// ------------>declaration de tableau
+		int entier[] = new int[10]; 
+
+//----------------------------> doit verifier si la taille du tableau n'est pas dépassé  à revoir 
+		entier[0]=1;
+		entier[1]=2;
+		entier[0]=5;
+		//------------>ne doit pas marcher car on depasse la taille du tableau
+		entier[12]=10;
+		printI(entier[0]);
+		printI(entier[1]);
+}

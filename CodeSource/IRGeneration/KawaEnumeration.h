@@ -16,6 +16,9 @@
 #define ERROR_FUNCTION_ALREADY_EXIST "function already exists"
 #define ERROR_CLASS_AREADY_EXIST "function already exists"
 #define ERROR_UNKNOW_INDEX "index inconnue"
+
+#define ERROR_MAIN_FUNCTION_ALREADY_EXIST "function main already exists"
+#define ERROR_MAIN_ONLY_TWO_NOT_EMPTY_NAME_REQUIRED "function only requires two not empty names"
 	
 #define	INT    "int"
 #define CHAR   "char"

@@ -4,6 +4,7 @@
 #include "KawaUtilitary.h"
 #include "GlobalVariableGenerator.h"
 
+
 // Cree le type associé a une instance de classe et la structure contenant les attributs
 StructType* TypeGenerator::createClassType(Module *module,
 					std::string className,
@@ -40,7 +41,9 @@ StructType* TypeGenerator::createClassType(Module *module,
 		
 		t = list_types[i];
 
-		t = t->getPointerTo();		
+		if(t->isStructTy()){
+			t = t->getPointerTo();
+		}
 		
 		if(!isStatic[i]) {
 			llvm_types.push_back(t);
@@ -54,7 +57,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 				className, att_names[i]);
 
 			GlobalVariableGenerator::getOrCreateStaticAttribut(
-				module, className, attName, list_types[i]);
+				module, className, attName, t);
 		}
 	}
 
@@ -113,7 +116,7 @@ Type *TypeGenerator::strToLLVMType(Module *module, std::string type) {
 }
 
 
-static Type* getPointerOf(Module *module, std::string type, int nb) {
+Type* TypeGenerator::getPointerOf(Module *module, std::string type, int nb) {
 
 	Type *t = TypeGenerator::strToLLVMType(module, type);
 
@@ -124,7 +127,7 @@ static Type* getPointerOf(Module *module, std::string type, int nb) {
 	return t;
 }
 
-static Type* getMultiDimensionArray(Module *module, std::string type, std::vector<int> sizes) {
+Type* TypeGenerator::getMultiDimensionArray(Module *module, std::string type, std::vector<int> sizes) {
 
 	Type *t = TypeGenerator::strToLLVMType(module, type);
 	int n;
@@ -138,3 +141,13 @@ static Type* getMultiDimensionArray(Module *module, std::string type, std::vecto
 }
 
 
+std::vector<Type*> TypeGenerator::strToLLVMType(Module *module, std::vector<std::string> args) {
+
+	std::vector<Type*> types;
+
+	for(int i = 0; i < args.size(); i++) {
+		types.push_back(strToLLVMType(module, args[i]));
+	}
+
+	return types;
+}

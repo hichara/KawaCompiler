@@ -30,7 +30,11 @@ public:
 	static Value *createMethodeCall(Module *module, Value *instance,
 							std::vector<Value*> args, int index, BasicBlock *b);
 
-	static Value *createMethodeCall(Module *module, Value *instance,
+
+	/**
+	*  Cree un appel de methode sur objet, le type de l'objet doit etre src *struct_obj
+	*/
+	static Value *createMethodeCall(Module *module, Value *src,
 						 std::vector<Value*> args, Value *index, BasicBlock *b);
 
 	static Value *createStaticMethodeCall(Module *module, std::string funcName,

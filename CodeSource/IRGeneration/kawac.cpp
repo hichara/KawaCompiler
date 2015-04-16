@@ -24,72 +24,10 @@
 #include "llvm/IR/Type.h"
 
 #include "FunctionGenerator.h"
+#include "TypeGenerator.h"
 
 using namespace llvm;
 
-
-
-Function *createMainFunction(Module *module) {
-  LLVMContext &context = module->getContext();
-
-  std::vector<Type *> empty;
-
-  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), empty, false);
-
-  Function *f = Function::Create(ft, GlobalValue::ExternalLinkage ,"main", module);
-
-  return f;
-}
-
-Function *createStrLen(Module *module) {
-  LLVMContext &context = module->getContext();
-
-  std::vector<Type *> type_args;
-  type_args.push_back(
-      Type::getInt8Ty(context)->getPointerTo());
-
-  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), type_args, false);
-
-  Function *f = Function::Create(ft, GlobalValue::ExternalLinkage, "strlen", module);
-
-  f->addFnAttr(Attribute::NoUnwind);
-
-  return f;
-}
-
-Function *createSrtCat(Module *module) {
-
-  LLVMContext &context = module->getContext();
-
-  Type* i8ptr = Type::getInt8Ty(context)->getPointerTo();
-
-  std::vector<Type *> type_args;
-  type_args.push_back(i8ptr);
-  type_args.push_back(i8ptr);
-
-  FunctionType *ft = FunctionType::get(i8ptr, type_args, false);
-
-  Function *f = Function::Create(ft, GlobalValue::ExternalLinkage, "strcat", module);
-
-  return f;
-}
-
-
-Function *createPutsFunction(Module *module) {
-  LLVMContext &context = module->getContext();
-
-  std::vector<Type *> type_args;
-  type_args.push_back(
-      Type::getInt8Ty(context)->getPointerTo());
-
-  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), type_args, false);
-
-  Function *f = Function::Create(ft, GlobalValue::ExternalLinkage, "puts", module);
-
-  f->addFnAttr(Attribute::NoUnwind);
-
-  return f;
-}
 
 
 int main() {
@@ -97,28 +35,75 @@ int main() {
   LLVMContext &Context = getGlobalContext();
   IRBuilder<> Builder(getGlobalContext());
 
-
-
-  Module *myModule = new Module("Nasser Module", Context);
+  Module *myModule = new Module("Module Test", Context);
   
-
-  Function *f1 = FunctionGenerator::getOrCreateMainFunction(myModule);
   Function *f2 = FunctionGenerator::getOrCreatePutsFunction(myModule);
   Function *f3 = FunctionGenerator::getOrCreateStrlenFunction(myModule);
   Function *f4 = FunctionGenerator::getOrCreateStrcatFunction(myModule);
   Function *f5 = FunctionGenerator::getOrCreateIntToStrFunction(myModule);
   Function *f6 = FunctionGenerator::getOrCreateDoubleToStrFunction(myModule);
+  Function *f7 = FunctionGenerator::getOrCreateMainFunction(myModule, "argc", "argv");
 
+  std::vector<std::string> types;
+  std::vector<std::string> names;
+  std::vector<bool> isstatic;
+
+
+  types.push_back("int");
+  types.push_back("float");
+  types.push_back("class_A");
+  types.push_back("class_b");
+  types.push_back("class_c");
+  types.push_back("string");
+  types.push_back("double");
+
+  names.push_back("avatar");
+  names.push_back("index");
+  names.push_back("bossun");
+  names.push_back("repre");
+  names.push_back("sepe");
+  names.push_back("mpm");
+  names.push_back("lovea");
+
+  isstatic.push_back(true);
+  isstatic.push_back(false);
+  isstatic.push_back(false);
+  isstatic.push_back(false);
+  isstatic.push_back(true);
+  isstatic.push_back(false);
+  isstatic.push_back(true);
+
+  Type* t1 = TypeGenerator::strToLLVMType(myModule, "CLASSA");
+
+  t1 = TypeGenerator::createClassType(myModule,
+            "class_A",
+            names, 
+            TypeGenerator::strToLLVMType(myModule, types), 
+            isstatic);
+
+    GlobalVariable *gv;
+
+    gv = new GlobalVariable (*myModule, 
+                t1,
+                true,
+                GlobalValue::ExternalLinkage ,
+                NULL, 
+                "KAWA_FORMAT_INT_TO_STRING");
+
+
+
+/*
   BasicBlock* bb = BasicBlock::Create(myModule->getContext(), "entry", f1);
 
   Constant *cc = ConstantDataArray::getString(Context, "Zapaato\0", true);
 
   Constant *zero = ConstantInt::get(Type::getInt32Ty(Context), 0);
  
-  Constant *kinze = ConstantInt::get(Type::getInt32Ty(Context), 15);
-  Constant *fff = ConstantFP::get(Type::getDoubleTy(Context), 15.05662f);
 
-  AllocaInst *ab = new AllocaInst(Type::getInt8Ty(Context), kinze,"", bb);
+  Constant *kinze = ConstantInt::get(Type::getInt32Ty(Context), 15);
+  
+
+  
   LoadInst *loadB = new LoadInst (ab, "zb", bb);
   std::vector<Value *> idx, args, args2, args3;
 
@@ -148,7 +133,7 @@ int main() {
 
 
   ReturnInst::Create(Context, zero, bb);
-
+*/
 /*
   GlobalVariable *gv = myModule->getGlobalVariable("KAWA_FORMAT_INT_TO_STRING");
 
@@ -165,13 +150,12 @@ int main() {
                 ar, 
                 "KAWA_FORMAT_INT_TO_STRING");
   }
+*/
 
- */  
 
   myModule->dump();
-//  ab->dump();
-//  ab->getType()->dump();
-// loadB->getType()->dump();
+
+  std::cout << Type::getInt8Ty(Context)->isStructTy() << " is struct\n";
 
   return 0;
 }

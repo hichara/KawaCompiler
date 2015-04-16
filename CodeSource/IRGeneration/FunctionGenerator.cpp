@@ -7,6 +7,25 @@
 #include "KawaEnumeration.h"
 
 
+void FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name) {
+
+  BasicBlock *b = BasicBlock::Create(f->getContext(), "entry", f);  
+  IRBuilder<> builder(f->getContext());
+  builder.SetInsertPoint(b);
+
+  if(args_name.size() == 0)
+  	return;
+
+  unsigned Idx = 0;
+  int size = args_name.size(); 
+
+  for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
+       ++AI, ++Idx) {
+  	Value *v = builder.CreateAlloca(AI->getType(), AI, args_name[Idx]);
+  	builder.CreateStore(AI, v);
+  }
+}
+
 Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
 									std::string className,
 									std::string name,
@@ -36,11 +55,14 @@ Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
 	Type *r_type = TypeGenerator::strToLLVMType(module, ret_type);
 
 	//Pointeur sur l'objet effectuant l'appel de la fonction
-	Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
 
 	std::vector<Type*> list_type;
 
-	list_type.push_back(c_type);
+	if(isStatic) {
+		Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
+		list_type.push_back(c_type);
+		args_names.insert(args_names.begin(), "this");
+	}
 
 	for(int i = 0; i < args_types.size(); i++) {
 		list_type.push_back(
@@ -55,24 +77,6 @@ Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
 
 	return f;
 }
-
-void FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name) {
-
-  BasicBlock *b = BasicBlock::Create(f->getContext(), "entry", f);  
-  IRBuilder<> builder(f->getContext());
-  builder.SetInsertPoint(b);
-
-  args_name.insert(args_name.begin(), "this");
-  unsigned Idx = 0;
-  int size = args_name.size(); 
-
-  for (Function::arg_iterator AI = f->arg_begin(); Idx != size;
-       ++AI, ++Idx) {
-  	Value *v = builder.CreateAlloca(AI->getType(), AI);
-  	builder.CreateStore(AI, v);
-  }
-}
-
 
 
 void FunctionGenerator::setFunctionBody(Function *f, std::vector<BasicBlock*> list_block) {
@@ -146,19 +150,36 @@ Function* FunctionGenerator::getFunction(Module *module, std::string name) {
 	return module->getFunction(name);
 }
 
-Function* FunctionGenerator::getOrCreateMainFunction(Module *module) {
+Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string aC, std::string aV) {
   Function *f = module->getFunction("main");
 
   if(f != NULL)
   	return f;
 
+  std::vector<std::string> args_names;
+
+  if(aC != "")
+  	args_names.push_back(aC);
+  if(aV != aC && aV != "")
+  	args_names.push_back(aV);
+
+  if(args_names.size() == 1)
+  	KawaUtilitary::stopGenerationIR(ERROR_MAIN_ONLY_TWO_NOT_EMPTY_NAME_REQUIRED);
+
   LLVMContext &context = module->getContext();
 
-  std::vector<Type *> empty;
+  std::vector<Type *> args;
 
-  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), empty, false);
+  if(args_names.size() == 2) {
+    args.push_back(Type::getInt32Ty(context));
+    args.push_back(Type::getInt8Ty(context)->getPointerTo()->getPointerTo());  	
+  }
+
+  FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), args, false);
 
   f = Function::Create(ft, GlobalValue::ExternalLinkage ,"main", module);
+
+  initFunction(f, args_names); 
 
   return f;
 }

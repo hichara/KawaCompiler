@@ -6,21 +6,31 @@
 Value* CallGenerator::createMethodeCall(Module *module, Value *instance,
 					 std::vector<Value*> args, int index, BasicBlock *bb) {
 
-	return NULL;
+	Constant *i = ConstantInt::get(Type::getInt32Ty(bb->getContext), index);
+	
+	return CallGenerator::createMethodeCall(module, instance,  args, i, bb);
 }
 
 
 Value* CallGenerator::createMethodeCall(Module *module, Value *instance,
 					 std::vector<Value*> args, Value *index, BasicBlock *bb) {
 
-	return NULL;
+	std::vector<Value*> arg(args);
+
+	Value *callee = NULL; // Load Function
+
+	arg.insert(arg.begin(), instance);
+
+	return new CallInst::Create(callee, arg, bb);
 }
 
 
 Value* CallGenerator::createStaticMethodeCall(Module *module, std::string funcName,
-					   std::vector<Value *> list_args, BasicBlock *bb) {
+					   std::vector<Value*> list_args, BasicBlock *bb) {
 
-	return NULL;
+	Function *f = FunctionGenerator::getFunction(module, funcName);
+
+	return new CallInst::Create(f, list_args, bb);
 }
 
 

@@ -1,3 +1,6 @@
+#ifndef FUNC_GEN
+#define FUNC_GEN
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -17,6 +20,8 @@
 #include <vector>
 
 #include "llvm/IR/Type.h"
+
+#include <llvm/IR/ValueSymbolTable.h>
 
 
 using namespace llvm;
@@ -39,7 +44,7 @@ public:
 
 	static Function *getFunction(Module *module, std::string name);
 
-	static Function *getOrCreateMainFunction(Module *module);
+	static Function *getOrCreateMainFunction(Module *module, std::string aC = "", std::string aV = "");
 
 	static Function *getOrCreatePutsFunction(Module *module);
 
@@ -53,19 +58,21 @@ public:
 
 	static Function *getOrCreateCallocFunction(Module *module);
 
-	static Function *getOrCreateIntToStrFunction(Module *module);
-
-	static Function *getOrCreateDoubleToStrFunction(Module *module);
-
 	static void initFunction(Function *f, std::vector<std::string> args_names);
 
 	static void setFunctionBody(Function *f,
 						std::vector<BasicBlock*> list_block);
+
+	static Function *getOrCreateIntToStrFunction(Module *module);
+
+	static Function *getOrCreateCharToStrFunction(Module *module);
+
+	static Function *getOrCreateDoubleToStrFunction(Module *module);
 };
 
 
 
-
+#endif
 
 
 

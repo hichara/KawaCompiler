@@ -36,7 +36,6 @@ public:
 	*/
 	static Value* createAllocOfArray(Type *type, BasicBlock *b);
 
-
 	/**
 	*
 	*/
@@ -46,6 +45,16 @@ public:
 	* 
 	*/
 	static Value* createLoad(Value *src, BasicBlock *b);
+
+	/**
+	*
+	*/
+	static Value* getVariableAdresse(Function *f, std::string name);
+
+	/**
+	*
+	*/
+	static Value* getVariableValue(Function *f, std::string name);
 
 	/**
 	*

@@ -52,7 +52,7 @@ KAWATreeParam* paramFloat;
 %token<vint> STRING TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
 %token<vint> TIMPORT TPACKAGE
 %token<vint> TPUBLIC TPRIVATE TPROTECTED
-%token<vint> TFINAL TABSTRACT TSTATIC /*TCONST TENUM*/ TVALUE
+%token<vint> TFINAL TABSTRACT TSTATIC TVALUE
 %token<vstring> ID TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
 %token<vint> TSUPER TTHIS 
 %token<vint> TIF TELSE
@@ -61,7 +61,6 @@ KAWATreeParam* paramFloat;
 %token<vint> TFOR TWHILE TDO
 %token<vint> TNEW TNULL TRETURN
 %token<vint> TPRINT TPRINTI TPRINTF TPRINTS
-%token<vstring> TMAIN
 
 %token<vint> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
 %token<vint> TINC TDEC
@@ -74,32 +73,26 @@ KAWATreeParam* paramFloat;
 %type<vint> Program Package
 %type<vint> Ids ListIds QList
 %type<vint> Type Tables BasicType
-%type<vint> Modifier Modifiers /*ModifiersMain*/ Static All Extends ExtendsList Implements			  
+%type<vint> Modifier Modifiers Static All Extends ExtendsList Implements			  
 %type<vint> ImportDeclaration 
 
-%type<vint> TypeDeclaration ClassOrInterfaceDeclaration ClassDeclaration InterfaceDeclaration 
-%type<vint> ClassBody ClassBodyDeclarations ClassBodyDeclaration
+%type<vint> ClassDeclaration InterfaceDeclaration 
+%type<vint> ClassBody MemberDecs MemberDec
 
-%type<vint> InterfaceBody InterfaceBodyDeclarations InterfaceBodyDeclaration
-%type<vint> MemberDecl
-%type<vint> MethodOrFieldDecl MethodOrFieldRest
-%type<vint> FieldDeclaratorsRest
-%type<vint> MethodDeclaratorRest MainMethodDeclaratorRest			
-%type<vint> ConstructorDeclaratorRest
-%type<vint> InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorList  ConstantDeclaratorRest ConstantDeclarator 
-%type<vint> FormalParameters MainFormalParametrs FormalMainParameterDecls VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
-%type<vint> VariableDeclaratorList VariableDeclarator VariableDeclaratorRest VariableInitializer ArrayInitializer ObjectInitializer MethodeInitializer VariableInitializerList
+%type<vint> InterfaceBody Prototypes Prototype
+%type<vint> FormalParameters VoidFormalParametrs FormalParametersCalledMethod FormalParametersCalledMethodDecls FormalParameterDecls VariableModifiers  VariableModifier FormalParameterDeclsRest FormalParameterCalledMethodDeclsRest VariableDeclaratorId
+%type<vint> VariableDeclaratorList VariableDeclarator VariableInitializer ConstructorCall MethodCall ArrayInitializer
 %type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest  
 %type<vKAWATreeParam> ArgsS ArgsI ArgsF
 %type<vKAWATreePrintString> PrintS
 %type<vKAWATreePrintInteger> PrintI
 %type<vKAWATreePrintFloat> PrintF
-%type<vint> SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel
-%type<vint> ForControl ForVarControl ForVariableDeclaratorsRest ForUpdate StatementExpressionList
+%type<vint> SwitchBlockStatements SwitchBlockStatement 
+%type<vint> ForControl ForVarControl ForUpdate StatementExpressionList
 
 %type<vint> Expression FacteurEffect ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus terme facteur factFinal
 
-%type<vint> IDExpression TablesIndexe
+%type<vint> TablesIndexe LinkedMethodVarCall LinkedMethodVarCallList
 
 %union
 {
@@ -134,7 +127,8 @@ KAWATreeParam* paramFloat;
 %start Program;
 %%
 
-Program : Package TypeDeclaration
+Program : Package ImportDeclaration Modifiers ClassDeclaration{ $$=0; cout<<"Program ---> Package ImportDeclaration Modifiers ClassDeclaration"<< endl;}
+		| Package ImportDeclaration Modifiers InterfaceDeclaration{ $$=0; /*cout<<"Program ---> Package ImportDeclaration Modifiers InterfaceDeclaration"<< endl;*/}
 		;
 Package : TPACKAGE ID ';'
 		;
@@ -159,7 +153,7 @@ Tables : '[' ']' Tables {$$=0;}
 	   | {$$=0;}
 	   ;
 
-TablesIndexe : '[' ENTIER ']' Tables {$$=0;}
+TablesIndexe : '[' ENTIER ']' TablesIndexe {$$=0;}
 	   | {$$=0;}
 	   ;
 
@@ -175,22 +169,17 @@ BasicType : TBYTE {$$=0;}
 		  ;
 
 /*------------- Partie d'encapsulation + final + static + extends ID, ID..... et implements ID, ID , ID... ----------------------------------*/
-Modifier : TPUBLIC {$$=0; cout << " Modifier --> TPUBLIC "<<endl;}
+Modifier : TPUBLIC {$$=0; /*cout << " Modifier --> TPUBLIC "<<endl;*/}
 		 | TPROTECTED {$$=0;}
 		 | TPRIVATE {$$=0;}
-		 | TSTATIC {$$=0; cout << " Modifier --> TSTATIC "<<endl;}
+		 | TSTATIC {$$=0; /*cout << " Modifier --> TSTATIC "<<endl;*/}
 		 | TABSTRACT {$$=0;}
 		 | TFINAL {$$=0;}
 		 ;
 
-Modifiers : Modifiers Modifier {$$=0;cout << " Modifiers --> Modifiers Modifier "<<endl;}
-		  | {$$=0; cout << " Modifiers --> Epsilone "<<endl;}
+Modifiers : Modifiers Modifier {$$=0; /*cout << " Modifiers --> Modifiers Modifier "<<endl;*/}
+		  | {$$=0; /*cout << " Modifiers --> Epsilone "<<endl;*/}
 		  ;
-/*
-ModifiersMain : TPUBLIC TSTATIC {$$=0;}
-			 | TSTATIC {$$=0;}
-			 ;
-*/
 
 Static : TSTATIC {$$=0;}
 	   | {$$=0;}
@@ -203,7 +192,7 @@ All : '.' ID All {$$=0;}
 
 
 Extends	: TEXTENDS Type {$$=0;}
-		| {$$=0;cout<<"Extends->epsilon\n";}
+		| {$$=0; /*cout<<"Extends->epsilon\n";*/}
 		;
 
 ExtendsList : TEXTENDS ListIds {$$=0;}
@@ -212,161 +201,64 @@ ExtendsList : TEXTENDS ListIds {$$=0;}
 
 
 Implements	: TIMPLEMENTS ListIds {$$=0;}
-			| {$$=0; cout<<"Implements->epsilon\n";}
+			| {$$=0; /*cout<<"Implements->epsilon\n";*/}
 			;
 
 /*---------------------IMPORTS ------------------------------------------------------------------*/
-ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0;}
-				  | {$$=0;cout<<"TypeDeclaration-->ImportDeclaration ClassOrInterfaceDeclaration"<< endl; }
+ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0; /*cout<<"ImportDeclaration --> import Static ID All"<< endl;*/ }
+				  | {$$=0; /*cout<<"ImportDeclaration --> epsilon"<< endl;*/ }
 				  ; 
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
-TypeDeclaration : ImportDeclaration ClassOrInterfaceDeclaration { $$=0; cout<<"ImportDeclaration-->Epsilone "<< endl;  }
-				;
 
-ClassOrInterfaceDeclaration : Modifiers ClassDeclaration {$$=0; program->addClass(mainClass); cout<< "ClassOrInterfaceDeclaration -->Modifiers ClassDeclaration "<< endl;}
-						    | Modifiers InterfaceDeclaration {$$=0;}
-							;
-
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { KAWATreeClass* c = new KAWATreeClass(*$2); /*$$->addMain(c); $$ = c*/; cout << "CLASS NAME: " << *$2 << endl; }
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { KAWATreeClass* c = new KAWATreeClass(*$2); /*$$->addMain(c); $$ = c; cout << "CLASS NAME: " << *$2 << endl; */}
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}
 					 ;
 
 /*-----------------------------------Corps d'une classe-----------------------------------------------------*/
-ClassBody: '{' ClassBodyDeclarations '}' {$$=0;cout<< "ClassBody --> '{' ClassBodyDeclarations '}'  "<< endl; } 
-ClassBodyDeclarations : ClassBodyDeclarations ClassBodyDeclaration {$$=0; cout<< " ClassBodyDeclarations --> ClassBodyDeclarations ClassBodyDeclaration "<< endl; }
-					  | {$$=0; cout<< " ClassBodyDeclarations --> Epsilone "<< endl;}
+ClassBody: '{' MemberDecs '}' {$$=0; /*cout<< "ClassBody --> '{' MemberDecs '}'  "<< endl;*/ } 
+MemberDecs : MemberDecs MemberDec {$$=0; /*cout<< " MemberDecs --> MemberDecs MemberDec "<< endl;*/ }
+					  | {$$=0; /*cout<< " MemberDecs --> Epsilone "<< endl;*/}
 					  ;
 
-ClassBodyDeclaration: Modifiers MemberDecl {$$=0;} /*| Static Block | ';' {$$=0;}*/
-					| Modifiers TVOID TMAIN MainMethodDeclaratorRest Block {$$=0; mainMethod = new KAWATreeMethod(*$3); mainMethod->setBody(bodyMain);cout<< " ClassBodyDeclarations --> Modifiers TVOID TMAIN MainMethodDeclaratorRest Block  "<< endl;}
+MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' {$$=0;}
+		  | Modifiers Type ID FormalParameters Block {$$=0;} /* methode avec type de retour */
+		  | Modifiers TVOID ID FormalParameters Block {$$=0;} /* void methode */
+		  | Modifiers ID FormalParameters Block {$$=0;} /* constructeur */
 					;  
 
 /*--------------------------------- corps d'une interface ---------------------------------------------------*/
-InterfaceBody: '{' InterfaceBodyDeclarations '}' {$$=$2;}
+InterfaceBody: '{' Prototypes '}' {$$=$2;}
 			 ; 
-InterfaceBodyDeclarations : InterfaceBodyDeclarations InterfaceBodyDeclaration {$$=0;}
+Prototypes : Prototypes Prototype {$$=0;}
  						  | {$$=0;}
  						  ;
 
-InterfaceBodyDeclaration: Modifiers InterfaceMemberDecl /*| ';' {$$=0;}*/
+Prototype : Modifiers Type ID FormalParameters';'
+    	  | Modifiers TVOID ID FormalParameters ';' {$$=0;} 
     					;  
 
-/*---------------------------classes Memberes : Methodes, void methods, variables, constructors, classes internes and inrefaces internes---------------*/
-MemberDecl: MethodOrFieldDecl {$$=0;}
-		  | TVOID ID MethodDeclaratorRest Block {$$=0;}
-		  | ID ConstructorDeclaratorRest Block {$$=0;}
-		  | ClassDeclaration {$$=0;} /*-------- classes internes ----------*/
-		  | InterfaceDeclaration  {$$=0;}/*---------- interfaces internes ----*/
-		  ;
-/*---------------- methodes and variables ---------------------------------------------------------*/
-MethodOrFieldDecl: Type ID MethodOrFieldRest {$$=0;}
-				 ;
-
-MethodOrFieldRest: FieldDeclaratorsRest ';' {$$=0;}
-				 | MethodDeclaratorRest Block {$$=0;}
-				 ;
-
-/*--------------- variables -----------------------------------------------------------------------*/
-FieldDeclaratorsRest: VariableDeclaratorRest VariableDeclaratorList {$$=0;}
-					;
-
 /*-------------------------------------------- partie variables ---------------------------------------------------------*/
-/*
-VariableDeclarators: VariableDeclarator VariableDeclaratorList {$$=0;}
-				   ;
-*/
+
 VariableDeclaratorList : ',' VariableDeclarator VariableDeclaratorList {$$=$2;}
 					   | {$$=0;}
 					   ;
 
-VariableDeclarator: ID VariableDeclaratorRest {$$=0;}
+VariableDeclarator: ID VariableInitializer {$$=0;}
 				  ;
 
-VariableDeclaratorRest: Tables '=' VariableInitializer {$$=0;}
-					  | Tables {$$=0;}
-					  ;
-
-VariableInitializer: ArrayInitializer {$$=0;}
-				   | Expression {$$=0;}
-				   ;
-
-ArrayInitializer: '{' VariableInitializer VariableInitializerList '}' {$$=$2;}
-				| '{' '}' {$$=0;}
-				;
-
-VariableInitializerList : ',' VariableInitializer VariableInitializerList {$$=$2;} 
-						| {$$=0;}
-						;
-
-
-/*---------------------- methodes ----------------------------------------------------------------*/
-MethodDeclaratorRest: FormalParameters {$$=0;}/*Throws Block*/ 
-					/*| FormalParameters Throws ';'*/
-					;
-
-MainMethodDeclaratorRest : MainFormalParametrs {$$=0;cout <<" MainMethodDeclaratorRest --> MainFormalParametrs" <<endl;}
-						 ;
-
-/*---------------------- partie throw pour les exceptions --------------------------------------------------------------
-Throws 				: TTHROWS QualifiedIdentifierList 
-					| {$$=0;}
-					;
-*/
-
-/*----------------------------- constructeur -----------------------------------------------------*/
-ConstructorDeclaratorRest: FormalParameters  {$$=0;} /*Throws Block*/
-						 ;
-/*------------------interface membres : Methodes, void methods, variables, classes internes and inrefaces internes ------------------------*/
-InterfaceMemberDecl: InterfaceMethodOrFieldDecl {$$=0;}
-    			   | TVOID ID FormalParameters ';' {$$=0;}/*Throws*/
-    			   | ClassDeclaration {$$=0;}/*-------- classes internes ----------*/
-    			   | InterfaceDeclaration {$$=0;}/*-------- interfaces internes ----------*/
-    			   ;
-
-InterfaceMethodOrFieldDecl: Type ID InterfaceMethodOrFieldRest {$$=0;}
-						  ;
-
-InterfaceMethodOrFieldRest: ConstantDeclaratorsRest ';' {$$=0;}
-    					  | FormalParameters ';' {$$=0;}/*InterfaceMethodDeclaratorRest*/
-    					  ;
-
-ConstantDeclaratorsRest: ConstantDeclaratorRest ConstantDeclaratorList {$$=0;}
-					   ;
-ConstantDeclaratorList : ',' ConstantDeclarator ConstantDeclaratorList {$$=$2;}
-					   | {$$=0;}
-					   ;
-
-ConstantDeclarator: ID ConstantDeclaratorRest {$$=0;}
-				  ;
-
-ConstantDeclaratorRest: Tables '=' VariableInitializer {$$=0;}
-					  | Tables {$$=0;}
-					  ;
-
-/*
-InterfaceMethodDeclaratorRest: FormalParameters ';' {$$=0;}/*Throws
-							 ; 
-*/
-/*
-VoidInterfaceMethodDeclaratorRest: FormalParameters Throws ';'
-								 ;
-*/  
+VariableInitializer: '=' Expression {$$=0;}
+					 | {$$=0;}
+					 ;
 
 /*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
 FormalParameters: '(' FormalParameterDecls ')' {$$=$2;}
 				| VoidFormalParametrs {$$=0;}
 				;
 
-MainFormalParametrs : '(' FormalMainParameterDecls ')' {$$=$2;}
-					| VoidFormalParametrs {$$=0; cout<< "MainFormalParametrs --> VoidFormalParametrs"<<endl;}
-					;	
-FormalMainParameterDecls : TSTRING '[' ']' ID {$$=0;}
-						 ;
-
-VoidFormalParametrs : '(' ')' {$$=0; cout<< "VoidFormalParametrs --> '(' ')' "<<endl;}
+VoidFormalParametrs : '(' ')' {$$=0; /*cout<< "VoidFormalParametrs --> '(' ')' "<<endl;*/}
 					;
 
 FormalParametersCalledMethod: '(' FormalParametersCalledMethodDecls ')' {$$=$2;}
@@ -399,33 +291,35 @@ VariableDeclaratorId: ID Tables {$$=0;}
 					;
 
 /*----------------------------------- partie blocks et les variables locaux ------------------------*/
-Block: '{' BlockStatements '}' {$$=$2;cout<< " Block --> '{' BlockStatements '}' "<< endl;}
+Block: '{' BlockStatements '}' {$$=$2; /*cout<< " Block --> '{' BlockStatements '}' "<< endl;*/}
 	 ;
 
 BlockStatements: BlockStatements BlockStatement {$$=0;}
-			   | {$$=0; cout<< " BlockStatements --> Epsilone "<< endl; }
+			   | {$$=0; /*cout<< " BlockStatements --> Epsilone "<< endl; */}
 			   ; 
 
 BlockStatement: Print {$$=0; }
-			  | PrintS {$$=0; bodyMain->addInstruction($1); cout<< " BlockStatement --> PrintS "<< endl; } 
-			  | PrintF {$$=0; bodyMain->addInstruction($1); cout<< " BlockStatement --> PrintF "<< endl; } 
-			  | PrintI {$$=0; bodyMain->addInstruction($1); cout<< " BlockStatement --> PrintI "<< endl;}
-			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
-			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} /* des nouveaux variables locaux initialisé ou pas */
-			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}/* des nouveaux variables locaux initialisé ou pas */
-			  /* les 3 premieres lignes remplacent Type VariableDeclarator VariableDeclaratorList ';' qui renvoie un conflit; conflit dans Ids de Type*/
+			  | PrintS {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintS "<< endl;*/ } 
+			  | PrintF {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintF "<< endl;*/ } 
+			  | PrintI {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintI "<< endl;*/}
+			  | TFINAL ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
+			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
+			  | TFINAL ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
+			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
+			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
+			  | TFINAL BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
     		  | ID TablesIndexe '=' Expression ';' {$$=0;}
-    		  | Expression ';' {$$=0;}
-    		  | TTHIS '.' VariableDeclarator ';' {$$=0;}
-    		  | TTHIS '.' ID FormalParametersCalledMethod ';' {$$=0;}
+    		  | TTHIS '.' ID TablesIndexe '=' Expression ';' {$$=0;}
+    		  | Expression ';' {$$=0; cout<< "blockStatement --> Expression "<<endl;}
+    		  /*| TTHIS '.' VariableDeclarator ';' {$$=0;}*/
+    		  /*| TTHIS '.' ID FormalParametersCalledMethod ';' {$$=0;}*/
     		  | TSUPER FormalParametersCalledMethod ';' {$$=0;}
-    		  | ClassOrInterfaceDeclaration {$$=0;}
-    		  | ID ':' Statement {$$=0;}
+    		  /*| ID ':' Statement {$$=0;}*/
     		  | Statement {$$=0;}
     		  | ';' {$$=0;}
     		  ;
 
-Print : TPRINT '(' Args ')' ';' {cout << "Print: " << $1 << endl; $$=0;}
+Print : TPRINT '(' Args ')' ';' {/*cout << "Print: " << $1 << endl;*/ $$=0;}
 	  ;
 Args :factFinal ArgsRest {$$=0;}
 	 | {$$=0;}
@@ -434,35 +328,31 @@ ArgsRest : '+' factFinal ArgsRest {$$=0;}
 		 | {$$=0;}
 		 ;
 
-PrintF : TPRINTF '(' ArgsF ')' ';' {$$=0; printFloat = new KAWATreePrintFloat; printFloat->addParam(paramFloat); cout << " PrintF --> TPRINTF '(' ArgsF ')' ';'" <<endl;}
+PrintF : TPRINTF '(' ArgsF ')' ';' {$$=0; printFloat = new KAWATreePrintFloat; printFloat->addParam(paramFloat); /*cout << " PrintF --> TPRINTF '(' ArgsF ')' ';'" <<endl;*/}
 	   ;
-ArgsF : REEL {$$=0; typeFloat = new KAWATreeType("float"); float* doubleVal = (float*) malloc(sizeof(float)); *doubleVal = $1; void* valueDouble = (void*) doubleVal; paramFloat = new KAWATreeParam(typeFloat, valueDouble);cout << " ArgsF --> REEL" <<endl;}
+ArgsF : REEL {$$=0; typeFloat = new KAWATreeType("float"); float* doubleVal = (float*) malloc(sizeof(float)); *doubleVal = $1; void* valueDouble = (void*) doubleVal; paramFloat = new KAWATreeParam(typeFloat, valueDouble);/*cout << " ArgsF --> REEL" <<endl;*/}
 	  | ID {$$=0;}
 	  | {$$=0;} 
 	  ; 
 
-PrintI : TPRINTI '(' ArgsI ')' ';' {$$ = new KAWATreePrintInteger; $$->addParam(paramInteger); cout << " PrintI --> TPRINTI '(' ArgsI ')' ';'" <<endl;}
+PrintI : TPRINTI '(' ArgsI ')' ';' {$$ = new KAWATreePrintInteger; $$->addParam(paramInteger); /*cout << " PrintI --> TPRINTI '(' ArgsI ')' ';'" <<endl;*/}
 	   ;
-ArgsI : ENTIER {$$=0; typeInteger = new KAWATreeType("int"); int* integer = (int*) malloc(sizeof(int)); *integer = $1; void* valueInt = (void*) integer; paramInteger = new KAWATreeParam(typeInteger, valueInt); cout << " ArgsI --> ENTIER " <<endl;}
+ArgsI : ENTIER {$$=0; typeInteger = new KAWATreeType("int"); int* integer = (int*) malloc(sizeof(int)); *integer = $1; void* valueInt = (void*) integer; paramInteger = new KAWATreeParam(typeInteger, valueInt); /*cout << " ArgsI --> ENTIER " <<endl;*/}
 	  | ID {$$=0;}
 	  | {$$=0;}
 	  ; 
 
-PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; printString = new KAWATreePrintString; printString->addParam(paramStr);cout<< " PrintS --> TPRINTS '(' ArgsS ')' ';'"<< endl;}
+PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; printString = new KAWATreePrintString; printString->addParam(paramStr); /*cout<< " PrintS --> TPRINTS '(' ArgsS ')' ';'"<< endl;*/}
 	   ;
-ArgsS : STRING {$$=0; typeString = new KAWATreeType("string"); paramStr = new KAWATreeParam(typeString, (void*) $1);cout<< " ArgsS --> STRING "<< endl;}
+ArgsS : STRING {$$=0; typeString = new KAWATreeType("string"); paramStr = new KAWATreeParam(typeString, (void*) $1);/*cout<< " ArgsS --> STRING "<< endl;*/}
 	  | ID {$$=0;}
 	  | {$$=0;}
 	  ; 
 
-/*
-LocalVariableDeclarationStatement: 
-								 ;
-*/
 Statement: Block {$$=0;}
     	 | TIF '(' Expression ')' Statement %prec THEN {$$=0;}
 		 | TIF '(' Expression ')' Statement TELSE Statement {$$=0;}
-		 | TSWITCH '(' Expression ')' '{' SwitchBlockStatementGroups '}' {$$=0;}
+		 | TSWITCH '(' Expression ')' '{' SwitchBlockStatements '}' {$$=0;}
 		 | TWHILE '(' Expression ')' Statement {$$=0;}
 		 | TDO Statement TWHILE '(' Expression ')' ';' {$$=0;}
 		 | TFOR '(' ForControl ')' Statement {$$=0;}
@@ -472,55 +362,17 @@ Statement: Block {$$=0;}
 		 | TCONTINUE ';' {$$=0;}
 		 | TRETURN Expression ';' {$$=0;}
 		 | TRETURN ';' {$$=0;}
-		 /*| TTHROWS Expression ';'*/
-		 /*| TSYNCHRONIZED '(' Expression ')' Block*/
-		 /*| TTRY Block Catches */
-		 /*| TTRY Block Catches TFINALLY Block*/
-		 /*| TTRY Block TFINALLY Block*/
-		 /*| TTRY ResourceSpecification Block Catches */
-		 /*| TTRY ResourceSpecification Block Catches TFINALLY Block*/
-		 /*| TTRY ResourceSpecification Block TFINALLY Block*/
-    	 ;
-
-/*--------------------------------------------partie exceptions------------------------------------
-Catches: CatchClause  CatchClauses
-CatchClauses : CatchClauses CatchClause
-			 | {$$=0;}
-			 ;
-
-CatchClause:  TCATCH '(' VariableModifiers CatchType ID ')' Block
-		   ;
-
-CatchType: QualifiedIdentifier QualifiedIdentifiers
-QualifiedIdentifiers : '|' QualifiedIdentifiers QualifiedIdentifier {$$=$2;}
-					 | {$$=0;}
-					 ;
-
-/*---------- partie resources de try ----------------------------
-ResourceSpecification: '(' Resources ';' ')' {$$=$2;}
-					 | '(' Resources ')' {$$=$2;}
-					 ;
-
-Resources: Resource ResourceList
 		 ;
-ResourceList : ';' ResourceList Resource {$$=$2;}
-			 | {$$=0;}
-			 ;
 
-Resource: VariableModifiers QualifiedIdentifier VariableDeclaratorId '=' Expression
-		;
-*/
 /*----------------------------------------Partie switch----------------------------------------------*/
-SwitchBlockStatementGroups: SwitchBlockStatementGroups SwitchBlockStatementGroup {$$=0;}
+SwitchBlockStatements: SwitchBlockStatements SwitchBlockStatement {$$=0;}
 						  | {$$=0;}
 						  ;
 
-SwitchBlockStatementGroup: SwitchLabel BlockStatements {$$=0;}
-						 ; 
+SwitchBlockStatement: TCASE Expression ':' BlockStatements {$$=0;}
+					|  TDEFAULT ':' BlockStatements
+					; 
 
-SwitchLabel: TCASE Expression ':' {$$=0;} 
-    	   | TDEFAULT ':' {$$=0;}
-    	   ;
 /*------------------------------ partie for -----------------------------------------------------------------*/
 ForControl: ForVarControl ';' Expression ';' {$$=0;} 
 		  | ForVarControl ';' Expression ';' ForUpdate {$$=0;} 
@@ -532,24 +384,22 @@ ForControl: ForVarControl ';' Expression ';' {$$=0;}
     	  | ';' ';' ForUpdate {$$=0;}
     	  ;
 
-ForVarControl: Type VariableDeclaratorId  ForVariableDeclaratorsRest {$$=0;}
-			 | ID ForVariableDeclaratorsRest {$$=0;}
+ForVarControl: Type VariableDeclaratorId VariableDeclaratorList {$$=0;}
+			 | Type VariableDeclaratorId '=' Expression VariableDeclaratorList {$$=0;}
+			 | ID Ids VariableDeclaratorList {$$=0;}
+			 | ID Ids '=' Expression VariableDeclaratorList  {$$=0;}
 			 ;
 
-ForVariableDeclaratorsRest:  VariableDeclaratorList {$$=0;}
-						  | '=' VariableInitializer VariableDeclaratorList {$$=0;}
-						  ;
 
-ForUpdate: IDExpression StatementExpressionList {$$=0;}
+ForUpdate: Expression StatementExpressionList {$$=0;}
+		 |  ID Ids TablesIndexe '=' Expression  StatementExpressionList {$$=0;}
 		 ;
 
 StatementExpressionList : ',' Expression StatementExpressionList {$$=0;}
+						| ','  ID Ids TablesIndexe '=' Expression  StatementExpressionList {$$=0;}
 						| {$$=0;}
 						;   
 
-IDExpression : Expression {$$=0;}
-	 		 | ID TablesIndexe '=' Expression {$$=0;}
-	 		 ;
 /*-------------------------------------Expression arithmetique----------------------------------------------------*/
 
 Expression : FacteurEffect {$$=0;}
@@ -566,14 +416,8 @@ FacteurEffect : FacteurEffect TORBINEQ ExpressionOr {$$=0;}
 			  | FacteurEffect TMULEQ ExpressionOr {$$=0;}
 			  | FacteurEffect TMINUSEQ ExpressionOr {$$=0;}
 			  | FacteurEffect TPLUSEQ ExpressionOr {$$=0;}
-			  /*| FacteurEffect '=' ExpressionOrCond*/
 			  | ExpressionOr{$$=0;}
 			  ;
-/*
-ExpressionCond : Expression '?' Expression ':' Expression % prec COND {$$=0;}
-				 | ExpressionCond {$$=0;}
-				 ;
-*/
 
 ExpressionOr  : ExpressionOr TOR ExpressionAnd {$$=0;} 
 			  | ExpressionAnd {$$=0;}
@@ -634,33 +478,44 @@ facteur : '~' facteur %prec NBINAIRE {$$=0;}
 		| TINC ID {$$=0;}
 		| factFinal {$$=0;}
 		;
-/*------------------------
-.
-------------------------
-[]
-------------------------*/
+
 factFinal: '(' Expression ')' {$$=0;}
 		 | ENTIER {$$=0;}
 		 | REEL {$$=0;}
-		 | ID Ids {$$=0;}
+		 /*| ID Ids {$$=0;}*/
 		 | STRING {$$=0;}
-		 | ObjectInitializer {$$=0;}
-		 | MethodeInitializer {$$=0;}
+		 | ConstructorCall {$$=0;}
+		 /* | MethodCall MethodCalls{$$=0;}*/
+		 | ArrayInitializer {$$=0;} 
+		 | LinkedMethodVarCall {$$=0;} 
 		 | TTRUE {$$=0;}
 		 | TFALSE {$$=0;}
 		 | TNULL {$$=0;} 
 		 ;
 
-ObjectInitializer : TNEW ID Ids FormalParametersCalledMethod {$$=0;}
-	   ;
+ConstructorCall : TNEW ID Ids FormalParametersCalledMethod {$$=0;}
+	            ;
 
-MethodeInitializer : ID Ids FormalParametersCalledMethod {$$=0;}
-		;
+MethodCall : ID FormalParametersCalledMethod {$$=0;}
+		   ;
+
+ArrayInitializer : TNEW BasicType '[' ENTIER ']'{/*cout << "NEW BasicType [ Entier ]"<<endl;*/}
+				 | TNEW ID Ids '[' ENTIER ']'{/*cout << "NEW ID IDs [ Entier ]"<<endl;*/}
+				 ;
+
+LinkedMethodVarCall : TTHIS '.' ID LinkedMethodVarCallList {$$=0;}
+					| ID LinkedMethodVarCallList {$$=0;}
+					| TTHIS '.' MethodCall LinkedMethodVarCallList {$$=0;}
+					| MethodCall LinkedMethodVarCallList {$$=0;}
+					;
+
+LinkedMethodVarCallList : '.' ID LinkedMethodVarCallList {$$=0;}
+						| '.' MethodCall LinkedMethodVarCallList {$$=0;}
+						| {$$=0;}
+						;
 
 
 %%
-
-/*#include "lex.yy.c"*/
 
 int yyerror( const char* err )
 {

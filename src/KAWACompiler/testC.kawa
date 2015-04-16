@@ -1,0 +1,20 @@
+package Test;
+
+public class Test{
+
+	public int[] x;
+	public meth(final int x)
+	{
+		final int x;
+		a= a.b.c;
+		a= a.bo().bo();
+		a = bo().bo().b.bo().a;
+		a= bo().bo();
+		a= bo();
+		a = a.b.bo().bo().b.b.bo();
+		a= bo().b.bo().b.d.d.bo().bo();	
+		a= a.bo().b.boB().doB().doB().b.b;
+		a=this.b;
+		//this.a[5].b=5;
+	}
+}

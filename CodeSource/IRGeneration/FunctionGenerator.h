@@ -1,5 +1,5 @@
-#ifndef KAWA_GENE_FNC
-#define KAWA_GENE_FNC
+#ifndef FUNC_GEN
+#define FUNC_GEN
 
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
@@ -21,44 +21,58 @@
 
 #include "llvm/IR/Type.h"
 
+#include <llvm/IR/ValueSymbolTable.h>
+
+
 using namespace llvm;
 
 
 class FunctionGenerator {
 
 public:
-	static Function *createFonction(Module *module, int index,
+	static Function *createFunction(Module *module, bool isStatic,
 									std::string className,
 									std::string name,
 									std::string ret_type, 
 									std::vector<std::string> args_types,									
 									std::vector<std::string> args_names);
 
+	static Function *createConstructor(Module *module, std::string className,
+								std::vector<std::string> args_types,									
+								std::vector<std::string> args_names);
+
+
 	static Function *getFunction(Module *module, std::string name);
 
-	static Function *createMainFunction(Module *module);
+	static Function *getOrCreateMainFunction(Module *module, std::string aC = "", std::string aV = "");
 
-	static Function *getMainFunction(Module *module);
+	static Function *getOrCreatePutsFunction(Module *module);
 
-	static Function *createPrintFunction(Module *module);
+	static Function *getOrCreateSprintf(Module *module);
 
-	static Function *getPrintFunction(Module *module);
+	static Function *getOrCreateStrlenFunction(Module *module);
 
-	static Function *getFunction(Module *module,
-				 				 std::string className,
-				 				 std::string name,
-				 				 std::string ret_type,
-				 				 std::vector<std::string> list_type);
+	static Function *getOrCreateStrcatFunction(Module *module);
 
-	static void setBody(Module *module,
-						std::string functionName,
+	static Function *getOrCreateMallocFunction(Module *module);
+
+	static Function *getOrCreateCallocFunction(Module *module);
+
+	static void initFunction(Function *f, std::vector<std::string> args_names);
+
+	static void setFunctionBody(Function *f,
 						std::vector<BasicBlock*> list_block);
 
+	static Function *getOrCreateIntToStrFunction(Module *module);
+
+	static Function *getOrCreateCharToStrFunction(Module *module);
+
+	static Function *getOrCreateDoubleToStrFunction(Module *module);
 };
 
 
 
-
-
-
 #endif
+
+
+

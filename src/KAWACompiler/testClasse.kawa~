@@ -10,8 +10,9 @@ public static class teste extends inter1 implements interface1 {
 	 */
 
 	 // tableau initialisé ou pas 
-	 int var1 [] = {3, 5}
+	 int var1 [] = {3, 5};
 	 float var2[];
+	int this =3;
 
 	 // variable simple
 	 float var3;

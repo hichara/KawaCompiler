@@ -10,8 +10,9 @@ public static class teste extends inter1 implements interface1 {
 	 */
 
 	 // tableau initialisé ou pas 
-	 int var1 [] = {3, 5};
-	 float var2[];
+	 int[] var1;
+	 float[] var2;
+	int y =3;
 
 	 // variable simple
 	 float var3;
@@ -30,19 +31,19 @@ public static class teste extends inter1 implements interface1 {
 	 Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
 	 
 	 // tableau d'objets initialisés ou pas 
-	 Teste t5[] = {new Teste(x), new Teste()};
-	 Teste t6[] = {};
+	 //Teste []t5 = new Teste[5];
+	 int []t6 = new int[5];
 
 	 // Variable initialisé par une methode d'un objet
 	 int var5 = t1.getAge();
 	 // tableau initialisé par des methodes des objets
-	 float var6 = {t1.getAge(), t2.getAge()};
+	 float var6;
 
 	 //fonction sans parametres avec des variables locaux et valeur de retour
 	 public char method1(){
 	 	// tableau initialisé ou pas 
-	 	int var1 [] = {3, 5};
-	 	float var2[];
+	 	int [] var;
+	 	float[] var2;
 
 	 	// variable simple
 	 	float var3;
@@ -54,20 +55,20 @@ public static class teste extends inter1 implements interface1 {
 	 	char c1, c2, c3; 
 
 	 	// variables de type objet
-	 	Teste t1 = new Teste();
+	 	final Teste t1 = new Teste();
 	 	Teste t2 = new Teste(age, nom, salaire);
 
 	 	//plusieurs variables de type objet séparés par des virgules
 	 	Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
 	 
 	 	// tableau d'objets initialisés ou pas 
-	 	Teste t5[] = {new Teste(x), new Teste()};
-	 	Teste t6[] = {};
+	 	Teste []t5;
+	 	Teste []t6;
 
 	 	// Variable initialisé par une methode d'un objet
 	 	int var5 = t1.getAge();
 	 	// tableau initialisé par des methodes des objets
-	 	float var6 = {t1.getAge(), t2.getAge()};
+	 	float var6 ;
 	 	// ; est acceptable 
 	 	;
 	 	// if else 
@@ -129,7 +130,7 @@ public static class teste extends inter1 implements interface1 {
 	 // constructeur sans parametres avec une boucle while étiqueté
 	 public Teste(){
 	 	int j=3;
-	 	Boucle : while(j<nbMax){
+	 	while(j<nbMax){
 	 				int k;
 	 			}
 	 }
@@ -143,10 +144,11 @@ public static class teste extends inter1 implements interface1 {
 	 	this.SetName(name[3]);
 	 	this.getName();
 	 	this.name = NULL;
+	 	//a.do().b.do();
 	 	boolean b = false; 
 	 	int j=3;
 	 	tabl[3] = 5;
-	 	Boucle : while(j<nbMax){
+	 	while(j<nbMax){
 	 				int k;
 	 			}
 	 }

@@ -1,75 +1,77 @@
 #include "TypeGenerator.h"
-
-
-
+#include "KawaEnumeration.h"
+#include "NameBuilder.h"
+#include "KawaUtilitary.h"
+#include "GlobalVariableGenerator.h"
 
 
 // Cree le type associé a une instance de classe et la structure contenant les attributs
-StructType *TypeGenerator::createClassType(Module *module,
+StructType* TypeGenerator::createClassType(Module *module,
 					std::string className,
 					std::vector<std::string> att_names,
-					std::vector<std::string> list_types, 
-					std::vector<bool> isValue,
+					std::vector<Type*> list_types, 
 					std::vector<bool> isStatic) {
 
-	if(isValue.size() == 0)
+	if(isStatic.size() == 0)
 		return NULL;
 
-	if(isValue.size() != list_type.size() ||
-	   isValue.size() != isStatic.size() ||
-	   isValue.size() != att_names.size())
+	if(isStatic.size() != list_types.size() ||
+	   isStatic.size() != att_names.size())
 		return NULL;
 
     std::string name_class =
     	NameBuilder::buildClassTypeName(className);
 
-    StructType *maClass = StrToLLVMType(name_class);
+    StructType *maClass = (StructType*)strToLLVMType(module, name_class);
 
 	if(!maClass->isOpaque())
-		KawaUtilitary::stopGenerationIR(CLASS_AREADY EXIST);
+		KawaUtilitary::stopGenerationIR(ERROR_CLASS_AREADY_EXIST);
 
 	std::string name_struct =
-		 NameBuilder::buildStructTypeName(className);
+		 NameBuilder::buildClassStructTypeName(className);
 
 
-	std::vector<Type*> res;
+	std::vector<Type*> llvm_types;
 	std::string attName, indexName;
 	Type *t;
 
 	int indexAtt = 0;
 
-	for(int i = 0; i < list_type.size(); i++) {
+	for(int i = 0; i < list_types.size(); i++) {
 		
-		t = StrToLLVMType(list_type[i]);
+		t = list_types[i];
 
-		if(!isValue[i])
-			t = t->getPointerTo();		
+		if(t->isStructTy()){
+			t = t->getPointerTo();
+		}
 		
 		if(!isStatic[i]) {
-			res.push_back(t);
+			llvm_types.push_back(t);
 			indexName = NameBuilder::buildAttributIndexName(
-				className, att_names[i]); 
+				className, att_names[i]);
 
-			GlobalVariableGenerator::createIndex(module, indexName, indexAtt);
+			GlobalVariableGenerator::createIndexOfMember(module, indexName, indexAtt);
 			indexAtt++;
 		} else {
 			attName = NameBuilder::buildStaticVariableName(
 				className, att_names[i]);
 
-			GlobalVariableGenerator::createStaticAttribute(
-				module, attName, list_types[i]);
+			GlobalVariableGenerator::getOrCreateStaticAttribut(
+				module, className, attName, t);
 		}
 	}
 
+	LLVMContext &context = module->getContext();
+
     StructType *maClassStruct = 
     	StructType::create(
-    		module->getContext(), 
-    		array_type,
+    		context, 
+    		llvm_types,
     		name_struct);
 
-    std::vector<Type *> ar2;	
-    ar2.push_back(maClassStruct->getPointerTy());
-    ar2.push_back(Type::getInt8Ty()->getPointerTo());
+    std::vector<Type*> ar2;	
+    ar2.push_back(maClassStruct->getPointerTo());
+    ar2.push_back(Type::getInt8Ty(context)->getPointerTo());
 
     maClass->setBody(ar2);
 
@@ -80,7 +82,7 @@ StructType *TypeGenerator::createClassType(Module *module,
 // Retourne le type associé à une chaine de caractere
 // Null Sinon
 // Dans le cas d'une classe, si la classe n'existe pas, on renvoie un type opaque
-Type *TypeGenerator::StrToLLVMType(Module *module, std::string type) {
+Type *TypeGenerator::strToLLVMType(Module *module, std::string type) {
 
 	LLVMContext &context = module->getContext();
 
@@ -90,20 +92,62 @@ Type *TypeGenerator::StrToLLVMType(Module *module, std::string type) {
 	if(type == INT)
 		return Type::getInt32Ty(context);
 
+	if(type == CHAR)
+		return Type::getInt8Ty(context);
+
 	if(type == DOUBLE)
 		return Type::getDoubleTy(context);
 
 	if(type == FLOAT)
 		return Type::getFloatTy(context);
 
+	if(type == STRING)
+		return Type::getInt8Ty(context)->getPointerTo();
+
 	std::string lt = KAWA_CLASS_PREFIX + type;
 
 	Type *t = module->getTypeByName(lt);
 
+	// Cree une structure opaque
 	if(t == NULL)
-		return StructType::createType(module->getContext, lt); 
+		return StructType::create(context, lt); 
 
 	return NULL;
 }
 
 
+Type* TypeGenerator::getPointerOf(Module *module, std::string type, int nb) {
+
+	Type *t = TypeGenerator::strToLLVMType(module, type);
+
+	for(int i = 0; i < nb; i++) {
+		t = t->getPointerTo();
+	}
+
+	return t;
+}
+
+Type* TypeGenerator::getMultiDimensionArray(Module *module, std::string type, std::vector<int> sizes) {
+
+	Type *t = TypeGenerator::strToLLVMType(module, type);
+	int n;
+
+	for(int i = 0; i < sizes.size(); i++) {
+		n = sizes[sizes.size() - 1 - i];
+		t = ArrayType::get(t, n);
+	}
+
+	return t;
+}
+
+
+std::vector<Type*> TypeGenerator::strToLLVMType(Module *module, std::vector<std::string> args) {
+
+	std::vector<Type*> types;
+
+	for(int i = 0; i < args.size(); i++) {
+		types.push_back(strToLLVMType(module, args[i]));
+	}
+
+	return types;
+}

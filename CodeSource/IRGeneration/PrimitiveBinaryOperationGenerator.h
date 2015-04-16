@@ -1,3 +1,7 @@
+#ifndef PRIM_BIN_OP_GEN
+#define PRIM_BIN_OP_GEN
+
+
 #include "llvm/Analysis/Passes.h"
 #include "llvm/ExecutionEngine/ExecutionEngine.h"
 #include "llvm/ExecutionEngine/JIT.h"
@@ -12,7 +16,6 @@
 #include "llvm/Transforms/Scalar.h"
 #include <cctype>
 #include <cstdio>
-#include <map>
 #include <string>
 #include <vector>
 
@@ -24,9 +27,21 @@ using namespace llvm;
 class PrimitiveBinaryOperationGenerator {
 
 public:
-	static Value* createAdd(Type *type, Value *o1, Value *o2,  const Twine &Name="", BasicBlock *b) ;
-	static Value* createMul(Type *type, Value *o1, Value *o2,  const Twine &Name="", BasicBlock *b) ;
-	static Value* createSub(Type *type, Value *o1, Value *o2,  const Twine &Name="", BasicBlock *b) ;
-    static Value* createDiv(Type *type, Value *o1, Value *o2,  const Twine &Name="", BasicBlock *b) ;
-    static Value* createAdd(Type *type, Value *o1, Value *o2,  const Twine &Name="", BasicBlock *b) ;
+	static Value* createAdd(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
+	static Value* createMul(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
+	static Value* createSub(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
+    static Value* createDiv(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
+    static Value* createMod(Type *type,*Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createAnd(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createXor(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createSup(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createInf(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createSOE(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createIOE(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value*  createOr(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value*  createEq(Value *o1, Value *o2, std::string name, BasicBlock *b);
+    static Value* createNot(Value *o1,std::string name, BasicBlock *b);
+    static Value* valToBool(Value *o1, BasicBlock *b);
 };
+
+#endif

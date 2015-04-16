@@ -1,0 +1,345 @@
+/**************** Grammaire ***************************/
+
+Program  ->  Package ImportDeclaration Modifiers ClassDeclaration
+| Package ImportDeclaration Modifiers InterfaceDeclaration
+
+Package  ->  TPACKAGE ID ';'
+/*--------La partie qui gère les identificateurs et les identificateurs FQN   ----------*/
+Ids  ->  '.' ID Ids 
+| Epsilone
+
+QList  ->  ',' ID Ids QList 
+| Epsilone
+
+ListIds  ->  ID Ids QList 
+
+/*-------les tableaux------------*/
+/*-------Cette partie n'est gérée que syntaxiquement ------------*/
+Type  ->  BasicType Tables 
+| ID Ids Tables 
+
+Tables  ->  '[' ']' Tables 
+| Epsilone
+
+TablesIndexe  ->  '[' ENTIER ']' TablesIndexe
+| Epsilone 
+
+/*-------les types primitifs (Nous avons pris string comme un type primitif)------------*/
+BasicType  ->  TBYTE 
+| TSHORT 
+| TCHAR 
+| TINT 
+| TLONG 
+| TFLOAT 
+| TDOUBLE 
+| TBOOLEAN 
+| TSTRING
+
+/*------------- Partie des modificateurs----*/
+Modifier  ->  TPUBLIC
+| TPROTECTED
+| TPRIVATE
+| TSTATIC
+| TABSTRACT
+| TFINAL
+
+Modifiers  ->  Modifiers Modifier
+| Epsilone 
+
+
+Static -> TSTATIC 
+| Epsilone
+
+/*------- Sous-Partie qui complete la partie des imports --------*/ 
+All  ->  '.' ID All 
+| '.' '*'
+| Epsilone 
+
+/*------- Partie d'héritage des classes--------*/ 
+Extends	 ->  TEXTENDS Type 
+| Epsilone 
+
+/*------- Partie d'héritage des interface--------*/ 
+ExtendsList  ->  TEXTENDS ListIds 
+| Epsilone
+
+/*------- Partie d'implémentation des interface--------*/ 
+Implements	 ->  TIMPLEMENTS ListIds 
+| Epsilone
+
+
+/*---------IMPORTS --------------*/
+ImportDeclaration  ->  TIMPORT ID All ';' ImportDeclaration 
+| Epsilone
+
+/*------------ Entête des classes et des interfaces------------*/
+ClassDeclaration  ->  TCLASS ID Extends Implements ClassBody
+
+InterfaceDeclaration  ->  TINTERFACE ID ExtendsList InterfaceBody 
+
+/*------------Corps d'une classe------------------*/
+ClassBody ->  '{' MemberDecs '}'
+
+MemberDecs -> MemberDecs MemberDec 
+| Epsilone
+
+
+MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' 
+| Modifiers Type ID FormalParameters Block 
+| Modifiers TVOID ID FormalParameters Block 
+| Modifiers ID FormalParameters Block 
+
+
+/*-------- Corps d'une interface --------------*/
+InterfaceBody ->  '{' Prototypes '}' 
+
+Prototypes -> Prototypes Prototype 
+| Epsilone
+
+Prototype -> Modifiers Type ID FormalParameters';'
+| Modifiers TVOID ID FormalParameters ';' 
+
+/*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
+FormalParameters -> '(' FormalParameterDecls ')'
+| VoidFormalParametrs 
+				
+
+VoidFormalParametrs -> '(' ')' 
+
+
+FormalParametersCalledMethod -> '(' FormalParametersCalledMethodDecls ')'
+| VoidFormalParametrs
+							;
+FormalParametersCalledMethodDecls -> ID '[' ENTIER ']' TablesIndexe FormalParameterCalledMethodDeclsRest 
+| Expression FormalParameterCalledMethodDeclsRest
+
+
+FormalParameterDecls -> VariableModifiers Type VariableDeclaratorId FormalParameterDeclsRest
+
+
+VariableModifiers -> VariableModifiers VariableModifier
+| Epsilone
+
+
+VariableModifier: TFINAL
+| TVALUE
+
+
+FormalParameterDeclsRest -> ',' FormalParameterDecls
+| Epsilone
+
+
+FormalParameterCalledMethodDeclsRest -> ',' FormalParametersCalledMethodDecls 
+| Epsilone
+
+
+VariableDeclaratorId -> ID Tables 
+
+
+/*---------- Partie des blocks et les variables locales -----------*/
+Block ->  '{' BlockStatements '}'
+
+BlockStatements ->  BlockStatements BlockStatement 
+| Epsilone 
+
+BlockStatement ->  Print
+| PrintS 
+| PrintF 
+| PrintI 
+| ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';'
+| ID Tables VariableDeclarator VariableDeclaratorList ';' 
+| BasicType Tables VariableDeclarator VariableDeclaratorList ';' 
+| ID TablesIndexe '=' Expression ';' 
+| Expression ';' 
+| TTHIS '.' VariableDeclarator ';' 
+| TTHIS '.' ID FormalParametersCalledMethod ';' 
+| TSUPER FormalParametersCalledMethod ';' 
+| Statement 
+| ';' 
+
+/*---------- Partie des print ----------*/
+Print  ->  TPRINT '(' Args ')' ';'
+
+Args  -> factFinal ArgsRest 
+| Epsilone
+
+ArgsRest  ->  '+' factFinal ArgsRest  
+| Epsilone
+
+PrintF  ->  TPRINTF '(' ArgsF ')' ';'
+
+ArgsF  ->  REEL
+| ID 
+| Epsilone
+
+PrintI  ->  TPRINTI '(' ArgsI ')' ';'
+
+ArgsI  ->  ENTIER 
+| ID 
+| Epsilone
+
+PrintS  ->  TPRINTS '(' ArgsS ')' ';' 
+
+ArgsS  ->  STRING 
+| ID 
+| Epsilone
+
+/*---------- Partie des Statements -----------*/
+Statement ->  Block 
+| TIF '(' Expression ')' Statement 
+| TIF '(' Expression ')' Statement TELSE Statement 
+| TSWITCH '(' Expression ')' '{' SwitchBlockStatementGroups '}' 
+| TWHILE '(' Expression ')' Statement 
+| TDO Statement TWHILE '(' Expression ')' ';' 
+| TFOR '(' ForControl ')' Statement 
+| TBREAK ID ';' 
+| TBREAK ';' 
+| TCONTINUE ID ';' 
+| TCONTINUE ';' 
+| TRETURN Expression ';' 
+| TRETURN ';' 
+
+/*----------------------------------------Partie switch----------------------------------------------*/
+SwitchBlockStatements -> SwitchBlockStatements SwitchBlockStatement
+| Epsilone
+
+
+SwitchBlockStatement: TCASE Expression ':' BlockStatements 
+|  TDEFAULT ':' BlockStatements
+
+
+/*------------------------------ partie for -----------------------------------------------------------------*/
+ForControl -> ForVarControl ';' Expression ';' 
+| ForVarControl ';' Expression ';' ForUpdate 
+| ForVarControl ';' ';' 
+| ForVarControl ';' ';' ForUpdate
+| ';' Expression ';' 
+| ';' Expression ';' ForUpdate
+| ';' ';' 
+| ';' ';' ForUpdate 
+
+
+ForVarControl -> Type VariableDeclaratorId VariableDeclaratorList 
+| Type VariableDeclaratorId '=' Expression VariableDeclaratorList
+| ID Ids VariableDeclaratorList
+| ID Ids '=' Expression VariableDeclaratorList
+
+
+
+ForUpdate -> Expression StatementExpressionList
+|  ID Ids TablesIndexe '=' Expression  StatementExpressionList
+		
+
+StatementExpressionList -> ',' Expression StatementExpressionList 
+| ','  ID Ids TablesIndexe '=' Expression  StatementExpressionList 
+| Epsilone
+
+
+/*---------------------Partie Expression ------------------------*/
+/*----Cette partie est gérée de cette manière afin de conserver l'ordre de priorité-----*/
+Expression  ->  FacteurAffect 
+
+/*---------- Partie des opérateurs concaténés avec "=" -----------*/
+FacteurAffect  ->  FacteurEffect TORBINEQ ExpressionOr 
+| FacteurEffect TXORBINEQ ExpressionOr 
+| FacteurEffect TANDBINEQ ExpressionOr 
+| FacteurEffect TDECALNSEQ ExpressionOr 
+| FacteurEffect TDECAREQ ExpressionOr 
+| FacteurEffect TDECALEQ ExpressionOr 
+| FacteurEffect TMODEQ ExpressionOr 
+| FacteurEffect TDIVEQ ExpressionOr 
+| FacteurEffect TMULEQ ExpressionOr 
+| FacteurEffect TMINUSEQ ExpressionOr 
+| FacteurEffect TPLUSEQ ExpressionOr 
+| ExpressionOr
+
+/*---------------------Sous-partie des Expressions de comparaisons ------------------------*/
+ExpressionOr   ->  ExpressionOr TOR ExpressionAnd  
+| ExpressionAnd 
+
+ExpressionAnd  ->  ExpressionAnd TAND ExpressionOrLogic  
+| ExpressionOrLogic 
+
+/*---Cette sous partie des Expressions de comparaison n'est gérée que syntaxiquement-----*/
+ExpressionOrLogic  ->  ExpressionOrLogic '|' ExpressionOrExLogic 
+| ExpressionOrExLogic 
+
+ExpressionOrExLogic  ->  ExpressionOrExLogic '\^' ExpressionAndLogic 
+| ExpressionAndLogic 
+
+ExpressionAndLogic  ->  ExpressionAndLogic '\&' ExpressionEqNeq 
+| ExpressionEqNeq 
+
+/*---Cette sous partie des Expressions de comparaison est gérée syntaxiquement et sémantiquement -----*/
+ExpressionEqNeq   ->  ExpressionEqNeq TCNE ExpressionCompEq 
+| ExpressionEqNeq TCEQ ExpressionCompEq 
+| ExpressionCompEq 
+
+ExpressionCompEq  ->  ExpressionCompEq TCGE TermePlus   
+| ExpressionCompEq '>' TermePlus 
+| ExpressionCompEq TCLE TermePlus 
+| ExpressionCompEq '<' TermePlus 
+| TermeDecal 
+
+/*---------------------Sous_partie des Expressions de décalage ------------------------*/
+/*---Cette sous partie des Expressions de décalage n'est gérée que syntaxiquement-----*/
+TermeDecal  ->  TermeDecal TDECALNS TermePlus 
+| TermeDecal TDECAR TermePlus 
+| TermeDecal TDECAL TermePlus 
+| TermePlus 
+
+/*------Sous_partie des Expressions Arithmétiques ---------------*/
+TermePlus     ->  TermePlus '+' terme  
+| TermePlus '-' terme 
+| terme 
+
+terme   ->  terme '*' facteur 
+| terme '/' facteur 
+| terme '%' facteur 
+| facteur 
+
+/*------------ Sous_partie des opérateurs unaires ------------------------*/
+facteur  ->  '~' facteur 
+| '!' facteur 
+| '-' facteur 
+| '+' facteur 
+| ID TDEC 
+| TDEC ID 
+| ID TINC 
+| TINC ID 
+| factFinal 
+
+/*--- Sous_partie des constantes et des références pour tout type d'opération et d'affectation----*/
+factFinal ->  '(' Expression ')' 
+| ENTIER 
+| REEL 
+| ID Ids 
+| STRING 
+| ObjectInitializer 
+| MethodeInitializer 
+| TTRUE 
+| TFALSE 
+| TNULL  
+
+/*------------ Sous_partie d'initialisation des objets-------------*/
+ConstructorCall -> TNEW ID Ids FormalParametersCalledMethod
+
+
+MethodCall -> ID FormalParametersCalledMethod 
+
+
+ArrayInitializer -> TNEW BasicType '[' ENTIER ']'
+| TNEW ID Ids '[' ENTIER ']'
+
+
+LinkedMethodVarCall -> TTHIS '.' ID LinkedMethodVarCallList 
+| ID LinkedMethodVarCallList 
+| TTHIS '.' MethodCall LinkedMethodVarCallList 
+| MethodCall LinkedMethodVarCallList
+
+
+LinkedMethodVarCallList -> '.' ID LinkedMethodVarCallList
+| '.' MethodCall LinkedMethodVarCallList
+| Epsilone
+
+

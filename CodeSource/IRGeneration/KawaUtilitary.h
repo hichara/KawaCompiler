@@ -1,9 +1,18 @@
+#ifndef KAWA_UTITLITARY
+#define KAWA_UTITLITARY
 
+#include <cctype>
+#include <cstdio>
+#include <map>
+#include <string>
+#include <vector>
+#include <iostream>
 
 
 class KawaUtilitary {
 public:
-	static Twine *append(const Twine *str1, const Twine *str2);
-
 	static void stopGenerationIR(std::string err);
 };
+
+
+#endif

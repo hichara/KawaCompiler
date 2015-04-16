@@ -109,7 +109,6 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "printInt"      {count(); return (TPRINTI);}
 "printFloat"    {count(); return (TPRINTF);}
 "print"         {count(); return (TPRINT);}
-"main"          {count(); return (TMAIN);}
 "package"       {count(); return (TPACKAGE);}
 
 {ID}            {count(); return strToken(ID); }

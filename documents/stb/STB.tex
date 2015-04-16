@@ -42,24 +42,14 @@
 \section{Objet}
 
 % Présentation succinte du sujet et hyp de travail.
-LLVM est une infrastructure modulaire permettant la réalisation de
-chaînes de compilation et conçue pour l'optimisation. Elle met en oeuvre
-une représentation intermédiaire du code qui permet de découpler les
-langages de l'architecture. Notre objectif est de réaliser, à l'aide de
-l'infrastructure LLVM, un compilateur pour un langage jouet, que nous
-appellerons \textbf {Kawa}, ce dernier doit supporter:
- \begin{itemize}
- 	\item	Les classes, les classes abstraites, les interfaces
-	\item   L'héritage
-	\item   Le polymorphisme
-	\item   Le système de types sera composé des types primitifs
-	  (int, float, etc.), des classes et des interfaces
-	\item   Les instructions de contrôle telles ques (if/else, for,
-	  while/do, switch, etc.).
-	\item   Les méthodes seront définies de manière identique à Java
-	  excepté que les paramètres pourront être préfixés du mot clé
-	  \bsc{value} (transmission par valeur au lieu de référence)
- \end{itemize}
+LLVM est une infrastructure modulaire permettant la réalisation de chaînes de compilation et conçue pour l'optimisation. Elle met en œuvre une représentation intermédiaire du code qui permet de découpler les langages de l'architecture. Notre objectif est de réaliser, à l'aide de l'infrastructure LLVM, un compilateur pour un langage jouet, que nous appellerons \textbf {Kawa}, ce dernier doit supporter:
+\begin{itemize}
+\item	Les classes, les classes abstraites, les interfaces
+\item   L'héritage
+\item   Le polymorphisme
+\item   Le système de types sera composé des types primitifs (int, float, etc.), des classes et des interfaces
+\item   Les instructions de contrôle telles ques (if/else, for, while/do, switch, etc).
+\end{itemize}
 
 
 %\subsection{Besoins opérationnels}
@@ -71,7 +61,7 @@ L'objectif à travers le choix du langage \textbf {kawa} qui est similaire  à \
 
 Pour réaliser le compilateur du langage \textbf {kawa} nous allons utiliser l'infrastructure \textbf {LLVM}, à travers cette infrastructure moderne nous allons apprendre la compilation d'un langage évolué dans ces différentes étapes jusqu'à la génération de code machine, car LLVM fournit des bibliothèques facilitant l’écriture de front-end (transformation de code source en une représentation intermédiaire \textbf {IR}), ainsi que la partie  back-end (transformation de la représentation intermédiaire en code machine).
 
-Nous allons  bénéficier dans le cadre de ce projet des différents avantages offerts par \textbf {LLVM} et \textbf {Clang} (compilateur c++ basé sur llvm) tels que :
+Nous allons  bénéficier dans le cadre de ce projet des différents avantages offerts par \textbf {LLVM} et \textbf {Clang} (compilateur c++ basé sur llvm) tels que :
 \begin{itemize}
 \item Les messages d’erreurs sont beaucoup plus compréhensibles en matière de détails ainsi que de précision par rapport à d'autres messages d'erreurs renvoyés par un autre compilateur, exemple (GCC).
 \item La rapidité en temps de la compilation ainsi que l'optimisation de la vitesse d'exécution, clang est trois fois plus rapide que GCC, de plus il consomme moins de ressources (faible utilisation de la mémoire).
@@ -96,15 +86,15 @@ Différents documents de référence :
 \newpage
 \section{Terminologie et sigles utilisés}
   \begin{itemize}
-  	\item LLVM : (Low Level Virtual Machine) est une infrastructure de compilateur conçue pour l'optimisation à la compilation.
-	\item Kawa : langage jouet qui reprend quelques fonctionnalités de java.
-	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par Apple.
-	\item GIT : logiciel qui permet de stocker un ensemble de fichiers en conservant la chronologie de toutes les modifications qui ont été effectuées dessus.
-	\item ELF : (Executable and Linkable Format) est un format de fichier binaire utilisé pour l'enregistrement de code compilé (objets, exécutables, bibliothèques de fonctions).
-	\item Ubuntu : Distribution linux sur base Debian.
-	\item C++ : Langage de programmation orienté objet bas niveau.
-	\item POO : Programmation orientée objet.
-	\item Makefile : Fichier regroupant des instructions de compilation avec gestion de dépendances.
+  	\item LLVM : (Low Level Virtual Machine) est une infrastructure de compilateur conçue pour l'optimisation à la compilation.
+	\item Kawa : langage jouet qui reprend quelques fonctionnalités de java.
+	\item Clang : compilateur pour le langage c++, son interface de bas niveau  se base sur des bibliothèques llvm pour la compilation. Il est utilisé par Apple.
+	\item GIT : logiciel qui permet de stocker un ensemble de fichiers en conservant la chronologie de toutes les modifications qui ont été effectuées dessus.
+	\item ELF : (Executable and Linkable Format) est un format de fichier binaire utilisé pour l'enregistrement de code compilé (objets, exécutables, bibliothèques de fonctions).
+	\item Ubuntu : Distribution linux sur base Debian.
+	\item C++ : Langage de programmation orienté objet bas niveau.
+	\item POO : Programmation orientée objet.
+	\item Makefile : Fichier regroupant des instructions de compilation avec gestion de dépendances.
   \end{itemize}
 
 \section{Exigences fonctionnelles}
@@ -120,7 +110,7 @@ Différents documents de référence :
   \hline EF\_1&
   Afficher l'aide&
   Utilisateur&
-  Indispensable
+  Secondaire
   \cr
   \hline EF\_2&
   Compiler une application en mode monolithique &
@@ -128,26 +118,11 @@ Différents documents de référence :
   Indispensable
   \cr
   \hline EF\_3&
-  Compiler une application en mode partagé& 
+  Afficher la version du compilateur&
   Utilisateur&
   Secondaire
   \cr
   \hline EF\_4&
-  Compiler une bibliothèques partagée&
-  Utilisateur&
-  Secondaire
-  \cr
-  \hline EF\_5&
-  Afficher la version du compilateur&
-  Utilisateur&
-  Important
-  \cr
-  \hline EF\_6&
-  Indiquer les chemins des dépendances entre le source de l'application et des modules (classe/interface) externes&
-  Utilisateur&
-  Secondaire
-  \cr
-  \hline EF\_7&
   Activer l'affichage en couleur&
   Utilisateur&
   Secondaire

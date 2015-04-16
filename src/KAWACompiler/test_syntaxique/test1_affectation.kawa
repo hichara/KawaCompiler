@@ -61,7 +61,7 @@ public class testdeclarationaffectationaffichage
 		   int entier[] = new int[10]; 
 
 		//-------------->ne doit pas marcher car manque d'indice du tableau
-		  //entier1[]=1;
+		  entier1[]=1;
 		
 		
 		

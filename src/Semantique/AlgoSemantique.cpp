@@ -1,6 +1,7 @@
 #include <iostream>
 #include "KT_Class.h"
 #include "KT_Interface.h"
+#include "KT_Prototype.h"
 #include "KT_Package.h"
 #include "KT_Program.h"
 #include <map>
@@ -75,6 +76,69 @@ bool isImplementCycle(KT_Interface * fille, KT_Interface * mere){
     return false;
 }
 
+
+bool typeIsCorret(string typeFullName){
+    return true;
+}
+
+// surement besoin du package (name) et import necessaire pour la verif de l'existance du type
+void createAndVerifySignatureMethod(KT_Class * classe){
+    vector<string> signaturesMethod;
+    for(KT_SimpleMethod * methode : classe->getSimpleMethods()){
+        string params;
+        for(KT_Param * param : methode->getParams()){
+            if(!param->getParamType()->isBasicType())
+                if(!typeIsCorret(*param->getParamType()->getTypeName())){
+                    cout << "ERROR DE TYPE, inexistant" << endl;
+                }
+            params += "."+*param->getParamType()->getTypeName();
+        }
+        if(!methode->getType()->isBasicType()){
+            if(!typeIsCorret(*methode->getType()->getTypeName())){
+                cout << "ERROR DE TYPE, inexistant" << endl;
+            }
+        }
+        string  * signature = new string(*methode->getName()+""+ params);
+        if(find(begin(signaturesMethod), end(signaturesMethod), *signature) != signaturesMethod.end()){
+            cout << "Erreur 2signatures identique ! " << endl;
+        }
+        signaturesMethod.push_back(*signature);
+        string * fqn = new string(methode->getModifier()->getVisibility()+"."+*methode->getType()->getTypeName() + "."+*signature);
+        cout << *classe->getName() << " a pour methode : " << *fqn << endl;
+        classe->addSignature(*fqn);
+//        methode->setSignature(fqn);
+    }
+}
+
+// surement besoin du package (name) et import necessaire pour la verif de l'existance du type
+void createAndVerifySignaturePrototype(KT_Interface * interface){
+    vector<string> signaturesMethod;
+    for(KT_Prototype * proto : interface->getPrototypes()){
+        string params;
+        for(KT_Param * param : proto->getParams()){
+            if(!param->getParamType()->isBasicType())
+                if(!typeIsCorret(*param->getParamType()->getTypeName())){
+                    cout << "ERROR DE TYPE, inexistant" << endl;
+                }
+            params += "."+*param->getParamType()->getTypeName();
+        }
+        if(!proto->getReturnType()->isBasicType()){
+            if(!typeIsCorret(*proto->getReturnType()->getTypeName())){
+                cout << "ERROR DE TYPE, inexistant" << endl;
+            }
+        }
+        string  * signature = new string(*proto->getName()+""+ params);
+        if(find(begin(signaturesMethod), end(signaturesMethod), *signature) != signaturesMethod.end()){
+            cout << "Erreur 2signatures identique ! " << endl;
+        }
+        signaturesMethod.push_back(*signature);
+        string * fqn = new string(proto->getModifier()->getVisibility()+"."+*proto->getReturnType()->getTypeName() + "."+*signature);
+        cout << *interface->getName() << " a pour proto : " << *fqn << endl;
+        interface->addSignature(*fqn);
+//        proto->setSignature(fqn);
+    }
+}
+
 // TODO: reste le cas ClasseX implement I1,I1,I1
 int createHeritage(KT_Program * prog){
     cout << "===================> Start P2 <===================" <<endl<<endl;
@@ -110,19 +174,18 @@ int createHeritage(KT_Program * prog){
                     cout << *classe->getName() << " a pour interface : "<< *interfaceTypes[*fqn]->getName() << endl;
                     listInter.push_back(interfaceTypes[*fqn]);
                 }
-                //TODO: classe->setParentInterfacesSemantique(listInter);
+                //TODO:
+                classe->setParentInterfacesSem(listInter);
             }
+            createAndVerifySignatureMethod(classe);
         }
 
+        // idem avec les interfaces
         for(KT_Interface * interface : package->getInterfaces()){
             if(interface->getInterfacesparent().size() > 0){
                 vector<KT_Interface *> listInter;
                 for(string * interfaceName : interface->getInterfacesparent()){
                     string * fqn = new string (*package->getName() + "." + *interfaceName);
-                    // ca ne doit pas être une classe ! (peut etre a supp, voir avec parseur)
-                    if(classTypes.find(*fqn) != classTypes.end()){
-                        return -4;
-                    }
                     // si le type n'existe pas
                     if(interfaceTypes.find(*fqn) == interfaceTypes.end()){
                         return -5;
@@ -135,22 +198,175 @@ int createHeritage(KT_Program * prog){
                     cout << *interface->getName() << " a pour interface : "<< *interfaceTypes[*fqn]->getName() << endl;
                     listInter.push_back(interfaceTypes[*fqn]);
                 }
-                //TODO: interface->setParentInterfacesSemantique(listInter);
+                //TODO:
+                interface->setInterfacesparentSem(listInter);
             }
+            createAndVerifySignaturePrototype(interface);
 
         }
     }
     return 0;
 }
 
+// Phase 3
 
+// (en cours) reste indexation de toutes les methodes (mygod) + gestion des methodes heritees
+int decoration(KT_Program * prog){
+    cout << endl << "decoration : " << endl;
+    for(KT_Package * package : prog->getPackages()){
+        for(KT_Class * classe : package->getClasses()){
+            // on verifie que toutes les méthodes que la classe doit implémenter le sont (si elle implement des interfaces)
+            for(KT_Interface * interface : classe->getParentInterfacesSem()){
+                for(string  signature : interface->getSignatures()){
+                    vector<string> lists = classe->getSignatures();
+                    if(find(begin(lists), end(lists), signature) == lists.end()){
+                        cout << *classe->getName()<< " :: error : une methode n'a pas ete defini lors de l'implemention : " << signature <<endl;
+                    }
+                }
+            }
+            // on effectue le traitement sur les body de chaque methode
+            for(KT_SimpleMethod * methode : classe->getSimpleMethods()){
+                if((*methode->getName()).compare("main") == 0){
+                    cout << "main" << endl;
+                }else{
+                    cout << "simple methode" << endl;
+                }
+            }
+        }
+    }
+}
 
 int main() {
 //	string * badName = new string("classelplp1");
+
+    // Type
+    KT_Type * type1 = new KT_Type();
+    type1->setBasicType(true);
+    string * typeN1 = new string("int");
+    type1->setTypeName(typeN1);
+
+    KT_Type * type2 = new KT_Type();
+    type2->setBasicType(true);
+    string * typeN2 = new string("double");
+    type2->setTypeName(typeN2);
+
+    KT_Type * type3 = new KT_Type();
+    type3->setBasicType(false);
+    string * typeN3 = new string("classe1");
+    type3->setTypeName(typeN3);
+
+    //Modifier
+    KT_Modifier * modif1 = new KT_Modifier();
+    modif1->setVisibility(1);
+
+    KT_Modifier * modif2 = new KT_Modifier();
+    modif1->setVisibility(2);
+
+    KT_Modifier * modif3 = new KT_Modifier();
+    modif1->setVisibility(3);
+
+
+    // Params
+    KT_Param * param1 = new KT_Param();
+    string * paramName1 = new string ("paramDeTypeInt");
+    param1->setName(paramName1);
+    param1->setParamModifier(modif1);
+    param1->setParamType(type1);
+
+    KT_Param * param2 = new KT_Param();
+    string * paramName2 = new string ("paramDeTypeDouble");
+    param2->setName(paramName2);
+    param2->setParamModifier(modif2);
+    param2->setParamType(type2);
+
+    KT_Param * param3 = new KT_Param();
+    string * paramName3 = new string ("paramDeTypeClasse1");
+    param3->setName(paramName3);
+    param3->setParamModifier(modif3);
+    param3->setParamType(type3);
+
+    // SimpleMethod
+    KT_SimpleMethod * method1 = new KT_SimpleMethod();
+    string * nameMethod1 = new string("main");
+    method1->setName(nameMethod1);
+    method1->setModifier(modif1);
+    method1->setType(type1);
+    vector<KT_Param * > paramsListMethod1;
+    paramsListMethod1.push_back(param1);
+    paramsListMethod1.push_back(param2);
+    method1->setParams(paramsListMethod1);
+
+    KT_SimpleMethod * method2 = new KT_SimpleMethod();
+    string * nameMethod2 = new string("methodReturnIntByIntEtDouble");
+    method2->setName(nameMethod2);
+    method2->setModifier(modif2);
+    method2->setType(type2);
+    vector<KT_Param * > paramsListMethod2;
+    paramsListMethod2.push_back(param1);
+    paramsListMethod2.push_back(param3);
+    method2->setParams(paramsListMethod2);
+
+    KT_SimpleMethod * method3 = new KT_SimpleMethod();
+    string * nameMethod3 = new string("protoReturnClasse1ByIntEtDoubleEtClass1");
+    method3->setName(nameMethod3);
+    method3->setModifier(modif3);
+    method3->setType(type3);
+    vector<KT_Param * > paramsListMethod3;
+    paramsListMethod3.push_back(param1);
+    paramsListMethod3.push_back(param2);
+    paramsListMethod3.push_back(param3);
+    method3->setParams(paramsListMethod3);
+
+    // Prototype
+    KT_Prototype * p1 = new KT_Prototype();
+    string * nameProto1 = new string("protoReturnIntByIntEtDouble");
+    p1->setName(nameProto1);
+    p1->setModifier(modif1);
+    p1->setReturnType(type1);
+    vector<KT_Param * > paramsList;
+    paramsList.push_back(param1);
+    paramsList.push_back(param2);
+    p1->setParams(paramsList);
+
+    KT_Prototype * p2 = new KT_Prototype();
+    string * nameProto2 = new string("protoReturnDoubleByInt");
+    p2->setName(nameProto2);
+    p2->setModifier(modif3);
+    p2->setReturnType(type2);
+    vector<KT_Param * > paramsList2;
+    paramsList2.push_back(param1);
+    p2->setParams(paramsList2);
+
+    KT_Prototype * p3 = new KT_Prototype();
+    string * nameProto3 = new string("protoReturnClasse1ByIntEtDoubleEtClass1");
+    p3->setName(nameProto3);
+    p3->setModifier(modif3);
+    p3->setReturnType(type3);
+    vector<KT_Param * > paramsList3;
+    paramsList3.push_back(param1);
+    paramsList3.push_back(param2);
+    paramsList3.push_back(param3);
+    p3->setParams(paramsList3);
+
+    KT_Prototype * p4 = new KT_Prototype();
+    string * nameProto4 = new string("protoReturnDoubleByInt");
+    p4->setName(nameProto4);
+    p4->setModifier(modif1);
+    p4->setReturnType(type1);
+    vector<KT_Param * > paramsList4;
+    paramsList4.push_back(param2);
+    p4->setParams(paramsList4);
+
     // Interfaces
     KT_Interface * interface1 = new KT_Interface();
 	string * interfaceName1 = new string("i1");
 	interface1->setName(interfaceName1);
+	vector<KT_Prototype * > protoList;
+    protoList.push_back(p1);
+    protoList.push_back(p2);
+    protoList.push_back(p4);
+    interface1->setPrototypes(protoList);
+
 
 	KT_Interface * interface2 = new KT_Interface();
 	string * interfaceName2 = new string("i2");
@@ -167,11 +383,18 @@ int main() {
     intList.push_back(interfaceName2);
     intList.push_back(interfaceName3);
     interface4->setInterfacesparent(intList);
+    vector<KT_Prototype * > protoList4;
+    protoList4.push_back(p3);
+    interface4->setPrototypes(protoList4);
+
 	// Classes
 	KT_Class * class1 = new KT_Class();
 	string * className1 = new string("classe1");
 	class1->setName(className1);
     class1->setParentClass(NULL);
+    class1->addMethod(method1);
+    class1->addMethod(method2);
+
 
 	KT_Class * class2 = new KT_Class();
 	string * className2 = new string("classe2");
@@ -179,9 +402,11 @@ int main() {
 	class2->setParentClass(className1);
     vector<string *> interfaceLists;
     interfaceLists.push_back(interfaceName4);
-    interfaceLists.push_back(interfaceName2);
-    interfaceLists.push_back(interfaceName1);
+//    interfaceLists.push_back(interfaceName2);
+//    interfaceLists.push_back(interfaceName1);
     class2->setParentInterfaces(interfaceLists);
+    class2->addMethod(method3);
+
 
 	KT_Class * class3 = new KT_Class();
 	string * className3 = new string("classe3");
@@ -234,6 +459,7 @@ int main() {
         if(res != 0) {
             cout<< "2. ERROR DANS TA FACE : " << res << endl;
         }
+        decoration(prog);
     }
 
 	return 0;
@@ -275,5 +501,4 @@ int main() {
 	KT_SimpleMethod * main = new KT_SimpleMethod();
 	main->setParams()
     */
-
 }

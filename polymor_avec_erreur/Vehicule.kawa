@@ -1,0 +1,13 @@
+package polymor.avec_erreur;
+
+ interface Vehicule {
+	 //********doit signaler cette erreur pas de constructeur dans une interface
+	 public Vehicule(){}
+	 //ne doit pas avoir de champs sauf si elle est de type final
+	 String marque;
+	 //devrait fonctionner
+	 final String marque1="toyota";
+	 void Demarrer( ); 
+     void RépartirPassager( ); 
+     void Maintenance( );  
+}

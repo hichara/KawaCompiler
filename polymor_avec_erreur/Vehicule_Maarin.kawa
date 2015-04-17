@@ -1,0 +1,7 @@
+package polymor.avec_erreur;
+
+ class Vehicule_Maarin implements Vehicule {
+	 
+	 public void RépartirPassager( ){printString("je suis la méthode de marin et jai deux passagers");}
+     public void Maintenance( ){printString("je suis la méthode de marin et maaintenance est pour today");} 
+}

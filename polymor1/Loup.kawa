@@ -1,0 +1,29 @@
+package polymor;
+
+public class Loup implements Rintintin {
+	
+	private String couleur;
+	private String race;
+	public Loup(){}
+	
+	  public Loup(String couleur, String race){
+	    this.couleur = couleur;
+	    this.race = race;
+	  }    
+	  
+	  public void manger(Rintintin r) {
+		  printString("Je mange les chiens lolllll!");
+		  } 
+	
+	public void faireCalin() {
+		printString("je suis la méthode redefinie de Rintintin dans loup et Je te fais un GROS CÂLIN");               
+	  }
+
+	  public void faireLeBeau() {
+		  printString("je suis la méthode redefinie de Rintintin dans loup et Je fais le beau !");
+	  }
+
+	  public void faireLechouille() {
+		  printString("je suis la méthode redefinie de Rintintin dans loup et Je fais de grosses léchouilles...");
+	  	}
+}

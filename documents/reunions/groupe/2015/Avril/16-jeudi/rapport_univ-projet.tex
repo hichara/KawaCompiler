@@ -1,0 +1,80 @@
+\documentclass{../../../../../res/rapport}
+
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage{DejaVuSans}
+
+\logo{../../../../../res/logo_univ.png}
+\author{AHOUATE Abdellatif}
+\participants{Ahouate Abdellatif,  
+              Alexandre Petre,
+              Kheireddine Berkane,
+         Nasser Adjibi}
+\absents{Pierre-luc Blot 
+         }
+\filiere{M1GIL}
+\projet{Compilateur LLVM}
+\projdesc{Langage jouet KAWA} % si la description est trop longue pensez 
+                              % à mettre \\ pour un retour à la ligne
+\title{Compte rendu du Jeudi 16 Avril 2015}
+\version{n°1}
+
+%\histentry{0.5}{10/12/2012}{Changelog pour la d\'emo}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \clearpage
+    
+    \section{Observations et questions} 
+    \label{sec:observations_et_questions}
+    \begin{itemize}
+	    \item Nous avons repris ce qu'on a déjà détaillé concernant le mini livrable de Dimanche 19 Avril 2015 lors la réunion avec le client:
+            \begin{itemize}
+        	\item Partie Front end:
+ 			\begin{itemize}
+        			\item L'intégration de la partie nécessaire de KawaTree pour le mini livrable dans le parser. 
+				\item Gérer plusieurs fichiers en entrées. 
+				
+        		\end{itemize}
+		\item Partie analyse sémantique:
+			\begin{itemize}
+        			\item Enregistrer chaque classe comme un type.
+				\item Définir les relations d"héritage (une seule interface).
+				\item Décorer les classes et les méthodes.
+				\item Traiter Main et Body. 					
+        		\end{itemize}
+		\item Partie Back-end : Après un retard de 1h30 Nasser Adjibi est venu pour détaillé la partie BackEnd:
+			\begin{itemize}
+        			\item Générateur des fonctions.
+				\item Générateur des variables.
+				\item Générateur d'appel 					
+        		\end{itemize}
+		
+		\item Partie Test :
+			\begin{itemize}
+        			\item Tester KawaTree en C++.
+				\item Test sémantique (Polymorphisme pas besoin d'héritage). 					
+        		\end{itemize}
+
+	   \end{itemize}
+
+	  \item Nous avons décider la fonctionnalité à développer pour le livrable final du 24 Avril 2015:
+            \begin{itemize}
+        	\item Partie Front end:
+ 			\begin{itemize}
+        			\item L'intégration totale de KawaTree dans le parser. 
+        		\end{itemize}
+		\item Partie analyse sémantique:
+			\begin{itemize}
+        			\item Graphe d'héritage avec polymorphisme
+				\item Définir les relations d"héritage (pour tout).		
+        		\end{itemize}
+		\item Partie Back-end: 
+			\begin{itemize}
+        			\item IR Compile.
+				\item Teste CallGen. 					
+        		\end{itemize}
+	   \end{itemize}
+   \end{itemize} 		
+\end{document}

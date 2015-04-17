@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include "../implementation_KawaTree/headers.h"
+/*
 #include "../AST/AST.h"
 #include "../KAWATree/src/KAWATreeCompiler.h"
 #include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
@@ -18,9 +20,11 @@
 #include "../KAWATree/src/KAWATreePrintInteger.h"
 #include "../KAWATree/src/KAWATreePrintFloat.h"
 #include "../KAWATree/src/KAWATreePrintString.h"
+*/
 
 using namespace std;
 
+/*
 KAWATreeClass* mainClass;
 KAWATreeMethod* mainMethod;
 KAWATreeBodyMethod* bodyMain = new KAWATreeBodyMethod;
@@ -36,7 +40,7 @@ KAWATreeParam* paramInteger;
 KAWATreePrintFloat* printFloat;
 KAWATreeType* typeFloat;
 KAWATreeParam* paramFloat;	
-
+*/
 
 
 
@@ -479,18 +483,16 @@ facteur : '~' facteur %prec NBINAIRE {$$=0;}
 		| factFinal {$$=0;}
 		;
 
-factFinal: '(' Expression ')' {$$=0;}
-		 | ENTIER {$$=0;}
-		 | REEL {$$=0;}
-		 /*| ID Ids {$$=0;}*/
-		 | STRING {$$=0;}
-		 | ConstructorCall {$$=0;}
-		 /* | MethodCall MethodCalls{$$=0;}*/
+factFinal: '(' Expression ')' {$$= new KT_Expression;}
+		 | ENTIER {$$= new KT_Entier; $$->setValue($1);}
+		 | REEL {$$=0; $$ = new KT_Reel; $$->setValue($1);}
+		 | STRING {$$= new KT_String; $$->setValue($1);}
+		 | ConstructorCall {$$=$1;}
 		 | ArrayInitializer {$$=0;} 
 		 | LinkedMethodVarCall {$$=0;} 
-		 | TTRUE {$$=0;}
-		 | TFALSE {$$=0;}
-		 | TNULL {$$=0;} 
+		 | TTRUE {$$= new KT_Bool; $$->setValue(true); }
+		 | TFALSE {$$= new KT_Bool; $$->setValue(false);}
+		 | TNULL {$$= new KT_NULL;} 
 		 ;
 
 ConstructorCall : TNEW ID Ids FormalParametersCalledMethod {$$=0;}
@@ -505,13 +507,13 @@ ArrayInitializer : TNEW BasicType '[' ENTIER ']'{/*cout << "NEW BasicType [ Enti
 
 LinkedMethodVarCall : TTHIS '.' ID LinkedMethodVarCallList {$$=0;}
 					| ID LinkedMethodVarCallList {$$=0;}
-					| TTHIS '.' MethodCall LinkedMethodVarCallList {$$=0;}
-					| MethodCall LinkedMethodVarCallList {$$=0;}
+					| TTHIS '.' MethodCall LinkedMethodVarCallList {$2.push_back($1); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($2);}
+					| MethodCall LinkedMethodVarCallList {$2.push_back($1); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($2);}
 					;
 
-LinkedMethodVarCallList : '.' ID LinkedMethodVarCallList {$$=0;}
-						| '.' MethodCall LinkedMethodVarCallList {$$=0;}
-						| {$$=0;}
+LinkedMethodVarCallList : '.' ID LinkedMethodVarCallList {KT_ID var=new KT_ID; vector<string*> ids; ids.push_back($2); var->setValue(ids); $3.push_back(ids); $$=$3; }
+						| '.' MethodCall LinkedMethodVarCallList {$3.push_back($2); $$=$3;}
+						| {/*$$=vector< KT_MethodOrVarCall * >*/ }
 						;
 
 

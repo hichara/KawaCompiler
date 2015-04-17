@@ -11,6 +11,7 @@
 #include "KT_SimpleMethod.h"
 #include "KT_Constructor.h"
 #include "PARSER_MemberDec.h"
+#include "KT_Interface.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -76,6 +77,35 @@ public:
 	* @param KT_Modifier *
 	*/
 	void setModifier(KT_Modifier* var);
+	
+	/**
+	* @param string
+	*/
+	
+	void addSignature(string var);
+	
+	/**
+	* @param vector<string>
+	*/
+	void setFullSignatures(vector<string> var);
+	
+	vector<string> getFullSignatures();
+	
+	/**
+	* @param KT_Class*
+	*/
+	void setParentClasseSemantique(KT_Class* var);
+	
+	KT_Class* getParentClasseSemantique();
+	
+	
+	/**
+	* @param vector<KT_Interface*>
+	*/
+	void setParentsInterfacesSemantique(vector<KT_Interface*> &var);
+	
+	vector<KT_Interface*> getParentsInterfacesSemantique();
+	
 
 	void toString();
 private: 
@@ -87,6 +117,9 @@ private:
     vector<KT_Constructor*> constructors;
     vector<PARSER_MemberDec*> memberDecs;
 	KT_Modifier* modifiers;
+	vector<string> fullSignatures;
+	KT_Class* parentClasseSemantique;
+	vector<KT_Interface*> parentsInterfacesSemantique;	
 };
 
 #endif //_KT_CLASS_H

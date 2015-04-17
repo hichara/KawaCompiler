@@ -45,11 +45,34 @@ public:
      * @param vector<KT_Prototype*>
      */
     void setPrototypes(vector<KT_Prototype*>& var);
+	
+	/**
+	* @param string
+	*/
+	
+	void addSignature(string var);
+	
+	/**
+	* @param vector<string>
+	*/
+	void setFullSignatures(vector<string> var);
+	
+	vector<string> getFullSignatures();
+	
+	/**
+	* @param vector<KT_Interface*>
+	*/
+	void setParentsInterfacesSemantique(vector<KT_Interface*> &var);
+	
+	vector<KT_Interface*> getParentsInterfacesSemantique();
+	
 private: 
     string * name;
     vector<string*> InterfacesParent;
     KT_Modifier* modifier;
 	vector<KT_Prototype*> prototypes;
+	vector<string> fullSignatures;
+	vector<KT_Interface*> parentsInterfacesSemantique;	
 };
 
 #endif //_KT_INTERFACE_H

@@ -66,3 +66,42 @@ void KT_Interface::setInterfacesparent(vector<string*>& var) {
 void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
 	prototypes=var;
 }
+
+/**
+	* @param string
+	*/
+	
+	void KT_Interface::addSignature(string var){
+	
+	 fullSignatures.push_back(var);
+	
+	}
+	
+	/**
+	* @param vector<string>
+	*/
+	void KT_Interface::setFullSignatures(vector<string> var){
+		this->fullSignatures = var;
+	}
+	
+	/**
+	* @return vector<string>
+	*/
+	vector<string> KT_Interface::getFullSignatures() {
+		return this->fullSignatures;
+	}
+	
+	/**
+	* @param vector<KT_Interface*>
+	*/
+	void KT_Interface::setParentsInterfacesSemantique(vector<KT_Interface*> &var){
+		this-> parentsInterfacesSemantique =var;
+	}
+	
+	/**
+	* @return vector<KT_Interface*>
+	*/
+	vector<KT_Interface*> KT_Interface::getParentsInterfacesSemantique(){
+		return this-> parentsInterfacesSemantique ;
+	}
+	

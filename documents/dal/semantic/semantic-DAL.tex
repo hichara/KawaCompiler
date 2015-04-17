@@ -78,7 +78,8 @@
 \newpage
 
 \section{Pré-requis}
-  La phase d'analyse sémantique arrive seulement après un retour positif de l'analyse syntaxique. Les fichiers sources écrits en KAWA ont été parsé et aucune erreur de syntaxe n'a été décelée. C'est à ce moment que l'analyseur sémantique est appelé. Afin de vérifier si ce qui a été écrit à du sens. Il n'appartient pas à l'analyseur sémantique de vérifier si des éléments sont syntaxiquement corrects. Pour en savoir plus sur l'analyse syntaxique, vous êtes invitez à consulter le document spécifiant sont fonctionnement.
+  La phase d'analyse sémantique arrive seulement après un retour positif de l'analyse syntaxique. Les fichiers sources écrits en KAWA ont été parsé et aucune erreur de syntaxe n'a été décelée. C'est à ce moment que l'analyseur sémantique est appelé. Afin de vérifier si ce qui a été écrit à du sens. Il n'appartient pas à l'analyseur sémantique de vérifier si des éléments sont syntaxiquement corrects. Pour en savoir plus sur l'analyse syntaxique, vous êtes invitez à consulter le document spécifiant sont fonctionnement.\\
+  Afin d'effectuer les analyses durant cette phase, l'analyseur sémantique procède à une décoration de l'arbre syntaxique (voir KawaTree) afin de déterminer le type des expressions qui seront traitées par le backend. Plus généralement, l'analyseur sémantique décore puis vérifie l'arbre syntaxique pour produire l'arbre sémantique. Il s'avère que cet arbre est représenté par la même structure de données nommée KawaTree. Le rôle fondamental de l'analyseur sémantique est, en se basant sur les données du KawaTree fournies par l'analyseur syntaxique, de produire et d'écrire des données supplémentaires dans KawaTree tout en vérifiant leurs sens. KawaTree sera ensuite transmis au backend pour la production de code IR LLVM.
 
 \section{Objectifs de l'analyseur sémantique}
   Afin de bien mettre en évidence les objectifs de l'analyse sémantique, voici quelques exemples qui permettront de comprendre ses enjeux. À ce niveau, dans ces exemples, un {\bfseries \color{success} programme correct} est un programme dont la {\bfseries \color{success} sémantique est correcte}. Tandis qu'un {\bfseries \color{danger} programme incorrect} est un programme dont la {\bfseries \color{danger} sémantique est incorrecte} (seule la syntaxe l'est).
@@ -967,6 +968,49 @@ La table des symboles permet de gérer les différents symboles qui seront analy
       \end{tikzpicture} 
     \end{multicols}
 
+  \section{Interface de la table des symboles}
+    \begin{minted}[bgcolor=bg-gray]{cpp}
+    /**
+     * Interface ITableOfSymbol.
+     * Specifie les operations sur la table des symboles.
+     */
+    class ITableOfSymbol{public:
+      // Requete
+
+      /**
+       * Retourne l'instance representant le symbol en fonction de son nom.
+       * @param sym Nom du symbol.
+       */
+      virtual SemanticPtr* getSymbol(String sym) = 0;
+
+      // Commandes
+
+      /**
+       * Place le curseur interne sur un nouveau bloc.
+       * Toutes les futures operations se feront sur ce bloc.
+       */
+      virtual void enterBloc() = 0;
+
+      /**
+       * Deplace le curseur interne sur le bloc precedent.
+       * Toutes les futures operations se feront sur ce bloc.
+       */
+      virtual void exitBloc() = 0;
+
+      /**
+       * Ajoute une definition de symbol dans la table des symboles.
+       * @param sym Nom du symbol
+       * @param sptr pointeur sur l'instance qui represente le symbol.
+       */
+      virtual void addSymbol(String sym, SemanticPtr* sptr) = 0;
+    }
+    \end{minted}
+
+    \subsection{enterBloc}
+      La fonction enterBloc doit être appellée lorsque l'analyseur sémantique entre dans un bloc. Ainsi un nouveau bloc sera empilé sur la pile. Les recherches de symboles se feront en prenant en compte les niveaux d'imbrications des blocs.
+    \subsection{exitBloc}
+     Réciproquement, lorsque l'analyseur sémantique quitte un bloc, la fonction exitBloc doit être appellée. Cela permet de dépiler un bloc de la pile afin de supprimer les déclarations qui sont obsolètes car innaccessibles depuis l'exterieur du bloc.
+
 
 \section{Étapes de l'analyse sémantique}
  \subsection{Liste des vérifications à réaliser}
@@ -1017,46 +1061,5 @@ La table des symboles permet de gérer les différents symboles qui seront analy
     \item Analyse sémantique des corps de méthodes
   \end{itemize}
 
- \section{Interface de la table des symboles}
-    \begin{minted}[bgcolor=bg-gray]{cpp}
-    /**
-     * Interface ITableOfSymbol.
-     * Specifie les operations sur la table des symboles.
-     */
-    class ITableOfSymbol{public:
-      // Requete
-
-      /**
-       * Retourne l'instance representant le symbol en fonction de son nom.
-       * @param sym Nom du symbol.
-       */
-      virtual SemanticPtr* getSymbol(String sym) = 0;
-
-      // Commandes
-
-      /**
-       * Place le curseur interne sur un nouveau bloc.
-       * Toutes les futures operations se feront sur ce bloc.
-       */
-      virtual void enterBloc() = 0;
-
-      /**
-       * Deplace le curseur interne sur le bloc precedent.
-       * Toutes les futures operations se feront sur ce bloc.
-       */
-      virtual void exitBloc() = 0;
-
-      /**
-       * Ajoute une definition de symbol dans la table des symboles.
-       * @param sym Nom du symbol
-       * @param sptr pointeur sur l'instance qui represente le symbol.
-       */
-      virtual void addSymbol(String sym, SemanticPtr* sptr) = 0;
-    }
-    \end{minted}
-
-  \subsection{enterBloc}
-    La fonction enterBloc doit être appellée lorsque l'analyseur sémantique entre dans un bloc. Ainsi un nouveau bloc sera empilé sur la pile. Les recherches de symboles se feront en prenant en compte les niveaux d'imbrications des blocs.
-  \subsection{exitBloc}
-   Réciproquement, lorsque l'analyseur sémantique quitte un bloc, la fonction exitBloc doit être appellée. Cela permet de dépiler un bloc de la pile afin de supprimer les déclarations qui sont obsolètes car innaccessibles depuis l'exterieur du bloc.
+ 
 \end{document}

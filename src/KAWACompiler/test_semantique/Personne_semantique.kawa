@@ -1,0 +1,85 @@
+package TestAST;
+
+public class Personne {
+	// attributs
+	private String prenom;
+	private String nom;
+	private int age;
+	
+	// méthode
+	public void initialise(String P, String N, int age){
+	this.prenom=P;
+	this.nom=N;
+	this.age=age;
+	}
+	
+	 
+	public void initialise(Personne P){
+		prenom=P.prenom;
+		nom=P.nom;
+		this.age=P.age;
+	}
+	
+	// méthode identifie permet d'afficher le nom prenom et age
+	public void identifie(){
+		String ss = prenom+","+nom+","+age;
+			printS(ss);
+	}
+	
+	// constructeurs avec parametre
+	public Personne(String P, String N, int age){
+	 initialise(P,N,age);
+	 printS(ss);// doit me signaler une erreur semantique variable déclarer au sein d'une autre méthode
+	}
+
+	public Personne(Personne P){
+	initialise(P);
+	}
+	
+	//constructeur sans parametre
+	public Personne(){}
+
+	 //-------->cette methode ne doit pas passer car il existe déja une méthode nommée initialise avec les memes parametres
+		public void initialise(String P, String N, int age){
+		this.prenom=P;
+		this.nom=N;
+		this.age=age;
+		this.identifie();
+		}
+	
+	public static void main() {
+		Personne p1;
+		// -------> ne doit pas  marcher car les attributs de la classe personne sont de type private
+		p1.prenom="Jean";
+		p1.nom="Dupont";
+		p1.age=30;
+		
+		//------>ne doit pas marcher non plus car p1 n'est pas initialiser
+		p1.initialise("Jean","Dupont",30);
+		
+		//---->utilisation du constructeur sans parametre
+		p1 = new Personne();
+
+	//ne doit pas marcher erreur semantique il n'exite pas de constructeur avec un seul para
+	p1 = new Personne("akim");
+
+		p1 = new pascal();//ne doit pas marcher erreur semantique ne renseigne aucun objet
+		
+		p1.initialise("Jean","Dupont",30);
+		printS("p1=");
+		p1.identifie();
+		Personne p2 = new Personne();
+				p2.initialise(p1);
+				printS("p2=");
+				p2.identifie();
+				
+		//----->utilisation du constructeur avec parametre
+				Personne p3 = new Personne("Jean","Dupont",30);
+						printS("p1=");
+						p3.identifie();
+						Personne p4 = new Personne(p1);
+						printS("p2=");
+						p4.identifie();
+	}
+
+}

@@ -4,6 +4,7 @@
 #include "NameBuilder.h"
 #include "TypeGenerator.h"
 
+
 //Cree une variable statique
 Value* GlobalVariableGenerator::getOrCreateStaticAttribut(
 							Module *module, std::string className ,
@@ -20,7 +21,7 @@ Value* GlobalVariableGenerator::getOrCreateStaticAttribut(
 		return NULL;
 
 	GlobalVariable *gv = new GlobalVariable(*module,
-	 		type->getPointerTo(), false, GlobalValue::CommonLinkage, 
+	 		type, false, GlobalValue::CommonLinkage, 
 	 		0, varN);
 
 	return gv;

@@ -1,0 +1,15 @@
+package TestAST;
+
+public class Personne 
+	// attributs
+	private String prenom;
+	private String nom;
+	private int age;
+	
+	// méthode
+	public void initialise(String P, String N, int age){
+	this.prenom=P;
+	this.nom=N;
+	this.age=age;
+	}
+	

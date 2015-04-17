@@ -56,7 +56,7 @@ Value* BasicInstructionGenerator::createLoad(Value *src, BasicBlock *b) {
 }
 
 
-Value* BasicInstructionGenerator::createGetPointerAt(Value *src, std::vector<Value*> at;, BasicBlock *b) {
+Value* BasicInstructionGenerator::createGetPointerAt(Value *src, std::vector<Value*> at; BasicBlock *b) {
 	IRBuilder<> builder;
 	builder.setInsertPoint(b);
 

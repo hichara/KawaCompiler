@@ -22,10 +22,8 @@
 \addtolength{\headsep}{0.8cm} 
 \addtolength{\footskip}{-0.2cm}
 
-
 %Import page de garde et structures pour la gestion de projet
 %\usepackage{structures}
-
 %Variables
 \logo{../res/logo_univ.png}
 \input{entete}
@@ -58,6 +56,16 @@
         \item ADJIBI Nasser 
         \item PETRE Alexandre
         \item TASSERIE Majid
+        \item BLOT Pierre-Luc
+        \item BERKANE Kheireddine
+        \item IDRISSOU Hamzath
+        \item AHOUATE Abdellatif
+      \end{itemize}
+      \vspace{5mm}
+      Le 16/02/2015 un membre à quitté l'équipe. Elle est désormais composée des membres suivant:
+      \begin{itemize}
+        \item ADJIBI Nasser 
+        \item PETRE Alexandre
         \item BLOT Pierre-Luc
         \item BERKANE Kheireddine
         \item IDRISSOU Hamzath
@@ -115,13 +123,10 @@
           \color{white}\cellcolor{blue}\bfseries{Sujets}\\
           \cr
           \hline
-          06/03/15     &   Premier livrable
+          19/04/15     &   Premier livrable
           \cr
           \hline
-          17/04/15     &   Deuxième livrable
-          \cr
-          \hline
-          15/05/15     &   Troisième livrable
+          24/04/15     &   Second livrable
           \cr
           \hline
           % todo : il manque la date de la présentation orale
@@ -142,12 +147,12 @@
           Professeur référent & Mr Nicart
           \cr
           \hline
-          Equipe de développement & ADJIBI Nasser; PETRE Alexandre; TASSERIE Majid; BLOT Pierre-Luc; BERKANE Kheireddine; IDRISSOU SOULER Hamzath; AHOUATE Abdellatif
+          Equipe de développement & ADJIBI Nasser; PETRE Alexandre; BLOT Pierre-Luc; BERKANE Kheireddine; IDRISSOU SOULER Hamzath; AHOUATE Abdellatif
           \cr
           \hline
     \end{tabular}\\
   \subsection{Objectifs pousuivis}
-    L'objectif du projet kawa est de livrer un compilateur fonctionnant avec la tachnologie LLVM au client au mois de Mai 2015. Ce projet va permettre à l'ensemble de notre groupe de travailler ensemble durant ces semaines et de développer ainsi nos compétences dans les technologies C++ et LLVM ainsi que ELF pour UNIX.
+    L'objectif du projet kawa est de livrer un compilateur fonctionnant avec la technologie LLVM au client au mois de Mai 2015. Ce projet va permettre à l'ensemble de notre groupe de travailler ensemble durant ces semaines et de développer ainsi nos compétences dans les technologies C++ et LLVM ainsi que ELF pour UNIX.
   \subsection{Documents de référence}
     \begin{tabular}{
         |>{\centering}p{7,5cm}
@@ -183,24 +188,48 @@
       \item L’intégration continue.
       \item Tests continus : Ils permettent de garantir le bon fonctionnement de l’application à chaque étape de développement.
     \end{itemize}
-  \begin{landscape} 
+  %\begin{landscape} 
   \subsection{Découpage général en cycles}
-   \input{decoupage_cycles}
-  \end{landscape}
+   %\input{decoupage_cycles}
+  %\end{landscape}
+    Notre projet sera décomposé en deux cycles, eux-mêmes découpés de la façon suivante. Le premier livrable est consituté de documentations techniques et le second est une implémentation du compilateur kawa.
 
     \begin{figure}[!h]
-      \includegraphics[width=17.8cm]{fig/decoupage_cycles.png}
+      \includegraphics[width=17.8cm]{img_Gantt/Gantt_Global.PNG}
       \caption{Decoupage général en cycles.}
       \label{decoupage_cycles}
     \end{figure}
-    \newpage
-    Notre projet sera décomposé en trois cycles, eux-mêmes découpés de la façon suivante :
+    
+    \subsection{Découpage du livrable 1}
 
-    \begin{figure}[!h]
-      \includegraphics[width=17.8cm]{fig/decomposition_cycle.png}
-      \caption{Décomposition d'un cycle de développement}
-      \label{decomposition_cycle}
-    \end{figure}
+      \begin{figure}[!h]
+        \includegraphics[width=17.8cm]{img_Gantt/Gantt_Livrable1.PNG}
+        \caption{Décomposition du cycle pour le livrable 1}
+        \label{decomposition_cycle_livrable_1}
+      \end{figure}
+
+    \subsection{Découpage du livrable 2}
+      \begin{figure}[!h]
+        \includegraphics[width=17.8cm]{img_Gantt/Gantt_livrable2_Module_Syntaxe.PNG}
+        \caption{Décomposition du cycle pour le module syntaxique}
+        \label{decomposition_cycle_livrable_2}
+      \end{figure}
+      \begin{figure}[!h]
+        \includegraphics[width=17.8cm]{img_Gantt/Livrable2_Module_Semantique.PNG}
+        \caption{Décomposition du cycle pour le module sémantique}
+        \label{decomposition_cycle_livrable_2}
+      \end{figure}
+      \begin{figure}[!h]
+        \includegraphics[width=17.8cm]{img_Gantt/Livrable2_Module_BackEnd.PNG}
+        \caption{Décomposition du cycle pour le module backend}
+        \label{decomposition_cycle_livrable_2}
+      \end{figure}
+      \begin{figure}[!h]
+        \includegraphics[width=17.8cm]{img_Gantt/Livrable2_Module_Test.PNG}
+        \caption{Décomposition du cycle pour le module test}
+        \label{decomposition_cycle_livrable_2}
+      \end{figure}
+
 
   \subsection{Réunion de début d'itération}    
     Cette réunion se fera systématiquement le premier jour du cycle. Elle permet au groupe de se réunir, de fixer les objectifs du cycle ainsi que rappeler les tâches à effectuer par binôme et les dates limites. Elle permet de répondre aux éventuelles interrogations des membres de l’équipe.
@@ -218,9 +247,8 @@
   \subsection{Versionning}
     À la fin de chacun de ces cycles sera livrée une version intermédiaire du logiciel. Nous livrerons donc trois versions du logiciel au client.
     \begin{itemize}
-      \item 06/03/15 : Version 0.1
-      \item 17/04/15 : Version 0.2
-      \item 15/05/15 : Version 1.0
+      \item 19/04/15 : Version 0.5
+      \item 24/04/15 : Version 1.0
     \end{itemize}
   \subsection{Documents}
     Les différents documents doivent être tenus à jour tout au long du projet. Pour chaque action effectuée, chaque membre du projet est tenu de compléter les documents correspondants.
@@ -229,7 +257,7 @@
 \section{Organisation et responsabilité}
 Notre équipe de projet est composée de sept personnes suivant l’organigramme suivant :
  \begin{figure}[!h]
-    \includegraphics[width=17.8cm]{fig/organigramme.png}
+    \includegraphics[width=17.8cm]{fig/organigramme-v2.png}
     \caption{Organigramme}
     \label{organigramme}
   \end{figure}
@@ -237,14 +265,15 @@ Notre équipe de projet est composée de sept personnes suivant l’organigramme
   \subsection{Attribution des rôles au sein de l’équipe de développement}
     Nous avons décidé de répartir les rôles de manière équitable. En effet, chaque membre du groupe est un développeur mais possède également un rôle plus précis qui implique des responsabilités.
   \subsection{Chef de projet}
-    Le chef de projet est le support de l’équipe. En effet il est le coordinateur de l’équipe car il doit mener le projet et gérer son bon déroulement. Pour cela, il doit estimer et planifier les phases de développement ainsi qu’assurer la qualité du logiciel. Le chef de projet est amené à suivre l’avancement du projet. De plus, il anime l’équipe et s’occupe de la communication entre les membres de l’équipe et doit gérer les éventuels problèmes. Pierre-Luc a été désignée chef de projet, pour ses capacités d’encadrement, son organisation et sa rigueur.
+    Le chef de projet est le support de l’équipe. En effet il est le coordinateur de l’équipe car il doit mener le projet et gérer son bon déroulement. Pour cela, il doit estimer et planifier les phases de développement ainsi qu’assurer la qualité du logiciel. Le chef de projet est amené à suivre l’avancement du projet. De plus, il anime l’équipe et s’occupe de la communication entre les membres de l’équipe et doit gérer les éventuels problèmes. Pierre-Luc a été désigné chef de projet, pour ses capacités d’encadrement, son organisation et sa rigueur. Et a tenu ce rôle jusqu'au 18/02/2015. Pour des raisons personnelles il n'a plus été en mesure d'assurer la gestion de l'équipe. C'est pourquoi Kheireddine BERKANE qui était suppléant pour ce rôle a été désigné chef de projet.
   \subsection{Chargé client}
     Le chargé client représente l’équipe auprès du client. Il a une vision à la fois technique et générale du projet. Il est amené à communiquer avec le client pour lister ses besoins et définir les ordres du jour lors des réunions. Il doit informer le client sur l’avancement du projet et maintenir le contact avec lui tout au long du projet.
-    Kheireddine a été désigné chargé client car il aime le contact et communique aisément. Pierre-Luc a été désignée chargé client suppléante en cas d’absence de Kheireddine.
+    Kheireddine a été désigné chargé client car il aime le contact et communique aisément. Pierre-Luc a été désigné chargé client suppléant en cas d’absence de Kheireddine.
   \subsection{Testeur}
-    Le testeur s’occupe de la planification, la création et la réalisation des tests. Il est chargé de produire des rapports réguliers décrivant les erreurs trouvées dans le produit. Dans ce rapport doivent figurer les étapes nécessaires pour reproduire le bug. De ce fait, il doit faire remonter tous les problèmes rencontrés lors des tests le plus rapidement possible au chef de projet. Son principal rôle est donc de vérifier le bon fonctionnement du logiciel. Alexandre a été désignée testeur pour ses connaissances en POO. Pour les même raisons, Hamzath et Abdallatif ont également été désignés.
+    Le testeur s’occupe de la planification, la création et la réalisation des tests. Il est chargé de produire des rapports réguliers décrivant les erreurs trouvées dans le produit. Dans ce rapport doivent figurer les étapes nécessaires pour reproduire le bug. De ce fait, il doit faire remonter tous les problèmes rencontrés lors des tests le plus rapidement possible au chef de projet. Son principal rôle est donc de vérifier le bon fonctionnement du logiciel. Alexandre a été désigné testeur pour ses connaissances en POO. Pour les même raisons, Hamzath et Abdallatif ont également été désignés. Suite au départ d'un membre de l'équipe et de nouvelles tâches a réaliser, le rôle de testeur a été attribué à Hamzath.
   \subsection{Responsable technique et développement}
-    Le responsable technique et développement est l’expert technique du projet. Il est chargé de modéliser les différents composants et créer le modèle d’architecture logicielle. Il doit pour cela comprendre le fonctionnement interne de l’application. C’est lui qui est également chargé de définir les éventuelels API qui vont être utilisés ainsi que les différents langages de programmation. Il doit être une référence pour les autres développeurs dans les langages et API qu’il a choisi. Nasser a été désigné responsable technique et développement car il a de bonnes connaissances LLVM et il les maintient à jour régulièrement. De plus, il a un esprit synthétique permettant de définir clairement les différents composants. Pour les mêmes raisons, Majid a également été désignée sur ce rôle.
+    Le responsable technique et développement est l’expert technique du projet. Il est chargé de modéliser les différents composants et créer le modèle d’architecture logicielle. Il doit pour cela comprendre le fonctionnement interne de l’application. C’est lui qui est également chargé de définir les éventuelels API qui vont être utilisés ainsi que les différents langages de programmation. Il doit être une référence pour les autres développeurs dans les langages et API qu’il a choisi. Nasser a été désigné responsable technique et développement car il a de bonnes connaissances LLVM et il les maintient à jour régulièrement. De plus, il a un esprit synthétique permettant de définir clairement les différents composants. Pour les mêmes raisons, Majid a également été désignée sur ce rôle.\\
+    Les membres qui sont rataché a ce rôle ont beaucoup changé puisque Majid ne faisant plus partie de l'équipe et le besoin de recherches plus approfondies ont conduit à l'organisation suivante. Nasser est responsable de la partie concernant le Backend du compilateur. Kheireddine et Abdellatif sont responsable de la partie Frontend du compilateur, l'analyseur syntaxique (lexer et parser). Et enfin Alexandre et Pierre-Luc sont responsable de l'analyseur sémantique du compilateur. De plus, Pierre-Luc a le rôle de superviser et la partie Backend.
   \subsection{Développeur, programmeur}
     Le développeur, programmeur doit suivre les différentes directives du responsable technique et du chef de projet. Il est amené à proposer des idées d’amélioration. Il est chargé de développer l’application en respectant les différents documents livrables. Il doit corriger les erreurs remontées lors des différents tests. Il doit avoir des connaissances dans les langages et API utilisés, ou se former si nécessaire. Nous sommes tous développeur, programmeur en plus de nos précédents rôles. 
   %\subsection{Manager}
@@ -317,14 +346,22 @@ Notre équipe de projet est composée de sept personnes suivant l’organigramme
           Responsabilités de rédaction & 
           \begin{itemize}
             \item ADJIBI Nasser
-            \item TASSERIE Majid
+            \item PETRE Alexandre
+            \item BLOT Pierre-Luc
+            \item BERKANE Kheireddine
+            \item IDRISSOU Hamzath
+            \item AHOUATE Abdellatif
           \end{itemize}
           \cr
           \hline
           Responsabilité de relecture &
           \begin{itemize}
+            \item ADJIBI Nasser
+            \item PETRE Alexandre
             \item BLOT Pierre-Luc
             \item BERKANE Kheireddine
+            \item IDRISSOU Hamzath
+            \item AHOUATE Abdellatif
           \end{itemize}
           \cr
           \hline
@@ -457,7 +494,6 @@ Notre équipe de projet est composée de sept personnes suivant l’organigramme
           \begin{itemize}
             \item ADJIBI Nasser
             \item PETRE Alexandre
-            \item TASSERIE Majid
             \item BLOT Pierre-Luc
             \item BERKANE Kheireddine
             \item IDRISSOU Hamzath
@@ -469,7 +505,6 @@ Notre équipe de projet est composée de sept personnes suivant l’organigramme
           \begin{itemize}
             \item ADJIBI Nasser
             \item PETRE Alexandre
-            \item TASSERIE Majid
             \item BLOT Pierre-Luc
             \item BERKANE Kheireddine
             \item IDRISSOU Hamzath
@@ -518,13 +553,10 @@ Notre équipe de projet est composée de sept personnes suivant l’organigramme
           20/01/15 & Début de la phase de développement
           \cr
           \hline
-          06/03/15 & Premier livrable
+          19/04/15 & Premier livrable
           \cr
           \hline
-          17/04/15 & Deuxième livrable
-          \cr
-          \hline
-          15/05/15 & Troisième livrable 
+          24/04/15 & Second livrable
           \cr
           \hline
     \end{tabular}\\

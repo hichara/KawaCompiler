@@ -1,0 +1,60 @@
+\documentclass{../../../../../res/rapport}
+
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage{DejaVuSans}
+
+\logo{../../../../../res/logo_univ.png}
+\author{AHOUATE Abdellatif}
+\participants{Ahouate Abdellatif,
+			  Alexandre Petre,
+              Idrissou Amzath,  
+			  Kheireddine Berkane}
+\absents{Nasser Adjibi, Pierre-luc Blot}
+\filiere{M1GIL}
+\projet{Compilateur LLVM}
+\projdesc{Langage jouet KAWA} % si la description est trop longue pensez 
+                              % à mettre \\ pour un retour à la ligne
+\title{Compte rendu du Mercredi 15 Avril 2015}
+\version{n°1}
+
+%\histentry{0.5}{10/12/2012}{Changelog pour la d\'emo}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \clearpage
+    
+    \section{Observations et questions} 
+    \label{sec:observations_et_questions}
+	\begin{itemize}
+        \item On a parlé de l'organisation de l'équipe.
+	\item Le client a exigé un push chaque jour pour que le chef de projet Kheireddine Berkane pourra suivre l'avancement en permanent du projet pour ce qui reste du projet.
+	\item Le client a exigé un mini livrable pour le Dimanche 19 Avril 2015, ce dernier reprend la notion du polymorphisme fonctionnel; programme qui contient:
+        	\begin{itemize}
+        		\item Une interface avec une méthode, et deux classes implémentant l'interface ainsi qu'une classe Test. 
+			\item Chacun des deux classes contient qu'une méthode sans body.
+			\item Chacun des deux classes contient qu'une méthode sans body.
+			\item la classe Test contient la méthode main pour tester l'appelle polymorphe.
+        	\end{itemize} 
+	\item On a détaillé ce qu'il faut faire pour chaque module.
+		\begin{itemize}
+        		\item Partie Front end:
+ 				\begin{itemize}
+        				\item L'intégration de la partie nécessaire de KawaTree pour le mini livrable dans le parser. 
+					\item Gérer plusieurs fichiers en entrées. 
+					
+        			\end{itemize}
+			\item Partie analyse sémantique:
+				\begin{itemize}
+        				\item Enregistrer chaque classe comme un type.
+					\item Définir les relations d"héritage (une seule interface).
+					\item Décorer les classes et les méthodes.
+					\item Traiter Main et Body. 					
+        			\end{itemize}
+			\item Partie Back-end : On a rien détaillé puisque Nasser Adjibi était absent 
+			
+        	\end{itemize} 
+		
+	\end{itemize}
+\end{document}

@@ -43,7 +43,7 @@ private:
 	static Value* convertFromDoubleToDouble(Value *v, BasicBlock *b);
 
 	static Value* convertFromIntToStr(Value *v, BasicBlock *b);
-	static Value* convertFromFloatToStr(Value *v, BasicBlock *b);
+	static Value* convertFromDoubleToStr(Value *v, BasicBlock *b);
 };
 
 

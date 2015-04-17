@@ -1,0 +1,33 @@
+package polymor;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+	    Chien c = new Chien("Gris bleuté", 20);
+	    Loup l = new Loup ("blanche","nikiki");
+	    c.crier();
+	    
+	    /*Les méthodes de l'interface
+	    c.faireCalin();
+	    c.faireLeBeau();
+	    c.faireLechouille();*/
+	     
+//*************Utilisons le polymorphisme de notre interface
+	    Rintintin r = new Chien();
+	    Rintintin r1 = new Loup();
+	    l.manger(r);
+//*********************************
+	    r.faireLeBeau();
+	    r.faireCalin();
+	    r.faireLechouille();
+	    r.crier();//*************dit signaler cette erreur
+	    ((Chien) r).crier();//*************dit marcher si le cast en pris en compte
+
+//***************************
+	    r1.faireLeBeau();
+	    r1.faireCalin();
+	    r1.faireLechouille();
+	}
+
+}

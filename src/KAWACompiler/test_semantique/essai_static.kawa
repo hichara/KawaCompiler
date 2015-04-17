@@ -1,0 +1,11 @@
+package TestAST;
+
+public class essaistatic {
+	int i = 0;
+			public static void main() {
+				
+				printI(i);
+			}
+
+}
+//ne dois pas marcher car main est de type static hors la variable i n'est de type static test semantique

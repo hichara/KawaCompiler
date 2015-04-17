@@ -1,0 +1,164 @@
+package TestAST;
+
+public class testdeclarationaffectationaffichage 
+{
+
+	
+	public static void affiche(String S){
+		String ss= "String="+S;
+		printS(ss);
+
+		}
+	
+	public static void affiche1(int entier){
+	//************> ne marchera pas car elle peut avoir qu'un int comme parametre donc pas possible de faire
+	//**printI("entier="+entier);
+
+				printI(entier);
+
+	}
+	
+	public static void affiche2(float f){
+	//************>idem pour le float ne peut recevoir qu'un float en argument pas possible de faire 
+	//**printF("float="+f); 
+
+					printF(f);
+
+	}
+	
+	String S = "beau gosse";
+	     int i = 10;
+	     float f=45.78;
+		 int k = 3;
+		float p = 12;
+		final int is = 5;
+		int po,ki,mr,c4;
+		
+		//------------->ne doit pas marcher mot clé if utilisé pour le type d'une variable idem pour while for 
+		//if k;
+
+	public static void main() 
+   {
+
+		affiche(S);
+		
+		//------------------->ne doit pas marcher car il manque le point virgule
+		   //affiche(S) 
+
+		   //marche ";" a été mis a la fin de l'instruction
+		   		   affiche(S); 
+		
+		affiche1(i);
+		affiche1(k);
+		affiche2(f);
+		affiche2(p);
+
+		p = p *i;
+		affiche2(p);
+
+		
+		// ------------>declaration de tableau
+		   int entier[] = new int[10]; 
+
+		//-------------->ne doit pas marcher car manque d'indice du tableau
+		  entier1[]=1;
+		
+		
+		
+//----------->blocs conditionel ne doit pas marcher car manque "{}" au niveau des if et pas de ";" au niveau du else
+		//int n=1;
+	
+			//if(n>1)
+					//if(n>6)
+					//printS("n>6");
+					//else;	// else du if(n>6) : rien à faire
+			//else printS("n<=1"); // else du if(n>1)*/
+
+//------------------------------------------------------->blocs conditionel avec "{}" au niveau des if
+		int n=1;
+	
+			if(n>1)
+			{
+					if(n>6){
+					printS("n>6");}
+					else{}
+			}			// else du if(n>6) : rien à faire
+			else {
+			     printS("n<=1");} // else du if(n>1	
+
+			
+//----------------------------------------------------------------->boucle for
+			int somme =0;
+			for(int ja=1;ja<=n;ja++){
+					somme=somme+15;
+			        affiche1(somme);}
+			        
+//-----------------------------------------------------------------> boucle while
+			        k=1;somme=0;
+			        while(k<=n)
+			        { somme+=k; k+1; affiche1(somme);}
+			        
+//-------------------------------------------------------->boucle do while
+			        k=1; somme=0;
+			        do {somme+=k+1;affiche1(somme);}
+			        while (k<=n);
+
+//----------------------------------------------------------> operateur && 
+			        int fe = 1;
+			     if(fe >= 0 && fe >1)
+			     {
+			     		printS(" &&  marche");
+			     }
+
+			 //----------------> operateur && 
+			        int fe = 1;
+			     if(fe >= 0 && fe == 1)
+			     {
+			     		printS(" &&  marche");
+			     }
+
+		//----------------> operateur || ne dois pas marcher car nous avons deux variables qui porte le meme nom 
+			        int f = 1;
+			     if(f >= 0 || f >3)
+			     {
+			     		printS(" ||  marche");
+			     }
+
+//---------------------------------------------------------------> operateur || 
+			        int mo = 1;
+			     if(mo >= 0 || mo >3)
+			     {
+			     		printS(" ||  marche");
+			     }
+
+//-------------------------ne marchera pas ------------------------------------> operateur || sans le bloc {}
+			//        int mo = 1;
+			  //   if(mo >= 0 || mo >3)
+			
+			    	//	printS(" ||  marche");
+			     
+
+//-----------------------------------------------------------> operateur ==
+			        int max = 50;
+			    if(max == 50)
+			    {
+			    	printS(" == marche bien");
+				}
+
+//--------------------------------------------------> operateur !=
+			        int max1 = 50;
+			    if(max != 50)
+			    {
+			    	printS(" != marche bien");
+			    }	
+
+//-------------------------------------------------->for infini
+	 	for(;;){
+	 		k--;
+	 	}     
+
+//ne doit pas etre afficher
+	 	printS("devrait pas continuer");
+  }
+}
+

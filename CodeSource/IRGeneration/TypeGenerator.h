@@ -26,9 +26,11 @@ public:
 
 	static Type* strToLLVMType(Module *module, std::string type);
 
+	static std::vector<Type*> strToLLVMType(Module *module, std::vector<std::string> args);
+
 	static Type* getPointerOf(Module *module, std::string, int nb);
 
-	static Type* getMultiDimensionArray(Module *module, std::vector<char> sizes);
+	static Type* getMultiDimensionArray(Module *module, std::string type, std::vector<int> sizes);
 };
 
 

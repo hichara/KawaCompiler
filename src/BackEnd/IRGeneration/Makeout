@@ -1,0 +1,24 @@
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 0 a un index de symbole 11 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 1 a un index de symbole 12 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 2 a un index de symbole 2 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 3 a un index de symbole 2 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 4 a un index de symbole 11 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 5 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 6 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 7 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 8 a un index de symbole 12 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 9 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 10 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 11 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 12 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 13 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 14 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 15 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 16 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 17 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 18 a un index de symbole 13 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 19 a un index de symbole 21 invalide
+/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_line): réadressage 0 a un index de symbole 2 invalide
+/usr/bin/../lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o: dans la fonction « _start »:
+(.text+0x20): référence indéfinie vers « main »
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

@@ -79,6 +79,57 @@ Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
 }
 
 
+Function* FunctionGenerator::createPrototype(Module *module, bool isStatic,
+									std::string className,
+									std::string name,
+									std::string ret_type, 
+									std::vector<std::string> args_types,
+									std::vector<std::string> args_names) {
+
+	if(className == "")
+		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
+
+	if(name == "")
+		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
+
+
+	if(args_types.size() != args_names.size())
+		KawaUtilitary::stopGenerationIR(ERROR_ILLEGAL_NUMBER_OF_ARGS);
+		
+
+	std::string functionName =
+			NameBuilder::buildFunctionName(className, name, ret_type, args_types, isStatic);
+
+	Function *f = FunctionGenerator::getFunction(module, functionName);
+
+	if(f != NULL)
+		KawaUtilitary::stopGenerationIR(ERROR_FUNCTION_ALREADY_EXIST);
+
+	Type *r_type = TypeGenerator::strToLLVMType(module, ret_type);
+
+	//Pointeur sur l'objet effectuant l'appel de la fonction
+
+	std::vector<Type*> list_type;
+
+	if(isStatic) {
+		Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
+		list_type.push_back(c_type);
+		args_names.insert(args_names.begin(), "this");
+	}
+
+	for(int i = 0; i < args_types.size(); i++) {
+		list_type.push_back(
+			TypeGenerator::strToLLVMType(module, args_types[i]));
+	}
+
+	FunctionType *ftype = FunctionType::get(r_type, list_type, false);
+
+	f = Function::Create(ftype, Function::ExternalLinkage, functionName, module);
+
+	return f;
+}
+
+
 void FunctionGenerator::setFunctionBody(Function *f, std::vector<BasicBlock*> list_block) {
 
 	for(int i = 0; i < list_block.size(); i++) {

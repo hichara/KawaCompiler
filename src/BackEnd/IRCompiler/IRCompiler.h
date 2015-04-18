@@ -2,11 +2,15 @@
 #define IRCOMP_H
 
 
-#define COMPILING_CLASS 0
-#define COMPILING_INTER 1
+#define COMPILING_NONE  0
+#define COMPILING_CLASS 1
+#define COMPILING_INTER 2
+#define COMPILING_METHO 3
+#define COMPILING_CONST 4
 
 
 #include "KT_Includes.h"
+#include <map>
 
 use namespace llvm;
 
@@ -22,13 +26,13 @@ private:
 
 	Function *currentFunction;
 
+	//Element en cours de compilation
 	KT_Class *currentClass;
-
 	KT_Interface *currentInterface;
 
-	int compilingState = -1;
+	std::map<Value*, std::string> nameMap;
 
-	std::string compilingObject;
+	int compilingState = COMPILING_NONE;
 
 public:
 

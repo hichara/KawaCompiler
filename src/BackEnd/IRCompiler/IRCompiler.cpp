@@ -69,13 +69,14 @@ void IRCompiler::compile(KT_Class *classe) {
 		compilingState = COMPILING_CLASS;
 	}
 
-	std::vector<KT_Interface*> pInfs = classe->getParentInterfaces();
+	std::vector<KT_Interface*> pInfs = classe->getParentsInterfacesSemantique();
 
 	if(pInfs.size() != 0) {
 		for(int  i = 0; i < pInfs.size(); i++) {
 			compile(pInfs[i]);
 		}
 		compilingState = COMPILING_CLASS;
+		currentClass = classe;
 	}
 
 
@@ -101,11 +102,40 @@ void IRCompiler::compile(KT_Class *classe) {
 	currentClass = NULL;
 }
 
-void IRCompiler::compile(KT_Interface *interface) {
+Type* IRCompiler::compile(KT_Interface *interface) {
 
+	currentInterface = interface;
+	std::vector<KT_Interface*> pInfs = classe->getParentsInterfacesSemantique();
+
+	if(pInfs.size() != 0) {
+		for(int  i = 0; i < pInfs.size(); i++) {
+			compile(pInfs[i]);
+		}
+		compilingState = COMPILING_CLASS;
+		currentInterface = interface;
+	}
+
+	std::vector<KT_Prototype *> prototypes = interface->getPrototypes();
+
+	for(int i = 0; i < prototypes.size(); i++) {
+		compile(prototypes[i]);
+	}
+
+
+	currentInterface = NULL;
+	// A completer
+	// Generer la tabe adHoc
 }
 
-Function *compile(KT_Prototype *p) { 
+
+Function* IRCompiler::compile(KT_Prototype *p) { 
+   std::string className;
+
+  if(compilingState == COMPILING_CLASS) {
+  	className = *(currentClass->getName());
+  } else {
+  	className = *(currentInterface->getName());
+  }
 
   KT_Modifier* modifier = p->getModifier();
 
@@ -118,27 +148,81 @@ Function *compile(KT_Prototype *p) {
   //parametres
   std::vector<std::string> params_names;
   std::vector<std::string> params_types;
-  std::vector<std::bool> params_isStatic;
 
   for(int i = 0; i < params.size(); i++) {
   	params.push_back(params[i]->getName());
   	params.push_back(params[i]->getParamType()->getTypeName());
-  	params.push_back(params[i]->getParamModifier()->istatic());
   }
 
-  return FunctionGenerator::createPrototype(IRmodule, isStatic,
-									std::string className,
-									std::string name,
-									std::string ret_type, 
-									std::vector<std::string> args_types,
-									std::vector<std::string> args_names) {
+  Function *f =  FunctionGenerator::createPrototype(IRmodule, isStatic,
+									className,
+									name,
+									ret_type, 
+									params_types,
+									parmas_names);
+
+  nameMap[f] = f->getName();
+
+  return f;
+}
+
+Function* IRCompiler::compile(KT_SimpleMethode *methode) {
+	  std::string className;
+
+	  if(compilingState == COMPILING_CLASS) {
+	  	className = *(currentClass->getName());
+	  } else {
+	  	className = *(currentInterface->getName());
+	  }
+
+	std::vector<KT_Param*> parmas = methode->getParams();
+
+	std::vector <std::string> args_names;
+	std::vector <std::string> args_types;
+
+	std::string ret_type = methode->getType()->getTypeName();
+
+	bool isStatic = modifier->getModifier()->istatic();
+
+	for(int i = 0; i < params.size(); i++) {
+		args_names.push_back(params[i]->getName());
+		args_types.push_back(params[i]->getType()->getTypeName());
+	}
+
+  Function *f =  FunctionGenerator::createPrototype(IRmodule, isStatic,
+									className,
+									name,
+									ret_type, 
+									args_names,
+									args_types);
+
+  nameMap[f] = f->getName();
+
+  compile(methode->getBlock());
+
+  return f;
 
 }
 
-Function *compile(KT_SimpleMethode *methode);
+void IRCompiler::compile(KT_Block *block) {
+	std::vector<KT_Statement*> stmnts;
+
+	stmnts = block->getStatements();
+
+	for(int i = 0; i < stmnts.size(); i++) {
+		compile(KT_Statement);
+	}
+}
 
 
-void compile(KT_Print *print);
+Value* IRCompiler::compile(KT_Block *Statements) {
+  // A completer
+}
+
+Value* IRCompiler::compile(KT_MethodCall *call) {
+	//A completer
+}
 
 
-void compile(KT_Block *block);
+
+Value* IRCompiler::compile(KT_Print *print);

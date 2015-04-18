@@ -214,7 +214,6 @@ void IRCompiler::compile(KT_Block *block) {
 	}
 }
 
-
 Value* IRCompiler::compile(KT_Block *Statements) {
   // A completer
 }
@@ -223,6 +222,9 @@ Value* IRCompiler::compile(KT_MethodCall *call) {
 	//A completer
 }
 
+Value* IRCompiler::compile(KT_Print *print) {
+
+	
+}
 
 
-Value* IRCompiler::compile(KT_Print *print);

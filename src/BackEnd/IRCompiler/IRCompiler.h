@@ -58,10 +58,22 @@ private:
 
 	LLVMContext& getContext();
 	Module* getModule();
-	Function* currentFunction();
+	Function* currentFunction();d
 	BasicBlock* getCurrentBlock();
-
 	void endCurrentFunction();
+	std::vector<KT_Class *> getAllParentClasses(KT_Class *classe);
+
+	std::vector<KT_Interface *> getAllParentInterfaces(KT_Class* classe);
+	std::vector<KT_Interface *> getAllParentInterfaces(KT_Interface* interface);
+
+	std::vector<KT_Prototype*> getActualMethodes(KT_Class*);
+	std::vector<KT_Prototype*> getActualMethodes(KT_Interface*);
+
+	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Class* staticC, KT_Class* dynamiqueI);
+	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Interface* staticC, KT_Class* dynamiqueC);
+	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Interface* staticC, KT_Interface* dynamiqueI);
+	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(std::vector<KT_Prototype*> s, std::vector<KT_Prototype*> d);
+
 };
 
 

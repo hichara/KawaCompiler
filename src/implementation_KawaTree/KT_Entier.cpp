@@ -29,7 +29,9 @@ void KT_Entier::setValue( int var) {
 	this-> value=var;
 }
 
+/*
 void KT_Entier::toString() {
 	cout << " Entier de valeur : " << value << endl;
 
 }
+*/

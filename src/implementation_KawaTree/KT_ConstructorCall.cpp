@@ -16,9 +16,9 @@ using namespace std;
  KT_ConstructorCall::KT_ConstructorCall () {}
 
 /**
- * @return string *
+ * @return vector<string*>
  */
-string* KT_ConstructorCall::getName() {
+vector<string*> KT_ConstructorCall::getName() {
     return this-> name;
 }
 
@@ -37,9 +37,9 @@ vector<KT_ParamsMethodCall*> KT_ConstructorCall::getParams() {
 }
 
 /**
- * @param string *
+ * @param vector<string*>
  */
-void KT_ConstructorCall::setName( string* var) {
+void KT_ConstructorCall::setName( vector<string*>& var) {
 	this-> name=var;
 }
 
@@ -50,5 +50,22 @@ void KT_ConstructorCall::setName( string* var) {
 void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> &var) {
 
 	this->params =var;
+}
+
+/**
+ * @param string*
+ */
+void KT_ConstructorCall::addString(string* var) {
+	typeName.push_back(var);
+}
+
+/**
+ * @param vector<string*>
+ */
+void KT_ConstructorCall::addVectorString(vector<string*>& var) {
+	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
+		string* n = (*it);
+		name.push_back(n);
+	}
 }
 

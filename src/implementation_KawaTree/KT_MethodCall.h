@@ -48,6 +48,11 @@ public:
      */
     void setCaller(KT_VarOrAttr* var);
 
+    /**
+     * @param string*
+     */
+    void setNameAddStringAtFirstPosition(string* var);    
+
 private: 
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;

@@ -25,6 +25,21 @@ public:
 	*/
 	void setPackages(vector<KT_Package*>& var);
 
+	/**
+	* @param KT_Package*, KT_Class*
+	*/
+	void addPackageWithClass(KT_Package* var, KT_Class* classe);
+
+	/**
+	* @param KT_Package*, KT_Interface*
+	*/
+	void addPackageWithInterface(KT_Package* var, KT_Interface* interfac);
+
+	/**
+	* @param KT_Package*
+	*/
+	KT_Package* getPackage(KT_Package* var);
+
 	void toString();
 private: 
     vector<KT_Package*> packages;

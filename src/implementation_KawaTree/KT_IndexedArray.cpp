@@ -38,3 +38,13 @@ void KT_IndexedArray::setDimension( int var) {
 void KT_IndexedArray::setIndex(vector<int>& var){
 	index=var;
 }
+
+/**
+ * @param vector<int>
+ */
+void KT_IndexedArray::setIndexAddIntAtFirstPosition(int var){
+	++dimension;
+	vector<string*>::iterator it;
+  	it = index.begin();
+  	it = index.insert ( it , var );
+}

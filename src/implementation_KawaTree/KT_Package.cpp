@@ -53,6 +53,20 @@ void KT_Package::setClasses(vector<KT_Class*>& var) {
 	classes = var;
 }
 
+/**
+* @param KT_Class*
+*/
+void addClass(KT_Class* var){
+	classes.push_back(var);
+}
+
+/**
+* @param KT_Interface*
+*/
+void addInterface(KT_Interface* var){
+	interfaces.push_back(var);
+}
+
 void KT_Package::toString() {
 	cout << "***********************" << endl;
 	cout << "Package : " << *name << endl;

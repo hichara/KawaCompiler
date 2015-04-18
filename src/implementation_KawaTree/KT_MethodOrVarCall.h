@@ -10,7 +10,7 @@
 #include <vector>
 using namespace std;
 
-class KT_MethodOrVarCall {
+class KT_MethodOrVarCall : public KT_FactFinal{
 public:
 	KT_MethodOrVarCall();
 };

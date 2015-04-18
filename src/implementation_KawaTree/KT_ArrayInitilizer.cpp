@@ -18,7 +18,14 @@ using namespace std;
  * @return KT_IndexedArray *
  */
 KT_IndexedArray* KT_ArrayInitilizer::getIndexedArray() {
-    return this-> indexedArray;
+    return this->indexedArray;
+}
+
+/**
+ * @return KT_IndexedArray *
+ */
+KT_Type* KT_ArrayInitilizer::getType() {
+    return this->type;
 }
 
 /**
@@ -26,4 +33,11 @@ KT_IndexedArray* KT_ArrayInitilizer::getIndexedArray() {
  */
 void KT_ArrayInitilizer::setIndexedArray(KT_IndexedArray* var) {
 	this-> indexedArray= var;
+}
+
+/**
+ * @param KT_Type*
+ */
+void KT_ArrayInitilizer::setType( KT_Type* var){
+	this->type= var;
 }

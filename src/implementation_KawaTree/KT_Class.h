@@ -87,6 +87,7 @@ private:
     vector<KT_Constructor*> constructors;
     vector<PARSER_MemberDec*> memberDecs;
 	KT_Modifier* modifiers;
+    vector<vector<string*>> imports;
 };
 
 #endif //_KT_CLASS_H

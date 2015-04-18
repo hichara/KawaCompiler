@@ -40,6 +40,16 @@ public:
 	*/
 	void setClasses(vector<KT_Class*>& var);
 
+    /**
+    * @param KT_Class*
+    */
+    void addClass(KT_Class* var);
+
+    /**
+    * @param KT_Interface*
+    */
+    void addInterface(KT_Interface* var);
+
 	void toString();
 private: 
     string* name;

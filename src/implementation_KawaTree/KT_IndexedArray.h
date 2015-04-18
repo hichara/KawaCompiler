@@ -28,6 +28,11 @@ public:
      * @param vector<int>
      */
     void setIndex(vector<int>& var);
+
+    /**
+     * @param int
+     */
+    void setIndexAddIntAtFirstPosition(int var);
 private: 
     int dimension;
     vector<int> index;

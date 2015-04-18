@@ -19,9 +19,9 @@ bool KT_Type::isBasicType() {
 }
 
 /**
- * @return string *
+ * @return vector<string*>
  */
-string* KT_Type::getTypeName() {
+vector<string*> KT_Type::getTypeName() {
     return typeName;
 }
 
@@ -47,9 +47,9 @@ void KT_Type::setBasicType(bool var) {
 }
 
 /**
- * @param string *
+ * @param vector<string*>
  */
-void KT_Type::setTypeName(string* var) {
+void KT_Type::setTypeName(vector<string*>& var) {
 	typeName=var;
 }
 
@@ -61,15 +61,30 @@ void KT_Type::setArrayDim(int var) {
 }
 
 /**
- * @param int
+ * @param PARSER_Array*
  */
 void KT_Type::setArray(PARSER_Array* var) {
 	Array=var;
+	arrayDim = Array->getArrayDim();
 }
 
 /**
-* @param int
-*/
+ * @param string*
+ */
+void KT_Type::addString(string* var) {
+	typeName.push_back(var);
+}
+
+/**
+ * @param vector<string*>
+ */
+void KT_Type::addVectorString(vector<string*>& var) {
+	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
+		string* name = (*it)->toString();
+		typeName.push_back(name);
+	}
+}
+
 void KT_Type::toString() {
 	if (typeName != NULL)
 		cout << *typeName;

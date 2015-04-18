@@ -28,3 +28,12 @@ vector<string*> KT_ID::getValue() {
 void KT_ID::setValue(vector<string*>& var){
     this-> value=var;
 }
+
+/**
+ * @param string*
+ */
+void KT_ID::setNameAddStringAtFirstPosition(string* var){
+  std::vector<string*>::iterator it;
+  it = value.begin();
+  it = value.insert ( it , var );
+}

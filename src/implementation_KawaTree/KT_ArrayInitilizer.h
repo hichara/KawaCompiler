@@ -19,13 +19,21 @@ public:
     KT_ArrayInitilizer();
 	
     KT_IndexedArray* getIndexedArray();
+
+    KT_Type* getType();
     
     /**
      * @param KT_IndexedArray *
      */
     void setIndexedArray( KT_IndexedArray* var);
+
+    /**
+     * @param KT_Type*
+     */
+    void setType( KT_Type* var);
 private: 
     KT_IndexedArray* indexedArray;
+    KT_Type* type;
 };
 
 #endif //_KT_ARRAYINITILIZER_H

@@ -66,3 +66,12 @@ void KT_MethodCall::setMethodCall(KT_SimpleMethod* var) {
 void KT_MethodCall::setCaller(KT_VarOrAttr* var) {
 	caller = var;
 }
+
+/**
+ * @param string*
+ */
+void KT_MethodCall::setNameAddStringAtFirstPosition(string* var){
+  std::vector<string*>::iterator it;
+  it = name.begin();
+  it = name.insert ( it , var );
+}

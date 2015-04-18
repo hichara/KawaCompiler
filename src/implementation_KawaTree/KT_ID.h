@@ -19,6 +19,11 @@ public:
     KT_ID ();
     vector<string*> getValue();
 	 void setValue(vector<string*>& var);
+
+	/**
+     * @param string*
+     */
+    void setNameAddStringAtFirstPosition(string* var);   
 private: 
     vector<string*> value;
 };

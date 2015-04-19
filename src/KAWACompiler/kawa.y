@@ -99,7 +99,9 @@ KAWATreeParam* paramFloat;
 %type<kt_prototype> Prototype
 %type<kt_param> VariableDeclaratorId
 %type<kt_modifier> VariableModifiers VariableModifier 
+
 %type<vint> VariableDeclaratorList VariableDeclarator VariableInitializer ConstructorCall  ArrayInitializer
+
 %type<kt_expression> VariableDeclaratorList
 %type<kt_variable> VariableDeclarator
 
@@ -109,10 +111,11 @@ KAWATreeParam* paramFloat;
 %type<kt_block> Block
 %type<vectorKT_Statement> Block Statements
 %type<kt_statement> Statement  
-%type<vint> BlockStatement   
+%type<kt_blockStatement> BlockStatement   
 %type<vectorKT_FactFinal> Args ArgsRest
 %type<kt_factFinal> ArgsS ArgsI ArgsF
 %type<kt_print> PrintS PrintI PrintF Print
+
 %type<vint> SwitchBlockStatements SwitchBlockStatement 
 %type<vint> ForControl ForVarControl ForUpdate StatementExpressionList
 
@@ -418,12 +421,12 @@ Statement     : Print {$$=$1;}
 			  | PrintS {$$=$1;} 
 			  | PrintF {$$=$1;} 
 			  | PrintI {$$=$1;}
-			  | TFINAL ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
-			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
-			  | TFINAL ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
-			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$=0} 
-			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
-			  | TFINAL BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
+			  | TFINAL ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;} 
+			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;} 
+			  | TFINAL ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;} 
+			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;} 
+			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;}
+			  | TFINAL BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=new Statement;}
     		  | ID TablesIndexe '=' Expression ';' { KT_ID* id; id->setValue($1); KT_Affectation* affectation; affectation->setsetRExpression($4); affectation->setLExpression(id); affectation->setIndexedArray($2); $$=affectation;}
     		  | TTHIS '.' ID TablesIndexe '=' Expression ';' {string* name = "this"+(*$1); KT_ID* id; id->setValue(id); KT_Affectation* affectation; affectation->setsetRExpression($6); affectation->setLExpression(id); affectation->setIndexedArray($4); $$=affectation;}
     		  | Expression ';' {$$=$1;}
@@ -462,19 +465,19 @@ ArgsS : STRING {KT_String* s = new KT_String; s->setValue($1); $$=s;}
 	  | {$$=new KT_FactFinal;}
 	  ; 
 
-BlockStatement: Block {$$=0;}
-    	 	  | TIF '(' Expression ')' BlockStatement %prec THEN {$$=0;}
-		      | TIF '(' Expression ')' BlockStatement TELSE BlockStatement {$$=0;}
-		      | TSWITCH '(' Expression ')' '{' SwitchBlockStatements '}' {$$=0;}
-		      | TWHILE '(' Expression ')' BlockStatement {$$=0;}
-		      | TDO BlockStatement TWHILE '(' Expression ')' ';' {$$=0;}
-		      | TFOR '(' ForControl ')' BlockStatement {$$=0;}
-		      | TBREAK ID ';' {$$=0;}
-		      | TBREAK ';' {$$=0;}
-		 	  | TCONTINUE ID ';' {$$=0;}
-		 	  | TCONTINUE ';' {$$=0;}
-		 	  | TRETURN Expression ';' {$$=0;}
-		 	  | TRETURN ';' {$$=0;}
+BlockStatement: Block {$$=new BlockStatement;}
+    	 	  | TIF '(' Expression ')' BlockStatement %prec THEN {KT_IfStatement* ifstatement; $$=ifstatement;}
+		      | TIF '(' Expression ')' BlockStatement TELSE BlockStatement {KT_ifElseStatement* ifelseStatement; $$=ifelseStatement;}
+		      | TSWITCH '(' Expression ')' '{' SwitchBlockStatements '}' {KT_SwitchStatement* switchStatement; $$=switchStatement;}
+		      | TWHILE '(' Expression ')' BlockStatement {$$=KT_WhileStatement* whileStatement; $$=whileStatement;}
+		      | TDO BlockStatement TWHILE '(' Expression ')' ';' {$$=KT_WhileStatement* whileStatement; $$=whileStatement;}
+		      | TFOR '(' ForControl ')' BlockStatement {KT_ForStatement* forStatement; $$=forStatement;}
+		      | TBREAK ID ';' {KT_BreakStatement breakStatement; $$=breakStatement;}
+		      | TBREAK ';' {KT_BreakStatement breakStatement; $$=breakStatement;}
+		 	  | TCONTINUE ID ';' {KT_ContinueStatement continueStatement; $$=continueStatement;}
+		 	  | TCONTINUE ';' {KT_ContinueStatement continueStatement; $$=continueStatement;}
+		 	  | TRETURN Expression ';' {KT_ReturnStatement returnStatement; $$=returnStatement;}
+		 	  | TRETURN ';' {KT_ReturnStatement returnStatement; $$=returnStatement;}
 		 ;
 
 /*----------------------------------------Partie switch----------------------------------------------*/

@@ -4,6 +4,9 @@
 #include "KT_Prototype.h"
 #include "KT_Package.h"
 #include "KT_Program.h"
+#include "KT_Print.h"
+#include "KT_FactFinal.h"
+#include "KT_String.h"
 #include <map>
 #include <algorithm>
 using namespace std;
@@ -14,8 +17,10 @@ map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
 map<string, KT_Class *>::iterator iteratorClass;
 map<string, KT_Interface *>::iterator iteratorInterface;
 
+bool existError;
+
 // Phase 1
-int createListOfType(KT_Program * prog) {
+void createListOfType(KT_Program * prog) {
 	cout << "===================> Start P1 <===================" << endl << endl;
 	vector<string> packagesName;
 
@@ -23,7 +28,8 @@ int createListOfType(KT_Program * prog) {
 	for (KT_Package * package : prog->getPackages()) {
 		// on vérifie que le nom du package n'est pas déjà utilisé
 		if (find(packagesName.begin(), packagesName.end(), *package->getName()) != packagesName.end()) {
-			return -1;
+			existError = true;
+			cout << "!!!!!! ERREUR 1 !!!!! Le nom du package :  est deja utilisé" << endl;
 		}
 		packagesName.push_back(*package->getName());
 
@@ -37,7 +43,8 @@ int createListOfType(KT_Program * prog) {
 				classe->setName(fqn);
 				classTypes[*fqn] = classe;
 			} else {
-				return -2;
+				existError = true;
+				cout << "!!!!!! ERREUR 2 !!!!! Le nom de la classe: est deja utilisé" << endl;
 			}
 		}
 
@@ -51,7 +58,8 @@ int createListOfType(KT_Program * prog) {
 				interface->setName(fqn);
 				interfaceTypes[*fqn] = interface;
 			} else {
-				return -3;
+				existError = true;
+				cout << "!!!!!! ERREUR 3 !!!!! Le nom de l'interface : est deja utilisé" << endl;
 			}
 		}
 	}
@@ -65,7 +73,6 @@ int createListOfType(KT_Program * prog) {
 		cout << iteratorInterface->first << " : " << *iteratorInterface->second->getName() << endl;
 	}
 
-	return 0;
 }
 
 // Phase 2 (en cours)
@@ -122,23 +129,26 @@ void createAndVerifySignatureMethod(KT_Class * classe, string * packageName) {
 		for (KT_Param * param : methode->getParams()) {
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
-					cout << "ERROR DE TYPE, inexistant" << endl;
+					existError = true;
+					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!methode->getType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, methode->getType()->getTypeName())) {
-				cout << "ERROR DE TYPE, inexistant" << endl;
+				existError = true;
+				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*methode->getName() + "" + params);
 		if (find(signaturesMethod.begin(), signaturesMethod.end(), *signature) != signaturesMethod.end()) {
-			cout << "Erreur 2signatures identique ! " << endl;
+			existError = true;
+			cout << "!!!!!! ERREUR 5 !!!!! Deux signatures identiques " << endl;
 		}
 		signaturesMethod.push_back(*signature);
 		string returnType = getFullName(methode->getType()->getTypeName());
 		string * fqn = new string(methode->getModifier()->getVisibility() + "." + returnType + "." + *signature);
-		cout << *classe->getName() << " a pour methode : " << *fqn << endl;
+		cout << *classe->getName() + " a pour methode : " + *fqn << endl;
 		classe->addSignature(*fqn);
 //        methode->setSignature(fqn);
 	}
@@ -152,23 +162,26 @@ void createAndVerifySignaturePrototype(KT_Interface * interface, string * packag
 		for (KT_Param * param : proto->getParams()) {
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
-					cout << "ERROR DE TYPE, inexistant" << endl;
+					existError = true;
+					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!proto->getReturnType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, proto->getReturnType()->getTypeName())) {
-				cout << "ERROR DE TYPE, inexistant" << endl;
+				existError = true;
+				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*proto->getName() + "" + params);
 		if (find(signaturesMethod.begin(), signaturesMethod.end(), *signature) != signaturesMethod.end()) {
-			cout << "Erreur 2signatures identique ! " << endl;
+			existError = true;
+			cout << "!!!!!! ERREUR 5 !!!!! Deux signatures identiques " << endl;
 		}
 		signaturesMethod.push_back(*signature);
 		string returnType = getFullName(proto->getReturnType()->getTypeName());
 		string * fqn = new string(proto->getModifier()->getVisibility() + "." + returnType + "." + *signature);
-		cout << *interface->getName() << " a pour proto : " << *fqn << endl;
+		cout << *interface->getName() + " a pour proto : " + *fqn << endl;
 		interface->addSignature(*fqn);
 //        proto->setSignature(fqn);
 	}
@@ -185,16 +198,17 @@ int createHeritage(KT_Program * prog) {
 				string * fqn = new string(*package->getName() + "." + *classe->getParentClass());
 				// on verifie que le type existe
 				if (classTypes.find(*fqn) == classTypes.end()) {
-					return -1;
+					existError = true;
+					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 				// on vérifie qu'il n'y a pas de cycle
 				if (hasHeritageCycle(classe, classTypes[*fqn])) {
-					cout << " !!!!!!!!!!!!!!! Cycle classe !!!!!!!!!!!" << endl;
-					return -2;
+					existError = true;
+					cout << "!!!!!! ERREUR 6 !!!!! Cycle présent dans l'arbre d'héritage " << endl;
 				}
 
 				// on décore
-				cout << *classe->getName() << " a pour classe mere : " << *classTypes[*fqn]->getName() << endl;
+				cout << *classe->getName() + " a pour classe mere : " + *classTypes[*fqn]->getName() << endl;
 				//TODO:
 				classe->setParentClasseSemantique(classTypes[*fqn]);
 			}
@@ -205,10 +219,11 @@ int createHeritage(KT_Program * prog) {
 					string * fqn = new string(*package->getName() + "." + *interface);
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
-						return -3;
+						existError = true;
+						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 					}
 
-					cout << *classe->getName() << " a pour interface : " << *interfaceTypes[*fqn]->getName() << endl;
+					cout << *classe->getName() + " a pour interface : " + *interfaceTypes[*fqn]->getName() << endl;
 					listInter.push_back(interfaceTypes[*fqn]);
 				}
 				//TODO:
@@ -225,15 +240,16 @@ int createHeritage(KT_Program * prog) {
 					string * fqn = new string(*package->getName() + "." + *interfaceName);
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
-						return -5;
+						existError = true;
+						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 					}
 					// si ca crée un cycle
 					if (hasImplementCycle(interface, interfaceTypes[*fqn])) {
-						cout << " !!!!!!!!!!!!!!! Cycle interface !!!!!!!!!!!" << endl;
-						return -6;
+						existError = true;
+						cout << "!!!!!! ERREUR 7 !!!!! Cycle présent dans l'arbe d'implémentation " << endl;
 					}
 
-					cout << *interface->getName() << " a pour interface : " << *interfaceTypes[*fqn]->getName() << endl;
+					cout << *interface->getName() + " a pour interface : " + *interfaceTypes[*fqn]->getName() << endl;
 					listInter.push_back(interfaceTypes[*fqn]);
 				}
 				//TODO:
@@ -247,6 +263,10 @@ int createHeritage(KT_Program * prog) {
 
 // Phase 3
 
+void completion(KT_Class * classe) {
+	//for()
+}
+
 // (en cours) reste indexation de toutes les methodes (mygod) + gestion des methodes heritees
 void decoration(KT_Program * prog) {
 	cout << endl << "decoration : " << endl;
@@ -257,19 +277,29 @@ void decoration(KT_Program * prog) {
 				for (string signature : interface->getFullSignatures()) {
 					vector<string> lists = classe->getFullSignatures();
 					if (find(lists.begin(), lists.end(), signature) == lists.end()) {
-						cout << *classe->getName() << " :: error : une methode n'a pas ete defini lors de l'implemention : " << signature << endl;
+						existError = true;
+						cout << "!!!!!! ERREUR 8 !!!!! Méthode non défini malgré implémentation " << endl;
 					}
 				}
 			}
 
-			//indexation (prog)
+			completion(classe);
 
 			// on effectue le traitement sur les body de chaque methode
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
+
 					cout << "main" << endl;
 				} else {
-					cout << "simple methode" << endl;
+					KT_Print * ktPrint = new KT_Print();
+					vector<KT_FactFinal *> args;
+					KT_FactFinal * arg1 = new KT_String();
+					string * argValue1 = new string("Méthode " + *methode->getName() + " appartenant a la classe " + *classe->getName());
+					((KT_String *) arg1)->setValue(argValue1);
+					args.push_back(arg1);
+					ktPrint->setArgs(args);
+
+					cout << "simple methode :" << endl;
 				}
 			}
 		}
@@ -409,7 +439,7 @@ int main() {
 	p3->setParams(paramsList3);
 
 	KT_Prototype * p4 = new KT_Prototype();
-	string * nameProto4 = new string("protoReturnDoubleByInt");
+	string * nameProto4 = new string("protoReturnDoubleByIntt");
 	p4->setName(nameProto4);
 	p4->setModifier(modif1);
 	p4->setReturnType(type1);
@@ -525,15 +555,53 @@ int main() {
 	pc[1] = package2;
 	prog->setPackages(pc);
 
-	int res = createListOfType(prog);
-	if (res != 0) {
-		cout << "1. ERROR DANS TA FACE : " << res << endl;
+	createListOfType(prog);
+	createHeritage(prog);
+	decoration(prog);
+
+	if (existError) {
+		cout << "\n\nIl y a des erreurs => compilation echouee" << endl;
 	} else {
-		res = createHeritage(prog);
-		if (res != 0) {
-			cout << "2. ERROR DANS TA FACE : " << res << endl;
+		cout << "\n\nCompilation reussie" << endl;
+	}
+
+	cout << endl << endl << "Resume " << endl << endl;
+	for (KT_Package * package : prog->getPackages()) {
+		cout << "-(P) " + *package->getName() << endl;
+		for (KT_Class * classe : package->getClasses()) {
+			cout << "\t-(C) " + *classe->getName() << endl;
+			if(classe->getParentClasseSemantique() != NULL)
+			cout << "\t\t=> classe mere = " + *classe->getParentClasseSemantique()->getName() << endl;
+			if(classe->getParentsInterfacesSemantique().size() >0)
+			cout << "\t\t=> interfaces meres = " << endl;
+			for (KT_Interface * i : classe->getParentsInterfacesSemantique()) {
+				cout << "\t\t\t- " + *i->getName()<< endl;
+			}
+			cout << "\t\t=> methodes = " << endl;
+			for (KT_SimpleMethod * m : classe->getSimpleMethods()) {
+				cout << "\t\t\t- " +*m->getName()<< endl;
+			}
+			cout << "\t\t=> signatures = " << endl;
+			for (string s : classe->getFullSignatures()) {
+				cout << "\t\t\t- " + s << endl;
+			}
 		}
-		decoration(prog);
+		for (KT_Interface * interface : package->getInterfaces()) {
+			cout << "\t-(I) " + *interface->getName() << endl;
+			if(interface->getParentsInterfacesSemantique().size() >0)
+			cout << "\t\t=> interfaces meres = " << endl;
+			for (KT_Interface * i : interface->getParentsInterfacesSemantique()) {
+				cout << "\t\t\t- " + *i->getName()<< endl;
+			}
+			cout << "\t\t=> prototypes = " << endl;
+			for (KT_Prototype * p : interface->getPrototypes()) {
+				cout << "\t\t\t- " + *p->getName()<< endl;
+			}
+			cout << "\t\t=> signatures = " << endl;
+			for (string  s : interface->getFullSignatures()) {
+				cout << "\t\t\t- " + s << endl;
+			}
+		}
 	}
 
 	return EXIT_SUCCESS;

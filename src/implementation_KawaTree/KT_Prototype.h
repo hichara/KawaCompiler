@@ -54,6 +54,12 @@ public:
      * @param vector<KT_Param*>
      */
     void setParams(vector<KT_Param*>& var);
+	
+	 /**
+	 * mehtode pour verifier la redefinition d'une methode (semantic)
+     * @param KT_Prototype* 
+     */
+	bool equal(KT_Prototype* var);
 private: 
     string* name;
 	

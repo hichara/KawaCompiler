@@ -82,3 +82,17 @@ void KT_Prototype::setModifier(KT_Modifier* var) {
 void KT_Prototype::setParams(vector<KT_Param*>& var) {
 	params=var;
 }
+
+/**
+ * mehtode pour verifier la redefinition d'une methode (semantic)
+ * @param KT_Prototype* 
+ */
+bool equal(KT_Prototype* var){
+	if( (this->name ==var->name) 
+		&& (this->returnType == var->returnType)
+		&& (std::equal(this->params.begin(),this->params.end(), var->params.begin()))
+		return true;
+		else
+			return false;
+
+}

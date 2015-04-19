@@ -10,7 +10,7 @@
 #include <iostream>
 #include "KT_Param.h"
 #include "KT_Block.h"
-
+#include "KT_Prototype.h"
 
 class KT_SimpleMethod: public PARSER_MemberDec{
 public: 
@@ -28,6 +28,9 @@ public:
 	KT_Modifier* getModifier();
 
 	KT_Type* getType();
+	
+	string getFullSignature();
+	
 	
 	/**
 	* method semantic
@@ -64,6 +67,11 @@ public:
 	* @param KT_Prototype*
 	*/
 	void setPrototype(KT_Prototype* var);
+	
+	/**
+	* @param string
+	*/
+	void setFullSignature(string var);
 
 	void toString();
 private: 
@@ -74,6 +82,7 @@ private:
 	KT_Modifier* modifier;
 	KT_Type* type;
 	KT_Prototype* prototype;
+	string FullSignature;
 };
 
 #endif //_KT_SIMPLEMETHOD_H

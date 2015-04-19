@@ -104,6 +104,21 @@ void KT_SimpleMethod::setPrototype(KT_Prototype* var){
 	this->prototype  = var;
 }
 
+/**
+* @param string
+*/
+void KT_SimpleMethod:::setFullSignature(string var){
+	this->FullSignature = var;
+}
+
+/**
+* @return string
+*/
+string KT_SimpleMethod::getFullSignature() {
+	return this->FullSignature;
+}
+
+
 void KT_SimpleMethod::toString() {
 	modifier->toString();
 	type->toString();

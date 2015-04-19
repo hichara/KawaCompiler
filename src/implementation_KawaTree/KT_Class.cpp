@@ -196,6 +196,27 @@ string* KT_Class::getFQN() {
 void KT_Class::setFQN(string* var){
 	this->FQN =var;
 }
+
+/**
+ * @return vector<KT_Prototypes*>
+ */
+vector<KT_Prototypes*>  KT_Class::getAllPrototypes(){
+	return this-> AllPrototypes;
+}
+	
+/**
+* @param vector<KT_Prototypes*> 
+*/
+void KT_Class::setAllPrototypes(vector<KT_Prototypes*> var){
+	this-> AllPrototypes=var;
+}
+
+/**
+* @param vector<KT_Prototypes*> 
+*/
+void addPrototype(KT_Prototype* var) {
+	AllPrototypes.push_back(var);
+}
 	
 
 void KT_Class::toString() {

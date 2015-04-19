@@ -93,6 +93,13 @@ public:
 	
 	string* getFQN();
 	
+	vector<KT_Prototypes*>  getAllPrototypes();
+	
+	/**
+	* @param vector<KT_Prototypes*> 
+	*/
+	void setAllPrototypes(vector<KT_Prototypes*> var);
+	
 	/**
 	* @param string*
 	*/
@@ -113,6 +120,11 @@ public:
 	
 	vector<KT_Interface*> getParentsInterfacesSemantique();
 	
+	/**
+* @param KT_Prototype* 
+*/
+void addPrototype(KT_Prototype* var);
+	
 
 	void toString();
 private: 
@@ -129,6 +141,7 @@ private:
 	KT_Class* parentClasseSemantique;
 	vector<KT_Interface*> parentsInterfacesSemantique;
 	string* FQN;
+	vector<KT_Prototypes*>  AllPrototypes ;
 
 };
 

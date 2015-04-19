@@ -1,12 +1,13 @@
 #include <iostream>
-#include "KT_Class.h"
-#include "KT_Interface.h"
-#include "KT_Prototype.h"
-#include "KT_Package.h"
-#include "KT_Program.h"
-#include "KT_Print.h"
-#include "KT_FactFinal.h"
-#include "KT_String.h"
+#include "../implementation_KawaTree/KT_Class.h"
+#include "../implementation_KawaTree/KT_Interface.h"
+#include "../implementation_KawaTree/KT_Prototype.h"
+#include "../implementation_KawaTree/KT_Package.h"
+#include "../implementation_KawaTree/KT_Program.h"
+#include "../implementation_KawaTree/KT_Print.h"
+#include "../implementation_KawaTree/KT_FactFinal.h"
+#include "../implementation_KawaTree/KT_String.h"
+#include "../implementation_KawaTree/KT_Statement.h"
 #include "CheckDeclarationStatementType.cpp"
 #include "CheckAffectationStatementType.cpp"
 #include "CheckCallMethodStatementType.cpp"
@@ -366,8 +367,8 @@ void decoration(KT_Program * prog) {
 			// on effectue le traitement sur les body de chaque methode
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
-					/* todo: ligne a dé/commenter pour dé/activer le traitement
-					KT_Block* mainBlock = *methode->getBlock();
+					//* todo: ligne a dé/commenter pour dé/activer le traitement
+					KT_Block* mainBlock = methode->getBlock();
 					bool mainIsGood = true;
 					for(KT_Statement* statement : mainBlock->getStatements()){
 						

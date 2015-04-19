@@ -68,6 +68,20 @@ void KT_Constructor::setBlock(KT_Block* var) {
 	block = var;
 }
 
+/**
+* @param string
+*/
+void KT_Constructor::setFullSignature(string var){
+	this->FullSignature = var;
+}
+
+/**
+* @return string
+*/
+string KT_Constructor::getFullSignature() {
+	return this->FullSignature;
+}
+
 void KT_Constructor::toString(){
 	modifier->toString();
 	cout << *name << " (";
@@ -77,6 +91,6 @@ void KT_Constructor::toString(){
 	}
 	cout << ")" << endl;
 	cout << " Block de Constructeur " <<endl;
-	block->toString();
+	//block->toString();
 
 }

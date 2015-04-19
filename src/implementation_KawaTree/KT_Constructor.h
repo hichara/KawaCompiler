@@ -29,6 +29,13 @@ public:
     vector<KT_Param*> getParams();
 
     KT_Block* getBlock();
+	
+	string getFullSignature();
+	
+	/**
+	* @param string
+	*/
+	void setFullSignature(string var);
     
     /**
      * @param string *
@@ -56,6 +63,7 @@ private:
     vector<KT_Param*> params;
     KT_Modifier* modifier;
     KT_Block* block;
+	string FullSignature;
 };
 
 #endif //_KT_CONSTRUCTOR_H

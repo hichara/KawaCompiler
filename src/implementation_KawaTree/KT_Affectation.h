@@ -9,7 +9,7 @@
 #include "KT_IDExpression.h"
 #include "KT_VarOrAttr.h"
 #include "KT_Expression.h"
-#include "KT_Expression.h"
+#include "KT_IndexedArray.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -25,6 +25,8 @@ public:
     KT_VarOrAttr* getReference();
     
     KT_Expression* getrExpression();
+
+    KT_IndexedArray* getIndexedArray();
     
     /**
      * @param KT_Expression *
@@ -40,11 +42,17 @@ public:
      * @param KT_VarOrAttr*
      */
     void setReference(KT_VarOrAttr* var);
+
+    /**
+     * @param KT_IndexedArray*
+     */
+    void setIndexedArray(KT_IndexedArray* var);
 	
 private: 
     KT_VarOrAttr* reference;
     KT_Expression* lExpression;
     KT_Expression* rExpression;
+    KT_IndexedArray* indexedArray;
 };
 
 #endif //_KT_AFFECTATION_H

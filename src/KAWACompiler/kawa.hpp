@@ -47,17 +47,17 @@ extern int yydebug;
   {
     ENTIER = 258,
     REEL = 259,
-    STRING = 260,
-    TSTRING = 261,
-    TSHORT = 262,
-    TINT = 263,
-    TLONG = 264,
-    TFLOAT = 265,
-    TDOUBLE = 266,
-    TBYTE = 267,
-    TCHAR = 268,
-    TBOOLEAN = 269,
-    TVOID = 270,
+    TSTRING = 260,
+    TSHORT = 261,
+    TINT = 262,
+    TLONG = 263,
+    TFLOAT = 264,
+    TDOUBLE = 265,
+    TBYTE = 266,
+    TCHAR = 267,
+    TBOOLEAN = 268,
+    TVOID = 269,
+    STRING = 270,
     TIMPORT = 271,
     TPACKAGE = 272,
     TPUBLIC = 273,
@@ -110,12 +110,12 @@ extern int yydebug;
     TORBINEQ = 320,
     TXORBINEQ = 321,
     TDECAL = 322,
-    TDECALEQ = 323,
-    TDECAR = 324,
-    TDECAREQ = 325,
-    TDECALNS = 326,
-    TDECALNSEQ = 327,
-    THEN = 328,
+    TDECAR = 323,
+    TDECALNS = 324,
+    THEN = 325,
+    TDECALNSEQ = 326,
+    TDECAREQ = 327,
+    TDECALEQ = 328,
     COND = 329,
     NBINAIRE = 330,
     NLOGIC = 331,
@@ -129,19 +129,107 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 98 "kawa.y" /* yacc.c:1909  */
+#line 96 "kawa.y" /* yacc.c:1909  */
 
+	bool vbool;
 	int vint;
 	float vfloat;
-	std::string* vstring;
-	KAWATreeProgram* program;
-	KAWATreeClass* clazz;
-	KAWATreePrintString* vKAWATreePrintString;
-	KAWATreePrintInteger* vKAWATreePrintInteger;
-	KAWATreePrintFloat* vKAWATreePrintFloat;
-	KAWATreeParam* vKAWATreeParam;
+	string* vstring;
+	KT_Addition* kt_addition;
+	KT_AdditionlEq* kt_tdditionlEq;
+	KT_Affectation* kt_affectation;
+	KT_AffectOperation* kt_affectOperation;
+	KT_AndBinEq* kt_andBinEq;
+	KT_ArithmeticExpression* kt_arithmeticExpression;
+	KT_ArrayInitilizer* kt_arrayInitilizer;
+	KT_Attribute* kt_attribute;
+	KT_BinaryExpression* kt_binaryExpression;
+	KT_Block* kt_block;
+	KT_BlockStatement* kt_blockStatement;
+	KT_Bool* kt_bool;
+	KT_BooleanExpression* kt_booleanExpression;
+	KT_BreakStatement* kt_breakStatement;
+	KT_Class* kt_class;
+	KT_Constructor* kt_constructor;
+	KT_ConstructorCall* kt_constructorCall;
+	KT_ContinueStatement* kt_continueStatement;
+	KT_Division* kt_division;
+	KT_DivisionEq* kt_divisionEq;
+	KT_Entier* kt_entier;
+	KT_Expression* kt_expression;
+	KT_ExpressionAnd* kt_expressionAnd;
+	KT_ExpressionAndLogic* kt_expressionAndLogic;
+	KT_ExpressionEq* kt_expressionEq;
+	KT_ExpressionGE* kt_expressionGE;
+	KT_ExpressionGT* kt_expressionGT;
+	KT_ExpressionLE* kt_expressionLE;
+	KT_ExpressionLT* kt_expressionLT;
+	KT_ExpressionNotEq* kt_expressionNotEq;
+	KT_ExpressionOr* kt_expressionOr;
+	KT_ExpressionOrLogic* kt_expressionOrLogic;
+	KT_ExpressionOrXLogic* kt_expressionOrXLogic;
+	KT_FactFinal* kt_factFinal;
+	KT_ForStatement* kt_forStatement;
+	KT_ID* kt_id;
+	KT_IDExpression* kt_idExpression;
+	KT_ifElseStatement* kt_ifElseStatement;
+	KT_IfStatement* kt_ifStatement;
+	KT_IndexedArray* kt_indexedArray;
+	KT_Interface* kt_interface;
+	KT_LinkedMethodOrVarCall* kt_linkedMethodOrVarCall;
+	KT_MethodCall* kt_methodCall;
+	KT_MethodOrVarCall* kt_methodOrVarCall;
+	KT_Minus* kt_minus;
+	KT_Modifier* kt_modifier;
+	KT_Modulo* kt_modulo;
+	KT_ModuloEq* kt_moduloEq;
+	KT_Multiplication* kt_multiplication;
+	KT_MultiplicationEq* kt_multiplicationEq;
+	KT_NBinary* kt_nBinary;
+	KT_Negation* kt_negation;
+	KT_OrBinEq* kt_orBinEq;
+	KT_Package* kt_package;
+	KT_Param* kt_param;
+	KT_ParamsMethodCall* kt_paramsMethodCall;
+	KT_PostDecrement* kt_postDecrement;
+	KT_PostIncrement* kt_postIncrement;
+	KT_PreDecrement* kt_preDecrement;
+	KT_PreIncrement* kt_preIncrement;
+	KT_Print* kt_print;
+	KT_Program* kt_program;
+	KT_Prototype* kt_prototype;
+	KT_Reel* kt_reel;
+	KT_ReturnStatement* kt_returnStatement;
+	KT_SimpleMethod* kt_simpleMethod;
+	KT_Statement* kt_statement;
+	KT_String* kt_string;
+	KT_Substraction* kt_substraction;
+	KT_SubstractionEq* kt_substractionEq;
+	KT_Super* kt_super;
+	KT_SwitchBlockStatement* kt_switchBlockStatement;
+	KT_SwitchStatement* kt_switchStatement;
+	KT_Type* kt_type;
+	KT_UnaryExpression* kt_unaryExpression;
+	KT_Variable* kt_variable;
+	KT_VarOrAttr* kt_varOrAttr;
+	KT_WhileStatement* kt_whileStatement;
+	KT_XOrBinEq* kt_xOrBinEq;
+	PARSER_Array* parser_array;
+	PARSER_Field* parser_field;
+	PARSER_ForControl* parser_forControl;
+	PARSER_MemberDec* parser_memberDec;
 
-#line 145 "kawa.hpp" /* yacc.c:1909  */
+	vector<KT_MethodOrVarCall*>* vectorKT_MethodOrVarCall;
+	vector<string*>* vectorString;
+	vector<vector<string*>>* vectorVecorString;
+	vector<KT_ParamsMethodCall*>* vectorKT_ParamsMethodCall;
+	vector<KT_Param*>* vectorKT_Param;
+	vector<KT_Prototype*>* vectorKT_Prototype;
+	vector<PARSER_MemberDec*>* vectorPARSER_MemberDec;
+	vector<KT_Statement*>* vectorKT_Statement;
+	vector<KT_FactFinal*>* vectorKT_FactFinal;
+
+#line 233 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

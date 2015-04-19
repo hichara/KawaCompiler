@@ -13,7 +13,11 @@ using namespace std;
  * KT_Class implementation
  */
  
-KT_Class:: KT_Class() {}
+KT_Class:: KT_Class() {
+//besoin semantic
+ParentClass=NULL;
+
+}
 
 
 /**
@@ -182,6 +186,41 @@ void KT_Class::setModifier(KT_Modifier* var) {
 	vector<KT_Interface*> KT_Class::getParentsInterfacesSemantique(){
 		return this-> parentsInterfacesSemantique ;
 	}
+	
+/**
+ * @return string *
+ */
+string* KT_Class::getFQN() {
+    return this-> FQN;
+}	
+	
+/**
+* @param string*
+*/
+void KT_Class::setFQN(string* var){
+	this->FQN =var;
+}
+
+/**
+ * @return vector<KT_Prototype*>
+ */
+vector<KT_Prototype*>  KT_Class::getAllPrototypes(){
+	return AllPrototypes;
+}
+	
+/**
+* @param vector<KT_Prototype*> 
+*/
+void KT_Class::setAllPrototypes(vector<KT_Prototype*> var){
+	this-> AllPrototypes=var;
+}
+
+/**
+* @param vector<KT_Prototype*> 
+*/
+void KT_Class::addPrototype(KT_Prototype* var) {
+	AllPrototypes.push_back(var);
+}
 	
 
 void KT_Class::toString() {

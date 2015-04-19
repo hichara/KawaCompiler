@@ -57,11 +57,26 @@ KT_Package* KT_Program::getPackage(KT_Package* var){
 	for (vector<KT_Package*>::iterator it = packages.begin(); it != packages.end(); ++it){
 		KT_Package* package = (*it);
 		string name1 = *(package->getName());
-		string name2 = *var;
+		string name2 = *(var->getName());
 		if(name1==name2)
 			return package;
 	}
 	return NULL;
+}
+
+
+/**
+* @param string
+*/
+void KT_Program::setName(string var){
+	this->name= var;
+}
+
+/**
+ * @return string
+ */
+string KT_Program::getName() {
+    return name;
 }
 
 void KT_Program::toString() {

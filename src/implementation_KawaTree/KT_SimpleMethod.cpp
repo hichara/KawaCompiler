@@ -9,7 +9,12 @@
  * KT_SimpleMethod implementation
  */
 
-KT_SimpleMethod::KT_SimpleMethod(){}
+KT_SimpleMethod::KT_SimpleMethod(){
+//besoin semantic
+
+prototype=NULL;
+
+}
 
 /**
  * @return string *
@@ -54,6 +59,14 @@ KT_Type* KT_SimpleMethod::getType() {
 }
 
 /**
+* @return KT_Prototype*
+*/
+KT_Prototype* KT_SimpleMethod::getPrototype() {
+	return prototype;
+}
+
+
+/**
  * @param string *
  */
 void KT_SimpleMethod::setName(string* var) {
@@ -88,6 +101,29 @@ void KT_SimpleMethod::setParams(vector<KT_Param*>& var) {
 	params = var;
 }
 
+
+/**
+* @param KT_Prototype*
+*/
+void KT_SimpleMethod::setPrototype(KT_Prototype* var){
+	this->prototype  = var;
+}
+
+/**
+* @param string
+*/
+void KT_SimpleMethod::setFullSignature(string var){
+	this->FullSignature = var;
+}
+
+/**
+* @return string
+*/
+string KT_SimpleMethod::getFullSignature() {
+	return this->FullSignature;
+}
+
+
 void KT_SimpleMethod::toString() {
 	modifier->toString();
 	type->toString();
@@ -97,5 +133,5 @@ void KT_SimpleMethod::toString() {
 	}
 	cout << ")" << endl;
 	cout << "Methode Block : " << endl;
-	block->toString();
+	//block->toString();
 }

@@ -80,17 +80,17 @@ void KT_Type::addString(string* var) {
  */
 void KT_Type::addVectorString(vector<string*>& var) {
 	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
-		string* name = (*it)->toString();
-		typeName.push_back(name);
+		//string* name = (*it);
+		typeName.push_back(*it);
 	}
 }
 
 void KT_Type::toString() {
-	if (typeName != NULL)
+	/*if (typeName != NULL)
 		cout << *typeName;
 	else
 		cout << "Type non définit ";
 	
 	cout<< " dimension: " << arrayDim << " ";
-
+	*/
 }

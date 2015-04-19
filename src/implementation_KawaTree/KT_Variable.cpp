@@ -19,6 +19,13 @@ vector<string*> KT_Variable::getName() {
 }
 
 /**
+ * @return KT_Expression*
+ */
+KT_Expression* KT_Variable::getValue() {
+    return value;
+}
+
+/**
  * @return bool
  */
 bool KT_Variable::isFinal() {
@@ -48,4 +55,11 @@ void KT_Variable::setFinal(bool var) {
  */
 void KT_Variable::setType(KT_Type* var) {
 	type=var;
+}
+
+/**
+ * @param KT_Expression*
+ */
+void KT_Variable::setValue(KT_Expression* var) {
+	value=var;
 }

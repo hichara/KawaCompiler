@@ -8,6 +8,7 @@
 
 #include "KT_FactFinal.h"
 #include "KT_IndexedArray.h"
+#include "KT_Type.h"
 #include <stdio.h>
 #include <string>
 #include <vector>

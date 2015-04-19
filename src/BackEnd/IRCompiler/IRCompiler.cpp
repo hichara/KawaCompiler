@@ -1,6 +1,5 @@
 
-
-
+#include "IRCompiler.h"
 
 IRCompiler() {
   InitializeNativeTarget();
@@ -28,7 +27,8 @@ BasicBlock* getCurrentBlock() {
 
 
 void IRCompiler::compile(KT_Program *program) {
-
+  
+  // A completer
   IRmodule = new Module(program->toString(), IRcontext);
 
   std::vector<KT_Package*> pckgs = program->getPackages();
@@ -38,6 +38,10 @@ void IRCompiler::compile(KT_Program *program) {
   for(int i = 0; i < size; i++) {
   	compile(pckgs[i]);
   }
+
+  PassManager PM;
+  PM.add(new PrintModulePass(&llvm::cout));
+  PM.run(*Mod);
 }
 
 void IRCompiler::compile(KT_Package *package) {
@@ -54,10 +58,25 @@ void IRCompiler::compile(KT_Package *package) {
   for(int i = 0; i < size_c; i++) {
   	compile(classes[i]);
   }
+
+  for(int i = 0; i < size_i; i++) {
+  	createAdHocTable(interfaces[i]);
+  }
+
+  for(int i = 0; i < size_c; i++) {
+  	createAdHocTable(classes[i]);
+  }
+
 }
 
 
 void IRCompiler::compile(KT_Class *classe) {
+
+	auto search = classeMap.find(classe);
+
+	if(search != classe.end()) {
+		return search->second;
+	}
 
 	currentClassOrInterface = classe;
 
@@ -79,7 +98,6 @@ void IRCompiler::compile(KT_Class *classe) {
 		currentClass = classe;
 	}
 
-
 	std::vector<KT_Attribute> *attribut = classe->getAttributes();
 
 	std::vector<KT_SimpleMethod*> s_mehtodes = classe->getSimpleMethods();
@@ -92,17 +110,24 @@ void IRCompiler::compile(KT_Class *classe) {
 	int size_c = c_constructors.size();
 
 	for(int i = 0; i < size_m; i++) {
+		compile(s_mehtodes[i]->getPrototype());
 		compile(s_mehtodes[i]);
 	}
 
-	for(int i = 0; i < size_m; i++) {
-		compile(c_constructors);
+	for(int i = 0; i < size_c; i++) {
+		compile(c_constructors[i]);
 	}
 
 	currentClass = NULL;
 }
 
 Type* IRCompiler::compile(KT_Interface *interface) {
+
+	auto search = interfaceMap.find(interface);
+
+	if(search != interface.end()) {
+		return search->second;
+	}
 
 	currentInterface = interface;
 	std::vector<KT_Interface*> pInfs = classe->getParentsInterfacesSemantique();
@@ -111,6 +136,7 @@ Type* IRCompiler::compile(KT_Interface *interface) {
 		for(int  i = 0; i < pInfs.size(); i++) {
 			compile(pInfs[i]);
 		}
+
 		compilingState = COMPILING_CLASS;
 		currentInterface = interface;
 	}
@@ -121,10 +147,13 @@ Type* IRCompiler::compile(KT_Interface *interface) {
 		compile(prototypes[i]);
 	}
 
-
-	currentInterface = NULL;
 	// A completer
 	// Generer la tabe adHoc
+
+
+
+	// Fin
+	currentInterface = NULL;
 }
 
 
@@ -167,6 +196,7 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 }
 
 Function* IRCompiler::compile(KT_SimpleMethode *methode) {
+	  // A completer
 	  std::string className;
 
 	  if(compilingState == COMPILING_CLASS) {
@@ -223,8 +253,7 @@ Value* IRCompiler::compile(KT_MethodCall *call) {
 }
 
 Value* IRCompiler::compile(KT_Print *print) {
-
-	
+// A completer
 }
 
 

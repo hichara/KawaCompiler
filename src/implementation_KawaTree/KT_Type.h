@@ -55,7 +55,7 @@ public:
     /**
      * @param vector<string*>
      */
-    addVectorString(vector<string*>& var);
+    void addVectorString(vector<string*>& var);
 
 	void toString();
     

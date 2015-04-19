@@ -10,6 +10,7 @@
 #include "KT_Attribute.h"
 #include "KT_SimpleMethod.h"
 #include "KT_Constructor.h"
+#include "KT_Prototype.h"
 #include "PARSER_MemberDec.h"
 #include "KT_Interface.h"
 #include <stdio.h>
@@ -52,6 +53,8 @@ public:
     vector<PARSER_MemberDec*> getMemberDecs();
 
 	KT_Modifier* getModifier();
+
+    vector<vector<string*> > getImports();
     
     /**
      * @param string *
@@ -91,6 +94,20 @@ public:
 	
 	vector<string> getFullSignatures();
 	
+	string* getFQN();
+	
+	vector<KT_Prototype*>  getAllPrototypes();
+	
+	/**
+	* @param vector<KT_Prototype*> 
+	*/
+	void setAllPrototypes(vector<KT_Prototype*> var);
+	
+	/**
+	* @param string*
+	*/
+	void setFQN(string* var);
+	
 	/**
 	* @param KT_Class*
 	*/
@@ -106,6 +123,16 @@ public:
 	
 	vector<KT_Interface*> getParentsInterfacesSemantique();
 	
+	/**
+* @param KT_Prototype* 
+*/
+void addPrototype(KT_Prototype* var);
+	
+
+    /**
+    * @param vector<vector<string*>>
+    */
+    void setImports(vector<vector<string*> >& var);
 
 	void toString();
 private: 
@@ -117,10 +144,12 @@ private:
     vector<KT_Constructor*> constructors;
     vector<PARSER_MemberDec*> memberDecs;
 	KT_Modifier* modifiers;
-    vector<vector<string*>> imports;
+    vector<vector<string*> > imports;
 	vector<string> fullSignatures;
 	KT_Class* parentClasseSemantique;
-	vector<KT_Interface*> parentsInterfacesSemantique;	
+	vector<KT_Interface*> parentsInterfacesSemantique;
+	string* FQN;
+	vector<KT_Prototype*> AllPrototypes ;
 
 };
 

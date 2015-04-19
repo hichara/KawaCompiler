@@ -33,6 +33,7 @@ public:
      * @param int
      */
     void setIndexAddIntAtFirstPosition(int var);
+
 private: 
     int dimension;
     vector<int> index;

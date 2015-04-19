@@ -25,6 +25,7 @@ vector<int> KT_IndexedArray::getIndex() {
     return index;
 }
 
+
 /**
  * @param int
  */

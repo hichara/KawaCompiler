@@ -38,6 +38,13 @@ KT_Expression* KT_Affectation::getrExpression() {
 }
 
 /**
+ * @return KT_IndexedArray*
+ */
+KT_IndexedArray* KT_IndexedArray::getIndexedArray() {
+    return indexedArray;
+}
+
+/**
  * @param KT_Expression *
  */
 void KT_Affectation::setLExpression(KT_Expression* var) {
@@ -58,4 +65,10 @@ void KT_Affectation::setReference(KT_VarOrAttr* var) {
 	reference=var;
 }
 
+/**
+ * @param KT_IndexedArray*
+ */
+void KT_Affectation::setIndexedArray(KT_IndexedArray* var){
+	indexedArray=var;
+}
 

@@ -52,6 +52,8 @@ public:
     vector<PARSER_MemberDec*> getMemberDecs();
 
 	KT_Modifier* getModifier();
+
+    vector<vector<string*>> getImports();
     
     /**
      * @param string *
@@ -125,6 +127,11 @@ public:
 */
 void addPrototype(KT_Prototype* var);
 	
+
+    /**
+    * @param vector<vector<string*>>
+    */
+    void setImports(vector<vector<string*>>& var);
 
 	void toString();
 private: 

@@ -19,11 +19,17 @@ public:
     KT_Program();
     
     vector<KT_Package*> getPackages();
+	string getName();
 
 	/**
 	* @param vector<KT_Package*>
 	*/
 	void setPackages(vector<KT_Package*>& var);
+	
+	/**
+	* @param string
+	*/
+	void setName(string var);
 
 	/**
 	* @param KT_Package*, KT_Class*
@@ -43,6 +49,7 @@ public:
 	void toString();
 private: 
     vector<KT_Package*> packages;
+	string name;
 };
 
 #endif //_KT_PROGRAM_H

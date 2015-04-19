@@ -183,6 +183,20 @@ void KT_Class::setModifier(KT_Modifier* var) {
 		return this-> parentsInterfacesSemantique ;
 	}
 	
+/**
+ * @return string *
+ */
+string* KT_Class::getFQN() {
+    return this-> FQN;
+}	
+	
+/**
+* @param string*
+*/
+void KT_Class::setFQN(string* var){
+	this->FQN =var;
+}
+	
 
 void KT_Class::toString() {
 	

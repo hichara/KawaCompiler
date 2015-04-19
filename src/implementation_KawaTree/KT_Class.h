@@ -91,6 +91,13 @@ public:
 	
 	vector<string> getFullSignatures();
 	
+	string* getFQN();
+	
+	/**
+	* @param string*
+	*/
+	void setFQN(string* var);
+	
 	/**
 	* @param KT_Class*
 	*/
@@ -120,7 +127,8 @@ private:
     vector<vector<string*>> imports;
 	vector<string> fullSignatures;
 	KT_Class* parentClasseSemantique;
-	vector<KT_Interface*> parentsInterfacesSemantique;	
+	vector<KT_Interface*> parentsInterfacesSemantique;
+	string* FQN;
 
 };
 

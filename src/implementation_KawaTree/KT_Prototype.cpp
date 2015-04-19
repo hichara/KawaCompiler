@@ -96,3 +96,20 @@ bool equal(KT_Prototype* var){
 			return false;
 
 }
+
+string getFN(vector<string *> beFill) {
+   string toFill = ".(";
+   for (string * pieceOfName : beFill)
+       toFill += "." + *pieceOfName;
+   toFill += ")";
+   return toFill;
+}
+string KT_Prototype::toString(){
+   string  p;
+   for (KT_Param * param : this->params)
+       p= p + getFN(param->getParamType()->getTypeName());
+   string * signature = new string(*this->name + "" + p);
+   string returnType = getFN(this->returnType->getTypeName());
+   string * fqn = new string(this->modifier->getVisibility() + "." + returnType + "." + *signature);
+   return *fqn;
+}

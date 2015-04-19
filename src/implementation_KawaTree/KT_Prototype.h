@@ -60,6 +60,9 @@ public:
      * @param KT_Prototype* 
      */
 	bool equal(KT_Prototype* var);
+	
+	string toString();
+	
 private: 
     string* name;
 	

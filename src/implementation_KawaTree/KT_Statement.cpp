@@ -11,7 +11,7 @@
 
 KT_Statement::KT_Statement(){}
 
-void accept(SemanticVisitor* visitor){}
+void KT_Statement::accept(SemanticVisitor* visitor){}
 /*
 void KT_Statement::toString(){
 	cout << "to string DE STATEMENT" << endl;

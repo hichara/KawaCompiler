@@ -16,7 +16,7 @@ class KT_Statement {
 public:
 	KT_Statement();
 	/*virtual void toString() = 0;*/
-	void accept(SemanticVisitor* visitor);
+	virtual void accept(SemanticVisitor* visitor);
 };
 
 #endif //_KT_STATEMENT_H

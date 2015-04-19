@@ -1,0 +1,21 @@
+package heritage;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Ville V1;
+		V1 = new Ville("france",10,"Lyon", 654, "France");
+		Ville V2 ;
+		V2 = new Ville("france",2,"Lille", 123, "France");
+		printString("le nombre d'instance de ville est :"+V1.getNombreInstances());
+		printString("\n"+V1.decrisToi());
+		printString(V2.decrisToi()+"\n");
+		printString(V1.comparer(V2));
+		Capital cap = new Capital("france",10,"Paris", 654987, "France", "la tour Eiffel");
+		Capital cap1 = new Capital();
+
+		  printString("\n"+cap1.decrisToi());
+		  printString("\n"+cap.decrisToi());
+	}
+
+}

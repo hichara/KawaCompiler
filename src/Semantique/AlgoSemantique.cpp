@@ -7,6 +7,9 @@
 #include "KT_Print.h"
 #include "KT_FactFinal.h"
 #include "KT_String.h"
+#include "CheckDeclarationStatementType.cpp"
+#include "CheckAffectationStatementType.cpp"
+#include "CheckCallMethodStatementType.cpp"
 #include <map>
 #include <algorithm>
 using namespace std;
@@ -363,7 +366,35 @@ void decoration(KT_Program * prog) {
 			// on effectue le traitement sur les body de chaque methode
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
+					/* todo: ligne a dé/commenter pour dé/activer le traitement
+					KT_Block* mainBlock = *methode->getBlock();
+					bool mainIsGood = true;
+					for(KT_Statement* statement : mainBlock->getStatements()){
+						
+						SemanticVisitor* declarationVisitor = new CheckDeclarationStatementType();
+						statement->accept(declarationVisitor);
+						
+						SemanticVisitor* affectationVisitor = new CheckAffectationStatementType();
+						statement->accept(affectationVisitor);
+						
+						SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
+						statement->accept(callMethodVisitor);
 
+						// si la statement n'est pas une déclaration ou une affectation ou un appel de méthode
+						// alors le main n'est pas correct.
+						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
+							&& !callMethodVisitor->isVisited()){
+								
+								mainIsGood = false;
+						}
+					}
+					if (!mainIsGood){
+						existError = true;
+						// todo: définir le numéro de l'erreur
+						cout << "!!!!!!! ERREUR * !!!!!!!! Méthode main doit comporter uniquement des déclarations,"
+						     << "affectations ou appels de méthodes uniquement" << endl;
+					}
+					//*/
 					//cout << "main" << endl;
 				} else {
 					KT_Print * ktPrint = new KT_Print();

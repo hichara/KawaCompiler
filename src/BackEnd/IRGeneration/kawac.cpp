@@ -99,11 +99,19 @@ int main() {
     fncs.push_back(f4);
     fncs.push_back(f5);
 
+  Function *cons = FunctionGenerator::getOrCreateConstructor(myModule,
+                "class_nom",
+                types,                  
+                names); 
+
 
     GlobalVariableGenerator::createAdHocTable(myModule,
             "class_A", 
             "class_B",
             fncs);
+
+
+std::cout << "end here too\n";
 
 
 /*
@@ -169,7 +177,7 @@ int main() {
 
   myModule->dump();
 
-  std::cout << Type::getInt8Ty(Context)->isStructTy() << " is struct\n";
+//  std::cout << Type::getInt8Ty(Context)->isStructTy() << " is struct\n";
 
   return 0;
 }

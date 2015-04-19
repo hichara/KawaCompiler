@@ -93,7 +93,7 @@
  	return b.CreateFPTrunc(v, Type::getDoubleTy(Context)); 	
  }
 
-
+/*
 Value* PrimitiveValueConverter::convertToStr(Value *o1, BasicBlock *bb) {
 	LLVMContext &context = bb->getContext();
 	IRBuilder<> b(context);
@@ -115,5 +115,5 @@ Value* PrimitiveValueConverter::convertToStr(Value *o1, BasicBlock *bb) {
 
 	return PrimitiveCreator::create("[unknown]", context);
 }
-
+*/
 

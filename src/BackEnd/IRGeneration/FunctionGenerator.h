@@ -30,27 +30,39 @@ using namespace llvm;
 class FunctionGenerator {
 
 public:
-	static Function *createFunction(Module *module, bool isStatic,
-									std::string className,
-									std::string name,
-									std::string ret_type, 
-									std::vector<std::string> args_types,									
-									std::vector<std::string> args_names);
 
-	static Function *createPrototype(Module *module, bool isStatic,
-									std::string className,
-									std::string name,
-									std::string ret_type, 
-									std::vector<std::string> args_types,									
-									std::vector<std::string> args_names);
+	static Function *getFunction(Module *module, std::string name);
 
-	static Function *createConstructor(Module *module, std::string className,
+	static Function *getConstructor(Module *module,
+								std::string className,
+								std::vector<std::string> args_types,									
+								std::vector<std::string> args_names);
+
+	static Function* getSubConstructor(Module *module,
+								std::string className,
 								std::vector<std::string> args_types,									
 								std::vector<std::string> args_names);
 
 
-	static Function *getFunction(Module *module, std::string name);
+	static Function *getOrCreateFunction(Module *module, bool isStatic,
+									std::string className,
+									std::string name,
+									std::string ret_type, 
+									std::vector<std::string> args_types,									
+									std::vector<std::string> args_names);
 
+	static Function* getOrCreateConstructor(Module *module,
+								std::string className,
+								std::vector<std::string> args_types,									
+								std::vector<std::string> args_names);
+
+	static Function *getAdHocTableFunction(Module *module, std::string classS, 
+								std::string classD);
+
+	static Function *createAdHocTableFunction(Module *module, std::string nameStatic,
+								 std::string nameDyn);
+
+	// Fonction primitives
 	static Function *getOrCreateMainFunction(Module *module, std::string aC = "", std::string aV = "");
 
 	static Function *getOrCreatePutsFunction(Module *module);
@@ -65,7 +77,7 @@ public:
 
 	static Function *getOrCreateCallocFunction(Module *module);
 
-	static void initFunction(Function *f, std::vector<std::string> args_names);
+	static BasicBlock *initFunction(Function *f, std::vector<std::string> args_names, bool isStatic);
 
 	static void setFunctionBody(Function *f,
 						std::vector<BasicBlock*> list_block);

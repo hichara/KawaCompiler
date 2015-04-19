@@ -13,7 +13,6 @@
 #include "KawaEnumeration.h"
 
 
-
 using namespace llvm;
 
 
@@ -37,6 +36,8 @@ public:
 	static std::string buildAdHocTableName(std::string classStatic,  
 	   									   std::string classDynamique);
 
+	static std::string buildgetAdHocTableFunction(std::string staticC, std::string dynamicC);
+	
 	
 	static std::string buildStaticVariableName(std::string className,
 											   std::string name);

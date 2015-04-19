@@ -112,7 +112,7 @@ Type *TypeGenerator::strToLLVMType(Module *module, std::string type) {
 	if(t == NULL)
 		return StructType::create(context, lt); 
 
-	return NULL;
+	return t;
 }
 
 

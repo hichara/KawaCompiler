@@ -58,15 +58,11 @@ std::string NameBuilder::buildConstructorName(std::string className,
 		return result.str();
 	}
 
-	for(std::vector<std::string>::iterator it = list_type.begin();
-		it != list_type.end(); ++it) {
+	for(int i = 0; i < list_type.size(); i++) {
 
-		tmp = strToKawaType((*it));
+		tmp = strToKawaType(list_type[i]);
 
-		if(tmp == "")
-			return "";
-
-		result << result.str() << "+" << tmp;
+		result << "+" << tmp;
 	}
 
 	return result.str();
@@ -89,15 +85,11 @@ std::string NameBuilder::buildSubConstructorName(std::string className,
 		return result.str();
 	}
 
-	for(std::vector<std::string>::iterator it = list_type.begin();
-		it != list_type.end(); ++it) {
+	for(int i = 0; i < list_type.size(); i++) {
 
-		tmp = strToKawaType((*it));
+		tmp = strToKawaType(list_type[i]);
 
-		if(tmp == "")
-			return "";
-
-		result << result.str() << "+" << tmp;
+		result << "+" << tmp;
 	}
 
 	return result.str();	
@@ -116,7 +108,6 @@ std::string NameBuilder::buildFunctionIndexName(std::string functionBuiltName) {
 }
 
 
-
 std::string NameBuilder::buildAdHocTableName(std::string classStatic,
 	    									 std::string classDynamique) {
 
@@ -128,7 +119,17 @@ std::string NameBuilder::buildAdHocTableName(std::string classStatic,
 
 	return res.str();
 }
-	
+
+
+std::string NameBuilder::buildgetAdHocTableFunction(std::string staticC, std::string dynamicC) {
+
+	std::stringstream res;
+	res << "get_table_" << buildAdHocTableName(staticC, dynamicC);
+
+	return res.str();
+}
+
+
 std::string NameBuilder::buildAttributIndexName(std::string className, std::string name) {
 
 	std::stringstream res;

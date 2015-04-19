@@ -152,12 +152,68 @@ void KT_Class::setModifier(KT_Modifier* var) {
 	this->modifiers = var;
 }
 
+
 /**
 * @param vector<vector<string*>>
 */
 void KT_Class::setImports(vector<vector<string*>>& var) {
 	this->imports = var;
 }
+
+	/**
+	* @param string
+	*/
+	
+	void KT_Class::addSignature(string var){
+	
+	 fullSignatures.push_back(var);
+	
+	}
+	
+	/**
+	* @param vector<string>
+	*/
+	void KT_Class::setFullSignatures(vector<string> var){
+		this->fullSignatures = var;
+	}
+	
+	/**
+	* @return vector<string>
+	*/
+	vector<string> KT_Class::getFullSignatures() {
+		return this->fullSignatures;
+	}
+	
+	
+	/**
+	* @param KT_Class*
+	*/
+	void KT_Class::setParentClasseSemantique(KT_Class* var){
+		this-> parentClasseSemantique  =var;
+	}
+	/**
+	* @return KT_Class*
+	*/
+	
+	KT_Class* KT_Class::getParentClasseSemantique(){
+		return this-> parentClasseSemantique  ;
+	}
+	
+	
+	/**
+	* @param vector<KT_Interface*>
+	*/
+	void KT_Class::setParentsInterfacesSemantique(vector<KT_Interface*> &var){
+		this-> parentsInterfacesSemantique =var;
+	}
+	
+	/**
+	* @return vector<KT_Interface*>
+	*/
+	vector<KT_Interface*> KT_Class::getParentsInterfacesSemantique(){
+		return this-> parentsInterfacesSemantique ;
+	}
+	
 
 void KT_Class::toString() {
 	

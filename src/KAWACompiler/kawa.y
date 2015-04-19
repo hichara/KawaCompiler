@@ -24,23 +24,6 @@
 
 using namespace std;
 
-/*
-KAWATreeClass* mainClass;
-KAWATreeMethod* mainMethod;
-KAWATreeBodyMethod* bodyMain = new KAWATreeBodyMethod;
-
-KAWATreePrintString* printString;
-KAWATreeType* typeString;
-KAWATreeParam* paramStr;
-
-KAWATreePrintInteger* printInteger;
-KAWATreeType* typeInteger;
-KAWATreeParam* paramInteger;
-
-KAWATreePrintFloat* printFloat;
-KAWATreeType* typeFloat;
-KAWATreeParam* paramFloat;	
-*/
 
 
 
@@ -49,7 +32,7 @@ KAWATreeParam* paramFloat;
 	int yyerror(const char* err );
 	extern int column;
 	extern int lineno;
-	KAWATreeProgram* program = new KAWATreeProgram;
+
 %}
 
 %token<vint> ENTIER
@@ -100,7 +83,7 @@ KAWATreeParam* paramFloat;
 %type<kt_param> VariableDeclaratorId
 %type<kt_modifier> VariableModifiers VariableModifier 
 
-%type<vint> VariableDeclaratorList VariableDeclarator VariableInitializer ConstructorCall  ArrayInitializer
+%type<vint> VariableInitializer ConstructorCall  ArrayInitializer
 
 %type<kt_expression> VariableDeclaratorList
 %type<kt_variable> VariableDeclarator
@@ -109,7 +92,7 @@ KAWATreeParam* paramFloat;
 %type<vectorKT_ParamsMethodCall> FormalParametersCalledMethod FormalParametersCalledMethodDecls VoidFormalParametrs FormalParameterCalledMethodDeclsRest
 
 %type<kt_block> Block
-%type<vectorKT_Statement> Block Statements
+%type<vectorKT_Statement> Statements
 %type<kt_statement> Statement  
 %type<kt_blockStatement> BlockStatement   
 %type<vectorKT_FactFinal> Args ArgsRest
@@ -215,15 +198,15 @@ KAWATreeParam* paramFloat;
 	PARSER_ForControl* parser_forControl;
 	PARSER_MemberDec* parser_memberDec;
 
-	vector<KT_MethodOrVarCall*> vectorKT_MethodOrVarCall;
-	vector<string*> vectorString;
-	vector<vector<string*>> vectorVecorString;
-	vector<KT_ParamsMethodCall*> vectorKT_ParamsMethodCall;
-	vector<KT_Param*> vectorKT_Param;
-	vector<KT_Prototype*> vectorKT_Prototype;
-	vector<PARSER_MemberDec*> vectorPARSER_MemberDec;
-	vector<KT_Statement*> vectorKT_Statement;
-	vector<KT_FactFinal*> vectorKT_FactFinal;
+	vector<KT_MethodOrVarCall*>* vectorKT_MethodOrVarCall;
+	vector<string*>* vectorString;
+	vector<vector<string*>>* vectorVecorString;
+	vector<KT_ParamsMethodCall*>* vectorKT_ParamsMethodCall;
+	vector<KT_Param*>* vectorKT_Param;
+	vector<KT_Prototype*>* vectorKT_Prototype;
+	vector<PARSER_MemberDec*>* vectorPARSER_MemberDec;
+	vector<KT_Statement*>* vectorKT_Statement;
+	vector<KT_FactFinal*>* vectorKT_FactFinal;
 }
 
 %nonassoc THEN 
@@ -253,26 +236,26 @@ Package : TPACKAGE ID ';' {$$= new KT_Package; $$->setName($2);}
 		;
 
 /*-----------------------------------ID et ID.ID.ID... et ID,ID,ID... --------------------------------------------------*/
-Ids : '.' ID Ids {$3.push_back($2); $$=$3;}
-	| {$$=vector<string*>;}
+Ids : '.' ID Ids {$3->push_back($2); $$=$3;}
+	| {vector<string*>* var; $$=var;}
 	;
 
-QList : ',' ID Ids QList {string* name=$2; for (vector<string*>::iterator it = $3.begin(); it != $3.end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $4.begin(); it != $4.end(); ++it){ string* n = (*it); listName.push_back(n);} $$=listName;}
-	  | {vector<string*> var; $$=var;}
+QList : ',' ID Ids QList {string* name=$2; for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $4->begin(); it != $4->end(); ++it){ string* n = (*it); listName.push_back(n);} $$=&listName;}
+	  | {vector<string*>* var; $$=var;}
 	  ;
 
-ListIds : ID Ids QList {string* name=$1; for (vector<string*>::iterator it = $2.begin(); it != $2.end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $3.begin(); it != $3.end(); ++it){ string* n = (*it); listName.push_back(n);} $$=listName; }
+ListIds : ID Ids QList {string* name=$1; for (vector<string*>::iterator it = $2->begin(); it != $2->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it){ string* n = (*it); listName.push_back(n);} $$=&listName; }
 		;
 /*-----------------------------------les types basic est les references type + possibilité des tableaux----------------------------------------------*/
 Type : BasicType Tables {$$=new KT_Type; $$->setBasicType(true); $$->setArray($2); vector<string*> name; name.push_back($1); $$->setTypeName(name); }
-	 | ID Ids Tables {$$=new KT_Type; $$->setBasicType(false); $$->setArray($2); vector<string*> name; name.push_back($1); for (vector<string*>::iterator it = $2.begin(); it != $2.end(); ++it){ string* n = (*it); name.push_back(n);} $$->setTypeName(name);}
+	 | ID Ids Tables {$$=new KT_Type; $$->setBasicType(false); $$->setArray($3); vector<string*> name; name.push_back($1); for (vector<string*>::iterator it = $2->begin(); it != $2->end(); ++it){ string* n = (*it); name.push_back(n);} $$->setTypeName(name);}
 	 ;
 
-Tables : '[' ']' Tables {$2->setArray(true); $$->setArrayDim($$->getArrayDim()+1);}
+Tables : '[' ']' Tables {$3->setArray(true); $$->setArrayDim($$->getArrayDim()+1);}
 	   | {$$=new PARSER_Array; $$->setArray(false); $$->setArrayDim(0);}
 	   ;
 
-TablesIndexe : '[' ENTIER ']' TablesIndexe {$1->setIndexAddIntAtFirstPosition($2); $$=$1;}
+TablesIndexe : '[' ENTIER ']' TablesIndexe {$4->setIndexAddIntAtFirstPosition($2); $$=$4;}
 	   | {KT_IndexedArray* var; $$=var;}
 	   ;
 
@@ -368,7 +351,7 @@ VariableDeclaratorList : ',' VariableDeclarator VariableDeclaratorList {$$=$2;}
 VariableDeclarator: ID VariableInitializer {$$=new KT_Variable; vector<string*> name; name.push_back($1); $$->setName(name); $$->setValue($2);}
 				  ;
 
-VariableInitializer: '=' Expression {$$=$1;}
+VariableInitializer: '=' Expression {$$=$2;}
 					 | {$$=new KT_Expression;}
 					 ;
 
@@ -384,7 +367,7 @@ FormalParametersCalledMethod: '(' FormalParametersCalledMethodDecls ')' {$$=$2;}
 							| VoidFormalParametrs {$$=$1;}
 							;
 FormalParametersCalledMethodDecls : ID '[' ENTIER ']' TablesIndexe FormalParameterCalledMethodDeclsRest {KT_ID* id = new KT_ID; id->setValue($1); $5->setIndexAddIntAtFirstPosition($3); KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray($5); param->setExpression(id); vector<KT_ParamsMethodCall*> vect; vect.push_back(param); for (vector<KT_ParamsMethodCall*>::iterator it = $6.begin(); it != $6.end(); ++it){ KT_ParamsMethodCall* n = (*it); vect.push_back(n);} $$=vect;}
-								  | Expression FormalParameterCalledMethodDeclsRest {KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setExpression($1); vector<KT_ParamsMethodCall*> vect; vect.push_back(param); for (vector<KT_ParamsMethodCall*>::iterator it = $3.begin(); it != $3.end(); ++it){ KT_ParamsMethodCall* n = (*it); vect.push_back(n);} $$=vect;}
+								  | Expression FormalParameterCalledMethodDeclsRest {KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setExpression($1); vector<KT_ParamsMethodCall*> vect; vect.push_back(param); for (vector<KT_ParamsMethodCall*>::iterator it = $2.begin(); it != $2.end(); ++it){ KT_ParamsMethodCall* n = (*it); vect.push_back(n);} $$=vect;}
 								  ;
 
 FormalParameterDecls: VariableModifiers Type VariableDeclaratorId FormalParameterDeclsRest {$2->setArrayDim($3->getParamType()->getArrayDim()); $3->setParamType($2); $3->setParamModifier($1); vector<KT_Param*> vect; vect.push_back($3); for (vector<KT_Param*>::iterator it = $4.begin(); it != $4.end(); ++it){ KT_Param* n = (*it); vect.push_back(n);} $$=vect;}
@@ -486,7 +469,7 @@ SwitchBlockStatements: SwitchBlockStatements SwitchBlockStatement {$$=0;}
 						  ;
 
 SwitchBlockStatement: TCASE Expression ':' Statements {$$=0;}
-					|  TDEFAULT ':' Statements
+					|  TDEFAULT ':' Statements {$$=0;}
 					; 
 
 /*------------------------------ partie for -----------------------------------------------------------------*/
@@ -607,7 +590,7 @@ factFinal: '(' Expression ')' {$$= $2;}
 		 | TNULL {$$= new KT_Null;} 
 		 ;
 
-ConstructorCall : TNEW ID Ids FormalParametersCalledMethod {$$=new KT_ConstructorCall; $$->addString($2); $$->addVectorString($3); $$->setParams($4);}
+ConstructorCall : TNEW ID Ids FormalParametersCalledMethod {$$=new KT_ConstructorCall; $$->addString($2); $$->addVectorString(*$3); $$->setParams($4);}
 	            ;
 
 MethodCall : ID FormalParametersCalledMethod {vector<string*> name; name.push_back($1); $$=new KT_MethodCall; $$->setName(name); $$->setParams($2);}
@@ -615,18 +598,18 @@ MethodCall : ID FormalParametersCalledMethod {vector<string*> name; name.push_ba
 
 ArrayInitializer : TNEW BasicType '[' ENTIER ']'{KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray.setDimension(1); vector<int> indexes; indexes.pysh_back($4); KT_Type* type = new KT_Type; type->setBasicType(true); vector<string*> typeName; typeName.push_back($2); type->setTypeName(typeName); type->setArrayDim(0); $$=new KT_ArrayInitilizer; $$->setIndexedArray(indexedArray); $$->setType(type); }
 				 
-				 | TNEW ID Ids '[' ENTIER ']'{KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray.setDimension(1); vector<int> indexes; indexes.pysh_back($5); KT_Type* type = new KT_Type; type->setBasicType(false); type->addString($2); type->addVectorString($3); type->setArrayDim(0); $$=new KT_ArrayInitilizer; $$->setIndexedArray(indexedArray); $$->setType(type);}
+				 | TNEW ID Ids '[' ENTIER ']'{KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray.setDimension(1); vector<int> indexes; indexes.pysh_back($5); KT_Type* type = new KT_Type; type->setBasicType(false); type->addString($2); type->addVectorString(*$3); type->setArrayDim(0); $$=new KT_ArrayInitilizer; $$->setIndexedArray(indexedArray); $$->setType(type);}
 				 ;
 
-LinkedMethodVarCall : TTHIS '.' ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($1); ids.push_back($3); var->setValue(ids); $4.push_back(var); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($2);}
-					| ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($1); var->setValue(ids); $2.push_back(var); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($2);}
-					| TTHIS '.' MethodCall LinkedMethodVarCallList {$3->setNameAddStringAtFirstPosition($1);  $4.push_back($3); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($4);}
-					| MethodCall LinkedMethodVarCallList {$2.push_back($1); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall($2);}
+LinkedMethodVarCall : TTHIS '.' ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($1); ids.push_back($3); var->setValue(ids); $4->push_back(var); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall(*$4);}
+					| ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($1); var->setValue(ids); $2->push_back(var); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall(*$2);}
+					| TTHIS '.' MethodCall LinkedMethodVarCallList {$3->setNameAddStringAtFirstPosition($1);  $4->push_back($3); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall(*$4);}
+					| MethodCall LinkedMethodVarCallList {$2->push_back($1); $$=new KT_LinkedMethodOrVarCall; $$->setMixedCall(*$2);}
 					;
 
-LinkedMethodVarCallList : '.' ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($2); var->setValue(ids); $3.push_back(var); $$=$3; }
-						| '.' MethodCall LinkedMethodVarCallList {$3.push_back($2); $$=$3;}
-						| { vector<KT_MethodOrVarCall*> vect; $$=vect; }
+LinkedMethodVarCallList : '.' ID LinkedMethodVarCallList {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back($2); var->setValue(ids); $3->push_back(var); $$=$3; }
+						| '.' MethodCall LinkedMethodVarCallList {$3->push_back($2); $$=$3;}
+						| { vector<KT_MethodOrVarCall*>* vect; $$=vect; }
 						;
 
 

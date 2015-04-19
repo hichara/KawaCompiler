@@ -10,6 +10,7 @@
 #include "KT_Attribute.h"
 #include "KT_SimpleMethod.h"
 #include "KT_Constructor.h"
+#include "KT_Prototype.h"
 #include "PARSER_MemberDec.h"
 #include "KT_Interface.h"
 #include <stdio.h>
@@ -95,12 +96,12 @@ public:
 	
 	string* getFQN();
 	
-	vector<KT_Prototypes*>  getAllPrototypes();
+	vector<KT_Prototype*>  getAllPrototypes();
 	
 	/**
-	* @param vector<KT_Prototypes*> 
+	* @param vector<KT_Prototype*> 
 	*/
-	void setAllPrototypes(vector<KT_Prototypes*> var);
+	void setAllPrototypes(vector<KT_Prototype*> var);
 	
 	/**
 	* @param string*
@@ -148,7 +149,7 @@ private:
 	KT_Class* parentClasseSemantique;
 	vector<KT_Interface*> parentsInterfacesSemantique;
 	string* FQN;
-	vector<KT_Prototypes*>  AllPrototypes ;
+	vector<KT_Prototype*>  AllPrototypes ;
 
 };
 

@@ -9,7 +9,7 @@
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 39
+#define YY_FLEX_SUBMINOR_VERSION 35
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -162,12 +162,7 @@ typedef unsigned int flex_uint32_t;
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #endif
 
-#ifndef YY_TYPEDEF_YY_SIZE_T
-#define YY_TYPEDEF_YY_SIZE_T
-typedef size_t yy_size_t;
-#endif
-
-extern yy_size_t yyleng;
+extern int yyleng;
 
 extern FILE *yyin, *yyout;
 
@@ -176,7 +171,6 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_LAST_MATCH 2
 
     #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -193,6 +187,11 @@ extern FILE *yyin, *yyout;
 	while ( 0 )
 
 #define unput(c) yyunput( c, (yytext_ptr)  )
+
+#ifndef YY_TYPEDEF_YY_SIZE_T
+#define YY_TYPEDEF_YY_SIZE_T
+typedef size_t yy_size_t;
+#endif
 
 #ifndef YY_STRUCT_YY_BUFFER_STATE
 #define YY_STRUCT_YY_BUFFER_STATE
@@ -211,7 +210,7 @@ struct yy_buffer_state
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
-	yy_size_t yy_n_chars;
+	int yy_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -281,8 +280,8 @@ static YY_BUFFER_STATE * yy_buffer_stack = 0; /**< Stack as an array. */
 
 /* yy_hold_char holds the character lost when yytext is formed. */
 static char yy_hold_char;
-static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */
-yy_size_t yyleng;
+static int yy_n_chars;		/* number of characters read into yy_ch_buf */
+int yyleng;
 
 /* Points to current character in buffer. */
 static char *yy_c_buf_p = (char *) 0;
@@ -310,7 +309,7 @@ static void yy_init_buffer (YY_BUFFER_STATE b,FILE *file  );
 
 YY_BUFFER_STATE yy_scan_buffer (char *base,yy_size_t size  );
 YY_BUFFER_STATE yy_scan_string (yyconst char *yy_str  );
-YY_BUFFER_STATE yy_scan_bytes (yyconst char *bytes,yy_size_t len  );
+YY_BUFFER_STATE yy_scan_bytes (yyconst char *bytes,int len  );
 
 void *yyalloc (yy_size_t  );
 void *yyrealloc (void *,yy_size_t  );
@@ -653,20 +652,7 @@ char *yytext;
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "../AST/AST.h"
-#include "../KAWATree/src/KAWATreeCompiler.h"
-#include "../KAWATree/src/KAWATreeMonolithicCompiler.h"
-#include "../KAWATree/src/KAWATreeCompilerNode.h"
-#include "../KAWATree/src/KAWATreeProgram.h"
-#include "../KAWATree/src/KAWATreeClass.h"
-#include "../KAWATree/src/KAWATreeMethod.h"
-#include "../KAWATree/src/KAWATreeBodyMethod.h"
-#include "../KAWATree/src/KAWATreeInstruction.h"
-#include "../KAWATree/src/KAWATreeParam.h"
-#include "../KAWATree/src/KAWATreeType.h"
-#include "../KAWATree/src/KAWATreePrintInteger.h"
-#include "../KAWATree/src/KAWATreePrintFloat.h"
-#include "../KAWATree/src/KAWATreePrintString.h"
+#include "../implementation_KawaTree/headers.h"
 #include "kawa.hpp"
 
 typedef std::string String;
@@ -698,7 +684,7 @@ void count() {
   }
 }
 
-#line 702 "tokens.cpp"
+#line 688 "tokens.cpp"
 
 #define INITIAL 0
 
@@ -737,7 +723,7 @@ FILE *yyget_out (void );
 
 void yyset_out  (FILE * out_str  );
 
-yy_size_t yyget_leng (void );
+int yyget_leng (void );
 
 char *yyget_text (void );
 
@@ -885,6 +871,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
+#line 43 "tokens.l"
+
+#line 877 "tokens.cpp"
+
 	if ( !(yy_init) )
 		{
 		(yy_init) = 1;
@@ -911,11 +901,6 @@ YY_DECL
 		yy_load_buffer_state( );
 		}
 
-	{
-#line 56 "tokens.l"
-
-#line 918 "tokens.cpp"
-
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
 		yy_cp = (yy_c_buf_p);
@@ -932,7 +917,7 @@ YY_DECL
 yy_match:
 		do
 			{
-			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)] ;
+			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
 			if ( yy_accept[yy_current_state] )
 				{
 				(yy_last_accepting_state) = yy_current_state;
@@ -973,553 +958,553 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 57 "tokens.l"
+#line 44 "tokens.l"
 {count(); yylval.vint=atof(yytext); return(ENTIER); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 58 "tokens.l"
+#line 45 "tokens.l"
 {count(); yylval.vint=atof(yytext); return(REEL); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 60 "tokens.l"
+#line 47 "tokens.l"
 {count(); return (TSTRING);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 61 "tokens.l"
+#line 48 "tokens.l"
 {count(); return (TSHORT);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 62 "tokens.l"
+#line 49 "tokens.l"
 {count(); return (TINT);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 63 "tokens.l"
+#line 50 "tokens.l"
 {count(); return (TLONG);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 64 "tokens.l"
+#line 51 "tokens.l"
 {count(); return (TFLOAT);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 65 "tokens.l"
+#line 52 "tokens.l"
 {count(); return (TDOUBLE);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 66 "tokens.l"
+#line 53 "tokens.l"
 {count(); return (TBYTE);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 67 "tokens.l"
+#line 54 "tokens.l"
 {count(); return (TCHAR);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 68 "tokens.l"
+#line 55 "tokens.l"
 {count(); return (TBOOLEAN);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 69 "tokens.l"
+#line 56 "tokens.l"
 {count(); return (TVOID);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 70 "tokens.l"
+#line 57 "tokens.l"
 {count(); /*return (TCONST);*/}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 71 "tokens.l"
+#line 58 "tokens.l"
 {count(); /*return (TENUM);*/}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 72 "tokens.l"
+#line 59 "tokens.l"
 {count(); return (TVALUE);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 73 "tokens.l"
+#line 60 "tokens.l"
 {count(); return (TIMPORT);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 74 "tokens.l"
+#line 61 "tokens.l"
 {count(); return (TPUBLIC);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 75 "tokens.l"
+#line 62 "tokens.l"
 {count(); return (TPRIVATE);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 76 "tokens.l"
+#line 63 "tokens.l"
 {count(); return (TPROTECTED);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 77 "tokens.l"
+#line 64 "tokens.l"
 {count(); return (TFINAL);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 78 "tokens.l"
+#line 65 "tokens.l"
 {count(); return (TABSTRACT);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 79 "tokens.l"
+#line 66 "tokens.l"
 {count(); return (TSTATIC);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 80 "tokens.l"
+#line 67 "tokens.l"
 {count(); return (TCLASS);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 81 "tokens.l"
+#line 68 "tokens.l"
 {count(); return (TINTERFACE);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 82 "tokens.l"
+#line 69 "tokens.l"
 {count(); return (TEXTENDS);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 83 "tokens.l"
+#line 70 "tokens.l"
 {count(); return (TIMPLEMENTS);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 84 "tokens.l"
+#line 71 "tokens.l"
 {count(); return (TSUPER);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 85 "tokens.l"
+#line 72 "tokens.l"
 {count(); return (TTHIS);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 86 "tokens.l"
+#line 73 "tokens.l"
 {count(); /*return (TTHROW);*/}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 87 "tokens.l"
+#line 74 "tokens.l"
 {count(); /*return (TTHROWS);*/}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 88 "tokens.l"
+#line 75 "tokens.l"
 {count(); /*return (TTRY);*/}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 89 "tokens.l"
+#line 76 "tokens.l"
 {count(); /*return (TCATCH);*/}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 90 "tokens.l"
+#line 77 "tokens.l"
 {count(); return (TIF);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 91 "tokens.l"
+#line 78 "tokens.l"
 {count(); return (TELSE);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 92 "tokens.l"
+#line 79 "tokens.l"
 {count(); return (TFALSE);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 93 "tokens.l"
+#line 80 "tokens.l"
 {count(); return (TTRUE);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 94 "tokens.l"
+#line 81 "tokens.l"
 {count(); return (TSWITCH);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 95 "tokens.l"
+#line 82 "tokens.l"
 {count(); return (TCASE);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 96 "tokens.l"
+#line 83 "tokens.l"
 {count(); return (TCONTINUE);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 97 "tokens.l"
+#line 84 "tokens.l"
 {count(); return (TBREAK);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 98 "tokens.l"
+#line 85 "tokens.l"
 {count(); return (TDEFAULT);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 99 "tokens.l"
+#line 86 "tokens.l"
 {count(); return (TFOR);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 100 "tokens.l"
+#line 87 "tokens.l"
 {count(); return (TWHILE);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 101 "tokens.l"
+#line 88 "tokens.l"
 {count(); return (TDO);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 102 "tokens.l"
+#line 89 "tokens.l"
 {count(); /*return (TINSTANCEOF);*/}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 103 "tokens.l"
+#line 90 "tokens.l"
 {count(); /*return (TFINALLY);*/}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 104 "tokens.l"
+#line 91 "tokens.l"
 {count(); return (TNEW);}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 105 "tokens.l"
+#line 92 "tokens.l"
 {count(); return (TNULL);}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 106 "tokens.l"
+#line 93 "tokens.l"
 {count(); return (TRETURN);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 107 "tokens.l"
+#line 94 "tokens.l"
 {count(); /*return (TSYNCHRONIZED);*/}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 108 "tokens.l"
+#line 95 "tokens.l"
 {count(); return (TPRINTS);}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 109 "tokens.l"
+#line 96 "tokens.l"
 {count(); return (TPRINTI);}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 110 "tokens.l"
+#line 97 "tokens.l"
 {count(); return (TPRINTF);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 111 "tokens.l"
+#line 98 "tokens.l"
 {count(); return (TPRINT);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 112 "tokens.l"
+#line 99 "tokens.l"
 {count(); return (TPACKAGE);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 114 "tokens.l"
+#line 101 "tokens.l"
 {count(); return strToken(ID); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 117 "tokens.l"
+#line 104 "tokens.l"
 {count(); return (STRING);}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 118 "tokens.l"
+#line 105 "tokens.l"
 {count(); return ('+');}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 119 "tokens.l"
+#line 106 "tokens.l"
 {count(); return ('-');}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 120 "tokens.l"
+#line 107 "tokens.l"
 {count(); return ('*');}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 121 "tokens.l"
+#line 108 "tokens.l"
 {count(); return ('/');}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 122 "tokens.l"
+#line 109 "tokens.l"
 {count(); return ('%');}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 123 "tokens.l"
+#line 110 "tokens.l"
 {count(); return ('=');}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 124 "tokens.l"
+#line 111 "tokens.l"
 {count(); return (TPLUSEQ);/**/}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 125 "tokens.l"
+#line 112 "tokens.l"
 {count(); return (TMINUSEQ);/**/}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 126 "tokens.l"
+#line 113 "tokens.l"
 {count(); return (TMULEQ);/**/}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 127 "tokens.l"
+#line 114 "tokens.l"
 {count(); return (TDIVEQ);/**/}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 128 "tokens.l"
+#line 115 "tokens.l"
 {count(); return (TMODEQ);/**/}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 129 "tokens.l"
+#line 116 "tokens.l"
 {count(); return (TINC);}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 130 "tokens.l"
+#line 117 "tokens.l"
 {count(); return (TDEC);}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 131 "tokens.l"
+#line 118 "tokens.l"
 {count(); return (TCEQ);}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 132 "tokens.l"
+#line 119 "tokens.l"
 {count(); return (TCNE);}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 133 "tokens.l"
+#line 120 "tokens.l"
 {count(); return ('<');}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 134 "tokens.l"
+#line 121 "tokens.l"
 {count(); return (TCLE);}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 135 "tokens.l"
+#line 122 "tokens.l"
 {count(); return ('>');}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 136 "tokens.l"
+#line 123 "tokens.l"
 {count(); return (TCGE);}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 137 "tokens.l"
+#line 124 "tokens.l"
 {count(); return (TOR);}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 138 "tokens.l"
+#line 125 "tokens.l"
 {count(); return (TAND);}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 139 "tokens.l"
+#line 126 "tokens.l"
 {count(); return ('!');}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 140 "tokens.l"
+#line 127 "tokens.l"
 {count(); return ('&');}
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 141 "tokens.l"
+#line 128 "tokens.l"
 {count(); return (TANDBINEQ);/**/}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 142 "tokens.l"
+#line 129 "tokens.l"
 {count(); return ('|');}
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 143 "tokens.l"
+#line 130 "tokens.l"
 {count(); return (TORBINEQ);/**/}
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 144 "tokens.l"
+#line 131 "tokens.l"
 {count(); return ('^');}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 145 "tokens.l"
+#line 132 "tokens.l"
 {count(); return (TXORBINEQ);/**/}
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 146 "tokens.l"
+#line 133 "tokens.l"
 {count(); return (TDECAL);/**/}
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 147 "tokens.l"
+#line 134 "tokens.l"
 {count(); return (TDECALEQ);/**/}
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 148 "tokens.l"
+#line 135 "tokens.l"
 {count(); return (TDECAR);/**/}
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 149 "tokens.l"
+#line 136 "tokens.l"
 {count(); return (TDECAREQ);/**/}
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 150 "tokens.l"
+#line 137 "tokens.l"
 {count(); return (TDECALNS);/**/}
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 151 "tokens.l"
+#line 138 "tokens.l"
 {count(); return (TDECALNSEQ);/**/}
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 152 "tokens.l"
+#line 139 "tokens.l"
 {count(); return ('(');}
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 153 "tokens.l"
+#line 140 "tokens.l"
 {count(); return (')');}
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 154 "tokens.l"
+#line 141 "tokens.l"
 {count(); return ('{');}
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 155 "tokens.l"
+#line 142 "tokens.l"
 {count(); return ('}');}
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 156 "tokens.l"
+#line 143 "tokens.l"
 {count(); return ('[');}
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 157 "tokens.l"
+#line 144 "tokens.l"
 {count(); return (']');}
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 158 "tokens.l"
+#line 145 "tokens.l"
 {count(); return ('.');}
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 159 "tokens.l"
+#line 146 "tokens.l"
 {count(); return (',');}
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 160 "tokens.l"
+#line 147 "tokens.l"
 {count(); return (';');}
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 161 "tokens.l"
+#line 148 "tokens.l"
 {count(); return ('~');}
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 162 "tokens.l"
+#line 149 "tokens.l"
 {count(); return ('?');}
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 163 "tokens.l"
+#line 150 "tokens.l"
 {count(); return (':');}
 	YY_BREAK
 case 104:
 /* rule 104 can match eol */
 YY_RULE_SETUP
-#line 164 "tokens.l"
+#line 151 "tokens.l"
 {count();}
 	YY_BREAK
 case 105:
 /* rule 105 can match eol */
 YY_RULE_SETUP
-#line 165 "tokens.l"
+#line 152 "tokens.l"
 {count();}
 	YY_BREAK
 case 106:
 /* rule 106 can match eol */
 YY_RULE_SETUP
-#line 166 "tokens.l"
+#line 153 "tokens.l"
 {count();}
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 167 "tokens.l"
+#line 154 "tokens.l"
 {count();}
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 168 "tokens.l"
+#line 155 "tokens.l"
 {count(); printf("TOKEN inconnu!\n"); yyterminate();}
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 170 "tokens.l"
+#line 157 "tokens.l"
 ECHO;
 	YY_BREAK
-#line 1523 "tokens.cpp"
+#line 1508 "tokens.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1650,7 +1635,6 @@ case YY_STATE_EOF(INITIAL):
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
-	} /* end of user's declarations */
 } /* end of yylex */
 
 /* yy_get_next_buffer - try to read in a new buffer
@@ -1706,21 +1690,21 @@ static int yy_get_next_buffer (void)
 
 	else
 		{
-			yy_size_t num_to_read =
+			int num_to_read =
 			YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
 
 		while ( num_to_read <= 0 )
 			{ /* Not enough room in the buffer - grow it. */
 
 			/* just a shorter name for the current buffer */
-			YY_BUFFER_STATE b = YY_CURRENT_BUFFER_LVALUE;
+			YY_BUFFER_STATE b = YY_CURRENT_BUFFER;
 
 			int yy_c_buf_p_offset =
 				(int) ((yy_c_buf_p) - b->yy_ch_buf);
 
 			if ( b->yy_is_our_buffer )
 				{
-				yy_size_t new_size = b->yy_buf_size * 2;
+				int new_size = b->yy_buf_size * 2;
 
 				if ( new_size <= 0 )
 					b->yy_buf_size += b->yy_buf_size / 8;
@@ -1751,7 +1735,7 @@ static int yy_get_next_buffer (void)
 
 		/* Read in more data. */
 		YY_INPUT( (&YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[number_to_move]),
-			(yy_n_chars), num_to_read );
+			(yy_n_chars), (size_t) num_to_read );
 
 		YY_CURRENT_BUFFER_LVALUE->yy_n_chars = (yy_n_chars);
 		}
@@ -1846,7 +1830,7 @@ static int yy_get_next_buffer (void)
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 306);
 
-		return yy_is_jam ? 0 : yy_current_state;
+	return yy_is_jam ? 0 : yy_current_state;
 }
 
     static void yyunput (int c, register char * yy_bp )
@@ -1861,7 +1845,7 @@ static int yy_get_next_buffer (void)
 	if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
 		{ /* need to shift things up to make room */
 		/* +2 for EOB chars. */
-		register yy_size_t number_to_move = (yy_n_chars) + 2;
+		register int number_to_move = (yy_n_chars) + 2;
 		register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
 					YY_CURRENT_BUFFER_LVALUE->yy_buf_size + 2];
 		register char *source =
@@ -1910,7 +1894,7 @@ static int yy_get_next_buffer (void)
 
 		else
 			{ /* need more input */
-			yy_size_t offset = (yy_c_buf_p) - (yytext_ptr);
+			int offset = (yy_c_buf_p) - (yytext_ptr);
 			++(yy_c_buf_p);
 
 			switch ( yy_get_next_buffer(  ) )
@@ -2070,6 +2054,10 @@ static void yy_load_buffer_state  (void)
 	yyfree((void *) b  );
 }
 
+#ifndef __cplusplus
+extern int isatty (int );
+#endif /* __cplusplus */
+    
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
  * such as during a yyrestart() or at EOF.
@@ -2182,7 +2170,7 @@ void yypop_buffer_state (void)
  */
 static void yyensure_buffer_stack (void)
 {
-	yy_size_t num_to_alloc;
+	int num_to_alloc;
     
 	if (!(yy_buffer_stack)) {
 
@@ -2279,12 +2267,12 @@ YY_BUFFER_STATE yy_scan_string (yyconst char * yystr )
  * 
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )
+YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len )
 {
 	YY_BUFFER_STATE b;
 	char *buf;
 	yy_size_t n;
-	yy_size_t i;
+	int i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = _yybytes_len + 2;
@@ -2366,7 +2354,7 @@ FILE *yyget_out  (void)
 /** Get the length of the current token.
  * 
  */
-yy_size_t yyget_leng  (void)
+int yyget_leng  (void)
 {
         return yyleng;
 }
@@ -2514,7 +2502,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 169 "tokens.l"
+#line 157 "tokens.l"
 
 
 
@@ -2571,17 +2559,17 @@ extern int yydebug;
   {
     ENTIER = 258,
     REEL = 259,
-    STRING = 260,
-    TSTRING = 261,
-    TSHORT = 262,
-    TINT = 263,
-    TLONG = 264,
-    TFLOAT = 265,
-    TDOUBLE = 266,
-    TBYTE = 267,
-    TCHAR = 268,
-    TBOOLEAN = 269,
-    TVOID = 270,
+    TSTRING = 260,
+    TSHORT = 261,
+    TINT = 262,
+    TLONG = 263,
+    TFLOAT = 264,
+    TDOUBLE = 265,
+    TBYTE = 266,
+    TCHAR = 267,
+    TBOOLEAN = 268,
+    TVOID = 269,
+    STRING = 270,
     TIMPORT = 271,
     TPACKAGE = 272,
     TPUBLIC = 273,
@@ -2634,12 +2622,12 @@ extern int yydebug;
     TORBINEQ = 320,
     TXORBINEQ = 321,
     TDECAL = 322,
-    TDECALEQ = 323,
-    TDECAR = 324,
-    TDECAREQ = 325,
-    TDECALNS = 326,
-    TDECALNSEQ = 327,
-    THEN = 328,
+    TDECAR = 323,
+    TDECALNS = 324,
+    THEN = 325,
+    TDECALNSEQ = 326,
+    TDECAREQ = 327,
+    TDECALEQ = 328,
     COND = 329,
     NBINAIRE = 330,
     NLOGIC = 331,
@@ -2653,19 +2641,107 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 98 "kawa.y" /* yacc.c:1909  */
+#line 112 "kawa.y" /* yacc.c:1909  */
 
+	bool vbool;
 	int vint;
 	float vfloat;
-	std::string* vstring;
-	KAWATreeProgram* program;
-	KAWATreeClass* clazz;
-	KAWATreePrintString* vKAWATreePrintString;
-	KAWATreePrintInteger* vKAWATreePrintInteger;
-	KAWATreePrintFloat* vKAWATreePrintFloat;
-	KAWATreeParam* vKAWATreeParam;
+	string* vstring;
+	KT_Addition* kt_addition;
+	KT_AdditionlEq* kt_tdditionlEq;
+	KT_Affectation* kt_affectation;
+	KT_AffectOperation* kt_affectOperation;
+	KT_AndBinEq* kt_andBinEq;
+	KT_ArithmeticExpression* kt_arithmeticExpression;
+	KT_ArrayInitilizer* kt_arrayInitilizer;
+	KT_Attribute* kt_attribute;
+	KT_BinaryExpression* kt_binaryExpression;
+	KT_Block* kt_block;
+	KT_BlockStatement* kt_blockStatement;
+	KT_Bool* kt_bool;
+	KT_BooleanExpression* kt_booleanExpression;
+	KT_BreakStatement* kt_breakStatement;
+	KT_Class* kt_class;
+	KT_Constructor* kt_constructor;
+	KT_ConstructorCall* kt_constructorCall;
+	KT_ContinueStatement* kt_continueStatement;
+	KT_Division* kt_division;
+	KT_DivisionEq* kt_divisionEq;
+	KT_Entier* kt_entier;
+	KT_Expression* kt_expression;
+	KT_ExpressionAnd* kt_expressionAnd;
+	KT_ExpressionAndLogic* kt_expressionAndLogic;
+	KT_ExpressionEq* kt_expressionEq;
+	KT_ExpressionGE* kt_expressionGE;
+	KT_ExpressionGT* kt_expressionGT;
+	KT_ExpressionLE* kt_expressionLE;
+	KT_ExpressionLT* kt_expressionLT;
+	KT_ExpressionNotEq* kt_expressionNotEq;
+	KT_ExpressionOr* kt_expressionOr;
+	KT_ExpressionOrLogic* kt_expressionOrLogic;
+	KT_ExpressionOrXLogic* kt_expressionOrXLogic;
+	KT_FactFinal* kt_factFinal;
+	KT_ForStatement* kt_forStatement;
+	KT_ID* kt_id;
+	KT_IDExpression* kt_idExpression;
+	KT_ifElseStatement* kt_ifElseStatement;
+	KT_IfStatement* kt_ifStatement;
+	KT_IndexedArray* kt_indexedArray;
+	KT_Interface* kt_interface;
+	KT_LinkedMethodOrVarCall* kt_linkedMethodOrVarCall;
+	KT_MethodCall* kt_methodCall;
+	KT_MethodOrVarCall* kt_methodOrVarCall;
+	KT_Minus* kt_minus;
+	KT_Modifier* kt_modifier;
+	KT_Modulo* kt_modulo;
+	KT_ModuloEq* kt_moduloEq;
+	KT_Multiplication* kt_multiplication;
+	KT_MultiplicationEq* kt_multiplicationEq;
+	KT_NBinary* kt_nBinary;
+	KT_Negation* kt_negation;
+	KT_OrBinEq* kt_orBinEq;
+	KT_Package* kt_package;
+	KT_Param* kt_param;
+	KT_ParamsMethodCall* kt_paramsMethodCall;
+	KT_PostDecrement* kt_postDecrement;
+	KT_PostIncrement* kt_postIncrement;
+	KT_PreDecrement* kt_preDecrement;
+	KT_PreIncrement* kt_preIncrement;
+	KT_Print* kt_print;
+	KT_Program* kt_program;
+	KT_Prototype* kt_prototype;
+	KT_Reel* kt_reel;
+	KT_ReturnStatement* kt_returnStatement;
+	KT_SimpleMethod* kt_simpleMethod;
+	KT_Statement* kt_statement;
+	KT_String* kt_string;
+	KT_Substraction* kt_substraction;
+	KT_SubstractionEq* kt_substractionEq;
+	KT_Super* kt_super;
+	KT_SwitchBlockStatement* kt_switchBlockStatement;
+	KT_SwitchStatement* kt_switchStatement;
+	KT_Type* kt_type;
+	KT_UnaryExpression* kt_unaryExpression;
+	KT_Variable* kt_variable;
+	KT_VarOrAttr* kt_varOrAttr;
+	KT_WhileStatement* kt_whileStatement;
+	KT_XOrBinEq* kt_xOrBinEq;
+	PARSER_Array* parser_array;
+	PARSER_Field* parser_field;
+	PARSER_ForControl* parser_forControl;
+	PARSER_MemberDec* parser_memberDec;
 
-#line 145 "kawa.hpp" /* yacc.c:1909  */
+	vector<KT_MethodOrVarCall*> vectorKT_MethodOrVarCall;
+	vector<string*> vectorString;
+	vector<vector<string*>> vectorVecorString;
+	vector<KT_ParamsMethodCall*> vectorKT_ParamsMethodCall;
+	vector<KT_Param*> vectorKT_Param;
+	vector<KT_Prototype*> vectorKT_Prototype;
+	vector<PARSER_MemberDec*> vectorPARSER_MemberDec;
+	vector<KT_Statement*> vectorKT_Statement;
+	vector<KT_FactFinal*> vectorKT_FactFinal;
+
+#line 233 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

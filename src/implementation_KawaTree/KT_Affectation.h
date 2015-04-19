@@ -9,7 +9,7 @@
 #include "KT_IDExpression.h"
 #include "KT_VarOrAttr.h"
 #include "KT_Expression.h"
-#include "KT_Expression.h"
+#include "KT_IndexedArray.h"
 #include <stdio.h>
 #include <string>
 #include <vector>

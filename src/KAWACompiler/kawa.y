@@ -79,37 +79,46 @@ KAWATreeParam* paramFloat;
 %type<kt_program> Program
 %type<kt_package> Package
 %type<vectorString> Ids
-%type<vint> ListIds QList
+%type<vectorString> ListIds QList
 %type<vstring> BasicType
 %type<kt_type> Type
 %type<parser_array> Tables 
 %type<vbool> Static
-%type<vint> All Extends ExtendsList Implements	
+%type<vectorString> All
+%type<vectorString> ExtendsList Implements
+%type<vstring> Extends	
 %type<kt_modifier> Modifier Modifiers		  
-%type<vint> ImportDeclaration 
+%type<vectorVecorString> ImportDeclaration 
 
-%type<vint> ClassDeclaration InterfaceDeclaration 
-%type<vint> ClassBody MemberDecs MemberDec
+%type<KT_Class> ClassDeclaration 
+%type<KT_Interface> InterfaceDeclaration 
+%type<vectorPARSER_MemberDec> ClassBody MemberDecs
+%type<parser_memberDec> MemberDec
 
-%type<vint> InterfaceBody Prototypes Prototype
+%type<vectorKT_Prototype> InterfaceBody Prototypes
+%type<kt_prototype> Prototype
 %type<kt_param> VariableDeclaratorId
 %type<kt_modifier> VariableModifiers VariableModifier 
 %type<vint> VariableDeclaratorList VariableDeclarator VariableInitializer ConstructorCall  ArrayInitializer
+%type<kt_expression> VariableDeclaratorList
+%type<kt_variable> VariableDeclarator
 
 %type<vectorKT_Param> FormalParameters FormalParameterDecls FormalParameterDeclsRest
 %type<vectorKT_ParamsMethodCall> FormalParametersCalledMethod FormalParametersCalledMethodDecls VoidFormalParametrs FormalParameterCalledMethodDeclsRest
 
-%type<vint> Block BlockStatements BlockStatement Statement Print Args ArgsRest  
-%type<vKAWATreeParam> ArgsS ArgsI ArgsF
-%type<vKAWATreePrintString> PrintS
-%type<vKAWATreePrintInteger> PrintI
-%type<vKAWATreePrintFloat> PrintF
+%type<kt_block> Block
+%type<vectorKT_Statement> Block Statements
+%type<kt_statement> Statement  
+%type<vint> BlockStatement   
+%type<vectorKT_FactFinal> Args ArgsRest
+%type<kt_factFinal> ArgsS ArgsI ArgsF
+%type<kt_print> PrintS PrintI PrintF Print
 %type<vint> SwitchBlockStatements SwitchBlockStatement 
 %type<vint> ForControl ForVarControl ForUpdate StatementExpressionList
 
 %type<kt_expression> Expression FacteurEffect ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus factFinal terme facteur
 
-%type<vint> TablesIndexe  
+%type<kt_indexedArray> TablesIndexe  
 %type<kt_linkedMethodOrVarCall> LinkedMethodVarCall
 %type<kt_methodCall> MethodCall
 %type<vectorKT_MethodOrVarCall> LinkedMethodVarCallList
@@ -205,8 +214,13 @@ KAWATreeParam* paramFloat;
 
 	vector<KT_MethodOrVarCall*> vectorKT_MethodOrVarCall;
 	vector<string*> vectorString;
+	vector<vector<string*>> vectorVecorString;
 	vector<KT_ParamsMethodCall*> vectorKT_ParamsMethodCall;
 	vector<KT_Param*> vectorKT_Param;
+	vector<KT_Prototype*> vectorKT_Prototype;
+	vector<PARSER_MemberDec*> vectorPARSER_MemberDec;
+	vector<KT_Statement*> vectorKT_Statement;
+	vector<KT_FactFinal*> vectorKT_FactFinal;
 }
 
 %nonassoc THEN 
@@ -240,11 +254,11 @@ Ids : '.' ID Ids {$3.push_back($2); $$=$3;}
 	| {$$=vector<string*>;}
 	;
 
-QList : ',' ID Ids QList {$$=0;}
-	  | {$$=0;}
+QList : ',' ID Ids QList {string* name=$2; for (vector<string*>::iterator it = $3.begin(); it != $3.end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $4.begin(); it != $4.end(); ++it){ string* n = (*it); listName.push_back(n);} $$=listName;}
+	  | {vector<string*> var; $$=var;}
 	  ;
 
-ListIds : ID Ids QList {$$=0;}
+ListIds : ID Ids QList {string* name=$1; for (vector<string*>::iterator it = $2.begin(); it != $2.end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = $3.begin(); it != $3.end(); ++it){ string* n = (*it); listName.push_back(n);} $$=listName; }
 		;
 /*-----------------------------------les types basic est les references type + possibilité des tableaux----------------------------------------------*/
 Type : BasicType Tables {$$=new KT_Type; $$->setBasicType(true); $$->setArray($2); vector<string*> name; name.push_back($1); $$->setTypeName(name); }
@@ -255,8 +269,8 @@ Tables : '[' ']' Tables {$2->setArray(true); $$->setArrayDim($$->getArrayDim()+1
 	   | {$$=new PARSER_Array; $$->setArray(false); $$->setArrayDim(0);}
 	   ;
 
-TablesIndexe : '[' ENTIER ']' TablesIndexe {$$=0;}
-	   | {$$=0;}
+TablesIndexe : '[' ENTIER ']' TablesIndexe {$1->setIndexAddIntAtFirstPosition($2); $$=$1;}
+	   | {KT_IndexedArray* var; $$=var;}
 	   ;
 
 BasicType : TBYTE {$$=$1;}
@@ -287,59 +301,59 @@ Static : TSTATIC {$$=true;}
 	   | {$$=false;}
 	   ;
 
-All : '.' ID All {$$=0;} 
-	| '.' '*' {$$=0;}
-	| {$$=0;}
+All : '.' ID All {vector<string*> name; name.push_back($2); for (vector<string*>::iterator it = $3.begin(); it != $3.end(); ++it){ string* n = (*it); name.push_back(n);} $$=name;} 
+	| '.' '*' {$$.push_back("*");}
+	| {vector<string*> var; $$=var;}
 	;
 
 
-Extends	: TEXTENDS Type {$$=0;}
-		| {$$=0; /*cout<<"Extends->epsilon\n";*/}
+Extends	: TEXTENDS Type {vector<string*> typeName =$2->getTypeName(); string* name=new string; for (vector<string*>::iterator it = typeName.begin(); it != typeName.end(); ++it){ string* n = (*it); if(it!=typeName.begin()){*name = *name + "." +*n;}else{name=n;}}  $$=name;}
+		| {$$=new string;}
 		;
 
-ExtendsList : TEXTENDS ListIds {$$=0;}
-			| {$$=0;}
+ExtendsList : TEXTENDS ListIds {$$=$2;}
+			| {vector<string*> var; $$=var;}
 			;
 
 
-Implements	: TIMPLEMENTS ListIds {$$=0;}
-			| {$$=0; /*cout<<"Implements->epsilon\n";*/}
+Implements	: TIMPLEMENTS ListIds {$$=$2;}
+			| {vector<string*> var; $$=var;}
 			;
 
 /*---------------------IMPORTS ------------------------------------------------------------------*/
-ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {$$=0; /*cout<<"ImportDeclaration --> import Static ID All"<< endl;*/ }
-				  | {$$=0; /*cout<<"ImportDeclaration --> epsilon"<< endl;*/ }
+ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {vector<string*> importvar; if($2==true){importvar.push_back("static");} importvar.push_back($3); for (vector<string*>::iterator it = $4.begin(); it != $4.end(); ++it){ string* n = (*it); importvar.push_back(n);} $6.push_back(importvar); $$=$6; }
+				  | {vector<vector<string*>> var = vector<vector<string*>>; $$=var; }
 				  ; 
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { KAWATreeClass* c = new KAWATreeClass(*$2); /*$$->addMain(c); $$ = c; cout << "CLASS NAME: " << *$2 << endl; */}
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { $$=new KT_Class; $$->setName($2); $$->setParentClass($3); $$->setParentInterfaces($4); $$->setMemberDec($5);}
 				 ;
 
-InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=0;}
+InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=new KT_Interface; $$->setName($2); $$->setInterfacesparent($3); $$->setPrototypes($4);}
 					 ;
 
 /*-----------------------------------Corps d'une classe-----------------------------------------------------*/
-ClassBody: '{' MemberDecs '}' {$$=0; /*cout<< "ClassBody --> '{' MemberDecs '}'  "<< endl;*/ } 
-MemberDecs : MemberDecs MemberDec {$$=0; /*cout<< " MemberDecs --> MemberDecs MemberDec "<< endl;*/ }
-					  | {$$=0; /*cout<< " MemberDecs --> Epsilone "<< endl;*/}
+ClassBody: '{' MemberDecs '}' {$$=$2;} 
+MemberDecs : MemberDecs MemberDec {$1.push_back($2); $$=$1;}
+					  | {vector<PARSER_MemberDec*> var; $$=var;}
 					  ;
 
-MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' {$$=0;}
-		  | Modifiers Type ID FormalParameters Block {$$=0;} /* methode avec type de retour */
-		  | Modifiers TVOID ID FormalParameters Block {$$=0;} /* void methode */
-		  | Modifiers ID FormalParameters Block {$$=0;} /* constructeur */
+MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' {/*PARSER_MemeberDec*/$$=;}
+		  | Modifiers Type ID FormalParameters Block {KT_SimpleMethod* methode =new KT_SimpleMethod; methode->setIndexParser(2); methode->setName($3); methode->setModifier($1) ; methode->setParams($4); methode->setType($2); methode->setBlock($5) ; $$=methode;} /* methode avec type de retour */
+		  | Modifiers TVOID ID FormalParameters Block {KT_Type type = new KT_Type; vector<string*> typeName; typeName.push_back("void"); type->ssetTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); KT_SimpleMethod* methode =new KT_SimpleMethod; methode->setIndexParser(2); methode->setName($3); methode->setModifier($1) ; methode->setParams($4); methode->setType(type); methode->setBlock($5) ; $$=methode;} /* void methode */
+		  | Modifiers ID FormalParameters Block {KT_Constructor* construcror =new KT_Constructor; constructor->setIndexParser(1); constructor->setName($2); constructor->setModifier($1) ; constructor->setParams($3) ; constructor->setBlock($4) ; $$=constructor;} /* constructeur */
 					;  
 
 /*--------------------------------- corps d'une interface ---------------------------------------------------*/
 InterfaceBody: '{' Prototypes '}' {$$=$2;}
 			 ; 
-Prototypes : Prototypes Prototype {$$=0;}
- 						  | {$$=0;}
+Prototypes : Prototypes Prototype {$1.push_back($2); $$=$1;}
+ 						  | {vector<KT_Param*> var; $$=var;}
  						  ;
 
-Prototype : Modifiers Type ID FormalParameters';'
-    	  | Modifiers TVOID ID FormalParameters ';' {$$=0;} 
+Prototype : Modifiers Type ID FormalParameters';' {$$ = new KT_Prototype; $$->setName($3); $$->setReturnType($2); $$->setModifier($1); $$->setParams(FormalParameters);}
+    	  | Modifiers TVOID ID FormalParameters ';' {KT_Type type = new KT_Type; vector<string*> typeName; typeName.push_back("void"); type->ssetTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); $$ = new KT_Prototype; $$->setName($3); $$->setReturnType(type); $$->setModifier($1); $$->setParams(FormalParameters);} 
     	   ;  
 
 /*-------------------------------------------- partie variables ---------------------------------------------------------*/
@@ -348,11 +362,11 @@ VariableDeclaratorList : ',' VariableDeclarator VariableDeclaratorList {$$=$2;}
 					   | {$$=0;}
 					   ;
 
-VariableDeclarator: ID VariableInitializer {$$=0;}
+VariableDeclarator: ID VariableInitializer {$$=new KT_Variable; vector<string*> name; name.push_back($1); $$->setName(name); $$->setValue($2);}
 				  ;
 
-VariableInitializer: '=' Expression {$$=0;}
-					 | {$$=0;}
+VariableInitializer: '=' Expression {$$=$1;}
+					 | {$$=new KT_Expression;}
 					 ;
 
 /*-------------------------------------- partie de parametres des methodes -----------------------------------------*/
@@ -393,77 +407,74 @@ VariableDeclaratorId: ID Tables {$$=new KT_Param; $$->setName($1); KT_Type type=
 					;
 
 /*----------------------------------- partie blocks et les variables locaux ------------------------*/
-Block: '{' BlockStatements '}' {$$=$2; /*cout<< " Block --> '{' BlockStatements '}' "<< endl;*/}
+Block: '{' Statements '}' {$$=new KT_Block; $$->setStatements($2)}
 	 ;
 
-BlockStatements: BlockStatements BlockStatement {$$=0;}
-			   | {$$=0; /*cout<< " BlockStatements --> Epsilone "<< endl; */}
+Statements: Statements Statement {$1.push_back($2); $$=$1;}
+			   | {vector<KT_Statement*> var; $$=var;}
 			   ; 
 
-BlockStatement: Print {$$=0; }
-			  | PrintS {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintS "<< endl;*/ } 
-			  | PrintF {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintF "<< endl;*/ } 
-			  | PrintI {$$=0; bodyMain->addInstruction($1); /*cout<< " BlockStatement --> PrintI "<< endl;*/}
+Statement     : Print {$$=$1;}
+			  | PrintS {$$=$1;} 
+			  | PrintF {$$=$1;} 
+			  | PrintI {$$=$1;}
 			  | TFINAL ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
 			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
 			  | TFINAL ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
-			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;} 
+			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {$=0} 
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
 			  | TFINAL BasicType Tables VariableDeclarator VariableDeclaratorList ';' {$$=0;}
-    		  | ID TablesIndexe '=' Expression ';' {$$=0;}
-    		  | TTHIS '.' ID TablesIndexe '=' Expression ';' {$$=0;}
-    		  | Expression ';' {$$=0; cout<< "blockStatement --> Expression "<<endl;}
-    		  /*| TTHIS '.' VariableDeclarator ';' {$$=0;}*/
-    		  /*| TTHIS '.' ID FormalParametersCalledMethod ';' {$$=0;}*/
-    		  | TSUPER FormalParametersCalledMethod ';' {$$=0;}
-    		  /*| ID ':' Statement {$$=0;}*/
-    		  | Statement {$$=0;}
-    		  | ';' {$$=0;}
+    		  | ID TablesIndexe '=' Expression ';' { KT_ID* id; id->setValue($1); KT_Affectation* affectation; affectation->setsetRExpression($4); affectation->setLExpression(id); affectation->setIndexedArray($2); $$=affectation;}
+    		  | TTHIS '.' ID TablesIndexe '=' Expression ';' {string* name = "this"+(*$1); KT_ID* id; id->setValue(id); KT_Affectation* affectation; affectation->setsetRExpression($6); affectation->setLExpression(id); affectation->setIndexedArray($4); $$=affectation;}
+    		  | Expression ';' {$$=$1;}
+    		  | TSUPER FormalParametersCalledMethod ';' {KT_Super* s = new KT_Super; s->setParams($2);}
+    		  | BlockStatement {$$=$1;}
+    		  | ';' {$$=new KT_Statement;}
     		  ;
 
-Print : TPRINT '(' Args ')' ';' {/*cout << "Print: " << $1 << endl;*/ $$=0;}
+Print : TPRINT '(' Args ')' ';' {$$=new KT_Print; $$->setArgs($3);}
 	  ;
-Args :factFinal ArgsRest {$$=0;}
-	 | {$$=0;}
+Args :factFinal ArgsRest {FactFinal* factFinal;= static_cast<FactFinal*>($1); vector<FactFinal*> args; args.push_back(factFinal); for (vector<FactFinal*>::iterator it = $2.begin(); it != $2.end(); ++it){ FactFinal* n = (*it); args.push_back(n);} $$=args;}
+	 | {vector<KT_FactFinal*> var; $$=var;}
 	 ;
-ArgsRest : '+' factFinal ArgsRest {$$=0;} 
-		 | {$$=0;}
+ArgsRest : '+' factFinal ArgsRest {FactFinal* factFinal;= static_cast<FactFinal*>($2); vector<FactFinal*> args; args.push_back(factFinal); for (vector<FactFinal*>::iterator it = $3.begin(); it != $3.end(); ++it){ FactFinal* n = (*it); args.push_back(n);} $$=args;} 
+		 | {vector<KT_FactFinal*> var; $$=var;}
 		 ;
 
-PrintF : TPRINTF '(' ArgsF ')' ';' {$$=0; printFloat = new KAWATreePrintFloat; printFloat->addParam(paramFloat); /*cout << " PrintF --> TPRINTF '(' ArgsF ')' ';'" <<endl;*/}
+PrintF : TPRINTF '(' ArgsF ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args; args.push_back($3); $$->setArgs(args);}
 	   ;
-ArgsF : REEL {$$=0; typeFloat = new KAWATreeType("float"); float* doubleVal = (float*) malloc(sizeof(float)); *doubleVal = $1; void* valueDouble = (void*) doubleVal; paramFloat = new KAWATreeParam(typeFloat, valueDouble);/*cout << " ArgsF --> REEL" <<endl;*/}
-	  | ID {$$=0;}
-	  | {$$=0;} 
+ArgsF : REEL {KT_Reel* reel = new KT_Reel; reel->setValue($1); $$=reel;}
+	  | ID {KT_ID* id = new KT_ID; id->setValue($1); $$=id;}
+	  | {$$=new KT_FactFinal;} 
 	  ; 
 
-PrintI : TPRINTI '(' ArgsI ')' ';' {$$ = new KAWATreePrintInteger; $$->addParam(paramInteger); /*cout << " PrintI --> TPRINTI '(' ArgsI ')' ';'" <<endl;*/}
+PrintI : TPRINTI '(' ArgsI ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args; args.push_back($3); $$->setArgs(args);}
 	   ;
-ArgsI : ENTIER {$$=0; typeInteger = new KAWATreeType("int"); int* integer = (int*) malloc(sizeof(int)); *integer = $1; void* valueInt = (void*) integer; paramInteger = new KAWATreeParam(typeInteger, valueInt); /*cout << " ArgsI --> ENTIER " <<endl;*/}
-	  | ID {$$=0;}
-	  | {$$=0;}
+ArgsI : ENTIER {KT_Entier* entier = new KT_Entier; reel->setValue($1); $$=entier;}
+	  | ID {KT_ID* id = new KT_ID; id->setValue($1); $$=id;}
+	  | {$$=new KT_FactFinal;}
 	  ; 
 
-PrintS : TPRINTS '(' ArgsS ')' ';' {$$=0; printString = new KAWATreePrintString; printString->addParam(paramStr); /*cout<< " PrintS --> TPRINTS '(' ArgsS ')' ';'"<< endl;*/}
+PrintS : TPRINTS '(' ArgsS ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args; args.push_back($3); $$->setArgs(args);}
 	   ;
-ArgsS : STRING {$$=0; typeString = new KAWATreeType("string"); paramStr = new KAWATreeParam(typeString, (void*) $1);/*cout<< " ArgsS --> STRING "<< endl;*/}
-	  | ID {$$=0;}
-	  | {$$=0;}
+ArgsS : STRING {KT_String* s = new KT_String; s->setValue($1); $$=s;}
+	  | ID {KT_ID* id = new KT_ID; id->setValue($1); $$=id;}
+	  | {$$=new KT_FactFinal;}
 	  ; 
 
-Statement: Block {$$=0;}
-    	 | TIF '(' Expression ')' Statement %prec THEN {$$=0;}
-		 | TIF '(' Expression ')' Statement TELSE Statement {$$=0;}
-		 | TSWITCH '(' Expression ')' '{' SwitchBlockStatements '}' {$$=0;}
-		 | TWHILE '(' Expression ')' Statement {$$=0;}
-		 | TDO Statement TWHILE '(' Expression ')' ';' {$$=0;}
-		 | TFOR '(' ForControl ')' Statement {$$=0;}
-		 | TBREAK ID ';' {$$=0;}
-		 | TBREAK ';' {$$=0;}
-		 | TCONTINUE ID ';' {$$=0;}
-		 | TCONTINUE ';' {$$=0;}
-		 | TRETURN Expression ';' {$$=0;}
-		 | TRETURN ';' {$$=0;}
+BlockStatement: Block {$$=0;}
+    	 	  | TIF '(' Expression ')' BlockStatement %prec THEN {$$=0;}
+		      | TIF '(' Expression ')' BlockStatement TELSE BlockStatement {$$=0;}
+		      | TSWITCH '(' Expression ')' '{' SwitchBlockStatements '}' {$$=0;}
+		      | TWHILE '(' Expression ')' BlockStatement {$$=0;}
+		      | TDO BlockStatement TWHILE '(' Expression ')' ';' {$$=0;}
+		      | TFOR '(' ForControl ')' BlockStatement {$$=0;}
+		      | TBREAK ID ';' {$$=0;}
+		      | TBREAK ';' {$$=0;}
+		 	  | TCONTINUE ID ';' {$$=0;}
+		 	  | TCONTINUE ';' {$$=0;}
+		 	  | TRETURN Expression ';' {$$=0;}
+		 	  | TRETURN ';' {$$=0;}
 		 ;
 
 /*----------------------------------------Partie switch----------------------------------------------*/
@@ -471,8 +482,8 @@ SwitchBlockStatements: SwitchBlockStatements SwitchBlockStatement {$$=0;}
 						  | {$$=0;}
 						  ;
 
-SwitchBlockStatement: TCASE Expression ':' BlockStatements {$$=0;}
-					|  TDEFAULT ':' BlockStatements
+SwitchBlockStatement: TCASE Expression ':' Statements {$$=0;}
+					|  TDEFAULT ':' Statements
 					; 
 
 /*------------------------------ partie for -----------------------------------------------------------------*/

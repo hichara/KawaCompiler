@@ -11,3 +11,17 @@
 
 PARSER_MemberDec::PARSER_MemberDec(){}
 
+/**
+ * @return int 
+ */
+int PARSER_MemberDec::getIndexParser() {
+    return name;
+}
+
+/**
+ * @param int
+ */
+void PARSER_MemberDec::setIndexParser(int var) {
+	indexParser=var;
+}
+

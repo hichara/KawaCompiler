@@ -1,0 +1,41 @@
+package heritage;
+
+public class Pays {
+private String nonpays;
+private int pays_frontalier;
+
+  public  Pays(){};
+  
+  public  Pays(String nom,int nbre){
+	  this.nonpays = nom;
+	  this.pays_frontalier = nbre;
+  };
+
+  		public String description()
+  		{
+  			String str = " son pays est:"+this.nonpays+" et à comme pays frontaliers " + this.pays_frontalier+"pays";
+  			printString(str);
+  					return str;	
+  		}
+  		
+  	//********setteur*****************
+  		public void setnom(String nom)
+  		{
+  			this.nonpays = nom;
+  		}
+  
+  		public void setpaysfront(int pays)
+  		{
+  			this.pays_frontalier = pays;
+  		}
+  //***************getteur****************
+  		public String getnom()
+  		{
+  			return this.nonpays;
+  		}
+  		
+  		public int front()
+  		{
+  			return this.pays_frontalier;
+  		}
+}

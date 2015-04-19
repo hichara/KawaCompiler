@@ -1,0 +1,85 @@
+package heritage;
+
+public class Ville extends Pays {
+	private String nomVille;
+	  private String nomPays;
+	  private int nbreHabitants;
+	//Variables publiques qui comptent les instances
+	  public static int nbreInstances = 0;
+	   //contructeur sans parametre
+	  public Ville(){   
+		  super();
+	    nomVille = "Paris";
+	    nomPays = "France";
+	    nbreHabitants = 0;
+	    this.nbreInstances++;
+	  }
+	 
+	  public Ville(String Pnom,int Pays_front,String pNom, int pNbre, String pPays)
+	  {
+	    super(Pnom,Pays_front);
+	    nomVille = pNom;
+	    nomPays = pPays;
+	    nbreHabitants = pNbre;
+	    this.nbreInstances++;
+	  }  
+	  		//**********************getteur
+	//Retourne le nom de la ville
+	  public String getNom()  {  
+	    return nomVille;
+	  }
+
+	  //Retourne le nom du pays
+	  public String getNomPays()
+	  {
+	    return nomPays;
+	  }
+
+	  // Retourne le nombre d'habitants
+	  public int getNombreHabitants()
+	  {
+	    return nbreHabitants;
+	  } 
+	  
+	  public static int getNombreInstances()
+	  {
+	    return nbreInstances;
+	  }  
+	  
+	  //*************setteur*********
+	//Définit le nom de la ville
+	  public void setNom(String pNom)
+	  {
+	    nomVille = pNom;
+	  }
+
+	  //Définit le nom du pays
+	  public void setNomPays(String pPays)
+	  {
+	    nomPays = pPays;
+	  }
+
+	  //Définit le nombre d'habitants
+	  public void setNombreHabitants(int nbre)
+	  {
+	    nbreHabitants = nbre;
+	  }
+	  
+	//Retourne la description de la ville
+	  public String decrisToi(){
+	    return "\t"+this.nomVille+" est une ville de "+this.nomPays + super.description() +" elle comporte : "+this.nbreHabitants+" habitant(s)";
+	  }
+	  
+	//Retourne une chaîne de caractères selon le résultat de la comparaison
+	  public String comparer(Ville v1){
+	    String str = new String();
+
+	    if (v1.getNombreHabitants() > this.nbreHabitants)
+	      str = v1.getNom()+" est une ville plus peuplée que "+this.nomVille;
+	     
+	    else
+	      str = this.nomVille+" est une ville plus peuplée que "+v1.getNom();
+	     
+	    return str;
+	  }
+}

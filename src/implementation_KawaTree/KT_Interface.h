@@ -25,6 +25,9 @@ public:
 	vector<KT_Prototype*> getPrototypes();
     
     KT_Modifier* getModifier();
+
+    vector<vector<string*>> getImports();
+    
     
     /**
      * @param string *
@@ -72,6 +75,11 @@ public:
 	* @param string*
 	*/
 	void setFQN(string* var);
+
+	/**
+    * @param vector<vector<string*>>
+    */
+    void setImports(vector<vector<string*>>& var);
 	
 private: 
     string* name;
@@ -81,6 +89,7 @@ private:
 	vector<string> fullSignatures;
 	vector<KT_Interface*> parentsInterfacesSemantique;	
 	string* FQN;
+	vector<vector<string*>> imports;
 };
 
 #endif //_KT_INTERFACE_H

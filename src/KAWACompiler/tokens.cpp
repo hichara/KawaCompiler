@@ -2641,7 +2641,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 112 "kawa.y" /* yacc.c:1909  */
+#line 113 "kawa.y" /* yacc.c:1909  */
 
 	bool vbool;
 	int vint;
@@ -2731,15 +2731,15 @@ union YYSTYPE
 	PARSER_ForControl* parser_forControl;
 	PARSER_MemberDec* parser_memberDec;
 
-	vector<KT_MethodOrVarCall*> vectorKT_MethodOrVarCall;
-	vector<string*> vectorString;
-	vector<vector<string*>> vectorVecorString;
-	vector<KT_ParamsMethodCall*> vectorKT_ParamsMethodCall;
-	vector<KT_Param*> vectorKT_Param;
-	vector<KT_Prototype*> vectorKT_Prototype;
-	vector<PARSER_MemberDec*> vectorPARSER_MemberDec;
-	vector<KT_Statement*> vectorKT_Statement;
-	vector<KT_FactFinal*> vectorKT_FactFinal;
+	vector<KT_MethodOrVarCall*>* vectorKT_MethodOrVarCall;
+	vector<string*>* vectorString;
+	vector<vector<string*>>* vectorVecorString;
+	vector<KT_ParamsMethodCall*>* vectorKT_ParamsMethodCall;
+	vector<KT_Param*>* vectorKT_Param;
+	vector<KT_Prototype*>* vectorKT_Prototype;
+	vector<PARSER_MemberDec*>* vectorPARSER_MemberDec;
+	vector<KT_Statement*>* vectorKT_Statement;
+	vector<KT_FactFinal*>* vectorKT_FactFinal;
 
 #line 233 "kawa.hpp" /* yacc.c:1909  */
 };

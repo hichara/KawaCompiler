@@ -9,7 +9,12 @@
  * KT_SimpleMethod implementation
  */
 
-KT_SimpleMethod::KT_SimpleMethod(){}
+KT_SimpleMethod::KT_SimpleMethod(){
+//besoin semantic
+
+prototype=NULL;
+
+}
 
 /**
  * @return string *

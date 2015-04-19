@@ -64,6 +64,21 @@ KT_Package* KT_Program::getPackage(KT_Package* var){
 	return NULL;
 }
 
+
+/**
+* @param string
+*/
+void KT_Program::setName(string var){
+	this->name= var;
+}
+
+/**
+ * @return string
+ */
+string KT_Program::getName() {
+    return name;
+}
+
 void KT_Program::toString() {
 	cout << "***********************" << endl;
 	cout << "Programe " << endl;

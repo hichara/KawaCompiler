@@ -19,7 +19,10 @@ public:
     
     KT_Prototype();
 
-    string* getName();
+    //back-end
+	string* getName();
+	
+	string getParentName();
     
     KT_Type* getReturnType();
     
@@ -31,6 +34,11 @@ public:
      * @param string *
      */
     void setName(string* var);
+	
+	 /**
+     * @param string
+     */
+    void setParentName(string var);
     
     /**
      * @param KT_Type *
@@ -48,6 +56,10 @@ public:
     void setParams(vector<KT_Param*>& var);
 private: 
     string* name;
+	
+	//back-end
+	string parentName;
+	
     vector<KT_Param*> params;
     KT_Type* returnType;
     KT_Modifier* modifier;

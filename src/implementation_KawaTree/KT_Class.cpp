@@ -214,6 +214,20 @@ void KT_Class::setImports(vector<vector<string*>>& var) {
 		return this-> parentsInterfacesSemantique ;
 	}
 	
+/**
+ * @return string *
+ */
+string* KT_Class::getFQN() {
+    return this-> FQN;
+}	
+	
+/**
+* @param string*
+*/
+void KT_Class::setFQN(string* var){
+	this->FQN =var;
+}
+	
 
 void KT_Class::toString() {
 	

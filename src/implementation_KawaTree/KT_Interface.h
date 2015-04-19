@@ -66,13 +66,21 @@ public:
 	
 	vector<KT_Interface*> getParentsInterfacesSemantique();
 	
+	string* getFQN();
+	
+	/**
+	* @param string*
+	*/
+	void setFQN(string* var);
+	
 private: 
-    string * name;
+    string* name;
     vector<string*> InterfacesParent;
     KT_Modifier* modifier;
 	vector<KT_Prototype*> prototypes;
 	vector<string> fullSignatures;
 	vector<KT_Interface*> parentsInterfacesSemantique;	
+	string* FQN;
 };
 
 #endif //_KT_INTERFACE_H

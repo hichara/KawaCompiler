@@ -37,6 +37,13 @@ public:
 									std::vector<std::string> args_types,									
 									std::vector<std::string> args_names);
 
+	static Function *createPrototype(Module *module, bool isStatic,
+									std::string className,
+									std::string name,
+									std::string ret_type, 
+									std::vector<std::string> args_types,									
+									std::vector<std::string> args_names);
+
 	static Function *createConstructor(Module *module, std::string className,
 								std::vector<std::string> args_types,									
 								std::vector<std::string> args_names);

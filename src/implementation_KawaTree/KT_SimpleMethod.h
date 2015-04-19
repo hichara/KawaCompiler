@@ -28,6 +28,11 @@ public:
 	KT_Modifier* getModifier();
 
 	KT_Type* getType();
+	
+	/**
+	* method semantic
+	*/
+	KT_Prototype* getPrototype();
     
     /**
      * @param string *
@@ -53,6 +58,12 @@ public:
 	* @param vector<KT_Param*>
 	*/
 	void setParams(vector<KT_Param*>& var);
+	
+	
+	/**
+	* @param KT_Prototype*
+	*/
+	void setPrototype(KT_Prototype* var);
 
 	void toString();
 private: 
@@ -62,6 +73,7 @@ private:
     KT_Block* block;
 	KT_Modifier* modifier;
 	KT_Type* type;
+	KT_Prototype* prototype;
 };
 
 #endif //_KT_SIMPLEMETHOD_H

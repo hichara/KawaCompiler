@@ -54,6 +54,14 @@ KT_Type* KT_SimpleMethod::getType() {
 }
 
 /**
+* @return KT_Prototype*
+*/
+KT_Prototype* KT_SimpleMethod::getPrototype() {
+	return prototype;
+}
+
+
+/**
  * @param string *
  */
 void KT_SimpleMethod::setName(string* var) {
@@ -86,6 +94,14 @@ void KT_SimpleMethod::setType(KT_Type* var) {
 */
 void KT_SimpleMethod::setParams(vector<KT_Param*>& var) {
 	params = var;
+}
+
+
+/**
+* @param KT_Prototype*
+*/
+void KT_SimpleMethod::setPrototype(KT_Prototype* var){
+	this->prototype  = var;
 }
 
 void KT_SimpleMethod::toString() {

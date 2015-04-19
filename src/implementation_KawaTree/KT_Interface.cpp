@@ -105,3 +105,18 @@ void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
 		return this-> parentsInterfacesSemantique ;
 	}
 	
+	
+	/**
+ * @return string *
+ */
+string* KT_Interface::getFQN() {
+    return this-> FQN;
+}	
+	
+/**
+* @param string*
+*/
+void KT_Interface::setFQN(string* var){
+	this->FQN =var;
+}
+	

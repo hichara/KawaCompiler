@@ -20,6 +20,14 @@ string* KT_Prototype::getName() {
 }
 
 /**
+ *	Partie back-end
+ * @return string
+ */
+string KT_Prototype::getParentName() {
+    return parentName;
+}
+
+/**
  * @return KT_Type *
  */
 KT_Type* KT_Prototype::getReturnType() {
@@ -45,6 +53,13 @@ KT_Modifier* KT_Prototype::getModifier() {
  */
 void KT_Prototype::setName(string* var) {
 	name=var;
+}
+
+/**
+ * @param string
+ */
+void KT_Prototype::setParentName(string var){
+	parentName=var;
 }
 
 /**

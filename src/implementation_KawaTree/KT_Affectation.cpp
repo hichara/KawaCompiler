@@ -72,3 +72,7 @@ void KT_Affectation::setIndexedArray(KT_IndexedArray* var){
 	indexedArray=var;
 }
 
+void KT_Affectation::accept(SemanticVisitor* visitor){
+	visitor->visitAffectation(this);
+}
+

@@ -5,7 +5,7 @@ KAWATreeDIR= ../implementation_KawaTree
 
 all: semanticAlgo
 
-semanticAlgo: ${SRCDIR}/*.cpp ${KAWATreeDIR}/*.h
+semanticAlgo: ${SRCDIR}/*.cpp ${KAWATreeDIR}/*.h ${KAWATreeDIR}/*.cpp
 	${CC} ${CFLAGS} ${SRCDIR}/*.cpp ${KAWATreeDIR}/*.cpp -o semanticAlgo
 
 clean:

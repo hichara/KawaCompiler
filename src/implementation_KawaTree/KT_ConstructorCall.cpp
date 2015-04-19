@@ -56,7 +56,7 @@ void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> &var) {
  * @param string*
  */
 void KT_ConstructorCall::addString(string* var) {
-	typeName.push_back(var);
+	name.push_back(var);
 }
 
 /**

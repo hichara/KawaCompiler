@@ -2641,7 +2641,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 113 "kawa.y" /* yacc.c:1909  */
+#line 96 "kawa.y" /* yacc.c:1909  */
 
 	bool vbool;
 	int vint;

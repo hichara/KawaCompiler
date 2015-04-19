@@ -42,7 +42,7 @@ KT_Modifier* KT_Interface::getModifier() {
 /**
 * @return vector<vector<string*>>
 */
-vector<vector<string*>> KT_Interface::getImports()() {
+vector<vector<string*> > KT_Interface::getImports() {
 	return this->imports;
 }
 

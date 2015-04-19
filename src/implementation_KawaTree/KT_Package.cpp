@@ -56,14 +56,14 @@ void KT_Package::setClasses(vector<KT_Class*>& var) {
 /**
 * @param KT_Class*
 */
-void addClass(KT_Class* var){
+void KT_Package::addClass(KT_Class* var){
 	classes.push_back(var);
 }
 
 /**
 * @param KT_Interface*
 */
-void addInterface(KT_Interface* var){
+void KT_Package::addInterface(KT_Interface* var){
 	interfaces.push_back(var);
 }
 

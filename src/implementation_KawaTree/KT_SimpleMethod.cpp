@@ -112,7 +112,7 @@ void KT_SimpleMethod::setPrototype(KT_Prototype* var){
 /**
 * @param string
 */
-void KT_SimpleMethod:::setFullSignature(string var){
+void KT_SimpleMethod::setFullSignature(string var){
 	this->FullSignature = var;
 }
 
@@ -133,5 +133,5 @@ void KT_SimpleMethod::toString() {
 	}
 	cout << ")" << endl;
 	cout << "Methode Block : " << endl;
-	block->toString();
+	//block->toString();
 }

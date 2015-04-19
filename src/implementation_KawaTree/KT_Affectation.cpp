@@ -40,7 +40,7 @@ KT_Expression* KT_Affectation::getrExpression() {
 /**
  * @return KT_IndexedArray*
  */
-KT_IndexedArray* KT_IndexedArray::getIndexedArray() {
+KT_IndexedArray* KT_Affectation::getIndexedArray() {
     return indexedArray;
 }
 

@@ -149,7 +149,7 @@ private:
 	KT_Class* parentClasseSemantique;
 	vector<KT_Interface*> parentsInterfacesSemantique;
 	string* FQN;
-	vector<KT_Prototype*>  AllPrototypes ;
+	vector<KT_Prototype*> AllPrototypes ;
 
 };
 

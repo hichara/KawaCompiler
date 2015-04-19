@@ -60,6 +60,6 @@ void KT_Variable::setType(KT_Type* var) {
 /**
  * @param KT_Expression*
  */
-void KT_Variable::setType(KT_Expression* var) {
+void KT_Variable::setValue(KT_Expression* var) {
 	value=var;
 }

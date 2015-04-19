@@ -87,12 +87,29 @@ void KT_Prototype::setParams(vector<KT_Param*>& var) {
  * mehtode pour verifier la redefinition d'une methode (semantic)
  * @param KT_Prototype* 
  */
-bool equal(KT_Prototype* var){
-	if( (this->name ==var->name) 
-		&& (this->returnType == var->returnType)
-		&& (std::equal(this->params.begin(),this->params.end(), var->params.begin()))
+bool KT_Prototype::equal(KT_Prototype* var){
+	if((this->name ==var->getName()) && (returnType == var->getReturnType()) && (std::equal(this->params.begin(),this->params.end(), var->getParams().begin())) )
 		return true;
 		else
 			return false;
 
+}
+/*
+string getFN(vector<string *> beFill) {
+   string toFill = ".(";
+   for (string * pieceOfName : beFill)
+       toFill += "." + *pieceOfName;
+   toFill += ")";
+   return toFill;
+}
+*/
+string KT_Prototype::toString(){
+   /*string  p;
+   for (KT_Param * param : this->params)
+       p= p + getFN(param->getParamType()->getTypeName());
+   string * signature = new string(*this->name + "" + p);
+   string returnType = getFN(this->returnType->getTypeName());
+   string * fqn = new string(this->modifier->getVisibility() + "." + returnType + "." + *signature);
+   return *fqn;*/
+   return "";
 }

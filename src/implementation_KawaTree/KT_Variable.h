@@ -8,12 +8,13 @@
 
 #include "KT_VarOrAttr.h"
 #include "KT_Type.h"
+#include "KT_Expression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
 using namespace std;
 
-class KT_Variable: public KT_VarOrAttr, KT_Statement {
+class KT_Variable: public KT_VarOrAttr, public KT_Statement {
 public: 
     
     KT_Variable();

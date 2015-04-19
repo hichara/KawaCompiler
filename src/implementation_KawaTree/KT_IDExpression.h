@@ -14,6 +14,10 @@ using namespace std;
 
 
 class KT_IDExpression: public KT_Statement {
+	/**
+     * @param StatementVisitor
+     */
+    void accept( /*StatementVisitor*/);
 };
 
 #endif //_KT_IDEXPRESSION_H

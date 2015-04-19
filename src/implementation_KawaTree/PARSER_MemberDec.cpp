@@ -15,7 +15,7 @@ PARSER_MemberDec::PARSER_MemberDec(){}
  * @return int 
  */
 int PARSER_MemberDec::getIndexParser() {
-    return name;
+    return indexParser;
 }
 
 /**

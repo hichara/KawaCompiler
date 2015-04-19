@@ -26,7 +26,7 @@ public:
 	*/
 	void setArgs(vector<KT_FactFinal*>& var);
 
-	virtual void toString() ;
+	/*virtual void toString() ;*/
 private: 
     vector<KT_FactFinal*> args;
 };

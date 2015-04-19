@@ -13,7 +13,11 @@ using namespace std;
  * KT_Class implementation
  */
  
-KT_Class:: KT_Class() {}
+KT_Class:: KT_Class() {
+//besoin semantic
+ParentClass=NULL;
+
+}
 
 
 /**
@@ -95,13 +99,6 @@ KT_Modifier* KT_Class::getModifier() {
 }
 
 /**
-* @return vector<vector<string*>>
-*/
-vector<vector<string*>> KT_Class::getImports()() {
-	return this->imports;
-}
-
-/**
  * @param string *
  */
 void KT_Class::setName(string* var) {
@@ -119,23 +116,7 @@ void KT_Class::setParentClass(string* var) {
  * @param vector<PARSER_MemberDec *>
  */
 void KT_Class::setMemberDec(vector<PARSER_MemberDec*>& var) {
-
 	this-> memberDecs= var;
-	for (vector<PARSER_MemberDec*>::iterator it = memberDecs.begin(); it != memberDecs.end(); ++it){
-		PARSER_MemberDec* member = (*it);
-		if(member->getIndexParser()==0){
-			KT_Attribute* attribute = static_cast<KT_Attribute*>(member);
-			attributes.push_back(attribute);
-		}
-		if(member->getIndexParser()==1){
-			KT_Constructor* constructor = static_cast<KT_Constructor*>(member);
-			constructors.push_back(constructor);
-		}
-		if(member->getIndexParser()==2){
-			KT_SimpleMethod* method = static_cast<KT_SimpleMethod*>(member);	
-			SimpleMethods.push_back(method);
-		}
-	}
 }
 
 /**
@@ -150,14 +131,6 @@ void KT_Class::setParentInterfaces(vector<string*>& var) {
 */
 void KT_Class::setModifier(KT_Modifier* var) {
 	this->modifiers = var;
-}
-
-
-/**
-* @param vector<vector<string*>>
-*/
-void KT_Class::setImports(vector<vector<string*>>& var) {
-	this->imports = var;
 }
 
 	/**
@@ -232,7 +205,7 @@ void KT_Class::setFQN(string* var){
  * @return vector<KT_Prototype*>
  */
 vector<KT_Prototype*>  KT_Class::getAllPrototypes(){
-	return this-> AllPrototypes;
+	return AllPrototypes;
 }
 	
 /**
@@ -245,7 +218,7 @@ void KT_Class::setAllPrototypes(vector<KT_Prototype*> var){
 /**
 * @param vector<KT_Prototype*> 
 */
-void addPrototype(KT_Prototype* var) {
+void KT_Class::addPrototype(KT_Prototype* var) {
 	AllPrototypes.push_back(var);
 }
 	

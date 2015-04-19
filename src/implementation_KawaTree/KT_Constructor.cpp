@@ -91,6 +91,6 @@ void KT_Constructor::toString(){
 	}
 	cout << ")" << endl;
 	cout << " Block de Constructeur " <<endl;
-	block->toString();
+	//block->toString();
 
 }

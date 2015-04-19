@@ -23,7 +23,7 @@ public:
 	
 	void setStatements(vector<KT_Statement*> &var);
 
-	virtual void toString() ;
+	/*virtual void toString() ;*/
 private: 
     vector<KT_Statement*> statements;
 };

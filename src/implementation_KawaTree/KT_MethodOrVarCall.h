@@ -5,6 +5,7 @@
 
 #ifndef _KT_METHODORVARCALL_H
 #define _KT_METHODORVARCALL_H
+#include "KT_FactFinal.h"
 #include <stdio.h>
 #include <string>
 #include <vector>

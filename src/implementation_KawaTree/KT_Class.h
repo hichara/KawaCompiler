@@ -54,7 +54,7 @@ public:
 
 	KT_Modifier* getModifier();
 
-    vector<vector<string*>> getImports();
+    vector<vector<string*> > getImports();
     
     /**
      * @param string *
@@ -132,7 +132,7 @@ void addPrototype(KT_Prototype* var);
     /**
     * @param vector<vector<string*>>
     */
-    void setImports(vector<vector<string*>>& var);
+    void setImports(vector<vector<string*> >& var);
 
 	void toString();
 private: 
@@ -144,12 +144,12 @@ private:
     vector<KT_Constructor*> constructors;
     vector<PARSER_MemberDec*> memberDecs;
 	KT_Modifier* modifiers;
-    vector<vector<string*>> imports;
+    vector<vector<string*> > imports;
 	vector<string> fullSignatures;
 	KT_Class* parentClasseSemantique;
 	vector<KT_Interface*> parentsInterfacesSemantique;
 	string* FQN;
-	vector<KT_Prototype*>  AllPrototypes ;
+	vector<KT_Prototype*> AllPrototypes ;
 
 };
 

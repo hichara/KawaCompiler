@@ -45,7 +45,7 @@ void KT_IndexedArray::setIndex(vector<int>& var){
  */
 void KT_IndexedArray::setIndexAddIntAtFirstPosition(int var){
 	++dimension;
-	vector<string*>::iterator it;
+	vector<int>::iterator it;
   	it = index.begin();
   	it = index.insert ( it , var );
 }

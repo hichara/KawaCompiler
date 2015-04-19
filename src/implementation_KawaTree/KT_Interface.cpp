@@ -40,6 +40,13 @@ KT_Modifier* KT_Interface::getModifier() {
 }
 
 /**
+* @return vector<vector<string*>>
+*/
+vector<vector<string*>> KT_Interface::getImports()() {
+	return this->imports;
+}
+
+/**
  * @param string *
  */
 void KT_Interface::setName(string* var) {
@@ -118,5 +125,12 @@ string* KT_Interface::getFQN() {
 */
 void KT_Interface::setFQN(string* var){
 	this->FQN =var;
+}
+
+/**
+* @param vector<vector<string*>>
+*/
+void KT_Interface::setImports(vector<vector<string*>>& var) {
+	this->imports = var;
 }
 	

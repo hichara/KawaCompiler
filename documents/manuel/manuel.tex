@@ -1,0 +1,151 @@
+\documentclass{../res/univ-projet}
+
+%Import des packages utilisés pour le document
+
+% minted : http://www.ctan.org/tex-archive/macros/latex/contrib/minted/
+% pour installer sur ubuntu:
+% http://tex.stackexchange.com/questions/40083/how-to-install-minted-in-ubuntu#40101
+
+\usepackage{lscape}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{color}
+
+
+
+\definecolor{success}{HTML}{198C19}
+\definecolor{danger}{HTML}{CC0000}
+\definecolor{bg-gray}{HTML}{F9F9F9}
+
+\definecolor{gris}{rgb}{0.95, 0.95, 0.95}
+
+%Redéfinition des marges
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{1cm}
+\addtolength{\headsep}{0.8cm} 
+\addtolength{\footskip}{-0.2cm}
+
+
+
+
+%Variables
+\logo{../res/logo_univ.png}
+\title{Manuel d'utilisation}
+\author{Pierre-Luc BLOT}
+\projet{Compilateur LLVM}
+\projdesc{Langage jouet Kawa}
+\filiere{M1GIL}
+\version{0.1}
+\relecteur{}
+%\signataire{Florent \bsc{NICART}}
+\date{\today}
+
+\histentry{0.1}{19/04/2015}{Version initiale.}
+
+
+% -- Début du document -- %
+\begin{document}
+
+%Page de garde
+\maketitle
+\newpage
+%La table des matières
+\tableofcontents
+\newpage
+
+\section{Description du compilateur kawac} 
+L'outil \textbf{kawac} lit des définitions de classes et des interfaces écrites dans le
+langage de programmation Kawa et les compiles en executable ELF. Il est aussi
+possible de les compiler en bytecode.
+
+  \subsection{compilation}
+    Il y a deux manières de passer des noms de fichiers sources à \textbf{kawac}.
+    \begin{itemize}
+      \item L’utilisateur introduit un ensemble de modules (classe/interface)
+      kawa afin de les pré/compiler et de générer une application sous forme
+      d’un seul exécutable.\\
+
+      Afin de permettre la compilation dans ce mode monolithique il faut :
+      \begin{itemize}
+        \item Indiquer l’emplacement des fichiers sources de l’application.
+        \item Introduire le commutateur -m en premier paramètre dans la
+        ligne de commande permettant la compilation.
+        \item L’absence des deux commutateurs (\textbf{-h} ou \textbf{--help}) et (\textbf{-v} ou \textbf{-
+        -version}) en premier paramètre.
+        
+      \end{itemize}
+
+      Afin de pouvoir lancer la compilation dans ce mode l’utilisateur doit :
+      \begin{itemize}
+        \item Indiquez au moins un module (une classe avec une méthode
+        main qui constitue le point d’entrée d’une application).
+        \item Tapez la ligne de commande suivante afin de compiler les sources kawa :\\
+        \begin{minted}[bgcolor=bg-gray]{bash}
+          :$ kawac -m filessources
+        \end{minted}
+        
+        
+      \end{itemize}
+
+      Cela déclanche la production d’un unique fichier exécutable sous le format
+      d’ELF qui ne dépend d’aucune bibliothèque kawa ainsi que le nom du fichier 
+      exécutable correspond au nom du module contenant la méthode main.\\
+
+      La compilation peut être interrompue pour divers raisons, on cite :
+      \begin{itemize}
+        \item Le fichier de sortie n’a pu être créé.
+        \item Le code source d’un des modules de l’application
+        comporte une erreur syntaxique, l’erreur rencontrée pendant cette
+        étape d’analyse est renvoyée sur la sortie standard du compilateur.
+        \item Le code source d’un des modules
+        (classe/interface) dont dépend le programme est introuvable.
+        Un message renvoyé par le compilateur indique le nom du (ou des)
+        module(s) manquants sur la sortie standard.
+        \item Le code source d’un des modules de l’application
+        comporte une erreur sémantique, exemple : l’incompatibilité de type
+        statique lors d’une opération d’affectation.
+        \item Aucun des modules indiqués ne comporte le
+        point d’entrée (main).
+        \item Plusieurs méthodes main ont été trouvées parmi
+        les classes indiquées dans le source, le compilateur renvoie la liste
+        des points d’entrée trouvés sur la sortie standard.
+        \item Notez qu'il est important que vos définitions de \textbf{package} soient bien situées
+         dans des fichiers se trouvant dans des répertoires ayant le nom de ce \textbf{paquetage}.
+      \end{itemize}
+
+    \end{itemize}
+  \subsection{afficher la version du compilateur}
+    Il est possible d'afficher l'aide du compilateur avec le commutateur \textbf{-h} ou \textbf{--help}. Cela permet d'obtenir rapidement une aide quant à la manière d'utiliser \textbf{kawac} et ce, depuis le terminal via une ligne de commande.
+  \begin{minted}[bgcolor=bg-gray]{bash}
+    :$ kawac --help
+  \end{minted}
+
+\newpage
+  \subsection{afficher la version du compilateur}
+    Il est possible de savoir la version du compilateur avec le commutateur \textbf{-v} ou \textbf{--version}
+    \begin{itemize}
+      \item L’odre de priorité entre le commutateur de help (\textbf{-h} ou \textbf{--help}) et le commutateur de version (\textbf{-v} ou \textbf{--version}) est définit par la première occurrence de l’un des deux commutateur i-e si nous avons un \textbf{-v}
+      avant un \textbf{-h}, le compilateur annule tout le reste et affiche la version
+  \end{itemize}
+  \begin{minted}[bgcolor=bg-gray]{bash}
+    :$ kawac --version
+  \end{minted}
+
+ \section{Dépendances de kawac}
+  Le compilateur kawa \textbf{kawac} utilise la technologie \textbf{LLVM} afin de produire du bytecode. \textbf{kawac} offre un frontend \textbf{LLVM} pour le langage Kawa ainsi qu'une partie du backend ce qui produit du bytecode. Néanmoins, pour produire un exécutable à partir du bytecode \textbf{kawac} a besoin d'\textbf{llc} dans sa version 3.4/3.5 et de \textbf{gcc} dans sa version 4.8.2 ou plus.
+
+ \section{Fonctionnement de la chaine de compilation}
+  Le frontend de kawac se nomme kawap (pour kawa bytecode production) qui utilise la technologie \textbf{LLVM} afin de produit du bytecode. Le compilateur en lui même se nomme \textbf{kawac} et encapsule le frontend ainsi que le backend. Voici comment se déroule la compilation d'un exécutable avec la commande:\\
+  \begin{minted}[bgcolor=bg-gray]{bash}
+    :$ kawac -m filessources
+  \end{minted}
+
+  \begin{enumerate}
+    \item kawap -m filessources $\rightarrow$ produit du bytecode dans un fichier .ll
+    \item llc $\rightarrow$ qui produit du code assembleur à partir du bytecode
+    \item gcc $\rightarrow$ qui crée le fichier exécutable à partir de l'assembleur
+  \end{enumerate}
+
+  L'exécutable \textbf{kawac} est un script bash qui explicite cette chaîne de compilation et vérifie les dépedances automatiquement.
+\end{document}

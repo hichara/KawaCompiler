@@ -39,7 +39,7 @@ public:
 	/**
 	*
 	*/
-	static Value* createAffectation(Value *target, Value *val, BasicBlock *b);
+	static Value* createAffectation(Module *module, std::string staticClassName, Value *target, Value *val, BasicBlock *b);
 
 	/**
 	* 
@@ -59,7 +59,7 @@ public:
 	/**
 	*
 	*/
-	static Value* createGetPointerAt(Value *target, std::vector<Value*> v;, BasicBlock *b);
+	static Value* createGetPointerAt(Value *target, std::vector<Value*> v, BasicBlock *b);
 
 	/**
 	* Cree un retour de valeur.
@@ -67,7 +67,7 @@ public:
 	* si type != null, v == null, return null
 	* si type != null, v != null, return (type)v 
 	*/
-	static ReturnInst* createReturn(BasicBlock *b, Type* type = null, Value *v = null);
+	static ReturnInst* createReturn(BasicBlock *b, Type* type, Value *v);
 };
 
 

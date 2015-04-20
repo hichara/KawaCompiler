@@ -12,13 +12,6 @@ StructType* TypeGenerator::createClassType(Module *module,
 					std::vector<Type*> list_types, 
 					std::vector<bool> isStatic) {
 
-	if(isStatic.size() == 0)
-		return NULL;
-
-	if(isStatic.size() != list_types.size() ||
-	   isStatic.size() != att_names.size())
-		return NULL;
-
     StructType *maClass = (StructType*)strToLLVMType(module, className);
 
 	if(!maClass->isOpaque())
@@ -27,7 +20,6 @@ StructType* TypeGenerator::createClassType(Module *module,
 	std::string name_struct =
 		 NameBuilder::buildClassStructTypeName(className);
 
-
 	std::vector<Type*> llvm_types;
 	std::string attName, indexName;
 	Type *t;
@@ -35,7 +27,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 	int indexAtt = 0;
 
 	for(int i = 0; i < list_types.size(); i++) {
-		
+				
 		t = list_types[i];
 
 		if(t->isStructTy()){
@@ -52,7 +44,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 		} else {
 
 			GlobalVariableGenerator::getOrCreateStaticAttribut(
-				module, className, att_names[i], t);
+				module, className, att_names[i], list_types[i]);
 		}
 	}
 

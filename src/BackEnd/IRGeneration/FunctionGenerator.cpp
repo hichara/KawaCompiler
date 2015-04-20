@@ -9,7 +9,7 @@
 
 
 
-BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name, bool addThis = true) {
+BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name, bool addThis) {
 
   BasicBlock *b = BasicBlock::Create(f->getContext(), "entry", f);  
   IRBuilder<> builder(f->getContext());
@@ -17,7 +17,7 @@ BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string
 
   std::vector<std::string> real_args(args_name);
 
-  if(!addThis) {
+  if(addThis) {
 	  real_args.insert(real_args.begin(), "this");  	
   }
 
@@ -229,20 +229,20 @@ Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string
 
   f = Function::Create(ft, GlobalValue::ExternalLinkage ,"main", module);
 
-  initFunction(f, args_names); 
+  initFunction(f, args_names, false); 
 
   return f;
 }
 
 
 Function* FunctionGenerator::getOrCreatePutsFunction(Module *module) {
-  
   Function *f = module->getFunction("puts");
 
   if(f != NULL)
   	return f;
 
   LLVMContext &context = module->getContext();
+
 
   std::vector<Type *> type_args;
   type_args.push_back(
@@ -576,6 +576,12 @@ Function* FunctionGenerator::createAdHocTableFunction(Module *module,
 
 	// A completer
 	Value *v = GlobalVariableGenerator::getAdHocTable(module, nameStatic, nameDyn);
+
+	if(v == NULL) {
+		std::stringstream err;
+		err << "AdHoc Table for static : " << nameStatic << " and dynamique " << nameDyn << " not defined";
+		KawaUtilitary::stopGenerationIR(err.str());
+	}
 
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);

@@ -77,7 +77,7 @@ public:
 
 	static Function *getOrCreateCallocFunction(Module *module);
 
-	static BasicBlock *initFunction(Function *f, std::vector<std::string> args_names, bool isStatic);
+	static BasicBlock *initFunction(Function *f, std::vector<std::string> args_names, bool addThis);
 
 	static void setFunctionBody(Function *f,
 						std::vector<BasicBlock*> list_block);

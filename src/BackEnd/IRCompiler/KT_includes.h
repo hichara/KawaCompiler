@@ -1,9 +1,9 @@
-#ifndef KT_INC
-#define KT_INC
+#ifndef IR_KT_INC
+#define IR_KT_INC
 
 
-#include "KT_Includes.h"
-
+#include "../../implementation_KawaTree/KT_Program.h"
+#include "../../implementation_KawaTree/headers.h"
 
 
 #endif

@@ -35,18 +35,25 @@ using namespace llvm;
 
 
 int main() {
+
   InitializeNativeTarget();
   LLVMContext &Context = getGlobalContext();
   IRBuilder<> Builder(getGlobalContext());
 
   Module *myModule = new Module("Module Test", Context);
-  
+
   Function *f2 = FunctionGenerator::getOrCreatePutsFunction(myModule);
+
   Function *f3 = FunctionGenerator::getOrCreateStrlenFunction(myModule);
+
   Function *f4 = FunctionGenerator::getOrCreateStrcatFunction(myModule);
+
   Function *f5 = FunctionGenerator::getOrCreateIntToStrFunction(myModule);
+
   Function *f6 = FunctionGenerator::getOrCreateDoubleToStrFunction(myModule);
+
   Function *f7 = FunctionGenerator::getOrCreateMainFunction(myModule, "argc", "argv");
+
   Function *f8 = FunctionGenerator::getOrCreateCharToStrFunction(myModule);
 
   std::vector<std::string> types;
@@ -85,6 +92,7 @@ int main() {
             TypeGenerator::strToLLVMType(myModule, types), 
             isstatic);
 
+
     GlobalVariable *gv;
 
     gv = new GlobalVariable (*myModule, 
@@ -103,6 +111,7 @@ int main() {
     std::vector<Value*> empty_v;
     std::vector<std::string> empty_s;
 
+
     FunctionType *ftAff = FunctionType::get(Type::getVoidTy(Context), empty, false);
     Function *afficheOk = Function::Create(ftAff, Function::ExternalLinkage, "afficheOk", myModule);
     BasicBlock* b = BasicBlock::Create(Context, "entry", afficheOk);
@@ -110,6 +119,8 @@ int main() {
     Value *str = PrimitiveCreator::create(s, b);
     CallInst::Create(f2, str, "",b);
     Value *v = ReturnInst::Create(Context, NULL, b);
+
+
 
     Constant *indexA = ConstantInt::get(Type::getInt32Ty(Context), 3);
 
@@ -126,7 +137,8 @@ int main() {
 
    fncs.push_back(f5);
 
-    Value* loadedMethod;
+
+//    Value* loadedMethod;
 
     Value* table = GlobalVariableGenerator::createAdHocTable(myModule,
             "class_A", 
@@ -144,7 +156,7 @@ int main() {
 
       std::string conName = NameBuilder::buildConstructorName("class_A", empty_s);
 
-      Value* instance = CallGenerator::createStaticMethodeCall(myModule, conName,
+     Value* instance = CallGenerator::createStaticMethodeCall(myModule, conName,
                   empty_v, &b3);
 
 
@@ -153,16 +165,14 @@ int main() {
 
 
 //    CallGenerator::createCallFromTable(myModule, afficheOk,
-//       table,  indexA, empty_v, &b3);
+  //     table,  indexA, empty_v, &b3);
 
 
 //    CallInst::Create(loadedMethod, empty_v ,"", &b3);
-    
+   
 
     Constant *zero = ConstantInt::get(Type::getInt32Ty(Context), 0);
     v = ReturnInst::Create(Context, zero, &b3);
-
-
 
 
 /*

@@ -11,7 +11,6 @@ Value* CallGenerator::createMethodeCall(Module *module, Function *staticRep, Val
 	return CallGenerator::createMethodeCall(module, staticRep, instance, args, ind, bb);
 }
 
-
 Value* CallGenerator::createMethodeCall(Module *module, Function *f, Value *instance,
 					 std::vector<Value*> args, Value *index, BasicBlock *bb) {
 
@@ -19,24 +18,43 @@ Value* CallGenerator::createMethodeCall(Module *module, Function *f, Value *inst
 	IRBuilder<> builder(context);
 	builder.SetInsertPoint(bb);
 
-	std::vector<Value *> casted;
-
-	std::vector<Value *> indexes;
+	std::vector<Value *> indexes, casted;
 
 	indexes.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
 	indexes.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));		
-    indexes.push_back(index);
 
-	Type *cast_t = f->getType()->getPointerTo()->getPointerTo();
-
-	Value *v1 = builder.CreateBitCast(instance, cast_t);
-	Value *v2 = builder.CreateGEP(v1, indexes);
-	Value *v3 = builder.CreateLoad(v2);
-
-	args.insert(args.begin(), instance);
+	Value *adr_table = builder.CreateGEP(instance, indexes);
+	Value *table = builder.CreateLoad(adr_table);
 
 	unsigned Idx = 0, size = args.size();
 
+	for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
+	       ++AI, ++Idx) {
+		Value *c = builder.CreateBitCast(args[Idx], AI->getType());
+		casted.push_back(c);
+	}
+
+    return createCallFromTable(module, f, table,  index, casted, bb);
+}
+
+Value* CallGenerator::createCallFromTable(Module *module, Function *f, Value *table, 
+	Value* index, std::vector<Value*> args, BasicBlock *bb) {
+	LLVMContext &context = module->getContext();
+	IRBuilder<> builder(context);
+	builder.SetInsertPoint(bb);
+
+	Type *cast_t = f->getType()->getPointerTo();
+
+	std::vector<Value *> indexes, casted;
+
+	Value *v1 = builder.CreateBitCast(table, cast_t);
+
+	indexes.push_back(index);
+	Value *v3 = builder.CreateGEP(v1, indexes);
+
+	Value *v4 = builder.CreateLoad(v3);
+
+	unsigned Idx = 0, size = args.size();
 
 	for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
 	       ++AI, ++Idx) {
@@ -45,8 +63,9 @@ Value* CallGenerator::createMethodeCall(Module *module, Function *f, Value *inst
 		casted.push_back(c);
 	}
 
-	return CallInst::Create(v3, args, "",bb);
+	return CallInst::Create(v4, args, "",bb);	
 }
+
 
 
 // Cree un appel statique
@@ -78,9 +97,7 @@ Value* CallGenerator::createStaticMethodeCall(Module *module, std::string funcNa
 // str doit etre de type i8*
 Value* CallGenerator::createPrintCall(Module *module, Value *str, BasicBlock *bb) {
 
-  Value *v = PrimitiveValueConverter::convertToStr(
-   		Type::getInt8Ty(module->getContext())->getPointerTo(), str,
-   		 bb);	
+  Value *v = PrimitiveValueConverter::convertToStr(str, bb);	
 
   Function *f = FunctionGenerator::getOrCreatePutsFunction(module);
 

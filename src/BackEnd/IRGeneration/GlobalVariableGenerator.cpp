@@ -21,7 +21,7 @@ Value* GlobalVariableGenerator::getOrCreateStaticAttribut(
 		return NULL;
 
 	GlobalVariable *gv = new GlobalVariable(*module,
-	 		type, false, GlobalValue::CommonLinkage, 
+	 		type, false, GlobalValue::ExternalLinkage , 
 	 		0, varN);
 
 	return gv;
@@ -36,8 +36,10 @@ Value* GlobalVariableGenerator::createIndexOfMember(Module *module, std::string 
 	Constant *c = ConstantInt::get(t ,index);
 
 	GlobalVariable *gv = new GlobalVariable(*module,
-	 		t, false, GlobalValue::CommonLinkage, 
+	 		t, false, GlobalValue::ExternalLinkage   , 
 	 		c, name);
+
+//	gv->getType()->dump();
 
 	return gv;
 }
@@ -48,11 +50,6 @@ Value* GlobalVariableGenerator::getIndexOfMember(Module *module, std::string nam
 	LLVMContext &c = module->getContext();
 	Type *t;
 	GlobalVariable *g = module->getGlobalVariable(name);
-
-	t = Type::getInt32Ty(c)->getPointerTo();
-
-	if(g->getType() != t)
-		KawaUtilitary::stopGenerationIR(ERROR_UNKNOW_INDEX);
 
 	Value *v = new LoadInst(g);
 
@@ -90,10 +87,11 @@ Value* GlobalVariableGenerator::createAdHocTable(Module *module,
 		*module,
 		arty,
 		true,
-		GlobalValue::CommonLinkage,
+		GlobalValue::ExternalLinkage,
 		gtable,
 		tableName);
 
+	
 	
 
 	return table;

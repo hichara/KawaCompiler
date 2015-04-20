@@ -99,6 +99,7 @@ Value* PrimitiveValueConverter::convertToStr(Value *o1, BasicBlock *bb) {
 	IRBuilder<> b(context);
 	b.SetInsertPoint(bb);
 
+/*
 	Type *type = o1->getType();
 
 	if(type == Type::getInt32Ty(context))
@@ -112,8 +113,9 @@ Value* PrimitiveValueConverter::convertToStr(Value *o1, BasicBlock *bb) {
 
 	if(type == Type::getDoubleTy(context))
 		return PrimitiveValueConverter::convertDoubleToStr(o1, bb);
-
-	return PrimitiveCreator::create("[unknown]", context);
+*/
+	std::string s = "[object]";
+	return PrimitiveCreator::create(s, bb);
 }
 
 

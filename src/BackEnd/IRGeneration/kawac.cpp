@@ -26,6 +26,9 @@
 #include "FunctionGenerator.h"
 #include "TypeGenerator.h"
 #include "GlobalVariableGenerator.h"
+#include "PrimitiveCreator.h"
+#include "CallGenerator.h"
+#include "NameBuilder.h"
 
 using namespace llvm;
 
@@ -94,16 +97,72 @@ int main() {
 
     std::vector<Function *> fncs;
 
-    fncs.push_back(f2);
-    fncs.push_back(f3);
-    fncs.push_back(f4);
-    fncs.push_back(f5);
 
+    BasicBlock &b3 = f7->getEntryBlock();
+    std::vector<Type*> empty;
+    std::vector<Value*> empty_v;
+    std::vector<std::string> empty_s;
 
-    GlobalVariableGenerator::createAdHocTable(myModule,
+    FunctionType *ftAff = FunctionType::get(Type::getVoidTy(Context), empty, false);
+    Function *afficheOk = Function::Create(ftAff, Function::ExternalLinkage, "afficheOk", myModule);
+    BasicBlock* b = BasicBlock::Create(Context, "entry", afficheOk);
+    std::string s = "afficheOk";
+    Value *str = PrimitiveCreator::create(s, b);
+    CallInst::Create(f2, str, "",b);
+    Value *v = ReturnInst::Create(Context, NULL, b);
+
+    Constant *indexA = ConstantInt::get(Type::getInt32Ty(Context), 3);
+
+//    fncs.push_back(f2);
+//    fncs.push_back(f3);
+//    fncs.push_back(f4);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+    fncs.push_back(afficheOk);
+
+   fncs.push_back(f5);
+
+    Value* loadedMethod;
+
+    Value* table = GlobalVariableGenerator::createAdHocTable(myModule,
             "class_A", 
-            "class_B",
+            "class_A",
             fncs);
+
+    FunctionGenerator::createAdHocTableFunction(myModule, "class_A", "class_A");
+
+    Function *f = FunctionGenerator::getOrCreateConstructor(myModule,
+                "class_A",
+                empty_s,                  
+                empty_s);
+      b =  FunctionGenerator::initFunction(f, empty_s, false);
+      ReturnInst::Create(Context, NULL, b);
+
+      std::string conName = NameBuilder::buildConstructorName("class_A", empty_s);
+
+      Value* instance = CallGenerator::createStaticMethodeCall(myModule, conName,
+                  empty_v, &b3);
+
+
+     CallGenerator::createMethodeCall(myModule, afficheOk, instance,
+                      empty_v, indexA, &b3);
+
+
+//    CallGenerator::createCallFromTable(myModule, afficheOk,
+//       table,  indexA, empty_v, &b3);
+
+
+//    CallInst::Create(loadedMethod, empty_v ,"", &b3);
+    
+
+    Constant *zero = ConstantInt::get(Type::getInt32Ty(Context), 0);
+    v = ReturnInst::Create(Context, zero, &b3);
+
+
 
 
 /*
@@ -169,7 +228,7 @@ int main() {
 
   myModule->dump();
 
-  std::cout << Type::getInt8Ty(Context)->isStructTy() << " is struct\n";
+//  std::cout << Type::getInt8Ty(Context)->isStructTy() << " is struct\n";
 
   return 0;
 }

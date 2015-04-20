@@ -38,13 +38,33 @@ Value* BasicInstructionGenerator::createAllocOfArray(Type *type, BasicBlock *b) 
 	return builder.CreateLoad(v, "");
 }
 
-Value* BasicInstructionGenerator::createAffectation(Value *target, Value *val, BasicBlock *b) {
+Value* BasicInstructionGenerator::createAffectation(Module *module, std::string staticClassName, Value *target, Value *val, BasicBlock *b) {
 	IRBuilder<> builder;
 	builder.setInsertPoint(b);
 
-	Value *v = b.CreateBitCast(val, target->getType()->getPointerELementType());
+	std::vector<Value*> indexI;
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0);
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0);
+	Value *v1 = builder.CreateGEP(val, indexI);
+	Value *data = builder.CreateLoad(v);
 
-	return builder.StoreInst(v, target);
+	std::vector<Value*> indexII;
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0);
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 1);
+	Value *v2 = builder.CreateGEP(val, indexI);
+	Value *table = builder.CreateLoad(v);
+
+	std::string varName = NameBuilder::buidClassAdHocTableIndex(className);
+	Value *adHocIndex = GlobalVariableGenerator::getIndexOfMember(module, varName);
+
+	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
+	Function *fs = FunctionGenerator::getFunction();
+	Value* newTable = CallGenerator::createMethodeCall(module, fs, val,
+					 empty, adHocIndex, b);
+
+	builder.CreateStore(newTable, table);
+
+	return target;
 }
 
 

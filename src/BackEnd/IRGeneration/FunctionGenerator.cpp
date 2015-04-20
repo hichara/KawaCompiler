@@ -5,28 +5,36 @@
 #include "TypeGenerator.h"
 #include "KawaUtilitary.h"
 #include "KawaEnumeration.h"
+#include "GlobalVariableGenerator.h"
 
 
-void FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name) {
+
+BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name, bool addThis = true) {
 
   BasicBlock *b = BasicBlock::Create(f->getContext(), "entry", f);  
   IRBuilder<> builder(f->getContext());
   builder.SetInsertPoint(b);
 
-  if(args_name.size() == 0)
-  	return;
+  std::vector<std::string> real_args(args_name);
+
+  if(!addThis) {
+	  real_args.insert(real_args.begin(), "this");  	
+  }
 
   unsigned Idx = 0;
-  int size = args_name.size(); 
+  int size = real_args.size(); 
 
   for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
        ++AI, ++Idx) {
-  	Value *v = builder.CreateAlloca(AI->getType(), AI, args_name[Idx]);
+  	Value *v = builder.CreateAlloca(AI->getType(), NULL, real_args[Idx]);
   	builder.CreateStore(AI, v);
   }
+  
+  return b;
 }
 
-Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
+
+Function* FunctionGenerator::getOrCreateFunction(Module *module, bool isStatic,
 									std::string className,
 									std::string name,
 									std::string ret_type, 
@@ -43,83 +51,30 @@ Function* FunctionGenerator::createFunction(Module *module, bool isStatic,
 	if(args_types.size() != args_names.size())
 		KawaUtilitary::stopGenerationIR(ERROR_ILLEGAL_NUMBER_OF_ARGS);
 		
-
 	std::string functionName =
 			NameBuilder::buildFunctionName(className, name, ret_type, args_types, isStatic);
 
 	Function *f = FunctionGenerator::getFunction(module, functionName);
 
 	if(f != NULL)
-		KawaUtilitary::stopGenerationIR(ERROR_FUNCTION_ALREADY_EXIST);
+		return f;
+
 
 	Type *r_type = TypeGenerator::strToLLVMType(module, ret_type);
-
-	//Pointeur sur l'objet effectuant l'appel de la fonction
 
 	std::vector<Type*> list_type;
 
 	if(isStatic) {
 		Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
 		list_type.push_back(c_type);
-		args_names.insert(args_names.begin(), "this");
 	}
 
 	for(int i = 0; i < args_types.size(); i++) {
-		list_type.push_back(
-			TypeGenerator::strToLLVMType(module, args_types[i]));
-	}
-
-	FunctionType *ftype = FunctionType::get(r_type, list_type, false);
-
-	f = Function::Create(ftype, Function::ExternalLinkage, functionName, module);
-
-	FunctionGenerator::initFunction(f, args_names);
-
-	return f;
-}
-
-
-Function* FunctionGenerator::createPrototype(Module *module, bool isStatic,
-									std::string className,
-									std::string name,
-									std::string ret_type, 
-									std::vector<std::string> args_types,
-									std::vector<std::string> args_names) {
-
-	if(className == "")
-		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
-
-	if(name == "")
-		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
-
-
-	if(args_types.size() != args_names.size())
-		KawaUtilitary::stopGenerationIR(ERROR_ILLEGAL_NUMBER_OF_ARGS);
-		
-
-	std::string functionName =
-			NameBuilder::buildFunctionName(className, name, ret_type, args_types, isStatic);
-
-	Function *f = FunctionGenerator::getFunction(module, functionName);
-
-	if(f != NULL)
-		KawaUtilitary::stopGenerationIR(ERROR_FUNCTION_ALREADY_EXIST);
-
-	Type *r_type = TypeGenerator::strToLLVMType(module, ret_type);
-
-	//Pointeur sur l'objet effectuant l'appel de la fonction
-
-	std::vector<Type*> list_type;
-
-	if(isStatic) {
-		Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
-		list_type.push_back(c_type);
-		args_names.insert(args_names.begin(), "this");
-	}
-
-	for(int i = 0; i < args_types.size(); i++) {
-		list_type.push_back(
-			TypeGenerator::strToLLVMType(module, args_types[i]));
+		Type *ty = TypeGenerator::strToLLVMType(module, args_types[i]);
+		if(ty->isStructTy()) {
+			ty = ty->getPointerTo();
+		}
+		list_type.push_back(ty);
 	}
 
 	FunctionType *ftype = FunctionType::get(r_type, list_type, false);
@@ -129,16 +84,29 @@ Function* FunctionGenerator::createPrototype(Module *module, bool isStatic,
 	return f;
 }
 
+Function* FunctionGenerator::getConstructor(Module *module,
+								std::string className,
+								std::vector<std::string> args_types,									
+								std::vector<std::string> args_names) {
 
-void FunctionGenerator::setFunctionBody(Function *f, std::vector<BasicBlock*> list_block) {
+	std::string consName =
+		NameBuilder::buildConstructorName(className, args_types);
 
-	for(int i = 0; i < list_block.size(); i++) {
-		f->getBasicBlockList().push_back(list_block[i]);
-	}
+	return FunctionGenerator::getFunction(module, consName);			
+}
+
+Function* FunctionGenerator::getSubConstructor(Module *module,
+								std::string className,
+								std::vector<std::string> args_types,									
+								std::vector<std::string> args_names) {
+	std::string subConsName =
+		NameBuilder::buildSubConstructorName(className, args_types);
+
+	return FunctionGenerator::getFunction(module, subConsName);	
 }
 
 
-Function* FunctionGenerator::createConstructor(Module *module,
+Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 								std::string className,
 								std::vector<std::string> args_types,									
 								std::vector<std::string> args_names) {
@@ -155,44 +123,71 @@ Function* FunctionGenerator::createConstructor(Module *module,
 		NameBuilder::buildConstructorName(className, args_types);
 
 	std::string subConsName =
-		NameBuilder::buildConstructorName(className, args_types);
+		NameBuilder::buildSubConstructorName(className, args_types);
 
 	Function *f = 
-		FunctionGenerator::getFunction(module, consName);
+		FunctionGenerator::getFunction(module, subConsName);
+
 
 	// Teste de l'existence du constructeur
 	if(f != NULL)
-		KawaUtilitary::stopGenerationIR(ERROR_FUNCTION_ALREADY_EXIST);
+		return f;
 
 	for(int i = 0; i < args_types.size(); i++) {
-		argtypes.push_back(
-			TypeGenerator::strToLLVMType(module, args_types[i]));
+		Type *ty = TypeGenerator::strToLLVMType(module, args_types[i]);
+		if(ty->isStructTy()) {
+			ty = ty->getPointerTo();
+		}
+		argtypes.push_back(ty);
 	}
+
+	LLVMContext &context = module->getContext();
 	
 	FunctionType *cons_ftype, *sub_cons_ftype;
 	Function *cons_f, *sub_cons_f;
-	std::vector<Type*>::iterator it;
-	Type *voidTy, *c_type;
 
-	LLVMContext &context = module->getContext();
+	Type *classType = TypeGenerator::strToLLVMType(module, className);
+	Type *voidTy = Type::getVoidTy(module->getContext());
 
-	voidTy = Type::getVoidTy(context);
+	cons_ftype = FunctionType::get(classType->getPointerTo(), argtypes, false);
 
-	cons_ftype = FunctionType::get(voidTy, argtypes, false);
-
-	it = argtypes.begin();
-	argtypes.insert(it, c_type->getPointerTo());
-
-	sub_cons_ftype = FunctionType::get(c_type, argtypes, false);
+	argtypes.insert(argtypes.begin() ,classType->getPointerTo());
+	sub_cons_ftype = FunctionType::get(voidTy, argtypes, false);
 
 	cons_f = Function::Create(cons_ftype, Function::ExternalLinkage, consName, module);
 	sub_cons_f = Function::Create(sub_cons_ftype, Function::ExternalLinkage, subConsName, module);
 
-	BasicBlock::Create(module->getContext(), "entry", sub_cons_f);
+	// Creation du corps du constructeur
 
-	FunctionGenerator::initFunction(sub_cons_f, args_names);
+	BasicBlock *b = BasicBlock::Create(context, "entry", cons_f);
+	IRBuilder<> builder(context);
+	builder.SetInsertPoint(b);
 
-	// Cree le corps de la fin fonction renvoyant le constructeur
+
+	//Instanciation du nouvel objet
+	Value *instance = builder.CreateAlloca(classType, NULL, "this");
+	Function* fadH = FunctionGenerator::getAdHocTableFunction(module, className, className);
+	std::vector<Value*> indx, empty;
+
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));
+
+	Value *table = builder.CreateCall(fadH, empty, "");
+	Value *adHoc = builder.CreateGEP(instance, indx);
+	builder.CreateStore(table, adHoc);
+	//insertion de la table adHoc a faire
+
+	//Appel de la fonction d'initiallisation
+	std::vector<Value*> callargs;
+	callargs.push_back(instance);
+
+	for(Function::arg_iterator AI = cons_f->arg_begin(); AI != cons_f->arg_end(); ++AI) {
+		callargs.push_back(AI);
+    }
+
+	builder.CreateCall(sub_cons_f, callargs);
+
+	builder.CreateRet(instance);
 
 	return sub_cons_f;	
 }
@@ -200,6 +195,10 @@ Function* FunctionGenerator::createConstructor(Module *module,
 Function* FunctionGenerator::getFunction(Module *module, std::string name) {
 	return module->getFunction(name);
 }
+
+/*--------------------------------------------------------------------
+ *--------------------------------------------------------------------
+ */
 
 Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string aC, std::string aV) {
   Function *f = module->getFunction("main");
@@ -234,6 +233,7 @@ Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string
 
   return f;
 }
+
 
 Function* FunctionGenerator::getOrCreatePutsFunction(Module *module) {
   
@@ -540,6 +540,47 @@ Function* FunctionGenerator::getOrCreateCharToStrFunction(Module *module) {
 	builder.CreateCall3(spf, space, format, arg);
 
 	builder.CreateRet(space);
+
+	return f;
+}
+
+
+
+Function* FunctionGenerator::getAdHocTableFunction(Module *module, 
+			std::string nameStatic, std::string nameDyn) {
+
+	std::string name = NameBuilder::buildgetAdHocTableFunction(nameStatic, nameDyn);
+
+	Function *f = FunctionGenerator::getFunction(module, name);
+
+	if(f != NULL)
+		return f;
+
+	Type* i8 = Type::getInt8Ty(module->getContext());
+	std::vector<Type*> empty;
+	FunctionType *ft = FunctionType::get(i8->getPointerTo()->getPointerTo(), empty, false);
+	f = Function::Create(ft, GlobalValue::ExternalLinkage, name, module);
+
+	return f;
+}
+
+
+Function* FunctionGenerator::createAdHocTableFunction(Module *module, 
+			std::string nameStatic, std::string nameDyn) {
+
+	Function *f = FunctionGenerator::getAdHocTableFunction(module, nameStatic, nameDyn);
+
+//	f->deleteBody();
+
+	BasicBlock * b = BasicBlock::Create(module->getContext(), "entry", f);
+
+	// A completer
+	Value *v = GlobalVariableGenerator::getAdHocTable(module, nameStatic, nameDyn);
+
+	IRBuilder<> builder(module->getContext());
+	builder.SetInsertPoint(b);
+	Value* ret = builder.CreateBitCast(v, Type::getInt8Ty(module->getContext())->getPointerTo()->getPointerTo());
+	builder.CreateRet(ret);
 
 	return f;
 }

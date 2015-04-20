@@ -23,9 +23,8 @@ public:
 	static Value* create(bool b, LLVMContext &context);	
 	static Value* create(float f, LLVMContext &context);
 	static Value* create(double d, LLVMContext &context);
-	static Value* create(std::string str, LLVMContext &context);
+	static Value* create(std::string str, BasicBlock *b);
 	static Value* create(Type *t, std::vector<Value*> size);
-
 };
 
 #endif

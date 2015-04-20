@@ -38,7 +38,7 @@
 #define	METHODE_INDEX_PREFIX "methode_index_"
 #define CONSTRUCTOR_PREFIX "KawaConstructor_"
 #define SUB_CONSTRUCTOR_PREFIX "SubConstructor_"
-#define	ADHOCTABLE_PREFIX "adhocTable_index_"
+#define	ADHOCTABLE_PREFIX "adhocTable_"
 
 #define	KAWA_CLASS_PREFIX "KawaClass_"
 #define	KAWA_CLASS_STRUCT_PREFIX "KawaClass_Struct_"

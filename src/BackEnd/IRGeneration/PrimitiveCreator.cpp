@@ -24,8 +24,11 @@ Value* PrimitiveCreator::create(float f, LLVMContext &context) {
 }
 
 // Cree une string
-Value* PrimitiveCreator::create(std::string str, LLVMContext &context) {
-	return ConstantDataArray::getString(context, str, true);
+Value* PrimitiveCreator::create(std::string s, BasicBlock *bb) {
+	IRBuilder<> builder(bb->getContext());
+	builder.SetInsertPoint(bb);
+
+  return builder.CreateGlobalStringPtr(s, "");
 }
 
 // Cree un boolean

@@ -51,11 +51,6 @@ Value* GlobalVariableGenerator::getIndexOfMember(Module *module, std::string nam
 	Type *t;
 	GlobalVariable *g = module->getGlobalVariable(name);
 
-	t = Type::getInt32Ty(c)->getPointerTo();
-
-	if(g->getType() != t)
-		KawaUtilitary::stopGenerationIR(ERROR_UNKNOW_INDEX);
-
 	Value *v = new LoadInst(g);
 
 	return v;	

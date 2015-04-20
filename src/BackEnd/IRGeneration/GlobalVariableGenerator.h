@@ -32,7 +32,6 @@ static Value* createIndexOfMember(Module *module,
 // Retourne un objet value contenant un entier
 static Value* getIndexOfMember(Module *module, std::string name);
 
-
 // Creee une table AdHoc
 // Effet de bord ajoute une fonction renvoyant vers cette table a la fin.
 // A completer

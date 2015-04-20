@@ -50,11 +50,9 @@ StructType* TypeGenerator::createClassType(Module *module,
 			GlobalVariableGenerator::createIndexOfMember(module, indexName, indexAtt);
 			indexAtt++;
 		} else {
-			attName = NameBuilder::buildStaticVariableName(
-				className, att_names[i]);
 
 			GlobalVariableGenerator::getOrCreateStaticAttribut(
-				module, className, attName, t);
+				module, className, att_names[i], t);
 		}
 	}
 

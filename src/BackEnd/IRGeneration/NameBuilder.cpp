@@ -41,6 +41,15 @@ std::string NameBuilder::buildFunctionName(std::string className,
 }
 
 
+std::string buidClassAdHocTableIndex(std::string className) {
+	std::stringstream res;
+
+	res << className << "_adHoc_index";
+
+	return res.str();	
+}
+
+
 std::string NameBuilder::buildConstructorName(std::string className, 
 							     std::vector<std::string> list_type) {
 

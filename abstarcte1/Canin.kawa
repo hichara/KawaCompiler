@@ -1,0 +1,6 @@
+
+	public abstract class Canin extends Animal {
+		  void deplacement() {
+		    printString("Je me déplace en meute !");
+		  }
+		}

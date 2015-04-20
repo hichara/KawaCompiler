@@ -42,7 +42,7 @@ void KT_SwitchBlockStatement::setCaseExist( bool var) {
 /**
  * @param KT_Block *
  */
-void KT_SwitchBlockStatement::setBlick(KT_Block* var) {
+void KT_SwitchBlockStatement::setBlock(KT_Block* var) {
 	block = var;
 }
 

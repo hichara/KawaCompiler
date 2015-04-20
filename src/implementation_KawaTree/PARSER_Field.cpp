@@ -40,3 +40,30 @@ vector<KT_Variable*> PARSER_Field::getVariables() {
 void PARSER_Field::setVariables(vector<KT_Variable*>& var) {
 	variables = var;
 }
+
+/**
+ * @param KT_Variable*
+ */
+void PARSER_Field::AddVariableAtFirstPosition(KT_Variable* var) {
+	  std::vector<KT_Variable*>::iterator it;
+ 	  it = variables.begin();
+  	  it = variables.insert ( it , var );
+}
+
+/**
+ * @param vector<KT_Variable*>
+ */
+void PARSER_Field::addVectorVariable(vector<KT_Variable*>& var){
+	for (vector<KT_Variable*>::iterator it = var.begin(); it != var.end(); ++it){
+		variables.push_back(*it);
+	}
+}
+
+/**
+ * @param KT_Type *
+ */
+void PARSER_Field::setFinal(bool var){
+	for(vector<KT_Variable*>::iterator it = variables.begin(); it != variables.end();++it){
+		(*it)->setFinal(var);
+	}
+}

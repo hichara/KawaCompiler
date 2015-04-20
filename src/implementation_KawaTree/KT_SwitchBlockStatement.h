@@ -31,7 +31,7 @@ public:
     /**
      * @param KT_Block *
      */
-    void setBlick(KT_Block* var);
+    void setBlock(KT_Block* var);
     
     /**
      * @param KT_Expression *

@@ -13,6 +13,7 @@ using namespace std;
  * KT_ArrayInitilizer implementation
  */
 
+KT_ArrayInitilizer::KT_ArrayInitilizer(){}
 
 /**
  * @return KT_IndexedArray *

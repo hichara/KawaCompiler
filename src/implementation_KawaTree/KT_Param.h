@@ -9,6 +9,7 @@
 #include "KT_Modifier.h"
 #include <iostream>
 #include "KT_Type.h"
+#include "KT_Variable.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -24,6 +25,8 @@ public:
     KT_Type* getParamType();
 
     KT_Modifier* getParamModifier();
+
+    KT_Variable* toVariable();
     
     /**
      * @param string *

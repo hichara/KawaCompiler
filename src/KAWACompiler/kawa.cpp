@@ -202,7 +202,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 96 "kawa.y" /* yacc.c:355  */
+#line 100 "kawa.y" /* yacc.c:355  */
 
 	bool vbool;
 	int vint;
@@ -301,8 +301,10 @@ union YYSTYPE
 	vector<PARSER_MemberDec*>* vectorPARSER_MemberDec;
 	vector<KT_Statement*>* vectorKT_Statement;
 	vector<KT_FactFinal*>* vectorKT_FactFinal;
+	vector<KT_SwitchBlockStatement*>* vectorKT_SwitchBlockStatement;
+	vector<KT_IDExpression*>* vectorKT_IDExpression;
 
-#line 306 "kawa.cpp" /* yacc.c:355  */
+#line 308 "kawa.cpp" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -317,7 +319,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 321 "kawa.cpp" /* yacc.c:358  */
+#line 323 "kawa.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -622,29 +624,29 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   216,   216,   217,   218,   221,   225,   226,   229,   230,
-     233,   236,   237,   240,   241,   244,   245,   248,   249,   250,
-     251,   252,   253,   254,   255,   256,   260,   261,   262,   263,
-     264,   265,   268,   269,   272,   273,   276,   277,   278,   282,
-     283,   286,   287,   291,   292,   296,   297,   302,   305,   309,
-     310,   311,   314,   315,   316,   317,   321,   323,   324,   327,
-     328,   333,   334,   337,   340,   341,   345,   346,   349,   352,
-     353,   355,   356,   359,   362,   363,   366,   367,   370,   371,
-     374,   375,   378,   382,   385,   386,   389,   390,   391,   392,
-     393,   394,   395,   396,   397,   398,   399,   400,   401,   402,
-     403,   404,   407,   409,   410,   412,   413,   416,   418,   419,
-     420,   423,   425,   426,   427,   430,   432,   433,   434,   437,
-     438,   439,   440,   441,   442,   443,   444,   445,   446,   447,
-     448,   449,   453,   454,   457,   458,   462,   463,   464,   465,
-     466,   467,   468,   469,   472,   473,   474,   475,   479,   480,
-     483,   484,   485,   490,   493,   494,   495,   499,   500,   501,
-     502,   503,   504,   507,   508,   511,   512,   515,   516,   519,
-     520,   523,   524,   527,   528,   529,   532,   533,   534,   535,
-     536,   539,   540,   541,   542,   545,   546,   547,   550,   551,
-     552,   553,   556,   557,   558,   559,   560,   561,   562,   563,
-     564,   567,   568,   569,   570,   571,   572,   573,   574,   575,
-     576,   579,   582,   585,   587,   590,   591,   592,   593,   596,
-     597,   598
+       0,   222,   222,   223,   224,   227,   231,   232,   235,   236,
+     239,   242,   243,   246,   247,   250,   251,   254,   255,   256,
+     257,   258,   259,   260,   261,   262,   266,   267,   268,   269,
+     270,   271,   274,   275,   278,   279,   282,   283,   284,   288,
+     289,   292,   293,   297,   298,   302,   303,   308,   311,   315,
+     316,   317,   320,   321,   322,   323,   327,   329,   330,   333,
+     334,   339,   340,   343,   346,   347,   351,   352,   355,   358,
+     359,   361,   362,   365,   368,   369,   372,   373,   376,   377,
+     380,   381,   384,   388,   391,   392,   395,   396,   397,   398,
+     399,   400,   401,   402,   403,   404,   405,   406,   407,   408,
+     409,   410,   413,   415,   416,   418,   419,   422,   424,   425,
+     426,   429,   431,   432,   433,   436,   438,   439,   440,   443,
+     444,   445,   446,   447,   448,   449,   450,   451,   452,   453,
+     454,   455,   459,   460,   463,   464,   468,   469,   470,   471,
+     472,   473,   474,   475,   478,   479,   480,   481,   485,   486,
+     489,   490,   491,   496,   499,   500,   501,   505,   506,   507,
+     508,   509,   510,   513,   514,   517,   518,   521,   522,   525,
+     526,   529,   530,   533,   534,   535,   538,   539,   540,   541,
+     542,   545,   546,   547,   548,   551,   552,   553,   556,   557,
+     558,   559,   562,   563,   564,   565,   566,   567,   568,   569,
+     570,   573,   574,   575,   576,   577,   578,   579,   580,   581,
+     582,   585,   588,   591,   593,   596,   597,   598,   599,   602,
+     603,   604
 };
 #endif
 
@@ -1807,1327 +1809,1327 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 216 "kawa.y" /* yacc.c:1646  */
+#line 222 "kawa.y" /* yacc.c:1646  */
     { (yyval.kt_program)= new KT_Program; (yyvsp[-1].kt_class)->setModifier((yyvsp[-2].kt_modifier)); (yyvsp[-1].kt_class)->setImports(*(yyvsp[-3].vectorVecorString)); (yyval.kt_program)->addPackageWithClass((yyvsp[-4].kt_package), (yyvsp[-1].kt_class));}
-#line 1813 "kawa.cpp" /* yacc.c:1646  */
+#line 1815 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 217 "kawa.y" /* yacc.c:1646  */
+#line 223 "kawa.y" /* yacc.c:1646  */
     { (yyval.kt_program)= new KT_Program; (yyvsp[-1].kt_interface)->setModifier((yyvsp[-2].kt_modifier)); (yyvsp[-1].kt_interface)->setImports(*(yyvsp[-3].vectorVecorString));(yyval.kt_program)->addPackageWithInterface((yyvsp[-4].kt_package), (yyvsp[-1].kt_interface));}
-#line 1819 "kawa.cpp" /* yacc.c:1646  */
+#line 1821 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 218 "kawa.y" /* yacc.c:1646  */
+#line 224 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_program)= new KT_Program;}
-#line 1825 "kawa.cpp" /* yacc.c:1646  */
+#line 1827 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 221 "kawa.y" /* yacc.c:1646  */
+#line 227 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_package)= new KT_Package; (yyval.kt_package)->setName((yyvsp[-1].vstring));}
-#line 1831 "kawa.cpp" /* yacc.c:1646  */
+#line 1833 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 225 "kawa.y" /* yacc.c:1646  */
+#line 231 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[0].vectorString)->push_back((yyvsp[-1].vstring)); (yyval.vectorString)=(yyvsp[0].vectorString);}
-#line 1837 "kawa.cpp" /* yacc.c:1646  */
+#line 1839 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 226 "kawa.y" /* yacc.c:1646  */
+#line 232 "kawa.y" /* yacc.c:1646  */
     {vector<string*>* var; (yyval.vectorString)=var;}
-#line 1843 "kawa.cpp" /* yacc.c:1646  */
+#line 1845 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 229 "kawa.y" /* yacc.c:1646  */
+#line 235 "kawa.y" /* yacc.c:1646  */
     {string* name=(yyvsp[-2].vstring); for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it){ string* n = (*it); listName.push_back(n);} (yyval.vectorString)=&listName;}
-#line 1849 "kawa.cpp" /* yacc.c:1646  */
+#line 1851 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 230 "kawa.y" /* yacc.c:1646  */
+#line 236 "kawa.y" /* yacc.c:1646  */
     {vector<string*>* var; (yyval.vectorString)=var;}
-#line 1855 "kawa.cpp" /* yacc.c:1646  */
+#line 1857 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 233 "kawa.y" /* yacc.c:1646  */
+#line 239 "kawa.y" /* yacc.c:1646  */
     {string* name=(yyvsp[-2].vstring); for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}  vector<string*> listName; listName.push_back(name); for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it){ string* n = (*it); listName.push_back(n);} (yyval.vectorString)=&listName; }
-#line 1861 "kawa.cpp" /* yacc.c:1646  */
+#line 1863 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 236 "kawa.y" /* yacc.c:1646  */
+#line 242 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_type)=new KT_Type; (yyval.kt_type)->setBasicType(true); (yyval.kt_type)->setArray((yyvsp[0].parser_array)); vector<string*> name; name.push_back((yyvsp[-1].vstring)); (yyval.kt_type)->setTypeName(name); }
-#line 1867 "kawa.cpp" /* yacc.c:1646  */
+#line 1869 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 237 "kawa.y" /* yacc.c:1646  */
+#line 243 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_type)=new KT_Type; (yyval.kt_type)->setBasicType(false); (yyval.kt_type)->setArray((yyvsp[0].parser_array)); vector<string*> name; name.push_back((yyvsp[-2].vstring)); for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} (yyval.kt_type)->setTypeName(name);}
-#line 1873 "kawa.cpp" /* yacc.c:1646  */
+#line 1875 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 240 "kawa.y" /* yacc.c:1646  */
+#line 246 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[0].parser_array)->setArray(true); (yyval.parser_array)->setArrayDim((yyval.parser_array)->getArrayDim()+1);}
-#line 1879 "kawa.cpp" /* yacc.c:1646  */
+#line 1881 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 241 "kawa.y" /* yacc.c:1646  */
+#line 247 "kawa.y" /* yacc.c:1646  */
     {(yyval.parser_array)=new PARSER_Array; (yyval.parser_array)->setArray(false); (yyval.parser_array)->setArrayDim(0);}
-#line 1885 "kawa.cpp" /* yacc.c:1646  */
+#line 1887 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 244 "kawa.y" /* yacc.c:1646  */
+#line 250 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[0].kt_indexedArray)->setIndexAddIntAtFirstPosition((yyvsp[-2].vint)); (yyval.kt_indexedArray)=(yyvsp[0].kt_indexedArray);}
-#line 1891 "kawa.cpp" /* yacc.c:1646  */
+#line 1893 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 245 "kawa.y" /* yacc.c:1646  */
+#line 251 "kawa.y" /* yacc.c:1646  */
     {KT_IndexedArray* var; (yyval.kt_indexedArray)=var;}
-#line 1897 "kawa.cpp" /* yacc.c:1646  */
+#line 1899 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 248 "kawa.y" /* yacc.c:1646  */
+#line 254 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1903 "kawa.cpp" /* yacc.c:1646  */
+#line 1905 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 249 "kawa.y" /* yacc.c:1646  */
+#line 255 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1909 "kawa.cpp" /* yacc.c:1646  */
+#line 1911 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 250 "kawa.y" /* yacc.c:1646  */
+#line 256 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1915 "kawa.cpp" /* yacc.c:1646  */
+#line 1917 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 251 "kawa.y" /* yacc.c:1646  */
+#line 257 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1921 "kawa.cpp" /* yacc.c:1646  */
+#line 1923 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 252 "kawa.y" /* yacc.c:1646  */
+#line 258 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1927 "kawa.cpp" /* yacc.c:1646  */
+#line 1929 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 253 "kawa.y" /* yacc.c:1646  */
+#line 259 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1933 "kawa.cpp" /* yacc.c:1646  */
+#line 1935 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 254 "kawa.y" /* yacc.c:1646  */
+#line 260 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1939 "kawa.cpp" /* yacc.c:1646  */
+#line 1941 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 255 "kawa.y" /* yacc.c:1646  */
+#line 261 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1945 "kawa.cpp" /* yacc.c:1646  */
+#line 1947 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 256 "kawa.y" /* yacc.c:1646  */
+#line 262 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=(yyvsp[0].vstring);}
-#line 1951 "kawa.cpp" /* yacc.c:1646  */
+#line 1953 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 260 "kawa.y" /* yacc.c:1646  */
+#line 266 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setVisibility(1);}
-#line 1957 "kawa.cpp" /* yacc.c:1646  */
+#line 1959 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 261 "kawa.y" /* yacc.c:1646  */
+#line 267 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setVisibility(2);}
-#line 1963 "kawa.cpp" /* yacc.c:1646  */
+#line 1965 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 262 "kawa.y" /* yacc.c:1646  */
+#line 268 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setVisibility(3);}
-#line 1969 "kawa.cpp" /* yacc.c:1646  */
+#line 1971 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 263 "kawa.y" /* yacc.c:1646  */
+#line 269 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setStatic(true);}
-#line 1975 "kawa.cpp" /* yacc.c:1646  */
+#line 1977 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 264 "kawa.y" /* yacc.c:1646  */
+#line 270 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setAbstract(true);}
-#line 1981 "kawa.cpp" /* yacc.c:1646  */
+#line 1983 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 265 "kawa.y" /* yacc.c:1646  */
+#line 271 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setFinal(true);}
-#line 1987 "kawa.cpp" /* yacc.c:1646  */
+#line 1989 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 268 "kawa.y" /* yacc.c:1646  */
+#line 274 "kawa.y" /* yacc.c:1646  */
     {if((yyvsp[0].kt_modifier)->isStatic()){(yyvsp[-1].kt_modifier)->setStatic(true);} if((yyvsp[0].kt_modifier)->isAbstract()){(yyvsp[-1].kt_modifier)->setAbstract(true);} if((yyvsp[0].kt_modifier)->isFinal()){(yyvsp[-1].kt_modifier)->setFinal(true);} if((yyvsp[0].kt_modifier)->getVisibility()>0) (yyvsp[-1].kt_modifier)->setVisibility((yyvsp[0].kt_modifier)->getVisibility());}
-#line 1993 "kawa.cpp" /* yacc.c:1646  */
+#line 1995 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 269 "kawa.y" /* yacc.c:1646  */
+#line 275 "kawa.y" /* yacc.c:1646  */
     {KT_Modifier* modifier; (yyval.kt_modifier)=modifier;}
-#line 1999 "kawa.cpp" /* yacc.c:1646  */
+#line 2001 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 272 "kawa.y" /* yacc.c:1646  */
+#line 278 "kawa.y" /* yacc.c:1646  */
     {(yyval.vbool)=true;}
-#line 2005 "kawa.cpp" /* yacc.c:1646  */
+#line 2007 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 273 "kawa.y" /* yacc.c:1646  */
+#line 279 "kawa.y" /* yacc.c:1646  */
     {(yyval.vbool)=false;}
-#line 2011 "kawa.cpp" /* yacc.c:1646  */
+#line 2013 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 276 "kawa.y" /* yacc.c:1646  */
+#line 282 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[-1].vstring)); for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} (yyval.vectorString)=&name;}
-#line 2017 "kawa.cpp" /* yacc.c:1646  */
+#line 2019 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 277 "kawa.y" /* yacc.c:1646  */
+#line 283 "kawa.y" /* yacc.c:1646  */
     {string name="*"; (yyval.vectorString)->push_back(&name);}
-#line 2023 "kawa.cpp" /* yacc.c:1646  */
+#line 2025 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 278 "kawa.y" /* yacc.c:1646  */
+#line 284 "kawa.y" /* yacc.c:1646  */
     {vector<string*>* var; (yyval.vectorString)=var;}
-#line 2029 "kawa.cpp" /* yacc.c:1646  */
+#line 2031 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 282 "kawa.y" /* yacc.c:1646  */
+#line 288 "kawa.y" /* yacc.c:1646  */
     {vector<string*> typeName =(yyvsp[0].kt_type)->getTypeName(); string* name=new string; for (vector<string*>::iterator it = typeName.begin(); it != typeName.end(); ++it){ string* n = (*it); if(it!=typeName.begin()){*name = *name + "." +*n;}else{name=n;}}  (yyval.vstring)=name;}
-#line 2035 "kawa.cpp" /* yacc.c:1646  */
+#line 2037 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 283 "kawa.y" /* yacc.c:1646  */
+#line 289 "kawa.y" /* yacc.c:1646  */
     {(yyval.vstring)=new string;}
-#line 2041 "kawa.cpp" /* yacc.c:1646  */
+#line 2043 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 286 "kawa.y" /* yacc.c:1646  */
+#line 292 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorString)=(yyvsp[0].vectorString);}
-#line 2047 "kawa.cpp" /* yacc.c:1646  */
+#line 2049 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 287 "kawa.y" /* yacc.c:1646  */
+#line 293 "kawa.y" /* yacc.c:1646  */
     {vector<string*>* var; (yyval.vectorString)=var;}
-#line 2053 "kawa.cpp" /* yacc.c:1646  */
+#line 2055 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 291 "kawa.y" /* yacc.c:1646  */
+#line 297 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorString)=(yyvsp[0].vectorString);}
-#line 2059 "kawa.cpp" /* yacc.c:1646  */
+#line 2061 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 292 "kawa.y" /* yacc.c:1646  */
+#line 298 "kawa.y" /* yacc.c:1646  */
     {vector<string*>* var; (yyval.vectorString)=var;}
-#line 2065 "kawa.cpp" /* yacc.c:1646  */
+#line 2067 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 296 "kawa.y" /* yacc.c:1646  */
+#line 302 "kawa.y" /* yacc.c:1646  */
     {vector<string*> importvar; if((yyvsp[-4].vbool)==true){string* s=new string("static"); importvar.push_back(s);} importvar.push_back((yyvsp[-3].vstring)); for (vector<string*>::iterator it = (yyvsp[-2].vectorString)->begin(); it != (yyvsp[-2].vectorString)->end(); ++it){ string* n = (*it); importvar.push_back(n);} (yyvsp[0].vectorVecorString)->push_back(importvar); (yyval.vectorVecorString)=(yyvsp[0].vectorVecorString); }
-#line 2071 "kawa.cpp" /* yacc.c:1646  */
+#line 2073 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 297 "kawa.y" /* yacc.c:1646  */
+#line 303 "kawa.y" /* yacc.c:1646  */
     {vector<vector<string*>>* var; (yyval.vectorVecorString)=var; }
-#line 2077 "kawa.cpp" /* yacc.c:1646  */
+#line 2079 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 302 "kawa.y" /* yacc.c:1646  */
+#line 308 "kawa.y" /* yacc.c:1646  */
     { (yyval.kt_class)=new KT_Class; (yyval.kt_class)->setName((yyvsp[-3].vstring)); (yyval.kt_class)->setParentClass((yyvsp[-2].vstring)); (yyval.kt_class)->setParentInterfaces(*(yyvsp[-1].vectorString)); (yyval.kt_class)->setMemberDec(*(yyvsp[0].vectorPARSER_MemberDec));}
-#line 2083 "kawa.cpp" /* yacc.c:1646  */
+#line 2085 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 305 "kawa.y" /* yacc.c:1646  */
+#line 311 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_interface)=new KT_Interface; (yyval.kt_interface)->setName((yyvsp[-2].vstring)); (yyval.kt_interface)->setInterfacesparent(*(yyvsp[-1].vectorString)); (yyval.kt_interface)->setPrototypes(*(yyvsp[0].vectorKT_Prototype));}
-#line 2089 "kawa.cpp" /* yacc.c:1646  */
+#line 2091 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 309 "kawa.y" /* yacc.c:1646  */
+#line 315 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorPARSER_MemberDec)=(yyvsp[-1].vectorPARSER_MemberDec);}
-#line 2095 "kawa.cpp" /* yacc.c:1646  */
+#line 2097 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 310 "kawa.y" /* yacc.c:1646  */
+#line 316 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[-1].vectorPARSER_MemberDec)->push_back((yyvsp[0].parser_memberDec)); (yyval.vectorPARSER_MemberDec)=(yyvsp[-1].vectorPARSER_MemberDec);}
-#line 2101 "kawa.cpp" /* yacc.c:1646  */
+#line 2103 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 311 "kawa.y" /* yacc.c:1646  */
+#line 317 "kawa.y" /* yacc.c:1646  */
     {vector<PARSER_MemberDec*>* var; (yyval.vectorPARSER_MemberDec)=var;}
-#line 2107 "kawa.cpp" /* yacc.c:1646  */
+#line 2109 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 314 "kawa.y" /* yacc.c:1646  */
+#line 320 "kawa.y" /* yacc.c:1646  */
     {/*PARSER_MemeberDec*/(yyval.parser_memberDec)=new PARSER_MemberDec;}
-#line 2113 "kawa.cpp" /* yacc.c:1646  */
+#line 2115 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 315 "kawa.y" /* yacc.c:1646  */
+#line 321 "kawa.y" /* yacc.c:1646  */
     {KT_SimpleMethod* methode =new KT_SimpleMethod; methode->setIndexParser(2); methode->setName((yyvsp[-2].vstring)); methode->setModifier((yyvsp[-4].kt_modifier)) ; methode->setParams(*(yyvsp[-1].vectorKT_Param)); methode->setType((yyvsp[-3].kt_type)); methode->setBlock((yyvsp[0].kt_block)) ; (yyval.parser_memberDec)=methode;}
-#line 2119 "kawa.cpp" /* yacc.c:1646  */
+#line 2121 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 316 "kawa.y" /* yacc.c:1646  */
+#line 322 "kawa.y" /* yacc.c:1646  */
     {KT_Type* type = new KT_Type; vector<string*> typeName; string* svoid = new string("void"); typeName.push_back(svoid); type->setTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); KT_SimpleMethod* methode =new KT_SimpleMethod; methode->setIndexParser(2); methode->setName((yyvsp[-2].vstring)); methode->setModifier((yyvsp[-4].kt_modifier)) ; methode->setParams(*(yyvsp[-1].vectorKT_Param)); methode->setType(type); methode->setBlock((yyvsp[0].kt_block)) ; (yyval.parser_memberDec)=methode;}
-#line 2125 "kawa.cpp" /* yacc.c:1646  */
+#line 2127 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 317 "kawa.y" /* yacc.c:1646  */
+#line 323 "kawa.y" /* yacc.c:1646  */
     {KT_Constructor* constructor =new KT_Constructor; constructor->setIndexParser(1); constructor->setName((yyvsp[-2].vstring)); constructor->setModifier((yyvsp[-3].kt_modifier)) ; constructor->setParams(*(yyvsp[-1].vectorKT_Param)) ; constructor->setBlock((yyvsp[0].kt_block)) ; (yyval.parser_memberDec)=constructor;}
-#line 2131 "kawa.cpp" /* yacc.c:1646  */
+#line 2133 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 321 "kawa.y" /* yacc.c:1646  */
+#line 327 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_Prototype)=(yyvsp[-1].vectorKT_Prototype);}
-#line 2137 "kawa.cpp" /* yacc.c:1646  */
+#line 2139 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 323 "kawa.y" /* yacc.c:1646  */
+#line 329 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[-1].vectorKT_Prototype)->push_back((yyvsp[0].kt_prototype)); (yyval.vectorKT_Prototype)=(yyvsp[-1].vectorKT_Prototype);}
-#line 2143 "kawa.cpp" /* yacc.c:1646  */
+#line 2145 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 324 "kawa.y" /* yacc.c:1646  */
+#line 330 "kawa.y" /* yacc.c:1646  */
     {vector<KT_Prototype*>* var; (yyval.vectorKT_Prototype)=var;}
-#line 2149 "kawa.cpp" /* yacc.c:1646  */
+#line 2151 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 327 "kawa.y" /* yacc.c:1646  */
+#line 333 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_prototype) = new KT_Prototype; (yyval.kt_prototype)->setName((yyvsp[-2].vstring)); (yyval.kt_prototype)->setReturnType((yyvsp[-3].kt_type)); (yyval.kt_prototype)->setModifier((yyvsp[-4].kt_modifier)); (yyval.kt_prototype)->setParams(*(yyvsp[-1].vectorKT_Param));}
-#line 2155 "kawa.cpp" /* yacc.c:1646  */
+#line 2157 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 328 "kawa.y" /* yacc.c:1646  */
+#line 334 "kawa.y" /* yacc.c:1646  */
     {KT_Type* type = new KT_Type; vector<string*> typeName; string* svoid = new string("void"); typeName.push_back(svoid); type->setTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); (yyval.kt_prototype) = new KT_Prototype; (yyval.kt_prototype)->setName((yyvsp[-2].vstring)); (yyval.kt_prototype)->setReturnType(type); (yyval.kt_prototype)->setModifier((yyvsp[-4].kt_modifier)); (yyval.kt_prototype)->setParams(*(yyvsp[-1].vectorKT_Param));}
-#line 2161 "kawa.cpp" /* yacc.c:1646  */
+#line 2163 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 333 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2167 "kawa.cpp" /* yacc.c:1646  */
+#line 339 "kawa.y" /* yacc.c:1646  */
+    { (yyval.parser_field)->AddVariableAtFirstPosition((yyvsp[-1].kt_variable)); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field)); }
+#line 2169 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 334 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_expression)=0;}
-#line 2173 "kawa.cpp" /* yacc.c:1646  */
+#line 340 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_field)=new PARSER_Field;}
+#line 2175 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 337 "kawa.y" /* yacc.c:1646  */
+#line 343 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_variable)=new KT_Variable; vector<string*> name; name.push_back((yyvsp[-1].vstring)); (yyval.kt_variable)->setName(name); (yyval.kt_variable)->setValue((yyvsp[0].kt_expression));}
-#line 2179 "kawa.cpp" /* yacc.c:1646  */
+#line 2181 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 340 "kawa.y" /* yacc.c:1646  */
+#line 346 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2185 "kawa.cpp" /* yacc.c:1646  */
+#line 2187 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 341 "kawa.y" /* yacc.c:1646  */
+#line 347 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=new KT_Expression;}
-#line 2191 "kawa.cpp" /* yacc.c:1646  */
+#line 2193 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 345 "kawa.y" /* yacc.c:1646  */
+#line 351 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_Param)=(yyvsp[-1].vectorKT_Param);}
-#line 2197 "kawa.cpp" /* yacc.c:1646  */
+#line 2199 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 346 "kawa.y" /* yacc.c:1646  */
+#line 352 "kawa.y" /* yacc.c:1646  */
     {vector<KT_Param*>* vect; (yyval.vectorKT_Param)=vect;}
-#line 2203 "kawa.cpp" /* yacc.c:1646  */
+#line 2205 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 349 "kawa.y" /* yacc.c:1646  */
+#line 355 "kawa.y" /* yacc.c:1646  */
     {vector<KT_ParamsMethodCall*>* vect; (yyval.vectorKT_ParamsMethodCall)=vect;}
-#line 2209 "kawa.cpp" /* yacc.c:1646  */
+#line 2211 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 352 "kawa.y" /* yacc.c:1646  */
+#line 358 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_ParamsMethodCall)=(yyvsp[-1].vectorKT_ParamsMethodCall);}
-#line 2215 "kawa.cpp" /* yacc.c:1646  */
+#line 2217 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 353 "kawa.y" /* yacc.c:1646  */
+#line 359 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_ParamsMethodCall)=(yyvsp[0].vectorKT_ParamsMethodCall);}
-#line 2221 "kawa.cpp" /* yacc.c:1646  */
+#line 2223 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 355 "kawa.y" /* yacc.c:1646  */
+#line 361 "kawa.y" /* yacc.c:1646  */
     {KT_ID* id = new KT_ID; vector<string*> name; name.push_back((yyvsp[-5].vstring)); id->setValue(name); (yyvsp[-1].kt_indexedArray)->setIndexAddIntAtFirstPosition((yyvsp[-3].vint)); KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray((yyvsp[-1].kt_indexedArray)); param->setExpression(id); vector<KT_ParamsMethodCall*> vect; vect.push_back(param); for (vector<KT_ParamsMethodCall*>::iterator it = (yyvsp[0].vectorKT_ParamsMethodCall)->begin(); it != (yyvsp[0].vectorKT_ParamsMethodCall)->end(); ++it){ KT_ParamsMethodCall* n = (*it); vect.push_back(n);} (yyval.vectorKT_ParamsMethodCall)=&vect;}
-#line 2227 "kawa.cpp" /* yacc.c:1646  */
+#line 2229 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 356 "kawa.y" /* yacc.c:1646  */
+#line 362 "kawa.y" /* yacc.c:1646  */
     {KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setExpression((yyvsp[-1].kt_expression)); vector<KT_ParamsMethodCall*> vect; vect.push_back(param); for (vector<KT_ParamsMethodCall*>::iterator it = (yyvsp[0].vectorKT_ParamsMethodCall)->begin(); it != (yyvsp[0].vectorKT_ParamsMethodCall)->end(); ++it){ KT_ParamsMethodCall* n = (*it); vect.push_back(n);} (yyval.vectorKT_ParamsMethodCall)=&vect;}
-#line 2233 "kawa.cpp" /* yacc.c:1646  */
+#line 2235 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 359 "kawa.y" /* yacc.c:1646  */
+#line 365 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[-2].kt_type)->setArrayDim((yyvsp[-1].kt_param)->getParamType()->getArrayDim()); (yyvsp[-1].kt_param)->setParamType((yyvsp[-2].kt_type)); (yyvsp[-1].kt_param)->setParamModifier((yyvsp[-3].kt_modifier)); vector<KT_Param*> vect; vect.push_back((yyvsp[-1].kt_param)); for (vector<KT_Param*>::iterator it = (yyvsp[0].vectorKT_Param)->begin(); it != (yyvsp[0].vectorKT_Param)->end(); ++it){ KT_Param* n = (*it); vect.push_back(n);} (yyval.vectorKT_Param)=&vect;}
-#line 2239 "kawa.cpp" /* yacc.c:1646  */
+#line 2241 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 362 "kawa.y" /* yacc.c:1646  */
+#line 368 "kawa.y" /* yacc.c:1646  */
     {if((yyvsp[0].kt_modifier)->isStatic()){(yyvsp[-1].kt_modifier)->setStatic(true);} if((yyvsp[0].kt_modifier)->isAbstract()){(yyvsp[-1].kt_modifier)->setAbstract(true);} if((yyvsp[0].kt_modifier)->isFinal()){(yyvsp[-1].kt_modifier)->setFinal(true);} if((yyvsp[0].kt_modifier)->getVisibility()>0) (yyvsp[-1].kt_modifier)->setVisibility((yyvsp[0].kt_modifier)->getVisibility());}
-#line 2245 "kawa.cpp" /* yacc.c:1646  */
+#line 2247 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 363 "kawa.y" /* yacc.c:1646  */
+#line 369 "kawa.y" /* yacc.c:1646  */
     {KT_Modifier* modifier; (yyval.kt_modifier)=modifier;}
-#line 2251 "kawa.cpp" /* yacc.c:1646  */
+#line 2253 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 366 "kawa.y" /* yacc.c:1646  */
+#line 372 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier; (yyval.kt_modifier)->setFinal(true);}
-#line 2257 "kawa.cpp" /* yacc.c:1646  */
+#line 2259 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 367 "kawa.y" /* yacc.c:1646  */
+#line 373 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_modifier)=new KT_Modifier;}
-#line 2263 "kawa.cpp" /* yacc.c:1646  */
+#line 2265 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 370 "kawa.y" /* yacc.c:1646  */
+#line 376 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_Param)=(yyvsp[0].vectorKT_Param);}
-#line 2269 "kawa.cpp" /* yacc.c:1646  */
+#line 2271 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 371 "kawa.y" /* yacc.c:1646  */
+#line 377 "kawa.y" /* yacc.c:1646  */
     {vector<KT_Param*>* vect; (yyval.vectorKT_Param)=vect;}
-#line 2275 "kawa.cpp" /* yacc.c:1646  */
+#line 2277 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 374 "kawa.y" /* yacc.c:1646  */
+#line 380 "kawa.y" /* yacc.c:1646  */
     {(yyval.vectorKT_ParamsMethodCall)=(yyvsp[0].vectorKT_ParamsMethodCall);}
-#line 2281 "kawa.cpp" /* yacc.c:1646  */
+#line 2283 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 375 "kawa.y" /* yacc.c:1646  */
+#line 381 "kawa.y" /* yacc.c:1646  */
     {vector<KT_ParamsMethodCall*>* vect; (yyval.vectorKT_ParamsMethodCall)=vect;}
-#line 2287 "kawa.cpp" /* yacc.c:1646  */
+#line 2289 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 378 "kawa.y" /* yacc.c:1646  */
+#line 384 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_param)=new KT_Param; (yyval.kt_param)->setName((yyvsp[-1].vstring)); KT_Type* type= new KT_Type; type->setArray((yyvsp[0].parser_array)); (yyval.kt_param)->setParamType(type); }
-#line 2293 "kawa.cpp" /* yacc.c:1646  */
+#line 2295 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 382 "kawa.y" /* yacc.c:1646  */
+#line 388 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_block)=new KT_Block; (yyval.kt_block)->setStatements(*(yyvsp[-1].vectorKT_Statement));}
-#line 2299 "kawa.cpp" /* yacc.c:1646  */
+#line 2301 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 385 "kawa.y" /* yacc.c:1646  */
+#line 391 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[-1].vectorKT_Statement)->push_back((yyvsp[0].kt_statement)); (yyval.vectorKT_Statement)=(yyvsp[-1].vectorKT_Statement);}
-#line 2305 "kawa.cpp" /* yacc.c:1646  */
+#line 2307 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 386 "kawa.y" /* yacc.c:1646  */
+#line 392 "kawa.y" /* yacc.c:1646  */
     {vector<KT_Statement*>* var; (yyval.vectorKT_Statement)=var;}
-#line 2311 "kawa.cpp" /* yacc.c:1646  */
+#line 2313 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 389 "kawa.y" /* yacc.c:1646  */
+#line 395 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[0].kt_print);}
-#line 2317 "kawa.cpp" /* yacc.c:1646  */
+#line 2319 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 390 "kawa.y" /* yacc.c:1646  */
+#line 396 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[0].kt_print);}
-#line 2323 "kawa.cpp" /* yacc.c:1646  */
+#line 2325 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 391 "kawa.y" /* yacc.c:1646  */
+#line 397 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[0].kt_print);}
-#line 2329 "kawa.cpp" /* yacc.c:1646  */
+#line 2331 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 392 "kawa.y" /* yacc.c:1646  */
+#line 398 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[0].kt_print);}
-#line 2335 "kawa.cpp" /* yacc.c:1646  */
+#line 2337 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 393 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2341 "kawa.cpp" /* yacc.c:1646  */
+#line 399 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-7].vstring)); name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); pf->setFinal(true); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2343 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 394 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2347 "kawa.cpp" /* yacc.c:1646  */
+#line 400 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-7].vstring)); name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2349 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 395 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2353 "kawa.cpp" /* yacc.c:1646  */
+#line 401 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); pf->setFinal(true); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2355 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 396 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2359 "kawa.cpp" /* yacc.c:1646  */
+#line 402 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2361 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 397 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2365 "kawa.cpp" /* yacc.c:1646  */
+#line 403 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); KT_Type* type=new KT_Type; type->setBasicType(true); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2367 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 398 "kawa.y" /* yacc.c:1646  */
-    {(yyval.kt_statement)=new KT_Statement;}
-#line 2371 "kawa.cpp" /* yacc.c:1646  */
+#line 404 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); KT_Type* type=new KT_Type; type->setBasicType(true); type->setArray((yyvsp[-3].parser_array));  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition((yyvsp[-2].kt_variable)); pf->addVectorVariable((yyvsp[-1].parser_field)); pf->upDateType(type); pf->setFinal(true); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); (yyval.kt_statement)=block;}
+#line 2373 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 399 "kawa.y" /* yacc.c:1646  */
+#line 405 "kawa.y" /* yacc.c:1646  */
     { KT_ID* id; vector<string*> name; name.push_back((yyvsp[-4].vstring)); id->setValue(name); KT_Affectation* affectation; affectation->setRExpression((yyvsp[-1].kt_expression)); affectation->setLExpression(id); affectation->setIndexedArray((yyvsp[-3].kt_indexedArray)); (yyval.kt_statement)=affectation;}
-#line 2377 "kawa.cpp" /* yacc.c:1646  */
+#line 2379 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 400 "kawa.y" /* yacc.c:1646  */
+#line 406 "kawa.y" /* yacc.c:1646  */
     {string name = "this"+(*(yyvsp[-4].vstring)); vector<string*> fullname; fullname.push_back(&name); KT_ID* id; id->setValue(fullname); KT_Affectation* affectation; affectation->setRExpression((yyvsp[-1].kt_expression)); affectation->setLExpression(id); affectation->setIndexedArray((yyvsp[-3].kt_indexedArray)); (yyval.kt_statement)=affectation;}
-#line 2383 "kawa.cpp" /* yacc.c:1646  */
+#line 2385 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 401 "kawa.y" /* yacc.c:1646  */
+#line 407 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[-1].kt_expression);}
-#line 2389 "kawa.cpp" /* yacc.c:1646  */
+#line 2391 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 402 "kawa.y" /* yacc.c:1646  */
+#line 408 "kawa.y" /* yacc.c:1646  */
     {KT_Super* s = new KT_Super; s->setParams(*(yyvsp[-1].vectorKT_ParamsMethodCall));}
-#line 2395 "kawa.cpp" /* yacc.c:1646  */
+#line 2397 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 403 "kawa.y" /* yacc.c:1646  */
+#line 409 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=(yyvsp[0].kt_blockStatement);}
-#line 2401 "kawa.cpp" /* yacc.c:1646  */
+#line 2403 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 404 "kawa.y" /* yacc.c:1646  */
+#line 410 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_statement)=new KT_Statement;}
-#line 2407 "kawa.cpp" /* yacc.c:1646  */
+#line 2409 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 407 "kawa.y" /* yacc.c:1646  */
+#line 413 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_print)=new KT_Print; (yyval.kt_print)->setArgs(*(yyvsp[-2].vectorKT_FactFinal));}
-#line 2413 "kawa.cpp" /* yacc.c:1646  */
+#line 2415 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 409 "kawa.y" /* yacc.c:1646  */
+#line 415 "kawa.y" /* yacc.c:1646  */
     {KT_FactFinal* factFinal = static_cast<KT_FactFinal*>((yyvsp[-1].kt_expression)); vector<KT_FactFinal*> args; args.push_back(factFinal); for (vector<KT_FactFinal*>::iterator it = (yyvsp[0].vectorKT_FactFinal)->begin(); it != (yyvsp[0].vectorKT_FactFinal)->end(); ++it){ KT_FactFinal* n = (*it); args.push_back(n);} (yyval.vectorKT_FactFinal)=&args;}
-#line 2419 "kawa.cpp" /* yacc.c:1646  */
+#line 2421 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 410 "kawa.y" /* yacc.c:1646  */
+#line 416 "kawa.y" /* yacc.c:1646  */
     {vector<KT_FactFinal*>* var; (yyval.vectorKT_FactFinal)=var;}
-#line 2425 "kawa.cpp" /* yacc.c:1646  */
+#line 2427 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 412 "kawa.y" /* yacc.c:1646  */
+#line 418 "kawa.y" /* yacc.c:1646  */
     {KT_FactFinal* factFinal= static_cast<KT_FactFinal*>((yyvsp[-1].kt_expression)); vector<KT_FactFinal*> args; args.push_back(factFinal); for (vector<KT_FactFinal*>::iterator it = (yyvsp[0].vectorKT_FactFinal)->begin(); it != (yyvsp[0].vectorKT_FactFinal)->end(); ++it){ KT_FactFinal* n = (*it); args.push_back(n);} (yyval.vectorKT_FactFinal)=&args;}
-#line 2431 "kawa.cpp" /* yacc.c:1646  */
+#line 2433 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 413 "kawa.y" /* yacc.c:1646  */
+#line 419 "kawa.y" /* yacc.c:1646  */
     {vector<KT_FactFinal*>* var; (yyval.vectorKT_FactFinal)=var;}
-#line 2437 "kawa.cpp" /* yacc.c:1646  */
+#line 2439 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 416 "kawa.y" /* yacc.c:1646  */
+#line 422 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_print)=new KT_Print; vector<KT_FactFinal*> args; args.push_back((yyvsp[-2].kt_factFinal)); (yyval.kt_print)->setArgs(args);}
-#line 2443 "kawa.cpp" /* yacc.c:1646  */
+#line 2445 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 418 "kawa.y" /* yacc.c:1646  */
+#line 424 "kawa.y" /* yacc.c:1646  */
     {KT_Reel* reel = new KT_Reel; reel->setValue((yyvsp[0].vfloat)); (yyval.kt_factFinal)=reel;}
-#line 2449 "kawa.cpp" /* yacc.c:1646  */
+#line 2451 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 419 "kawa.y" /* yacc.c:1646  */
+#line 425 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[0].vstring)); KT_ID* id = new KT_ID; id->setValue(name); (yyval.kt_factFinal)=id;}
-#line 2455 "kawa.cpp" /* yacc.c:1646  */
+#line 2457 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 420 "kawa.y" /* yacc.c:1646  */
+#line 426 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_factFinal)=new KT_FactFinal;}
-#line 2461 "kawa.cpp" /* yacc.c:1646  */
+#line 2463 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 423 "kawa.y" /* yacc.c:1646  */
+#line 429 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_print)=new KT_Print; vector<KT_FactFinal*> args; args.push_back((yyvsp[-2].kt_factFinal)); (yyval.kt_print)->setArgs(args);}
-#line 2467 "kawa.cpp" /* yacc.c:1646  */
+#line 2469 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 425 "kawa.y" /* yacc.c:1646  */
+#line 431 "kawa.y" /* yacc.c:1646  */
     {KT_Entier* entier = new KT_Entier; entier->setValue((yyvsp[0].vint)); (yyval.kt_factFinal)=entier;}
-#line 2473 "kawa.cpp" /* yacc.c:1646  */
+#line 2475 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 426 "kawa.y" /* yacc.c:1646  */
+#line 432 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[0].vstring)); KT_ID* id = new KT_ID; id->setValue(name); (yyval.kt_factFinal)=id;}
-#line 2479 "kawa.cpp" /* yacc.c:1646  */
+#line 2481 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 427 "kawa.y" /* yacc.c:1646  */
+#line 433 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_factFinal)=new KT_FactFinal;}
-#line 2485 "kawa.cpp" /* yacc.c:1646  */
+#line 2487 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 430 "kawa.y" /* yacc.c:1646  */
+#line 436 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_print)=new KT_Print; vector<KT_FactFinal*> args; args.push_back((yyvsp[-2].kt_factFinal)); (yyval.kt_print)->setArgs(args);}
-#line 2491 "kawa.cpp" /* yacc.c:1646  */
+#line 2493 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 432 "kawa.y" /* yacc.c:1646  */
+#line 438 "kawa.y" /* yacc.c:1646  */
     {KT_String* s = new KT_String; s->setValue((yyvsp[0].vstring)); (yyval.kt_factFinal)=s;}
-#line 2497 "kawa.cpp" /* yacc.c:1646  */
+#line 2499 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 433 "kawa.y" /* yacc.c:1646  */
+#line 439 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[0].vstring)); KT_ID* id = new KT_ID; id->setValue(name); (yyval.kt_factFinal)=id;}
-#line 2503 "kawa.cpp" /* yacc.c:1646  */
+#line 2505 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 434 "kawa.y" /* yacc.c:1646  */
+#line 440 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_factFinal)=new KT_FactFinal;}
-#line 2509 "kawa.cpp" /* yacc.c:1646  */
+#line 2511 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 437 "kawa.y" /* yacc.c:1646  */
+#line 443 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_blockStatement)=new KT_BlockStatement;}
-#line 2515 "kawa.cpp" /* yacc.c:1646  */
+#line 2517 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 438 "kawa.y" /* yacc.c:1646  */
-    {KT_IfStatement* ifstatement; (yyval.kt_blockStatement)=ifstatement;}
-#line 2521 "kawa.cpp" /* yacc.c:1646  */
+#line 444 "kawa.y" /* yacc.c:1646  */
+    {KT_IfStatement* ifstatement; ifstatement->setCondition((yyvsp[-2].kt_expression)); ifstatement->setBStatement((yyvsp[0].kt_blockStatement)); (yyval.kt_blockStatement)=ifstatement;}
+#line 2523 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 439 "kawa.y" /* yacc.c:1646  */
-    {KT_ifElseStatement* ifelseStatement; (yyval.kt_blockStatement)=ifelseStatement;}
-#line 2527 "kawa.cpp" /* yacc.c:1646  */
+#line 445 "kawa.y" /* yacc.c:1646  */
+    {KT_ifElseStatement* ifelseStatement; ifelseStatement->setCondition((yyvsp[-4].kt_expression)); ifelseStatement->setIfBStatement((yyvsp[-2].kt_blockStatement)); ifelseStatement->setElseBStatement((yyvsp[0].kt_blockStatement)); (yyval.kt_blockStatement)=ifelseStatement;}
+#line 2529 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 440 "kawa.y" /* yacc.c:1646  */
-    {KT_SwitchStatement* switchStatement; (yyval.kt_blockStatement)=switchStatement;}
-#line 2533 "kawa.cpp" /* yacc.c:1646  */
+#line 446 "kawa.y" /* yacc.c:1646  */
+    {KT_SwitchStatement* switchStatement; switchStatement->setCondition((yyvsp[-4].kt_expression)); switchStatement->setSwitchBStatements(*(yyvsp[-1].vectorKT_SwitchBlockStatement)); (yyval.kt_blockStatement)=switchStatement;}
+#line 2535 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 441 "kawa.y" /* yacc.c:1646  */
-    {KT_WhileStatement* whileStatement; (yyval.kt_blockStatement)=whileStatement;}
-#line 2539 "kawa.cpp" /* yacc.c:1646  */
+#line 447 "kawa.y" /* yacc.c:1646  */
+    {KT_WhileStatement* whileStatement; whileStatement->setCondition((yyvsp[-2].kt_expression)); whileStatement->setWBStatement((yyvsp[0].kt_blockStatement)); (yyval.kt_blockStatement)=whileStatement;}
+#line 2541 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 442 "kawa.y" /* yacc.c:1646  */
-    {KT_WhileStatement* whileStatement; (yyval.kt_blockStatement)=whileStatement;}
-#line 2545 "kawa.cpp" /* yacc.c:1646  */
+#line 448 "kawa.y" /* yacc.c:1646  */
+    {KT_WhileStatement* whileStatement; whileStatement->setCondition((yyvsp[-2].kt_expression)); whileStatement->setWBStatement((yyvsp[-5].kt_blockStatement)); (yyval.kt_blockStatement)=whileStatement;}
+#line 2547 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 443 "kawa.y" /* yacc.c:1646  */
-    {KT_ForStatement* forStatement; (yyval.kt_blockStatement)=forStatement;}
-#line 2551 "kawa.cpp" /* yacc.c:1646  */
+#line 449 "kawa.y" /* yacc.c:1646  */
+    {KT_ForStatement* forStatement; forStatement->setForControl((yyvsp[-2].parser_forControl)); forStatement->setBlockStatement((yyvsp[0].kt_blockStatement)); (yyval.kt_blockStatement)=forStatement;}
+#line 2553 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 444 "kawa.y" /* yacc.c:1646  */
-    {KT_BreakStatement* breakStatement; (yyval.kt_blockStatement)=breakStatement;}
-#line 2557 "kawa.cpp" /* yacc.c:1646  */
+#line 450 "kawa.y" /* yacc.c:1646  */
+    {KT_BreakStatement* breakStatement; breakStatement->setIdExist(true); breakStatement->setId((yyvsp[-1].vstring)); (yyval.kt_blockStatement)=breakStatement;}
+#line 2559 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 445 "kawa.y" /* yacc.c:1646  */
-    {KT_BreakStatement* breakStatement; (yyval.kt_blockStatement)=breakStatement;}
-#line 2563 "kawa.cpp" /* yacc.c:1646  */
+#line 451 "kawa.y" /* yacc.c:1646  */
+    {KT_BreakStatement* breakStatement; breakStatement->setIdExist(false); (yyval.kt_blockStatement)=breakStatement;}
+#line 2565 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 446 "kawa.y" /* yacc.c:1646  */
-    {KT_ContinueStatement* continueStatement; (yyval.kt_blockStatement)=continueStatement;}
-#line 2569 "kawa.cpp" /* yacc.c:1646  */
+#line 452 "kawa.y" /* yacc.c:1646  */
+    {KT_ContinueStatement* continueStatement; continueStatement->setIdExist(true); continueStatement->setId((yyvsp[-1].vstring)); (yyval.kt_blockStatement)=continueStatement;}
+#line 2571 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 447 "kawa.y" /* yacc.c:1646  */
-    {KT_ContinueStatement* continueStatement; (yyval.kt_blockStatement)=continueStatement;}
-#line 2575 "kawa.cpp" /* yacc.c:1646  */
+#line 453 "kawa.y" /* yacc.c:1646  */
+    {KT_ContinueStatement* continueStatement; continueStatement->setIdExist(false); (yyval.kt_blockStatement)=continueStatement;}
+#line 2577 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 448 "kawa.y" /* yacc.c:1646  */
-    {KT_ReturnStatement* returnStatement; (yyval.kt_blockStatement)=returnStatement;}
-#line 2581 "kawa.cpp" /* yacc.c:1646  */
+#line 454 "kawa.y" /* yacc.c:1646  */
+    {KT_ReturnStatement* returnStatement; returnStatement->setIsVoidReturn(false); returnStatement->setReturnExpression((yyvsp[-1].kt_expression)); (yyval.kt_blockStatement)=returnStatement;}
+#line 2583 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 449 "kawa.y" /* yacc.c:1646  */
-    {KT_ReturnStatement* returnStatement; (yyval.kt_blockStatement)=returnStatement;}
-#line 2587 "kawa.cpp" /* yacc.c:1646  */
+#line 455 "kawa.y" /* yacc.c:1646  */
+    {KT_ReturnStatement* returnStatement; returnStatement->setIsVoidReturn(true); (yyval.kt_blockStatement)=returnStatement;}
+#line 2589 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 453 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2593 "kawa.cpp" /* yacc.c:1646  */
+#line 459 "kawa.y" /* yacc.c:1646  */
+    {(yyvsp[-1].vectorKT_SwitchBlockStatement)->push_back((yyvsp[0].kt_switchBlockStatement)); (yyval.vectorKT_SwitchBlockStatement)=(yyvsp[-1].vectorKT_SwitchBlockStatement);}
+#line 2595 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 454 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2599 "kawa.cpp" /* yacc.c:1646  */
+#line 460 "kawa.y" /* yacc.c:1646  */
+    {vector<KT_SwitchBlockStatement*>* var; (yyval.vectorKT_SwitchBlockStatement)=var;}
+#line 2601 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 457 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2605 "kawa.cpp" /* yacc.c:1646  */
+#line 463 "kawa.y" /* yacc.c:1646  */
+    {(yyval.kt_switchBlockStatement)=new KT_SwitchBlockStatement; (yyval.kt_switchBlockStatement)->setCaseExist(true); KT_Block* block =new KT_Block; block->setStatements(*(yyvsp[0].vectorKT_Statement)); (yyval.kt_switchBlockStatement)->setBlock(block); (yyval.kt_switchBlockStatement)->setExpression((yyvsp[-2].kt_expression));}
+#line 2607 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 458 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2611 "kawa.cpp" /* yacc.c:1646  */
+#line 464 "kawa.y" /* yacc.c:1646  */
+    {(yyval.kt_switchBlockStatement)=new KT_SwitchBlockStatement; (yyval.kt_switchBlockStatement)->setCaseExist(false); KT_Block* block =new KT_Block; block->setStatements(*(yyvsp[0].vectorKT_Statement)); (yyval.kt_switchBlockStatement)->setBlock(block);}
+#line 2613 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 462 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2617 "kawa.cpp" /* yacc.c:1646  */
+#line 468 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setCondition((yyvsp[-1].kt_expression)); (yyval.parser_forControl)->setInitFor((yyvsp[-3].parser_field)); }
+#line 2619 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 463 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2623 "kawa.cpp" /* yacc.c:1646  */
+#line 469 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setCondition((yyvsp[-2].kt_expression)); (yyval.parser_forControl)->setInitFor((yyvsp[-4].parser_field)); (yyval.parser_forControl)->setUpDate(*(yyvsp[0].vectorKT_IDExpression));}
+#line 2625 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 464 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2629 "kawa.cpp" /* yacc.c:1646  */
+#line 470 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setInitFor((yyvsp[-2].parser_field));}
+#line 2631 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 465 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2635 "kawa.cpp" /* yacc.c:1646  */
+#line 471 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setInitFor((yyvsp[-3].parser_field)); (yyval.parser_forControl)->setUpDate(*(yyvsp[0].vectorKT_IDExpression));}
+#line 2637 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 466 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2641 "kawa.cpp" /* yacc.c:1646  */
+#line 472 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setCondition((yyvsp[-1].kt_expression));}
+#line 2643 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 467 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2647 "kawa.cpp" /* yacc.c:1646  */
+#line 473 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setCondition((yyvsp[-2].kt_expression)); (yyval.parser_forControl)->setUpDate(*(yyvsp[0].vectorKT_IDExpression));}
+#line 2649 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 468 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2653 "kawa.cpp" /* yacc.c:1646  */
+#line 474 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; }
+#line 2655 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 469 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2659 "kawa.cpp" /* yacc.c:1646  */
+#line 475 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_forControl)=new PARSER_ForControl; (yyval.parser_forControl)->setUpDate(*(yyvsp[0].vectorKT_IDExpression));}
+#line 2661 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 472 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2665 "kawa.cpp" /* yacc.c:1646  */
+#line 478 "kawa.y" /* yacc.c:1646  */
+    {(yyval.parser_field)=new PARSER_Field; KT_Variable* var= (yyvsp[-1].kt_param)->toVariable(); (yyval.parser_field)->AddVariableAtFirstPosition(var); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field)); (yyval.parser_field)->upDateType((yyvsp[-2].kt_type)); }
+#line 2667 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 473 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2671 "kawa.cpp" /* yacc.c:1646  */
+#line 479 "kawa.y" /* yacc.c:1646  */
+    {KT_Variable* variable = (yyvsp[-3].kt_param)->toVariable(); variable->setValue((yyvsp[-1].kt_expression)); (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(variable); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field)); (yyval.parser_field)->upDateType((yyvsp[-4].kt_type));}
+#line 2673 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 474 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2677 "kawa.cpp" /* yacc.c:1646  */
+#line 480 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-2].vstring)); for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false); (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(var); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field)); }
+#line 2679 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 147:
-#line 475 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2683 "kawa.cpp" /* yacc.c:1646  */
+#line 481 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); for (vector<string*>::iterator it = (yyvsp[-3].vectorString)->begin(); it != (yyvsp[-3].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false); var->setValue((yyvsp[-1].kt_expression)); (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(var); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field));}
+#line 2685 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 148:
-#line 479 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2689 "kawa.cpp" /* yacc.c:1646  */
+#line 485 "kawa.y" /* yacc.c:1646  */
+    {vector<KT_IDExpression*>* update; update->push_back((yyvsp[-1].kt_expression)); for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin(); it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
+#line 2691 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 480 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2695 "kawa.cpp" /* yacc.c:1646  */
+#line 486 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_ID* id; id->setValue(name); KT_Affectation* affectation; affectation->setRExpression((yyvsp[-1].kt_expression)); affectation->setLExpression(id); affectation->setIndexedArray((yyvsp[-3].kt_indexedArray)); vector<KT_IDExpression*>* update; update->push_back(affectation); for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin(); it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
+#line 2697 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 483 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2701 "kawa.cpp" /* yacc.c:1646  */
+#line 489 "kawa.y" /* yacc.c:1646  */
+    {vector<KT_IDExpression*>* update; update->push_back((yyvsp[-1].kt_expression)); for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin(); it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
+#line 2703 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 151:
-#line 484 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2707 "kawa.cpp" /* yacc.c:1646  */
+#line 490 "kawa.y" /* yacc.c:1646  */
+    {vector<string*> name; name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_ID* id; id->setValue(name); KT_Affectation* affectation; affectation->setRExpression((yyvsp[-1].kt_expression)); affectation->setLExpression(id); affectation->setIndexedArray((yyvsp[-3].kt_indexedArray)); vector<KT_IDExpression*>* update; update->push_back(affectation); for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin(); it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
+#line 2709 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 152:
-#line 485 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vint)=0;}
-#line 2713 "kawa.cpp" /* yacc.c:1646  */
+#line 491 "kawa.y" /* yacc.c:1646  */
+    {vector<KT_IDExpression*>* var; (yyval.vectorKT_IDExpression)=var;}
+#line 2715 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 490 "kawa.y" /* yacc.c:1646  */
+#line 496 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2719 "kawa.cpp" /* yacc.c:1646  */
+#line 2721 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 493 "kawa.y" /* yacc.c:1646  */
+#line 499 "kawa.y" /* yacc.c:1646  */
     {KT_OrBinEq* expression = new KT_OrBinEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2725 "kawa.cpp" /* yacc.c:1646  */
+#line 2727 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 494 "kawa.y" /* yacc.c:1646  */
+#line 500 "kawa.y" /* yacc.c:1646  */
     {KT_XOrBinEq* expression = new KT_XOrBinEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2731 "kawa.cpp" /* yacc.c:1646  */
+#line 2733 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 495 "kawa.y" /* yacc.c:1646  */
+#line 501 "kawa.y" /* yacc.c:1646  */
     {KT_AndBinEq* expression = new KT_AndBinEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2737 "kawa.cpp" /* yacc.c:1646  */
+#line 2739 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 499 "kawa.y" /* yacc.c:1646  */
+#line 505 "kawa.y" /* yacc.c:1646  */
     {KT_ModuloEq* expression = new KT_ModuloEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2743 "kawa.cpp" /* yacc.c:1646  */
+#line 2745 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 500 "kawa.y" /* yacc.c:1646  */
+#line 506 "kawa.y" /* yacc.c:1646  */
     {KT_DivisionEq* expression = new KT_DivisionEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2749 "kawa.cpp" /* yacc.c:1646  */
+#line 2751 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 501 "kawa.y" /* yacc.c:1646  */
+#line 507 "kawa.y" /* yacc.c:1646  */
     {KT_MultiplicationEq* expression = new KT_MultiplicationEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2755 "kawa.cpp" /* yacc.c:1646  */
+#line 2757 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 502 "kawa.y" /* yacc.c:1646  */
+#line 508 "kawa.y" /* yacc.c:1646  */
     {KT_SubstractionEq* expression = new KT_SubstractionEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2761 "kawa.cpp" /* yacc.c:1646  */
+#line 2763 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 503 "kawa.y" /* yacc.c:1646  */
+#line 509 "kawa.y" /* yacc.c:1646  */
     {KT_AdditionlEq* expression = new KT_AdditionlEq; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2767 "kawa.cpp" /* yacc.c:1646  */
+#line 2769 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 504 "kawa.y" /* yacc.c:1646  */
+#line 510 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2773 "kawa.cpp" /* yacc.c:1646  */
+#line 2775 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 507 "kawa.y" /* yacc.c:1646  */
+#line 513 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionOr* expression= new KT_ExpressionOr; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2779 "kawa.cpp" /* yacc.c:1646  */
+#line 2781 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 508 "kawa.y" /* yacc.c:1646  */
+#line 514 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2785 "kawa.cpp" /* yacc.c:1646  */
+#line 2787 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 511 "kawa.y" /* yacc.c:1646  */
+#line 517 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionAnd* expression =new KT_ExpressionAnd; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2791 "kawa.cpp" /* yacc.c:1646  */
+#line 2793 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 512 "kawa.y" /* yacc.c:1646  */
+#line 518 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2797 "kawa.cpp" /* yacc.c:1646  */
+#line 2799 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 515 "kawa.y" /* yacc.c:1646  */
+#line 521 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionOrLogic* expression= new KT_ExpressionOrLogic; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2803 "kawa.cpp" /* yacc.c:1646  */
+#line 2805 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 516 "kawa.y" /* yacc.c:1646  */
+#line 522 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2809 "kawa.cpp" /* yacc.c:1646  */
+#line 2811 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 519 "kawa.y" /* yacc.c:1646  */
+#line 525 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionOrXLogic* expression= new KT_ExpressionOrXLogic; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2815 "kawa.cpp" /* yacc.c:1646  */
+#line 2817 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 520 "kawa.y" /* yacc.c:1646  */
+#line 526 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2821 "kawa.cpp" /* yacc.c:1646  */
+#line 2823 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 523 "kawa.y" /* yacc.c:1646  */
+#line 529 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionAndLogic* expression =new KT_ExpressionAndLogic; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2827 "kawa.cpp" /* yacc.c:1646  */
+#line 2829 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 172:
-#line 524 "kawa.y" /* yacc.c:1646  */
+#line 530 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2833 "kawa.cpp" /* yacc.c:1646  */
+#line 2835 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 173:
-#line 527 "kawa.y" /* yacc.c:1646  */
+#line 533 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2839 "kawa.cpp" /* yacc.c:1646  */
+#line 2841 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 174:
-#line 528 "kawa.y" /* yacc.c:1646  */
+#line 534 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2845 "kawa.cpp" /* yacc.c:1646  */
+#line 2847 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 175:
-#line 529 "kawa.y" /* yacc.c:1646  */
+#line 535 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2851 "kawa.cpp" /* yacc.c:1646  */
+#line 2853 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 176:
-#line 532 "kawa.y" /* yacc.c:1646  */
+#line 538 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionGE* expression=new KT_ExpressionGE; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2857 "kawa.cpp" /* yacc.c:1646  */
+#line 2859 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 177:
-#line 533 "kawa.y" /* yacc.c:1646  */
+#line 539 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionGT* expression=new KT_ExpressionGT; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2863 "kawa.cpp" /* yacc.c:1646  */
+#line 2865 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 178:
-#line 534 "kawa.y" /* yacc.c:1646  */
+#line 540 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionLE* expression=new KT_ExpressionLE; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2869 "kawa.cpp" /* yacc.c:1646  */
+#line 2871 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 179:
-#line 535 "kawa.y" /* yacc.c:1646  */
+#line 541 "kawa.y" /* yacc.c:1646  */
     {KT_ExpressionLT* expression=new KT_ExpressionLT; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2875 "kawa.cpp" /* yacc.c:1646  */
+#line 2877 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 180:
-#line 536 "kawa.y" /* yacc.c:1646  */
+#line 542 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2881 "kawa.cpp" /* yacc.c:1646  */
+#line 2883 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 181:
-#line 539 "kawa.y" /* yacc.c:1646  */
+#line 545 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2887 "kawa.cpp" /* yacc.c:1646  */
+#line 2889 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 182:
-#line 540 "kawa.y" /* yacc.c:1646  */
+#line 546 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2893 "kawa.cpp" /* yacc.c:1646  */
+#line 2895 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 183:
-#line 541 "kawa.y" /* yacc.c:1646  */
+#line 547 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2899 "kawa.cpp" /* yacc.c:1646  */
+#line 2901 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 184:
-#line 542 "kawa.y" /* yacc.c:1646  */
+#line 548 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2905 "kawa.cpp" /* yacc.c:1646  */
+#line 2907 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 185:
-#line 545 "kawa.y" /* yacc.c:1646  */
+#line 551 "kawa.y" /* yacc.c:1646  */
     {KT_Addition* expression=new KT_Addition; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2911 "kawa.cpp" /* yacc.c:1646  */
+#line 2913 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 186:
-#line 546 "kawa.y" /* yacc.c:1646  */
+#line 552 "kawa.y" /* yacc.c:1646  */
     {KT_Substraction* expression=new KT_Substraction; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2917 "kawa.cpp" /* yacc.c:1646  */
+#line 2919 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 187:
-#line 547 "kawa.y" /* yacc.c:1646  */
+#line 553 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2923 "kawa.cpp" /* yacc.c:1646  */
+#line 2925 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 188:
-#line 550 "kawa.y" /* yacc.c:1646  */
+#line 556 "kawa.y" /* yacc.c:1646  */
     {KT_Multiplication* expression=new KT_Multiplication; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2929 "kawa.cpp" /* yacc.c:1646  */
+#line 2931 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 189:
-#line 551 "kawa.y" /* yacc.c:1646  */
+#line 557 "kawa.y" /* yacc.c:1646  */
     {KT_Division* expression =new KT_Division; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2935 "kawa.cpp" /* yacc.c:1646  */
+#line 2937 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 190:
-#line 552 "kawa.y" /* yacc.c:1646  */
+#line 558 "kawa.y" /* yacc.c:1646  */
     {KT_Modulo* expression= new KT_Modulo; expression->setLExpression((yyvsp[-2].kt_expression)); expression->setRExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2941 "kawa.cpp" /* yacc.c:1646  */
+#line 2943 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 191:
-#line 553 "kawa.y" /* yacc.c:1646  */
+#line 559 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2947 "kawa.cpp" /* yacc.c:1646  */
+#line 2949 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 192:
-#line 556 "kawa.y" /* yacc.c:1646  */
+#line 562 "kawa.y" /* yacc.c:1646  */
     {KT_NBinary* expression = new KT_NBinary; expression->setExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2953 "kawa.cpp" /* yacc.c:1646  */
+#line 2955 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 193:
-#line 557 "kawa.y" /* yacc.c:1646  */
+#line 563 "kawa.y" /* yacc.c:1646  */
     {KT_Negation* expression= new KT_Negation; expression->setExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2959 "kawa.cpp" /* yacc.c:1646  */
+#line 2961 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 194:
-#line 558 "kawa.y" /* yacc.c:1646  */
+#line 564 "kawa.y" /* yacc.c:1646  */
     {KT_Minus* expression= new KT_Minus; expression->setExpression((yyvsp[0].kt_expression)); (yyval.kt_expression)=expression;}
-#line 2965 "kawa.cpp" /* yacc.c:1646  */
+#line 2967 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 195:
-#line 559 "kawa.y" /* yacc.c:1646  */
+#line 565 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 2971 "kawa.cpp" /* yacc.c:1646  */
+#line 2973 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 196:
-#line 560 "kawa.y" /* yacc.c:1646  */
+#line 566 "kawa.y" /* yacc.c:1646  */
     {KT_PostDecrement* expression =new KT_PostDecrement; vector<string*> name; name.push_back((yyvsp[-1].vstring)); KT_ID* id=new KT_ID; id->setValue(name); expression->setExpression(id); (yyval.kt_expression)=expression;}
-#line 2977 "kawa.cpp" /* yacc.c:1646  */
+#line 2979 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 197:
-#line 561 "kawa.y" /* yacc.c:1646  */
+#line 567 "kawa.y" /* yacc.c:1646  */
     {KT_PreDecrement* expression =new KT_PreDecrement; vector<string*> name; name.push_back((yyvsp[0].vstring)); KT_ID* id=new KT_ID; id->setValue(name); expression->setExpression(id); (yyval.kt_expression)=expression;}
-#line 2983 "kawa.cpp" /* yacc.c:1646  */
+#line 2985 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 198:
-#line 562 "kawa.y" /* yacc.c:1646  */
+#line 568 "kawa.y" /* yacc.c:1646  */
     {KT_PostIncrement* expression =new KT_PostIncrement; vector<string*> name; name.push_back((yyvsp[-1].vstring)); KT_ID* id=new KT_ID; id->setValue(name); expression->setExpression(id); (yyval.kt_expression)=expression;}
-#line 2989 "kawa.cpp" /* yacc.c:1646  */
+#line 2991 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 199:
-#line 563 "kawa.y" /* yacc.c:1646  */
+#line 569 "kawa.y" /* yacc.c:1646  */
     {KT_PreIncrement* expression=new KT_PreIncrement; vector<string*> name; name.push_back((yyvsp[0].vstring)); KT_ID* id=new KT_ID; id->setValue(name); expression->setExpression(id); (yyval.kt_expression)=expression;}
-#line 2995 "kawa.cpp" /* yacc.c:1646  */
+#line 2997 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 200:
-#line 564 "kawa.y" /* yacc.c:1646  */
+#line 570 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 3001 "kawa.cpp" /* yacc.c:1646  */
+#line 3003 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 201:
-#line 567 "kawa.y" /* yacc.c:1646  */
+#line 573 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)= (yyvsp[-1].kt_expression);}
-#line 3007 "kawa.cpp" /* yacc.c:1646  */
+#line 3009 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 202:
-#line 568 "kawa.y" /* yacc.c:1646  */
+#line 574 "kawa.y" /* yacc.c:1646  */
     {KT_Entier* expression= new KT_Entier; expression->setValue((yyvsp[0].vint)); (yyval.kt_expression)=expression;}
-#line 3013 "kawa.cpp" /* yacc.c:1646  */
+#line 3015 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 203:
-#line 569 "kawa.y" /* yacc.c:1646  */
+#line 575 "kawa.y" /* yacc.c:1646  */
     {KT_Reel* expression = new KT_Reel; expression->setValue((yyvsp[0].vfloat)); (yyval.kt_expression)=expression;}
-#line 3019 "kawa.cpp" /* yacc.c:1646  */
+#line 3021 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 204:
-#line 570 "kawa.y" /* yacc.c:1646  */
+#line 576 "kawa.y" /* yacc.c:1646  */
     {KT_String* expression = new KT_String; expression->setValue((yyvsp[0].vstring)); (yyval.kt_expression)=expression;}
-#line 3025 "kawa.cpp" /* yacc.c:1646  */
+#line 3027 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 205:
-#line 571 "kawa.y" /* yacc.c:1646  */
+#line 577 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 3031 "kawa.cpp" /* yacc.c:1646  */
+#line 3033 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 206:
-#line 572 "kawa.y" /* yacc.c:1646  */
+#line 578 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_expression);}
-#line 3037 "kawa.cpp" /* yacc.c:1646  */
+#line 3039 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 207:
-#line 573 "kawa.y" /* yacc.c:1646  */
+#line 579 "kawa.y" /* yacc.c:1646  */
     {(yyval.kt_expression)=(yyvsp[0].kt_linkedMethodOrVarCall);}
-#line 3043 "kawa.cpp" /* yacc.c:1646  */
+#line 3045 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 208:
-#line 574 "kawa.y" /* yacc.c:1646  */
+#line 580 "kawa.y" /* yacc.c:1646  */
     {KT_Bool* expression= new KT_Bool; expression->setValue(true); (yyval.kt_expression)=expression; }
-#line 3049 "kawa.cpp" /* yacc.c:1646  */
+#line 3051 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 209:
-#line 575 "kawa.y" /* yacc.c:1646  */
+#line 581 "kawa.y" /* yacc.c:1646  */
     {KT_Bool* expression= new KT_Bool; expression->setValue(false); (yyval.kt_expression)=expression;}
-#line 3055 "kawa.cpp" /* yacc.c:1646  */
+#line 3057 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 210:
-#line 576 "kawa.y" /* yacc.c:1646  */
+#line 582 "kawa.y" /* yacc.c:1646  */
     {KT_Null* expression = new KT_Null; (yyval.kt_expression)=expression;}
-#line 3061 "kawa.cpp" /* yacc.c:1646  */
+#line 3063 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 211:
-#line 579 "kawa.y" /* yacc.c:1646  */
+#line 585 "kawa.y" /* yacc.c:1646  */
     {KT_ConstructorCall* expression =new KT_ConstructorCall; expression->addString((yyvsp[-2].vstring)); expression->addVectorString(*(yyvsp[-1].vectorString)); expression->setParams(*(yyvsp[0].vectorKT_ParamsMethodCall)); (yyval.kt_expression)=expression;}
-#line 3067 "kawa.cpp" /* yacc.c:1646  */
+#line 3069 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 212:
-#line 582 "kawa.y" /* yacc.c:1646  */
+#line 588 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[-1].vstring)); KT_MethodCall* expression =new KT_MethodCall; expression->setName(name); expression->setParams(*(yyvsp[0].vectorKT_ParamsMethodCall)); (yyval.kt_methodCall)=expression;}
-#line 3073 "kawa.cpp" /* yacc.c:1646  */
+#line 3075 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 213:
-#line 585 "kawa.y" /* yacc.c:1646  */
+#line 591 "kawa.y" /* yacc.c:1646  */
     {KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray->setDimension(1); vector<int> indexes; indexes.push_back((yyvsp[-1].vint)); KT_Type* type = new KT_Type; type->setBasicType(true); vector<string*> typeName; typeName.push_back((yyvsp[-3].vstring)); type->setTypeName(typeName); type->setArrayDim(0); KT_ArrayInitilizer* expression = new KT_ArrayInitilizer; expression->setIndexedArray(indexedArray); expression->setType(type); (yyval.kt_expression)=expression;}
-#line 3079 "kawa.cpp" /* yacc.c:1646  */
+#line 3081 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 214:
-#line 587 "kawa.y" /* yacc.c:1646  */
+#line 593 "kawa.y" /* yacc.c:1646  */
     {KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray->setDimension(1); vector<int> indexes; indexes.push_back((yyvsp[-1].vint)); KT_Type* type = new KT_Type; type->setBasicType(false); type->addString((yyvsp[-4].vstring)); type->addVectorString(*(yyvsp[-3].vectorString)); type->setArrayDim(0); KT_ArrayInitilizer* expression =new KT_ArrayInitilizer; expression->setIndexedArray(indexedArray); expression->setType(type); (yyval.kt_expression)=expression;}
-#line 3085 "kawa.cpp" /* yacc.c:1646  */
+#line 3087 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 215:
-#line 590 "kawa.y" /* yacc.c:1646  */
+#line 596 "kawa.y" /* yacc.c:1646  */
     {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back((yyvsp[-3].vstring)); ids.push_back((yyvsp[-1].vstring)); var->setValue(ids); (yyvsp[0].vectorKT_MethodOrVarCall)->push_back(var); KT_LinkedMethodOrVarCall* expression =new KT_LinkedMethodOrVarCall; expression->setMixedCall(*(yyvsp[0].vectorKT_MethodOrVarCall)); (yyval.kt_linkedMethodOrVarCall)=expression;}
-#line 3091 "kawa.cpp" /* yacc.c:1646  */
+#line 3093 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 216:
-#line 591 "kawa.y" /* yacc.c:1646  */
+#line 597 "kawa.y" /* yacc.c:1646  */
     {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back((yyvsp[-1].vstring)); var->setValue(ids); (yyvsp[0].vectorKT_MethodOrVarCall)->push_back(var); KT_LinkedMethodOrVarCall* expression =new KT_LinkedMethodOrVarCall; expression->setMixedCall(*(yyvsp[0].vectorKT_MethodOrVarCall)); (yyval.kt_linkedMethodOrVarCall)=expression;}
-#line 3097 "kawa.cpp" /* yacc.c:1646  */
+#line 3099 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 217:
-#line 592 "kawa.y" /* yacc.c:1646  */
+#line 598 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[-1].kt_methodCall)->setNameAddStringAtFirstPosition((yyvsp[-3].vstring));  (yyvsp[0].vectorKT_MethodOrVarCall)->push_back((yyvsp[-1].kt_methodCall)); KT_LinkedMethodOrVarCall* expression =new KT_LinkedMethodOrVarCall; expression->setMixedCall(*(yyvsp[0].vectorKT_MethodOrVarCall)); (yyval.kt_linkedMethodOrVarCall)=expression;}
-#line 3103 "kawa.cpp" /* yacc.c:1646  */
+#line 3105 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 218:
-#line 593 "kawa.y" /* yacc.c:1646  */
+#line 599 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[0].vectorKT_MethodOrVarCall)->push_back((yyvsp[-1].kt_methodCall)); KT_LinkedMethodOrVarCall* expression =new KT_LinkedMethodOrVarCall; expression->setMixedCall(*(yyvsp[0].vectorKT_MethodOrVarCall)); (yyval.kt_linkedMethodOrVarCall)=expression;}
-#line 3109 "kawa.cpp" /* yacc.c:1646  */
+#line 3111 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 219:
-#line 596 "kawa.y" /* yacc.c:1646  */
+#line 602 "kawa.y" /* yacc.c:1646  */
     {KT_ID* var=new KT_ID; vector<string*> ids; ids.push_back((yyvsp[-1].vstring)); var->setValue(ids); (yyvsp[0].vectorKT_MethodOrVarCall)->push_back(var); (yyval.vectorKT_MethodOrVarCall)=(yyvsp[0].vectorKT_MethodOrVarCall); }
-#line 3115 "kawa.cpp" /* yacc.c:1646  */
+#line 3117 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 220:
-#line 597 "kawa.y" /* yacc.c:1646  */
+#line 603 "kawa.y" /* yacc.c:1646  */
     {(yyvsp[0].vectorKT_MethodOrVarCall)->push_back((yyvsp[-1].kt_methodCall)); (yyval.vectorKT_MethodOrVarCall)=(yyvsp[0].vectorKT_MethodOrVarCall);}
-#line 3121 "kawa.cpp" /* yacc.c:1646  */
+#line 3123 "kawa.cpp" /* yacc.c:1646  */
     break;
 
   case 221:
-#line 598 "kawa.y" /* yacc.c:1646  */
+#line 604 "kawa.y" /* yacc.c:1646  */
     { vector<KT_MethodOrVarCall*>* vect; (yyval.vectorKT_MethodOrVarCall)=vect; }
-#line 3127 "kawa.cpp" /* yacc.c:1646  */
+#line 3129 "kawa.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 3131 "kawa.cpp" /* yacc.c:1646  */
+#line 3133 "kawa.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3355,7 +3357,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 602 "kawa.y" /* yacc.c:1906  */
+#line 608 "kawa.y" /* yacc.c:1906  */
 
 
 int yyerror( const char* err )

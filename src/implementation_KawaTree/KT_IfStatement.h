@@ -30,7 +30,7 @@ public:
     /**
      * @param KT_BlockStatement *
      */
-    void setBStatelent( KT_BlockStatement* var);
+    void setBStatement( KT_BlockStatement* var);
 	
 	
 private: 

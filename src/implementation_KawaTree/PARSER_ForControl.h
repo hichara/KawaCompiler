@@ -9,6 +9,7 @@
 #include "KT_Variable.h"
 #include "KT_Expression.h"
 #include "KT_IDExpression.h"
+#include "PARSER_Field.h"
 #include <stdio.h>
 #include <string>
 #include <vector>

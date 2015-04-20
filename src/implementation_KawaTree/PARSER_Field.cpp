@@ -53,6 +53,16 @@ void PARSER_Field::AddVariableAtFirstPosition(KT_Variable* var) {
 /**
  * @param vector<KT_Variable*>
  */
+void PARSER_Field::addVectorVariable(PARSER_Field* var){
+	vector<KT_Variable*> variable = var->getVariables();
+	for (vector<KT_Variable*>::iterator it = variable.begin(); it != variable.end(); ++it){
+		variables.push_back(*it);
+	}
+}
+
+/**
+ * @param vector<KT_Variable*>
+ */
 void PARSER_Field::addVectorVariable(vector<KT_Variable*>& var){
 	for (vector<KT_Variable*>::iterator it = var.begin(); it != var.end(); ++it){
 		variables.push_back(*it);

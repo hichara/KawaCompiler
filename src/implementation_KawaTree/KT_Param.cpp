@@ -33,6 +33,20 @@ KT_Modifier* KT_Param::getParamModifier() {
 }
 
 /**
+ * @return string *
+ */
+KT_Variable* KT_Param::toVariable() {
+    KT_Variable* var;
+    vector<string*> name; 
+    name.push_back(this->name);
+    var->setName(name);
+    var->setType(paramType);
+    KT_Expression* exp = new KT_Expression;
+    var->setValue(exp);
+    return var; 
+}
+
+/**
  * @param string *
  */
 void KT_Param::setName(string* var) {

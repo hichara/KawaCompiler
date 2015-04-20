@@ -2671,7 +2671,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 96 "kawa.y" /* yacc.c:1909  */
+#line 100 "kawa.y" /* yacc.c:1909  */
 
 	bool vbool;
 	int vint;
@@ -2770,8 +2770,10 @@ union YYSTYPE
 	vector<PARSER_MemberDec*>* vectorPARSER_MemberDec;
 	vector<KT_Statement*>* vectorKT_Statement;
 	vector<KT_FactFinal*>* vectorKT_FactFinal;
+	vector<KT_SwitchBlockStatement*>* vectorKT_SwitchBlockStatement;
+	vector<KT_IDExpression*>* vectorKT_IDExpression;
 
-#line 233 "kawa.hpp" /* yacc.c:1909  */
+#line 235 "kawa.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

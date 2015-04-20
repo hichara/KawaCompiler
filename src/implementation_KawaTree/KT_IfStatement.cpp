@@ -40,6 +40,6 @@ void KT_IfStatement::setCondition(KT_Expression* var) {
 /**
  * @param KT_BlockStatement *
  */
-void KT_IfStatement::setBStatelent(KT_BlockStatement* var) {
+void KT_IfStatement::setBStatement(KT_BlockStatement* var) {
 	this-> bStatement= var;
 }

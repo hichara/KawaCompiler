@@ -41,6 +41,11 @@ public:
     void AddVariableAtFirstPosition(KT_Variable* var);    
 
     /**
+     * @param PARSER_Field*
+     */
+    void addVectorVariable(PARSER_Field* var);
+
+    /**
      * @param vector<KT_Variable*>
      */
     void addVectorVariable(vector<KT_Variable*>& var);

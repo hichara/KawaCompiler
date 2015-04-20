@@ -10,6 +10,7 @@
 #include "KT_VarOrAttr.h"
 #include "KT_Expression.h"
 #include "KT_IndexedArray.h"
+#include "SemanticVisitor.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -47,6 +48,8 @@ public:
      * @param KT_IndexedArray*
      */
     void setIndexedArray(KT_IndexedArray* var);
+
+    void accept(SemanticVisitor* visitor);
 	
 private: 
     KT_VarOrAttr* reference;

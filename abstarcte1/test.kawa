@@ -1,0 +1,29 @@
+
+public class test {
+	
+	public static void main(String[] args) {
+		/*
+		 * doit aussi me generer une erreur si on enleve les commentaires
+		 * Animal a = new Animal();
+		 * */
+		 Loup l = new Loup("Gris bleuté", 20);
+		printString(l.toString());
+		    l.boire();
+		    l.manger();
+		    l.deplacement();
+		    l.crier();
+		   
+		    
+		   printString("***************************************");
+
+		  Chien c = new Chien("blanc", 30);
+		 printString(c.toString());
+		      c.boire();
+		      c.manger();
+		      c.deplacement();
+		      c.crier();
+			    
+
+	}
+
+}

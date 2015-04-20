@@ -16,11 +16,11 @@ std::string NameBuilder::buildFunctionName(std::string className,
 	if(name == "")
 		return "";
 
-	result << className << '.' << name << "_ret:";
+	result << className << '.' << name << "_rt_";
 	result << strToKawaType(ret_type);
 
 	if (list_type.size() == 0) {
-		result << "+" << KAWA_VOID;
+		result << "_" << KAWA_VOID;
 		result.str();
 	}
 
@@ -31,7 +31,7 @@ std::string NameBuilder::buildFunctionName(std::string className,
 		if(tmp == "")
 			return "";
 
-		result << result.str() << "+" << tmp;
+		result << result.str() << "_" << tmp;
 	}
 
 	if(isStatic)
@@ -53,7 +53,7 @@ std::string NameBuilder::buildConstructorName(std::string className,
 	result << CONSTRUCTOR_PREFIX << className;
 
 	if (list_type.size() == 0) {
-		result << "+" << KAWA_VOID;
+		result << "_pt_" << KAWA_VOID;
 
 		return result.str();
 	}
@@ -62,7 +62,7 @@ std::string NameBuilder::buildConstructorName(std::string className,
 
 		tmp = strToKawaType(list_type[i]);
 
-		result << "+" << tmp;
+		result << "_pt_" << tmp;
 	}
 
 	return result.str();
@@ -80,7 +80,7 @@ std::string NameBuilder::buildSubConstructorName(std::string className,
 	result << SUB_CONSTRUCTOR_PREFIX << className;
 
 	if (list_type.size() == 0) {
-		result << "+" << KAWA_VOID;
+		result << "_pt_" << KAWA_VOID;
 
 		return result.str();
 	}
@@ -89,7 +89,7 @@ std::string NameBuilder::buildSubConstructorName(std::string className,
 
 		tmp = strToKawaType(list_type[i]);
 
-		result << "+" << tmp;
+		result << "_pt_" << tmp;
 	}
 
 	return result.str();	

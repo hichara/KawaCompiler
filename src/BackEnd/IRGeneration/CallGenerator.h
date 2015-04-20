@@ -31,6 +31,9 @@ class CallGenerator {
 
 public:
 
+	static Value* createCallFromTable(Module *module, Function *Fstatic,
+			 Value *table, Value* index, std::vector<Value*> args, BasicBlock *b);
+
 	/**
 	*
 	*/
@@ -57,11 +60,6 @@ public:
 	* L'argument src doit être de type i8*
 	*/
 	static Value *createPrintCall(Module *module, Value *str, BasicBlock *b);
-
-	/**
-	*  Appal le constructeur.
-	*/
-	static Value *callConstructor(Module *module, std::vector<Value*> args, BasicBlock *b);
 };
 
 

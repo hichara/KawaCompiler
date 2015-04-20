@@ -9,7 +9,7 @@
 
 
 
-BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name, bool isStatic = true) {
+BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string> args_name, bool addThis = true) {
 
   BasicBlock *b = BasicBlock::Create(f->getContext(), "entry", f);  
   IRBuilder<> builder(f->getContext());
@@ -17,7 +17,7 @@ BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string
 
   std::vector<std::string> real_args(args_name);
 
-  if(!isStatic) {
+  if(!addThis) {
 	  real_args.insert(real_args.begin(), "this");  	
   }
 
@@ -26,7 +26,7 @@ BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string
 
   for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
        ++AI, ++Idx) {
-  	Value *v = builder.CreateAlloca(AI->getType(), AI, real_args[Idx]);
+  	Value *v = builder.CreateAlloca(AI->getType(), NULL, real_args[Idx]);
   	builder.CreateStore(AI, v);
   }
   
@@ -154,11 +154,6 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	argtypes.insert(argtypes.begin() ,classType->getPointerTo());
 	sub_cons_ftype = FunctionType::get(voidTy, argtypes, false);
 
-	cons_ftype->dump();
-	std::cerr << "\n";
-
-	sub_cons_ftype->dump();
-
 	cons_f = Function::Create(cons_ftype, Function::ExternalLinkage, consName, module);
 	sub_cons_f = Function::Create(sub_cons_ftype, Function::ExternalLinkage, subConsName, module);
 
@@ -170,7 +165,16 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 
 
 	//Instanciation du nouvel objet
-	Value *instance = builder.CreateAlloca (classType, NULL, "instance");
+	Value *instance = builder.CreateAlloca(classType, NULL, "this");
+	Function* fadH = FunctionGenerator::getAdHocTableFunction(module, className, className);
+	std::vector<Value*> indx, empty;
+
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));
+
+	Value *table = builder.CreateCall(fadH, empty, "");
+	Value *adHoc = builder.CreateGEP(instance, indx);
+	builder.CreateStore(table, adHoc);
 	//insertion de la table adHoc a faire
 
 	//Appel de la fonction d'initiallisation
@@ -185,9 +189,7 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 
 	builder.CreateRet(instance);
 
-///	f = sub_cons_f;
-
-	return f;	
+	return sub_cons_f;	
 }
 
 Function* FunctionGenerator::getFunction(Module *module, std::string name) {
@@ -549,7 +551,7 @@ Function* FunctionGenerator::getAdHocTableFunction(Module *module,
 
 	std::string name = NameBuilder::buildgetAdHocTableFunction(nameStatic, nameDyn);
 
-	Function *f =FunctionGenerator::getFunction(module, name);
+	Function *f = FunctionGenerator::getFunction(module, name);
 
 	if(f != NULL)
 		return f;
@@ -568,7 +570,7 @@ Function* FunctionGenerator::createAdHocTableFunction(Module *module,
 
 	Function *f = FunctionGenerator::getAdHocTableFunction(module, nameStatic, nameDyn);
 
-	f->deleteBody();
+//	f->deleteBody();
 
 	BasicBlock * b = BasicBlock::Create(module->getContext(), "entry", f);
 
@@ -576,7 +578,9 @@ Function* FunctionGenerator::createAdHocTableFunction(Module *module,
 	Value *v = GlobalVariableGenerator::getAdHocTable(module, nameStatic, nameDyn);
 
 	IRBuilder<> builder(module->getContext());
-	builder.CreateRet(v);
+	builder.SetInsertPoint(b);
+	Value* ret = builder.CreateBitCast(v, Type::getInt8Ty(module->getContext())->getPointerTo()->getPointerTo());
+	builder.CreateRet(ret);
 
 	return f;
 }

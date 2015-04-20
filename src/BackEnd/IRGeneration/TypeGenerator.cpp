@@ -19,10 +19,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 	   isStatic.size() != att_names.size())
 		return NULL;
 
-    std::string name_class =
-    	NameBuilder::buildClassTypeName(className);
-
-    StructType *maClass = (StructType*)strToLLVMType(module, name_class);
+    StructType *maClass = (StructType*)strToLLVMType(module, className);
 
 	if(!maClass->isOpaque())
 		KawaUtilitary::stopGenerationIR(ERROR_CLASS_AREADY_EXIST);
@@ -71,7 +68,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 
     std::vector<Type*> ar2;	
     ar2.push_back(maClassStruct->getPointerTo());
-    ar2.push_back(Type::getInt8Ty(context)->getPointerTo());
+    ar2.push_back(Type::getInt8Ty(context)->getPointerTo()->getPointerTo());
 
     maClass->setBody(ar2);
 
@@ -104,7 +101,7 @@ Type *TypeGenerator::strToLLVMType(Module *module, std::string type) {
 	if(type == STRING)
 		return Type::getInt8Ty(context)->getPointerTo();
 
-	std::string lt = KAWA_CLASS_PREFIX + type;
+	std::string lt = NameBuilder::buildClassTypeName(type);
 
 	Type *t = module->getTypeByName(lt);
 

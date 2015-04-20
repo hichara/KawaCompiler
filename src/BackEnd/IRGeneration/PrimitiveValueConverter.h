@@ -29,6 +29,7 @@ class PrimitiveValueConverter {
 
 public:
 	static Value* convertFromTo(Type *t1, Type *t2, Value *v, BasicBlock *b);
+	static Value* convertToStr(Value *o1, BasicBlock *b);
 
 private:
 	static Value* convertFromIntToInt(Value *v, BasicBlock *b);
@@ -43,13 +44,12 @@ private:
 	static Value* convertFromDoubleToFloat(Value *v, BasicBlock *b);
 	static Value* convertFromDoubleToDouble(Value *v, BasicBlock *b);
 
-	static Value* convertFromIntToStr(Value *v, BasicBlock *b);
-	static Value* convertFromDoubleToStr(Value *v, BasicBlock *b);
+//	static Value* convertFromIntToStr(Value *v, BasicBlock *b);
+//	static Value* convertFromDoubleToStr(Value *v, BasicBlock *b);
 
-	static Value* convertToStr(Value *o1, BasicBlock *b);
-	static Value* convertIntToStr(Value *o1, BasicBlock *b);
-	static Value* convertCharToStr(Value *o1, BasicBlock *b);
-	static Value* convertDoubleToStr(Value *o1, BasicBlock *b);
+//	static Value* convertIntToStr(Value *o1, BasicBlock *b);
+//	static Value* convertCharToStr(Value *o1, BasicBlock *b);
+//	static Value* convertDoubleToStr(Value *o1, BasicBlock *b);
 };
 
 

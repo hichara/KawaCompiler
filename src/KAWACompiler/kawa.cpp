@@ -1810,7 +1810,7 @@ yyreduce:
     {
         case 2:
 #line 222 "kawa.y" /* yacc.c:1646  */
-    { (yyval.kt_program)= new KT_Program; (yyvsp[-1].kt_class)->setModifier((yyvsp[-2].kt_modifier)); (yyvsp[-1].kt_class)->setImports(*(yyvsp[-3].vectorVecorString)); (yyval.kt_program)->addPackageWithClass((yyvsp[-4].kt_package), (yyvsp[-1].kt_class));}
+    { (yyval.kt_program)= new KT_Program; (yyvsp[-1].kt_class)->setModifier((yyvsp[-2].kt_modifier)); (yyvsp[-1].kt_class)->setImports(*(yyvsp[-3].vectorVecorString)); (yyval.kt_program)->addPackageWithClass((yyvsp[-4].kt_package), (yyvsp[-1].kt_class)); string* name = (yyvsp[-1].kt_class)->getName(); cout<<*name<<endl;}
 #line 1815 "kawa.cpp" /* yacc.c:1646  */
     break;
 

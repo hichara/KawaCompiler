@@ -219,7 +219,7 @@ using namespace std;
 %start Program;
 %%
 
-Program : Package ImportDeclaration Modifiers ClassDeclaration Program { $$= new KT_Program; $4->setModifier($3); $4->setImports(*$2); $$->addPackageWithClass($1, $4);}
+Program : Package ImportDeclaration Modifiers ClassDeclaration Program { $$= new KT_Program; $4->setModifier($3); $4->setImports(*$2); $$->addPackageWithClass($1, $4); string* name = $4->getName(); cout<<*name<<endl;}
 		| Package ImportDeclaration Modifiers InterfaceDeclaration Program{ $$= new KT_Program; $4->setModifier($3); $4->setImports(*$2);$$->addPackageWithInterface($1, $4);}
 		| {$$= new KT_Program;}		
 		;

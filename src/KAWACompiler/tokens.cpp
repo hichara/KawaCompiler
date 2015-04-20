@@ -369,8 +369,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 109
-#define YY_END_OF_BUFFER 110
+#define YY_NUM_RULES 108
+#define YY_END_OF_BUFFER 109
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -380,24 +380,24 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[307] =
     {   0,
-        0,    0,  110,  108,  107,  106,   79,  108,   62,   80,
-       92,   93,   60,   58,   99,   59,   98,   61,    1,  103,
-      100,   73,   63,   75,  102,   56,   96,   97,   84,  108,
+        0,    0,  109,  107,  106,  105,   78,  107,   61,   79,
+       91,   92,   59,   58,   98,  107,   97,   60,    1,  102,
+       99,   72,   62,   74,  101,   56,   95,   96,   83,  107,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
-       56,   56,   56,   56,   56,   94,   82,   95,  101,   72,
-        0,   57,   68,   78,   81,   66,   69,   64,   70,   65,
-        0,    0,   67,    0,    1,    0,   86,   74,   71,   76,
-       88,   56,   85,   56,   56,   56,   56,   56,   56,   56,
+       56,   56,   56,   56,   56,   93,   81,   94,  100,   71,
+        0,   57,   67,   77,   80,   65,   68,   63,   69,   64,
+        0,    0,   66,    0,    1,    0,   85,   73,   70,   75,
+       87,   56,   84,   56,   56,   56,   56,   56,   56,   56,
        56,   56,   56,   44,   56,   56,   56,   56,   56,   56,
        56,   33,   56,   56,   56,   56,   56,   56,   56,   56,
 
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
-       56,   83,   77,    0,    0,    0,  104,    2,    2,   87,
-       89,   90,   56,   56,   56,   56,   56,   56,   56,   56,
+       56,   82,   76,    0,    0,    0,  103,    2,    2,   86,
+       88,   89,   56,   56,   56,   56,   56,   56,   56,   56,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   42,
        56,   56,    5,   56,   47,   56,   56,   56,   56,   56,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
-       31,   56,   56,   56,  105,   91,   56,   56,   56,    9,
+       31,   56,   56,   56,  104,   90,   56,   56,   56,    9,
        38,   56,   10,   56,   56,   56,   56,   56,   34,   14,
        56,   56,   56,   56,   56,   56,   56,   56,    6,   48,
        56,   56,   56,   56,   56,   56,   56,   56,   56,   56,
@@ -661,19 +661,13 @@ int file_num=0, file_num_max=0;
 char **files;
 
 inline int strToken( int token ){
-    yylval.vstring = new std::string( yytext, yyleng );
-    /*
-    if( debugTokens ){
-        printf("TOKEN\tIDENTIFIER\t%d\t%s\n", token, yytext);
-    }
-    */
-
+    string* st = new std::string(yytext, yyleng); yylval.vstring = st; 
     return token;
 }
 
 int column=1; int lineno=1;
 
-/* Fonction qui compte les colonnes et lignes pour préciser la position d'un erreur */ 
+/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */ 
 void count() {
   int i;
   column += strlen(yytext);
@@ -687,7 +681,7 @@ void count() {
   }
 }
 
-#line 691 "tokens.cpp"
+#line 685 "tokens.cpp"
 
 #define INITIAL 0
 
@@ -874,9 +868,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 46 "tokens.l"
+#line 40 "tokens.l"
 
-#line 880 "tokens.cpp"
+#line 874 "tokens.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -961,553 +955,549 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 47 "tokens.l"
+#line 41 "tokens.l"
 {count(); yylval.vint=atof(yytext); return(ENTIER); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 48 "tokens.l"
-{count(); yylval.vint=atof(yytext); return(REEL); }
+#line 42 "tokens.l"
+{count(); yylval.vfloat=atof(yytext); return(REEL); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 50 "tokens.l"
-{count(); return (TSTRING);}
+#line 44 "tokens.l"
+{count(); return strToken(TSTRING);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 51 "tokens.l"
-{count(); return (TSHORT);}
+#line 45 "tokens.l"
+{count(); return strToken(TSHORT);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 52 "tokens.l"
-{count(); return (TINT);}
+#line 46 "tokens.l"
+{count(); return strToken(TINT);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 53 "tokens.l"
-{count(); return (TLONG);}
+#line 47 "tokens.l"
+{count(); return strToken(TLONG);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 54 "tokens.l"
-{count(); return (TFLOAT);}
+#line 48 "tokens.l"
+{count(); return strToken(TFLOAT);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 55 "tokens.l"
-{count(); return (TDOUBLE);}
+#line 49 "tokens.l"
+{count(); return strToken(TDOUBLE);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 56 "tokens.l"
-{count(); return (TBYTE);}
+#line 50 "tokens.l"
+{count(); return strToken(TBYTE);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 57 "tokens.l"
-{count(); return (TCHAR);}
+#line 51 "tokens.l"
+{count(); return strToken(TCHAR);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 58 "tokens.l"
-{count(); return (TBOOLEAN);}
+#line 52 "tokens.l"
+{count(); return strToken(TBOOLEAN);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 59 "tokens.l"
-{count(); return (TVOID);}
+#line 53 "tokens.l"
+{count(); return strToken(TVOID);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 60 "tokens.l"
-{count(); /*return (TCONST);*/}
+#line 54 "tokens.l"
+{count(); /**return strToken(TCONST);**/}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 61 "tokens.l"
-{count(); /*return (TENUM);*/}
+#line 55 "tokens.l"
+{count(); /**return strToken(TENUM);**/}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 62 "tokens.l"
-{count(); return (TVALUE);}
+#line 56 "tokens.l"
+{count(); return strToken(TVALUE);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 63 "tokens.l"
-{count(); return (TIMPORT);}
+#line 57 "tokens.l"
+{count(); return strToken(TIMPORT);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 64 "tokens.l"
-{count(); return (TPUBLIC);}
+#line 58 "tokens.l"
+{count(); return strToken(TPUBLIC);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 65 "tokens.l"
-{count(); return (TPRIVATE);}
+#line 59 "tokens.l"
+{count(); return strToken(TPRIVATE);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 66 "tokens.l"
-{count(); return (TPROTECTED);}
+#line 60 "tokens.l"
+{count(); return strToken(TPROTECTED);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 67 "tokens.l"
-{count(); return (TFINAL);}
+#line 61 "tokens.l"
+{count(); return strToken(TFINAL);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 68 "tokens.l"
-{count(); return (TABSTRACT);}
+#line 62 "tokens.l"
+{count(); return strToken(TABSTRACT);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 69 "tokens.l"
-{count(); return (TSTATIC);}
+#line 63 "tokens.l"
+{count(); return strToken(TSTATIC);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 70 "tokens.l"
-{count(); return (TCLASS);}
+#line 64 "tokens.l"
+{count(); return strToken(TCLASS);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 71 "tokens.l"
-{count(); return (TINTERFACE);}
+#line 65 "tokens.l"
+{count(); return strToken(TINTERFACE);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 72 "tokens.l"
-{count(); return (TEXTENDS);}
+#line 66 "tokens.l"
+{count(); return strToken(TEXTENDS);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 73 "tokens.l"
-{count(); return (TIMPLEMENTS);}
+#line 67 "tokens.l"
+{count(); return strToken(TIMPLEMENTS);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 74 "tokens.l"
-{count(); return (TSUPER);}
+#line 68 "tokens.l"
+{count(); return strToken(TSUPER);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 75 "tokens.l"
-{count(); return (TTHIS);}
+#line 69 "tokens.l"
+{count(); return strToken(TTHIS);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 76 "tokens.l"
-{count(); /*return (TTHROW);*/}
+#line 70 "tokens.l"
+{count(); /**return strToken(TTHROW);**/}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 77 "tokens.l"
-{count(); /*return (TTHROWS);*/}
+#line 71 "tokens.l"
+{count(); /**return strToken(TTHROWS);**/}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 78 "tokens.l"
-{count(); /*return (TTRY);*/}
+#line 72 "tokens.l"
+{count(); /**return strToken(TTRY);**/}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 79 "tokens.l"
-{count(); /*return (TCATCH);*/}
+#line 73 "tokens.l"
+{count(); /**return strToken(TCATCH);**/}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 80 "tokens.l"
-{count(); return (TIF);}
+#line 74 "tokens.l"
+{count(); return strToken(TIF);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 81 "tokens.l"
-{count(); return (TELSE);}
+#line 75 "tokens.l"
+{count(); return strToken(TELSE);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 82 "tokens.l"
-{count(); return (TFALSE);}
+#line 76 "tokens.l"
+{count(); return strToken(TFALSE);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 83 "tokens.l"
-{count(); return (TTRUE);}
+#line 77 "tokens.l"
+{count(); return strToken(TTRUE);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 84 "tokens.l"
-{count(); return (TSWITCH);}
+#line 78 "tokens.l"
+{count(); return strToken(TSWITCH);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 85 "tokens.l"
-{count(); return (TCASE);}
+#line 79 "tokens.l"
+{count(); /**return strToken(TCASE);*/}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 86 "tokens.l"
-{count(); return (TCONTINUE);}
+#line 80 "tokens.l"
+{count(); return strToken(TCONTINUE);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 87 "tokens.l"
-{count(); return (TBREAK);}
+#line 81 "tokens.l"
+{count(); return strToken(TBREAK);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 88 "tokens.l"
-{count(); return (TDEFAULT);}
+#line 82 "tokens.l"
+{count(); return strToken(TDEFAULT);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 89 "tokens.l"
-{count(); return (TFOR);}
+#line 83 "tokens.l"
+{count(); return strToken(TFOR);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 90 "tokens.l"
-{count(); return (TWHILE);}
+#line 84 "tokens.l"
+{count(); return strToken(TWHILE);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 91 "tokens.l"
-{count(); return (TDO);}
+#line 85 "tokens.l"
+{count(); return strToken(TDO);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 92 "tokens.l"
-{count(); /*return (TINSTANCEOF);*/}
+#line 86 "tokens.l"
+{count(); /**return strToken(TINSTANCEOF);**/}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 93 "tokens.l"
-{count(); /*return (TFINALLY);*/}
+#line 87 "tokens.l"
+{count(); /**return strToken(TFINALLY);**/}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 94 "tokens.l"
-{count(); return (TNEW);}
+#line 88 "tokens.l"
+{count(); return strToken(TNEW);}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 95 "tokens.l"
-{count(); return (TNULL);}
+#line 89 "tokens.l"
+{count(); return strToken(TNULL);}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 96 "tokens.l"
-{count(); return (TRETURN);}
+#line 90 "tokens.l"
+{count(); return strToken(TRETURN);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 97 "tokens.l"
-{count(); /*return (TSYNCHRONIZED);*/}
+#line 91 "tokens.l"
+{count(); /**return strToken(TSYNCHRONIZED);**/}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 98 "tokens.l"
-{count(); return (TPRINTS);}
+#line 92 "tokens.l"
+{count(); return strToken(TPRINTS);}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 99 "tokens.l"
-{count(); return (TPRINTI);}
+#line 93 "tokens.l"
+{count(); return strToken(TPRINTI);}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 100 "tokens.l"
-{count(); return (TPRINTF);}
+#line 94 "tokens.l"
+{count(); return strToken(TPRINTF);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 101 "tokens.l"
-{count(); return (TPRINT);}
+#line 95 "tokens.l"
+{count(); return strToken(TPRINT);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 102 "tokens.l"
-{count(); return (TPACKAGE);}
+#line 96 "tokens.l"
+{count(); return strToken(TPACKAGE);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 104 "tokens.l"
-{count(); return strToken(ID); }
+#line 98 "tokens.l"
+{count(); /*string* st = new std::string(yytext, yyleng); yylval.vstring = st; */ return strToken(ID); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 107 "tokens.l"
-{count(); return (STRING);}
+#line 101 "tokens.l"
+{count(); /*return strToken(STRING);*/}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 108 "tokens.l"
-{count(); return ('+');}
+#line 102 "tokens.l"
+{count(); /*return ('+');}
+"-"             {count(); /*return ('-');*/}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 109 "tokens.l"
-{count(); return ('-');}
+#line 104 "tokens.l"
+{count(); return ('*');}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 110 "tokens.l"
-{count(); return ('*');}
+#line 105 "tokens.l"
+{count(); /*return ('/');*/}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 111 "tokens.l"
-{count(); return ('/');}
+#line 106 "tokens.l"
+{count(); /*return ('%');*/}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 112 "tokens.l"
-{count(); return ('%');}
+#line 107 "tokens.l"
+{count(); /*return ('=');*/}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 113 "tokens.l"
-{count(); return ('=');}
+#line 108 "tokens.l"
+{count(); /*return strToken(TPLUSEQ);*/}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 114 "tokens.l"
-{count(); return (TPLUSEQ);/**/}
+#line 109 "tokens.l"
+{count(); /*return strToken(TMINUSEQ);*/}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 115 "tokens.l"
-{count(); return (TMINUSEQ);/**/}
+#line 110 "tokens.l"
+{count(); /*return strToken(TMULEQ);*/}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 116 "tokens.l"
-{count(); return (TMULEQ);/**/}
+#line 111 "tokens.l"
+{count(); /*return strToken(TDIVEQ);*/}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 117 "tokens.l"
-{count(); return (TDIVEQ);/**/}
+#line 112 "tokens.l"
+{count(); /*return strToken(TMODEQ);*/}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 118 "tokens.l"
-{count(); return (TMODEQ);/**/}
+#line 113 "tokens.l"
+{count(); /*return strToken(TINC);*/}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 119 "tokens.l"
-{count(); return (TINC);}
+#line 114 "tokens.l"
+{count(); /*return strToken(TDEC);*/}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 120 "tokens.l"
-{count(); return (TDEC);}
+#line 115 "tokens.l"
+{count(); /*return strToken(TCEQ);*/}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 121 "tokens.l"
-{count(); return (TCEQ);}
+#line 116 "tokens.l"
+{count(); /*return strToken(TCNE);*/}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 122 "tokens.l"
-{count(); return (TCNE);}
+#line 117 "tokens.l"
+{count(); /*return ('<');*/}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 123 "tokens.l"
-{count(); return ('<');}
+#line 118 "tokens.l"
+{count(); /*return strToken(TCLE);*/}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 124 "tokens.l"
-{count(); return (TCLE);}
+#line 119 "tokens.l"
+{count(); /*return ('>');*/}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 125 "tokens.l"
-{count(); return ('>');}
+#line 120 "tokens.l"
+{count(); /*return strToken(TCGE);*/}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 126 "tokens.l"
-{count(); return (TCGE);}
+#line 121 "tokens.l"
+{count(); /*return strToken(TOR);*/}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 127 "tokens.l"
-{count(); return (TOR);}
+#line 122 "tokens.l"
+{count(); /*return strToken(TAND);*/}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 128 "tokens.l"
-{count(); return (TAND);}
+#line 123 "tokens.l"
+{count(); /*return ('!');*/}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 129 "tokens.l"
-{count(); return ('!');}
+#line 124 "tokens.l"
+{count(); /*return ('&');*/}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 130 "tokens.l"
-{count(); return ('&');}
+#line 125 "tokens.l"
+{count(); /*return strToken(TANDBINEQ);*/}
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 131 "tokens.l"
-{count(); return (TANDBINEQ);/**/}
+#line 126 "tokens.l"
+{count(); /*return ('|');*/}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 132 "tokens.l"
-{count(); return ('|');}
+#line 127 "tokens.l"
+{count(); /*return strToken(TORBINEQ);*/}
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 133 "tokens.l"
-{count(); return (TORBINEQ);/**/}
+#line 128 "tokens.l"
+{count(); /*return ('^');*/}
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 134 "tokens.l"
-{count(); return ('^');}
+#line 129 "tokens.l"
+{count(); /*return strToken(TXORBINEQ);*/}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 135 "tokens.l"
-{count(); return (TXORBINEQ);/**/}
+#line 130 "tokens.l"
+{count(); /*return strToken(TDECAL);*/}
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 136 "tokens.l"
-{count(); return (TDECAL);/**/}
+#line 131 "tokens.l"
+{count(); /*return strToken(TDECALEQ);*/}
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 137 "tokens.l"
-{count(); return (TDECALEQ);/**/}
+#line 132 "tokens.l"
+{count(); /*return strToken(TDECAR);*/}
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 138 "tokens.l"
-{count(); return (TDECAR);/**/}
+#line 133 "tokens.l"
+{count(); /*return strToken(TDECAREQ);*/}
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 139 "tokens.l"
-{count(); return (TDECAREQ);/**/}
+#line 134 "tokens.l"
+{count(); /*return strToken(TDECALNS);*/}
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 140 "tokens.l"
-{count(); return (TDECALNS);/**/}
+#line 135 "tokens.l"
+{count(); /*return strToken(TDECALNSEQ);*/}
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 141 "tokens.l"
-{count(); return (TDECALNSEQ);/**/}
+#line 136 "tokens.l"
+{count(); /*return ('(');*/}
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 142 "tokens.l"
-{count(); return ('(');}
+#line 137 "tokens.l"
+{count(); /*return (')');*/}
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 143 "tokens.l"
-{count(); return (')');}
+#line 138 "tokens.l"
+{count(); /*return ('{');*/}
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 144 "tokens.l"
-{count(); return ('{');}
+#line 139 "tokens.l"
+{count(); /*return ('}');*/}
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 145 "tokens.l"
-{count(); return ('}');}
+#line 140 "tokens.l"
+{count(); /*return ('[');*/}
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 146 "tokens.l"
-{count(); return ('[');}
+#line 141 "tokens.l"
+{count(); /*return (']');*/}
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 147 "tokens.l"
-{count(); return (']');}
+#line 142 "tokens.l"
+{count(); return ('.');}
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 148 "tokens.l"
-{count(); return ('.');}
+#line 143 "tokens.l"
+{count(); /*return (',');*/}
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 149 "tokens.l"
-{count(); return (',');}
+#line 144 "tokens.l"
+{count(); return (';');}
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 150 "tokens.l"
-{count(); return (';');}
+#line 145 "tokens.l"
+{count(); /*return ('~');*/}
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 151 "tokens.l"
-{count(); return ('~');}
+#line 146 "tokens.l"
+{count(); /*return ('?');*/}
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 152 "tokens.l"
-{count(); return ('?');}
+#line 147 "tokens.l"
+{count(); /*return (':');*/}
 	YY_BREAK
 case 103:
+/* rule 103 can match eol */
 YY_RULE_SETUP
-#line 153 "tokens.l"
-{count(); return (':');}
+#line 148 "tokens.l"
+{count();}
 	YY_BREAK
 case 104:
 /* rule 104 can match eol */
 YY_RULE_SETUP
-#line 154 "tokens.l"
+#line 149 "tokens.l"
 {count();}
 	YY_BREAK
 case 105:
 /* rule 105 can match eol */
 YY_RULE_SETUP
-#line 155 "tokens.l"
+#line 150 "tokens.l"
 {count();}
 	YY_BREAK
 case 106:
-/* rule 106 can match eol */
 YY_RULE_SETUP
-#line 156 "tokens.l"
+#line 151 "tokens.l"
 {count();}
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 157 "tokens.l"
-{count();}
+#line 152 "tokens.l"
+{count(); printf("TOKEN inconnu!\n"); yyterminate();}
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 158 "tokens.l"
-{count(); printf("TOKEN inconnu!\n"); yyterminate();}
-	YY_BREAK
-case 109:
-YY_RULE_SETUP
-#line 160 "tokens.l"
+#line 154 "tokens.l"
 ECHO;
 	YY_BREAK
-#line 1511 "tokens.cpp"
+#line 1501 "tokens.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2505,7 +2495,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 160 "tokens.l"
+#line 154 "tokens.l"
 
 
 int main( int argc, char** argv ){ 

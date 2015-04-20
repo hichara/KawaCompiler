@@ -12,19 +12,13 @@ int file_num=0, file_num_max=0;
 char **files;
 
 inline int strToken( int token ){
-    yylval.vstring = new std::string( yytext, yyleng );
-    /*
-    if( debugTokens ){
-        printf("TOKEN\tIDENTIFIER\t%d\t%s\n", token, yytext);
-    }
-    */
-
+    string* st = new std::string(yytext, yyleng); yylval.vstring = st; 
     return token;
 }
 
 int column=1; int lineno=1;
 
-/* Fonction qui compte les colonnes et lignes pour préciser la position d'un erreur */ 
+/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */ 
 void count() {
   int i;
   column += strlen(yytext);
@@ -45,112 +39,112 @@ FLOAT [0-9]+(\.[0-9]+)?(e[0-9]+)?
 ID [_]?[a-zA-Z][a-zA-Z0-9]*
 %%
 {INT} {count(); yylval.vint=atof(yytext); return(ENTIER); }
-{FLOAT} {count(); yylval.vint=atof(yytext); return(REEL); }
+{FLOAT} {count(); yylval.vfloat=atof(yytext); return(REEL); }
 
-"string"        {count(); return (TSTRING);}
-"short"					{count(); return (TSHORT);}
-"int"					  {count(); return (TINT);}
-"long"					{count(); return (TLONG);}
-"float"					{count(); return (TFLOAT);}
-"double"				{count(); return (TDOUBLE);}
-"byte"					{count(); return (TBYTE);}
-"char"					{count(); return (TCHAR);}
-"boolean"				{count(); return (TBOOLEAN);}
-"void"					{count(); return (TVOID);}
-"const"					{count(); /*return (TCONST);*/}
-"enum"					{count(); /*return (TENUM);*/}
-"value"					{count(); return (TVALUE);}
-"import"				{count(); return (TIMPORT);}
-"public"				{count(); return (TPUBLIC);}
-"private"				{count(); return (TPRIVATE);}
-"protected"			{count(); return (TPROTECTED);}
-"final"					{count(); return (TFINAL);}
-"abstract"			{count(); return (TABSTRACT);}
-"static"				{count(); return (TSTATIC);}
-"class"					{count(); return (TCLASS);}
-"interface"			{count(); return (TINTERFACE);}
-"extends"				{count(); return (TEXTENDS);}
-"implements"		{count(); return (TIMPLEMENTS);}
-"super"					{count(); return (TSUPER);}
-"this"					{count(); return (TTHIS);}
-"throw"					{count(); /*return (TTHROW);*/}
-"throws"				{count(); /*return (TTHROWS);*/}
-"try"					  {count(); /*return (TTRY);*/}
-"catch"					{count(); /*return (TCATCH);*/}
-"if"					  {count(); return (TIF);}
-"else"					{count(); return (TELSE);}
-"false"					{count(); return (TFALSE);}
-"true"					{count(); return (TTRUE);}
-"switch"				{count(); return (TSWITCH);}
-"case"					{count(); return (TCASE);}
-"continue"			{count(); return (TCONTINUE);}
-"break"					{count(); return (TBREAK);}
-"default"				{count(); return (TDEFAULT);}
-"for"					  {count(); return (TFOR);}
-"while"					{count(); return (TWHILE);}
-"do"					  {count(); return (TDO);}
-"instanceof"		{count(); /*return (TINSTANCEOF);*/}
-"finally"				{count(); /*return (TFINALLY);*/}
-"new"					  {count(); return (TNEW);}
-"null"					{count(); return (TNULL);}
-"return"				{count(); return (TRETURN);}
-"synchronized"	{count(); /*return (TSYNCHRONIZED);*/}
-"printString"   {count(); return (TPRINTS);}
-"printInt"      {count(); return (TPRINTI);}
-"printFloat"    {count(); return (TPRINTF);}
-"print"         {count(); return (TPRINT);}
-"package"       {count(); return (TPACKAGE);}
+"string"        {count(); return strToken(TSTRING);}
+"short"					{count(); return strToken(TSHORT);}
+"int"           {count(); return strToken(TINT);}
+"long"					{count(); return strToken(TLONG);}
+"float"					{count(); return strToken(TFLOAT);}
+"double"				{count(); return strToken(TDOUBLE);}
+"byte"					{count(); return strToken(TBYTE);}
+"char"					{count(); return strToken(TCHAR);}
+"boolean"				{count(); return strToken(TBOOLEAN);}
+"void"					{count(); return strToken(TVOID);}
+"const"					{count(); /**return strToken(TCONST);**/}
+"enum"					{count(); /**return strToken(TENUM);**/}
+"value"					{count(); return strToken(TVALUE);}
+"import"				{count(); return strToken(TIMPORT);}
+"public"				{count(); return strToken(TPUBLIC);}
+"private"				{count(); return strToken(TPRIVATE);}
+"protected"			{count(); return strToken(TPROTECTED);}
+"final"					{count(); return strToken(TFINAL);}
+"abstract"			{count(); return strToken(TABSTRACT);}
+"static"				{count(); return strToken(TSTATIC);}
+"class"					{count(); return strToken(TCLASS);}
+"interface"			{count(); return strToken(TINTERFACE);}
+"extends"				{count(); return strToken(TEXTENDS);}
+"implements"		{count(); return strToken(TIMPLEMENTS);}
+"super"					{count(); return strToken(TSUPER);}
+"this"					{count(); return strToken(TTHIS);}
+"throw"					{count(); /**return strToken(TTHROW);**/}
+"throws"				{count(); /**return strToken(TTHROWS);**/}
+"try"					  {count(); /**return strToken(TTRY);**/}
+"catch"					{count(); /**return strToken(TCATCH);**/}
+"if"					  {count(); return strToken(TIF);}
+"else"					{count(); return strToken(TELSE);}
+"false"					{count(); return strToken(TFALSE);}
+"true"					{count(); return strToken(TTRUE);}
+"switch"				{count(); return strToken(TSWITCH);}
+"case"					{count(); /**return strToken(TCASE);*/}
+"continue"			{count(); return strToken(TCONTINUE);}
+"break"					{count(); return strToken(TBREAK);}
+"default"				{count(); return strToken(TDEFAULT);}
+"for"					  {count(); return strToken(TFOR);}
+"while"					{count(); return strToken(TWHILE);}
+"do"					  {count(); return strToken(TDO);}
+"instanceof"		{count(); /**return strToken(TINSTANCEOF);**/}
+"finally"				{count(); /**return strToken(TFINALLY);**/}
+"new"					  {count(); return strToken(TNEW);}
+"null"					{count(); return strToken(TNULL);}
+"return"				{count(); return strToken(TRETURN);}
+"synchronized"	{count(); /**return strToken(TSYNCHRONIZED);**/}
+"printString"   {count(); return strToken(TPRINTS);}
+"printInt"      {count(); return strToken(TPRINTI);}
+"printFloat"    {count(); return strToken(TPRINTF);}
+"print"         {count(); return strToken(TPRINT);}
+"package"       {count(); return strToken(TPACKAGE);}
 
-{ID}            {count(); return strToken(ID); }
+{ID}            {count(); /*string* st = new std::string(yytext, yyleng); yylval.vstring = st; */ return strToken(ID); }
 
 
-\"[^\n\"]*\"		{count(); return (STRING);}
-"+"             {count(); return ('+');}
-"-"             {count(); return ('-');}
+\"[^\n\"]*\"		{count(); /*return strToken(STRING);*/}
+"+"             {count(); /*return ('+');}
+"-"             {count(); /*return ('-');*/}
 "*"             {count(); return ('*');}
-"/"             {count(); return ('/');}
-"%"						  {count(); return ('%');}
-"="             {count(); return ('=');}
-"+="					  {count(); return (TPLUSEQ);/**/}
-"-="					  {count(); return (TMINUSEQ);/**/}
-"*="					  {count(); return (TMULEQ);/**/}
-"/="					  {count(); return (TDIVEQ);/**/}
-"%="					  {count(); return (TMODEQ);/**/}
-"++"					  {count(); return (TINC);}
-"--"					  {count(); return (TDEC);}
-"=="            {count(); return (TCEQ);}
-"!="            {count(); return (TCNE);}
-"<"             {count(); return ('<');}
-"<="            {count(); return (TCLE);}
-">"             {count(); return ('>');}
-">="            {count(); return (TCGE);}
-"||"					  {count(); return (TOR);}
-"&&"					  {count(); return (TAND);}
-"!"						  {count(); return ('!');}
-"&"						  {count(); return ('&');}
-"&="					  {count(); return (TANDBINEQ);/**/}
-"|"						  {count(); return ('|');}
-"|="					  {count(); return (TORBINEQ);/**/}
-"^"						  {count(); return ('^');}
-"^="					  {count(); return (TXORBINEQ);/**/}
-"<<"					  {count(); return (TDECAL);/**/}
-"<<="					  {count(); return (TDECALEQ);/**/}
-">>"					  {count(); return (TDECAR);/**/}
-">>="					  {count(); return (TDECAREQ);/**/}
-">>>"					  {count(); return (TDECALNS);/**/}
-">>>="					{count(); return (TDECALNSEQ);/**/}
-"("             {count(); return ('(');}
-")"             {count(); return (')');}
-"{"             {count(); return ('{');}
-"}"             {count(); return ('}');}
-"["						  {count(); return ('[');}
-"]"						  {count(); return (']');}
+"/"             {count(); /*return ('/');*/}
+"%"						  {count(); /*return ('%');*/}
+"="             {count(); /*return ('=');*/}
+"+="					  {count(); /*return strToken(TPLUSEQ);*/}
+"-="					  {count(); /*return strToken(TMINUSEQ);*/}
+"*="					  {count(); /*return strToken(TMULEQ);*/}
+"/="					  {count(); /*return strToken(TDIVEQ);*/}
+"%="					  {count(); /*return strToken(TMODEQ);*/}
+"++"					  {count(); /*return strToken(TINC);*/}
+"--"					  {count(); /*return strToken(TDEC);*/}
+"=="            {count(); /*return strToken(TCEQ);*/}
+"!="            {count(); /*return strToken(TCNE);*/}
+"<"             {count(); /*return ('<');*/}
+"<="            {count(); /*return strToken(TCLE);*/}
+">"             {count(); /*return ('>');*/}
+">="            {count(); /*return strToken(TCGE);*/}
+"||"					  {count(); /*return strToken(TOR);*/}
+"&&"					  {count(); /*return strToken(TAND);*/}
+"!"						  {count(); /*return ('!');*/}
+"&"						  {count(); /*return ('&');*/}
+"&="					  {count(); /*return strToken(TANDBINEQ);*/}
+"|"						  {count(); /*return ('|');*/}
+"|="					  {count(); /*return strToken(TORBINEQ);*/}
+"^"						  {count(); /*return ('^');*/}
+"^="					  {count(); /*return strToken(TXORBINEQ);*/}
+"<<"					  {count(); /*return strToken(TDECAL);*/}
+"<<="					  {count(); /*return strToken(TDECALEQ);*/}
+">>"					  {count(); /*return strToken(TDECAR);*/}
+">>="					  {count(); /*return strToken(TDECAREQ);*/}
+">>>"					  {count(); /*return strToken(TDECALNS);*/}
+">>>="					{count(); /*return strToken(TDECALNSEQ);*/}
+"("             {count(); /*return ('(');*/}
+")"             {count(); /*return (')');*/}
+"{"             {count(); /*return ('{');*/}
+"}"             {count(); /*return ('}');*/}
+"["						  {count(); /*return ('[');*/}
+"]"						  {count(); /*return (']');*/}
 "."             {count(); return ('.');}
-","             {count(); return (',');}
+","             {count(); /*return (',');*/}
 ";"						  {count(); return (';');}
-"~"						  {count(); return ('~');}
-"?"						  {count(); return ('?');}
-":" 					  {count(); return (':');}
+"~"						  {count(); /*return ('~');*/}
+"?"						  {count(); /*return ('?');*/}
+":" 					  {count(); /*return (':');*/}
 "//".*\n 				{count();}
 "/*"[^*\/]*"*/"	{count();}
 [\n]					  {count();}

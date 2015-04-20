@@ -70,6 +70,12 @@ void KT_ForStatement::setBlockStatement( KT_BlockStatement* var) {
  */
 void KT_ForStatement::setForControl(PARSER_ForControl* var ) {
 	this-> forControl=var;
+	setCondition(var->getCondition());
+	setUpdate(var->getUpDate());
+
+	for (vector<KT_Attribute*>::iterator it = var->begin(); it != var->end(); ++it){
+		initFor.push_back(*it);
+	}
 }
 
 /**

@@ -382,7 +382,7 @@ void decoration(KT_Program * prog) {
 						statement->accept(callMethodVisitor);
 
 						// si la statement n'est pas une déclaration ou une affectation ou un appel de méthode
-						// alors le main n'est pas correct.
+						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
 						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
 							&& !callMethodVisitor->isVisited()){
 								

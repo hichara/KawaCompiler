@@ -130,7 +130,7 @@ void KT_Interface::setFQN(string* var){
 /**
 * @param vector<vector<string*>>
 */
-void KT_Interface::setImports(vector<vector<string*>>& var) {
+void KT_Interface::setImports(vector<vector<string*> >& var) {
 	this->imports = var;
 }
 	

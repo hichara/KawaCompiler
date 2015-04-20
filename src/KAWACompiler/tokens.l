@@ -8,6 +8,9 @@
 
 typedef std::string String;
 
+int file_num=0, file_num_max=0;
+char **files;
+
 inline int strToken( int token ){
     yylval.vstring = new std::string( yytext, yyleng );
     /*
@@ -155,8 +158,35 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 .			          {count(); printf("TOKEN inconnu!\n"); yyterminate();}
 
 %%
-
-int yywrap()
-{
-    return 1;
+int main( int argc, char** argv ){ 
+    ++argv; --argc; 
+    file_num=0;
+    file_num_max = argc;
+    files = argv;
+    if ( argc > 0 ){
+        while( (yyin = fopen(files[file_num],"r")) == 0 && file_num < file_num_max ){
+            printf ("pb ouverture du fichier %s \n", files[file_num++]);
+            exit(1);
+        }
+        yyparse();
+    }
+    return 0;
 }
+
+int yywrap() {
+  fclose(yyin);
+  if ( ++file_num < file_num_max ) {
+    while( (yyin = fopen(files[file_num],"r")) == 0 && file_num < file_num_max ){
+      return 1;
+    }
+    if ( file_num < file_num_max )
+        return 0;
+    else 
+        return 1;
+  } 
+  else{
+    return 1;
+  }
+  
+}
+

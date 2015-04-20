@@ -18,6 +18,8 @@ public:
     
     PARSER_Field();
 
+    vector<KT_Variable*> getVariables();
+    
     /**
      * @param KT_Variable *
      */
@@ -32,8 +34,22 @@ public:
      * @param vector<KT_Variable*>
      */
     void setVariables(vector<KT_Variable*>& var);
+
+    /**
+     * @param KT_Variable*
+     */
+    void AddVariableAtFirstPosition(KT_Variable* var);    
+
+    /**
+     * @param vector<KT_Variable*>
+     */
+    void addVectorVariable(vector<KT_Variable*>& var);
+
+    /**
+     * @param bool
+     */
+    void setFinal(bool var);   
     
-    vector<KT_Variable*> getVariables();
 private: 
     vector<KT_Variable*> variables;
 };

@@ -221,6 +221,13 @@ void KT_Class::setAllPrototypes(vector<KT_Prototype*> var){
 void KT_Class::addPrototype(KT_Prototype* var) {
 	AllPrototypes.push_back(var);
 }
+
+/**
+* @param vector<vector<string*> > 
+*/
+void KT_Class::setImports(vector<vector<string*> >& var) {
+	imports=var;
+}
 	
 
 void KT_Class::toString() {

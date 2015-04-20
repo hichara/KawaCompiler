@@ -9,7 +9,9 @@
  * KT_Variable implementation
  */
 
-KT_Variable::KT_Variable(){}
+KT_Variable::KT_Variable(){
+	Final=false;
+}
 
 /**
  * @return vector<string *>

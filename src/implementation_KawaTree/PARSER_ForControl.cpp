@@ -28,7 +28,7 @@ vector<KT_IDExpression*> PARSER_ForControl::getUpDate() {
 /**
  * @return vector<KT_Variable *>
  */
-vector<KT_Variable*> PARSER_ForControl::getInitFor() {
+PARSER_Field* PARSER_ForControl::getInitFor() {
     return initFor;
 }
 
@@ -49,6 +49,6 @@ void PARSER_ForControl::setUpDate(vector<KT_IDExpression*>& var) {
 /**
  * @param vector<KT_Variable*>&
  */
-void PARSER_ForControl::setInitFor(vector<KT_Variable*>& var) {
+void PARSER_ForControl::setInitFor(PARSER_Field* var) {
 	initFor=var;
 }

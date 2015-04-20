@@ -23,7 +23,7 @@ public:
     
     vector<KT_IDExpression*> getUpDate();
     
-    vector<KT_Variable*> getInitFor();
+    PARSER_Field* getInitFor();
     
     /**
      * @param KT_Expression *
@@ -36,13 +36,13 @@ public:
     void setUpDate(vector<KT_IDExpression*>& var);
 
     /**
-     * @param vector<KT_Variable*>
+     * @param PARSER_Field*
      */
-    void setInitFor(vector<KT_Variable*>& var);
+    void setInitFor(PARSER_Field* var);
 private: 
     KT_Expression* condition;
     vector<KT_IDExpression*> upDate;
-    vector<KT_Variable*> initFor;
+    PARSER_Field* initFor;
 };
 
 #endif //_PARSER_FORCONTROL_H

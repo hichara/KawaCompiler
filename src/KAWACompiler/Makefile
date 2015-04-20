@@ -16,4 +16,4 @@ parser: kawa.y
 	bison -d -o kawa.cpp kawa.y
 
 kawac: lexer 
-	${CC} ${CFLAGS} ${IRDIR}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp main.cpp ${LDFLAGS}
+	${CC} ${CFLAGS} ${IRDIR}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp ${LDFLAGS}

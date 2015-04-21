@@ -17,6 +17,7 @@ class KT_ReturnStatement: public KT_BlockStatement {
 public: 
     
     KT_ReturnStatement();
+    ~KT_ReturnStatement();
 
     bool isVoidReturn();
     

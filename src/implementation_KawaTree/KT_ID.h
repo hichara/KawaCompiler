@@ -17,6 +17,7 @@ using namespace std;
 class KT_ID: public KT_MethodOrVarCall {
 public: 
     KT_ID ();
+    ~KT_ID ();
     vector<string*> getValue();
 	 void setValue(vector<string*>& var);
 

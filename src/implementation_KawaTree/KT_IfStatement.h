@@ -16,7 +16,8 @@ using namespace std;
 
 class KT_IfStatement: public KT_BlockStatement {
 public: 
-    KT_IfStatement ();
+    KT_IfStatement();
+    ~KT_IfStatement();
 	
     KT_Expression* getCondition();
     

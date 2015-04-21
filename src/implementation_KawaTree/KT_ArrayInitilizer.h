@@ -18,6 +18,7 @@ using namespace std;
 class KT_ArrayInitilizer: public KT_FactFinal {
 public: 
     KT_ArrayInitilizer();
+    ~KT_ArrayInitilizer();
 	
     KT_IndexedArray* getIndexedArray();
 

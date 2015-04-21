@@ -18,6 +18,7 @@ class KT_Print: public KT_Statement {
 public: 
     
     KT_Print();
+    ~KT_Print();
     
     vector<KT_FactFinal*> getArgs();
 

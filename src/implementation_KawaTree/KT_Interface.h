@@ -17,6 +17,7 @@ class KT_Interface{
 public: 
     
     KT_Interface(); 
+    ~KT_Interface(); 
 
     string* getName();
     

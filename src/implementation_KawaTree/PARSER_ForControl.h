@@ -19,6 +19,7 @@ class PARSER_ForControl {
 public: 
     
     PARSER_ForControl();
+    ~PARSER_ForControl();
 
     KT_Expression* getCondition();
     

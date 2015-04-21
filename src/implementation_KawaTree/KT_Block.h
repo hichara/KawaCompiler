@@ -18,6 +18,7 @@ using namespace std;
 class KT_Block: public KT_BlockStatement {
 public: 
     KT_Block();
+    ~KT_Block();
 	
     vector<KT_Statement*> getStatements();
 	

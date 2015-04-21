@@ -19,6 +19,7 @@ class KT_MethodCall: public KT_MethodOrVarCall {
 public: 
     
     KT_MethodCall();
+    ~KT_MethodCall();
     
     vector<string*> getName();
     

@@ -17,6 +17,7 @@ class KT_WhileStatement: public KT_BlockStatement {
 public: 
     
     KT_WhileStatement();
+    ~KT_WhileStatement();
     
     KT_Expression* getCondition();
     

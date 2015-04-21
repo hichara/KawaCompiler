@@ -13,6 +13,7 @@ using namespace std;
 class PARSER_MemberDec{
 public: 
     PARSER_MemberDec();
+    ~PARSER_MemberDec();
     int getIndexParser();
 
     /**

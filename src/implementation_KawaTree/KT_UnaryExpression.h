@@ -16,6 +16,7 @@ class KT_UnaryExpression: public KT_Expression {
 public: 
     
     KT_UnaryExpression();
+    ~KT_UnaryExpression();
 
     KT_Expression* getExpression();
     

@@ -14,6 +14,7 @@ class KT_ParamsMethodCall {
 public: 
     
     KT_ParamsMethodCall();
+    ~KT_ParamsMethodCall();
 
     KT_IndexedArray* getIndexedArray();
     

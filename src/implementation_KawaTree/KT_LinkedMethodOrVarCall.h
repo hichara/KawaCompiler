@@ -17,6 +17,7 @@ class KT_LinkedMethodOrVarCall: public KT_FactFinal {
 public: 
     
 	KT_LinkedMethodOrVarCall();
+	~KT_LinkedMethodOrVarCall();
     vector<KT_MethodOrVarCall*> getMixedCall();
 
     /**

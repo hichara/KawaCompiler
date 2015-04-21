@@ -16,6 +16,7 @@ class KT_SwitchBlockStatement {
 public: 
     
     KT_SwitchBlockStatement();
+    ~KT_SwitchBlockStatement();
     
     bool isCaseExist();
     

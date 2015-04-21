@@ -18,6 +18,7 @@ class KT_Prototype {
 public: 
     
     KT_Prototype();
+    ~KT_Prototype();
 
     //back-end
 	string* getName();

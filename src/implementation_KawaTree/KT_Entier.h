@@ -17,6 +17,7 @@ class KT_Entier: public KT_FactFinal {
 public: 
     
 	KT_Entier();
+	~KT_Entier();
     int getValue();
     
     /**

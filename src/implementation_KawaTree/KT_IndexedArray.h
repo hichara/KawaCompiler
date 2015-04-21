@@ -14,6 +14,7 @@ class KT_IndexedArray {
 public: 
     
     KT_IndexedArray();
+    ~KT_IndexedArray();
 
     int getDimension();
     

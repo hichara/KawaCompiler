@@ -22,6 +22,7 @@ using namespace std;
 class KT_Class{
 public: 
 	KT_Class();
+	~KT_Class();
     
     vector<KT_SimpleMethod*> getSimpleMethods();
     

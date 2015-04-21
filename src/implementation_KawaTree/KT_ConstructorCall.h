@@ -17,7 +17,8 @@ using namespace std;
 
 class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
 public: 
-	KT_ConstructorCall ();
+    KT_ConstructorCall();
+	~KT_ConstructorCall();
     
     vector<string*> getName();
     

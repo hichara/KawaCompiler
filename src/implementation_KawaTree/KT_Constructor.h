@@ -20,7 +20,8 @@ using namespace std;
 class KT_Constructor: public PARSER_MemberDec{
 public: 
     
-	KT_Constructor();
+    KT_Constructor();
+	~KT_Constructor();
 	
     string* getName();
     

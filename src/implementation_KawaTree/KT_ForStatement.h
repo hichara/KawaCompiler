@@ -20,6 +20,7 @@ using namespace std;
 class KT_ForStatement: public KT_BlockStatement {
 public: 
     KT_ForStatement();
+    ~KT_ForStatement();
 	
     KT_BlockStatement* getBlockStatement();
     

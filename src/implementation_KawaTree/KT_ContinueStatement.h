@@ -15,7 +15,8 @@ using namespace std;
 
 class KT_ContinueStatement: public KT_BlockStatement {
 public: 
-	KT_ContinueStatement();
+    KT_ContinueStatement();
+	~KT_ContinueStatement();
     
     bool isIdExist();
     

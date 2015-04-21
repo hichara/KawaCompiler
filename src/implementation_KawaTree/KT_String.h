@@ -16,6 +16,7 @@ class KT_String: public KT_FactFinal {
 public: 
     
     KT_String();
+    ~KT_String();
     
     string* getValue();
     

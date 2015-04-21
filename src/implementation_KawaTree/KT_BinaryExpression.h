@@ -15,7 +15,8 @@ using namespace std;
 
 class KT_BinaryExpression: public KT_Expression {
 public: 
-	KT_BinaryExpression();
+    KT_BinaryExpression();
+	~KT_BinaryExpression();
     
     KT_Expression* getLExpression();
     

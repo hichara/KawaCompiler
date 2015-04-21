@@ -16,6 +16,7 @@ class KT_Reel: public KT_FactFinal {
 public: 
     
     KT_Reel();
+    ~KT_Reel();
     
     float getValue();
     

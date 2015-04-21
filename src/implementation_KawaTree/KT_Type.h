@@ -17,6 +17,7 @@ class KT_Type {
 public: 
     
     KT_Type();
+    ~KT_Type();
 
     bool isBasicType();
     

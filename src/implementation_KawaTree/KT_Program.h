@@ -17,6 +17,7 @@ class KT_Program {
 public: 
     
     KT_Program();
+    ~KT_Program();
     
     vector<KT_Package*> getPackages();
 	string getName();

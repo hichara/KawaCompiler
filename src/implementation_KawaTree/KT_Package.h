@@ -18,6 +18,7 @@ class KT_Package {
 public: 
 
     KT_Package();
+    ~KT_Package();
     
     string* getName();
     

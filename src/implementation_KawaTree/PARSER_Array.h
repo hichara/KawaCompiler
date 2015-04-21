@@ -14,6 +14,7 @@ class PARSER_Array {
 public: 
     
     PARSER_Array();
+    ~PARSER_Array();
 
     bool isArray();
     

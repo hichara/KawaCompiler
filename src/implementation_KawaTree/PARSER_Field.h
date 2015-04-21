@@ -17,6 +17,7 @@ class PARSER_Field: public PARSER_MemberDec {
 public: 
     
     PARSER_Field();
+    ~PARSER_Field();
 
     vector<KT_Variable*> getVariables();
     

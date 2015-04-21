@@ -15,6 +15,7 @@ class KT_SwitchStatement: public KT_BlockStatement {
 public: 
     
     KT_SwitchStatement();
+    ~KT_SwitchStatement();
 
     KT_Expression* getCondition();
     

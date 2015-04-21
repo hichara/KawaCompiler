@@ -18,6 +18,7 @@ class KT_Variable: public KT_VarOrAttr, public KT_Statement {
 public: 
     
     KT_Variable();
+    ~KT_Variable();
     
     vector<string*> getName();
     

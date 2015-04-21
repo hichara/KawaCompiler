@@ -19,6 +19,7 @@ class KT_Param {
 public: 
     
     KT_Param();
+    ~KT_Param();
 
     string* getName();
     

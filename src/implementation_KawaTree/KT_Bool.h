@@ -17,6 +17,7 @@ class KT_Bool: public KT_FactFinal {
 public: 
     
 	KT_Bool();
+	~KT_Bool();
     bool getValue();
     
     /**

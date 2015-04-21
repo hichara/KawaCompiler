@@ -16,6 +16,7 @@ using namespace std;
 class KT_Expression: public KT_IDExpression {
 public: 
 	KT_Expression() ;
+	~KT_Expression() ;
     
     /**
      * @param ExprVisitor

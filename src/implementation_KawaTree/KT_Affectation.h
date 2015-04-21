@@ -19,7 +19,8 @@ using namespace std;
 
 class KT_Affectation: public KT_IDExpression {
 public: 
-	KT_Affectation();
+    KT_Affectation();
+	~KT_Affectation();
     
     KT_Expression* getLExpression();
     

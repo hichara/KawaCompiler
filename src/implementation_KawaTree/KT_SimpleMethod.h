@@ -16,6 +16,7 @@ class KT_SimpleMethod: public PARSER_MemberDec{
 public: 
     
     KT_SimpleMethod();
+    ~KT_SimpleMethod();
     
     string* getName();
     

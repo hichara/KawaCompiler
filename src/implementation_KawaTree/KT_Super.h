@@ -16,7 +16,7 @@ using namespace std;
 class KT_Super: public KT_Statement {
 public:
 	KT_Super();
-	
+	~KT_Super();
 	vector<KT_ParamsMethodCall*> getParams();
 
 	/**

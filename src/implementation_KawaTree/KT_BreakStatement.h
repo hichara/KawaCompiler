@@ -16,7 +16,8 @@ using namespace std;
 class KT_BreakStatement: public KT_BlockStatement {
 public: 
     
-	KT_BreakStatement();
+    KT_BreakStatement();
+	~KT_BreakStatement();
     bool isIdExist();
     
     string* getId();

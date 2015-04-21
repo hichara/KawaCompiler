@@ -19,7 +19,8 @@ using namespace std;
 class KT_Attribute: public KT_VarOrAttr {
 public: 
 
-	KT_Attribute ();
+    KT_Attribute();
+	~KT_Attribute();
     int index;
     
     string* getName();

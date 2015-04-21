@@ -1026,72 +1026,72 @@ YY_RULE_SETUP
 case 15:
 YY_RULE_SETUP
 #line 56 "tokens.l"
-{count(); return strToken(TVALUE);}
+{count(); /*return strToken(TVALUE);*/}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 57 "tokens.l"
-{count(); return strToken(TIMPORT);}
+{count(); return (TIMPORT);/*return strToken(TIMPORT);*/}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 58 "tokens.l"
-{count(); return strToken(TPUBLIC);}
+{count(); /*return strToken(TPUBLIC);*/}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 59 "tokens.l"
-{count(); return strToken(TPRIVATE);}
+{count(); /*return strToken(TPRIVATE);*/}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 60 "tokens.l"
-{count(); return strToken(TPROTECTED);}
+{count(); /*return strToken(TPROTECTED);*/}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 61 "tokens.l"
-{count(); return strToken(TFINAL);}
+{count(); /*return strToken(TFINAL);*/}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 62 "tokens.l"
-{count(); return strToken(TABSTRACT);}
+{count(); /*return strToken(TABSTRACT);*/}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 63 "tokens.l"
-{count(); return strToken(TSTATIC);}
+{count(); /*return strToken(TSTATIC);*/}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 64 "tokens.l"
-{count(); return strToken(TCLASS);}
+{count(); /*return strToken(TCLASS);*/}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 65 "tokens.l"
-{count(); return strToken(TINTERFACE);}
+{count(); /*return strToken(TINTERFACE);*/}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 66 "tokens.l"
-{count(); return strToken(TEXTENDS);}
+{count(); /*return strToken(TEXTENDS);*/}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 67 "tokens.l"
-{count(); return strToken(TIMPLEMENTS);}
+{count(); /*return strToken(TIMPLEMENTS);*/}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 68 "tokens.l"
-{count(); return strToken(TSUPER);}
+{count(); /*return strToken(TSUPER);*/}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 69 "tokens.l"
-{count(); return strToken(TTHIS);}
+{count(); /*return strToken(TTHIS);*/}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
@@ -1116,27 +1116,27 @@ YY_RULE_SETUP
 case 33:
 YY_RULE_SETUP
 #line 74 "tokens.l"
-{count(); return strToken(TIF);}
+{count(); /*return strToken(TIF);*/}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 75 "tokens.l"
-{count(); return strToken(TELSE);}
+{count(); /*return strToken(TELSE);*/}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 76 "tokens.l"
-{count(); return strToken(TFALSE);}
+{count(); /*return strToken(TFALSE);*/}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 77 "tokens.l"
-{count(); return strToken(TTRUE);}
+{count(); /*return strToken(TTRUE);*/}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 78 "tokens.l"
-{count(); return strToken(TSWITCH);}
+{count(); /*return strToken(TSWITCH);*/}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
@@ -1146,32 +1146,32 @@ YY_RULE_SETUP
 case 39:
 YY_RULE_SETUP
 #line 80 "tokens.l"
-{count(); return strToken(TCONTINUE);}
+{count(); /*return strToken(TCONTINUE);*/}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 81 "tokens.l"
-{count(); return strToken(TBREAK);}
+{count(); /*return strToken(TBREAK);*/}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 82 "tokens.l"
-{count(); return strToken(TDEFAULT);}
+{count(); /*return strToken(TDEFAULT);*/}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 83 "tokens.l"
-{count(); return strToken(TFOR);}
+{count(); /*return strToken(TFOR);*/}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 84 "tokens.l"
-{count(); return strToken(TWHILE);}
+{count(); /*return strToken(TWHILE);*/}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 85 "tokens.l"
-{count(); return strToken(TDO);}
+{count(); /*return strToken(TDO);*/}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
@@ -1186,17 +1186,17 @@ YY_RULE_SETUP
 case 47:
 YY_RULE_SETUP
 #line 88 "tokens.l"
-{count(); return strToken(TNEW);}
+{count(); /*return strToken(TNEW);*/}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 89 "tokens.l"
-{count(); return strToken(TNULL);}
+{count(); /*return strToken(TNULL);*/}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 90 "tokens.l"
-{count(); return strToken(TRETURN);}
+{count(); /*return strToken(TRETURN);*/}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
@@ -1206,27 +1206,27 @@ YY_RULE_SETUP
 case 51:
 YY_RULE_SETUP
 #line 92 "tokens.l"
-{count(); return strToken(TPRINTS);}
+{count(); /*return strToken(TPRINTS);*/}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 93 "tokens.l"
-{count(); return strToken(TPRINTI);}
+{count(); /*return strToken(TPRINTI);*/}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 94 "tokens.l"
-{count(); return strToken(TPRINTF);}
+{count(); /*return strToken(TPRINTF);*/}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 95 "tokens.l"
-{count(); return strToken(TPRINT);}
+{count(); /*return strToken(TPRINT);*/}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 96 "tokens.l"
-{count(); return strToken(TPACKAGE);}
+{count(); return (TPACKAGE);/*return strToken(TPACKAGE);*/}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
@@ -2599,11 +2599,11 @@ extern int yydebug;
     TABSTRACT = 277,
     TSTATIC = 278,
     TVALUE = 279,
-    ID = 280,
-    TCLASS = 281,
-    TINTERFACE = 282,
-    TEXTENDS = 283,
-    TIMPLEMENTS = 284,
+    TCLASS = 280,
+    TINTERFACE = 281,
+    TEXTENDS = 282,
+    TIMPLEMENTS = 283,
+    ID = 284,
     TSUPER = 285,
     TTHIS = 286,
     TIF = 287,
@@ -2661,7 +2661,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 100 "kawa.y" /* yacc.c:1909  */
+#line 101 "kawa.y" /* yacc.c:1909  */
 
 	bool vbool;
 	int vint;

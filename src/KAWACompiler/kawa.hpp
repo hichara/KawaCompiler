@@ -67,11 +67,11 @@ extern int yydebug;
     TABSTRACT = 277,
     TSTATIC = 278,
     TVALUE = 279,
-    ID = 280,
-    TCLASS = 281,
-    TINTERFACE = 282,
-    TEXTENDS = 283,
-    TIMPLEMENTS = 284,
+    TCLASS = 280,
+    TINTERFACE = 281,
+    TEXTENDS = 282,
+    TIMPLEMENTS = 283,
+    ID = 284,
     TSUPER = 285,
     TTHIS = 286,
     TIF = 287,
@@ -129,7 +129,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 100 "kawa.y" /* yacc.c:1909  */
+#line 101 "kawa.y" /* yacc.c:1909  */
 
 	bool vbool;
 	int vint;

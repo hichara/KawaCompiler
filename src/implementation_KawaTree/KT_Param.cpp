@@ -36,7 +36,7 @@ KT_Modifier* KT_Param::getParamModifier() {
  * @return string *
  */
 KT_Variable* KT_Param::toVariable() {
-    KT_Variable* var;
+    KT_Variable* var=new KT_Variable;
     vector<string*> name; 
     name.push_back(this->name);
     var->setName(name);

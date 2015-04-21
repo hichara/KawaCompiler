@@ -23,25 +23,26 @@ using namespace std;
 %token<vfloat> REEL  
 %token<vstring> TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
 %token<vstring> STRING
-%token<vstring> TIMPORT TPACKAGE
+%token<vint> TIMPORT TPACKAGE
 %token<vstring> TPUBLIC TPRIVATE TPROTECTED
 %token<vstring> TFINAL TABSTRACT TSTATIC TVALUE
-%token<vstring> ID TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
+%token<vint> TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
+%token<vstring> ID
 %token<vstring> TSUPER TTHIS 
-%token<vstring> TIF TELSE
-%token<vstring> TFALSE TTRUE
-%token<vstring> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
-%token<vstring> TFOR TWHILE TDO
-%token<vstring> TNEW TNULL TRETURN
-%token<vstring> TPRINT TPRINTI TPRINTF TPRINTS
+%token<vint> TIF TELSE
+%token<vint> TFALSE TTRUE
+%token<vint> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
+%token<vint> TFOR TWHILE TDO
+%token<vint> TNEW TNULL TRETURN
+%token<vint> TPRINT TPRINTI TPRINTF TPRINTS
 
-%token<vstring> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
-%token<vstring> TINC TDEC
-%token<vstring> TCEQ TCNE
-%token<vstring> TCLE TCGE
-%token<vstring> TOR TAND
-%token<vstring> TANDBINEQ TORBINEQ
-%token<vstring> TXORBINEQ TDECAL /*TDECALEQ*/ TDECAR /*TDECAREQ*/ TDECALNS /*TDECALNSEQ*/
+%token<vint> TPLUSEQ TMINUSEQ TMULEQ TDIVEQ TMODEQ
+%token<vint> TINC TDEC
+%token<vint> TCEQ TCNE
+%token<vint> TCLE TCGE
+%token<vint> TOR TAND
+%token<vint> TANDBINEQ TORBINEQ
+%token<vint> TXORBINEQ TDECAL /*TDECALEQ*/ TDECAR /*TDECAREQ*/ TDECALNS /*TDECALNSEQ*/
 
 %type<kt_program> Program
 %type<kt_package> Package
@@ -263,7 +264,7 @@ BasicType : TBYTE {$$=$1;}
 		  ;
 
 /*------------- Partie d'encapsulation + final + static + extends ID, ID..... et implements ID, ID , ID... ----------------------------------*/
-Modifier : TPUBLIC {$$=new KT_Modifier; $$->setVisibility(1);}
+Modifier 	: TPUBLIC {$$=new KT_Modifier; $$->setVisibility(1);}
 		 | TPROTECTED {$$=new KT_Modifier; $$->setVisibility(2);}
 		 | TPRIVATE {$$=new KT_Modifier; $$->setVisibility(3);}
 		 | TSTATIC {$$=new KT_Modifier; $$->setStatic(true);}

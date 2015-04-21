@@ -21,7 +21,6 @@ class KT_Modifier {
 public: 
     
     KT_Modifier();
-    ~KT_Modifier();
 
     bool isStatic();
     

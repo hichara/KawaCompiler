@@ -15,7 +15,7 @@ using namespace std;
 class KT_Statement {
 public:
 	KT_Statement();
-	~KT_Statement();
+	
 	/*virtual void toString() = 0;*/
 	virtual void accept(SemanticVisitor* visitor);
 };

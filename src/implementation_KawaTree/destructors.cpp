@@ -1,4 +1,4 @@
-#include "entete.h"
+#include "headers.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -50,7 +50,7 @@ KT_Program::~KT_Program(){
 }
 
 KT_Print::~KT_Print(){
-    for (<KT_FactFinal*>::size_type i = 0; i < args.size(); ++i)
+    for (vector<KT_FactFinal*>::size_type i = 0; i < args.size(); ++i)
     {
         delete args[i];
     }
@@ -207,6 +207,7 @@ KT_Class::~KT_Class(){
     delete modifiers;
     delete parentClasseSemantique;
     delete FQN;
+    fullSignatures.clear();
     
     for (vector<string*>::size_type i = 0; i < ParentInterfaces.size(); ++i)
     {
@@ -237,12 +238,6 @@ KT_Class::~KT_Class(){
     {
         delete memberDecs[i];
     }
-
-    for (vector<KT_Interface*>::size_type i = 0; i < parentClasseSemantique.size(); ++i)
-    {
-        delete parentClasseSemantique[i];
-    }
-
 
     for (vector<KT_Prototype*>::size_type i = 0; i < AllPrototypes.size(); ++i)
     {
@@ -305,7 +300,7 @@ PARSER_ForControl::~PARSER_ForControl(){
 }
 
 PARSER_Field::~PARSER_Field(){
-    for(vector::size_type i = 0; i < variables.size(); ++i)
+    for(vector<KT_Variable*>::size_type i = 0; i < variables.size(); ++i)
     {
         delete variables[i];
     }

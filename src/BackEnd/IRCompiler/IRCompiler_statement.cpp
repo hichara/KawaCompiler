@@ -40,7 +40,3 @@ Value* IRCompiler::compilePrint(KT_Print *print) {
 	return f;
 }
 
-Value* IRCompiler::compileAffectation(KT_Attribute *aff) {
-
-}
-

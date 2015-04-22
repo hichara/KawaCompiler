@@ -63,6 +63,8 @@ public:
 	Type* createType(KT_Class *classe);
 	Type* createType(KT_Interface* interface);
 	
+
+	Value* compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall *c);
 	Value* compileAffectation(KT_Affectation *af);
 	Value* compilePrint(KT_Print *print);
 	Value* compileExpression(KT_Expression *expr);
@@ -95,7 +97,7 @@ private:
 
 	Value* searchVariable(std::string);
 
-	std::string fqnType(std::vector<string*> vec);
+	std::string fqnType(std::vector<std::string*> vec);
 
 	// Implementer dans IR_Compiler_tool.cpp
 	std::vector<KT_Class *> getAllParentClasses(KT_Class *classe);

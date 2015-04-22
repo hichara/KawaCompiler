@@ -28,6 +28,28 @@ Value* GlobalVariableGenerator::getOrCreateStaticAttribut(
 }
 
 
+Value* GlobalVariableGenerator::getOrCreateIndexOfMember(Module *module, std::string name, int index) {
+
+	GlobalVariable *g = module->getGlobalVariable(name);
+
+	if(g == NULL) {
+		Type *t = Type::getInt32Ty(module->getContext());
+
+		g = new GlobalVariable(*module,
+	 		t, false, GlobalValue::ExternalLinkage   , 
+	 		0, name);
+	}
+
+	if(index != -1) {
+		Type *t = Type::getInt32Ty(module->getContext());
+		Constant *c = ConstantInt::get(t ,index);
+		g->setInitializer(c);
+	}
+
+	return g;
+}
+
+
 // Cree un l'index d'un attribut
 Value* GlobalVariableGenerator::createIndexOfMember(Module *module, std::string name, int index) {
 
@@ -58,6 +80,7 @@ Value* GlobalVariableGenerator::getIndexOfMember(Module *module, std::string nam
 
 
 
+
 // Creee une table AdHoc
 Value* GlobalVariableGenerator::createAdHocTable(Module *module,
 						std::string classStatic, 
@@ -76,7 +99,7 @@ Value* GlobalVariableGenerator::createAdHocTable(Module *module,
 		cast = ConstantExpr::getBitCast(functions[i], i8ptr);
 		casts.push_back(cast);
 		indexName = NameBuilder::buildFunctionIndexName(functions[i]->getName().str());
-		createIndexOfMember(module, indexName, i);
+		getOrCreateIndexOfMember(module, indexName, i);
 	}
 
 	std::string tableName = NameBuilder::buildAdHocTableName(classStatic, classDynamic);
@@ -90,8 +113,6 @@ Value* GlobalVariableGenerator::createAdHocTable(Module *module,
 		GlobalValue::ExternalLinkage,
 		gtable,
 		tableName);
-
-	
 	
 
 	return table;

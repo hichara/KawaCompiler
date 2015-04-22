@@ -3,7 +3,7 @@
 #include "FunctionGenerator.h"
 #include "CallGenerator.h"
 #include "NameBuilder.h"
-
+#include "TypeGenerator.h"
 
 Value* BasicInstructionGenerator::createDeclaration(std::string varName, Type *type, BasicBlock *b) {
 	IRBuilder<> builder(type->getContext());
@@ -12,9 +12,49 @@ Value* BasicInstructionGenerator::createDeclaration(std::string varName, Type *t
 	return  builder.CreateAlloca(type, NULL, varName);
 }
 
-Value* BasicInstructionGenerator::createAffectation(Module *module, std::string className, Value *target, Value *val, BasicBlock *b) {
+Value* BasicInstructionGenerator::createAffectation(Module *module, Value *target, Value *val, BasicBlock *b) {
+	
+	Type *type = target->getType()->getPointerElementType();
+
+	if(type->isStructTy())
+		return createAffectationObj(module, target, val, b);
+
+	return createAffectationReg(module, target, val, b);
+}
+
+Value *BasicInstructionGenerator::stripVal(Value* val, BasicBlock *b) {
+	Value *load = val;
+	Type* type = val->getType();
+
+	if(type->isPointerTy()) {
+		if(type == Type::getInt8Ty(val->getContext())->getPointerTo())
+			return new LoadInst(val, "", b);
+
+		type = type->getPointerElementType();
+		if(type->isStructTy())
+			return val;
+
+		return new LoadInst(val, "", b);
+	}
+
+	return val;	
+}
+
+Value* BasicInstructionGenerator::createAffectationReg(Module *module, Value *target, Value *val, BasicBlock *b) {
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
+
+	builder.CreateStore(val, target);
+
+	return target;
+}
+
+
+Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *target, Value *val, BasicBlock *b) {
+	IRBuilder<> builder(module->getContext());
+	builder.SetInsertPoint(b);
+
+	std::string className = target->getType()->getPointerElementType()->getStructName().str();
 
 	std::vector<Value*> indexI, empty;
 	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));

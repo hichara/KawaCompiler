@@ -27,6 +27,10 @@ class BasicInstructionGenerator {
 
 public:
 	/**
+	* 
+	*/
+	static Value *stripVal(Value* val, BasicBlock *b);
+	/**
 	*
 	*/
 	static Value* createDeclaration(std::string varName, Type* type, BasicBlock *b);
@@ -36,10 +40,23 @@ public:
 	*/
 	static Value* createAllocOfArray(Type *type, BasicBlock *b);
 
+
 	/**
 	*
 	*/
-	static Value* createAffectation(Module *module, std::string staticClassName, Value *target, Value *val, BasicBlock *b);
+	static Value* createAffectationReg(Module *module, Value *target, Value *val, BasicBlock *b);
+
+
+	/**
+	*
+	*/
+	static Value* createAffectationObj(Module *module, Value *target, Value *val, BasicBlock *b);
+
+
+	/**
+	*
+	*/
+	static Value* createAffectation(Module *module, Value *target, Value *val, BasicBlock *b);
 
 	/**
 	* 

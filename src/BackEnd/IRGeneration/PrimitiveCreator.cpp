@@ -2,6 +2,13 @@
 
 
 
+//Cree null
+static Value* createNull(LLVMContext &context) {
+	PointerType *t  = Type::getInt8Ty(context)->getPointerTo();
+	return ConstantPointerNull::get(t);
+}
+
+
 // Cree un entier
 Value* PrimitiveCreator::create(int i, LLVMContext &context) {
 	return ConstantInt::get(Type::getInt32Ty(context), i);

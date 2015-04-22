@@ -26,8 +26,9 @@ BasicBlock* FunctionGenerator::initFunction(Function *f, std::vector<std::string
 
   for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
        ++AI, ++Idx) {
-  	Value *v = builder.CreateAlloca(AI->getType(), NULL, real_args[Idx]);
-  	builder.CreateStore(AI, v);
+// 	Value *v = builder.CreateAlloca(AI->getType(), NULL, real_args[Idx]);
+//  	builder.CreateStore(AI, v);
+  	AI->setName(real_args[Idx]);
   }
   
   return b;

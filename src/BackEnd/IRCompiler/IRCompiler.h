@@ -12,6 +12,8 @@
 
 
 #include <map>
+#include <stdio.h>
+#include <fcntl.h>
 
 #include "IRGen_includes.h"
 #include "KT_includes.h"
@@ -41,46 +43,45 @@ private:
 	std::map<KT_Class*, Type*> classMap;
 	std::map<KT_Interface*, Type*> interfaceMap;
 
+	// state
 	int compilingState = COMPILING_NONE;
+	int inbrication_level = 0;
 
 public:
 
 	IRCompiler(); 
 
 	void compile(KT_Program *program);
-
 	void compile(KT_Package *KT_Package);
-
 	void compile(KT_Class *classe);
-
 	void compile(KT_Interface *interface);
 
 	Function* compile(KT_SimpleMethod *methode);
-
 	Function* compile(KT_Constructor *constructor);
-
-	Value* compile(KT_Block *block);
-
 	Function *compile(KT_Prototype*);
 
-	// ---------Statement-------------------
-
-	Value* compile(KT_Statement *stmt);
-
-	Value* compile(KT_MethodCall *stmt);
-
-	Value* compile(KT_Print *print);
-
-	Value* compile(KT_Expression *expr);
-
-	Value* compile(KT_Entier *expr);
-
+	Type* createType(KT_Class *classe);
+	Type* createType(KT_Interface* interface);
+	
+	Value* compileAffectation(KT_Affectation *af);
+	Value* compilePrint(KT_Print *print);
+	Value* compileExpression(KT_Expression *expr);
+	Value* compileFactFinal(KT_FactFinal *expr);
+	Value* compileParamsMethodCall(KT_ParamsMethodCall *pmC);
+	Value* compileMethodOrVarCall(KT_MethodOrVarCall *call);
+	Value* compileEntier(KT_Entier *expr) ;
+	Value* compileString(KT_String *expr);
+	Value* compileMethodCall(KT_MethodCall *call);
+	Value* compileConstructorCall(KT_ConstructorCall *call);
+	Value* compileVariable (KT_ID *id);
+	Value* compileNULL(KT_Null *vnull);
+	Value* compileVarOrAttr(KT_VarOrAttr *vOa);
+	Value* compileVariable(KT_Variable *id);
+	Value* compileStatement(KT_Statement *stm);
 
 	// ---------Exression -------------------
 
 
-	Type* createType(KT_Class *classe);
-	Type* createType(KT_Interface* interface);
 
 private:
 
@@ -89,7 +90,13 @@ private:
 	Function* getCurrentFunction();
 	BasicBlock* getCurrentBlock();
 	void endCurrentFunction();
-	
+	int getInbricationLevel();
+
+
+	Value* searchVariable(std::string);
+
+	std::string fqnType(std::vector<string*> vec);
+
 	// Implementer dans IR_Compiler_tool.cpp
 	std::vector<KT_Class *> getAllParentClasses(KT_Class *classe);
 
@@ -110,6 +117,8 @@ private:
 	Value* createAdHocTable(KT_Class *classeI, KT_Class *classeII);
 	Value* createAdHocTable(KT_Interface* interfaceI, KT_Class *classeII);
 	Value* createAdHocTable(KT_Interface* interfaceI, KT_Interface* interfaceII);
+
+
 };
 
 

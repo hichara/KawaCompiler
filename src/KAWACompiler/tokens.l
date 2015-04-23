@@ -54,97 +54,97 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "const"					{count(); /**return strToken(TCONST);**/}
 "enum"					{count(); /**return strToken(TENUM);**/}
 "value"					{count(); /*return strToken(TVALUE);*/}
-"import"				{count(); return (TIMPORT);/*return strToken(TIMPORT);*/}
-"public"				{count(); /*return strToken(TPUBLIC);*/}
-"private"				{count(); /*return strToken(TPRIVATE);*/}
-"protected"			{count(); /*return strToken(TPROTECTED);*/}
-"final"					{count(); /*return strToken(TFINAL);*/}
-"abstract"			{count(); /*return strToken(TABSTRACT);*/}
-"static"				{count(); /*return strToken(TSTATIC);*/}
-"class"					{count(); /*return strToken(TCLASS);*/}
-"interface"			{count(); /*return strToken(TINTERFACE);*/}
-"extends"				{count(); /*return strToken(TEXTENDS);*/}
-"implements"		{count(); /*return strToken(TIMPLEMENTS);*/}
-"super"					{count(); /*return strToken(TSUPER);*/}
-"this"					{count(); /*return strToken(TTHIS);*/}
+"import"				{count(); return strToken(TIMPORT);}
+"public"				{count(); return strToken(TPUBLIC);}
+"private"				{count(); return strToken(TPRIVATE);}
+"protected"			{count(); return strToken(TPROTECTED);}
+"final"					{count(); return strToken(TFINAL);}
+"abstract"			{count(); return strToken(TABSTRACT);}
+"static"				{count(); return strToken(TSTATIC);}
+"class"					{count(); return strToken(TCLASS);}
+"interface"			{count(); return strToken(TINTERFACE);}
+"extends"				{count(); return strToken(TEXTENDS);}
+"implements"		{count(); return strToken(TIMPLEMENTS);}
+"super"					{count(); return strToken(TSUPER);}
+"this"					{count(); return strToken(TTHIS);}
 "throw"					{count(); /**return strToken(TTHROW);**/}
 "throws"				{count(); /**return strToken(TTHROWS);**/}
 "try"					  {count(); /**return strToken(TTRY);**/}
 "catch"					{count(); /**return strToken(TCATCH);**/}
-"if"					  {count(); /*return strToken(TIF);*/}
-"else"					{count(); /*return strToken(TELSE);*/}
-"false"					{count(); /*return strToken(TFALSE);*/}
-"true"					{count(); /*return strToken(TTRUE);*/}
-"switch"				{count(); /*return strToken(TSWITCH);*/}
-"case"					{count(); /**return strToken(TCASE);*/}
-"continue"			{count(); /*return strToken(TCONTINUE);*/}
-"break"					{count(); /*return strToken(TBREAK);*/}
-"default"				{count(); /*return strToken(TDEFAULT);*/}
-"for"					  {count(); /*return strToken(TFOR);*/}
-"while"					{count(); /*return strToken(TWHILE);*/}
-"do"					  {count(); /*return strToken(TDO);*/}
+"if"					  {count(); return strToken(TIF);}
+"else"					{count(); return strToken(TELSE);}
+"false"					{count(); return strToken(TFALSE);}
+"true"					{count(); return strToken(TTRUE);}
+"switch"				{count(); return strToken(TSWITCH);}
+"case"					{count(); return strToken(TCASE);}
+"continue"			{count(); return strToken(TCONTINUE);}
+"break"					{count(); return strToken(TBREAK);}
+"default"				{count(); return strToken(TDEFAULT);}
+"for"					  {count(); return strToken(TFOR);}
+"while"					{count(); return strToken(TWHILE);}
+"do"					  {count(); return strToken(TDO);}
 "instanceof"		{count(); /**return strToken(TINSTANCEOF);**/}
 "finally"				{count(); /**return strToken(TFINALLY);**/}
-"new"					  {count(); /*return strToken(TNEW);*/}
-"null"					{count(); /*return strToken(TNULL);*/}
-"return"				{count(); /*return strToken(TRETURN);*/}
+"new"					  {count(); return strToken(TNEW);}
+"null"					{count(); return strToken(TNULL);}
+"return"				{count(); return strToken(TRETURN);}
 "synchronized"	{count(); /**return strToken(TSYNCHRONIZED);**/}
-"printString"   {count(); /*return strToken(TPRINTS);*/}
-"printInt"      {count(); /*return strToken(TPRINTI);*/}
-"printFloat"    {count(); /*return strToken(TPRINTF);*/}
-"print"         {count(); /*return strToken(TPRINT);*/}
-"package"       {count(); return (TPACKAGE);/*return strToken(TPACKAGE);*/}
+"printString"   {count(); return strToken(TPRINTS);}
+"printInt"      {count(); return strToken(TPRINTI);}
+"printFloat"    {count(); return strToken(TPRINTF);}
+"print"         {count(); return strToken(TPRINT);}
+"package"       {count(); return (TPACKAGE);return strToken(TPACKAGE);}
 
 {ID}            {count(); /*string* st = new std::string(yytext, yyleng); yylval.vstring = st; */ return strToken(ID); }
 
 
-\"[^\n\"]*\"		{count(); /*return strToken(STRING);*/}
-"+"             {count(); /*return ('+');}
-"-"             {count(); /*return ('-');*/}
+\"[^\n\"]*\"		{count(); return strToken(STRING);}
+"+"             {count(); return ('+');}
+"-"             {count(); return ('-');}
 "*"             {count(); return ('*');}
-"/"             {count(); /*return ('/');*/}
-"%"						  {count(); /*return ('%');*/}
-"="             {count(); /*return ('=');*/}
-"+="					  {count(); /*return strToken(TPLUSEQ);*/}
-"-="					  {count(); /*return strToken(TMINUSEQ);*/}
-"*="					  {count(); /*return strToken(TMULEQ);*/}
-"/="					  {count(); /*return strToken(TDIVEQ);*/}
-"%="					  {count(); /*return strToken(TMODEQ);*/}
-"++"					  {count(); /*return strToken(TINC);*/}
-"--"					  {count(); /*return strToken(TDEC);*/}
-"=="            {count(); /*return strToken(TCEQ);*/}
-"!="            {count(); /*return strToken(TCNE);*/}
-"<"             {count(); /*return ('<');*/}
-"<="            {count(); /*return strToken(TCLE);*/}
-">"             {count(); /*return ('>');*/}
-">="            {count(); /*return strToken(TCGE);*/}
-"||"					  {count(); /*return strToken(TOR);*/}
-"&&"					  {count(); /*return strToken(TAND);*/}
-"!"						  {count(); /*return ('!');*/}
-"&"						  {count(); /*return ('&');*/}
-"&="					  {count(); /*return strToken(TANDBINEQ);*/}
-"|"						  {count(); /*return ('|');*/}
-"|="					  {count(); /*return strToken(TORBINEQ);*/}
-"^"						  {count(); /*return ('^');*/}
-"^="					  {count(); /*return strToken(TXORBINEQ);*/}
-"<<"					  {count(); /*return strToken(TDECAL);*/}
-"<<="					  {count(); /*return strToken(TDECALEQ);*/}
-">>"					  {count(); /*return strToken(TDECAR);*/}
-">>="					  {count(); /*return strToken(TDECAREQ);*/}
-">>>"					  {count(); /*return strToken(TDECALNS);*/}
-">>>="					{count(); /*return strToken(TDECALNSEQ);*/}
-"("             {count(); /*return ('(');*/}
-")"             {count(); /*return (')');*/}
-"{"             {count(); /*return ('{');*/}
-"}"             {count(); /*return ('}');*/}
-"["						  {count(); /*return ('[');*/}
-"]"						  {count(); /*return (']');*/}
+"/"             {count(); return ('/');}
+"%"						  {count(); return ('%');}
+"="             {count(); return ('=');}
+"+="					  {count(); return strToken(TPLUSEQ);}
+"-="					  {count(); return strToken(TMINUSEQ);}
+"*="					  {count(); return strToken(TMULEQ);}
+"/="					  {count(); return strToken(TDIVEQ);}
+"%="					  {count(); return strToken(TMODEQ);}
+"++"					  {count(); return strToken(TINC);}
+"--"					  {count(); return strToken(TDEC);}
+"=="            {count(); return strToken(TCEQ);}
+"!="            {count(); return strToken(TCNE);}
+"<"             {count(); return ('<');}
+"<="            {count(); return strToken(TCLE);}
+">"             {count(); return ('>');}
+">="            {count(); return strToken(TCGE);}
+"||"					  {count(); return strToken(TOR);}
+"&&"					  {count(); return strToken(TAND);}
+"!"						  {count(); return ('!');}
+"&"						  {count(); return ('&');}
+"&="					  {count(); return strToken(TANDBINEQ);}
+"|"						  {count(); return ('|');}
+"|="					  {count(); return strToken(TORBINEQ);}
+"^"						  {count(); return ('^');}
+"^="					  {count(); return strToken(TXORBINEQ);}
+"<<"					  {count(); return strToken(TDECAL);}
+"<<="					  {count(); return strToken(TDECALEQ);}
+">>"					  {count(); return strToken(TDECAR);}
+">>="					  {count(); return strToken(TDECAREQ);}
+">>>"					  {count(); return strToken(TDECALNS);}
+">>>="					{count(); return strToken(TDECALNSEQ);}
+"("             {count(); return ('(');}
+")"             {count(); return (')');}
+"{"             {count(); return ('{');}
+"}"             {count(); return ('}');}
+"["						  {count(); return ('[');}
+"]"						  {count(); return (']');}
 "."             {count(); return ('.');}
-","             {count(); /*return (',');*/}
+","             {count(); return (',');}
 ";"						  {count(); return (';');}
-"~"						  {count(); /*return ('~');*/}
-"?"						  {count(); /*return ('?');*/}
-":" 					  {count(); /*return (':');*/}
+"~"						  {count(); return ('~');}
+"?"						  {count(); return ('?');}
+":" 					  {count(); return (':');}
 "//".*\n 				{count();}
 "/*"[^*\/]*"*/"	{count();}
 [\n]					  {count();}
@@ -152,7 +152,9 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 .			          {count(); printf("TOKEN inconnu!\n"); yyterminate();}
 
 %%
+extern KT_Program* program; 
 int main( int argc, char** argv ){ 
+
     ++argv; --argc; 
     file_num=0;
     file_num_max = argc;
@@ -164,6 +166,7 @@ int main( int argc, char** argv ){
         }
         yyparse();
     }
+
     return 0;
 }
 

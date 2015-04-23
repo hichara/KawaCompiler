@@ -1,3 +1,6 @@
+#ifndef __CheckAffectationStatementType__
+#define __CheckAffectationStatementType__
+
 #include <iostream>
 #include "../implementation_KawaTree/SemanticVisitor.h"
 #include "../implementation_KawaTree/KT_Statement.h"
@@ -7,3 +10,5 @@ class CheckAffectationStatementType:public SemanticVisitor{public:
 		visited = true;
 	}
 };
+
+#endif /* __CheckAffectationStatementType__ */

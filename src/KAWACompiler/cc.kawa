@@ -1,0 +1,13 @@
+package monPaquetage;
+import pipi.*;
+
+public class MonChienMarrant{
+	
+	public void maMethode(){
+
+	}
+
+	public void foo(){
+		this.maMethode();
+	}
+}

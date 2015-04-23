@@ -1,5 +1,5 @@
 CC= clang++
-CFLAGS= -Wall -g -Wno-c++11-extensions -std=c++11
+CFLAGS= -Wall -g -Wno-deprecated-register -Wno-overloaded-virtual -Wno-c++11-extensions -Wno-string-plus-int -Wno-invalid-source-encoding -std=c++11 
 LDFLAGS= -lm -ldl `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
 KAWATreeSrcDir= ../implementation_KawaTree
 SemanticSrcDir= ../Semantique

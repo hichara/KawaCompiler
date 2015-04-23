@@ -18,8 +18,6 @@
 #include <algorithm>
 using namespace std;
 
-extern bool existError;
-
 void createListOfType(KT_Program * prog);
 bool hasHeritageCycle(KT_Class * depart, KT_Class * mere);
 bool hasImplementCycle(KT_Interface * depart, KT_Interface * mere);
@@ -33,7 +31,9 @@ void completionInterface(KT_Interface * interface);
 void decoration(KT_Program * prog);
 
 class Semantic{public:
+	static bool existSemanticError;
 	static void check(KT_Program* prog){
+		
 		createListOfType(prog);
 		createHeritage(prog);
 		decoration(prog);
@@ -94,7 +94,7 @@ class Semantic{public:
 			}
 		}
 		//*
-		if (existError) {
+		if (Semantic::existSemanticError) {
 			cout << "\n\nIl y a des erreurs => compilation echouee => ICI CA PLANTE :D" << endl;
 		} else {
 			cout << "\n\nCompilation reussie" << endl;

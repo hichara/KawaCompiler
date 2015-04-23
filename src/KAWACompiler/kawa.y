@@ -341,16 +341,16 @@ ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {vector<string*>
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
 
-ClassDeclaration : TCLASS ID Extends Implements ClassBody { $$=new KT_Class; $$->setName($2); $$->setParentClass($3); $$->setParentInterfaces(*$4); $$->setMemberDec(*$5);}
+ClassDeclaration : TCLASS ID Extends Implements ClassBody { $$=new KT_Class; $$->setName($2); $$->setParentClass($3); $$->setParentInterfaces(*$4); $$->setMemberDec(*$5);cout<<"MemberDec : "<<$$->getSimpleMethods().size()<<endl;}
 				 ;
 
 InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=new KT_Interface; $$->setName($2); $$->setInterfacesparent(*$3); $$->setPrototypes(*$4);}
 					 ;
 
 /*-----------------------------------Corps d'une classe-----------------------------------------------------*/
-ClassBody: '{' MemberDecs '}' {$$=$2;} 
+ClassBody: '{' MemberDecs '}' {$$=$2; } 
 MemberDecs : MemberDecs MemberDec { $1->push_back($2); $$=$1;}
-					  | { vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>; $$=var; }
+					  | { vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>; $$=var; cout<<"epsilon  :";}
 					  ;
 
 MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' {/*PARSER_MemeberDec*/$$=new PARSER_MemberDec;}

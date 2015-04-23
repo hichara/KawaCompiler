@@ -117,6 +117,23 @@ void KT_Class::setParentClass(string* var) {
  */
 void KT_Class::setMemberDec(vector<PARSER_MemberDec*>& var) {
 	this-> memberDecs= var;
+
+	for (vector<PARSER_MemberDec*>::iterator it = memberDecs.begin(); it != memberDecs.end(); ++it){
+		PARSER_MemberDec* member = (*it);
+		if(member->getIndexParser()==2){
+		KT_SimpleMethod* methode = static_cast<KT_SimpleMethod*>(*it);
+			SimpleMethods.push_back(methode);
+		}
+
+		else if(member->getIndexParser()==1){
+			KT_Constructor* constru = static_cast<KT_Constructor*>(*it);
+			constructors.push_back(constru);
+		}
+
+		else{
+		}
+	}
+	
 }
 
 /**

@@ -4,23 +4,16 @@ import TestP1.testP2.test3.test4.test5.test6.testp7;
 import P1.P2.t3.t4.t5.t6.tp7;
 
 public class TestClasse extends C1 implements I1, I2{
-	public void testClasse(int x, float y, Class d){
-		x=3;	
-		int y= 5*3;
-		double z=10-y;
-		float t = 10/5;
-		int g= (10*5)+5/(3-2);
-		
-		y <= z;
-		a++;
-		b--;
-		B|=T;
-		a &= b;
+	
 
-		if(x>y){
-			x++;		
-		}
+	 //fonction sans parametres avec des variables locaux et valeur de retour
+	 public char method1(){
 		
 	}
 
+	 //fonction avec switch
+	 protected int methode4(int var3){
+		
+		}
+	 }
 }

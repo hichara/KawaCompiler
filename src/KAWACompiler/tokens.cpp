@@ -2517,7 +2517,6 @@ int main( int argc, char** argv ){
         yyparse();
     }
 
-    cout<< "nombre de prototype de Interfaces : "<< program->getPackages().at(0)->getInterfaces().at(0)->getPrototypes().size() <<endl;
     return 0;
 }
 

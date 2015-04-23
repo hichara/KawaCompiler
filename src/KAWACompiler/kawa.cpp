@@ -2133,7 +2133,7 @@ yyreduce:
 
   case 48:
 #line 344 "kawa.y" /* yacc.c:1646  */
-    { (yyval.kt_class)=new KT_Class; (yyval.kt_class)->setName((yyvsp[-3].vstring)); (yyval.kt_class)->setParentClass((yyvsp[-2].vstring)); (yyval.kt_class)->setParentInterfaces(*(yyvsp[-1].vectorString)); (yyval.kt_class)->setMemberDec(*(yyvsp[0].vectorPARSER_MemberDec));}
+    { (yyval.kt_class)=new KT_Class; (yyval.kt_class)->setName((yyvsp[-3].vstring)); (yyval.kt_class)->setParentClass((yyvsp[-2].vstring)); (yyval.kt_class)->setParentInterfaces(*(yyvsp[-1].vectorString)); (yyval.kt_class)->setMemberDec(*(yyvsp[0].vectorPARSER_MemberDec));cout<<"MemberDec : "<<(yyval.kt_class)->getSimpleMethods().size()<<endl;}
 #line 2138 "kawa.cpp" /* yacc.c:1646  */
     break;
 
@@ -2145,7 +2145,7 @@ yyreduce:
 
   case 50:
 #line 351 "kawa.y" /* yacc.c:1646  */
-    {(yyval.vectorPARSER_MemberDec)=(yyvsp[-1].vectorPARSER_MemberDec);}
+    {(yyval.vectorPARSER_MemberDec)=(yyvsp[-1].vectorPARSER_MemberDec); }
 #line 2150 "kawa.cpp" /* yacc.c:1646  */
     break;
 
@@ -2157,7 +2157,7 @@ yyreduce:
 
   case 52:
 #line 353 "kawa.y" /* yacc.c:1646  */
-    { vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>; (yyval.vectorPARSER_MemberDec)=var; }
+    { vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>; (yyval.vectorPARSER_MemberDec)=var; cout<<"epsilon  :";}
 #line 2162 "kawa.cpp" /* yacc.c:1646  */
     break;
 

@@ -28,6 +28,8 @@ static Value* getOrCreateStaticAttribut(Module *module, std::string className,
 // Cree un l'index d'un attribut
 static Value* createIndexOfMember(Module *module,
 				std::string name, int index);
+// Cree un index
+static Value* getOrCreateIndexOfMember(Module *module, std::string name, int index = -1);
 
 // Retourne un objet value contenant un entier
 static Value* getIndexOfMember(Module *module, std::string name);

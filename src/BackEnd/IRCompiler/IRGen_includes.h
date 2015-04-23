@@ -13,6 +13,7 @@
 #include "llvm/PassManager.h"
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Transforms/Scalar.h"
+#include "llvm/Support/raw_ostream.h"
 #include <cctype>
 #include <cstdio>
 #include <map>
@@ -25,13 +26,16 @@
 #include "llvm/IR/Type.h"
 
 
-
+#include "../IRGeneration/BasicInstructionGenerator.h"
 #include "../IRGeneration/FunctionGenerator.h"
 #include "../IRGeneration/TypeGenerator.h"
 #include "../IRGeneration/GlobalVariableGenerator.h"
 #include "../IRGeneration/NameBuilder.h"
 #include "../IRGeneration/TypeGenerator.h"
 #include "../IRGeneration/PrimitiveCreator.h"
+#include "../IRGeneration/CallGenerator.h"
+#include "../IRGeneration/KawaUtilitary.h"
+#include "../IRGeneration/PrimitiveValueConverter.h"
 
 
 #endif

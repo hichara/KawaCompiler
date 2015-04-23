@@ -16,12 +16,19 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+
+#include <stdio.h>
+#include <fcntl.h>
+
+
+#include "llvm/Support/raw_ostream.h"
 
 #include "llvm/Target/TargetLibraryInfo.h"
 #include "llvm/ADT/Triple.h"
 
-
 #include "llvm/IR/Type.h"
+
 
 #include "FunctionGenerator.h"
 #include "TypeGenerator.h"
@@ -29,6 +36,7 @@
 #include "PrimitiveCreator.h"
 #include "CallGenerator.h"
 #include "NameBuilder.h"
+#include "PrimitiveValueConverter.h"
 
 using namespace llvm;
 
@@ -103,7 +111,7 @@ int main() {
                 "KAWA_FORMAT_INT_TO_STRING");
 
 
-    std::vector<Function *> fncs;
+    std::vector<Function *> fncs, fncs2;
 
 
     BasicBlock &b3 = f7->getEntryBlock();
@@ -117,8 +125,19 @@ int main() {
     BasicBlock* b = BasicBlock::Create(Context, "entry", afficheOk);
     std::string s = "afficheOk";
     Value *str = PrimitiveCreator::create(s, b);
+    str = PrimitiveCreator::create(14949, b->getContext());
+    str = PrimitiveValueConverter::convertToStr(myModule, str, b);
     CallInst::Create(f2, str, "",b);
     Value *v = ReturnInst::Create(Context, NULL, b);
+
+
+    FunctionType *ftAff2 = FunctionType::get(Type::getVoidTy(Context), empty, false);
+    Function *afficheOk2 = Function::Create(ftAff, Function::ExternalLinkage, "afficheOk2", myModule);
+    BasicBlock* b2 = BasicBlock::Create(Context, "entry", afficheOk2);
+    std::string s2 = "afficheOk2";
+    Value *str2 = PrimitiveCreator::create(s2, b2);
+    CallInst::Create(f2, str2, "",b2);
+    Value *v2 = ReturnInst::Create(Context, NULL, b2);
 
 
 
@@ -135,7 +154,12 @@ int main() {
     fncs.push_back(afficheOk);
     fncs.push_back(afficheOk);
 
-   fncs.push_back(f5);
+    fncs2.push_back(afficheOk2);
+    fncs2.push_back(afficheOk2);
+    fncs2.push_back(afficheOk2);
+    fncs2.push_back(afficheOk2);
+    fncs2.push_back(afficheOk2);
+    fncs2.push_back(afficheOk2);
 
 
 //    Value* loadedMethod;
@@ -145,20 +169,25 @@ int main() {
             "class_A",
             fncs);
 
+    Value* table2 = GlobalVariableGenerator::createAdHocTable(myModule,
+            "class_B", 
+            "class_B",
+            fncs2);
+
+
     FunctionGenerator::createAdHocTableFunction(myModule, "class_A", "class_A");
 
     Function *f = FunctionGenerator::getOrCreateConstructor(myModule,
                 "class_A",
                 empty_s,                  
                 empty_s);
-      b =  FunctionGenerator::initFunction(f, empty_s, false);
+      b =  FunctionGenerator::initFunction(f, empty_s, true);
       ReturnInst::Create(Context, NULL, b);
 
       std::string conName = NameBuilder::buildConstructorName("class_A", empty_s);
 
      Value* instance = CallGenerator::createStaticMethodeCall(myModule, conName,
                   empty_v, &b3);
-
 
      CallGenerator::createMethodeCall(myModule, afficheOk, instance,
                       empty_v, indexA, &b3);
@@ -234,6 +263,18 @@ int main() {
                 "KAWA_FORMAT_INT_TO_STRING");
   }
 */
+
+  GlobalVariableGenerator::getOrCreateIndexOfMember(myModule, "abs_index");
+  GlobalVariableGenerator::getOrCreateIndexOfMember(myModule, "abs_index", 1558);
+  GlobalVariableGenerator::getOrCreateIndexOfMember(myModule, "abs_indexcd");
+
+
+
+  int fd = open("TEST.TXT", O_CREAT | O_WRONLY, S_IRWXU | S_IRWXG | S_IRWXG);
+
+  raw_fd_ostream my_out(fd, true);
+
+  myModule->print(my_out, NULL);
 
 
   myModule->dump();

@@ -18,6 +18,7 @@ class  PrimitiveCreator {
 
 public:
 
+	static Value* createNull(LLVMContext &context);
 	static Value* create(int i, LLVMContext &context);
 	static Value* create(char c, LLVMContext &context);
 	static Value* create(bool b, LLVMContext &context);	

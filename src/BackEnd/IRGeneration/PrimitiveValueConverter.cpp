@@ -1,14 +1,19 @@
 #include "PrimitiveCreator.h"
 #include "PrimitiveValueConverter.h"
+#include "FunctionGenerator.h"
 
 /// Fonctions static public
 
- Value* PrimitiveValueConverter::convertFromTo(Type *t1, Type *t2, Value *v, BasicBlock *b) {
+ Value* PrimitiveValueConverter::convertFromTo(Module* module, Type *t1, Type *t2, Value *v, BasicBlock *b) {
  	if(t1 == t2) {
  		return v;
  	}
 
  	LLVMContext &Context = b->getContext();
+
+ 	if(t1 == Type::getInt8Ty(b->getContext())->getPointerTo()) {
+ 		return convertToStr(module, v, b);
+ 	}
 
  	if(t1 == Type::getInt32Ty(Context)) {
  		if(t2 == Type::getFloatTy(Context))
@@ -94,28 +99,49 @@
  }
 
 
-Value* PrimitiveValueConverter::convertToStr(Value *o1, BasicBlock *bb) {
+Value* PrimitiveValueConverter::convertToStr(Module *module, Value *o1, BasicBlock *bb) {
 	LLVMContext &context = bb->getContext();
 	IRBuilder<> b(context);
 	b.SetInsertPoint(bb);
 
-/*
+
 	Type *type = o1->getType();
 
 	if(type == Type::getInt32Ty(context))
-		return PrimitiveValueConverter::convertIntToStr(o1, bb);
+		return PrimitiveValueConverter::convertIntToStr(module, o1, bb);
 
 	if(type == Type::getInt8Ty(context))
-		return PrimitiveValueConverter::convertCharToStr(o1, bb);
+		return PrimitiveValueConverter::convertCharToStr(module, o1, bb);
 
 	if(type == Type::getInt8Ty(context)->getPointerTo())
 		return o1;
 
 	if(type == Type::getDoubleTy(context))
-		return PrimitiveValueConverter::convertDoubleToStr(o1, bb);
-*/
+		return PrimitiveValueConverter::convertDoubleToStr(module, o1, bb);
+
 	std::string s = "[object]";
 	return PrimitiveCreator::create(s, bb);
 }
+
+
+
+Value* PrimitiveValueConverter::convertIntToStr(Module *module, Value *o1, BasicBlock *bb) {
+	Function *f = FunctionGenerator::getOrCreateIntToStrFunction(module);
+
+	return CallInst::Create(f, o1, "", bb);
+}
+
+Value* PrimitiveValueConverter::convertDoubleToStr(Module *module, Value *o1, BasicBlock *bb) {
+	Function *f = FunctionGenerator::getOrCreateIntToStrFunction(module);
+
+	return CallInst::Create(f, o1, "", bb);
+}
+
+Value* PrimitiveValueConverter::convertCharToStr(Module *module, Value *o1, BasicBlock *bb) {
+	Function *f = FunctionGenerator::getOrCreateCharToStrFunction(module);
+
+	return CallInst::Create(f, o1, "", bb);
+}
+
 
 

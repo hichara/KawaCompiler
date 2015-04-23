@@ -3,6 +3,8 @@
  */
 
 
+class KT_Constructor;
+
 #ifndef _KT_CONSTRUCTOR_H
 #define _KT_CONSTRUCTOR_H
 

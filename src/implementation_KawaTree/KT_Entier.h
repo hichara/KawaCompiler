@@ -6,6 +6,8 @@
 #ifndef _KT_ENTIER_H
 #define _KT_ENTIER_H
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 #include "KT_FactFinal.h"
 #include <stdio.h>
 #include <string>
@@ -25,6 +27,8 @@ public:
      */
     void setValue( int var);
 	/*virtual void toString();*/
+
+	Value *acceptIRCompiler(IRCompiler *compiler);
 private: 
     int value;
 };

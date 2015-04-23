@@ -5,6 +5,9 @@
 
 #include "KT_ReturnStatement.h"
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
+
 /**
  * KT_ReturnStatement implementation
  */
@@ -37,4 +40,8 @@ void KT_ReturnStatement::setIsVoidReturn( bool var) {
  */
 void KT_ReturnStatement::setReturnExpression(KT_Expression* var) {
 	returnExppression=var;
+}
+
+llvm::Value* KT_ReturnStatement::acceptIRCompiler(IRCompiler* compiler) {
+	return compiler->compileReturnStatement(this);
 }

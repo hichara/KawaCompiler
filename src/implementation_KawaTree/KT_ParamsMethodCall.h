@@ -6,9 +6,13 @@
 #ifndef _KT_PARAMSMETHODCALL_H
 #define _KT_PARAMSMETHODCALL_H
 
+
 #include "KT_IndexedArray.h"
 #include "KT_Expression.h"
 
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
 
 class KT_ParamsMethodCall {
 public: 
@@ -29,6 +33,8 @@ public:
      * @param KT_Expression *
      */
     void setExpression(KT_Expression* var);
+
+    llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 private: 
     KT_IndexedArray* indexedArray;
     KT_Expression* expression;

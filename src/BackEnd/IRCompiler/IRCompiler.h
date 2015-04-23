@@ -2,6 +2,32 @@
 #define IRCOMP_H
 
 
+class KT_Program;
+class KT_LinkedMethodOrVarCall;
+class KT_Affectation;
+class KT_Print;
+class KT_Expression;
+class KT_FactFinal;
+class KT_ParamsMethodCall;
+class KT_MethodOrVarCall;
+class KT_Entier;
+class KT_String;
+class KT_MethodCall;
+class KT_ConstructorCall;
+class KT_ID;
+class KT_Null;
+class KT_VarOrAttr;
+class KT_Variable;
+class KT_Statement;
+class KT_Interface;
+class KT_Class;
+class KT_Prototype;
+class KT_SimpleMethod;
+class KT_ConstructorCall;
+class KT_Constructor;
+class KT_Package;
+class KT_LinkedMehodOrVarCall;
+class KT_ReturnStatement;
 
 
 #define COMPILING_NONE  0
@@ -80,6 +106,8 @@ public:
 	Value* compileVarOrAttr(KT_VarOrAttr *vOa);
 	Value* compileVariable(KT_Variable *id);
 	Value* compileStatement(KT_Statement *stm);
+	Value* compileLinkedMehodOrVarCall(KT_LinkedMehodOrVarCall *l);
+	Value* compileReturnStatement(KT_ReturnStatement *ret);
 
 	// ---------Exression -------------------
 

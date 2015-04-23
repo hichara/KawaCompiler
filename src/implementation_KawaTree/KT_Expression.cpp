@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 using namespace std;
 
 /**
@@ -27,4 +30,8 @@ void KT_Expression::accept( /*ExprVisitor*/) {
  */
 string* KT_Expression::calculReturnType() {
     return returnType;
+}
+
+Value* KT_Expression::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileExpression(this);
 }

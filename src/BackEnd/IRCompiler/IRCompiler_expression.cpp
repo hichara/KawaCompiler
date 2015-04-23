@@ -2,6 +2,25 @@
 
 #include "IRCompiler.h"
 
+#include "../../implementation_KawaTree/KT_Program.h"
+#include "../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Affectation.h"
+#include "../../implementation_KawaTree/KT_Print.h"
+#include "../../implementation_KawaTree/KT_Expression.h"
+#include "../../implementation_KawaTree/KT_FactFinal.h"
+#include "../../implementation_KawaTree/KT_ParamsMethodCall.h"
+#include "../../implementation_KawaTree/KT_MethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Entier.h"
+#include "../../implementation_KawaTree/KT_String.h"
+#include "../../implementation_KawaTree/KT_MethodCall.h"
+#include "../../implementation_KawaTree/KT_ConstructorCall.h"
+#include "../../implementation_KawaTree/KT_ID.h"
+#include "../../implementation_KawaTree/KT_Null.h"
+#include "../../implementation_KawaTree/KT_VarOrAttr.h"
+#include "../../implementation_KawaTree/KT_Variable.h"
+#include "../../implementation_KawaTree/KT_Statement.h"
+#include "../../implementation_KawaTree/KT_ReturnStatement.h"
+
 
 Value* IRCompiler::compileExpression(KT_Expression *expr) {
 	return expr->acceptIRCompiler(this);
@@ -23,6 +42,14 @@ Value* IRCompiler::compileVarOrAttr(KT_VarOrAttr *call) {
 	return call->acceptIRCompiler(this);
 }
 
+Value* IRCompiler::compileLinkedMehodOrVarCall(KT_LinkedMehodOrVarCall *l) {
+	
+	KawaUtilitary::stopGenerationIR("linked call not handled\n");	
+
+	return NULL;	
+}
+
+
 
 Value* IRCompiler::compileEntier(KT_Entier *expr) {
 	return PrimitiveCreator::create(expr->getValue(), getContext());
@@ -35,7 +62,8 @@ Value* IRCompiler::compileString(KT_String *expr) {
 
 Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 	KT_Prototype *proto = call->getMethod()->getPrototype();
-	
+	bool isStatic = proto->getModifier()->isStatic();
+
 	Value *caller = compileVarOrAttr(call->getCaller());
 
 	Function *f = compile(proto);	
@@ -52,6 +80,11 @@ Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 	}
 
 	Value *index = GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), index_str);
+
+	if(isStatic) {
+		return CallGenerator::createStaticMethodeCall(getModule(),
+			f->getName().str(), v_args, getCurrentBlock());
+	}
 
 	return CallGenerator::createMethodeCall(getModule(),
 	 f, caller, v_args, index, getCurrentBlock());

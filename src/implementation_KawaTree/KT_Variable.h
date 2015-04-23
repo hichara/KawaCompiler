@@ -2,9 +2,10 @@
  * Project Untitled
  */
 
-
 #ifndef _KT_VARIABLE_H
 #define _KT_VARIABLE_H
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 #include "KT_VarOrAttr.h"
 #include "KT_Type.h"
@@ -47,6 +48,8 @@ public:
      * @param KT_Expression*
      */
     void setValue(KT_Expression* var);
+
+    Value* acceptIRCompiler(IRCompiler *compiler); 
 private: 
     vector<string*> name;
     bool Final;

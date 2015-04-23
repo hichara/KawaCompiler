@@ -3,6 +3,8 @@
  */
 
 
+class BinaryExpression;
+
 #ifndef _KT_BINARYEXPRESSION_H
 #define _KT_BINARYEXPRESSION_H
 

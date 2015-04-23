@@ -4,6 +4,8 @@
 
 
 #include "KT_Print.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 
 /**
  * KT_Print implementation
@@ -24,6 +26,11 @@ vector<KT_FactFinal*> KT_Print::getArgs() {
 void KT_Print::setArgs(vector<KT_FactFinal*>& var) {
 	this->args = var;
 }
+
+llvm::Value* KT_Print::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compilePrint(this);
+}
+
 
 /*
 void KT_Print::toString(){

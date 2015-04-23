@@ -3,6 +3,8 @@
  */
 
 
+class KT_BreakStatement;
+
 #ifndef _KT_BREAKSTATEMENT_H
 #define _KT_BREAKSTATEMENT_H
 

@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 using namespace std;
 
 /**
@@ -75,4 +80,9 @@ void KT_Affectation::setIndexedArray(KT_IndexedArray* var){
 void KT_Affectation::accept(SemanticVisitor* visitor){
 	visitor->visitAffectation(this);
 }
+
+Value* KT_Affectation::acceptIRCompiler(IRCompiler *compiler) {
+	compiler->compileAffectation(this);
+}
+
 

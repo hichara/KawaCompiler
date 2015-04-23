@@ -3,6 +3,8 @@
  */
 
 
+class KT_Addition;
+
 #ifndef _KT_ADDITION_H
 #define _KT_ADDITION_H
 

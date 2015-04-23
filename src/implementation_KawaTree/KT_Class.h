@@ -3,6 +3,8 @@
  */
 
 
+class KT_Class;
+
 #ifndef _KT_CLASS_H
 #define _KT_CLASS_H
 

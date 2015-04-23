@@ -2,14 +2,22 @@
  * Project Untitled
  */
 
+class KT_Expression;
 
 #ifndef _KT_EXPRESSION_H
 #define _KT_EXPRESSION_H
+
 
 #include "KT_IDExpression.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
+
 using namespace std;
 
 
@@ -24,6 +32,9 @@ public:
     void accept( /*ExprVisitor*/);
     
     string* calculReturnType();
+
+    llvm::Value *acceptIRCompiler(IRCompiler *compiler);
+
 private:
 	string* returnType;
 };

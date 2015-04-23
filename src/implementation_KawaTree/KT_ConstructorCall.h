@@ -2,9 +2,12 @@
  * Project kawa
  */
 
+class KT_ConstructorCall;
 
 #ifndef _KT_CONSTRUCTORCALL_H
 #define _KT_CONSTRUCTORCALL_H
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 #include "KT_Constructor.h"
 #include "KT_FactFinal.h"
@@ -13,6 +16,8 @@
 #include <string>
 #include <vector>
 using namespace std;
+
+class IRCompiler;
 
 
 class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
@@ -45,7 +50,9 @@ public:
      * @param vector<string*>
      */
     void addVectorString(vector<string*>& var);
-	
+
+    llvm::Value *acceptIRCompiler(IRCompiler *compiler);
+    
 private: 
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;

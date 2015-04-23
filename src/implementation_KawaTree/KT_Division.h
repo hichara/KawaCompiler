@@ -2,6 +2,7 @@
  * Project kawa
  */
 
+class KT_Division;
 
 #ifndef _KT_DIVISION_H
 #define _KT_DIVISION_H

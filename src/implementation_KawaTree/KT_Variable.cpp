@@ -65,3 +65,13 @@ void KT_Variable::setType(KT_Type* var) {
 void KT_Variable::setValue(KT_Expression* var) {
 	value=var;
 }
+
+Value* KT_Variable::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileVariable(this);
+}
+
+
+
+
+
+

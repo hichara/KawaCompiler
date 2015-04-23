@@ -3,6 +3,7 @@
  */
 
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 #include "KT_ConstructorCall.h"
 #include <stdio.h>
 #include <string>
@@ -69,3 +70,6 @@ void KT_ConstructorCall::addVectorString(vector<string*>& var) {
 	}
 }
 
+Value* KT_ConstructorCall::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileConstructorCall(this);
+}

@@ -3,6 +3,8 @@
  */
 
 
+class KT_Modifier;
+
 #ifndef _KT_MODIFIER_H
 #define _KT_MODIFIER_H
 #include <iostream>

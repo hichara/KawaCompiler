@@ -4,6 +4,8 @@
 
 
 #include "KT_MethodCall.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 
 /**
  * KT_MethodCall implementation
@@ -75,3 +77,13 @@ void KT_MethodCall::setNameAddStringAtFirstPosition(string* var){
   it = name.begin();
   it = name.insert ( it , var );
 }
+
+
+Value* KT_MethodCall::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileMethodCall(this);
+}
+
+
+
+
+

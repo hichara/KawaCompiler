@@ -6,6 +6,8 @@
 #ifndef _KT_METHODCALL_H
 #define _KT_METHODCALL_H
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 #include "KT_MethodOrVarCall.h"
 #include "KT_ParamsMethodCall.h"
 #include "KT_SimpleMethod.h"
@@ -13,7 +15,12 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 using namespace std;
+
 
 class KT_MethodCall: public KT_MethodOrVarCall {
 public: 
@@ -54,6 +61,7 @@ public:
      */
     void setNameAddStringAtFirstPosition(string* var);    
 
+    llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 private: 
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;

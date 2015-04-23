@@ -2,6 +2,7 @@
  * Project kawa
  */
 
+class KT_Block;
 
 #ifndef _KT_BLOCK_H
 #define _KT_BLOCK_H

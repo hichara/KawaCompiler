@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 using namespace std;
 
 class KT_ReturnStatement: public KT_BlockStatement {
@@ -32,6 +36,9 @@ public:
      * @param Kt_Expression *
      */
     void setReturnExpression(KT_Expression* var);
+
+    llvm::Value* acceptIRCompiler(IRCompiler* compiler);
+
 private: 
     bool VoidReturn;
     KT_Expression* returnExppression;

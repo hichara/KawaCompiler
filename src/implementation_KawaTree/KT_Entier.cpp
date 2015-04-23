@@ -29,6 +29,10 @@ void KT_Entier::setValue( int var) {
 	this-> value=var;
 }
 
+Value* KT_Entier::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileEntier(this);
+}
+
 /*
 void KT_Entier::toString() {
 	cout << " Entier de valeur : " << value << endl;

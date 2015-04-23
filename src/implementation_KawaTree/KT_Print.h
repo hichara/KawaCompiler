@@ -6,12 +6,19 @@
 #ifndef _KT_PRINT_H
 #define _KT_PRINT_H
 
+
 #include "KT_Statement.h"
 #include "KT_FactFinal.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
+
 using namespace std;
 
 class KT_Print: public KT_Statement {
@@ -28,6 +35,9 @@ public:
 	void setArgs(vector<KT_FactFinal*>& var);
 
 	/*virtual void toString() ;*/
+
+	llvm::Value *acceptIRCompiler(IRCompiler *compiler);
+
 private: 
     vector<KT_FactFinal*> args;
 };

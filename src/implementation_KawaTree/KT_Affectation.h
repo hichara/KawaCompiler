@@ -3,6 +3,7 @@
  */
 
 
+
 #ifndef _KT_AFFECTATION_H
 #define _KT_AFFECTATION_H
 
@@ -15,6 +16,11 @@
 #include <string>
 #include <vector>
 using namespace std;
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
+class KT_Affectation;
 
 
 class KT_Affectation: public KT_IDExpression {
@@ -51,6 +57,12 @@ public:
     void setIndexedArray(KT_IndexedArray* var);
 
     void accept(SemanticVisitor* visitor);
+
+
+    /**
+    *  Visiteur IRCompiler
+    */
+    llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 	
 private: 
     KT_VarOrAttr* reference;

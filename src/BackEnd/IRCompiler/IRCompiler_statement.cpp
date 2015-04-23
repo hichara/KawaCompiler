@@ -2,6 +2,26 @@
 
 #include "IRCompiler.h"
 
+#include "../../implementation_KawaTree/KT_Program.h"
+#include "../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Affectation.h"
+#include "../../implementation_KawaTree/KT_Print.h"
+#include "../../implementation_KawaTree/KT_Expression.h"
+#include "../../implementation_KawaTree/KT_FactFinal.h"
+#include "../../implementation_KawaTree/KT_ParamsMethodCall.h"
+#include "../../implementation_KawaTree/KT_MethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Entier.h"
+#include "../../implementation_KawaTree/KT_String.h"
+#include "../../implementation_KawaTree/KT_MethodCall.h"
+#include "../../implementation_KawaTree/KT_ConstructorCall.h"
+#include "../../implementation_KawaTree/KT_ID.h"
+#include "../../implementation_KawaTree/KT_Null.h"
+#include "../../implementation_KawaTree/KT_VarOrAttr.h"
+#include "../../implementation_KawaTree/KT_Variable.h"
+#include "../../implementation_KawaTree/KT_Statement.h"
+#include "../../implementation_KawaTree/KT_ReturnStatement.h"
+
+
 Value* IRCompiler::compileStatement(KT_Statement *expr) {
 	return expr->acceptIRCompiler(this);
 }
@@ -38,5 +58,18 @@ Value* IRCompiler::compilePrint(KT_Print *print) {
 	}
 
 	return f;
+}
+
+
+Value* IRCompiler::compileReturnStatement(KT_ReturnStatement *ret) {
+	IRBuilder<> buider(getContext());
+	buider.SetInsertPoint(getCurrentBlock());
+
+	if(ret->isVoidReturn())
+		buider.CreeateRetVoid();
+
+	Value *v = BasicInstructionGenerator::stripVal(ret->getReturnExpression());
+
+	return buider.CreateRet(v);	
 }
 

@@ -2,7 +2,6 @@
  * Project kawa
  */
 
-
 #ifndef _KT_ATTRIBUTE_H
 #define _KT_ATTRIBUTE_H
 
@@ -14,6 +13,8 @@
 #include <string>
 #include <vector>
 using namespace std;
+
+class IRCompiler;
 
 
 class KT_Attribute: public KT_VarOrAttr {

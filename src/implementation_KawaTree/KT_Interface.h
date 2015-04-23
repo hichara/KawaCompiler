@@ -3,6 +3,8 @@
  */
 
 
+class KT_Interface;
+
 #ifndef _KT_INTERFACE_H
 #define _KT_INTERFACE_H
 

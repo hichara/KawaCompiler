@@ -2,4 +2,5 @@ package Test;
 
 public interface Inter{
 	public void i();
+	public int j();
 }

@@ -1,5 +1,5 @@
 package Test;
 
 public interface Inter{
-	public static void i();
+	public void i();
 }

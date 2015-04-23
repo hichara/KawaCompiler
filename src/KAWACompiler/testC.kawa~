@@ -1,10 +1,26 @@
 package Test;
 
-public class Test{
+import TestP1.testP2.test3.test4.test5.test6.testp7;
+import P1.P2.t3.t4.t5.t6.tp7;
 
-	public int[] x;
-	public meth(final int x)
-	{
-		final int x;	
+public class TestClasse extends C1 implements I1, I2{
+	public void testClasse(int x, float y, Class d){
+		x=3;	
+		int y= 5*3;
+		double z=10-y;
+		float t = 10/5;
+		int g= (10*5)+5/(3-2);
+		
+		y <= z;
+		a++;
+		b--;
+		B|=T;
+		a &= b;
+
+		if(x>y){
+			x++;		
+		}
+		
 	}
+
 }

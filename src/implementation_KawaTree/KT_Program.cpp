@@ -33,8 +33,10 @@ void KT_Program::addPackageWithClass(KT_Package* var, KT_Class* classe){
 	if(package!= NULL){
 		package->addClass(classe);
 	}
-	else
-		packages.push_back(var);
+	else{
+		var->addClass(classe);
+		this->packages.push_back(var);
+	}
 }
 
 /**
@@ -45,8 +47,10 @@ void KT_Program::addPackageWithInterface(KT_Package* var, KT_Interface* interfac
 	if(package!= NULL){
 		package->addInterface(interfac);
 	}
-	else
-		packages.push_back(var);
+	else{
+		var->addInterface(interfac);
+		this->packages.push_back(var);
+	}
 }
 
 /**

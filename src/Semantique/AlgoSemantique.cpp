@@ -1,19 +1,4 @@
-#include <iostream>
-#include "../implementation_KawaTree/KT_Class.h"
-#include "../implementation_KawaTree/KT_Interface.h"
-#include "../implementation_KawaTree/KT_Prototype.h"
-#include "../implementation_KawaTree/KT_Package.h"
-#include "../implementation_KawaTree/KT_Program.h"
-#include "../implementation_KawaTree/KT_Print.h"
-#include "../implementation_KawaTree/KT_FactFinal.h"
-#include "../implementation_KawaTree/KT_String.h"
-#include "../implementation_KawaTree/KT_Statement.h"
-#include "CheckDeclarationStatementType.cpp"
-#include "CheckAffectationStatementType.cpp"
-#include "CheckCallMethodStatementType.cpp"
-#include <map>
-#include <algorithm>
-using namespace std;
+#include "AlgoSemantique.h"
 
 map<string, KT_Class *> classTypes;             // Map des classes
 map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
@@ -21,7 +6,7 @@ map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
 map<string, KT_Class *>::iterator iteratorClass;
 map<string, KT_Interface *>::iterator iteratorInterface;
 
-bool existError;
+extern bool existError;
 
 // Phase 1
 void createListOfType(KT_Program * prog) {
@@ -105,6 +90,10 @@ bool hasImplementCycle(KT_Interface * depart, KT_Interface * mere) {
 }
 
 bool typeIsCorrect(string * packageName, vector<string*> typeName) {
+	if ( typeName.size() == 1 && typeName[0]->compare("void") == 0 ){
+		return true;
+	}
+
 	string fqn = *packageName;
 	for (string * pieceOfTypeName : typeName) {
 		fqn += "." + *pieceOfTypeName;
@@ -112,6 +101,7 @@ bool typeIsCorrect(string * packageName, vector<string*> typeName) {
 	iteratorInterface = interfaceTypes.find(fqn);
 	iteratorClass = classTypes.find(fqn);
 	if (iteratorInterface == interfaceTypes.end() && iteratorClass == classTypes.end()) {
+		cout << "type error : " << fqn << endl;
 		return false;
 	}
 	return true;
@@ -381,7 +371,7 @@ void decoration(KT_Program * prog) {
 						SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
 						statement->accept(callMethodVisitor);
 
-						// si la statement n'est pas une déclaration ou une affectation ou un appel de méthode
+						// si le statement n'est pas une déclaration ou une affectation ou un appel de méthode
 						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
 						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
 							&& !callMethodVisitor->isVisited()){
@@ -413,7 +403,7 @@ void decoration(KT_Program * prog) {
 	}
 }
 
-int main() {
+int main_semantic() {
 //	string * badName = new string("classelplp1");
 
 	// *****************************************************************************

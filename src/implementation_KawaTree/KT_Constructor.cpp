@@ -57,7 +57,7 @@ void KT_Constructor::setModifier(KT_Modifier* var) {
  * @param vector<KT_Param*>
  */
 void KT_Constructor::setParams(vector<KT_Param*> var) {
-	params = var;
+	this->params = var;
 }
 
 
@@ -65,7 +65,7 @@ void KT_Constructor::setParams(vector<KT_Param*> var) {
  * @param KT_Block*
  */
 void KT_Constructor::setBlock(KT_Block* var) {
-	block = var;
+	this->block = var;
 }
 
 /**

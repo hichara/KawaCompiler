@@ -1,20 +1,221 @@
 package Test;
 
-public class Test{
+import TestP1.testP2.test3.test4.test5.test6.testp7;
+import P1.P2.t3.t4.t5.t6.tp7;
 
-	public int[] x;
-	public meth(final int x)
-	{
-		final int x;
-		a= a.b.c;
-		a= a.bo().bo();
-		a = bo().bo().b.bo().a;
-		a= bo().bo();
-		a= bo();
-		a = a.b.bo().bo().b.b.bo();
-		a= bo().b.bo().b.d.d.bo().bo();	
-		a= a.bo().b.boB().doB().doB().b.b;
-		a=this.b;
-		//this.a[5].b=5;
+public class TestClasse extends C1 implements I1, I2{
+	 /* 
+	 	commentaire
+	 	plusieurs lignes
+	 */
+
+	 // tableau initialisé ou pas 
+	 int[] var1;
+	 float[] var2;
+	int y =3;
+
+	 // variable simple
+	 float var3;
+	 
+	 // variable simple initialisé
+	 float var4 = 5;
+	 
+	 
+
+	 // variables de type objet
+	 Teste t1 = new Teste();
+	 Teste t2 = new Teste(age, nom, salaire);
+
+	 //plusieurs variables de type objet séparés par des virgules
+	 //Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
+	  
+	  // tableau d'objets initialisés ou pas 
+	 //Teste []t5 = new Teste[5];
+	 int []t6 = new int[5];
+
+
+	 //fonction sans parametres avec des variables locaux et valeur de retour
+	 public char method1(){
+	 	// tableau initialisé ou pas 
+	 	int [] var;
+	 	float[] var2;
+
+	 	// variable simple
+	 	float var3;
+	 
+	 	// variable simple initialisé
+	 	float var4 = 5;
+	 
+	 	//plusieurs variables séparés par des virgules
+	 	//char c1, c2, c3; 
+
+	 	// variables de type objet
+	 	final Teste t1 = new Teste();
+	 	Teste t2 = new Teste(age, nom, salaire);
+
+	 	//plusieurs variables de type objet séparés par des virgules
+	 	//Teste t3 = new Teste(age, nom, salaire), t4 = new Teste();
+	 
+	 	// tableau d'objets initialisés ou pas 
+	 	Teste []t5;
+	 	Teste []t6;
+
+	 	// Variable initialisé par une methode d'un objet
+	 	int var5 = t1.getAge();
+	 	// tableau initialisé par des methodes des objets
+	 	float var6 ;
+	 	// ; est acceptable 
+	 	;
+	 	// if else 
+	 	if(x>y){
+	 		if(y<100){
+	 			float var6;
+	 		}
+	 		else{
+	 			float var7;
+	 		}
+	 	}
+
+	 	// boucle while 
+	 	while(W>10){
+	 		if(x>10){
+	 			byte b ;
+	 		}
+	 	}
+
+	 	//boucle do while 
+	 	do{
+	 		char x;
+	 		int y = 200; 
+	 	}while(z<10);
+
+	 	return z ;
+	 
+		
 	}
+
+
+		 //void fonction parametrée avec les conditions if else et les boucle while et do while et return ; 
+	 private void methode2(int x, Test t, float [] tableau){
+	 	// if else 
+	 	if(x>y){
+	 		if(y<100){
+	 			float var6;
+	 		}
+	 		else{
+	 			float var7;
+	 		}
+	 	}
+
+	 	// boucle while 
+	 	while(W>10){
+	 		if(x>10){
+	 			byte b ;
+	 		}
+	 		else
+	 			break;
+	 	}
+
+	 	//boucle do while 
+	 	do{
+	 		char x;
+	 		int y = 200; 
+	 	}while(z<10);
+
+	 	return ;
+	 }
+
+	 // constructeur sans parametres avec une boucle while étiqueté
+	 public Teste(){
+	 	int j=3;
+	 	while(j<nbMax){
+	 				int k;
+	 			}
+	 }
+
+	 // constructeur avec parametres
+	 public Teste(int [] op1, Personne p){
+	 	super();
+	 	super(k, t);
+	 	this.par = 5;
+	 	this.par = getAge();
+	 	this.SetName(name[3]);
+	 	this.getName();
+	 	this.name = NULL;
+	 	//a.do().b.do();
+	 	boolean b = false; 
+	 	int j=3;
+	 	tabl[3] = 5;
+	 	while(j<nbMax){
+	 				int k;
+	 			}
+	 }
+
+
+	 //fonction avec les possibiltés de la boucle for
+	 protected int methode3(int [][] tabl){
+	 	// for avec les 3 parametres
+	 	for(int i=0; i<getMax()&&j>getMax(); i++){
+	 		i++;
+	 		x=x+1;
+	 		x=getMax();
+	 		x= setMax(15);
+	 	}
+	 	
+	 	//for avec le 1er et 2em parametre
+	 	for(int j=test.getAge(); j<90; ){
+	 		j++;
+	 	}
+	 	
+	 	//for avec le 1er et 3em parametre
+	 	for(int k=20; ; k--){
+	 		j++;
+	 	}
+
+	 	//for avec le 1er parametre
+	 	for(int n; ;){
+	 		l++;
+	 	}
+
+	 	//for avec le 2er et 3em parametre
+	 	for(;l<var.getMax(); l++){
+	 		j++;
+	 	}
+
+	 	//for avec le 2er et 3em parametre
+	 	for(;l<var.getMax(); l++){
+	 		j++;
+	 	}
+
+	 	//for avec le 2em parametre
+	 	for(;j!=100;){
+	 		x;
+	 	}
+
+
+	 	//for avec le 3em parametre
+	 	for(;;j++){
+	 		x;
+	 	}
+
+	 	//for infini
+	 	for(;;){
+	 		k--;
+	 	}
+	 	
+	 }
+
+	 //fonction avec switch
+	 protected int methode4(int var3){
+		switch(chaine) {
+  			case 1:
+    			x++;
+    			break;
+  			case 2:
+    			y++;
+    			break;
+  			default:
+    			z++;
+		}
+	 }
 }

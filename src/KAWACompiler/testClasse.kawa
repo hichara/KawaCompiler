@@ -136,7 +136,7 @@ public static class teste extends inter1 implements interface1 {
 	 }
 
 	 // constructeur avec parametres
-	 public Teste(int [] op1, value Personne p){
+	 public Teste(int [] op1, Personne p){
 	 	super();
 	 	super(k, t);
 	 	this.par = 5;

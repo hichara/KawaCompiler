@@ -15,7 +15,8 @@ using namespace std;
  
 KT_Class:: KT_Class() {
 //besoin semantic
-ParentClass=NULL;
+//ParentClass=NULL;
+parentClasseSemantique=NULL;
 
 }
 

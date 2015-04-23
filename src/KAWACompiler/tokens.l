@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "../implementation_KawaTree/headers.h"
+#include "../Semantique/AlgoSemantique.h"
 #include "kawa.hpp"
 
 typedef std::string String;
@@ -164,7 +165,24 @@ int main( int argc, char** argv ){
             printf ("pb ouverture du fichier %s \n", files[file_num++]);
             exit(1);
         }
+        /****
+         * Frontend
+         ***/        
+        // analyse syntaxique --> production de l'AST avec KawaTree
         yyparse();
+        
+        // analyse sémantique
+        /*
+        Semantic::check(program);
+        /*/
+        Semantic::checkWithDebug(program);
+        //*/
+        /****
+         * Backend
+         ***/
+        // production de code intermédiare avec IRCompiler
+
+
     }
 
     return 0;

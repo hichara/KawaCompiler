@@ -1,19 +1,4 @@
-#include <iostream>
-#include "../implementation_KawaTree/KT_Class.h"
-#include "../implementation_KawaTree/KT_Interface.h"
-#include "../implementation_KawaTree/KT_Prototype.h"
-#include "../implementation_KawaTree/KT_Package.h"
-#include "../implementation_KawaTree/KT_Program.h"
-#include "../implementation_KawaTree/KT_Print.h"
-#include "../implementation_KawaTree/KT_FactFinal.h"
-#include "../implementation_KawaTree/KT_String.h"
-#include "../implementation_KawaTree/KT_Statement.h"
-#include "CheckDeclarationStatementType.cpp"
-#include "CheckAffectationStatementType.cpp"
-#include "CheckCallMethodStatementType.cpp"
-#include <map>
-#include <algorithm>
-using namespace std;
+#include "AlgoSemantique.h"
 
 map<string, KT_Class *> classTypes;             // Map des classes
 map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
@@ -21,7 +6,7 @@ map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
 map<string, KT_Class *>::iterator iteratorClass;
 map<string, KT_Interface *>::iterator iteratorInterface;
 
-bool existError;
+bool Semantic::existSemanticError = false;
 
 // Phase 1
 void createListOfType(KT_Program * prog) {
@@ -32,7 +17,7 @@ void createListOfType(KT_Program * prog) {
 	for (KT_Package * package : prog->getPackages()) {
 		// on vérifie que le nom du package n'est pas déjà utilisé
 		if (find(packagesName.begin(), packagesName.end(), *package->getName()) != packagesName.end()) {
-			existError = true;
+			Semantic::existSemanticError = true;
 			cout << "!!!!!! ERREUR 1 !!!!! Le nom du package :  est deja utilisé" << endl;
 		}
 		packagesName.push_back(*package->getName());
@@ -47,7 +32,7 @@ void createListOfType(KT_Program * prog) {
 				classe->setFQN(fqn);
 				classTypes[*fqn] = classe;
 			} else {
-				existError = true;
+				Semantic::existSemanticError = true;
 				cout << "!!!!!! ERREUR 2 !!!!! Le nom de la classe: est deja utilisé" << endl;
 			}
 		}
@@ -62,7 +47,7 @@ void createListOfType(KT_Program * prog) {
 				interface->setFQN(fqn);
 				interfaceTypes[*fqn] = interface;
 			} else {
-				existError = true;
+				Semantic::existSemanticError = true;
 				cout << "!!!!!! ERREUR 3 !!!!! Le nom de l'interface : est deja utilisé" << endl;
 			}
 		}
@@ -105,6 +90,10 @@ bool hasImplementCycle(KT_Interface * depart, KT_Interface * mere) {
 }
 
 bool typeIsCorrect(string * packageName, vector<string*> typeName) {
+	if ( typeName.size() == 1 && typeName[0]->compare("void") == 0 ){
+		return true;
+	}
+
 	string fqn = *packageName;
 	for (string * pieceOfTypeName : typeName) {
 		fqn += "." + *pieceOfTypeName;
@@ -112,6 +101,7 @@ bool typeIsCorrect(string * packageName, vector<string*> typeName) {
 	iteratorInterface = interfaceTypes.find(fqn);
 	iteratorClass = classTypes.find(fqn);
 	if (iteratorInterface == interfaceTypes.end() && iteratorClass == classTypes.end()) {
+		cout << "type error : " << fqn << endl;
 		return false;
 	}
 	return true;
@@ -133,20 +123,20 @@ void createAndVerifySignatureMethod(KT_Class * classe, string * packageName) {
 		for (KT_Param * param : methode->getParams()) {
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
-					existError = true;
+					Semantic::existSemanticError = true;
 					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!methode->getType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, methode->getType()->getTypeName())) {
-				existError = true;
+				Semantic::existSemanticError = true;
 				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*methode->getName() + "" + params);
 		if (find(signaturesMethod.begin(), signaturesMethod.end(), *signature) != signaturesMethod.end()) {
-			existError = true;
+			Semantic::existSemanticError = true;
 			cout << "!!!!!! ERREUR 5 !!!!! Deux signatures identiques " << endl;
 		}
 		signaturesMethod.push_back(*signature);
@@ -166,20 +156,20 @@ void createAndVerifySignaturePrototype(KT_Interface * interface, string * packag
 		for (KT_Param * param : proto->getParams()) {
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
-					existError = true;
+					Semantic::existSemanticError = true;
 					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!proto->getReturnType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, proto->getReturnType()->getTypeName())) {
-				existError = true;
+				Semantic::existSemanticError = true;
 				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*proto->getName() + "" + params);
 		if (find(signaturesMethod.begin(), signaturesMethod.end(), *signature) != signaturesMethod.end()) {
-			existError = true;
+			Semantic::existSemanticError = true;
 			cout << "!!!!!! ERREUR 5 !!!!! Deux signatures identiques " << endl;
 		}
 		signaturesMethod.push_back(*signature);
@@ -198,16 +188,18 @@ int createHeritage(KT_Program * prog) {
 	for (KT_Package * package : prog->getPackages()) {
 		for (KT_Class * classe : package->getClasses()) {
 			// Si la classe hérite d'une classe mère,
+			cout << "createHeritage: " << *classe->getParentClass() << endl;
 			if (!classe->getParentClass()->empty()) {
+				cout << "je suis dans le if createHeritage" << endl;
 				string * fqn = new string(*package->getName() + "." + *classe->getParentClass());
 				// on verifie que le type existe
 				if (classTypes.find(*fqn) == classTypes.end()) {
-					existError = true;
+					Semantic::existSemanticError = true;
 					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
 				// on vérifie qu'il n'y a pas de cycle
 				if (hasHeritageCycle(classe, classTypes[*fqn])) {
-					existError = true;
+					Semantic::existSemanticError = true;
 					cout << "!!!!!! ERREUR 6 !!!!! Cycle présent dans l'arbre d'héritage " << endl;
 				}
 
@@ -218,12 +210,13 @@ int createHeritage(KT_Program * prog) {
 			}
 			// Si la classe implémentes une ou plusieurs interfaces,
 			if (classe->getParentInterfaces().size() > 0) {
+				cout << "je suis dans le if interface createHeritage" << endl;
 				vector<KT_Interface *> listInter;
 				for (string * interface : classe->getParentInterfaces()) {
 					string * fqn = new string(*package->getName() + "." + *interface);
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
-						existError = true;
+						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 					}
 
@@ -244,12 +237,12 @@ int createHeritage(KT_Program * prog) {
 					string * fqn = new string(*package->getName() + "." + *interfaceName);
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
-						existError = true;
+						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 					}
 					// si ca crée un cycle
 					if (hasImplementCycle(interface, interfaceTypes[*fqn])) {
-						existError = true;
+						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 7 !!!!! Cycle présent dans l'arbe d'implémentation " << endl;
 					}
 
@@ -268,10 +261,14 @@ int createHeritage(KT_Program * prog) {
 // Phase 3
 
 void completion(KT_Class * classe) {
+	cout << "completion --- " << classe->getParentClasseSemantique() << endl;
 	if (classe->getParentClasseSemantique() != NULL) {
+		cout << "class name: " << classe->getName() << endl;
 		completion(classe->getParentClasseSemantique());
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
+			cout << "method name: " << methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
+				cout << "hello je suis dans le if" << endl;
 				KT_Prototype * proto = new KT_Prototype();
 				proto->setModifier(methode->getModifier());
 				proto->setName(methode->getName());
@@ -302,8 +299,11 @@ void completion(KT_Class * classe) {
 			 }*/
 		}
 	} else {
+		cout << "completion: pas de classe parent"  << endl;
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
+			cout << "nom de méthode" << *methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
+				cout << "proto null" << endl;
 				KT_Prototype * proto = new KT_Prototype();
 				proto->setModifier(methode->getModifier());
 				proto->setName(methode->getName());
@@ -339,7 +339,7 @@ void decoration(KT_Program * prog) {
 				for (string signature : iParent->getFullSignatures()) {
 					vector<string> lists = interface->getFullSignatures();
 					if (find(lists.begin(), lists.end(), signature) == lists.end()) {
-						existError = true;
+						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 8 !!!!! Une interface en implemente une autre sans reprendre ses prototypes " << endl;
 						cout << *interface->getFQN() << endl;
 						cout << signature << endl;
@@ -354,7 +354,7 @@ void decoration(KT_Program * prog) {
 				for (string signature : interface->getFullSignatures()) {
 					vector<string> lists = classe->getFullSignatures();
 					if (find(lists.begin(), lists.end(), signature) == lists.end()) {
-						existError = true;
+						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 9 !!!!! Méthode non défini malgré implémentation " << endl;
 						cout << *classe->getFQN() << endl;
 						cout << signature << endl;
@@ -381,7 +381,7 @@ void decoration(KT_Program * prog) {
 						SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
 						statement->accept(callMethodVisitor);
 
-						// si la statement n'est pas une déclaration ou une affectation ou un appel de méthode
+						// si le statement n'est pas une déclaration ou une affectation ou un appel de méthode
 						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
 						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
 							&& !callMethodVisitor->isVisited()){
@@ -390,7 +390,7 @@ void decoration(KT_Program * prog) {
 						}
 					}
 					if (!mainIsGood){
-						existError = true;
+						Semantic::existSemanticError = true;
 						// todo: définir le numéro de l'erreur
 						cout << "!!!!!!! ERREUR * !!!!!!!! Méthode main doit comporter uniquement des déclarations,"
 						     << "affectations ou appels de méthodes uniquement" << endl;
@@ -413,7 +413,7 @@ void decoration(KT_Program * prog) {
 	}
 }
 
-int main() {
+int main_semantic() {
 //	string * badName = new string("classelplp1");
 
 	// *****************************************************************************
@@ -740,7 +740,7 @@ int main() {
 		}
 	}
 
-	if (existError) {
+	if (Semantic::existSemanticError) {
 		cout << "\n\nIl y a des erreurs => compilation echouee => ICI CA PLANTE :D" << endl;
 	} else {
 		cout << "\n\nCompilation reussie" << endl;

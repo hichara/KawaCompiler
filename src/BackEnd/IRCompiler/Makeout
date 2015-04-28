@@ -1,0 +1,967 @@
+clang: warning: -lLLVMX86Disassembler: 'linker' input unused
+clang: warning: -lLLVMX86AsmParser: 'linker' input unused
+clang: warning: -lLLVMX86CodeGen: 'linker' input unused
+clang: warning: -lLLVMSelectionDAG: 'linker' input unused
+clang: warning: -lLLVMAsmPrinter: 'linker' input unused
+clang: warning: -lLLVMX86Desc: 'linker' input unused
+clang: warning: -lLLVMObject: 'linker' input unused
+clang: warning: -lLLVMMCParser: 'linker' input unused
+clang: warning: -lLLVMBitReader: 'linker' input unused
+clang: warning: -lLLVMX86Info: 'linker' input unused
+clang: warning: -lLLVMX86AsmPrinter: 'linker' input unused
+clang: warning: -lLLVMX86Utils: 'linker' input unused
+clang: warning: -lLLVMJIT: 'linker' input unused
+clang: warning: -lLLVMExecutionEngine: 'linker' input unused
+clang: warning: -lLLVMCodeGen: 'linker' input unused
+clang: warning: -lLLVMScalarOpts: 'linker' input unused
+clang: warning: -lLLVMInstCombine: 'linker' input unused
+clang: warning: -lLLVMTransformUtils: 'linker' input unused
+clang: warning: -lLLVMipa: 'linker' input unused
+clang: warning: -lLLVMAnalysis: 'linker' input unused
+clang: warning: -lLLVMTarget: 'linker' input unused
+clang: warning: -lLLVMMC: 'linker' input unused
+clang: warning: -lLLVMCore: 'linker' input unused
+clang: warning: -lLLVMSupport: 'linker' input unused
+clang: warning: -lz: 'linker' input unused
+clang: warning: -lpthread: 'linker' input unused
+clang: warning: -lffi: 'linker' input unused
+clang: warning: -ledit: 'linker' input unused
+clang: warning: -ltinfo: 'linker' input unused
+clang: warning: -ldl: 'linker' input unused
+clang: warning: -lm: 'linker' input unused
+clang: warning: argument unused during compilation: '-L/usr/lib/llvm-3.5/lib'
+In file included from ../../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../../implementation_KawaTree/KT_Addition.h:11:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_AdditionlEq.h:10:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_AffectOperation.cpp:6:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Affectation.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Affectation.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+../../implementation_KawaTree/KT_Affectation.cpp:86:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_AndBinEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_AndBinEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ArrayInitilizer.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ArrayInitilizer.h:9:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Attribute.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Attribute.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.cpp:6:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Block.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_BlockStatement.cpp:6:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Bool.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Bool.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.cpp:6:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_BreakStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_BreakStatement.h:11:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Class.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Class.h:12:
+In file included from ../../implementation_KawaTree/KT_Attribute.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_Class.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Class.h:13:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_Constructor.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Constructor.h:13:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_Constructor.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Constructor.h:15:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_ConstructorCall.cpp:7:
+In file included from ../../implementation_KawaTree/KT_ConstructorCall.h:12:
+In file included from ../../implementation_KawaTree/KT_Constructor.h:13:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_ConstructorCall.cpp:7:
+In file included from ../../implementation_KawaTree/KT_ConstructorCall.h:12:
+In file included from ../../implementation_KawaTree/KT_Constructor.h:15:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_ContinueStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ContinueStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Division.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Division.h:10:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_DivisionEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_DivisionEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Entier.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Entier.h:11:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Expression.cpp:6:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionAnd.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionAnd.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionAndLogic.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionAndLogic.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionEq.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionGE.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionGE.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionGT.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionGT.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionLE.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionLE.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionLT.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionLT.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionNotEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionNotEq.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionOr.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionOr.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionOrLogic.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionOrLogic.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ExpressionOrXLogic.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ExpressionOrXLogic.h:9:
+In file included from ../../implementation_KawaTree/KT_BooleanExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_FactFinal.cpp:6:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ForStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ForStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_ForStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ForStatement.h:10:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_ID.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ID.h:10:
+In file included from ../../implementation_KawaTree/KT_MethodOrVarCall.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_IfStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_IfStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_IfStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_IfStatement.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_Interface.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Interface.h:12:
+In file included from ../../implementation_KawaTree/KT_Prototype.h:9:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_LinkedMethodOrVarCall.cpp:6:
+In file included from ../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_MethodCall.cpp:6:
+In file included from ../../implementation_KawaTree/KT_MethodCall.h:11:
+In file included from ../../implementation_KawaTree/KT_MethodOrVarCall.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_MethodCall.cpp:6:
+In file included from ../../implementation_KawaTree/KT_MethodCall.h:13:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_MethodOrVarCall.cpp:6:
+In file included from ../../implementation_KawaTree/KT_MethodOrVarCall.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Minus.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Minus.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Modulo.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Modulo.h:9:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ModuloEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ModuloEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Multiplication.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Multiplication.h:9:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_MultiplicationEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_MultiplicationEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_NBinary.cpp:6:
+In file included from ../../implementation_KawaTree/KT_NBinary.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Negation.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Negation.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Null.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Null.h:11:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_OrBinEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_OrBinEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Package.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Package.h:10:
+In file included from ../../implementation_KawaTree/KT_Class.h:12:
+In file included from ../../implementation_KawaTree/KT_Attribute.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_Package.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Package.h:10:
+In file included from ../../implementation_KawaTree/KT_Class.h:13:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_Param.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ParamsMethodCall.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ParamsMethodCall.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_PostDecrement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_PostDecrement.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_PostIncrement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_PostIncrement.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_PreDecrement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_PreDecrement.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_PreIncrement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_PreIncrement.h:9:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Print.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Print.h:11:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Program.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../../implementation_KawaTree/KT_Package.h:10:
+In file included from ../../implementation_KawaTree/KT_Class.h:12:
+In file included from ../../implementation_KawaTree/KT_Attribute.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_Program.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../../implementation_KawaTree/KT_Package.h:10:
+In file included from ../../implementation_KawaTree/KT_Class.h:13:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_Prototype.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Prototype.h:9:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Reel.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Reel.h:9:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ReturnStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ReturnStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_ReturnStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ReturnStatement.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:11:
+In file included from ../../implementation_KawaTree/KT_Param.h:12:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+../../implementation_KawaTree/KT_SimpleMethod.cpp:113:17: error: non-const lvalue reference to type 'vector<[...]>' cannot bind to a temporary of type 'vector<[...]>'
+        var->setParams(getParams());
+                       ^~~~~~~~~~~
+../../implementation_KawaTree/KT_Prototype.h:57:39: note: passing argument to parameter 'var' here
+    void setParams(vector<KT_Param*>& var);
+                                      ^
+2 warnings and 1 error generated.
+In file included from ../../implementation_KawaTree/KT_String.cpp:6:
+In file included from ../../implementation_KawaTree/KT_String.h:10:
+In file included from ../../implementation_KawaTree/KT_FactFinal.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Substraction.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Substraction.h:9:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_SubstractionEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SubstractionEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Super.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Super.h:10:
+In file included from ../../implementation_KawaTree/KT_ParamsMethodCall.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_SwitchBlockStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SwitchBlockStatement.h:8:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_SwitchBlockStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SwitchBlockStatement.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_SwitchStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SwitchStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_SwitchStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_SwitchStatement.h:10:
+In file included from ../../implementation_KawaTree/KT_SwitchBlockStatement.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.cpp:6:
+In file included from ../../implementation_KawaTree/KT_UnaryExpression.h:9:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_Variable.cpp:6:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_WhileStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_WhileStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_WhileStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_WhileStatement.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/KT_XOrBinEq.cpp:6:
+In file included from ../../implementation_KawaTree/KT_XOrBinEq.h:9:
+In file included from ../../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/KT_ifElseStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ifElseStatement.h:9:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/KT_ifElseStatement.cpp:6:
+In file included from ../../implementation_KawaTree/KT_ifElseStatement.h:10:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.
+In file included from ../../implementation_KawaTree/PARSER_Field.cpp:6:
+In file included from ../../implementation_KawaTree/PARSER_Field.h:10:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/PARSER_ForControl.cpp:6:
+In file included from ../../implementation_KawaTree/PARSER_ForControl.h:9:
+In file included from ../../implementation_KawaTree/KT_Variable.h:12:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+1 warning generated.
+In file included from ../../implementation_KawaTree/destructors.cpp:1:
+In file included from ../../implementation_KawaTree/headers.h:1:
+In file included from ../../implementation_KawaTree/KT_Addition.h:11:
+In file included from ../../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../../implementation_KawaTree/KT_BinaryExpression.h:11:
+../../implementation_KawaTree/KT_Expression.h:32:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../../implementation_KawaTree/destructors.cpp:1:
+In file included from ../../implementation_KawaTree/headers.h:10:
+In file included from ../../implementation_KawaTree/KT_Block.h:10:
+../../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../../implementation_KawaTree/KT_Statement.h:27:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings generated.

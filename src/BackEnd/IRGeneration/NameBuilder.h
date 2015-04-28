@@ -1,3 +1,7 @@
+/**
+* Creator Hichara
+*/
+
 #ifndef NAME_BUILDER_H
 #define NAME_BUILDER_H
 
@@ -35,8 +39,6 @@ public:
 
 	static std::string buildAdHocTableName(std::string classStatic,  
 	   									   std::string classDynamique);
-
-	static std::string buidClassAdHocTableIndex(std::string className);
 
 	static std::string buildgetAdHocTableFunction(std::string staticC, std::string dynamicC);
 	

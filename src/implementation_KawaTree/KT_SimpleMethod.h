@@ -18,7 +18,7 @@ public:
     KT_SimpleMethod();
     ~KT_SimpleMethod();
     
-    string* getName();
+    string getName();
     
     int getIndex();
     
@@ -41,7 +41,7 @@ public:
     /**
      * @param string *
      */
-    void setName(string* var);
+    void setName(string var);
     
     /**
      * @param KT_Block *
@@ -61,7 +61,7 @@ public:
 	/**
 	* @param vector<KT_Param*>
 	*/
-	void setParams(vector<KT_Param*>& var);
+	void setParams(vector<KT_Param*> var);
 	
 	
 	/**
@@ -76,7 +76,7 @@ public:
 
 	void toString();
 private: 
-    string* name;
+    string name;
     int index;
     vector<KT_Param*> params;
     KT_Block* block;

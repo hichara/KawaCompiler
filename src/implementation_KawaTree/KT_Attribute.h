@@ -37,7 +37,7 @@ public:
     /**
      * @param string *
      */
-    void setName(string* var);
+    void setName(string var);
     
     /**
      * @param KT_Type *
@@ -56,7 +56,7 @@ public:
 
 	void toString();
 private: 
-    string* name;
+    string name;
     KT_Modifier* modifier;
 	KT_Type* type;
 	KT_Expression* value;

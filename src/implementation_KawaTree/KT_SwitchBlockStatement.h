@@ -27,7 +27,7 @@ public:
     /**
      * @param bool
      */
-    void setCaseExist( bool var);
+    void setCaseExist(bool var);
     
     /**
      * @param KT_Block *

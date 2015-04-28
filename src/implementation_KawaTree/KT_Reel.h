@@ -23,7 +23,7 @@ public:
     /**
      * @param float
      */
-    void setValue( float var);
+    void setValue(float var);
 private: 
     float value;
 };

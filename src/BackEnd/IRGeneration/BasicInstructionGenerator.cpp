@@ -1,9 +1,15 @@
+/**
+* Creator Hichara
+*/
+
+#include "PrimitiveValueConverter.h"
 #include "BasicInstructionGenerator.h"
 #include "GlobalVariableGenerator.h"
 #include "FunctionGenerator.h"
 #include "CallGenerator.h"
 #include "NameBuilder.h"
 #include "TypeGenerator.h"
+
 
 Value* BasicInstructionGenerator::createDeclaration(std::string varName, Type *type, BasicBlock *b) {
 	IRBuilder<> builder(type->getContext());
@@ -44,7 +50,10 @@ Value* BasicInstructionGenerator::createAffectationReg(Module *module, Value *ta
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
 
-	builder.CreateStore(val, target);
+	Value *cast = PrimitiveValueConverter::convertFromTo(module, val,
+		target->getType()->getPointerElementType(), b);
+
+	builder.CreateStore(cast, target);
 
 	return target;
 }
@@ -68,10 +77,10 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	Value *v2 = builder.CreateGEP(val, indexII);
 	Value *table = builder.CreateLoad(v2);
 
-	std::string varName = NameBuilder::buidClassAdHocTableIndex(className);
+	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
+	std::string varName = NameBuilder::buildFunctionIndexName(s);
 	Value *adHocIndex = GlobalVariableGenerator::getIndexOfMember(module, varName);
 
-	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
 	Function *fs = FunctionGenerator::getFunction(module, s);
 	Value* newTable = CallGenerator::createMethodeCall(module, fs, val,
 					 empty, adHocIndex, b);

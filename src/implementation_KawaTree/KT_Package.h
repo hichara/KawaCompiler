@@ -20,7 +20,7 @@ public:
     KT_Package();
     ~KT_Package();
     
-    string* getName();
+    string getName();
     
     vector<KT_Interface*> getInterfaces();
     
@@ -29,17 +29,17 @@ public:
     /**
      * @param string *
      */
-    void setName(string* var);
+    void setName(string var);
 
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void setInterfaces(vector<KT_Interface*>& var);
+	void setInterfaces(vector<KT_Interface*> var);
 
 	/**
 	* @param vector<KT_Class*>
 	*/
-	void setClasses(vector<KT_Class*>& var);
+	void setClasses(vector<KT_Class*> var);
 
     /**
     * @param KT_Class*
@@ -53,7 +53,7 @@ public:
 
 	void toString();
 private: 
-    string* name;
+    string name;
     vector<KT_Class*> classes;
     vector<KT_Interface*> interfaces;
 };

@@ -20,20 +20,20 @@ public:
     
     bool isIdExist();
     
-    string* getId();
+    string getId();
     
     /**
      * @param bool
      */
-    void setIdExist( bool var);
+    void setIdExist(bool var);
     
     /**
      * @param string *
      */
-    void setId( string* var);
+    void setId(string var);
 private: 
     bool idExist;
-    string* id;
+    string id;
 };
 
 #endif //_KT_CONTINUESTATEMENT_H

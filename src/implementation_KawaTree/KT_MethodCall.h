@@ -28,23 +28,23 @@ public:
     KT_MethodCall();
     ~KT_MethodCall();
     
-    vector<string*> getName();
+    vector<string> getName();
     
     KT_SimpleMethod* getMethod();
     
-    KT_VarOrAttr* getCaller();
+    KT_VarOrAttr getCaller();
     
     vector<KT_ParamsMethodCall*> getParams();
     
     /**
      * @param string *
      */
-    void setName(vector<string*> var);
+    void setName(vector<string> var);
 
     /**
      * @param vector<KT_ParamsMethodCall*>
      */
-    void setParams(vector<KT_ParamsMethodCall*>& var);
+    void setParams(vector<KT_ParamsMethodCall*> var);
 
     /**
      * @param KT_SimpleMethod*
@@ -59,11 +59,11 @@ public:
     /**
      * @param string*
      */
-    void setNameAddStringAtFirstPosition(string* var);    
+    void setNameAddStringAtFirstPosition(string var);
 
     llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 private: 
-    vector<string*> name;
+    vector<string> name;
     vector<KT_ParamsMethodCall*> params;
     KT_SimpleMethod* methodCall;
     KT_VarOrAttr* caller;

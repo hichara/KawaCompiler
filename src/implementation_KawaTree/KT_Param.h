@@ -21,7 +21,7 @@ public:
     KT_Param();
     ~KT_Param();
 
-    string* getName();
+    string getName();
     
     KT_Type* getParamType();
 
@@ -32,7 +32,7 @@ public:
     /**
      * @param string *
      */
-    void setName(string* var);
+    void setName(string var);
     
     /**
      * @param KT_Type *
@@ -47,7 +47,7 @@ public:
 	void toString();
 
 private: 
-    string* name;
+    string name;
     KT_Modifier* paramModifier;
     KT_Type* paramType;
 };

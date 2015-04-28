@@ -32,7 +32,7 @@ public:
 	/**
 	* @param vector<KT_FactFinal*>
 	*/
-	void setArgs(vector<KT_FactFinal*>& var);
+	void setArgs(vector<KT_FactFinal*> var);
 
 	/*virtual void toString() ;*/
 

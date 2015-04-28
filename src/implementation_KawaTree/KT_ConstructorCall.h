@@ -34,27 +34,27 @@ public:
     /**
      * @param vector<string*>
      */
-    void setName(vector<string*>& var);
+    void setName(vector<string> var);
 	
 	/**
      * @param vector<KT_ParamsMethodCall *>
      */
-    void setParams(vector<KT_ParamsMethodCall*>& var);
+    void setParams(vector<KT_ParamsMethodCall*> var);
 
-        /**
-     * @param string*
+    /**
+     * @param string
      */
-    void addString(string* var);
+    void addString(string var);
 
     /**
      * @param vector<string*>
      */
-    void addVectorString(vector<string*>& var);
+    void addVectorString(vector<string> var);
 
     llvm::Value *acceptIRCompiler(IRCompiler *compiler);
     
 private: 
-    vector<string*> name;
+    vector<string> name;
     vector<KT_ParamsMethodCall*> params;
 };
 

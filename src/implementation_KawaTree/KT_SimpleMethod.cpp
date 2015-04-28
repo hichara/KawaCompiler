@@ -106,7 +106,11 @@ void KT_SimpleMethod::setParams(vector<KT_Param*>& var) {
 * @param KT_Prototype*
 */
 void KT_SimpleMethod::setPrototype(KT_Prototype* var){
-	this->prototype  = var;
+	this->prototype = var;
+	var->setParentName(*(getName()));
+	var->setModifier(getModifier());
+	var->setReturnType(getType());
+	var->setParams(getParams());
 }
 
 /**

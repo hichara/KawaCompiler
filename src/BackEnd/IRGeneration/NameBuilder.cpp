@@ -1,3 +1,7 @@
+/**
+* Creator Hichara
+*/
+
 #include "NameBuilder.h"
 
 

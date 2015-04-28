@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 using namespace std;
 
 /**
@@ -36,4 +39,8 @@ void KT_ID::setNameAddStringAtFirstPosition(string* var){
   std::vector<string*>::iterator it;
   it = value.begin();
   it = value.insert ( it , var );
+}
+
+llvm::Value* KT_ID::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileID(this);
 }

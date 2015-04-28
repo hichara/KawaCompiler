@@ -12,13 +12,18 @@ class KT_Addition;
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 using namespace std;
 
 
 class KT_Addition: public KT_ArithmeticExpression {
 public : 
-	KT_Addition ();
+	KT_Addition();
 
+	llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 };
 
 #endif //_KT_ADDITION_H

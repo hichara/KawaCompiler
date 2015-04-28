@@ -43,12 +43,12 @@ public:
     /**
      * @param string *
      */
-    void setName( string* var);
+    void setName(string var);
     
     /**
      * @param KT_Modifier *
      */
-    void setModifier( KT_Modifier* var);
+    void setModifier(KT_Modifier* var);
 	
 	/**
      * @param Vector<KT_Param *>
@@ -62,7 +62,7 @@ public:
 
 	void toString();
 private: 
-    string* name;
+    string name;
     vector<KT_Param*> params;
     KT_Modifier* modifier;
     KT_Block* block;

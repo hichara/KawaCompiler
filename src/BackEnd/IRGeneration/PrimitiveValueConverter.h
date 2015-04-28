@@ -1,3 +1,7 @@
+/**
+* Creator Hichara
+*/
+
 #ifndef PRIM_VAL_CON
 #define PRIM_VAL_CON
 
@@ -28,8 +32,9 @@ using namespace llvm;
 class PrimitiveValueConverter {
 
 public:
-	static Value* convertFromTo(Module *module, Type *t1, Type *t2, Value *v, BasicBlock *b);
+	static Value* convertFromTo(Module *module, Value *v, Type *t1, BasicBlock *b);
 	static Value* convertToStr(Module* module, Value *o1, BasicBlock *b);
+	static Type* dominatingType(Type *t1, Type *t2);
 
 private:
 	static Value* convertFromIntToInt(Value *v, BasicBlock *b);

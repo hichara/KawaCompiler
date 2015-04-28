@@ -14,6 +14,7 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
 class IRCompiler;
 
 

@@ -21,7 +21,7 @@ public:
     KT_Variable();
     ~KT_Variable();
     
-    vector<string*> getName();
+    vector<string> getName();
     
     bool isFinal();
     
@@ -32,7 +32,7 @@ public:
     /**
      * @param string *
      */
-    void setName(vector<string*> var);
+    void setName(vector<string> var);
     
     /**
      * @param bool
@@ -51,7 +51,7 @@ public:
 
     Value* acceptIRCompiler(IRCompiler *compiler); 
 private: 
-    vector<string*> name;
+    vector<string> name;
     bool Final;
     KT_Type* type;
     KT_Expression* value; 

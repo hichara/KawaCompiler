@@ -72,6 +72,9 @@ void KT_Interface::setInterfacesparent(vector<string*>& var) {
  */
 void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
 	prototypes=var;
+	for(int i = 0; i < var.size(); i++) {
+		var[i]->setParentName(*(getName()));
+	}
 }
 
 /**

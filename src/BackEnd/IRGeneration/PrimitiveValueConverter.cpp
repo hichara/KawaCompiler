@@ -1,11 +1,34 @@
+/**
+* Creator Hichara
+*/
+
 #include "PrimitiveCreator.h"
 #include "PrimitiveValueConverter.h"
 #include "FunctionGenerator.h"
 
 /// Fonctions static public
 
- Value* PrimitiveValueConverter::convertFromTo(Module* module, Type *t1, Type *t2, Value *v, BasicBlock *b) {
- 	if(t1 == t2) {
+Type* PrimitiveValueConverter::dominatingType(Type *t1, Type *t2) {
+	Type *type = Type::getInt8Ty(t1->getContext())->getPointerTo();
+
+	if(t1 == type || t2 == type) {
+		return type;
+	}
+
+	type = Type::getDoubleTy(t1->getContext());
+
+	if(t1 == type || t2 == type) {
+		return type;
+	}
+
+	return t1;
+}
+
+ Value* PrimitiveValueConverter::convertFromTo(Module* module, Value *v, Type *ty, BasicBlock *b) {
+ 	Type *t1 = ty;
+ 	Type *t2 = v->getType();
+
+ 	if(t1 == v->getType()) {
  		return v;
  	}
 

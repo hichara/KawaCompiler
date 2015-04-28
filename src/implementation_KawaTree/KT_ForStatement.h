@@ -35,7 +35,7 @@ public:
     /**
      * @param KT_Expression *
      */
-    void setCondition( KT_Expression* var );
+    void setCondition(KT_Expression* var );
     
     /**
      * @param KT_BlockStatement *
@@ -50,12 +50,12 @@ public:
     /**
      * @param vector<KT_Variable*>
      */
-    void setInitFor(vector<KT_Variable*>& var);
+    void setInitFor(vector<KT_Variable*> var);
 
     /**
      * @param vector<KT_IDExpression*>
      */
-    void setUpdate(vector<KT_IDExpression*>& var);
+    void setUpdate(vector<KT_IDExpression*> var);
 
 private: 
     KT_BlockStatement* blockStatement;

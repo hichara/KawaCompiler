@@ -32,12 +32,12 @@ KT_Expression* KT_BinaryExpression::getRExpression() {
  * @param KT_Expression *
  */
 void KT_BinaryExpression::setLExpression(KT_Expression* var) {
-	this-> lExpression=var;
+	this-> lExpression = var;
 }
 
 /**
  * @param KT_Expression *
  */
 void KT_BinaryExpression::setRExpression(KT_Expression* var) {
-	this-> rExpression=var;
+	this-> rExpression = var;
 }

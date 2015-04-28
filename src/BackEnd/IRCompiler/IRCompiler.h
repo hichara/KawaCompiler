@@ -28,6 +28,7 @@ class KT_Constructor;
 class KT_Package;
 class KT_LinkedMehodOrVarCall;
 class KT_ReturnStatement;
+class KT_Addition;
 
 
 #define COMPILING_NONE  0
@@ -42,14 +43,14 @@ class KT_ReturnStatement;
 #include <fcntl.h>
 
 #include "IRGen_includes.h"
-#include "KT_includes.h"
-
 
 using namespace llvm;
 
 class IRCompiler {
 
 private:
+
+	bool debugOn = true;
 
 	Module *IRmodule;
 
@@ -88,9 +89,6 @@ public:
 
 	Type* createType(KT_Class *classe);
 	Type* createType(KT_Interface* interface);
-	
-
-	Value* compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall *c);
 	Value* compileAffectation(KT_Affectation *af);
 	Value* compilePrint(KT_Print *print);
 	Value* compileExpression(KT_Expression *expr);
@@ -106,8 +104,11 @@ public:
 	Value* compileVarOrAttr(KT_VarOrAttr *vOa);
 	Value* compileVariable(KT_Variable *id);
 	Value* compileStatement(KT_Statement *stm);
-	Value* compileLinkedMehodOrVarCall(KT_LinkedMehodOrVarCall *l);
+	Value* compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall*);
 	Value* compileReturnStatement(KT_ReturnStatement *ret);
+	Value* compileID(KT_ID *id);
+	Value* compileAddition(KT_Addition *add);
+
 
 	// ---------Exression -------------------
 
@@ -122,6 +123,7 @@ private:
 	void endCurrentFunction();
 	int getInbricationLevel();
 
+	void debug(std::string msg);
 
 	Value* searchVariable(std::string);
 

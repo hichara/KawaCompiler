@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 using namespace std;
 
 /**
@@ -15,3 +19,11 @@ using namespace std;
  */
 
  KT_Addition::KT_Addition(){}
+
+
+
+
+
+llvm::Value* KT_Addition::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileAddition(this);
+}

@@ -21,7 +21,7 @@ public:
 
     bool isBasicType();
     
-    vector<string*> getTypeName();
+    vector<string> getTypeName();
     
     int getArrayDim();
     
@@ -36,7 +36,7 @@ public:
     /**
      * @param vector<string*>
      */
-    void setTypeName(vector<string*>& var);
+    void setTypeName(vector<string> var);
     
     /**
      * @param int
@@ -51,18 +51,18 @@ public:
     /**
      * @param string*
      */
-    void addString(string* var);
+    void addString(string var);
 
     /**
      * @param vector<string*>
      */
-    void addVectorString(vector<string*>& var);
+    void addVectorString(vector<string> var);
 
 	void toString();
     
 private: 
     bool basicType;
-    vector<string*> typeName;
+    vector<string> typeName;
     int arrayDim;
     PARSER_Array* Array;
 };

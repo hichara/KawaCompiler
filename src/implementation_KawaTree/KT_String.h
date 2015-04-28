@@ -24,12 +24,12 @@ public:
     KT_String();
     ~KT_String();
     
-    string* getValue();
+    string getValue();
     
     /**
      * @param string *
      */
-    void setValue(string* var);
+    void setValue(string var);
 	/*virtual void toString() ;*/	
 
 	llvm::Value *acceptIRCompiler(IRCompiler *compiler);

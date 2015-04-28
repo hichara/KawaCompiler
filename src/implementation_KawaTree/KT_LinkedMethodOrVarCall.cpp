@@ -4,7 +4,8 @@
 
 
 #include "KT_LinkedMethodOrVarCall.h"
- #include "../BackEnd/IRCompiler/IRCompiler.h"
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 /**
  * KT_LinkedMethodOrVarCall implementation

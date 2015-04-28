@@ -25,7 +25,7 @@ public:
 	/**
 	* @param vector<KT_Package*>
 	*/
-	void setPackages(vector<KT_Package*>& var);
+	void setPackages(vector<KT_Package*> var);
 	
 	/**
 	* @param string

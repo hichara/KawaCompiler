@@ -21,7 +21,7 @@ public:
     ~KT_Prototype();
 
     //back-end
-	string* getName();
+	string getName();
 	
 	string getParentName();
     
@@ -34,7 +34,7 @@ public:
     /**
      * @param string *
      */
-    void setName(string* var);
+    void setName(string var);
 	
 	 /**
      * @param string
@@ -54,7 +54,7 @@ public:
     /**
      * @param vector<KT_Param*>
      */
-    void setParams(vector<KT_Param*>& var);
+    void setParams(vector<KT_Param*> var);
 	
 	 /**
 	 * mehtode pour verifier la redefinition d'une methode (semantic)
@@ -65,7 +65,7 @@ public:
 	string toString();
 	
 private: 
-    string* name;
+    string name;
 	
 	//back-end
 	string parentName;

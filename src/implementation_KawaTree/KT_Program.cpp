@@ -21,7 +21,7 @@ vector<KT_Package*> KT_Program::getPackages() {
 /**
 * @param vector<string *>
 */
-void KT_Program::setPackages(vector<KT_Package*>& var) {
+void KT_Program::setPackages(vector<KT_Package*> var) {
 	this->packages = var;
 }
 

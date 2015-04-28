@@ -36,7 +36,7 @@ public:
     /**
      * @param vector<string*>
      */
-    void setTypeName(vector<string*>& var);
+    void setTypeName(vector<string*> var);
     
     /**
      * @param int
@@ -56,7 +56,7 @@ public:
     /**
      * @param vector<string*>
      */
-    void addVectorString(vector<string*>& var);
+    void addVectorString(vector<string*> var);
 
 	void toString();
     

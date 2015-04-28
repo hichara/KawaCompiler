@@ -21,7 +21,7 @@ vector<KT_FactFinal*> KT_Print::getArgs() {
 /**
 * @param vector<KT_FactFinal*>
 */
-void KT_Print::setArgs(vector<KT_FactFinal*>& var) {
+void KT_Print::setArgs(vector<KT_FactFinal*> var) {
 	this->args = var;
 }
 

@@ -95,9 +95,9 @@ void KT_SimpleMethod::setType(KT_Type* var) {
 }
 
 /**
-* @param vector<KT_Param*>&
+* @param vector<KT_Param*>
 */
-void KT_SimpleMethod::setParams(vector<KT_Param*>& var) {
+void KT_SimpleMethod::setParams(vector<KT_Param*> var) {
 	params = var;
 }
 

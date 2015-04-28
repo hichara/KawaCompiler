@@ -34,7 +34,7 @@ public:
     /**
      * @param vector<KT_Variable*>
      */
-    void setVariables(vector<KT_Variable*>& var);
+    void setVariables(vector<KT_Variable*> var);
 
     /**
      * @param KT_Variable*
@@ -49,7 +49,7 @@ public:
     /**
      * @param vector<KT_Variable*>
      */
-    void addVectorVariable(vector<KT_Variable*>& var);
+    void addVectorVariable(vector<KT_Variable*> var);
 
     /**
      * @param bool

@@ -35,7 +35,7 @@ public:
     /**
      * @param vector<KT_IDExpression*>
      */
-    void setUpDate(vector<KT_IDExpression*>& var);
+    void setUpDate(vector<KT_IDExpression*> var);
 
     /**
      * @param PARSER_Field*

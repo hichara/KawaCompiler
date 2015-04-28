@@ -19,7 +19,7 @@ public:
     KT_ID ();
     ~KT_ID ();
     vector<string*> getValue();
-	 void setValue(vector<string*>& var);
+	 void setValue(vector<string*> var);
 
 	/**
      * @param string*

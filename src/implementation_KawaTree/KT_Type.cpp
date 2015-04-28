@@ -49,7 +49,7 @@ void KT_Type::setBasicType(bool var) {
 /**
  * @param vector<string*>
  */
-void KT_Type::setTypeName(vector<string*>& var) {
+void KT_Type::setTypeName(vector<string*> var) {
 	typeName=var;
 }
 
@@ -78,7 +78,7 @@ void KT_Type::addString(string* var) {
 /**
  * @param vector<string*>
  */
-void KT_Type::addVectorString(vector<string*>& var) {
+void KT_Type::addVectorString(vector<string*> var) {
 	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
 		//string* name = (*it);
 		typeName.push_back(*it);

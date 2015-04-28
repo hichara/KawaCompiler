@@ -2,7 +2,7 @@ package polymor;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String args) {
 		
 	    Chien c = new Chien("Gris bleuté", 20);
 	    Loup l = new Loup ("blanche","nikiki");
@@ -22,7 +22,7 @@ public class Test {
 	    r.faireCalin();
 	    r.faireLechouille();
 	    r.crier();//*************dit signaler cette erreur
-	    ((Chien) r).crier();//*************dit marcher si le cast en pris en compte
+	    //((Chien) r).crier();//*************dit marcher si le cast en pris en compte
 
 //***************************
 	    r1.faireLeBeau();

@@ -15,10 +15,10 @@ void createListOfType(KT_Program * prog) {
 
 	// On parcourt chaque package
 	for (KT_Package * package : prog->getPackages()) {
-		// on vérifie que le nom du package n'est pas déjà utilisé
+		// on vÃ©rifie que le nom du package n'est pas dÃ©jÃ  utilisÃ©
 		if (find(packagesName.begin(), packagesName.end(), *package->getName()) != packagesName.end()) {
 			Semantic::existSemanticError = true;
-			cout << "!!!!!! ERREUR 1 !!!!! Le nom du package :  est deja utilisé" << endl;
+			cout << "!!!!!! ERREUR 1 !!!!! Le nom du package :  est deja utilisÃ©" << endl;
 		}
 		packagesName.push_back(*package->getName());
 
@@ -26,20 +26,20 @@ void createListOfType(KT_Program * prog) {
 		for (KT_Class * classe : package->getClasses()) {
 			string * fqn = new string(*package->getName() + "." + *classe->getName());
 
-			// On vérifie que le nom de classe n'est pas deja utilisé
+			// On vÃ©rifie que le nom de classe n'est pas deja utilisÃ©
 			iteratorClass = classTypes.find(*fqn);
 			if (iteratorClass == classTypes.end()) {
 				classe->setFQN(fqn);
 				classTypes[*fqn] = classe;
 			} else {
 				Semantic::existSemanticError = true;
-				cout << "!!!!!! ERREUR 2 !!!!! Le nom de la classe: est deja utilisé" << endl;
+				cout << "!!!!!! ERREUR 2 !!!!! Le nom de la classe: est deja utilisÃ©" << endl;
 			}
 		}
 
 		// On parcourt chaque interface du package
 		for (KT_Interface * interface : package->getInterfaces()) {
-			// On vérifie que le nom d'interface n'est pas deja utilisé
+			// On vÃ©rifie que le nom d'interface n'est pas deja utilisÃ©
 			string * fqn = new string(*package->getName() + "." + *interface->getName());
 			iteratorInterface = interfaceTypes.find(*fqn);
 			iteratorClass = classTypes.find(*fqn);
@@ -48,12 +48,12 @@ void createListOfType(KT_Program * prog) {
 				interfaceTypes[*fqn] = interface;
 			} else {
 				Semantic::existSemanticError = true;
-				cout << "!!!!!! ERREUR 3 !!!!! Le nom de l'interface : est deja utilisé" << endl;
+				cout << "!!!!!! ERREUR 3 !!!!! Le nom de l'interface : est deja utilisÃ©" << endl;
 			}
 		}
 	}
 
-	// Affichage de confirmation (à supprimer)
+	// Affichage de confirmation (Ã  supprimer)
 	/*for (iteratorClass = classTypes.begin(); iteratorClass != classTypes.end(); ++iteratorClass) {
 		cout << iteratorClass->first << " : " << *iteratorClass->second->getFQN() << endl;
 	}
@@ -187,7 +187,7 @@ int createHeritage(KT_Program * prog) {
 	// On parcourt chaque package, et chaque classe qu'il contient
 	for (KT_Package * package : prog->getPackages()) {
 		for (KT_Class * classe : package->getClasses()) {
-			// Si la classe hérite d'une classe mère,
+			// Si la classe hÃ©rite d'une classe mÃ¨re,
 			cout << "createHeritage: " << *classe->getParentClass() << endl;
 			if (!classe->getParentClass()->empty()) {
 				cout << "je suis dans le if createHeritage" << endl;
@@ -197,18 +197,18 @@ int createHeritage(KT_Program * prog) {
 					Semantic::existSemanticError = true;
 					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 				}
-				// on vérifie qu'il n'y a pas de cycle
+				// on vÃ©rifie qu'il n'y a pas de cycle
 				if (hasHeritageCycle(classe, classTypes[*fqn])) {
 					Semantic::existSemanticError = true;
-					cout << "!!!!!! ERREUR 6 !!!!! Cycle présent dans l'arbre d'héritage " << endl;
+					cout << "!!!!!! ERREUR 6 !!!!! Cycle prÃ©sent dans l'arbre d'hÃ©ritage " << endl;
 				}
 
-				// on décore
+				// on dÃ©core
 				cout << *classe->getFQN() + " a pour classe mere : " + *classTypes[*fqn]->getFQN() << endl;
 				//TODO:
 				classe->setParentClasseSemantique(classTypes[*fqn]);
 			}
-			// Si la classe implémentes une ou plusieurs interfaces,
+			// Si la classe implÃ©mentes une ou plusieurs interfaces,
 			if (classe->getParentInterfaces().size() > 0) {
 				cout << "je suis dans le if interface createHeritage" << endl;
 				vector<KT_Interface *> listInter;
@@ -240,10 +240,10 @@ int createHeritage(KT_Program * prog) {
 						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
 					}
-					// si ca crée un cycle
+					// si ca crÃ©e un cycle
 					if (hasImplementCycle(interface, interfaceTypes[*fqn])) {
 						Semantic::existSemanticError = true;
-						cout << "!!!!!! ERREUR 7 !!!!! Cycle présent dans l'arbe d'implémentation " << endl;
+						cout << "!!!!!! ERREUR 7 !!!!! Cycle prÃ©sent dans l'arbe d'implÃ©mentation " << endl;
 					}
 
 					//cout << *interface->getFQN() + " a pour interface : " + *interfaceTypes[*fqn]->getFQN() << endl;
@@ -301,7 +301,7 @@ void completion(KT_Class * classe) {
 	} else {
 		cout << "completion: pas de classe parent"  << endl;
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
-			cout << "nom de méthode" << *methode->getName() << endl;
+			cout << "nom de mÃ©thode: " << *methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
 				cout << "proto null" << endl;
 				KT_Prototype * proto = new KT_Prototype();
@@ -349,13 +349,13 @@ void decoration(KT_Program * prog) {
 			completionInterface(interface);
 		}
 		for (KT_Class * classe : package->getClasses()) {
-			// on verifie que toutes les méthodes que la classe doit implémenter le sont (si elle implement des interfaces)
+			// on verifie que toutes les mÃ©thodes que la classe doit implÃ©menter le sont (si elle implement des interfaces)
 			for (KT_Interface * interface : classe->getParentsInterfacesSemantique()) {
 				for (string signature : interface->getFullSignatures()) {
 					vector<string> lists = classe->getFullSignatures();
 					if (find(lists.begin(), lists.end(), signature) == lists.end()) {
 						Semantic::existSemanticError = true;
-						cout << "!!!!!! ERREUR 9 !!!!! Méthode non défini malgré implémentation " << endl;
+						cout << "!!!!!! ERREUR 9 !!!!! MÃ©thode non dÃ©fini malgrÃ© implÃ©mentation " << endl;
 						cout << *classe->getFQN() << endl;
 						cout << signature << endl;
 					}
@@ -367,7 +367,7 @@ void decoration(KT_Program * prog) {
 			// on effectue le traitement sur les body de chaque methode
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
-					//* todo: ligne a dé/commenter pour dé/activer le traitement
+					//* todo: ligne a dÃ©/commenter pour dÃ©/activer le traitement
 					KT_Block* mainBlock = methode->getBlock();
 					bool mainIsGood = true;
 					for(KT_Statement* statement : mainBlock->getStatements()){
@@ -381,7 +381,7 @@ void decoration(KT_Program * prog) {
 						SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
 						statement->accept(callMethodVisitor);
 
-						// si le statement n'est pas une déclaration ou une affectation ou un appel de méthode
+						// si le statement n'est pas une dÃ©claration ou une affectation ou un appel de mÃ©thode
 						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
 						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
 							&& !callMethodVisitor->isVisited()){
@@ -391,9 +391,9 @@ void decoration(KT_Program * prog) {
 					}
 					if (!mainIsGood){
 						Semantic::existSemanticError = true;
-						// todo: définir le numéro de l'erreur
-						cout << "!!!!!!! ERREUR * !!!!!!!! Méthode main doit comporter uniquement des déclarations,"
-						     << "affectations ou appels de méthodes uniquement" << endl;
+						// todo: dÃ©finir le numÃ©ro de l'erreur
+						cout << "!!!!!!! ERREUR * !!!!!!!! MÃ©thode main doit comporter uniquement des dÃ©clarations,"
+						     << "affectations ou appels de mÃ©thodes uniquement" << endl;
 					}
 					//*/
 					//cout << "main" << endl;
@@ -401,7 +401,7 @@ void decoration(KT_Program * prog) {
 					KT_Print * ktPrint = new KT_Print();
 					vector<KT_FactFinal *> args;
 					KT_FactFinal * arg1 = new KT_String();
-					string * argValue1 = new string("Méthode " + *methode->getName() + " appartenant a la classe " + *classe->getFQN());
+					string * argValue1 = new string("MÃ©thode " + *methode->getName() + " appartenant a la classe " + *classe->getFQN());
 					((KT_String *) arg1)->setValue(argValue1);
 					args.push_back(arg1);
 					ktPrint->setArgs(args);

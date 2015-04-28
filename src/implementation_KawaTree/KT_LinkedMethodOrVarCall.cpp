@@ -21,6 +21,6 @@ vector<KT_MethodOrVarCall*> KT_LinkedMethodOrVarCall::getMixedCall() {
 /**
  * @param vector<KT_MethodOrVarCall*>
  */
-void KT_LinkedMethodOrVarCall::setMixedCall(vector<KT_MethodOrVarCall*>& var){
+void KT_LinkedMethodOrVarCall::setMixedCall(vector<KT_MethodOrVarCall*> var){
 	mixteCall= var;
 }

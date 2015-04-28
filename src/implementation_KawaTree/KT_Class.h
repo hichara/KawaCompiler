@@ -120,7 +120,7 @@ public:
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void setParentsInterfacesSemantique(vector<KT_Interface*> &var);
+	void setParentsInterfacesSemantique(vector<KT_Interface*> var);
 	
 	vector<KT_Interface*> getParentsInterfacesSemantique();
 	

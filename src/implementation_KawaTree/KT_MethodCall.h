@@ -37,7 +37,7 @@ public:
     /**
      * @param vector<KT_ParamsMethodCall*>
      */
-    void setParams(vector<KT_ParamsMethodCall*>& var);
+    void setParams(vector<KT_ParamsMethodCall*> var);
 
     /**
      * @param KT_SimpleMethod*

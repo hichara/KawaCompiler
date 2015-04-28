@@ -116,7 +116,7 @@ void KT_Class::setParentClass(string* var) {
 /**
  * @param vector<PARSER_MemberDec *>
  */
-void KT_Class::setMemberDec(vector<PARSER_MemberDec*>& var) {
+void KT_Class::setMemberDec(vector<PARSER_MemberDec*> var) {
 	this-> memberDecs= var;
 
 	for (vector<PARSER_MemberDec*>::iterator it = memberDecs.begin(); it != memberDecs.end(); ++it){
@@ -140,7 +140,7 @@ void KT_Class::setMemberDec(vector<PARSER_MemberDec*>& var) {
 /**
  * @param vector<string *>
  */
-void KT_Class::setParentInterfaces(vector<string*>& var) {
+void KT_Class::setParentInterfaces(vector<string*> var) {
 	this-> ParentInterfaces= var;
 }
 
@@ -194,7 +194,7 @@ void KT_Class::setModifier(KT_Modifier* var) {
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void KT_Class::setParentsInterfacesSemantique(vector<KT_Interface*> &var){
+	void KT_Class::setParentsInterfacesSemantique(vector<KT_Interface*> var){
 		this-> parentsInterfacesSemantique =var;
 	}
 	
@@ -243,7 +243,7 @@ void KT_Class::addPrototype(KT_Prototype* var) {
 /**
 * @param vector<vector<string*> > 
 */
-void KT_Class::setImports(vector<vector<string*> >& var) {
+void KT_Class::setImports(vector<vector<string*> > var) {
 	imports=var;
 }
 	

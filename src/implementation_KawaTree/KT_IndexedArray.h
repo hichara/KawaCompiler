@@ -28,7 +28,7 @@ public:
     /**
      * @param vector<int>
      */
-    void setIndex(vector<int>& var);
+    void setIndex(vector<int> var);
 
     /**
      * @param int

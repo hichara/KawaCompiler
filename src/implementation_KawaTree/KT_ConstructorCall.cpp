@@ -39,7 +39,7 @@ vector<KT_ParamsMethodCall*> KT_ConstructorCall::getParams() {
 /**
  * @param vector<string*>
  */
-void KT_ConstructorCall::setName( vector<string*>& var) {
+void KT_ConstructorCall::setName( vector<string*> var) {
 	this-> name=var;
 }
 
@@ -47,7 +47,7 @@ void KT_ConstructorCall::setName( vector<string*>& var) {
  * @param string *
  */
 
-void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> &var) {
+void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> var) {
 
 	this->params =var;
 }
@@ -62,7 +62,7 @@ void KT_ConstructorCall::addString(string* var) {
 /**
  * @param vector<string*>
  */
-void KT_ConstructorCall::addVectorString(vector<string*>& var) {
+void KT_ConstructorCall::addVectorString(vector<string*> var) {
 	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
 		string* n = (*it);
 		name.push_back(n);

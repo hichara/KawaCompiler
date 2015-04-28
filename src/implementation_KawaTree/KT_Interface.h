@@ -38,7 +38,7 @@ public:
     /**
      * @param vector<string*>
      */
-    void setInterfacesparent(vector<string*>& var);
+    void setInterfacesparent(vector<string*> var);
 
     /**
      * @param KT_Modifier *
@@ -48,7 +48,7 @@ public:
     /**
      * @param vector<KT_Prototype*>
      */
-    void setPrototypes(vector<KT_Prototype*>& var);
+    void setPrototypes(vector<KT_Prototype*> var);
 	
 	/**
 	* @param string
@@ -66,7 +66,7 @@ public:
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void setParentsInterfacesSemantique(vector<KT_Interface*> &var);
+	void setParentsInterfacesSemantique(vector<KT_Interface*> var);
 	
 	vector<KT_Interface*> getParentsInterfacesSemantique();
 	
@@ -80,7 +80,7 @@ public:
 	/**
     * @param vector<vector<string*>>
     */
-    void setImports(vector<vector<string*> >& var);
+    void setImports(vector<vector<string*> > var);
 	
 private: 
     string* name;

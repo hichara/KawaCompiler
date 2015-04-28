@@ -49,7 +49,7 @@ void KT_MethodCall::setName(vector<string*> var) {
 /**
  * @param vector<KT_ParamsMethodCall*>
  */
-void KT_MethodCall::setParams(vector<KT_ParamsMethodCall*>& var){
+void KT_MethodCall::setParams(vector<KT_ParamsMethodCall*> var){
 	params= var;
 }
 

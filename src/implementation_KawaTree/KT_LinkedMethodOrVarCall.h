@@ -23,7 +23,7 @@ public:
     /**
      * @param vector<KT_MethodOrVarCall*>
      */
-    void setMixedCall(vector<KT_MethodOrVarCall*>& var);
+    void setMixedCall(vector<KT_MethodOrVarCall*> var);
     
 private: 
     vector<KT_MethodOrVarCall*> mixteCall;

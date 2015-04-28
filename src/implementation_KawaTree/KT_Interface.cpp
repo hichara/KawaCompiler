@@ -63,14 +63,14 @@ void KT_Interface::setModifier(KT_Modifier* var) {
 /**
  * @param vector<string*>
  */
-void KT_Interface::setInterfacesparent(vector<string*>& var) {
+void KT_Interface::setInterfacesparent(vector<string*> var) {
 	InterfacesParent=var;
 }
 
 /**
  * @param vector<KT_Prototype*>
  */
-void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
+void KT_Interface::setPrototypes(vector<KT_Prototype*> var){
 	prototypes=var;
 }
 
@@ -101,7 +101,7 @@ void KT_Interface::setPrototypes(vector<KT_Prototype*>& var){
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void KT_Interface::setParentsInterfacesSemantique(vector<KT_Interface*> &var){
+	void KT_Interface::setParentsInterfacesSemantique(vector<KT_Interface*> var){
 		this-> parentsInterfacesSemantique =var;
 	}
 	
@@ -130,7 +130,7 @@ void KT_Interface::setFQN(string* var){
 /**
 * @param vector<vector<string*>>
 */
-void KT_Interface::setImports(vector<vector<string*> >& var) {
+void KT_Interface::setImports(vector<vector<string*> > var) {
 	this->imports = var;
 }
 	

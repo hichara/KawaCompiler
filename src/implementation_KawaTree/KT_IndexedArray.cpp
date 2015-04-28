@@ -36,7 +36,7 @@ void KT_IndexedArray::setDimension( int var) {
 /**
  * @param vector<int>
  */
-void KT_IndexedArray::setIndex(vector<int>& var){
+void KT_IndexedArray::setIndex(vector<int> var){
 	index=var;
 }
 

@@ -70,12 +70,12 @@ public:
     /**
      * @param PARSER_MemberDec *
      */
-    void setMemberDec(vector<PARSER_MemberDec*>& var);
+    void setMemberDec(vector<PARSER_MemberDec*> var);
 	
 	/**
 	* @param PARSER_MemberDec *
 	*/
-	void setParentInterfaces(vector<string*>& var);
+	void setParentInterfaces(vector<string*> var);
 
 	/**
 	* @param KT_Modifier *
@@ -133,7 +133,7 @@ void addPrototype(KT_Prototype* var);
     /**
     * @param vector<vector<string*>>
     */
-    void setImports(vector<vector<string*> >& var);
+    void setImports(vector<vector<string*> > var);
 
 	void toString();
 private: 

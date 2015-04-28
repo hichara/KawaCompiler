@@ -88,13 +88,13 @@ void KT_ForStatement::setForControl(PARSER_ForControl* var ) {
 /**
  * @param vector<KT_Variable*>
  */
-void KT_ForStatement::setInitFor(vector<KT_Variable*>& var){
+void KT_ForStatement::setInitFor(vector<KT_Variable*> var){
 	initFor=var;
 }
 
 /**
  * @param vector<KT_IDExpression*>
  */
-void KT_ForStatement::setUpdate(vector<KT_IDExpression*>& var){
+void KT_ForStatement::setUpdate(vector<KT_IDExpression*> var){
 	update=var;
 }

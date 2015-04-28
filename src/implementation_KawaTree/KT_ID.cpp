@@ -25,7 +25,7 @@ vector<string*> KT_ID::getValue() {
 /**
  * @return void
  */
-void KT_ID::setValue(vector<string*>& var){
+void KT_ID::setValue(vector<string*> var){
     this-> value=var;
 }
 

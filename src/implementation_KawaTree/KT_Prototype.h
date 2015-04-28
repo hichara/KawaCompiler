@@ -54,7 +54,7 @@ public:
     /**
      * @param vector<KT_Param*>
      */
-    void setParams(vector<KT_Param*>& var);
+    void setParams(vector<KT_Param*> var);
 	
 	 /**
 	 * mehtode pour verifier la redefinition d'une methode (semantic)

@@ -42,14 +42,14 @@ void KT_Package::setName(string* var) {
 /**
 * @param vector<KT_Interface*>
 */
-void KT_Package::setInterfaces(vector<KT_Interface*>& var) {
+void KT_Package::setInterfaces(vector<KT_Interface*> var) {
 	interfaces = var;
 }
 
 /**
 * @param vector<KT_Class*>
 */
-void KT_Package::setClasses(vector<KT_Class*>& var) {
+void KT_Package::setClasses(vector<KT_Class*> var) {
 	classes = var;
 }
 

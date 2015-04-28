@@ -42,12 +42,12 @@ void PARSER_ForControl::setCondition(KT_Expression* var) {
 /**
  * @param vector<KT_IDExpression*>
  */
-void PARSER_ForControl::setUpDate(vector<KT_IDExpression*>& var) {
+void PARSER_ForControl::setUpDate(vector<KT_IDExpression*> var) {
 	upDate=var;
 }
 
 /**
- * @param vector<KT_Variable*>&
+ * @param vector<KT_Variable*>
  */
 void PARSER_ForControl::setInitFor(PARSER_Field* var) {
 	initFor=var;

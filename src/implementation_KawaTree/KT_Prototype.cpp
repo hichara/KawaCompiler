@@ -79,7 +79,7 @@ void KT_Prototype::setModifier(KT_Modifier* var) {
 /**
  * @param vector<KT_Param*> 
  */
-void KT_Prototype::setParams(vector<KT_Param*>& var) {
+void KT_Prototype::setParams(vector<KT_Param*> var) {
 	params=var;
 }
 
@@ -88,7 +88,7 @@ void KT_Prototype::setParams(vector<KT_Param*>& var) {
  * @param KT_Prototype* 
  */
 bool KT_Prototype::equal(KT_Prototype* var){
-	if((this->name ==var->getName()) && (returnType == var->getReturnType()) && (std::equal(this->params.begin(),this->params.end(), var->getParams().begin())) )
+	if((this->name ==var->getName())  (returnType == var->getReturnType())  (std::equal(this->params.begin(),this->params.end(), var->getParams().begin())) )
 		return true;
 		else
 			return false;

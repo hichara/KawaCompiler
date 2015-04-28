@@ -61,7 +61,7 @@ public:
 	/**
 	* @param vector<KT_Param*>
 	*/
-	void setParams(vector<KT_Param*>& var);
+	void setParams(vector<KT_Param*> var);
 	
 	
 	/**

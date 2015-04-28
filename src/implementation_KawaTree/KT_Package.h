@@ -34,12 +34,12 @@ public:
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void setInterfaces(vector<KT_Interface*>& var);
+	void setInterfaces(vector<KT_Interface*> var);
 
 	/**
 	* @param vector<KT_Class*>
 	*/
-	void setClasses(vector<KT_Class*>& var);
+	void setClasses(vector<KT_Class*> var);
 
     /**
     * @param KT_Class*

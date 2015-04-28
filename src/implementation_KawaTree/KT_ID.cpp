@@ -19,26 +19,26 @@ using namespace std;
 KT_ID::KT_ID() {}
  
 /**
- * @return vector<string *>
+ * @return vector<string>
  */
-vector<string*> KT_ID::getValue() {
+vector<string> KT_ID::getValue() {
     return this-> value;
 }
 
 /**
  * @return void
  */
-void KT_ID::setValue(vector<string*>& var){
+void KT_ID::setValue(vector<string> var){
     this-> value=var;
 }
 
 /**
- * @param string*
+ * @param string
  */
-void KT_ID::setNameAddStringAtFirstPosition(string* var){
-  std::vector<string*>::iterator it;
+void KT_ID::setNameAddStringAtFirstPosition(string var){
+  std::vector<string>::iterator it;
   it = value.begin();
-  it = value.insert ( it , var );
+  it = value.insert (it , var);
 }
 
 llvm::Value* KT_ID::acceptIRCompiler(IRCompiler *compiler) {

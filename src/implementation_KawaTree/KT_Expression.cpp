@@ -26,9 +26,9 @@ void KT_Expression::accept( /*ExprVisitor*/) {
 }
 
 /**
- * @return string *
+ * @return string
  */
-string* KT_Expression::calculReturnType() {
+string KT_Expression::calculReturnType() {
     return returnType;
 }
 

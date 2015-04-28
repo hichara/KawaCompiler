@@ -31,14 +31,13 @@ public:
 
     vector<vector<string>> getImports();
     
-    
     /**
-     * @param string *
+     * @param string
      */
     void setName(string var);
     
     /**
-     * @param vector<string*>
+     * @param vector<string>
      */
     void setInterfacesparent(vector<string> var);
 
@@ -55,7 +54,6 @@ public:
 	/**
 	* @param string
 	*/
-	
 	void addSignature(string var);
 	
 	/**
@@ -63,36 +61,46 @@ public:
 	*/
 	void setFullSignatures(vector<string> var);
 	
+	/**
+	* @return vector<string>
+	*/
 	vector<string> getFullSignatures();
 	
 	/**
 	* @param vector<KT_Interface*>
 	*/
-	void setParentsInterfacesSemantique(vector<KT_Interface*> &var);
-	
-	vector<KT_Interface*> getParentsInterfacesSemantique();
-	
-	string* getFQN();
+	void setParentsInterfacesSemantique(vector<KT_Interface*> var);
 	
 	/**
-	* @param string*
+	* @return vector<KT_Interface*>
+	*/
+	vector<KT_Interface*> getParentsInterfacesSemantique();
+	
+	/**
+	* @return string
+	*/ 
+	string getFQN();
+	
+	/**
+	* @param string
 	*/
 	void setFQN(string var);
 
 	/**
-    * @param vector<vector<string*>>
+    * @param vector<vector<string>>
     */
     void setImports(vector<vector<string>> var);
 	
 private: 
     string name;
-    vector<string*> InterfacesParent;
+    vector<string> InterfacesParent;
     KT_Modifier* modifier;
 	vector<KT_Prototype*> prototypes;
 	vector<string> fullSignatures;
 	vector<KT_Interface*> parentsInterfacesSemantique;	
 	string FQN;
-	vector<vector<string> > imports;
+	vector<vector<string>> imports;
+	
 };
 
 #endif //_KT_INTERFACE_H

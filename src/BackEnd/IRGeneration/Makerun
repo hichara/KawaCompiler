@@ -1,0 +1,75 @@
+; ModuleID = 'Module Test'
+
+%KawaClass_class_c = type opaque
+%KawaClass_KawaClass_class_A = type { %KawaClass_Struct_class_A*, i8** }
+%KawaClass_Struct_class_A = type { float, %KawaClass_class_A*, %KawaClass_class_b*, i8* }
+%KawaClass_class_A = type opaque
+%KawaClass_class_b = type opaque
+
+@kawa_format_int = constant [3 x i8] c"%d\00"
+@kawa_format_double = constant [3 x i8] c"%f\00"
+@kawa_format_char = constant [3 x i8] c"%c\00"
+@static_class_A_static_class_A_avatar = external global i32
+@attribut_index__class_A_index = global i32 0
+@attribut_index__class_A_bossun = global i32 1
+@attribut_index__class_A_repre = global i32 2
+@static_class_A_static_class_A_sepe = external global %KawaClass_class_c*
+@attribut_index__class_A_mpm = global i32 3
+@static_class_A_static_class_A_lovea = external global double
+@KAWA_FORMAT_INT_TO_STRING = external constant %KawaClass_KawaClass_class_A
+@methode_index_puts = global i32 0
+@methode_index_strlen = global i32 1
+@methode_index_strcat = global i32 2
+@methode_index_int_to_str = global i32 3
+@adhocTable_index__class_A_class_B = common constant [4 x i8*] [i8* bitcast (i32 (i8*)* @puts to i8*), i8* bitcast (i32 (i8*)* @strlen to i8*), i8* bitcast (i8* (i8*, i8*)* @strcat to i8*), i8* bitcast (i8* (i32)* @int_to_str to i8*)]
+
+; Function Attrs: nounwind
+declare i32 @puts(i8*) #0
+
+; Function Attrs: nounwind
+declare i32 @strlen(i8*) #0
+
+declare i8* @strcat(i8*, i8*)
+
+define i8* @int_to_str(i32) {
+entry:
+  %1 = call i8* @malloc(i64 50)
+  %2 = call i32 (i8*, i8*, ...)* @sprintf(i8* %1, i8* getelementptr inbounds ([3 x i8]* @kawa_format_int, i32 0, i32 0), i32 %0)
+  ret i8* %1
+}
+
+; Function Attrs: nounwind
+declare i8* @malloc(i64) #0
+
+declare i32 @sprintf(i8*, i8*, ...)
+
+define i8* @float_to_str(double) {
+entry:
+  %1 = call i8* @malloc(i64 50)
+  %2 = call i32 (i8*, i8*, ...)* @sprintf(i8* %1, i8* getelementptr inbounds ([3 x i8]* @kawa_format_double, i32 0, i32 0), double %0)
+  ret i8* %1
+}
+
+define i32 @main(i32, i8**) {
+entry:
+  %argc = alloca i32, i32 %0
+  store i32 %0, i32* %argc
+  %argv = alloca i8**, i8** %1
+  store i8** %1, i8*** %argv
+
+  ret i32 0
+}
+
+define i8* @char_to_str(i8) {
+entry:
+  %1 = call i8* @malloc(i64 50)
+  %2 = call i32 (i8*, i8*, ...)* @sprintf(i8* %1, i8* getelementptr inbounds ([3 x i8]* @kawa_format_char, i32 0, i32 0), i8 %0)
+  ret i8* %1
+}
+
+define void @afficheOk() {
+entry:
+  %0 = call i32 @puts(i1 true)
+}
+
+attributes #0 = { nounwind }

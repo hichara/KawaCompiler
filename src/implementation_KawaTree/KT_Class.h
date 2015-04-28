@@ -57,27 +57,27 @@ public:
 
 	KT_Modifier* getModifier();
 
-    vector<vector<string*> > getImports();
+    vector<vector<string> > getImports();
     
     /**
-     * @param string *
+     * @param string
      */
-    void setName(string* var);
+    void setName(string var);
     
     /**
-     * @param string *
+     * @param string
      */
-    void setParentClass(string* var);
+    void setParentClass(string var);
     
     /**
      * @param PARSER_MemberDec *
      */
-    void setMemberDec(vector<PARSER_MemberDec*>& var);
+    void setMemberDec(vector<PARSER_MemberDec*> var);
 	
 	/**
 	* @param PARSER_MemberDec *
 	*/
-	void setParentInterfaces(vector<string*>& var);
+	void setParentInterfaces(vector<string> var);
 
 	/**
 	* @param KT_Modifier *
@@ -97,7 +97,7 @@ public:
 	
 	vector<string> getFullSignatures();
 	
-	string* getFQN();
+	string getFQN();
 	
 	vector<KT_Prototype*>  getAllPrototypes();
 	
@@ -109,7 +109,7 @@ public:
 	/**
 	* @param string*
 	*/
-	void setFQN(string* var);
+	void setFQN(string var);
 	
 	/**
 	* @param KT_Class*
@@ -133,27 +133,26 @@ void addPrototype(KT_Prototype* var);
 	
 
     /**
-    * @param vector<vector<string*>>
+    * @param vector<vector<string>>
     */
-    void setImports(vector<vector<string*> >& var);
+    void setImports(vector<vector<string>> var);
 
 	void toString();
 private: 
-    string* name;
-    string* ParentClass;
-    vector<string*> ParentInterfaces;
+    string name;
+    string ParentClass;
+    vector<string> ParentInterfaces;
     vector<KT_Attribute*> attributes;
     vector<KT_SimpleMethod*> SimpleMethods;
     vector<KT_Constructor*> constructors;
     vector<PARSER_MemberDec*> memberDecs;
 	KT_Modifier* modifiers;
-    vector<vector<string*> > imports;
+    vector<vector<string>> imports;
 	vector<string> fullSignatures;
 	KT_Class* parentClasseSemantique;
 	vector<KT_Interface*> parentsInterfacesSemantique;
-	string* FQN;
+	string FQN;
 	vector<KT_Prototype*> AllPrototypes ;
-
 };
 
 #endif //_KT_CLASS_H

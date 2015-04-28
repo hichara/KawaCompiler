@@ -27,19 +27,19 @@ KT_Expression* KT_IfStatement::getCondition() {
  * @return KT_BlockStatement *
  */
 KT_BlockStatement* KT_IfStatement::getBStatement() {
-    return this-> bStatement;
+    return this->bStatement;
 }
 
 /**
  * @param KT_Expression *
  */
 void KT_IfStatement::setCondition(KT_Expression* var) {
-	this-> condition= var;
+	this->condition = var;
 }
 
 /**
  * @param KT_BlockStatement *
  */
 void KT_IfStatement::setBStatement(KT_BlockStatement* var) {
-	this-> bStatement= var;
+	this->bStatement = var;
 }

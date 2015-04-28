@@ -60,21 +60,21 @@ void KT_Affectation::setLExpression(KT_Expression* var) {
  * @param KT_Expression *
  */
 void KT_Affectation::setRExpression(KT_Expression* var) {
-	this->rExpression=var;
+	this->rExpression = var;
 }
 
 /**
  * @param KT_VarOrAttr*
  */
 void KT_Affectation::setReference(KT_VarOrAttr* var) {
-	reference=var;
+	reference = var;
 }
 
 /**
  * @param KT_IndexedArray*
  */
 void KT_Affectation::setIndexedArray(KT_IndexedArray* var){
-	indexedArray=var;
+	indexedArray = var;
 }
 
 void KT_Affectation::accept(SemanticVisitor* visitor){

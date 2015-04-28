@@ -1,24 +1,32 @@
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 0 a un index de symbole 11 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 1 a un index de symbole 12 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 2 a un index de symbole 2 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 3 a un index de symbole 2 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 4 a un index de symbole 11 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 5 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 6 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 7 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 8 a un index de symbole 12 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 9 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 10 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 11 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 12 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 13 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 14 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 15 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 16 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 17 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 18 a un index de symbole 13 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_info): réadressage 19 a un index de symbole 21 invalide
-/usr/bin/ld: /usr/lib/debug/usr/lib/x86_64-linux-gnu/crt1.o(.debug_line): réadressage 0 a un index de symbole 2 invalide
-/usr/bin/../lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o: dans la fonction « _start »:
-(.text+0x20): référence indéfinie vers « main »
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+clang: warning: -lLLVMX86Disassembler: 'linker' input unused
+clang: warning: -lLLVMX86AsmParser: 'linker' input unused
+clang: warning: -lLLVMX86CodeGen: 'linker' input unused
+clang: warning: -lLLVMSelectionDAG: 'linker' input unused
+clang: warning: -lLLVMAsmPrinter: 'linker' input unused
+clang: warning: -lLLVMX86Desc: 'linker' input unused
+clang: warning: -lLLVMObject: 'linker' input unused
+clang: warning: -lLLVMMCParser: 'linker' input unused
+clang: warning: -lLLVMBitReader: 'linker' input unused
+clang: warning: -lLLVMX86Info: 'linker' input unused
+clang: warning: -lLLVMX86AsmPrinter: 'linker' input unused
+clang: warning: -lLLVMX86Utils: 'linker' input unused
+clang: warning: -lLLVMJIT: 'linker' input unused
+clang: warning: -lLLVMExecutionEngine: 'linker' input unused
+clang: warning: -lLLVMCodeGen: 'linker' input unused
+clang: warning: -lLLVMScalarOpts: 'linker' input unused
+clang: warning: -lLLVMInstCombine: 'linker' input unused
+clang: warning: -lLLVMTransformUtils: 'linker' input unused
+clang: warning: -lLLVMipa: 'linker' input unused
+clang: warning: -lLLVMAnalysis: 'linker' input unused
+clang: warning: -lLLVMTarget: 'linker' input unused
+clang: warning: -lLLVMMC: 'linker' input unused
+clang: warning: -lLLVMCore: 'linker' input unused
+clang: warning: -lLLVMSupport: 'linker' input unused
+clang: warning: -lz: 'linker' input unused
+clang: warning: -lpthread: 'linker' input unused
+clang: warning: -lffi: 'linker' input unused
+clang: warning: -ledit: 'linker' input unused
+clang: warning: -ltinfo: 'linker' input unused
+clang: warning: -ldl: 'linker' input unused
+clang: warning: -lm: 'linker' input unused
+clang: warning: argument unused during compilation: '-L/usr/lib/llvm-3.5/lib'

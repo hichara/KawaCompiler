@@ -23,22 +23,22 @@ bool KT_BreakStatement::isIdExist() {
 }
 
 /**
- * @return string *
+ * @return string
  */
-string* KT_BreakStatement::getId() {
-    return this-> id;
+string KT_BreakStatement::getId() {
+    return this->id;
 }
 
 /**
  * @param bool
  */
 void KT_BreakStatement::setIdExist( bool var) {
-	this->idExist= var;
+	this->idExist = var;
 }
 
 /**
- * @param string *
+ * @param string
  */
-void KT_BreakStatement::setId(string* var) {
-	this->id=var;
+void KT_BreakStatement::setId(string var) {
+	this->id = var;
 }

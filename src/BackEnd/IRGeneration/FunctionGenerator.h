@@ -1,3 +1,8 @@
+/**
+* Creator Hichara
+*/
+
+
 #ifndef FUNC_GEN
 #define FUNC_GEN
 
@@ -87,6 +92,8 @@ public:
 	static Function *getOrCreateCharToStrFunction(Module *module);
 
 	static Function *getOrCreateDoubleToStrFunction(Module *module);
+
+	static Function *getOrCreateConcatFunction(Module *module);
 };
 
 

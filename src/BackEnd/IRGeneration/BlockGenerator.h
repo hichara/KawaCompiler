@@ -1,3 +1,8 @@
+/**
+* Creator Hichara
+*/
+
+/*
 #ifndef BLOC_GEN_KAWA
 #define BLOC_GEN_KAWA
 
@@ -63,3 +68,4 @@ public:
 
 #endif
 
+*/

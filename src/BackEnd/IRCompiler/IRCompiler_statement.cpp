@@ -2,6 +2,9 @@
 
 #include "IRCompiler.h"
 
+#include "KT_includes.h"
+
+
 Value* IRCompiler::compileStatement(KT_Statement *expr) {
 	return expr->acceptIRCompiler(this);
 }
@@ -38,5 +41,20 @@ Value* IRCompiler::compilePrint(KT_Print *print) {
 	}
 
 	return f;
+}
+
+
+Value* IRCompiler::compileReturnStatement(KT_ReturnStatement *ret) {
+	IRBuilder<> buider(getContext());
+	buider.SetInsertPoint(getCurrentBlock());
+
+	if(ret->isVoidReturn())
+		buider.CreateRetVoid();
+
+	Value *v = compileExpression(ret->getReturnExpression());
+
+	v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
+
+	return buider.CreateRet(v);	
 }
 

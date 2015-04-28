@@ -2,6 +2,33 @@
 #define IRCOMP_H
 
 
+class KT_Program;
+class KT_LinkedMethodOrVarCall;
+class KT_Affectation;
+class KT_Print;
+class KT_Expression;
+class KT_FactFinal;
+class KT_ParamsMethodCall;
+class KT_MethodOrVarCall;
+class KT_Entier;
+class KT_String;
+class KT_MethodCall;
+class KT_ConstructorCall;
+class KT_ID;
+class KT_Null;
+class KT_VarOrAttr;
+class KT_Variable;
+class KT_Statement;
+class KT_Interface;
+class KT_Class;
+class KT_Prototype;
+class KT_SimpleMethod;
+class KT_ConstructorCall;
+class KT_Constructor;
+class KT_Package;
+class KT_LinkedMehodOrVarCall;
+class KT_ReturnStatement;
+class KT_Addition;
 
 
 #define COMPILING_NONE  0
@@ -16,14 +43,14 @@
 #include <fcntl.h>
 
 #include "IRGen_includes.h"
-#include "KT_includes.h"
-
 
 using namespace llvm;
 
 class IRCompiler {
 
 private:
+
+	bool debugOn = true;
 
 	Module *IRmodule;
 
@@ -62,9 +89,6 @@ public:
 
 	Type* createType(KT_Class *classe);
 	Type* createType(KT_Interface* interface);
-	
-
-	Value* compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall *c);
 	Value* compileAffectation(KT_Affectation *af);
 	Value* compilePrint(KT_Print *print);
 	Value* compileExpression(KT_Expression *expr);
@@ -80,6 +104,11 @@ public:
 	Value* compileVarOrAttr(KT_VarOrAttr *vOa);
 	Value* compileVariable(KT_Variable *id);
 	Value* compileStatement(KT_Statement *stm);
+	Value* compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall*);
+	Value* compileReturnStatement(KT_ReturnStatement *ret);
+	Value* compileID(KT_ID *id);
+	Value* compileAddition(KT_Addition *add);
+
 
 	// ---------Exression -------------------
 
@@ -94,6 +123,7 @@ private:
 	void endCurrentFunction();
 	int getInbricationLevel();
 
+	void debug(std::string msg);
 
 	Value* searchVariable(std::string);
 

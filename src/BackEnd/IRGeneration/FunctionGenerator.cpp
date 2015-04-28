@@ -1,3 +1,8 @@
+/**
+* Creator Hichara
+*/
+
+
 #include "FunctionGenerator.h"
 
 
@@ -170,13 +175,26 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	Function* fadH = FunctionGenerator::getAdHocTableFunction(module, className, className);
 	std::vector<Value*> indx, empty;
 
+	//insertion de la table adHoc a faire
 	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
 	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));
 
 	Value *table = builder.CreateCall(fadH, empty, "");
 	Value *adHoc = builder.CreateGEP(instance, indx);
 	builder.CreateStore(table, adHoc);
-	//insertion de la table adHoc a faire
+
+	//inserttion des donnée
+	std::string subtypeName = NameBuilder::buildClassStructTypeName(className);
+	Type *stype = TypeGenerator::strToLLVMType(module, subtypeName);
+
+	indx.clear();
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
+	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
+
+	Value *data = builder.CreateAlloca(stype, NULL, "");
+	Value *ptrdata = builder.CreateGEP(instance, indx);
+
+	builder.CreateStore(ptrdata, data);
 
 	//Appel de la fonction d'initiallisation
 	std::vector<Value*> callargs;
@@ -590,5 +608,72 @@ Function* FunctionGenerator::createAdHocTableFunction(Module *module,
 	builder.CreateRet(ret);
 
 	return f;
+}
+
+Function* FunctionGenerator::getOrCreateConcatFunction(Module *module) {
+
+	Function *f = module->getFunction("concat");
+
+	if(f != NULL)
+		return f;
+
+	Function *fstrcat = FunctionGenerator::getOrCreateStrcatFunction(module);
+	Function *fcalloc = FunctionGenerator::getOrCreateCallocFunction(module);
+	Function *fstrlen = FunctionGenerator::getOrCreateStrlenFunction(module);
+
+	Function *fcat; 
+
+	Type *i8 = Type::getInt8Ty(module->getContext()), 
+		 *i64 = Type::getInt64Ty(module->getContext()),
+		 *i32 = Type::getInt32Ty(module->getContext());
+
+	std::vector<Type*> args_ty;
+
+	args_ty.push_back(i8->getPointerTo());
+	args_ty.push_back(i8->getPointerTo());
+
+	FunctionType *ft = FunctionType::get(i8->getPointerTo(), args_ty, false);
+
+	fcat = Function::Create(ft, GlobalValue::ExternalLinkage, "concat", module);
+
+	// Corps de la fonction
+
+	BasicBlock *b = BasicBlock::Create(module->getContext(), "", fcat);
+
+	IRBuilder<> builder(module->getContext());
+	builder.SetInsertPoint(b);
+
+	std::vector<Value*> fargs;
+	int size = 2;
+	int Idx = 0;
+
+    for(Function::arg_iterator AI = fcat->arg_begin(); Idx != size;
+       ++AI, ++Idx) {
+   	  fargs.push_back(AI);
+    }
+
+    Value* str1 = fargs[0];
+    Value* str2 = fargs[1];
+
+    Value *size1 = builder.CreateCall(fstrlen, str1, "");
+    Value *size2 = builder.CreateCall(fstrlen, str2, "");
+
+    Constant *un = ConstantInt::get(i64, 1);
+
+    Value *len = builder.CreateAdd(size1, size2);
+
+    len = builder.CreateSExt(len, i64);
+
+    len = builder.CreateAdd(len, un);
+
+    Value *space = builder.CreateCall2(fcalloc, un, len);
+
+    Value* res = builder.CreateCall2(fstrcat, space, str1);
+
+    res = builder.CreateCall2(fstrcat, res, str2);
+
+    builder.CreateRet(res);
+
+    return fcat;
 }
 

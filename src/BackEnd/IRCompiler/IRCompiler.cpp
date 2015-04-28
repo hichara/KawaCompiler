@@ -2,11 +2,32 @@
 #include "IRCompiler.h"
 
 
+#include "../../implementation_KawaTree/KT_Program.h"
+#include "../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Affectation.h"
+#include "../../implementation_KawaTree/KT_Print.h"
+#include "../../implementation_KawaTree/KT_Expression.h"
+#include "../../implementation_KawaTree/KT_FactFinal.h"
+#include "../../implementation_KawaTree/KT_ParamsMethodCall.h"
+#include "../../implementation_KawaTree/KT_MethodOrVarCall.h"
+#include "../../implementation_KawaTree/KT_Entier.h"
+#include "../../implementation_KawaTree/KT_String.h"
+#include "../../implementation_KawaTree/KT_MethodCall.h"
+#include "../../implementation_KawaTree/KT_ConstructorCall.h"
+#include "../../implementation_KawaTree/KT_ID.h"
+#include "../../implementation_KawaTree/KT_Null.h"
+#include "../../implementation_KawaTree/KT_VarOrAttr.h"
+#include "../../implementation_KawaTree/KT_Variable.h"
+#include "../../implementation_KawaTree/KT_Statement.h"
+#include "../../implementation_KawaTree/KT_ReturnStatement.h"
+
 
 void IRCompiler::compile(KT_Program *program) {
   
   // A completer
   IRmodule = new Module(program->getName(), IRcontext);
+
+  debug("program");
 
   std::vector<KT_Package*> pckgs = program->getPackages();
 
@@ -28,6 +49,9 @@ void IRCompiler::compile(KT_Program *program) {
 }
 
 void IRCompiler::compile(KT_Package *package) {
+  debug("package");
+
+
   std::vector<KT_Class*> classes = package->getClasses(); 
   std::vector<KT_Interface*> interfaces = package->getInterfaces();
 
@@ -53,6 +77,7 @@ void IRCompiler::compile(KT_Package *package) {
 
 
 void IRCompiler::compile(KT_Class *classe) {
+  debug("class");
 
 	Type *t = createType(classe);
 
@@ -74,6 +99,8 @@ void IRCompiler::compile(KT_Class *classe) {
 }
 
 void IRCompiler::compile(KT_Interface *interface) {
+  debug("interface");
+
   	createType(interface);
 
 	std::vector<KT_Prototype *> prototypes = interface->getPrototypes();
@@ -84,47 +111,44 @@ void IRCompiler::compile(KT_Interface *interface) {
 }
 
 
-Type* IRCompiler::createType(KT_Class * classe) {
-
-	std::vector<KT_Attribute*> att = classe->getAttributes();
-
-	std::vector<std::string> att_names;
-	std::vector<Type*> att_types;
-	std::vector<bool> att_static;
-
-	for(int i = 0; i < att.size(); i++) {
-		att_names.push_back(*(att[i]->getName()));
-		att_static.push_back(att[i]->getModifier()->isStatic());
-		std::string strtype = fqnType(att[i]->getType()->getTypeName());
-		att_types.push_back(
-			TypeGenerator::strToLLVMType(getModule(), strtype));
-	}
-
-	return TypeGenerator::createClassType(getModule(), 
-								*(classe->getName()),
-								att_names, att_types, att_static);
-}
-
 
 Function* IRCompiler::compile(KT_Prototype *p) { 
+	std::stringstream err, err2;
+  debug("prototype");
+
+	std::string className = p->getParentName();
+
+	err << "parentName : " << className;
 
 	KT_Modifier* modifier = p->getModifier();
 
-	std::string className = p->getParentName();
+	debug(err.str());
+
 	std::string name = *(p->getName());
 	std::vector<KT_Param* > params = p->getParams();
-	std::string r_type /* =  p->getReturnType()->getTypeName() */;
+	std::string r_type  =  fqnType(p->getReturnType()->getTypeName()) ;
 
 	bool istatic = modifier->isStatic();
+
+	err2 << "rtype : " << r_type << " et " << istatic;
 
 	//parametres
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
 
+  	debug("debut boucle");
+
   	for(int i = 0; i < params.size(); i++) {
   		params_names.push_back(*(params[i]->getName()));
   		params_types.push_back(fqnType(params[i]->getParamType()->getTypeName()));
+
+  		debug(*(params[i]->getName()));
+  		debug(fqnType(params[i]->getParamType()->getTypeName()));
   	}
+
+  	debug("fin boucle");
+
+  	debug("avant declaration");
 
   	Function *f =  FunctionGenerator::getOrCreateFunction(getModule(), istatic,
 									className,
@@ -132,12 +156,17 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 									r_type, 
 									params_types,
 									params_names);
+  	debug("apres declaration");
+
+
+ debug("prototype fin");
 
   return f;
 }
 
 Function* IRCompiler::compile(KT_SimpleMethod *methode) {
-  
+  	  debug("methode");
+
   	// A completer
  	KT_Prototype* proto = methode->getPrototype();
  	std::vector<KT_Param*> params = proto->getParams();
@@ -160,10 +189,13 @@ Function* IRCompiler::compile(KT_SimpleMethod *methode) {
 		compileStatement(stmnts[i]);
 	}
 
+ debug("fin");
+
   return f;
 }
 
 Function* IRCompiler::compile(KT_Constructor * constructor) {
+	  debug("constructor");
 
 	std::string name = *(constructor->getName());
 	std::vector<KT_Param*> params = constructor->getParams();
@@ -189,6 +221,7 @@ Function* IRCompiler::compile(KT_Constructor * constructor) {
 	for(int i = 0; i < stmnts.size(); i++) {
 		compileStatement(stmnts[i]);
 	}
+ debug("fin");
 
 	return FunctionGenerator::getConstructor(getModule(),
 		name, params_types, params_names);

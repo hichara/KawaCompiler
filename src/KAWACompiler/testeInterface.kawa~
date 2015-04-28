@@ -9,5 +9,5 @@ public interface inter extends inter1, inter2 {
 	 public char method1();
                           
 	 //void fonction parametrée 
-	 private void methode2(int x, Test t, float [] tableau);
+	 void methode2(int x, Test t, float [] tableau);
 }

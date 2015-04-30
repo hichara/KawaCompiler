@@ -24,7 +24,7 @@ public:
 	~KT_Attribute();
     int index;
     
-    string* getName();
+    string getName();
     
     int getIndex();
     
@@ -35,7 +35,7 @@ public:
 	KT_Expression* getValue();
     
     /**
-     * @param string *
+     * @param string
      */
     void setName(string var);
     

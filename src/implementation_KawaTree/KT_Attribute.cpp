@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+ 
 using namespace std;
 
 /**
@@ -16,31 +17,31 @@ using namespace std;
  KT_Attribute::KT_Attribute () {}
 
 /**
- * @return string *
+ * @return string
  */
-string* KT_Attribute::getName() {
-    return this-> name;
+string KT_Attribute::getName() {
+    return this->name;
 }
 
 /**
  * @return int
  */
 int KT_Attribute::getIndex() {
-    return this-> index;
+    return this->index;
 }
 
 /**
  * @return KT_Type *
  */
 KT_Type* KT_Attribute::getType() {
-    return this-> type;
+    return this->type;
 }
 
 /**
  * @return KT_Modifier *
  */
 KT_Modifier* KT_Attribute::getModifier() {
-    return this-> modifier;
+    return this->modifier;
 }
 
 /**
@@ -51,10 +52,10 @@ KT_Expression* KT_Attribute::getValue() {
 }
 
 /**
- * @param string *
+ * @param string
  */
 void KT_Attribute::setName(string var) {
-	this-> name= var;
+	this-> name = var;
 }
 
 /**

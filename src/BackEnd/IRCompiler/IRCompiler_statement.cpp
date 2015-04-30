@@ -6,7 +6,9 @@
 
 
 Value* IRCompiler::compileStatement(KT_Statement *expr) {
-	return expr->acceptIRCompiler(this);
+	return NULL;
+
+//	return expr->acceptIRCompiler(this);
 }
 
 

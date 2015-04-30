@@ -25,5 +25,5 @@ bool KT_Bool::getValue() {
  * @param bool
  */
 void KT_Bool::setValue( bool var) {
-	this->value =var;
+	this->value = var;
 }

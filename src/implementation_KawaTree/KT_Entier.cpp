@@ -19,14 +19,14 @@ using namespace std;
  * @return int
  */
 int KT_Entier::getValue() {
-    return this-> value;
+    return this->value;
 }
 
 /**
  * @param int
  */
 void KT_Entier::setValue( int var) {
-	this-> value=var;
+	this->value = var;
 }
 
 Value* KT_Entier::acceptIRCompiler(IRCompiler *compiler) {

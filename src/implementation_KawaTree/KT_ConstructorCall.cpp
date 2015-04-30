@@ -17,9 +17,9 @@ using namespace std;
  KT_ConstructorCall::KT_ConstructorCall () {}
 
 /**
- * @return vector<string*>
+ * @return vector<string>
  */
-vector<string*> KT_ConstructorCall::getName() {
+vector<string> KT_ConstructorCall::getName() {
     return this-> name;
 }
 
@@ -38,34 +38,33 @@ vector<KT_ParamsMethodCall*> KT_ConstructorCall::getParams() {
 }
 
 /**
- * @param vector<string*>
+ * @param vector<string>
  */
-void KT_ConstructorCall::setName( vector<string*>& var) {
-	this-> name=var;
+void KT_ConstructorCall::setName(vector<string> var) {
+	this-> name = var;
 }
 
 /**
- * @param string *
+ * @param string
  */
 
 void KT_ConstructorCall::setParams(vector<KT_ParamsMethodCall*> &var) {
-
-	this->params =var;
+	this->params = var;
 }
 
 /**
- * @param string*
+ * @param string
  */
-void KT_ConstructorCall::addString(string* var) {
+void KT_ConstructorCall::addString(string var) {
 	name.push_back(var);
 }
 
 /**
- * @param vector<string*>
+ * @param vector<string>
  */
-void KT_ConstructorCall::addVectorString(vector<string*>& var) {
-	for (vector<string*>::iterator it = var.begin(); it != var.end(); ++it){
-		string* n = (*it);
+void KT_ConstructorCall::addVectorString(vector<string> var) {
+	for (vector<string>::iterator it = var.begin(); it != var.end(); ++it){
+		string n = (*it);
 		name.push_back(n);
 	}
 }

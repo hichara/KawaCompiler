@@ -14,7 +14,7 @@ KT_Constructor::KT_Constructor() {}
 /**
  * @return string *
  */
-string* KT_Constructor::getName() {
+string KT_Constructor::getName() {
     return this-> name;
 }
 
@@ -42,7 +42,7 @@ KT_Block* KT_Constructor::getBlock(){
 /**
  * @param string *
  */
-void KT_Constructor::setName( string* var) {
+void KT_Constructor::setName(string var) {
 	this-> name= var;
 }
 
@@ -84,7 +84,7 @@ string KT_Constructor::getFullSignature() {
 
 void KT_Constructor::toString(){
 	modifier->toString();
-	cout << *name << " (";
+	cout << name << " (";
 	for (vector<KT_Param*>::iterator it = params.begin(); it != params.end(); ++it){
 		(*it)->toString();
 		cout << ", ";

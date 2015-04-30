@@ -23,23 +23,23 @@ bool KT_ContinueStatement::isIdExist() {
 }
 
 /**
- * @return string *
+ * @return string
  */
-string* KT_ContinueStatement::getId() {
-    return this-> id;
+string KT_ContinueStatement::getId() {
+    return this->id;
 }
 
 /**
  * @param bool
  */
-void KT_ContinueStatement::setIdExist( bool var ) {
+void KT_ContinueStatement::setIdExist(bool var) {
 	this->idExist =var;
 
 }
 
 /**
- * @param string *
+ * @param string
  */
-void KT_ContinueStatement::setId(string* var) {
-	this-> id =var;
+void KT_ContinueStatement::setId(string var) {
+	this-> id = var;
 }

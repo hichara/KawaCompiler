@@ -23,7 +23,7 @@ vector<KT_Statement*> KT_Block::getStatements() {
 }
 
 void KT_Block::setStatements(vector<KT_Statement*> &var) {
-	this-> statements =var;
+	this-> statements = var;
 }
 
 /*

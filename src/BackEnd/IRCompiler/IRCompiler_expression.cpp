@@ -4,24 +4,35 @@
 
 #include "KT_includes.h"
 
+
 Value* IRCompiler::compileExpression(KT_Expression *expr) {
-	return expr->acceptIRCompiler(this);
+//	return expr->acceptIRCompiler(this);
+	return NULL;
+
 }
 
 Value *IRCompiler::compileFactFinal(KT_FactFinal *expr) {
-	return expr->acceptIRCompiler(this);
+//	return expr->acceptIRCompiler(this);
+	return NULL;
+
 }
 
 Value *IRCompiler::compileParamsMethodCall(KT_ParamsMethodCall *pmc) {
-	return pmc->acceptIRCompiler(this);
+	return NULL;
+
+//	return pmc->acceptIRCompiler(this);
 }
 
 Value* IRCompiler::compileMethodOrVarCall(KT_MethodOrVarCall *call) {
-	return call->acceptIRCompiler(this);
+	return NULL;
+
+//	return call->acceptIRCompiler(this);
 }
 
 Value* IRCompiler::compileVarOrAttr(KT_VarOrAttr *call) {
-	return call->acceptIRCompiler(this);
+	return NULL;
+
+//	return call->acceptIRCompiler(this);
 }
 
 

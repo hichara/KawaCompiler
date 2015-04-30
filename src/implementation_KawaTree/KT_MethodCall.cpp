@@ -14,9 +14,9 @@
 KT_MethodCall::KT_MethodCall(){}
 
 /**
- * @return vector<string *>
+ * @return vector<string>
  */
-vector<string*> KT_MethodCall::getName() {
+vector<string> KT_MethodCall::getName() {
     return name;
 }
 
@@ -42,17 +42,17 @@ vector<KT_ParamsMethodCall*> KT_MethodCall::getParams() {
 }
 
 /**
- * @param string *
+ * @param string
  */
-void KT_MethodCall::setName(vector<string*> var) {
+void KT_MethodCall::setName(vector<string> var) {
 	name= var;
 }
 
 /**
  * @param vector<KT_ParamsMethodCall*>
  */
-void KT_MethodCall::setParams(vector<KT_ParamsMethodCall*>& var){
-	params= var;
+void KT_MethodCall::setParams(vector<KT_ParamsMethodCall*> var){
+	params = var;
 }
 
 /**
@@ -70,10 +70,10 @@ void KT_MethodCall::setCaller(KT_VarOrAttr* var) {
 }
 
 /**
- * @param string*
+ * @param string
  */
-void KT_MethodCall::setNameAddStringAtFirstPosition(string* var){
-  std::vector<string*>::iterator it;
+void KT_MethodCall::setNameAddStringAtFirstPosition(string var){
+  std::vector<string>::iterator it;
   it = name.begin();
   it = name.insert ( it , var );
 }

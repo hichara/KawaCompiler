@@ -6,3 +6,5 @@
 *.snm
 kawac
 tokens.cpp
+kawa.cpp
+kawa.hpp

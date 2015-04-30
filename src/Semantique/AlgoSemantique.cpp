@@ -377,6 +377,7 @@ void decoration(KT_Program * prog) {
 
 					for(KT_Statement* statement : mainBlock->getStatements()){
 						statement->toString();
+
 						statement->accept(declarationVisitor);
 						statement->accept(affectationVisitor);
 						statement->accept(callMethodVisitor);
@@ -387,7 +388,7 @@ void decoration(KT_Program * prog) {
 							&& !callMethodVisitor->isVisited()){
 
 								mainIsGood = false;
-								break;
+								//break;
 						}
 					}
 					cout << "declarationVisitor:" << declarationVisitor->isVisited() << endl;

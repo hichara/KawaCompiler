@@ -1,5 +1,7 @@
 #include "IRCompiler.h"
 
+#include "KT_includes.h"
+
 std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Class* classe) {
 	return classe->getAllPrototypes();
 }
@@ -49,7 +51,7 @@ std::vector<KT_Interface*> IRCompiler::getAllParentInterfaces(KT_Class* classe) 
 	return res;	
 }
 
-std::vector<KT_Interface *> getAllParentInterfaces(KT_Interface* interface) {
+std::vector<KT_Interface *> IRCompiler::getAllParentInterfaces(KT_Interface* interface) {
 	std::vector<KT_Interface *> interfaces = interface->getParentsInterfacesSemantique();
 	std::vector<KT_Interface *> res, tmp;
 

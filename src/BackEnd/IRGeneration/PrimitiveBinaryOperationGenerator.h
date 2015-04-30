@@ -1,3 +1,7 @@
+/**
+* Creator Hichara
+*/
+
 #ifndef PRIM_BIN_OP_GEN
 #define PRIM_BIN_OP_GEN
 
@@ -27,21 +31,20 @@ using namespace llvm;
 class PrimitiveBinaryOperationGenerator {
 
 public:
-	static Value* createAdd(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
-	static Value* createMul(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
-	static Value* createSub(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
-    static Value* createDiv(Type *type, Value *o1, Value *o2,  std::string name, BasicBlock *b);
-    static Value* createMod(Type *type,*Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createAnd(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createXor(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createSup(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createInf(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createSOE(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createIOE(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value*  createOr(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value*  createEq(Value *o1, Value *o2, std::string name, BasicBlock *b);
-    static Value* createNot(Value *o1,std::string name, BasicBlock *b);
-    static Value* valToBool(Value *o1, BasicBlock *b);
+	static Value* createAdd(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b);
+	static Value* createMul(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b);
+	static Value* createSub(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createDiv(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createMod(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createAnd(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createXor(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createSup(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createInf(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createSOE(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createIOE(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value*  createOr(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value*  createEq(Module *module, Value *o1, Value *o2, BasicBlock *b);
+    static Value* createNot(Module *module, Value *o1, BasicBlock *b);
 };
 
 #endif

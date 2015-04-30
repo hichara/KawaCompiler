@@ -1,3 +1,6 @@
+/**
+* Creator Hichara
+*/
 
 #ifndef GLOBAL_VARIABLE_GEN_KAWA
 #define GLOBAL_VARIABLE_GEN_KAWA

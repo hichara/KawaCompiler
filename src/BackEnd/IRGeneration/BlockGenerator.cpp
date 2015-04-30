@@ -1,3 +1,8 @@
+/**
+* Creator Hichara
+*/
+/*
+
 #include "BlockGenerator.h"
 
 
@@ -58,4 +63,4 @@
 		BranchInst *br = BranchInst::Create(endIF, current);
 
 		return endIF;
-	}
+	} */

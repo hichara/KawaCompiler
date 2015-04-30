@@ -1,5 +1,7 @@
 #include "IRCompiler.h"
 
+#include "KT_includes.h"
+
 IRCompiler::IRCompiler() {
   InitializeNativeTarget();
 }
@@ -38,7 +40,29 @@ Type* IRCompiler::createType(KT_Interface* interface) {
 								att_names, att_types, att_static);	
 }
 
-std::string IRCompiler::fqnType(std::vector<string*> vec) {
+
+Type* IRCompiler::createType(KT_Class * classe) {
+
+	std::vector<KT_Attribute*> att = classe->getAttributes();
+
+	std::vector<std::string> att_names;
+	std::vector<Type*> att_types;
+	std::vector<bool> att_static;
+
+	for(int i = 0; i < att.size(); i++) {
+		att_names.push_back(*(att[i]->getName()));
+		att_static.push_back(att[i]->getModifier()->isStatic());
+		std::string strtype = fqnType(att[i]->getType()->getTypeName());
+		att_types.push_back(
+			TypeGenerator::strToLLVMType(getModule(), strtype));
+	}
+
+	return TypeGenerator::createClassType(getModule(), 
+								*(classe->getName()),
+								att_names, att_types, att_static);
+}
+
+std::string IRCompiler::fqnType(std::vector<std::string*> vec) {
 	std::stringstream res;
 
 	res << *(vec[0]);
@@ -47,6 +71,14 @@ std::string IRCompiler::fqnType(std::vector<string*> vec) {
 	}
 
 	return res.str();
+}
+
+
+void IRCompiler::debug(std::string msg) {
+	if(debugOn){
+		std::cout << "IRCompiler : " << msg << "\n";
+	}
+
 }
 
 

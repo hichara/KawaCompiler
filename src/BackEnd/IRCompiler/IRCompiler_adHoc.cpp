@@ -2,6 +2,7 @@
 
 #include "IRCompiler.h"
 
+#include "KT_includes.h"
 
 Value* IRCompiler::createAdHocTable(KT_Class *classe) {
 	return createAdHocTable(classe, classe);

@@ -157,6 +157,7 @@ extern KT_Program* program;
 int main( int argc, char** argv ){
 
     ++argv; --argc;
+    ++argv; --argc;
     file_num=0;
     file_num_max = argc;
     files = argv;
@@ -170,7 +171,7 @@ int main( int argc, char** argv ){
          ***/
         // analyse syntaxique --> production de l'AST avec KawaTree
         yyparse();
-      
+
         // analyse sémantique
         /*
         Semantic::check(program);
@@ -194,8 +195,11 @@ int yywrap() {
     while( (yyin = fopen(files[file_num],"r")) == 0 && file_num < file_num_max ){
       return 1;
     }
-    if ( file_num < file_num_max )
-        return 0;
+    if ( file_num < file_num_max ){
+      lineno=0;
+      return 0;
+    }
+
     else
         return 1;
   }

@@ -1,3 +1,8 @@
+/**
+* Creator Hichara
+*/
+
+
 #include "GlobalVariableGenerator.h"
 
 #include "KawaUtilitary.h"

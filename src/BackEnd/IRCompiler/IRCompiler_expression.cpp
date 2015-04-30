@@ -2,6 +2,7 @@
 
 #include "IRCompiler.h"
 
+#include "KT_includes.h"
 
 Value* IRCompiler::compileExpression(KT_Expression *expr) {
 	return expr->acceptIRCompiler(this);
@@ -24,6 +25,15 @@ Value* IRCompiler::compileVarOrAttr(KT_VarOrAttr *call) {
 }
 
 
+Value* IRCompiler::compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall*) {
+	
+	KawaUtilitary::stopGenerationIR("linked call not handled\n");	
+
+	return NULL;	
+}
+
+
+
 Value* IRCompiler::compileEntier(KT_Entier *expr) {
 	return PrimitiveCreator::create(expr->getValue(), getContext());
 }
@@ -35,7 +45,8 @@ Value* IRCompiler::compileString(KT_String *expr) {
 
 Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 	KT_Prototype *proto = call->getMethod()->getPrototype();
-	
+	bool isStatic = proto->getModifier()->isStatic();
+
 	Value *caller = compileVarOrAttr(call->getCaller());
 
 	Function *f = compile(proto);	
@@ -52,6 +63,11 @@ Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 	}
 
 	Value *index = GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), index_str);
+
+	if(isStatic) {
+		return CallGenerator::createStaticMethodeCall(getModule(),
+			f->getName().str(), v_args, getCurrentBlock());
+	}
 
 	return CallGenerator::createMethodeCall(getModule(),
 	 f, caller, v_args, index, getCurrentBlock());
@@ -96,12 +112,12 @@ Value* IRCompiler::compileConstructorCall(KT_ConstructorCall *call) {
 	return res;
 }
 
-Value* IRCompiler::compileVariable(KT_Variable *id) {
+Value* IRCompiler::compileID(KT_ID *id) {
 	ValueSymbolTable &table = currentFunction->getValueSymbolTable();
 	Value *v;
 
 	// Concatene le nom
-	std::string v_name = fqnType(id->getName());
+	std::string v_name = fqnType(id->getValue());
 
 	int currentlvl = getInbricationLevel();
 
@@ -122,6 +138,28 @@ Value* IRCompiler::compileVariable(KT_Variable *id) {
 	s << "error : " << v_name << " not found\n";
 
 	KawaUtilitary::stopGenerationIR(s.str());
+
+	return NULL;
+}
+
+Value* IRCompiler::compileVariable(KT_Variable *var) {
+
+	std::string name = fqnType(var->getName());
+	std::string type = fqnType(var->getType()->getTypeName());
+
+	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
+	Value *dec = BasicInstructionGenerator::BasicInstructionGenerator::createDeclaration(name, t, getCurrentBlock());
+
+	KT_Expression *expr = var->getValue();
+
+	if(expr != NULL) {
+		Value *v = compileExpression(expr);
+		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
+		return BasicInstructionGenerator::createAffectation(getModule(),
+			dec, v, getCurrentBlock());
+	}
+
+	return dec;
 }
 
 
@@ -129,5 +167,14 @@ Value* IRCompiler::compileNULL(KT_Null *vnull) {
 	return PrimitiveCreator::createNull(getModule()->getContext());
 }
 
+Value* IRCompiler::compileAddition(KT_Addition *add) {
+	Value* vl = compileExpression(add->getLExpression());
+	Value* vg = compileExpression(add->getRExpression());
 
+	vl = BasicInstructionGenerator::stripVal(vl, getCurrentBlock());
+	vg = BasicInstructionGenerator::stripVal(vg, getCurrentBlock());
 
+	Type *t = PrimitiveValueConverter::dominatingType(vl->getType(), vg->getType());
+
+	return PrimitiveBinaryOperationGenerator::createAdd(getModule(), t, vl, vg, getCurrentBlock());
+}

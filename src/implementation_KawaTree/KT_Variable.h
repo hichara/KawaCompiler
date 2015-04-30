@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class KT_Variable: public KT_Statement, public KT_VarOrAttr {
+class KT_Variable: public KT_Statement/*, public KT_VarOrAttr*/ {
 public:
 
     KT_Variable();

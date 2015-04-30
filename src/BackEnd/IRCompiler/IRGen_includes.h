@@ -36,6 +36,7 @@
 #include "../IRGeneration/CallGenerator.h"
 #include "../IRGeneration/KawaUtilitary.h"
 #include "../IRGeneration/PrimitiveValueConverter.h"
+#include "../IRGeneration/PrimitiveBinaryOperationGenerator.h"
 
 
 #endif

@@ -1,9 +1,13 @@
+/**
+* Creator Hichara
+*/
+
 #include "PrimitiveCreator.h"
 
 
 
 //Cree null
-static Value* createNull(LLVMContext &context) {
+Value* PrimitiveCreator::createNull(LLVMContext &context) {
 	PointerType *t  = Type::getInt8Ty(context)->getPointerTo();
 	return ConstantPointerNull::get(t);
 }

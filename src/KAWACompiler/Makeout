@@ -1,0 +1,461 @@
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:10:
+../implementation_KawaTree/KT_Attribute.h:34:2: error: unknown type name 'KT_Expression'
+        KT_Expression* getValue();
+        ^
+../implementation_KawaTree/KT_Attribute.h:54:16: error: unknown type name 'KT_Expression'
+        void setValue(KT_Expression* var);
+                      ^
+../implementation_KawaTree/KT_Attribute.h:61:2: error: unknown type name 'KT_Expression'
+        KT_Expression* value;
+        ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:11:
+In file included from ../implementation_KawaTree/KT_SimpleMethod.h:11:
+In file included from ../implementation_KawaTree/KT_Param.h:12:
+../implementation_KawaTree/KT_Variable.h:19:48: error: expected class name
+class KT_Variable: public KT_VarOrAttr, public KT_Statement {
+                                               ^
+../implementation_KawaTree/KT_Variable.h:31:5: error: unknown type name 'KT_Expression'
+    KT_Expression* getValue();
+    ^
+../implementation_KawaTree/KT_Variable.h:51:19: error: unknown type name 'KT_Expression'
+    void setValue(KT_Expression* var);
+                  ^
+../implementation_KawaTree/KT_Variable.h:58:5: error: unknown type name 'KT_Expression'
+    KT_Expression* value; 
+    ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:11:
+In file included from ../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../implementation_KawaTree/KT_Block.h:9:
+../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../implementation_KawaTree/KT_Statement.h:25:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:6:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h:11:
+../implementation_KawaTree/KT_FactFinal.h:19:28: error: expected class name
+class KT_FactFinal: public KT_Expression {
+                           ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:27:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getLExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:31:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getrExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:38:25: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setLExpression(KT_Expression* var);
+                        ^~~~~~~~~~~~~
+                        KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:43:25: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setRExpression(KT_Expression* var);
+                        ^~~~~~~~~~~~~
+                        KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:65:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* lExpression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:66:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* rExpression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:23:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:33:24: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setExpression(KT_Expression* var);
+                       ^~~~~~~~~~~~~
+                       KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:38:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* expression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:70:27: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+        Value* compileExpression(KT_Expression *expr);
+                                 ^~~~~~~~~~~~~
+                                 KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_Addition.cpp:7:
+In file included from ../implementation_KawaTree/KT_Addition.h:9:
+In file included from ../implementation_KawaTree/KT_ArithmeticExpression.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+../implementation_KawaTree/KT_Expression.h:29:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../implementation_KawaTree/KT_Statement.h:25:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings and 18 errors generated.
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:10:
+../implementation_KawaTree/KT_Attribute.h:34:2: error: unknown type name 'KT_Expression'
+        KT_Expression* getValue();
+        ^
+../implementation_KawaTree/KT_Attribute.h:54:16: error: unknown type name 'KT_Expression'
+        void setValue(KT_Expression* var);
+                      ^
+../implementation_KawaTree/KT_Attribute.h:61:2: error: unknown type name 'KT_Expression'
+        KT_Expression* value;
+        ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:11:
+In file included from ../implementation_KawaTree/KT_SimpleMethod.h:11:
+In file included from ../implementation_KawaTree/KT_Param.h:12:
+../implementation_KawaTree/KT_Variable.h:19:48: error: expected class name
+class KT_Variable: public KT_VarOrAttr, public KT_Statement {
+                                               ^
+../implementation_KawaTree/KT_Variable.h:31:5: error: unknown type name 'KT_Expression'
+    KT_Expression* getValue();
+    ^
+../implementation_KawaTree/KT_Variable.h:51:19: error: unknown type name 'KT_Expression'
+    void setValue(KT_Expression* var);
+                  ^
+../implementation_KawaTree/KT_Variable.h:58:5: error: unknown type name 'KT_Expression'
+    KT_Expression* value; 
+    ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:11:
+In file included from ../implementation_KawaTree/KT_SimpleMethod.h:12:
+In file included from ../implementation_KawaTree/KT_Block.h:9:
+../implementation_KawaTree/KT_BlockStatement.h:24:10: warning: 'KT_BlockStatement::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*StatementVisitor*/);
+         ^
+../implementation_KawaTree/KT_Statement.h:25:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:6:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h:11:
+../implementation_KawaTree/KT_FactFinal.h:19:28: error: expected class name
+class KT_FactFinal: public KT_Expression {
+                           ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:27:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getLExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:31:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getrExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:38:25: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setLExpression(KT_Expression* var);
+                        ^~~~~~~~~~~~~
+                        KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:43:25: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setRExpression(KT_Expression* var);
+                        ^~~~~~~~~~~~~
+                        KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:65:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* lExpression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:7:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Affectation.h:66:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* rExpression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:23:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* getExpression();
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:33:24: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    void setExpression(KT_Expression* var);
+                       ^~~~~~~~~~~~~
+                       KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:11:
+../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_ParamsMethodCall.h:38:5: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+    KT_Expression* expression;
+    ^~~~~~~~~~~~~
+    KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:70:27: error: unknown type name 'KT_Expression'; did you mean 'KT_IDExpression'?
+        Value* compileExpression(KT_Expression *expr);
+                                 ^~~~~~~~~~~~~
+                                 KT_IDExpression
+../implementation_KawaTree/KT_IDExpression.h:17:7: note: 'KT_IDExpression' declared here
+class KT_IDExpression: public KT_Statement {
+      ^
+In file included from ../implementation_KawaTree/KT_AdditionlEq.cpp:6:
+In file included from ../implementation_KawaTree/KT_AdditionlEq.h:9:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+../implementation_KawaTree/KT_Expression.h:29:10: warning: 'KT_Expression::accept' hides overloaded virtual function [-Woverloaded-virtual]
+    void accept( /*ExprVisitor*/);
+         ^
+../implementation_KawaTree/KT_Statement.h:25:15: note: hidden overloaded virtual function 'KT_Statement::accept' declared here: different number of parameters (1 vs 0)
+        virtual void accept(SemanticVisitor* visitor);
+                     ^
+2 warnings and 18 errors generated.
+In file included from ../implementation_KawaTree/KT_AffectOperation.cpp:6:
+In file included from ../implementation_KawaTree/KT_AffectOperation.h:9:
+In file included from ../implementation_KawaTree/KT_BinaryExpression.h:9:
+In file included from ../implementation_KawaTree/KT_Expression.h:9:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/IRCompiler.h:19:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/KT_includes.h:5:
+In file included from ../implementation_KawaTree/../BackEnd/IRCompiler/../../implementation_KawaTree/KT_Program.h:10:
+In file included from ../implementation_KawaTree/KT_Package.h:10:
+In file included from ../implementation_KawaTree/KT_Class.h:10:
+../implementation_KawaTree/KT_Attribute.h:34:2: error: unknown type name 'KT_Expression'
+        KT_Expression* getValue();
+        ^
+../implementation_KawaTree/KT_Attribute.h:54:16: error: unknown type name 'KT_Expression'
+        void setValue(KT_Expression* var);
+                      ^
+../implementation_KawaTree/KT_Attribute.h:61:2: error: unknown type name 'KT_Expression'
+        KT_Expression* value;
+        ^
+make: *** [kawac] Interrompre

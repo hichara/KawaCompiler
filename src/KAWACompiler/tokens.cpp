@@ -662,13 +662,13 @@ int file_num=0, file_num_max=0;
 char **files;
 
 inline int strToken( int token ){
-    string* st = new std::string(yytext, yyleng); yylval.vstring = st; 
+    string* st = new std::string(yytext, yyleng); yylval.vstring = st;
     return token;
 }
 
 int column=1; int lineno=1;
 
-/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */ 
+/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */
 void count() {
   int i;
   column += strlen(yytext);
@@ -2503,10 +2503,10 @@ void yyfree (void * ptr )
 #line 155 "tokens.l"
 
 
-extern KT_Program* program; 
-int main( int argc, char** argv ){ 
+extern KT_Program* program;
+int main( int argc, char** argv ){
 
-    ++argv; --argc; 
+    ++argv; --argc;
     file_num=0;
     file_num_max = argc;
     files = argv;
@@ -2517,10 +2517,10 @@ int main( int argc, char** argv ){
         }
         /****
          * Frontend
-         ***/        
+         ***/
         // analyse syntaxique --> production de l'AST avec KawaTree
         yyparse();
-        
+      
         // analyse sémantique
         /*
         Semantic::check(program);
@@ -2546,15 +2546,14 @@ int yywrap() {
     }
     if ( file_num < file_num_max )
         return 0;
-    else 
+    else
         return 1;
-  } 
+  }
   else{
     return 1;
   }
-  
-}
 
+}
 /* A Bison parser, made by GNU Bison 3.0.2.  */
 
 /* Bison interface for Yacc-like parsers in C
@@ -2768,7 +2767,7 @@ union YYSTYPE
 	KT_Type* kt_type;
 	KT_UnaryExpression* kt_unaryExpression;
 	KT_Variable* kt_variable;
-	KT_VarOrAttr* kt_varOrAttr;
+	//KT_VarOrAttr* kt_varOrAttr;
 	KT_WhileStatement* kt_whileStatement;
 	KT_XOrBinEq* kt_xOrBinEq;
 	PARSER_Array* parser_array;

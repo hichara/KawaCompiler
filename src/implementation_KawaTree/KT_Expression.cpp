@@ -16,13 +16,6 @@ using namespace std;
  KT_Expression::KT_Expression() {}
 
 /**
- * @param ExprVisitor
- */
-void KT_Expression::accept( /*ExprVisitor*/) {
-
-}
-
-/**
  * @return string *
  */
 string* KT_Expression::calculReturnType() {

@@ -5,6 +5,8 @@
 #include "../implementation_KawaTree/KT_Class.h"
 #include "../implementation_KawaTree/KT_Interface.h"
 #include "../implementation_KawaTree/KT_Prototype.h"
+#include "../implementation_KawaTree/KT_Affectation.h"
+#include "../implementation_KawaTree/KT_Variable.h"
 #include "../implementation_KawaTree/KT_Package.h"
 #include "../implementation_KawaTree/KT_Program.h"
 #include "../implementation_KawaTree/KT_Print.h"
@@ -33,7 +35,7 @@ void decoration(KT_Program * prog);
 class Semantic{public:
 	static bool existSemanticError;
 	static void check(KT_Program* prog){
-		
+
 		createListOfType(prog);
 		createHeritage(prog);
 		decoration(prog);

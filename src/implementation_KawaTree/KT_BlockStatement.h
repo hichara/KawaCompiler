@@ -14,14 +14,15 @@ using namespace std;
 
 
 class KT_BlockStatement: public KT_Statement {
-public: 
+public:
 
 	KT_BlockStatement();
-    
+  virtual ~KT_BlockStatement();
     /**
      * @param StatementVisitor
      */
-    void accept( /*StatementVisitor*/);
+    //void accept( /*StatementVisitor*/);
+    virtual void toString();
 };
 
 #endif //_KT_BLOCKSTATEMENT_H

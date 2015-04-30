@@ -13,13 +13,13 @@ int file_num=0, file_num_max=0;
 char **files;
 
 inline int strToken( int token ){
-    string* st = new std::string(yytext, yyleng); yylval.vstring = st; 
+    string* st = new std::string(yytext, yyleng); yylval.vstring = st;
     return token;
 }
 
 int column=1; int lineno=1;
 
-/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */ 
+/* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */
 void count() {
   int i;
   column += strlen(yytext);
@@ -153,10 +153,10 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 .			          {count(); printf("TOKEN inconnu!\n"); yyterminate();}
 
 %%
-extern KT_Program* program; 
-int main( int argc, char** argv ){ 
+extern KT_Program* program;
+int main( int argc, char** argv ){
 
-    ++argv; --argc; 
+    ++argv; --argc;
     file_num=0;
     file_num_max = argc;
     files = argv;
@@ -167,10 +167,10 @@ int main( int argc, char** argv ){
         }
         /****
          * Frontend
-         ***/        
+         ***/
         // analyse syntaxique --> production de l'AST avec KawaTree
         yyparse();
-        
+      
         // analyse sémantique
         /*
         Semantic::check(program);
@@ -196,12 +196,11 @@ int yywrap() {
     }
     if ( file_num < file_num_max )
         return 0;
-    else 
+    else
         return 1;
-  } 
+  }
   else{
     return 1;
   }
-  
-}
 
+}

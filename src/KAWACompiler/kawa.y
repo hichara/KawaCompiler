@@ -10,7 +10,7 @@ using namespace std;
 
 
 
-	extern KT_Program* program = new KT_Program; 
+	extern KT_Program* program = new KT_Program;
 	int yylex();
 	extern char* yytext;
 	int yyerror(const char* err );
@@ -20,7 +20,7 @@ using namespace std;
 %}
 
 %token<vint> ENTIER
-%token<vfloat> REEL  
+%token<vfloat> REEL
 %token<vstring> TSTRING TSHORT TINT TLONG TFLOAT TDOUBLE TBYTE TCHAR TBOOLEAN TVOID
 %token<vstring> STRING
 %token<vint> TIMPORT TPACKAGE
@@ -28,7 +28,7 @@ using namespace std;
 %token<vstring> TFINAL TABSTRACT TSTATIC TVALUE
 %token<vstring> TCLASS TINTERFACE TEXTENDS TIMPLEMENTS
 %token<vstring> ID
-%token<vstring> TSUPER TTHIS 
+%token<vstring> TSUPER TTHIS
 %token<vstring> TIF TELSE
 %token<vstring> TFALSE TTRUE
 %token<vstring> TSWITCH TCASE TCONTINUE TBREAK TDEFAULT
@@ -50,23 +50,23 @@ using namespace std;
 %type<vectorString> ListIds QList
 %type<vstring> BasicType
 %type<kt_type> Type
-%type<parser_array> Tables 
+%type<parser_array> Tables
 %type<vbool> Static
 %type<vectorString> All
 %type<vectorString> ExtendsList Implements
-%type<vstring> Extends	
-%type<kt_modifier> Modifier Modifiers		  
-%type<vectorVecorString> ImportDeclaration 
+%type<vstring> Extends
+%type<kt_modifier> Modifier Modifiers
+%type<vectorVecorString> ImportDeclaration
 
-%type<kt_class> ClassDeclaration 
-%type<kt_interface> InterfaceDeclaration 
+%type<kt_class> ClassDeclaration
+%type<kt_interface> InterfaceDeclaration
 %type<vectorPARSER_MemberDec> ClassBody MemberDecs
 %type<parser_memberDec> MemberDec
 
 %type<vectorKT_Prototype> InterfaceBody Prototypes
 %type<kt_prototype> Prototype
 %type<kt_param> VariableDeclaratorId
-%type<kt_modifier> VariableModifiers VariableModifier 
+%type<kt_modifier> VariableModifiers VariableModifier
 
 %type<kt_expression> ConstructorCall  ArrayInitializer
 
@@ -79,21 +79,21 @@ using namespace std;
 
 %type<kt_block> Block
 %type<vectorKT_Statement> Statements
-%type<kt_statement> Statement  
-%type<kt_blockStatement> BlockStatement   
+%type<kt_statement> Statement
+%type<kt_blockStatement> BlockStatement
 %type<vectorKT_FactFinal> Args ArgsRest
 %type<kt_factFinal> ArgsS ArgsI ArgsF
 %type<kt_print> PrintS PrintI PrintF Print
 
-%type<kt_switchBlockStatement> SwitchBlockStatement 
-%type<vectorKT_SwitchBlockStatement> SwitchBlockStatements 
+%type<kt_switchBlockStatement> SwitchBlockStatement
+%type<vectorKT_SwitchBlockStatement> SwitchBlockStatements
 %type<parser_forControl> ForControl
 %type<parser_field> ForVarControl
 %type<vectorKT_IDExpression> ForUpdate StatementExpressionList
 
 %type<kt_expression> Expression FacteurEffect ExpressionOr ExpressionAnd ExpressionOrLogic ExpressionOrExLogic ExpressionAndLogic ExpressionEqNeq ExpressionCompEq TermeDecal TermePlus factFinal terme facteur
 
-%type<kt_indexedArray> TablesIndexe  
+%type<kt_indexedArray> TablesIndexe
 %type<kt_linkedMethodOrVarCall> LinkedMethodVarCall
 %type<kt_methodCall> MethodCall
 %type<vectorKT_MethodOrVarCall> LinkedMethodVarCallList
@@ -200,9 +200,9 @@ using namespace std;
 	vector<KT_IDExpression*>* vectorKT_IDExpression;
 }
 
-%nonassoc THEN 
+%nonassoc THEN
 %nonassoc TELSE
-%right TORBINEQ TXORBINEQ TANDBINEQ TDECALNSEQ TDECAREQ TDECALEQ TMODEQ TDIVEQ TMULEQ TMINUSEQ TPLUSEQ '='   
+%right TORBINEQ TXORBINEQ TANDBINEQ TDECALNSEQ TDECAREQ TDECALEQ TMODEQ TDIVEQ TMULEQ TMINUSEQ TPLUSEQ '='
 %right COND
 %left TOR
 %left TAND
@@ -223,7 +223,7 @@ Program: ProgramUnity{ }
 
 ProgramUnity : Package ImportDeclaration Modifiers ClassDeclaration ProgramUnity { $4->setModifier($3); $4->setImports(*$2); program->addPackageWithClass($1, $4); $$=program;}
 			 | Package ImportDeclaration Modifiers InterfaceDeclaration ProgramUnity{  $4->setModifier($3); $4->setImports(*$2);program->addPackageWithInterface($1, $4); $$=program;}
-		     | {$$= program;}		
+		     | {$$= program;}
 		;
 
 Package : TPACKAGE ID ';' {$$= new KT_Package; $$->setName($2);}
@@ -234,15 +234,15 @@ Ids : '.' ID Ids {$3->push_back($2); $$=$3;}
 	| {vector<string*>* var = new vector<string*>; $$=var;}
 	;
 
-QList : ',' ID Ids QList {string* name=$2; 
+QList : ',' ID Ids QList {string* name=$2;
 							for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}
-							vector<string*>* listName = new vector<string*>; listName->push_back(name); 
+							vector<string*>* listName = new vector<string*>; listName->push_back(name);
 						    for (vector<string*>::iterator it = $4->begin(); it != $4->end(); ++it){ string* n = (*it); listName->push_back(n);}
 						    $$=listName;}
 	  | {vector<string*>* var = new vector<string*>; $$=var;}
 	  ;
 
-ListIds : ID Ids QList {string* name=$1; 
+ListIds : ID Ids QList {string* name=$1;
 					    for (vector<string*>::iterator it = $2->begin(); it != $2->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}
 					    vector<string*>* listName = new vector<string*>; listName->push_back(name);
 					    for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it){ string* n = (*it); listName->push_back(n);}
@@ -285,8 +285,8 @@ Modifier 	: TPUBLIC {$$=new KT_Modifier; $$->setVisibility(1);}
 		 ;
 
 Modifiers : Modifiers Modifier {if($2->isStatic()){$1->setStatic(true);}
-							    if($2->isAbstract()){$1->setAbstract(true);} 
-							    if($2->isFinal()){$1->setFinal(true);} 
+							    if($2->isAbstract()){$1->setAbstract(true);}
+							    if($2->isFinal()){$1->setFinal(true);}
 							    if($2->getVisibility()>0) $1->setVisibility($2->getVisibility());
 							}
 		  | {KT_Modifier* modifier = new KT_Modifier; $$=modifier;}
@@ -296,9 +296,9 @@ Static : TSTATIC {$$=true;}
 	   | {$$=false;}
 	   ;
 
-All : '.' ID All {  
+All : '.' ID All {
 					vector<string*>* name = new vector<string*>; name->push_back($2);
- 					for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it)	
+ 					for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it)
  						{ string* n = (*it); name->push_back(n);}
  					$$=name;
  				 }
@@ -310,7 +310,7 @@ All : '.' ID All {
 
 Extends	: TEXTENDS Type {vector<string*> typeName =$2->getTypeName(); string* name=new string;
 						 for (vector<string*>::iterator it = typeName.begin(); it != typeName.end(); ++it)
-						 	{ string* n = (*it); 
+						 	{ string* n = (*it);
 						 		if(it!=typeName.begin()){*name = *name + "." +*n;}
 						 		else{name=n;}
 						 	}
@@ -334,10 +334,10 @@ ImportDeclaration : TIMPORT Static ID All ';' ImportDeclaration {vector<string*>
 																 for (vector<string*>::iterator it = $4->begin(); it != $4->end(); ++it)
 																 	{ string* n = (*it); importvar->push_back(n);}
 
-																  $6->push_back(*importvar); 
+																  $6->push_back(*importvar);
 																  $$=$6; }
 				  | {vector<vector<string*>>* var = new vector<vector<string*>>; $$=var; }
-				  ; 
+				  ;
 
 /*--------------------- Entete classes et interfaces------------------------------------------------------------------*/
 
@@ -348,7 +348,7 @@ InterfaceDeclaration : TINTERFACE ID ExtendsList InterfaceBody {$$=new KT_Interf
 					 ;
 
 /*-----------------------------------Corps d'une classe-----------------------------------------------------*/
-ClassBody: '{' MemberDecs '}' {$$=$2; } 
+ClassBody: '{' MemberDecs '}' {$$=$2; }
 MemberDecs : MemberDecs MemberDec { $1->push_back($2); $$=$1;}
 					  | { vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>; $$=var; cout<<"epsilon  :";}
 					  ;
@@ -367,18 +367,18 @@ MemberDec: Modifiers Type ID VariableInitializer VariableDeclaratorList ';' {/*P
 		  										  constructor->setParams(*$3) ;
 		  										  constructor->setBlock($4) ;
 		  										  $$=constructor;}
-					;  
+					;
 
 /*--------------------------------- corps d'une interface ---------------------------------------------------*/
 InterfaceBody: '{' Prototypes '}' {$$=$2;}
-			 ; 
+			 ;
 Prototypes : Prototypes Prototype {$1->push_back($2); $$=$1;}
  						  | {vector<KT_Prototype*>* var = new vector<KT_Prototype*>; $$=var;}
  						  ;
 
 Prototype : Modifiers Type ID FormalParameters';' {$$ = new KT_Prototype; $$->setName($3); $$->setReturnType($2); $$->setModifier($1); $$->setParams(*$4);}
-    	  | Modifiers TVOID ID FormalParameters ';' {KT_Type* type = new KT_Type; vector<string*> typeName; string* svoid = new string("void"); typeName.push_back(svoid); type->setTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); $$ = new KT_Prototype; $$->setName($3); $$->setReturnType(type); $$->setModifier($1); $$->setParams(*$4);} 
-    	   ;  
+    	  | Modifiers TVOID ID FormalParameters ';' {KT_Type* type = new KT_Type; vector<string*> typeName; string* svoid = new string("void"); typeName.push_back(svoid); type->setTypeName(typeName); type->setBasicType(false); type->setArrayDim(0); $$ = new KT_Prototype; $$->setName($3); $$->setReturnType(type); $$->setModifier($1); $$->setParams(*$4);}
+    	   ;
 
 /*-------------------------------------------- partie variables ---------------------------------------------------------*/
 
@@ -404,12 +404,12 @@ VoidFormalParametrs : '(' ')' {vector<KT_ParamsMethodCall*>* vect = new vector<K
 FormalParametersCalledMethod: '(' FormalParametersCalledMethodDecls ')' {$$=$2;}
 							| VoidFormalParametrs {$$=$1;}
 							;
-FormalParametersCalledMethodDecls : ID '[' ENTIER ']' TablesIndexe FormalParameterCalledMethodDeclsRest {KT_ID* id = new KT_ID; 
-											vector<string*> name; name.push_back($1); id->setValue(name); $5->setIndexAddIntAtFirstPosition($3); 
-											KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray($5); 
+FormalParametersCalledMethodDecls : ID '[' ENTIER ']' TablesIndexe FormalParameterCalledMethodDeclsRest {KT_ID* id = new KT_ID;
+											vector<string*> name; name.push_back($1); id->setValue(name); $5->setIndexAddIntAtFirstPosition($3);
+											KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray($5);
 											param->setExpression(id);
-											vector<KT_ParamsMethodCall*>* vect= new vector<KT_ParamsMethodCall*>; 
-											vect->push_back(param); 
+											vector<KT_ParamsMethodCall*>* vect= new vector<KT_ParamsMethodCall*>;
+											vect->push_back(param);
 											for (vector<KT_ParamsMethodCall*>::iterator it = $6->begin(); it != $6->end(); ++it)
 												{ KT_ParamsMethodCall* n = (*it); vect->push_back(n);}
 											$$=vect;}
@@ -444,7 +444,7 @@ FormalParameterDeclsRest: ',' FormalParameterDecls {$$=$2;}
 
 FormalParameterCalledMethodDeclsRest : ',' FormalParametersCalledMethodDecls {$$=$2;}
 									 | {vector<KT_ParamsMethodCall*>* vect = new vector<KT_ParamsMethodCall*>; $$=vect;}
-									 ; 
+									 ;
 
 VariableDeclaratorId: ID Tables {$$=new KT_Param; $$->setName($1); KT_Type* type= new KT_Type; type->setArray($2); $$->setParamType(type); }
 					;
@@ -455,16 +455,16 @@ Block: '{' Statements '}' {$$=new KT_Block; $$->setStatements(*$2);}
 
 Statements: Statements Statement {$1->push_back($2); $$=$1;}
 			   | { vector<KT_Statement*>* var = new vector<KT_Statement*>; $$=var;}
-			   ; 
+			   ;
 
 Statement     : Print {$$=$1;}
-			  | PrintS {$$=$1;} 
-			  | PrintF {$$=$1;} 
+			  | PrintS {$$=$1;}
+			  | PrintF {$$=$1;}
 			  | PrintI {$$=$1;}
 			  | TFINAL ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($2); name.push_back($4); for (vector<string*>::iterator it = $5->begin(); it != $5->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($6);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($7); pf->addVectorVariable($8); pf->upDateType(type); pf->setFinal(true); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;}
-			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($1); name.push_back($3); for (vector<string*>::iterator it = $4->begin(); it != $4->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($5);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($6); pf->addVectorVariable($7); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;} 
+			  | ID '.' ID Ids Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($1); name.push_back($3); for (vector<string*>::iterator it = $4->begin(); it != $4->end(); ++it){ string* n = (*it); name.push_back(n);} KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($5);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($6); pf->addVectorVariable($7); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;}
 			  | TFINAL ID Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($2); KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($3);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($4); pf->addVectorVariable($5); pf->upDateType(type); pf->setFinal(true); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;}
-			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($1); KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($2);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($3); pf->addVectorVariable($4); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;} 
+			  | ID Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($1); KT_Type* type=new KT_Type; type->setBasicType(false); type->setArray($2);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($3); pf->addVectorVariable($4); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;}
 			  | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($1); KT_Type* type=new KT_Type; type->setBasicType(true); type->setArray($2);  type->setTypeName(name); PARSER_Field* pf =new PARSER_Field; pf->AddVariableAtFirstPosition($3); pf->addVectorVariable($4); pf->upDateType(type); vector<KT_Variable*> vars = pf->getVariables(); vector<KT_Statement*> stats; for (vector<KT_Variable*>::iterator it = vars.begin(); it != vars.end(); ++it){ KT_Statement* n = (*it); stats.push_back(n);} KT_Block* block = new KT_Block; block->setStatements(stats); $$=block;}
 			  | TFINAL BasicType Tables VariableDeclarator VariableDeclaratorList ';' {vector<string*> name; name.push_back($2);
 			  																			 KT_Type* type=new KT_Type; type->setBasicType(true);
@@ -509,7 +509,7 @@ ArgsRest : '+' factFinal ArgsRest {KT_FactFinal* factFinal= static_cast<KT_FactF
 									 vector<KT_FactFinal*>* args=new vector<KT_FactFinal*>; args->push_back(factFinal);
 									 for (vector<KT_FactFinal*>::iterator it = $3->begin(); it != $3->end(); ++it)
 									 	{ KT_FactFinal* n = (*it); args->push_back(n);}
-									  $$=args;} 
+									  $$=args;}
 		 | {vector<KT_FactFinal*>* var = new vector<KT_FactFinal*>; $$=var;}
 		 ;
 
@@ -517,22 +517,22 @@ PrintF : TPRINTF '(' ArgsF ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args;
 	   ;
 ArgsF : REEL {KT_Reel* reel = new KT_Reel; reel->setValue($1); $$=reel;}
 	  | ID {vector<string*> name; name.push_back($1); KT_ID* id = new KT_ID; id->setValue(name); $$=id;}
-	  | {$$=new KT_FactFinal;} 
-	  ; 
+	  | {$$=new KT_FactFinal;}
+	  ;
 
 PrintI : TPRINTI '(' ArgsI ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args; args.push_back($3); $$->setArgs(args);}
 	   ;
 ArgsI : ENTIER {KT_Entier* entier = new KT_Entier; entier->setValue($1); $$=entier;}
 	  | ID {vector<string*> name; name.push_back($1); KT_ID* id = new KT_ID; id->setValue(name); $$=id;}
 	  | {$$=new KT_FactFinal;}
-	  ; 
+	  ;
 
 PrintS : TPRINTS '(' ArgsS ')' ';' {$$=new KT_Print; vector<KT_FactFinal*> args; args.push_back($3); $$->setArgs(args);}
 	   ;
 ArgsS : STRING {KT_String* s = new KT_String; s->setValue($1); $$=s;}
 	  | ID {vector<string*> name; name.push_back($1); KT_ID* id = new KT_ID; id->setValue(name); $$=id;}
 	  | {$$=new KT_FactFinal;}
-	  ; 
+	  ;
 
 BlockStatement: Block {$$=new KT_BlockStatement;}
     	 	  | TIF '(' Expression ')' BlockStatement %prec THEN {KT_IfStatement* ifstatement= new KT_IfStatement; ifstatement->setCondition($3); ifstatement->setBStatement($5); $$=ifstatement;}
@@ -556,11 +556,11 @@ SwitchBlockStatements: SwitchBlockStatements SwitchBlockStatement {$1->push_back
 
 SwitchBlockStatement: TCASE Expression ':' Statements {$$=new KT_SwitchBlockStatement; $$->setCaseExist(true); KT_Block* block =new KT_Block; block->setStatements(*$4); $$->setBlock(block); $$->setExpression($2);}
 					|  TDEFAULT ':' Statements {$$=new KT_SwitchBlockStatement; $$->setCaseExist(false); KT_Block* block =new KT_Block; block->setStatements(*$3); $$->setBlock(block);}
-					; 
+					;
 
 /*------------------------------ partie for -----------------------------------------------------------------*/
-ForControl: ForVarControl ';' Expression ';' {$$=new PARSER_ForControl; $$->setCondition($3); $$->setInitFor($1); } 
-		  | ForVarControl ';' Expression ';' ForUpdate {$$=new PARSER_ForControl; $$->setCondition($3); $$->setInitFor($1); $$->setUpDate(*$5);} 
+ForControl: ForVarControl ';' Expression ';' {$$=new PARSER_ForControl; $$->setCondition($3); $$->setInitFor($1); }
+		  | ForVarControl ';' Expression ';' ForUpdate {$$=new PARSER_ForControl; $$->setCondition($3); $$->setInitFor($1); $$->setUpDate(*$5);}
 		  | ForVarControl ';' ';' {$$=new PARSER_ForControl; $$->setInitFor($1);}
 		  | ForVarControl ';' ';' ForUpdate {$$=new PARSER_ForControl; $$->setInitFor($1); $$->setUpDate(*$4); }
     	  | ';' Expression ';' {$$=new PARSER_ForControl; $$->setCondition($2); PARSER_Field* initFor = new PARSER_Field; $$->setInitFor(initFor);}
@@ -574,16 +574,16 @@ ForVarControl: Type VariableDeclaratorId VariableDeclaratorList {$$=new PARSER_F
 																 $$->upDateType($1); }
 			 | Type VariableDeclaratorId '=' Expression VariableDeclaratorList {
 			 																	 KT_Variable* variable = $2->toVariable(); variable->setValue($4);
-			 																	 $$=new PARSER_Field; $$->AddVariableAtFirstPosition(variable); 
+			 																	 $$=new PARSER_Field; $$->AddVariableAtFirstPosition(variable);
 			 																	 $$->addVectorVariable($5); $$->upDateType($1);
 			 																	}
 			 | ID Ids VariableDeclaratorList {vector<string*> name; name.push_back($1);
 			 								 for (vector<string*>::iterator it = $2->begin(); it != $2->end(); ++it)
-			 								 	{ string* n = (*it); name.push_back(n);} 
+			 								 	{ string* n = (*it); name.push_back(n);}
 			 								 KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false);
 			 								 $$=new PARSER_Field; $$->AddVariableAtFirstPosition(var); $$->addVectorVariable($3);
 			 								  }
-			 | ID Ids '=' Expression VariableDeclaratorList  {vector<string*> name; name.push_back($1); 
+			 | ID Ids '=' Expression VariableDeclaratorList  {vector<string*> name; name.push_back($1);
 			 													for (vector<string*>::iterator it = $2->begin(); it != $2->end(); ++it)
 			 														{ string* n = (*it); name.push_back(n);}
 			 												   KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false);
@@ -594,28 +594,28 @@ ForVarControl: Type VariableDeclaratorId VariableDeclaratorList {$$=new PARSER_F
 
 
 ForUpdate: Expression StatementExpressionList {vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>; update->push_back($1); for (vector<KT_IDExpression*>::iterator it = $2->begin(); it != $2->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} $$=update;}
-		 | ID Ids TablesIndexe '=' Expression  StatementExpressionList {vector<string*> name; name.push_back($1); for (vector<string*>::iterator it = $2->begin(); 
+		 | ID Ids TablesIndexe '=' Expression  StatementExpressionList {vector<string*> name; name.push_back($1); for (vector<string*>::iterator it = $2->begin();
 		 																it != $2->end(); ++it){ string* n = (*it); name.push_back(n);}
 		 																 KT_ID* id= new KT_ID ; id->setValue(name);
-		 																 KT_Affectation* affectation= new KT_Affectation ; affectation->setRExpression($5); 
+		 																 KT_Affectation* affectation= new KT_Affectation ; affectation->setRExpression($5);
 		 																 affectation->setLExpression(id);
 		 																 affectation->setIndexedArray($3);
-		 																 vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>; 
+		 																 vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>;
 		 																 update->push_back(affectation);
-		 																 for (vector<KT_IDExpression*>::iterator it = $6->begin(); 
-		 																 it != $6->end(); ++it){ KT_IDExpression* n = (*it); 
+		 																 for (vector<KT_IDExpression*>::iterator it = $6->begin();
+		 																 it != $6->end(); ++it){ KT_IDExpression* n = (*it);
 		 																 update->push_back(n);} $$=update;}
 		 ;
 
 StatementExpressionList : ',' Expression StatementExpressionList {vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>; update->push_back($2); for (vector<KT_IDExpression*>::iterator it = $3->begin(); it != $3->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} $$=update;}
 						| ','  ID Ids TablesIndexe '=' Expression  StatementExpressionList {vector<string*> name; name.push_back($2); for (vector<string*>::iterator it = $3->begin(); it != $3->end(); ++it){ string* n = (*it); name.push_back(n);} KT_ID* id= new KT_ID ; id->setValue(name); KT_Affectation* affectation= new KT_Affectation;
 																							 affectation->setRExpression($6); affectation->setLExpression(id); affectation->setIndexedArray($4);
-																							 vector<KT_IDExpression*>* update =new vector<KT_IDExpression*> ; 
-																		update->push_back(affectation); 
+																							 vector<KT_IDExpression*>* update =new vector<KT_IDExpression*> ;
+																		update->push_back(affectation);
 																		for (vector<KT_IDExpression*>::iterator it = $7->begin();
 																		 it != $7->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} $$=update;}
 						| {vector<KT_IDExpression*>* var = new vector<KT_IDExpression*>; $$=var;}
-						;   
+						;
 
 /*-------------------------------------Expression arithmetique----------------------------------------------------*/
 
@@ -636,11 +636,11 @@ FacteurEffect : FacteurEffect TORBINEQ ExpressionOr {KT_OrBinEq* expression = ne
 			  | ExpressionOr{$$=$1;}
 			  ;
 
-ExpressionOr  : ExpressionOr TOR ExpressionAnd {KT_ExpressionOr* expression= new KT_ExpressionOr; expression->setLExpression($1); expression->setRExpression($3); $$=expression;} 
+ExpressionOr  : ExpressionOr TOR ExpressionAnd {KT_ExpressionOr* expression= new KT_ExpressionOr; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 			  | ExpressionAnd {$$=$1;}
 			  ;
 
-ExpressionAnd : ExpressionAnd TAND ExpressionOrLogic {KT_ExpressionAnd* expression =new KT_ExpressionAnd; expression->setLExpression($1); expression->setRExpression($3); $$=expression;} 
+ExpressionAnd : ExpressionAnd TAND ExpressionOrLogic {KT_ExpressionAnd* expression =new KT_ExpressionAnd; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 			  | ExpressionOrLogic {$$=$1;}
 			  ;
 
@@ -650,7 +650,7 @@ ExpressionOrLogic : ExpressionOrLogic '|' ExpressionOrExLogic {KT_ExpressionOrLo
 
 ExpressionOrExLogic : ExpressionOrExLogic '^' ExpressionAndLogic {KT_ExpressionOrXLogic* expression= new KT_ExpressionOrXLogic; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				    | ExpressionAndLogic {$$=$1;}
-				    ;	
+				    ;
 
 ExpressionAndLogic : ExpressionAndLogic '&' ExpressionEqNeq {KT_ExpressionAndLogic* expression =new KT_ExpressionAndLogic; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				   | ExpressionEqNeq {$$=$1;}
@@ -659,14 +659,14 @@ ExpressionAndLogic : ExpressionAndLogic '&' ExpressionEqNeq {KT_ExpressionAndLog
 ExpressionEqNeq  : ExpressionEqNeq TCNE ExpressionCompEq {$$=$3;}
 				 | ExpressionEqNeq TCEQ ExpressionCompEq {$$=$3;}
 				 | ExpressionCompEq {$$=$1;}
-				 ; 
+				 ;
 
-ExpressionCompEq : ExpressionCompEq TCGE TermePlus {KT_ExpressionGE* expression=new KT_ExpressionGE; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}  
+ExpressionCompEq : ExpressionCompEq TCGE TermePlus {KT_ExpressionGE* expression=new KT_ExpressionGE; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				 | ExpressionCompEq '>' TermePlus {KT_ExpressionGT* expression=new KT_ExpressionGT; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				 | ExpressionCompEq TCLE TermePlus {KT_ExpressionLE* expression=new KT_ExpressionLE; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				 | ExpressionCompEq '<' TermePlus {KT_ExpressionLT* expression=new KT_ExpressionLT; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 				 | TermeDecal {$$=$1;}
-				 ;	
+				 ;
 
 TermeDecal : TermeDecal TDECALNS TermePlus {$$=$3;}
 	   	   | TermeDecal TDECAR TermePlus {$$=$3;}
@@ -674,10 +674,10 @@ TermeDecal : TermeDecal TDECALNS TermePlus {$$=$3;}
 	       | TermePlus {$$=$1;}
 	       ;
 
-TermePlus    : TermePlus '+' terme {KT_Addition* expression=new KT_Addition; expression->setLExpression($1); expression->setRExpression($3); $$=expression;} 
+TermePlus    : TermePlus '+' terme {KT_Addition* expression=new KT_Addition; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 			 | TermePlus '-' terme {KT_Substraction* expression=new KT_Substraction; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 			 | terme {$$=$1;}
-			 ;	
+			 ;
 
 terme  : terme '*' facteur {KT_Multiplication* expression=new KT_Multiplication; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
 	   | terme '/' facteur {KT_Division* expression =new KT_Division; expression->setLExpression($1); expression->setRExpression($3); $$=expression;}
@@ -701,11 +701,11 @@ factFinal: '(' Expression ')' {$$= $2;}
 		 | REEL {KT_Reel* expression = new KT_Reel; expression->setValue($1); $$=expression;}
 		 | STRING {KT_String* expression = new KT_String; expression->setValue($1); $$=expression;}
 		 | ConstructorCall {$$=$1;}
-		 | ArrayInitializer {$$=$1;} 
-		 | LinkedMethodVarCall {$$=$1;} 
+		 | ArrayInitializer {$$=$1;}
+		 | LinkedMethodVarCall {$$=$1;}
 		 | TTRUE {KT_Bool* expression= new KT_Bool; expression->setValue(true); $$=expression; }
 		 | TFALSE {KT_Bool* expression= new KT_Bool; expression->setValue(false); $$=expression;}
-		 | TNULL {KT_Null* expression = new KT_Null; $$=expression;} 
+		 | TNULL {KT_Null* expression = new KT_Null; $$=expression;}
 		 ;
 
 ConstructorCall : TNEW ID Ids FormalParametersCalledMethod {KT_ConstructorCall* expression =new KT_ConstructorCall; expression->addString($2); expression->addVectorString(*$3); expression->setParams(*$4); $$=expression;}
@@ -715,7 +715,7 @@ MethodCall : ID FormalParametersCalledMethod {vector<string*> name; name.push_ba
 		   ;
 
 ArrayInitializer : TNEW BasicType '[' ENTIER ']'{KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray->setDimension(1); vector<int> indexes; indexes.push_back($4); KT_Type* type = new KT_Type; type->setBasicType(true); vector<string*> typeName; typeName.push_back($2); type->setTypeName(typeName); type->setArrayDim(0); KT_ArrayInitilizer* expression = new KT_ArrayInitilizer; expression->setIndexedArray(indexedArray); expression->setType(type); $$=expression;}
-				 
+
 				 | TNEW ID Ids '[' ENTIER ']'{KT_IndexedArray* indexedArray= new KT_IndexedArray; indexedArray->setDimension(1); vector<int> indexes; indexes.push_back($5); KT_Type* type = new KT_Type; type->setBasicType(false); type->addString($2); type->addVectorString(*$3); type->setArrayDim(0); KT_ArrayInitilizer* expression =new KT_ArrayInitilizer; expression->setIndexedArray(indexedArray); expression->setType(type); $$=expression;}
 				 ;
 
@@ -738,4 +738,3 @@ int yyerror( const char* err )
   printf("Erreur syntaxique: \'%s\' est imprévu dans la ligne [%d]\n", yytext, lineno/*, column-strlen(yytext)*/);
   return 0;
 }
-

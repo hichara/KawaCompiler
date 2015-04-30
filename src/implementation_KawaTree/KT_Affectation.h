@@ -18,23 +18,23 @@ using namespace std;
 
 
 class KT_Affectation: public KT_IDExpression {
-public: 
+public:
     KT_Affectation();
-	~KT_Affectation();
-    
+	  virtual ~KT_Affectation();
+
     KT_Expression* getLExpression();
-    
+
     KT_VarOrAttr* getReference();
-    
+
     KT_Expression* getrExpression();
 
     KT_IndexedArray* getIndexedArray();
-    
+
     /**
      * @param KT_Expression *
      */
     void setLExpression(KT_Expression* var);
-    
+
     /**
      * @param KT_Expression *
      */
@@ -50,9 +50,10 @@ public:
      */
     void setIndexedArray(KT_IndexedArray* var);
 
-    void accept(SemanticVisitor* visitor);
-	
-private: 
+    virtual void accept(SemanticVisitor* visitor);
+
+    virtual void toString();
+private:
     KT_VarOrAttr* reference;
     KT_Expression* lExpression;
     KT_Expression* rExpression;

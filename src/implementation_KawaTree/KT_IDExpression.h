@@ -15,7 +15,7 @@ using namespace std;
 
 
 class KT_IDExpression: public KT_Statement {
-	
+	virtual void toString();	
 };
 
 #endif //_KT_IDEXPRESSION_H

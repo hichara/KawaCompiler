@@ -10,19 +10,21 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include "SemanticVisitor.h"
 using namespace std;
 
 
 class KT_Expression: public KT_IDExpression {
-public: 
+public:
 	KT_Expression() ;
-	~KT_Expression() ;
-    
+	virtual ~KT_Expression();
+
     /**
      * @param ExprVisitor
      */
-    void accept( /*ExprVisitor*/);
-    
+    //void accept( /*ExprVisitor*/);
+	  virtual void accept(SemanticVisitor* visitor){};
+
     string* calculReturnType();
 private:
 	string* returnType;

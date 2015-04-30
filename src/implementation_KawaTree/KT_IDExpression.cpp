@@ -12,3 +12,5 @@ using namespace std;
 /**
  * KT_IDExpression implementation
  */
+
+ void KT_IDExpression::toString(){}

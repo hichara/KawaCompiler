@@ -122,10 +122,10 @@ KT_Interface::~KT_Interface(){
 
     for (vector<vector<string*> >::size_type i = 0; i < imports.size(); ++i)
     {
-        
+
         for (vector<string*>::size_type j = 0; j < imports[i].size(); ++j)
         {
-        
+
             delete imports[i][j];
         }
     }
@@ -208,7 +208,7 @@ KT_Class::~KT_Class(){
     delete parentClasseSemantique;
     delete FQN;
     fullSignatures.clear();
-    
+
     for (vector<string*>::size_type i = 0; i < ParentInterfaces.size(); ++i)
     {
         delete ParentInterfaces[i];
@@ -253,6 +253,12 @@ KT_Class::~KT_Class(){
     }
 
 }
+
+KT_Bool::~KT_Bool(){}
+KT_Entier::~KT_Entier(){}
+KT_Reel::~KT_Reel(){}
+
+KT_Statement::~KT_Statement(){}
 
 KT_BreakStatement::~KT_BreakStatement(){
     delete id;
@@ -310,6 +316,8 @@ KT_WhileStatement::~KT_WhileStatement(){
     delete condition;
     delete wBStatement;
 }
+
+KT_VarOrAttr::~KT_VarOrAttr(){}
 
 KT_Variable::~KT_Variable(){
     delete type;

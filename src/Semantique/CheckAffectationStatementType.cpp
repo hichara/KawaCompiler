@@ -8,6 +8,7 @@
 class CheckAffectationStatementType:public SemanticVisitor{public:
 	void visitAffectation(KT_Statement* statement){
 		visited = true;
+		cout << "affectation visitor visited" << endl;
 	}
 };
 

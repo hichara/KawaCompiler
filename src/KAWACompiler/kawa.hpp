@@ -211,7 +211,7 @@ union YYSTYPE
 	KT_Type* kt_type;
 	KT_UnaryExpression* kt_unaryExpression;
 	KT_Variable* kt_variable;
-	KT_VarOrAttr* kt_varOrAttr;
+	//KT_VarOrAttr* kt_varOrAttr;
 	KT_WhileStatement* kt_whileStatement;
 	KT_XOrBinEq* kt_xOrBinEq;
 	PARSER_Array* parser_array;

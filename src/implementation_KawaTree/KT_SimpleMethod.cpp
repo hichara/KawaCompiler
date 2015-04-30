@@ -133,5 +133,5 @@ void KT_SimpleMethod::toString() {
 	}
 	cout << ")" << endl;
 	cout << "Methode Block : " << endl;
-	//block->toString();
+	block->toString();
 }

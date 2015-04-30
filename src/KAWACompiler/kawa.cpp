@@ -75,7 +75,7 @@ using namespace std;
 
 
 
-	extern KT_Program* program = new KT_Program; 
+	extern KT_Program* program = new KT_Program;
 	int yylex();
 	extern char* yytext;
 	int yyerror(const char* err );
@@ -284,7 +284,7 @@ union YYSTYPE
 	KT_Type* kt_type;
 	KT_UnaryExpression* kt_unaryExpression;
 	KT_Variable* kt_variable;
-	KT_VarOrAttr* kt_varOrAttr;
+	//KT_VarOrAttr* kt_varOrAttr;
 	KT_WhileStatement* kt_whileStatement;
 	KT_XOrBinEq* kt_xOrBinEq;
 	PARSER_Array* parser_array;
@@ -1866,9 +1866,9 @@ yyreduce:
 
   case 9:
 #line 237 "kawa.y" /* yacc.c:1646  */
-    {string* name=(yyvsp[-2].vstring); 
+    {string* name=(yyvsp[-2].vstring);
 							for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}
-							vector<string*>* listName = new vector<string*>; listName->push_back(name); 
+							vector<string*>* listName = new vector<string*>; listName->push_back(name);
 						    for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it){ string* n = (*it); listName->push_back(n);}
 						    (yyval.vectorString)=listName;}
 #line 1875 "kawa.cpp" /* yacc.c:1646  */
@@ -1882,7 +1882,7 @@ yyreduce:
 
   case 11:
 #line 245 "kawa.y" /* yacc.c:1646  */
-    {string* name=(yyvsp[-2].vstring); 
+    {string* name=(yyvsp[-2].vstring);
 					    for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it){ string* n = (*it); *name = *name + "." +*n;}
 					    vector<string*>* listName = new vector<string*>; listName->push_back(name);
 					    for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it){ string* n = (*it); listName->push_back(n);}
@@ -2022,8 +2022,8 @@ yyreduce:
   case 33:
 #line 287 "kawa.y" /* yacc.c:1646  */
     {if((yyvsp[0].kt_modifier)->isStatic()){(yyvsp[-1].kt_modifier)->setStatic(true);}
-							    if((yyvsp[0].kt_modifier)->isAbstract()){(yyvsp[-1].kt_modifier)->setAbstract(true);} 
-							    if((yyvsp[0].kt_modifier)->isFinal()){(yyvsp[-1].kt_modifier)->setFinal(true);} 
+							    if((yyvsp[0].kt_modifier)->isAbstract()){(yyvsp[-1].kt_modifier)->setAbstract(true);}
+							    if((yyvsp[0].kt_modifier)->isFinal()){(yyvsp[-1].kt_modifier)->setFinal(true);}
 							    if((yyvsp[0].kt_modifier)->getVisibility()>0) (yyvsp[-1].kt_modifier)->setVisibility((yyvsp[0].kt_modifier)->getVisibility());
 							}
 #line 2030 "kawa.cpp" /* yacc.c:1646  */
@@ -2049,9 +2049,9 @@ yyreduce:
 
   case 37:
 #line 299 "kawa.y" /* yacc.c:1646  */
-    {  
+    {
 					vector<string*>* name = new vector<string*>; name->push_back((yyvsp[-1].vstring));
- 					for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it)	
+ 					for (vector<string*>::iterator it = (yyvsp[0].vectorString)->begin(); it != (yyvsp[0].vectorString)->end(); ++it)
  						{ string* n = (*it); name->push_back(n);}
  					(yyval.vectorString)=name;
  				 }
@@ -2074,7 +2074,7 @@ yyreduce:
 #line 311 "kawa.y" /* yacc.c:1646  */
     {vector<string*> typeName =(yyvsp[0].kt_type)->getTypeName(); string* name=new string;
 						 for (vector<string*>::iterator it = typeName.begin(); it != typeName.end(); ++it)
-						 	{ string* n = (*it); 
+						 	{ string* n = (*it);
 						 		if(it!=typeName.begin()){*name = *name + "." +*n;}
 						 		else{name=n;}
 						 	}
@@ -2120,7 +2120,7 @@ yyreduce:
 																 for (vector<string*>::iterator it = (yyvsp[-2].vectorString)->begin(); it != (yyvsp[-2].vectorString)->end(); ++it)
 																 	{ string* n = (*it); importvar->push_back(n);}
 
-																  (yyvsp[0].vectorVecorString)->push_back(*importvar); 
+																  (yyvsp[0].vectorVecorString)->push_back(*importvar);
 																  (yyval.vectorVecorString)=(yyvsp[0].vectorVecorString); }
 #line 2126 "kawa.cpp" /* yacc.c:1646  */
     break;
@@ -2287,12 +2287,12 @@ yyreduce:
 
   case 72:
 #line 407 "kawa.y" /* yacc.c:1646  */
-    {KT_ID* id = new KT_ID; 
-											vector<string*> name; name.push_back((yyvsp[-5].vstring)); id->setValue(name); (yyvsp[-1].kt_indexedArray)->setIndexAddIntAtFirstPosition((yyvsp[-3].vint)); 
-											KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray((yyvsp[-1].kt_indexedArray)); 
+    {KT_ID* id = new KT_ID;
+											vector<string*> name; name.push_back((yyvsp[-5].vstring)); id->setValue(name); (yyvsp[-1].kt_indexedArray)->setIndexAddIntAtFirstPosition((yyvsp[-3].vint));
+											KT_ParamsMethodCall* param = new KT_ParamsMethodCall; param->setIndexedArray((yyvsp[-1].kt_indexedArray));
 											param->setExpression(id);
-											vector<KT_ParamsMethodCall*>* vect= new vector<KT_ParamsMethodCall*>; 
-											vect->push_back(param); 
+											vector<KT_ParamsMethodCall*>* vect= new vector<KT_ParamsMethodCall*>;
+											vect->push_back(param);
 											for (vector<KT_ParamsMethodCall*>::iterator it = (yyvsp[0].vectorKT_ParamsMethodCall)->begin(); it != (yyvsp[0].vectorKT_ParamsMethodCall)->end(); ++it)
 												{ KT_ParamsMethodCall* n = (*it); vect->push_back(n);}
 											(yyval.vectorKT_ParamsMethodCall)=vect;}
@@ -2783,7 +2783,7 @@ yyreduce:
 #line 575 "kawa.y" /* yacc.c:1646  */
     {
 			 																	 KT_Variable* variable = (yyvsp[-3].kt_param)->toVariable(); variable->setValue((yyvsp[-1].kt_expression));
-			 																	 (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(variable); 
+			 																	 (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(variable);
 			 																	 (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field)); (yyval.parser_field)->upDateType((yyvsp[-4].kt_type));
 			 																	}
 #line 2790 "kawa.cpp" /* yacc.c:1646  */
@@ -2793,7 +2793,7 @@ yyreduce:
 #line 580 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[-2].vstring));
 			 								 for (vector<string*>::iterator it = (yyvsp[-1].vectorString)->begin(); it != (yyvsp[-1].vectorString)->end(); ++it)
-			 								 	{ string* n = (*it); name.push_back(n);} 
+			 								 	{ string* n = (*it); name.push_back(n);}
 			 								 KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false);
 			 								 (yyval.parser_field)=new PARSER_Field; (yyval.parser_field)->AddVariableAtFirstPosition(var); (yyval.parser_field)->addVectorVariable((yyvsp[0].parser_field));
 			 								  }
@@ -2802,7 +2802,7 @@ yyreduce:
 
   case 148:
 #line 586 "kawa.y" /* yacc.c:1646  */
-    {vector<string*> name; name.push_back((yyvsp[-4].vstring)); 
+    {vector<string*> name; name.push_back((yyvsp[-4].vstring));
 			 													for (vector<string*>::iterator it = (yyvsp[-3].vectorString)->begin(); it != (yyvsp[-3].vectorString)->end(); ++it)
 			 														{ string* n = (*it); name.push_back(n);}
 			 												   KT_Variable* var = new KT_Variable; var->setName(name); var->setFinal(false);
@@ -2820,16 +2820,16 @@ yyreduce:
 
   case 150:
 #line 597 "kawa.y" /* yacc.c:1646  */
-    {vector<string*> name; name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); 
+    {vector<string*> name; name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin();
 		 																it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);}
 		 																 KT_ID* id= new KT_ID ; id->setValue(name);
-		 																 KT_Affectation* affectation= new KT_Affectation ; affectation->setRExpression((yyvsp[-1].kt_expression)); 
+		 																 KT_Affectation* affectation= new KT_Affectation ; affectation->setRExpression((yyvsp[-1].kt_expression));
 		 																 affectation->setLExpression(id);
 		 																 affectation->setIndexedArray((yyvsp[-3].kt_indexedArray));
-		 																 vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>; 
+		 																 vector<KT_IDExpression*>* update= new vector<KT_IDExpression*>;
 		 																 update->push_back(affectation);
-		 																 for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin(); 
-		 																 it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); 
+		 																 for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin();
+		 																 it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it);
 		 																 update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
 #line 2835 "kawa.cpp" /* yacc.c:1646  */
     break;
@@ -2844,8 +2844,8 @@ yyreduce:
 #line 611 "kawa.y" /* yacc.c:1646  */
     {vector<string*> name; name.push_back((yyvsp[-5].vstring)); for (vector<string*>::iterator it = (yyvsp[-4].vectorString)->begin(); it != (yyvsp[-4].vectorString)->end(); ++it){ string* n = (*it); name.push_back(n);} KT_ID* id= new KT_ID ; id->setValue(name); KT_Affectation* affectation= new KT_Affectation;
 																							 affectation->setRExpression((yyvsp[-1].kt_expression)); affectation->setLExpression(id); affectation->setIndexedArray((yyvsp[-3].kt_indexedArray));
-																							 vector<KT_IDExpression*>* update =new vector<KT_IDExpression*> ; 
-																		update->push_back(affectation); 
+																							 vector<KT_IDExpression*>* update =new vector<KT_IDExpression*> ;
+																		update->push_back(affectation);
 																		for (vector<KT_IDExpression*>::iterator it = (yyvsp[0].vectorKT_IDExpression)->begin();
 																		 it != (yyvsp[0].vectorKT_IDExpression)->end(); ++it){ KT_IDExpression* n = (*it); update->push_back(n);} (yyval.vectorKT_IDExpression)=update;}
 #line 2852 "kawa.cpp" /* yacc.c:1646  */
@@ -3508,4 +3508,3 @@ int yyerror( const char* err )
   printf("Erreur syntaxique: \'%s\' est imprévu dans la ligne [%d]\n", yytext, lineno/*, column-strlen(yytext)*/);
   return 0;
 }
-

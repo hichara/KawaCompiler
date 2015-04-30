@@ -26,10 +26,8 @@ void KT_Block::setStatements(vector<KT_Statement*> var) {
 	this-> statements =var;
 }
 
-/*
-void KT_Block::toString() {	
+void KT_Block::toString() {
 	for (vector<KT_Statement*>::iterator it = statements.begin(); it != statements.end(); ++it){
 		(*it)->toString();
 	}
 }
-*/

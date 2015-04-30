@@ -13,6 +13,7 @@ using namespace std;
 class KT_VarOrAttr {
 public:
 	KT_VarOrAttr();
+  virtual ~KT_VarOrAttr();
 };
 
 #endif //_KT_VARORATTR_H

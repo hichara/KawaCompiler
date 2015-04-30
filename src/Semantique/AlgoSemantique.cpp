@@ -365,30 +365,34 @@ void decoration(KT_Program * prog) {
 			completion(classe);
 
 			// on effectue le traitement sur les body de chaque methode
+
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
 					//* todo: ligne a dé/commenter pour dé/activer le traitement
 					KT_Block* mainBlock = methode->getBlock();
 					bool mainIsGood = true;
+					SemanticVisitor* declarationVisitor = new CheckDeclarationStatementType();
+					SemanticVisitor* affectationVisitor = new CheckAffectationStatementType();
+					SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
+
 					for(KT_Statement* statement : mainBlock->getStatements()){
-						
-						SemanticVisitor* declarationVisitor = new CheckDeclarationStatementType();
+						statement->toString();
 						statement->accept(declarationVisitor);
-						
-						SemanticVisitor* affectationVisitor = new CheckAffectationStatementType();
 						statement->accept(affectationVisitor);
-						
-						SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
 						statement->accept(callMethodVisitor);
 
 						// si le statement n'est pas une déclaration ou une affectation ou un appel de méthode
 						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
 						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
 							&& !callMethodVisitor->isVisited()){
-								
+
 								mainIsGood = false;
+								break;
 						}
 					}
+					cout << "declarationVisitor:" << declarationVisitor->isVisited() << endl;
+					cout << "affectationVisitor:" << affectationVisitor->isVisited() << endl;
+					cout << "callMethodVisitor:" << callMethodVisitor->isVisited() << endl;
 					if (!mainIsGood){
 						Semantic::existSemanticError = true;
 						// todo: définir le numéro de l'erreur

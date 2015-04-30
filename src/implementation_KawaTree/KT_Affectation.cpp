@@ -13,7 +13,7 @@ using namespace std;
  * KT_Affectation implementation
  */
 
- 
+
  KT_Affectation::KT_Affectation() {}
 
 /**
@@ -76,3 +76,6 @@ void KT_Affectation::accept(SemanticVisitor* visitor){
 	visitor->visitAffectation(this);
 }
 
+void KT_Affectation::toString(){
+	cout << "\taffectation" << endl;
+}

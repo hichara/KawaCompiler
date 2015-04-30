@@ -65,3 +65,17 @@ void KT_Variable::setType(KT_Type* var) {
 void KT_Variable::setValue(KT_Expression* var) {
 	value=var;
 }
+
+void KT_Variable::accept(SemanticVisitor* visitor){
+	cout << "kt variable visited" << endl;
+	visitor->visitAffectation(this);
+
+}
+
+void KT_Variable::toString(){
+	cout << "\tvariable: ";
+	for (vector<string*>::iterator it = this->name.begin(); it != this->name.end(); ++it){
+		cout << **it;
+	}
+	cout << endl;
+}

@@ -7,6 +7,26 @@
 #include "../Semantique/AlgoSemantique.h"
 #include "kawa.hpp"
 
+#include <iostream>
+#include "../implementation_KawaTree/KT_Class.h"
+#include "../implementation_KawaTree/KT_Interface.h"
+#include "../implementation_KawaTree/KT_Prototype.h"
+#include "../implementation_KawaTree/KT_Affectation.h"
+#include "../implementation_KawaTree/KT_Variable.h"
+#include "../implementation_KawaTree/KT_Package.h"
+#include "../implementation_KawaTree/KT_Program.h"
+#include "../implementation_KawaTree/KT_Print.h"
+#include "../implementation_KawaTree/KT_FactFinal.h"
+#include "../implementation_KawaTree/KT_String.h"
+#include "../implementation_KawaTree/KT_Statement.h"
+#include "../Semantique/CheckDeclarationStatementType.cpp"
+#include "../Semantique/CheckAffectationStatementType.cpp"
+#include "../Semantique/CheckCallMethodStatementType.cpp"
+#include "../Semantique/CheckVariableStatementType.cpp"
+#include <map>
+#include <algorithm>
+using namespace std;
+
 typedef std::string String;
 
 int file_num=0, file_num_max=0;
@@ -176,6 +196,7 @@ int main( int argc, char** argv ){
         /*
         Semantic::check(program);
         /*/
+
         Semantic::checkWithDebug(program);
         //*/
         /****

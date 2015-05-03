@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "../implementation_KawaTree/headers.h"
-
+#include "../Semantique/CheckAffectationStatementType.cpp"
 using namespace std;
 
 
@@ -873,9 +873,13 @@ Statement
 			KT_Statement* n = (*it);
 			stats.push_back(n);
 		}
+		/*
 		KT_Block* block = new KT_Block;
 		block->setStatements(stats);
 		$$ = block;
+		/*/
+		$$ = $3;
+		//*/
 	}
   | BasicType Tables VariableDeclarator VariableDeclaratorList ';' {
 		vector<string*> name;

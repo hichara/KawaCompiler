@@ -67,9 +67,7 @@ void KT_Variable::setValue(KT_Expression* var) {
 }
 
 void KT_Variable::accept(SemanticVisitor* visitor){
-	cout << "kt variable visited" << endl;
 	visitor->visitVariable(this);
-
 }
 
 void KT_Variable::toString(){

@@ -8,7 +8,7 @@
 class CheckVariableStatementType:public SemanticVisitor{public:
 	void visitVariable(KT_Statement* statement){
 		visited = true;
-		cout << "variable visitor visited" << endl;
+		cout << "Variable visitor visited" << endl;
 	}
 };
 

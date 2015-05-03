@@ -13,7 +13,8 @@
 #include "../implementation_KawaTree/KT_FactFinal.h"
 #include "../implementation_KawaTree/KT_String.h"
 #include "../implementation_KawaTree/KT_Statement.h"
-#include "CheckDeclarationStatementType.cpp"
+#include "CheckVariableStatementType.cpp"
+#include "CheckBlockStatementType.cpp"
 #include "CheckAffectationStatementType.cpp"
 #include "CheckCallMethodStatementType.cpp"
 #include <map>

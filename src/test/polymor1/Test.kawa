@@ -4,10 +4,9 @@ public class Test {
 
 	public static void main(String args) {
 
-	    Chien c;
-			c = new Chien("Gris bleuté", 20);
+	    Chien c = new Chien("Gris bleuté", 20);
 	    c.crier();
-	    Loup l; l = new Loup ("blanche","nikiki");
+	    Loup l = new Loup ("blanche","nikiki");
 	    c.crier();
 
 	    /*Les méthodes de l'interface
@@ -16,8 +15,8 @@ public class Test {
 	    c.faireLechouille();*/
 
 //*************Utilisons le polymorphisme de notre interface
-	    Rintintin r; r = new Chien();
-	    Rintintin r1; r1 = new Loup();
+	    Rintintin r = new Chien();
+	    Rintintin r1 = new Loup();
 	    l.manger(r);
 //*********************************
 	    r.faireLeBeau();

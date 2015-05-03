@@ -14,6 +14,7 @@ class SemanticVisitor{public:
 	virtual void visitCallMethod(KT_Statement* s){};
 	virtual void visitDeclaration(KT_Statement* s){};
 	virtual void visitVariable(KT_Statement* s){};
+	virtual void visitBlockStatement(KT_Statement* s){};
 };
 
 #endif

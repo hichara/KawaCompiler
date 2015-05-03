@@ -93,6 +93,9 @@ bool typeIsCorrect(string * packageName, vector<string*> typeName) {
 	if ( typeName.size() == 1 && typeName[0]->compare("void") == 0 ){
 		return true;
 	}
+	if ( typeName.size() == 1 && typeName[0]->compare("String") == 0 ){
+		return true;
+	}
 
 	string fqn = *packageName;
 	for (string * pieceOfTypeName : typeName) {
@@ -124,14 +127,14 @@ void createAndVerifySignatureMethod(KT_Class * classe, string * packageName) {
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
 					Semantic::existSemanticError = true;
-					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+					cout << "!!!!!! ERREUR 4a !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!methode->getType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, methode->getType()->getTypeName())) {
 				Semantic::existSemanticError = true;
-				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+				cout << "!!!!!! ERREUR 4b !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*methode->getName() + "" + params);
@@ -157,14 +160,14 @@ void createAndVerifySignaturePrototype(KT_Interface * interface, string * packag
 			if (!param->getParamType()->isBasicType())
 				if (!typeIsCorrect(packageName, param->getParamType()->getTypeName())) {
 					Semantic::existSemanticError = true;
-					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+					cout << "!!!!!! ERREUR 4c !!!!! Type inexistant " << endl;
 				}
 			params = params + getFullName(param->getParamType()->getTypeName());
 		}
 		if (!proto->getReturnType()->isBasicType()) {
 			if (!typeIsCorrect(packageName, proto->getReturnType()->getTypeName())) {
 				Semantic::existSemanticError = true;
-				cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+				cout << "!!!!!! ERREUR 4d !!!!! Type inexistant " << endl;
 			}
 		}
 		string * signature = new string(*proto->getName() + "" + params);
@@ -195,7 +198,7 @@ int createHeritage(KT_Program * prog) {
 				// on verifie que le type existe
 				if (classTypes.find(*fqn) == classTypes.end()) {
 					Semantic::existSemanticError = true;
-					cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+					cout << "!!!!!! ERREUR 4e !!!!! Type inexistant " << endl;
 				}
 				// on vérifie qu'il n'y a pas de cycle
 				if (hasHeritageCycle(classe, classTypes[*fqn])) {
@@ -217,7 +220,7 @@ int createHeritage(KT_Program * prog) {
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
 						Semantic::existSemanticError = true;
-						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+						cout << "!!!!!! ERREUR 4f !!!!! Type inexistant " << endl;
 					}
 
 					//cout << *classe->getFQN() + " a pour interface : " + *interfaceTypes[*fqn]->getFQN() << endl;
@@ -238,7 +241,7 @@ int createHeritage(KT_Program * prog) {
 					// si le type n'existe pas
 					if (interfaceTypes.find(*fqn) == interfaceTypes.end()) {
 						Semantic::existSemanticError = true;
-						cout << "!!!!!! ERREUR 4 !!!!! Type inexistant " << endl;
+						cout << "!!!!!! ERREUR 4g !!!!! Type inexistant " << endl;
 					}
 					// si ca crée un cycle
 					if (hasImplementCycle(interface, interfaceTypes[*fqn])) {
@@ -268,7 +271,7 @@ void completion(KT_Class * classe) {
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 			cout << "method name: " << methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
-				cout << "hello je suis dans le if" << endl;
+
 				KT_Prototype * proto = new KT_Prototype();
 				proto->setModifier(methode->getModifier());
 				proto->setName(methode->getName());
@@ -371,29 +374,26 @@ void decoration(KT_Program * prog) {
 					//* todo: ligne a dé/commenter pour dé/activer le traitement
 					KT_Block* mainBlock = methode->getBlock();
 					bool mainIsGood = true;
-					SemanticVisitor* declarationVisitor = new CheckDeclarationStatementType();
 					SemanticVisitor* affectationVisitor = new CheckAffectationStatementType();
 					SemanticVisitor* callMethodVisitor = new CheckCallMethodStatementType();
+					// pour les déclarations
+					SemanticVisitor* variableVisitor = new CheckVariableStatementType();
+					SemanticVisitor* blockStatementVisitor = new CheckBlockStatementType();
 
 					for(KT_Statement* statement : mainBlock->getStatements()){
-						statement->toString();
-
-						statement->accept(declarationVisitor);
+						statement->accept(variableVisitor);
 						statement->accept(affectationVisitor);
 						statement->accept(callMethodVisitor);
+						statement->accept(blockStatementVisitor);
 
 						// si le statement n'est pas une déclaration ou une affectation ou un appel de méthode
 						// c'est qu'il s'agit d'un autre type de statement, alors le main n'est pas correct.
-						if (!declarationVisitor->isVisited() && !affectationVisitor->isVisited()
-							&& !callMethodVisitor->isVisited()){
+						if ((!variableVisitor->isVisited() && !affectationVisitor->isVisited()
+							&& !callMethodVisitor->isVisited()) || blockStatementVisitor->isVisited()){
 
 								mainIsGood = false;
-								//break;
 						}
 					}
-					cout << "declarationVisitor:" << declarationVisitor->isVisited() << endl;
-					cout << "affectationVisitor:" << affectationVisitor->isVisited() << endl;
-					cout << "callMethodVisitor:" << callMethodVisitor->isVisited() << endl;
 					if (!mainIsGood){
 						Semantic::existSemanticError = true;
 						// todo: définir le numéro de l'erreur

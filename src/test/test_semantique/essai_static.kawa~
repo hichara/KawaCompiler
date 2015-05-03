@@ -8,4 +8,4 @@ public class essaistatic {
 			}
 
 }
-
+//ne dois pas marcher car main est de type static hors la variable i n'est de type static test semantique

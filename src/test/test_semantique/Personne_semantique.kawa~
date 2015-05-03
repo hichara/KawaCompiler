@@ -50,9 +50,9 @@ public class Personne {
 	public static void main() {
 		Personne p1;
 		// -------> ne doit pas  marcher car les attributs de la classe personne sont de type private
-		//p1.prenom="Jean";
-		//p1.nom="Dupont";
-		//p1.age=30;
+		p1.prenom="Jean";
+		p1.nom="Dupont";
+		p1.age=30;
 		
 		//------>ne doit pas marcher non plus car p1 n'est pas initialiser
 		p1.initialise("Jean","Dupont",30);

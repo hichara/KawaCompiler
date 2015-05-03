@@ -12,4 +12,3 @@ public class Personne
 	this.nom=N;
 	this.age=age;
 	}
-	

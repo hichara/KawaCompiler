@@ -8,9 +8,10 @@
 #include "PrimitiveValueConverter.h"
 #include "KawaUtilitary.h"
 
-/// Public static 
+using namespace llvm;
 
- Value* PrimitiveBinaryOperationGenerator::createAdd(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b) {
+/// Public static 
+Value* PrimitiveBinaryOperationGenerator::createAdd(Module *module, Type *type, Value *o1, Value *o2, BasicBlock *b) {
  	LLVMContext &Context = b->getContext();
  	IRBuilder<> builder(Context);
  	builder.SetInsertPoint(b);

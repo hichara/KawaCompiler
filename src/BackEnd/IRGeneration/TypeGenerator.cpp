@@ -15,7 +15,7 @@ StructType* TypeGenerator::createClassType(Module *module,
     StructType *maClass = (StructType*)strToLLVMType(module, className);
 
 	if(!maClass->isOpaque())
-		KawaUtilitary::stopGenerationIR(ERROR_CLASS_AREADY_EXIST);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_CLASS_AREADY_EXIST);
 
 	std::string name_struct =
 		 NameBuilder::buildClassStructTypeName(className);
@@ -73,22 +73,22 @@ Type *TypeGenerator::strToLLVMType(Module *module, std::string type) {
 
 	LLVMContext &context = module->getContext();
 
-	if(type == VOID)
+	if(type == KawaEnumeration::VOID)
 		return Type::getVoidTy(context);
 
-	if(type == INT)
+	if(type == KawaEnumeration::INT)
 		return Type::getInt32Ty(context);
 
-	if(type == CHAR)
+	if(type == KawaEnumeration::CHAR)
 		return Type::getInt8Ty(context);
 
-	if(type == DOUBLE)
+	if(type == KawaEnumeration::DOUBLE)
 		return Type::getDoubleTy(context);
 
-	if(type == FLOAT)
+	if(type == KawaEnumeration::FLOAT)
 		return Type::getFloatTy(context);
 
-	if(type == STRING)
+	if(type == KawaEnumeration::STRING)
 		return Type::getInt8Ty(context)->getPointerTo();
 
 	std::string lt = NameBuilder::buildClassTypeName(type);

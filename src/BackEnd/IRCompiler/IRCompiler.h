@@ -89,6 +89,7 @@ public:
 
 	Type* createType(KT_Class *classe);
 	Type* createType(KT_Interface* interface);
+
 	Value* compileAffectation(KT_Affectation *af);
 	Value* compilePrint(KT_Print *print);
 	Value* compileExpression(KT_Expression *expr);

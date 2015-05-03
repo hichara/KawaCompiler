@@ -13,6 +13,9 @@
 #include "SemanticVisitor.h"
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 
 class KT_Expression: public KT_IDExpression {
 public:
@@ -26,6 +29,12 @@ public:
 	  virtual void accept(SemanticVisitor* visitor){};
 
     string* calculReturnType();
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 private:
 	string* returnType;
 };

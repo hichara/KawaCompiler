@@ -19,7 +19,7 @@ Value* PrimitiveCreator::create(int i, LLVMContext &context) {
 }
 
 Value* PrimitiveCreator::create(char c, LLVMContext &context) {
-	return ConstantInt::get(Type::getInt8Ty(context), c);
+	return ConstantInt::get(Type::getInt16Ty(context), c);
 }
 
 

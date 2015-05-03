@@ -1,25 +1,6 @@
 
 #include "IRCompiler.h"
-
-
-#include "../../implementation_KawaTree/KT_Program.h"
-#include "../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h"
-#include "../../implementation_KawaTree/KT_Affectation.h"
-#include "../../implementation_KawaTree/KT_Print.h"
-#include "../../implementation_KawaTree/KT_Expression.h"
-#include "../../implementation_KawaTree/KT_FactFinal.h"
-#include "../../implementation_KawaTree/KT_ParamsMethodCall.h"
-#include "../../implementation_KawaTree/KT_MethodOrVarCall.h"
-#include "../../implementation_KawaTree/KT_Entier.h"
-#include "../../implementation_KawaTree/KT_String.h"
-#include "../../implementation_KawaTree/KT_MethodCall.h"
-#include "../../implementation_KawaTree/KT_ConstructorCall.h"
-#include "../../implementation_KawaTree/KT_ID.h"
-#include "../../implementation_KawaTree/KT_Null.h"
-#include "../../implementation_KawaTree/KT_VarOrAttr.h"
-#include "../../implementation_KawaTree/KT_Variable.h"
-#include "../../implementation_KawaTree/KT_Statement.h"
-#include "../../implementation_KawaTree/KT_ReturnStatement.h"
+#include "KT_includes.h"
 
 
 void IRCompiler::compile(KT_Program *program) {
@@ -79,8 +60,6 @@ void IRCompiler::compile(KT_Package *package) {
 void IRCompiler::compile(KT_Class *classe) {
   debug("class");
 
-	Type *t = createType(classe);
-
 	std::vector<KT_SimpleMethod*> s_mehtodes = classe->getSimpleMethods();
 
 	std::vector<KT_Constructor*> c_constructors = classe->getConstructors();
@@ -136,19 +115,23 @@ Function* IRCompiler::compile(KT_Prototype *p) {
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
 
-  	debug("debut boucle");
+  //	debug("debut boucle");
 
   	for(int i = 0; i < params.size(); i++) {
   		params_names.push_back(*(params[i]->getName()));
   		params_types.push_back(fqnType(params[i]->getParamType()->getTypeName()));
 
-  		debug(*(params[i]->getName()));
-  		debug(fqnType(params[i]->getParamType()->getTypeName()));
+  //		debug(*(params[i]->getName()));
+//  		debug(fqnType(params[i]->getParamType()->getTypeName()));
   	}
+    
+    if(name == "main" && istatic) {
+      return FunctionGenerator::getOrCreateMainFunction(getModule(), "argc", "argv");
+    }
 
-  	debug("fin boucle");
+//  	debug("fin boucle");
 
-  	debug("avant declaration");
+  	//debug("avant declaration");
 
   	Function *f =  FunctionGenerator::getOrCreateFunction(getModule(), istatic,
 									className,
@@ -156,10 +139,10 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 									r_type, 
 									params_types,
 									params_names);
-  	debug("apres declaration");
+  //	debug("apres declaration");
 
 
- debug("prototype fin");
+// debug("prototype fin");
 
   return f;
 }

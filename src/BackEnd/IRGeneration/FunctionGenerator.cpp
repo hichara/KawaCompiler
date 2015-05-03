@@ -48,14 +48,14 @@ Function* FunctionGenerator::getOrCreateFunction(Module *module, bool isStatic,
 									std::vector<std::string> args_names) {
 
 	if(className == "")
-		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_EMPTY_CLASS_STRING);
 
 	if(name == "")
-		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_EMPTY_CLASS_STRING);
 
 
 	if(args_types.size() != args_names.size())
-		KawaUtilitary::stopGenerationIR(ERROR_ILLEGAL_NUMBER_OF_ARGS);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_ILLEGAL_NUMBER_OF_ARGS);
 		
 	std::string functionName =
 			NameBuilder::buildFunctionName(className, name, ret_type, args_types, isStatic);
@@ -120,10 +120,10 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	std::vector<Type*> argtypes;
 
 	if(className == "")
-		KawaUtilitary::stopGenerationIR(ERROR_EMPTY_CLASS_STRING);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_EMPTY_CLASS_STRING);
 
 	if(args_types.size() != args_names.size())
-		KawaUtilitary::stopGenerationIR(ERROR_ILLEGAL_NUMBER_OF_ARGS);
+		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_ILLEGAL_NUMBER_OF_ARGS);
 		
 	std::string consName =
 		NameBuilder::buildConstructorName(className, args_types);
@@ -233,7 +233,7 @@ Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string
   	args_names.push_back(aV);
 
   if(args_names.size() == 1)
-  	KawaUtilitary::stopGenerationIR(ERROR_MAIN_ONLY_TWO_NOT_EMPTY_NAME_REQUIRED);
+  	KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_MAIN_ONLY_TWO_NOT_EMPTY_NAME_REQUIRED);
 
   LLVMContext &context = module->getContext();
 
@@ -399,10 +399,9 @@ Function* FunctionGenerator::getOrCreateIntToStrFunction(Module *module) {
 		return f;
 
 	LLVMContext &context = module->getContext();
-	GlobalVariable *gv = module->getGlobalVariable(KAWA_FORMAT_INT_TO_STRING);
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_INT_TO_STRING);
 
 	if(gv == NULL) {
-		Type *i8ptr = Type::getInt8Ty(context)->getPointerTo();
 
 		Constant* ar = ConstantDataArray::getString(context, "%d");
 
@@ -411,7 +410,7 @@ Function* FunctionGenerator::getOrCreateIntToStrFunction(Module *module) {
 			 					true,
 			  					GlobalValue::ExternalLinkage,
 			  					ar,
-			  					KAWA_FORMAT_INT_TO_STRING);
+			  					KawaEnumeration::KAWA_FORMAT_INT_TO_STRING);
 	}
 
 	//Creation de la fonction
@@ -457,10 +456,9 @@ Function* FunctionGenerator::getOrCreateDoubleToStrFunction(Module *module) {
 		return f;
 
 	LLVMContext &context = module->getContext();
-	GlobalVariable *gv = module->getGlobalVariable(KAWA_FORMAT_DOUBLE_TO_STRING);
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_DOUBLE_TO_STRING);
 
 	if(gv == NULL) {
-		Type *i8ptr = Type::getInt8Ty(context)->getPointerTo();
 
 		Constant* ar = ConstantDataArray::getString(context, "%f");
 
@@ -469,7 +467,7 @@ Function* FunctionGenerator::getOrCreateDoubleToStrFunction(Module *module) {
 			 					true,
 			  					GlobalValue::ExternalLinkage,
 			  					ar,
-			  					KAWA_FORMAT_DOUBLE_TO_STRING);
+			  					KawaEnumeration::KAWA_FORMAT_DOUBLE_TO_STRING);
 	}
 
 	//Creation de la fonction
@@ -514,10 +512,9 @@ Function* FunctionGenerator::getOrCreateCharToStrFunction(Module *module) {
 		return f;
 
 	LLVMContext &context = module->getContext();
-	GlobalVariable *gv = module->getGlobalVariable(KAWA_FORMAT_CHAR_TO_STRING);
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_CHAR_TO_STRING);
 
 	if(gv == NULL) {
-		Type *i8ptr = Type::getInt8Ty(context)->getPointerTo();
 
 		Constant* ar = ConstantDataArray::getString(context, "%c");
 
@@ -526,7 +523,7 @@ Function* FunctionGenerator::getOrCreateCharToStrFunction(Module *module) {
 			 					true,
 			  					GlobalValue::ExternalLinkage,
 			  					ar,
-			  					KAWA_FORMAT_CHAR_TO_STRING);
+			  					KawaEnumeration::KAWA_FORMAT_CHAR_TO_STRING);
 	}
 
 	//Creation de la fonction
@@ -624,8 +621,7 @@ Function* FunctionGenerator::getOrCreateConcatFunction(Module *module) {
 	Function *fcat; 
 
 	Type *i8 = Type::getInt8Ty(module->getContext()), 
-		 *i64 = Type::getInt64Ty(module->getContext()),
-		 *i32 = Type::getInt32Ty(module->getContext());
+		 *i64 = Type::getInt64Ty(module->getContext());
 
 	std::vector<Type*> args_ty;
 

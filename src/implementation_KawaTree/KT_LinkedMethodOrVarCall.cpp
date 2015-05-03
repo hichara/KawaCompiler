@@ -4,6 +4,7 @@
 
 
 #include "KT_LinkedMethodOrVarCall.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 /**
  * KT_LinkedMethodOrVarCall implementation
@@ -23,4 +24,8 @@ vector<KT_MethodOrVarCall*> KT_LinkedMethodOrVarCall::getMixedCall() {
  */
 void KT_LinkedMethodOrVarCall::setMixedCall(vector<KT_MethodOrVarCall*> var){
 	mixteCall= var;
+}
+
+llvm::Value* KT_LinkedMethodOrVarCall::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileLinkedMethodOrVarCall(this);	
 }

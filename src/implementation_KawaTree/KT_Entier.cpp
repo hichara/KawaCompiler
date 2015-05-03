@@ -9,6 +9,9 @@
 #include <vector>
 using namespace std;
 
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 /**
  * KT_Entier implementation
  */
@@ -35,3 +38,8 @@ void KT_Entier::toString() {
 
 }
 */
+
+llvm::Value* KT_Entier::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileEntier(this);	
+}
+

@@ -14,6 +14,10 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
+
 class KT_Print: public KT_Statement {
 public: 
     
@@ -28,6 +32,12 @@ public:
 	void setArgs(vector<KT_FactFinal*> var);
 
 	/*virtual void toString() ;*/
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 private: 
     vector<KT_FactFinal*> args;
 };

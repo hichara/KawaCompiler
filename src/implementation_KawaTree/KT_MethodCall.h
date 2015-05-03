@@ -15,6 +15,9 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 class KT_MethodCall: public KT_MethodOrVarCall {
 public: 
     
@@ -53,6 +56,12 @@ public:
      * @param string*
      */
     void setNameAddStringAtFirstPosition(string* var);    
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 
 private: 
     vector<string*> name;

@@ -14,6 +14,9 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 
 class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
 public: 
@@ -45,6 +48,8 @@ public:
      * @param vector<string*>
      */
     void addVectorString(vector<string*> var);
+
+    virtual llvm::Value *acceptIRCompiler(IRCompiler *compiler);
 	
 private: 
     vector<string*> name;

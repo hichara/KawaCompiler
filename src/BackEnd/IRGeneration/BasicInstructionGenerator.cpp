@@ -29,14 +29,20 @@ Value* BasicInstructionGenerator::createAffectation(Module *module, Value *targe
 }
 
 Value *BasicInstructionGenerator::stripVal(Value* val, BasicBlock *b) {
-	Value *load = val;
 	Type* type = val->getType();
 
 	if(type->isPointerTy()) {
 		if(type == Type::getInt8Ty(val->getContext())->getPointerTo())
-			return new LoadInst(val, "", b);
+			return val;
 
 		type = type->getPointerElementType();
+		if(type == Type::getInt16Ty(val->getContext())->getPointerTo()) {
+			Type *i8 = Type::getInt8Ty(val->getContext());
+			Value *v1 = new LoadInst(val, "", b);
+			Value *v2 = CastInst::CreateIntegerCast(v1, i8, true, "", b);
+			return v2;
+		}
+
 		if(type->isStructTy())
 			return val;
 

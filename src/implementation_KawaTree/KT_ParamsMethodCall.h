@@ -9,6 +9,8 @@
 #include "KT_IndexedArray.h"
 #include "KT_Expression.h"
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
 
 class KT_ParamsMethodCall {
 public: 
@@ -29,6 +31,12 @@ public:
      * @param KT_Expression *
      */
     void setExpression(KT_Expression* var);
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 private: 
     KT_IndexedArray* indexedArray;
     KT_Expression* expression;

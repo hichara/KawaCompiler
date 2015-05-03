@@ -24,7 +24,7 @@ std::string NameBuilder::buildFunctionName(std::string className,
 	result << strToKawaType(ret_type);
 
 	if (list_type.size() == 0) {
-		result << "_" << KAWA_VOID;
+		result << "_" << KawaEnumeration::KAWA_VOID;
 		result.str();
 	}
 
@@ -39,7 +39,7 @@ std::string NameBuilder::buildFunctionName(std::string className,
 	}
 
 	if(isStatic)
-		result << STATIC << "_" << result.str(); 
+		result << KawaEnumeration::STATIC << "_" << result.str(); 
 
 	return result.str();
 }
@@ -63,10 +63,10 @@ std::string NameBuilder::buildConstructorName(std::string className,
 	if(className == "")
 		return "";
 
-	result << CONSTRUCTOR_PREFIX << className;
+	result << KawaEnumeration::CONSTRUCTOR_PREFIX << className;
 
 	if (list_type.size() == 0) {
-		result << "_pt_" << KAWA_VOID;
+		result << "_pt_" << KawaEnumeration::KAWA_VOID;
 
 		return result.str();
 	}
@@ -90,10 +90,10 @@ std::string NameBuilder::buildSubConstructorName(std::string className,
 	if(className == "")
 		return "";
 
-	result << SUB_CONSTRUCTOR_PREFIX << className;
+	result << KawaEnumeration::SUB_CONSTRUCTOR_PREFIX << className;
 
 	if (list_type.size() == 0) {
-		result << "_pt_" << KAWA_VOID;
+		result << "_pt_" << KawaEnumeration::KAWA_VOID;
 
 		return result.str();
 	}
@@ -115,7 +115,7 @@ std::string NameBuilder::buildFunctionIndexName(std::string functionBuiltName) {
 
 	std::stringstream res;
 
-	res << METHODE_INDEX_PREFIX << functionBuiltName;
+	res << KawaEnumeration::METHODE_INDEX_PREFIX << functionBuiltName;
 
 	return res.str();
 }
@@ -128,7 +128,7 @@ std::string NameBuilder::buildAdHocTableName(std::string classStatic,
 		return "";
 
 	std::stringstream res;
-	res << ADHOCTABLE_PREFIX << "_" << classStatic << "_" << classDynamique;
+	res << KawaEnumeration::ADHOCTABLE_PREFIX << "_" << classStatic << "_" << classDynamique;
 
 	return res.str();
 }
@@ -147,7 +147,7 @@ std::string NameBuilder::buildAttributIndexName(std::string className, std::stri
 
 	std::stringstream res;
 
-	res << ATTRIBUT_INDEX_PREFIX << "_" << className << "_" << name;
+	res << KawaEnumeration::ATTRIBUT_INDEX_PREFIX << "_" << className << "_" << name;
 
 	return res.str();
 }
@@ -159,7 +159,7 @@ std::string NameBuilder::buildStaticVariableName(std::string className,
 
 	std::stringstream res;
 
-	res << STATIC << "_" << className << "_" << name;
+	res << KawaEnumeration::STATIC << "_" << className << "_" << name;
 
 	return res.str();
 }
@@ -172,7 +172,7 @@ std::string NameBuilder::buildClassTypeName(std::string className) {
 
 	std::stringstream result;
 
-	result << KAWA_CLASS_PREFIX << className;
+	result << KawaEnumeration::KAWA_CLASS_PREFIX << className;
 
 	return result.str();
 }
@@ -185,7 +185,7 @@ std::string NameBuilder::buildClassStructTypeName(std::string className) {
 
 	std::stringstream res;
 
-	res << KAWA_CLASS_STRUCT_PREFIX << className;
+	res << KawaEnumeration::KAWA_CLASS_STRUCT_PREFIX << className;
 
 	return res.str();
 }
@@ -195,20 +195,20 @@ std::string NameBuilder::strToKawaType(std::string type) {
 
 	std::stringstream result;
 
-	if(type == FLOAT)
-		result << KAWA_FLOAT;
+	if(type == KawaEnumeration::FLOAT)
+		result << KawaEnumeration::KAWA_FLOAT;
 
-	else if(type == INT)
-		result << KAWA_INT;
+	else if(type == KawaEnumeration::INT)
+		result << KawaEnumeration::KAWA_INT;
 
-	else if(type == CHAR)
-		result << KAWA_CHAR;
+	else if(type == KawaEnumeration::CHAR)
+		result << KawaEnumeration::KAWA_CHAR;
 
-	else if(type == DOUBLE)
-		result << KAWA_DOUBLE;
+	else if(type == KawaEnumeration::DOUBLE)
+		result << KawaEnumeration::KAWA_DOUBLE;
 
-	else if(type == STRING)
-		result << KAWA_STRING;
+	else if(type == KawaEnumeration::STRING)
+		result << KawaEnumeration::KAWA_STRING;
 
 	else
 		result << buildClassTypeName(type);
@@ -221,25 +221,25 @@ std::string NameBuilder::LLVMTypeToStr(Type* type) {
 	LLVMContext &c = type->getContext();
 
 	if(type == (Type*)Type::getInt32Ty(c))
-		return KAWA_INT;
+		return KawaEnumeration::KAWA_INT;
 
 	if(type == (Type*)Type::getInt8Ty(c))
-		return KAWA_CHAR;
+		return KawaEnumeration::KAWA_CHAR;
 
 	if(type == (Type*)Type::getVoidTy(c))
-		return KAWA_VOID;
+		return KawaEnumeration::KAWA_VOID;
 
 	if(type == (Type*)Type::getFloatTy(c))
-		return KAWA_FLOAT;
+		return KawaEnumeration::KAWA_FLOAT;
 
 	if(type == (Type*)Type::getDoubleTy(c))
-		return KAWA_DOUBLE;
+		return KawaEnumeration::KAWA_DOUBLE;
 
 	if(type == (Type*)Type::getInt8PtrTy(c))
-		return KAWA_STRING;
+		return KawaEnumeration::KAWA_STRING;
 
 	if(type->isStructTy())
-		return KAWA_CLASS_PREFIX + (type->getStructName()).str();
+		return KawaEnumeration::KAWA_CLASS_PREFIX + (type->getStructName()).str();
 
 	return "";
 }

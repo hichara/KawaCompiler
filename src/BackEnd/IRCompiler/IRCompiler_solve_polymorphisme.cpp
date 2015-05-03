@@ -35,6 +35,8 @@ std::vector<KT_Interface*> IRCompiler::getAllParentInterfaces(KT_Class* classe) 
 		return res;
 	}
 
+	parent_classe = classe->getParentClasseSemantique();
+
 	std::vector<KT_Interface*> res = getAllParentInterfaces(parent_classe);
 	std::vector<KT_Interface*> interfaces = classe->getParentsInterfacesSemantique();
 	std::vector<KT_Interface*> tmp;
@@ -98,9 +100,8 @@ std::vector<KT_Prototype *> IRCompiler::getPolymorphiqueMethodeFor(KT_Interface*
 std::vector<KT_Prototype *> IRCompiler::getPolymorphiqueMethodeFor(std::vector<KT_Prototype*> s, std::vector<KT_Prototype*> d) {
 	std::vector<KT_Prototype*> res;
 
-	int size_s = d.size();
+	int size_s = s.size();
 	int size_d = d.size();
-	bool found = false;
 
 	for(int i = 0; i < size_s; i++) {
 		KT_Modifier *m = s[i]->getModifier();

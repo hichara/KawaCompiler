@@ -16,7 +16,10 @@
 
 using namespace std;
 
-class KT_Variable: public KT_Statement/*, public KT_VarOrAttr*/ {
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
+class KT_Variable : public KT_Statement {
 public:
 
     KT_Variable();
@@ -52,7 +55,9 @@ public:
 
     virtual void accept(SemanticVisitor* visitor);
 
-    virtual void toString();
+    void toString();
+
+    virtual llvm::Value *acceptIRCompiler(IRCompiler *compiler);
 
 private:
     vector<string*> name;

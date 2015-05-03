@@ -77,5 +77,5 @@ void KT_Affectation::accept(SemanticVisitor* visitor){
 }
 
 void KT_Affectation::toString(){
-	cout << "\taffectation" << endl;
+	cout << "\ttoString affectation" << endl;
 }

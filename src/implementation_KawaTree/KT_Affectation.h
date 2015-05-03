@@ -51,7 +51,6 @@ public:
     void setIndexedArray(KT_IndexedArray* var);
 
     virtual void accept(SemanticVisitor* visitor);
-
     virtual void toString();
 private:
     KT_VarOrAttr* reference;

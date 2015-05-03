@@ -17,6 +17,8 @@ using namespace std;
 /**
  * @param StatementVisitor
  */
-//void KT_BlockStatement::accept( /*StatementVisitor*/) {}
+void KT_BlockStatement::accept(SemanticVisitor* visitor){
+  visitor->visitBlockStatement(this);
+}
 
 void KT_BlockStatement::toString(){}

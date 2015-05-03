@@ -23,7 +23,9 @@ public:
      * @param ExprVisitor
      */
     //void accept( /*ExprVisitor*/);
-	  virtual void accept(SemanticVisitor* visitor){};
+	  virtual void accept(SemanticVisitor* visitor){
+			cout << "accept de Expression" << endl;
+		};
 
     string* calculReturnType();
 private:

@@ -51,7 +51,6 @@ public:
     void setValue(KT_Expression* var);
 
     virtual void accept(SemanticVisitor* visitor);
-
     virtual void toString();
 
 private:

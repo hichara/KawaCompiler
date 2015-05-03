@@ -21,7 +21,7 @@ public:
     /**
      * @param StatementVisitor
      */
-    //void accept( /*StatementVisitor*/);
+		void accept(SemanticVisitor* visitor);
     virtual void toString();
 };
 

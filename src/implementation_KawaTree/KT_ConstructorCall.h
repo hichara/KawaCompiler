@@ -9,6 +9,7 @@
 #include "KT_Constructor.h"
 #include "KT_FactFinal.h"
 #include "KT_ParamsMethodCall.h"
+#include "SemanticVisitor.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -16,21 +17,21 @@ using namespace std;
 
 
 class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
-public: 
+public:
     KT_ConstructorCall();
 	~KT_ConstructorCall();
-    
+
     vector<string*> getName();
-    
+
     KT_Constructor* getMethod();
-    
+
     vector<KT_ParamsMethodCall*> getParams();
-    
+
     /**
      * @param vector<string*>
      */
     void setName(vector<string*> var);
-	
+
 	/**
      * @param vector<KT_ParamsMethodCall *>
      */
@@ -45,8 +46,9 @@ public:
      * @param vector<string*>
      */
     void addVectorString(vector<string*> var);
-	
-private: 
+
+    void accept(SemanticVisitor* visitor);
+private:
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;
 };

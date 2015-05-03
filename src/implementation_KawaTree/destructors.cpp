@@ -147,6 +147,8 @@ KT_ifElseStatement::~KT_ifElseStatement(){
     delete elseBStatement;
 }
 
+KT_FactFinal::~KT_FactFinal(){}
+
 KT_ID::~KT_ID (){
     for (vector<string*>::size_type i = 0; i < value.size(); ++i)
     {

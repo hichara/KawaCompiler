@@ -8,6 +8,7 @@
 class CheckCallMethodStatementType:public SemanticVisitor{public:
 	void visitCallMethod(KT_Statement* statement){
 		visited = true;
+		cout << "call method visitor visited" << endl;
 	}
 };
 

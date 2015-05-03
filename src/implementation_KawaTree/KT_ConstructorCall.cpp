@@ -69,3 +69,6 @@ void KT_ConstructorCall::addVectorString(vector<string*> var) {
 	}
 }
 
+void KT_ConstructorCall::accept(SemanticVisitor* visitor){
+  visitor->visitConstructorCall(this);
+}

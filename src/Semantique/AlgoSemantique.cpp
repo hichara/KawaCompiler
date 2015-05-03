@@ -414,6 +414,17 @@ void decoration(KT_Program * prog) {
 					//cout << "simple methode :" << endl;
 				}
 			}
+
+			// analyse des appels
+			cout << "analyse appels" << endl;
+			CheckConstructorCallStatementType* constructorCallVisitor = new CheckConstructorCallStatementType;
+			for(KT_SimpleMethod* method : classe->getSimpleMethods()){
+				KT_Block* block = method->getBlock();
+				// parcours des statements
+				for(KT_Statement* statement : block->getStatements()){
+					statement->accept(constructorCallVisitor);
+				}
+			}
 		}
 	}
 }

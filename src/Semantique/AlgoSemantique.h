@@ -17,6 +17,7 @@
 #include "CheckBlockStatementType.cpp"
 #include "CheckAffectationStatementType.cpp"
 #include "CheckCallMethodStatementType.cpp"
+#include "CheckConstructorCallStatementType.cpp"
 #include <map>
 #include <algorithm>
 using namespace std;

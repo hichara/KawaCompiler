@@ -135,6 +135,27 @@ possible de les compiler en bytecode.
  \section{Dépendances de kawac}
   Le compilateur kawa \textbf{kawac} utilise la technologie \textbf{LLVM} afin de produire du bytecode. \textbf{kawac} offre un frontend \textbf{LLVM} pour le langage Kawa ainsi qu'une partie du backend ce qui produit du bytecode. Néanmoins, pour produire un exécutable à partir du bytecode \textbf{kawac} a besoin d'\textbf{llc} dans sa version 3.4/3.5 et de \textbf{gcc} dans sa version 4.8.2 ou plus.
 
+	\subsection{Installation des dépendances}
+		Afin de compiler les sources de kawac, il est nécessaire d'installer les paquets suivants:
+		\begin{itemize}
+			\item bison
+			\item flex
+			\item llvm-3.5
+			\item llvm-3.5-tools
+			\item clang-3.5
+			\item zlib1g-dev 
+			\item libedit-dev
+		\end{itemize}
+                \begin{minted}[bgcolor=bg-gray]{bash}
+:$ sudo apt-get install bison flex llvm-3.5 llvm-3.5-tools clang-3.5 zlib1g-dev libedit-dev
+\end{minted}
+
+		Il est possible que la commande llc ne soit pas installée automatiquement. Si tel est le cas il sera nécessaire de le faire manuellement:\\
+                \begin{minted}[bgcolor=bg-gray]{bash}
+:$ sudo ln -s /usr/bin/llc-3.5 /usr/bin/llc
+\end{minted}
+
+
  \section{Fonctionnement de la chaine de compilation}
   Le frontend de kawac se nomme kawap (pour kawa bytecode production) qui utilise la technologie \textbf{LLVM} afin de produit du bytecode. Le compilateur en lui même se nomme \textbf{kawac} et encapsule le frontend ainsi que le backend. Voici comment se déroule la compilation d'un exécutable avec la commande:\\
   \begin{minted}[bgcolor=bg-gray]{bash}

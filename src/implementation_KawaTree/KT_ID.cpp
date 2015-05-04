@@ -37,3 +37,10 @@ void KT_ID::setNameAddStringAtFirstPosition(string* var){
   it = value.begin();
   it = value.insert ( it , var );
 }
+
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
+llvm::Value* KT_ID::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileID(this);	
+}

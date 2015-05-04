@@ -4,6 +4,7 @@
 
 
 #include "KT_ParamsMethodCall.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 /**
  * KT_ParamsMethodCall implementation
@@ -37,4 +38,9 @@ void KT_ParamsMethodCall::setIndexedArray(KT_IndexedArray* var) {
  */
 void KT_ParamsMethodCall::setExpression(KT_Expression* var) {
 	expression=var;
+}
+
+
+llvm::Value* KT_ParamsMethodCall::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileParamsMethodCall(this);	
 }

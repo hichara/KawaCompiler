@@ -9,6 +9,9 @@
 #include <vector>
 using namespace std;
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
+
 /**
  * KT_Expression implementation
  */
@@ -21,3 +24,8 @@ using namespace std;
 string* KT_Expression::calculReturnType() {
     return returnType;
 }
+
+/*
+llvm::Value* KT_Expression::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileExpression(this);	
+}*/

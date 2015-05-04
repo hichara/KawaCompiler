@@ -5,15 +5,24 @@
 #include "KT_includes.h"
 
 Value* IRCompiler::createAdHocTable(KT_Class *classe) {
+	std::stringstream str;
+	str << "Table ad Hoc for classe "<< *(classe->getFQN());
+	debug(str.str());
 	return createAdHocTable(classe, classe);
 }
 
 
 Value* IRCompiler::createAdHocTable(KT_Interface* interface) {
+	std::stringstream str;
+	str << "Table ad Hoc for interface " << *(interface->getFQN());
+	debug(str.str());
+
 	return createAdHocTable(interface, interface);
 }
 
 Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
+	debug("creation table adHoc");
+
 	std::vector<KT_Class *> classes;
 	std::vector<KT_Interface*> interfaces;
 	std::vector<KT_Prototype*> methodes;
@@ -44,7 +53,7 @@ Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
 		functions.push_back(f);
 	}
 
-	for(int i = 0; i < classes.size(); i++) {
+	for(int i = 0; i < interfaces.size(); i++) {
 		Function *f = FunctionGenerator::getAdHocTableFunction(getModule(), *(interfaces[i]->getFQN()), *(c2->getFQN()));
 		functions.push_back(f);
 	}
@@ -56,6 +65,8 @@ Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
 				*(c2->getFQN()), functions);
 
 	f = FunctionGenerator::createAdHocTableFunction(getModule(), *(c1->getFQN()), *(c2->getFQN()));
+
+	debug("fin creation table adHoc");
 
 	return v;
 }

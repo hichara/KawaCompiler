@@ -6,6 +6,7 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
+
 #include <cctype>
 #include <cstdio>
 #include <string>
@@ -23,6 +24,8 @@ public:
 						std::vector<std::string> att_names, 
 						std::vector<Type*> list_types, 
 						std::vector<bool> isStatic);
+
+	static StructType* getOrCreateNullObjectType(Module *module);
 
 	static Type* strToLLVMType(Module *module, std::string type);
 

@@ -3,13 +3,14 @@
 */
 
 #include "PrimitiveCreator.h"
-
+#include "TypeGenerator.h"
+#include "KawaEnumeration.h"
 
 
 //Cree null
-Value* PrimitiveCreator::createNull(LLVMContext &context) {
-	PointerType *t  = Type::getInt8Ty(context)->getPointerTo();
-	return ConstantPointerNull::get(t);
+Value* PrimitiveCreator::createNull(Module *module) {
+	return module->getOrInsertGlobal(KawaEnumeration::GLOBAL_NULL_NAME,
+		 TypeGenerator::getOrCreateNullObjectType(module));
 }
 
 
@@ -19,7 +20,7 @@ Value* PrimitiveCreator::create(int i, LLVMContext &context) {
 }
 
 Value* PrimitiveCreator::create(char c, LLVMContext &context) {
-	return ConstantInt::get(Type::getInt8Ty(context), c);
+	return ConstantInt::get(Type::getInt16Ty(context), c);
 }
 
 

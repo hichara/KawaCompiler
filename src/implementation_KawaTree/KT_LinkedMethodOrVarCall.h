@@ -13,6 +13,9 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 class KT_LinkedMethodOrVarCall: public KT_FactFinal {
 public: 
     
@@ -24,7 +27,13 @@ public:
      * @param vector<KT_MethodOrVarCall*>
      */
     void setMixedCall(vector<KT_MethodOrVarCall*> var);
-    
+  
+  	void toString() {
+  		cout << "i am a linked call\n";
+  	}
+
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+  
 private: 
     vector<KT_MethodOrVarCall*> mixteCall;
 };

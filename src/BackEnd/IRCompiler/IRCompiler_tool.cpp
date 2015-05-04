@@ -1,6 +1,7 @@
 #include "IRCompiler.h"
 
 #include "KT_includes.h"
+#include "IRGen_includes.h"
 
 IRCompiler::IRCompiler() {
   InitializeNativeTarget();

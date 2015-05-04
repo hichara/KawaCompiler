@@ -4,6 +4,7 @@
 
 
 #include "KT_String.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 /**
  * KT_String implementation
@@ -29,3 +30,7 @@ void KT_String::toString() {
 	cout << " String de valeur : " << *value << endl;
 }
 */
+
+llvm::Value* KT_String::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileString(this);	
+}

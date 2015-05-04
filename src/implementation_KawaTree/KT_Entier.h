@@ -12,6 +12,8 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
 
 class KT_Entier: public KT_FactFinal {
 public: 
@@ -25,6 +27,12 @@ public:
      */
     void setValue( int var);
 	/*virtual void toString();*/
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 private: 
     int value;
 };

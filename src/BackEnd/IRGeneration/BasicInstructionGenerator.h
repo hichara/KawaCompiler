@@ -6,18 +6,12 @@
 #ifndef BASIC_INST_GEN_KAWA
 #define BASIC_INST_GEN_KAWA
 
-#include "llvm/Analysis/Passes.h"
-#include "llvm/ExecutionEngine/ExecutionEngine.h"
-#include "llvm/ExecutionEngine/JIT.h"
 #include "llvm/IR/DataLayout.h"
 #include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
-#include "llvm/IR/Verifier.h"
-#include "llvm/PassManager.h"
-#include "llvm/Support/TargetSelect.h"
-#include "llvm/Transforms/Scalar.h"
+
 #include <cctype>
 #include <cstdio>
 #include <string>
@@ -31,12 +25,14 @@ using namespace llvm;
 class BasicInstructionGenerator {
 
 public:
+
 	/**
-	* 
+	*  Transforme un objet LLVM::Value en un objet utilisable pour des fonctions de bases
 	*/
 	static Value *stripVal(Value* val, BasicBlock *b);
+
 	/**
-	*
+	*  Cree une declaration
 	*/
 	static Value* createDeclaration(std::string varName, Type* type, BasicBlock *b);
 	
@@ -47,7 +43,7 @@ public:
 
 
 	/**
-	*
+	*  
 	*/
 	static Value* createAffectationReg(Module *module, Value *target, Value *val, BasicBlock *b);
 
@@ -57,9 +53,8 @@ public:
 	*/
 	static Value* createAffectationObj(Module *module, Value *target, Value *val, BasicBlock *b);
 
-
 	/**
-	*
+	*  Cree une affectation
 	*/
 	static Value* createAffectation(Module *module, Value *target, Value *val, BasicBlock *b);
 
@@ -90,6 +85,12 @@ public:
 	* si type != null, v != null, return (type)v 
 	*/
 	static ReturnInst* createReturn(BasicBlock *b, Type* type, Value *v);
+
+	/**
+	*  Termine une fonction par une instruction de retour null ou void
+	*/
+	static ReturnInst* endFunction(Function *f, BasicBlock *b);
+
 };
 
 

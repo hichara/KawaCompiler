@@ -74,8 +74,6 @@ Value* GlobalVariableGenerator::createIndexOfMember(Module *module, std::string 
 // Retourne un objet value contenant un entier
 Value* GlobalVariableGenerator::getIndexOfMember(Module *module, std::string name) {
 
-	LLVMContext &c = module->getContext();
-	Type *t;
 	GlobalVariable *g = module->getGlobalVariable(name);
 
 	Value *v = new LoadInst(g);

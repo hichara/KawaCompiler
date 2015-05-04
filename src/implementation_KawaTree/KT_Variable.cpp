@@ -4,6 +4,8 @@
 
 
 #include "KT_Variable.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 
 /**
  * KT_Variable implementation
@@ -75,5 +77,13 @@ void KT_Variable::toString(){
 	for (vector<string*>::iterator it = this->name.begin(); it != this->name.end(); ++it){
 		cout << **it;
 	}
+
+	cout << "  " << *(getType()->getTypeName()[0]);
+
 	cout << endl;
 }
+
+llvm::Value* KT_Variable::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compileVariable(this);	
+}
+

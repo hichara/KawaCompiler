@@ -3,7 +3,8 @@ CFLAGS= -Wall -g -Wno-deprecated-register -Wno-string-plus-int -std=c++11
 LDFLAGS= -lm -ldl `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
 KAWATreeSrcDir= ../implementation_KawaTree
 SemanticSrcDir= ../Semantique
-IRDIR= ../KAWATree/src/IRGen
+IRGENDIR= ../BackEnd/IRGeneration
+IRCMPDIR= ../BackEnd/IRCompiler
 
 all: kawac
 
@@ -17,4 +18,4 @@ parser: kawa.y
 	bison -d -o kawa.cpp kawa.y
 
 kawac: lexer
-	${CC} ${CFLAGS} ${IRDIR}/*.cpp ${SemanticSrcDir}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp ${LDFLAGS}
+	${CC} ${CFLAGS} ${IRGENDIR}/*.cpp ${IRCMPDIR}/*.cpp ${SemanticSrcDir}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp ${LDFLAGS}

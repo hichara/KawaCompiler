@@ -12,11 +12,14 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
 
 class KT_Addition: public KT_ArithmeticExpression {
 public : 
 	KT_Addition ();
 
+    llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 };
 
 #endif //_KT_ADDITION_H

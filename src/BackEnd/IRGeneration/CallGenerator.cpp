@@ -101,12 +101,12 @@ Value* CallGenerator::createStaticMethodeCall(Module *module, std::string funcNa
 // str doit etre de type i8*
 Value* CallGenerator::createPrintCall(Module *module, Value *str, BasicBlock *bb) {
 
-  Value *v = PrimitiveValueConverter::convertToStr(module, str, bb);	
+  Value *v = PrimitiveValueConverter::convertToStr(module, str, bb);
 
   Function *f = FunctionGenerator::getOrCreatePutsFunction(module);
 
   std::vector<Value *> arg;
-  arg.push_back(str);
+  arg.push_back(v);
 
   return CallInst::Create(f, arg, "", bb);
 }

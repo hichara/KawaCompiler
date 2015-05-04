@@ -9,6 +9,8 @@
 #include <vector>
 using namespace std;
 
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
 /**
  * KT_Affectation implementation
  */
@@ -78,4 +80,9 @@ void KT_Affectation::accept(SemanticVisitor* visitor){
 
 void KT_Affectation::toString(){
 	cout << "\ttoString affectation" << endl;
+}
+
+
+llvm::Value* KT_Affectation::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileAffectation(this);
 }

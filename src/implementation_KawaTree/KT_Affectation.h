@@ -14,6 +14,10 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 using namespace std;
 
 
@@ -52,6 +56,13 @@ public:
 
     virtual void accept(SemanticVisitor* visitor);
     virtual void toString();
+
+
+    /**
+    * Methode accept pour le IRCompiler
+    */
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+
 private:
     KT_VarOrAttr* reference;
     KT_Expression* lExpression;

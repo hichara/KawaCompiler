@@ -4,6 +4,7 @@
 
 
 #include "KT_Print.h"
+#include "../BackEnd/IRCompiler/IRCompiler.h"
 
 /**
  * KT_Print implementation
@@ -37,3 +38,7 @@ void KT_Print::toString(){
 	//cout << "statment Print :D "<<endl;
 
 }*/
+
+llvm::Value* KT_Print::acceptIRCompiler(IRCompiler *compiler) {
+  return compiler->compilePrint(this);	
+}

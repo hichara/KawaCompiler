@@ -1,31 +1,18 @@
 
 #include "IRCompiler.h"
-
-
-#include "../../implementation_KawaTree/KT_Program.h"
-#include "../../implementation_KawaTree/KT_LinkedMethodOrVarCall.h"
-#include "../../implementation_KawaTree/KT_Affectation.h"
-#include "../../implementation_KawaTree/KT_Print.h"
-#include "../../implementation_KawaTree/KT_Expression.h"
-#include "../../implementation_KawaTree/KT_FactFinal.h"
-#include "../../implementation_KawaTree/KT_ParamsMethodCall.h"
-#include "../../implementation_KawaTree/KT_MethodOrVarCall.h"
-#include "../../implementation_KawaTree/KT_Entier.h"
-#include "../../implementation_KawaTree/KT_String.h"
-#include "../../implementation_KawaTree/KT_MethodCall.h"
-#include "../../implementation_KawaTree/KT_ConstructorCall.h"
-#include "../../implementation_KawaTree/KT_ID.h"
-#include "../../implementation_KawaTree/KT_Null.h"
-#include "../../implementation_KawaTree/KT_VarOrAttr.h"
-#include "../../implementation_KawaTree/KT_Variable.h"
-#include "../../implementation_KawaTree/KT_Statement.h"
-#include "../../implementation_KawaTree/KT_ReturnStatement.h"
+#include "KT_includes.h"
 
 
 void IRCompiler::compile(KT_Program *program) {
   
   // A completer
-  IRmodule = new Module(program->getName(), IRcontext);
+  std::string progName = program->getName();
+
+  if(progName == "") {
+    progName = "program";
+  }
+
+  IRmodule = new Module(progName, IRcontext);
 
   debug("program");
 
@@ -39,7 +26,7 @@ void IRCompiler::compile(KT_Program *program) {
 
   std::stringstream pName;
 
-  pName << program->getName() << ".ll";
+  pName << progName << ".ll";
 
   int fd = open(pName.str().c_str(), O_CREAT | O_WRONLY, S_IRWXU | S_IRWXG | S_IRWXG);
 
@@ -58,28 +45,43 @@ void IRCompiler::compile(KT_Package *package) {
   int size_i = interfaces.size();
   int size_c = classes.size();  
 
+  debug("debut compilation des interfaces");
   for(int i = 0; i < size_i; i++) {
   	compile(interfaces[i]);
   }
+
+  debug("fin compilation des interfaces");
+
+
+  debug("debut compilation des classes");
 
   for(int i = 0; i < size_c; i++) {
   	compile(classes[i]);
   }
 
+  debug("fin compilation des classes");
+
+  debug("debut creation table adHoc interfaces");
+
   for(int i = 0; i < size_i; i++) {
   	createAdHocTable(interfaces[i]);
   }
 
+  debug("fin creation table adHoc interfaces");
+
+
+  debug("debut creation table adHoc classes");
+
   for(int i = 0; i < size_c; i++) {
   	createAdHocTable(classes[i]);
   }
+
+  debug("fin creation table adHoc classes");
 }
 
 
 void IRCompiler::compile(KT_Class *classe) {
   debug("class");
-
-	Type *t = createType(classe);
 
 	std::vector<KT_SimpleMethod*> s_mehtodes = classe->getSimpleMethods();
 
@@ -125,8 +127,16 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 	debug(err.str());
 
 	std::string name = *(p->getName());
+
+  debug(name);
+
 	std::vector<KT_Param* > params = p->getParams();
+
+  debug("params recuperes");
+
 	std::string r_type  =  fqnType(p->getReturnType()->getTypeName()) ;
+
+  debug("type de retour recuperes");
 
 	bool istatic = modifier->isStatic();
 
@@ -136,15 +146,19 @@ Function* IRCompiler::compile(KT_Prototype *p) {
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
 
-  	debug("debut boucle");
+  //	debug("debut boucle");
 
   	for(int i = 0; i < params.size(); i++) {
   		params_names.push_back(*(params[i]->getName()));
   		params_types.push_back(fqnType(params[i]->getParamType()->getTypeName()));
 
-  		debug(*(params[i]->getName()));
-  		debug(fqnType(params[i]->getParamType()->getTypeName()));
+  //		debug(*(params[i]->getName()));
+//  		debug(fqnType(params[i]->getParamType()->getTypeName()));
   	}
+    
+    if(name == "main") {
+      return FunctionGenerator::getOrCreateMainFunction(getModule(), "argc", "argv");
+    }
 
   	debug("fin boucle");
 
@@ -177,19 +191,25 @@ Function* IRCompiler::compile(KT_SimpleMethod *methode) {
  		param_names.push_back(*(params[i]->getName()));
  	}
 
+  debug("Recuperation du prototype");
+
  	Function *f = compile(methode->getPrototype());
 
+  f->dump();
+  std::cerr << "\n";
+
+  debug("Prototype recupere");
+
+  currentFunction = f;
  	currentBloc = FunctionGenerator::initFunction(f, param_names, addThis);
- 	currentFunction = f;
 
-	std::vector<KT_Statement*> stmnts;
-	stmnts = methode->getBlock()->getStatements();
+  debug("Compilation bloc instructions");
 
-	for(int i = 0; i < stmnts.size(); i++) {
-		compileStatement(stmnts[i]);
-	}
+  compileBlock(methode->getBlock());
 
- debug("fin");
+  BasicInstructionGenerator::endFunction(f, currentBloc);
+
+  debug("fin compilation methode");
 
   return f;
 }
@@ -197,8 +217,8 @@ Function* IRCompiler::compile(KT_SimpleMethod *methode) {
 Function* IRCompiler::compile(KT_Constructor * constructor) {
 	  debug("constructor");
 
-	std::string name = *(constructor->getName());
-	std::vector<KT_Param*> params = constructor->getParams();
+  	std::string name = *(constructor->getName());
+  	std::vector<KT_Param*> params = constructor->getParams();
 
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
@@ -213,16 +233,20 @@ Function* IRCompiler::compile(KT_Constructor * constructor) {
 								params_types,									
 								params_names);
 
-  	currentBloc = FunctionGenerator::initFunction(f, params_names, true);
+    currentBloc = FunctionGenerator::initFunction(f, params_names, true);
+    currentFunction = f;
 
-	std::vector<KT_Statement*> stmnts;
-	stmnts = constructor->getBlock()->getStatements();
+  	std::vector<KT_Statement*> stmnts;
+  	stmnts = constructor->getBlock()->getStatements();
 
-	for(int i = 0; i < stmnts.size(); i++) {
-		compileStatement(stmnts[i]);
-	}
- debug("fin");
+  	for(int i = 0; i < stmnts.size(); i++) {
+      compileStatement(stmnts[i]);
+  	}
 
-	return FunctionGenerator::getConstructor(getModule(),
-		name, params_types, params_names);
+    BasicInstructionGenerator::endFunction(f, currentBloc);
+
+    debug("fin compilation constructor");
+
+  	return FunctionGenerator::getConstructor(getModule(),
+  		name, params_types, params_names);
 }

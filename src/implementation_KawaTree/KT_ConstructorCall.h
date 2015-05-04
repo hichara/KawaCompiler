@@ -15,6 +15,9 @@
 #include <vector>
 using namespace std;
 
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 
 class KT_ConstructorCall: public KT_Constructor, public KT_FactFinal {
 public:
@@ -48,7 +51,10 @@ public:
     void addVectorString(vector<string*> var);
 
     void accept(SemanticVisitor* visitor);
-private:
+
+    virtual llvm::Value *acceptIRCompiler(IRCompiler *compiler);
+	
+private: 
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;
 };

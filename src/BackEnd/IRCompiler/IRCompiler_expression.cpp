@@ -5,45 +5,69 @@
 #include "KT_includes.h"
 
 Value* IRCompiler::compileExpression(KT_Expression *expr) {
+	debug("compiling a KT_Expression");
+
 	return expr->acceptIRCompiler(this);
 }
 
 Value *IRCompiler::compileFactFinal(KT_FactFinal *expr) {
+	debug("compiling a KT_FactFinal");
+
 	return expr->acceptIRCompiler(this);
 }
 
-Value *IRCompiler::compileParamsMethodCall(KT_ParamsMethodCall *pmc) {
-	return pmc->acceptIRCompiler(this);
-}
-
 Value* IRCompiler::compileMethodOrVarCall(KT_MethodOrVarCall *call) {
+	debug("compiling a KT_MethodOrVarCall");
+
 	return call->acceptIRCompiler(this);
 }
 
 Value* IRCompiler::compileVarOrAttr(KT_VarOrAttr *call) {
+	debug("compiling a KT_VarOrAttr");
+
 	return call->acceptIRCompiler(this);
 }
 
 
-Value* IRCompiler::compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall*) {
-	
-	KawaUtilitary::stopGenerationIR("linked call not handled\n");	
+Value* IRCompiler::compileLinkedMethodOrVarCall(KT_LinkedMethodOrVarCall* link) {
+	debug("compiling a KT_LinkedMethodORVarCall");
 
-	return NULL;	
+	std::vector<KT_MethodOrVarCall*> linked = link->getMixedCall();
+
+	Value *v = NULL;
+	for(int i = 0; i < linked.size(); i++) {
+		linked[i]->whoAmI();
+		v = compileExpression(linked[i]);
+	}
+
+	debug("end linked call");
+
+	return v;	
+}
+
+Value *IRCompiler::compileParamsMethodCall(KT_ParamsMethodCall *pmc) {	
+	debug("compiling a KT_ParamsMethodCall");
+
+	return compileExpression(pmc->getExpression());
 }
 
 
-
 Value* IRCompiler::compileEntier(KT_Entier *expr) {
+	debug("compiling a KT_Entier");
+
 	return PrimitiveCreator::create(expr->getValue(), getContext());
 }
 
 Value* IRCompiler::compileString(KT_String *expr) {
+	debug("compiling a KT_String");
+
 	std::string s = *(expr->getValue());
 	return PrimitiveCreator::create(s, getCurrentBlock());
 }
 
 Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
+	debug("compiling a KT_LinkedMethodCall");
+
 	KT_Prototype *proto = call->getMethod()->getPrototype();
 	bool isStatic = proto->getModifier()->isStatic();
 
@@ -75,6 +99,8 @@ Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 
 
 Value* IRCompiler::compileConstructorCall(KT_ConstructorCall *call) {
+	debug("compiling a KT_ConstructorCall");
+
 	KT_Constructor *cons = call->getMethod();
 	std::string name = *(cons->getName());
 	std::vector<KT_Param*> params = cons->getParams();
@@ -113,6 +139,9 @@ Value* IRCompiler::compileConstructorCall(KT_ConstructorCall *call) {
 }
 
 Value* IRCompiler::compileID(KT_ID *id) {
+	debug("compiling a KT_ID");
+
+
 	ValueSymbolTable &table = currentFunction->getValueSymbolTable();
 	Value *v;
 
@@ -125,49 +154,33 @@ Value* IRCompiler::compileID(KT_ID *id) {
 		std::stringstream str;
 		str << v_name << "_" << currentlvl;
 
-		v = table.lookup(v_name);
+		v = table.lookup(str.str());
 		if(v != NULL) {
+			v->dump();
 			return v;
 		}
-
 		currentlvl--;
 	}
 
 	std::stringstream s;
 
-	s << "error : " << v_name << " not found\n";
+	s << v_name << " not found\n";
 
 	KawaUtilitary::stopGenerationIR(s.str());
 
 	return NULL;
 }
 
-Value* IRCompiler::compileVariable(KT_Variable *var) {
-
-	std::string name = fqnType(var->getName());
-	std::string type = fqnType(var->getType()->getTypeName());
-
-	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
-	Value *dec = BasicInstructionGenerator::BasicInstructionGenerator::createDeclaration(name, t, getCurrentBlock());
-
-	KT_Expression *expr = var->getValue();
-
-	if(expr != NULL) {
-		Value *v = compileExpression(expr);
-		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
-		return BasicInstructionGenerator::createAffectation(getModule(),
-			dec, v, getCurrentBlock());
-	}
-
-	return dec;
-}
-
 
 Value* IRCompiler::compileNULL(KT_Null *vnull) {
-	return PrimitiveCreator::createNull(getModule()->getContext());
+	debug("compiling a KT_Null");
+
+	return PrimitiveCreator::createNull(getModule());
 }
 
 Value* IRCompiler::compileAddition(KT_Addition *add) {
+	debug("compiling a KT_Addition");
+
 	Value* vl = compileExpression(add->getLExpression());
 	Value* vg = compileExpression(add->getRExpression());
 

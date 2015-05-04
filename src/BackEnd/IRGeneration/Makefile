@@ -3,38 +3,41 @@
 
 
 
-all: PrimitiveCreator.o
+all:
+	clang++ -g *.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
 
-kawac: FunctionGenerator.o KawaUtilitary.o TypeGenerator.o GlobalVariableGenerator.o NameBuilder.o PrimitiveValueConverter.o PrimitiveCreator.o CallGenerator.o
-	clang++ -g kawac.cpp CallGenerator.o FunctionGenerator.o KawaUtilitary.o TypeGenerator.o GlobalVariableGenerator.o PrimitiveValueConverter.o PrimitiveCreator.o NameBuilder.o `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 -o kawac
-	rm *.o
+PrimitiveValueConverter:
+	clang++ -g PrimitiveValueConverter.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
 
-PrimitiveValueConverter.o:
-	clang++ -c -g PrimitiveValueConverter.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
+PrimitiveCreator:
+	clang++ -g PrimitiveCreator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
 
-PrimitiveCreator.o:
-	clang++ -c -g PrimitiveCreator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
+PrimitiveBinaryOperationGenerator:
+	clang++ -g PrimitiveBinaryOperationGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
 
-PrimitiveBinaryOperationGenerator.o:
-	clang++ -c -g PrimitiveBinaryOperationGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
+CallGenerator:
+	clang++ -g CallGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
 
-CallGenerator.o:
-	clang++ -c -g CallGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
+FunctionGenerator:
+	clang++ -g FunctionGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3 2> Makeout
 
-FunctionGenerator.o:
-	clang++ -c -g FunctionGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3 2> Makeout
+KawaUtilitary:
+	clang++ -g KawaUtilitary.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3
 
-KawaUtilitary.o:
-	clang++ -c -g KawaUtilitary.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
+TypeGenerator:
+	clang++ -g TypeGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3
 
-TypeGenerator.o:
-	clang++ -c -g TypeGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
+GlobalVariableGenerator:
+	clang++ -g GlobalVariableGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3
 
-GlobalVariableGenerator.o:
-	clang++ -c -g GlobalVariableGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
+NameBuilder:
+	clang++ -g NameBuilder.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native core` -O3
 
-NameBuilder.o:
-	clang++ -c -g NameBuilder.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core jit native` -O3
+KawaEnumeration:
+	clang++ -g KawaEnumeration.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs` -O3
+
+kawac:
+	clang++ -g *.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs` -O3 -o kawac 2> Makeout
 
 try:
 	./kawac 2> kawac.ll

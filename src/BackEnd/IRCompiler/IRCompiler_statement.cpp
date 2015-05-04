@@ -24,8 +24,7 @@ Value* IRCompiler::compileVariable(KT_Variable *var) {
 	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
 	Value *dec = BasicInstructionGenerator::BasicInstructionGenerator::createDeclaration(r_name.str(), t, getCurrentBlock());
 
-//	KT_Expression *expr = var->getValue();
-	KT_Expression *expr = NULL;
+	KT_Expression *expr = var->getValue();
 
 	if(expr != NULL) {
 		debug("expr is not null");

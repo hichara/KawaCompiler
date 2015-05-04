@@ -25,6 +25,7 @@ string* KT_Expression::calculReturnType() {
     return returnType;
 }
 
+/*
 llvm::Value* KT_Expression::acceptIRCompiler(IRCompiler *compiler) {
   return compiler->compileExpression(this);	
-}
+}*/

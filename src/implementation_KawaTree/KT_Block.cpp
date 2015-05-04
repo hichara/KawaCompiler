@@ -31,3 +31,9 @@ void KT_Block::toString() {
 		(*it)->toString();
 	}
 }
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+
+llvm::Value* KT_Block::acceptIRCompiler(IRCompiler *compiler) {
+	return compiler->compileBlock(this);
+}

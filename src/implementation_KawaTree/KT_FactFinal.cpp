@@ -18,7 +18,8 @@ using namespace std;
  KT_FactFinal::KT_FactFinal() {}
 
 
-
+/*
 llvm::Value* KT_FactFinal::acceptIRCompiler(IRCompiler *compiler) {
   return compiler->compileFactFinal(this);	
 }
+*/

@@ -15,5 +15,12 @@ KT_VarOrAttr::KT_VarOrAttr(){}
 
 
 llvm::Value* KT_VarOrAttr::acceptIRCompiler(IRCompiler *compiler) {
+  cout << "Erreur acceptIRCompiler in ";
+  cout <<  typeid(*this).name();
+  cout << " shoud not have been called ";
+  cout << "acceptIRCompiler is not redefined or handled by the IRCompiler\n";	
+
+  exit(-1);
+
   return compiler->compileVarOrAttr(this);	
 }

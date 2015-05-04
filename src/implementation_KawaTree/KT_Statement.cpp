@@ -18,6 +18,11 @@ void KT_Statement::toString() {
 	cout << "toString for KT_Statement";
 }
 
+void KT_Statement::whoAmI() {
+  cout << "I am : ";
+  cout <<  typeid(*this).name();
+  cout << "\n";
+}
 
 
 void KT_Statement::accept(SemanticVisitor* visitor){
@@ -26,5 +31,12 @@ void KT_Statement::accept(SemanticVisitor* visitor){
 }
 
 llvm::Value* KT_Statement::acceptIRCompiler(IRCompiler *compiler) {
-  return compiler->compileStatement(this);	
+
+  cout << "Erreur acceptIRCompiler in ";
+  cout <<  typeid(*this).name();
+  cout << " shoud not have been called ";
+  cout << "acceptIRCompiler is not redefined or handled by the IRCompiler\n";	
+
+  exit(-1);    
+  return NULL;
 }

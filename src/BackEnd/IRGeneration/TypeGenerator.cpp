@@ -14,8 +14,9 @@ StructType* TypeGenerator::createClassType(Module *module,
 
     StructType *maClass = (StructType*)strToLLVMType(module, className);
 
-	if(!maClass->isOpaque())
+	if(!maClass->isOpaque()) {
 		KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_CLASS_AREADY_EXIST);
+	}
 
 	std::string name_struct =
 		 NameBuilder::buildClassStructTypeName(className);
@@ -64,6 +65,22 @@ StructType* TypeGenerator::createClassType(Module *module,
 
     return maClass;
 }
+
+StructType* TypeGenerator::getOrCreateNullObjectType(Module *module) {
+
+	StructType *t = (StructType*)TypeGenerator::strToLLVMType(module, "__null_object");
+
+	if(!t->isOpaque())
+		return t;
+
+	std::vector<std::string> att_names;
+	std::vector<Type*> list_types;
+	std::vector<bool> isStatic;
+	std::string className = "__null_object";
+
+	return createClassType(module, className, att_names, list_types, isStatic);
+}
+
 
 
 // Retourne le type associé à une chaine de caractere

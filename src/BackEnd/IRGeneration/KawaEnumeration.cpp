@@ -1,5 +1,6 @@
 #include "KawaEnumeration.h"
 
+const std::string KawaEnumeration::GLOBAL_NULL_NAME = "global_var_null";
 
 const std::string KawaEnumeration::ADHOCTABLE_LABEL = "adhoctable";
 const std::string KawaEnumeration::STATIC = "static";

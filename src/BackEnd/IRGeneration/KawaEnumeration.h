@@ -12,6 +12,8 @@ public:
 	KawaEnumeration();
 	~KawaEnumeration();
 
+	static const std::string GLOBAL_NULL_NAME;
+
 	static const std::string ADHOCTABLE_LABEL;
 	static const std::string STATIC;
 	static const std::string KAWA_THIS;

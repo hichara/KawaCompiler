@@ -23,6 +23,8 @@ public:
      */
     //void accept( /*StatementVisitor*/);
     virtual void toString();
+
+    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 };
 
 #endif //_KT_BLOCKSTATEMENT_H

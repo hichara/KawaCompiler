@@ -8,6 +8,7 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
+
 #include <cctype>
 #include <cstdio>
 #include <string>
@@ -22,7 +23,7 @@ class  PrimitiveCreator {
 
 public:
 
-	static Value* createNull(LLVMContext &context);
+	static Value* createNull(Module *module);
 	static Value* create(int i, LLVMContext &context);
 	static Value* create(char c, LLVMContext &context);
 	static Value* create(bool b, LLVMContext &context);	

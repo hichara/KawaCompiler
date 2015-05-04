@@ -185,7 +185,7 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 
 	//inserttion des donnée
 	std::string subtypeName = NameBuilder::buildClassStructTypeName(className);
-	Type *stype = TypeGenerator::strToLLVMType(module, subtypeName);
+	Type *stype = module->getTypeByName(subtypeName);
 
 	indx.clear();
 	indx.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
@@ -194,7 +194,7 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	Value *data = builder.CreateAlloca(stype, NULL, "");
 	Value *ptrdata = builder.CreateGEP(instance, indx);
 
-	builder.CreateStore(ptrdata, data);
+	builder.CreateStore(data, ptrdata);
 
 	//Appel de la fonction d'initiallisation
 	std::vector<Value*> callargs;

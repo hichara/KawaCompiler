@@ -69,37 +69,46 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
 
+	std::vector<Value*> indexI, indexII, empty;
+
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
+
+	indexII.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
+	indexII.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 1));
+
+	Value *oldDataPtr  = builder.CreateGEP(target, indexI);
+	Value *oldData     = builder.CreateLoad(oldDataPtr);
+
+	Value *oldTablePtr = builder.CreateGEP(target, indexII);
+	Value *oldTable    = builder.CreateLoad(oldTablePtr);
+
+	if(val->getType() == TypeGenerator::getOrCreateNullObjectType(module)->getPointerTo()) {
+		Value *nullData = Constant::getNullValue(oldData->getType());
+		Value *nullTable = Constant::getNullValue(oldTable->getType());
+
+		builder.CreateStore(nullData, oldDataPtr);
+		builder.CreateStore(nullTable, oldTablePtr);
+
+		return target;
+	}
+
 	std::string className = target->getType()->getPointerElementType()->getStructName().str();
-
-	std::vector<Value*> indexI, empty;
-	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
-	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
-	Value *v1 = builder.CreateGEP(val, indexI);
-	Value *data = builder.CreateLoad(v1);
-
-	std::vector<Value*> indexII;
-	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
-	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 1));
-	Value *v2 = builder.CreateGEP(val, indexII);
-	Value *table = builder.CreateLoad(v2);
-
 	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
 	std::string varName = NameBuilder::buildFunctionIndexName(s);
 	Value *adHocIndex = GlobalVariableGenerator::getIndexOfMember(module, varName);
 
+	Value *newDataPtr = builder.CreateGEP(val, indexI);
+	Value *newData    = builder.CreateLoad(newDataPtr);
+
 	Function *fs = FunctionGenerator::getFunction(module, s);
-	Value* newTable = CallGenerator::createMethodeCall(module, fs, val,
+	Value *newTable = CallGenerator::createMethodeCall(module, fs, val,
 					 empty, adHocIndex, b);
 
-	Value* v3 = builder.CreateGEP(target, indexI);
-	Value *oldata = builder.CreateLoad(v3);
-	Value *v4 = builder.CreateBitCast(data, oldata->getType());
+	newData = builder.CreateBitCast(newData, oldData->getType());
 
-	Value *v5 = builder.CreateGEP(target, indexII);
-
-	builder.CreateStore(newTable, v5);
-	builder.CreateStore(v4, v3);
-	builder.CreateStore(newTable, table);
+	builder.CreateStore(newTable, oldTablePtr);
+	builder.CreateStore(newData, oldDataPtr);
 
 	return target;
 }
@@ -121,6 +130,21 @@ ReturnInst* BasicInstructionGenerator::createReturn(BasicBlock *b, Type* type, V
 	Value* cast = builder.CreateBitCast(v, type);
 
 	return builder.CreateRet(cast);
+}
+
+
+ReturnInst* BasicInstructionGenerator::endFunction(Function *f, BasicBlock *b) {
+	Type *t = f->getReturnType();
+
+	IRBuilder<> builder(b->getContext());
+	builder.SetInsertPoint(b);
+
+	if(t == Type::getVoidTy(b->getContext()))
+		return builder.CreateRetVoid();
+
+	Constant *c = Constant::getNullValue(t);
+
+	return builder.CreateRet(c);
 }
 
 

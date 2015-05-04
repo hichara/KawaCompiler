@@ -23,8 +23,7 @@ public:
     /**
     * Methode accept pour le IRCompiler
     */
-    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
-
+//    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 };
 
 #endif //_KT_METHODORVARCALL_H

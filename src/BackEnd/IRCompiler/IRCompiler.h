@@ -29,6 +29,8 @@ class KT_Package;
 class KT_LinkedMehodOrVarCall;
 class KT_ReturnStatement;
 class KT_Addition;
+class KT_BlockStatement;
+class KT_Block;
 
 
 #define COMPILING_NONE  0
@@ -38,6 +40,12 @@ class KT_Addition;
 #define COMPILING_CONST 4
 
 
+#include <cctype>
+#include <cstdio>
+#include <map>
+#include <string>
+#include <vector>
+#include <iostream>
 #include <map>
 #include <stdio.h>
 #include <fcntl.h>
@@ -50,7 +58,7 @@ class IRCompiler {
 
 private:
 
-	bool debugOn = true;
+	bool debugOn = false;
 
 	Module *IRmodule;
 
@@ -78,18 +86,43 @@ public:
 
 	IRCompiler(); 
 
+	/**
+	* Compile les noeud du KawaTree
+	*/	
 	void compile(KT_Program *program);
 	void compile(KT_Package *KT_Package);
 	void compile(KT_Class *classe);
 	void compile(KT_Interface *interface);
 
+	/**
+	* Compile une methode et renvoie un LLVM::Function* representant le constructeur 
+	*/
 	Function* compile(KT_SimpleMethod *methode);
+
+	/**
+	* Compile le constructeur et renvoie un LLVM::Function* representant le constructeur 
+	*/
 	Function* compile(KT_Constructor *constructor);
+	
+	/**
+	* Compile l'entete d'une fonction.
+	* @return renvoie la meme objet Function a chaque appel
+	*/
 	Function *compile(KT_Prototype*);
 
+	/*
+	* Cree le type representant une classe
+	*/
 	Type* createType(KT_Class *classe);
+
+	/*
+	* Cree le type representant une interface
+	*/
 	Type* createType(KT_Interface* interface);
 
+	/**
+	* Fonction de compilation des noeud du KawaTree
+	*/
 	Value* compileAffectation(KT_Affectation *af);
 	Value* compilePrint(KT_Print *print);
 	Value* compileExpression(KT_Expression *expr);
@@ -109,11 +142,8 @@ public:
 	Value* compileReturnStatement(KT_ReturnStatement *ret);
 	Value* compileID(KT_ID *id);
 	Value* compileAddition(KT_Addition *add);
-
-
-	// ---------Exression -------------------
-
-
+	Value* compileBlockStatement(KT_BlockStatement *bstmt);
+	Value* compileBlock(KT_Block *bloc);
 
 private:
 
@@ -121,37 +151,57 @@ private:
 	Module* getModule();
 	Function* getCurrentFunction();
 	BasicBlock* getCurrentBlock();
-	void endCurrentFunction();
 	int getInbricationLevel();
 
 	void debug(std::string msg);
 
 	Value* searchVariable(std::string);
 
+
 	std::string fqnType(std::vector<std::string*> vec);
 
-	// Implementer dans IR_Compiler_tool.cpp
+	// Implementer dans IRCompiler_solver_polymorphisme.cpp
+	/**
+	* Retoune toutes les classes parents de l'arborescence
+	*/
 	std::vector<KT_Class *> getAllParentClasses(KT_Class *classe);
 
+	/**
+	* Teste si un prototype est une redefinition
+	*/
+	bool isRedefiniton(KT_Prototype *p1, KT_Prototype *p2);
+
+
+	/**
+	* Retourne toutes les interfaces parents 
+	*/
 	std::vector<KT_Interface *> getAllParentInterfaces(KT_Class* classe);
 	std::vector<KT_Interface *> getAllParentInterfaces(KT_Interface* interface);
 
+	/**
+	* Retourne les prototypes ordonnées pour le polymorphisme.
+	*/
 	std::vector<KT_Prototype*> getActualMethodes(KT_Class*);
 	std::vector<KT_Prototype*> getActualMethodes(KT_Interface*);
 
+	// Implementer dans IRCompiler_solve_polymorphisme.cpp
+	/**
+	* Permet de trier les methodes pour cree les tables adHoc
+	*/
 	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Class* staticC, KT_Class* dynamiqueI);
 	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Interface* staticC, KT_Class* dynamiqueC);
 	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(KT_Interface* staticC, KT_Interface* dynamiqueI);
 	std::vector<KT_Prototype *> getPolymorphiqueMethodeFor(std::vector<KT_Prototype*> s, std::vector<KT_Prototype*> d);
 
-	// Implementer dans IR_compileradHoc.cpp
+	// Implementer dans IRCompiler_adHoc.cpp
+	/**
+	* Permet de cree les tables adHoc entre deux types
+	*/
 	Value* createAdHocTable(KT_Class *classeI);
 	Value* createAdHocTable(KT_Interface *interfaceI);
 	Value* createAdHocTable(KT_Class *classeI, KT_Class *classeII);
 	Value* createAdHocTable(KT_Interface* interfaceI, KT_Class *classeII);
 	Value* createAdHocTable(KT_Interface* interfaceI, KT_Interface* interfaceII);
-
-
 };
 
 

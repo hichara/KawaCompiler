@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+
+#include "llvm/IR/Module.h"
+class IRCompiler;
+
 using namespace std;
 
 
@@ -23,6 +27,8 @@ public:
     vector<KT_Statement*> getStatements();
 	virtual void toString();
 	void setStatements(vector<KT_Statement*> var);
+
+	virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 
 private:
     vector<KT_Statement*> statements;

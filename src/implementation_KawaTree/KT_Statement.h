@@ -20,6 +20,7 @@ public:
 	KT_Statement();
   virtual ~KT_Statement();
 	virtual void toString();
+	virtual void whoAmI();
 	virtual void accept(SemanticVisitor* visitor);
 
 	virtual llvm::Value *acceptIRCompiler(IRCompiler *compiler);	

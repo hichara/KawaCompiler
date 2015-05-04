@@ -33,7 +33,7 @@ public:
     /**
     * Methode accept pour le IRCompiler
     */
-    virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
+    //virtual llvm::Value* acceptIRCompiler(IRCompiler *compiler);
 
 private:
 	string* returnType;

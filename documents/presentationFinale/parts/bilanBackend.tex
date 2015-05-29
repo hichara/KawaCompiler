@@ -1,0 +1,134 @@
+\section{Bilan: backend}
+    \begin{frame}{Bilan: backend}{Le composant BackEnd}
+    	\begin{block}{Le composant BackEnd}
+	    	\begin{itemize}
+				\item<1-> Rappel de la fonction du composant
+				\begin{itemize}
+					\item<2-> Interpreter le kawatree bien formé par la semantique en un code llvm ir.
+				  	\item<3-> Produire le fichier \{nomp\_programme\}.ll
+				  	\item<4-> Compiler le programme en un executable
+				\end{itemize}
+	    	\end{itemize}
+	    \end{block}
+	\end{frame}
+	\begin{frame}{Bilan: backend}{Le composant BackEnd}
+    	\begin{block}{Le composant BackEnd}
+	    	\begin{itemize}
+
+				\item<1-> Structure du Back
+				 \begin{itemize}
+				 	\item<2-> IRCompiler : composant parcourant le kawaTree
+				  	\item<3-> Famille de generation : famille de composants metiers generant le code
+				  	\item<4-> compilateur llc et gcc pour la compilation finale
+				 	
+				 \end{itemize}
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+    \begin{frame}{Bilan: backend}{Deroulement de la mise en oeuvre du back-end}
+    	\begin{block}{Deroulement de la mise en oeuvre du back-end}
+	    	\begin{itemize}
+				\item<1-> Phase d'etude de l'architecture llvm au cours de laquelle il fallait se familiarisé avec l'Api
+
+				\item<2-> Etablissement de l'architecture du backend
+					\begin{itemize}
+						\item<3-> Famille de generation
+						\item<4-> IRCompiler
+					\end{itemize}
+
+				\item<5-> Choix du mode de devellopement
+					\begin{itemize}
+						\item<6-> Le devellopement du back end etait ascendant dans la mesure ou j'ai commencé par a develloper la famille de generation avant puis essayer de les integrer progressivement au IRCompiler.
+					\end{itemize}
+
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+    \begin{frame}{Bilan: backend}{Deroulement de la mise en oeuvre du back-end}
+    	\begin{block}{Deroulement de la mise en oeuvre du back-end}
+	    	\begin{itemize}
+				\item<1-> Probleme rencontré
+				\begin{itemize}
+					\item<2-> Révision à plusieurs reprise de l'architecture du back End à cause d'incoherences rencontrées au fur et a mesure que je devellopais, causant des retards
+
+					\item<3-> Tests unitaires longs a mettre en oeuvre et une compilation lente, accruant la fatigue.
+
+					\item<4-> Difficulté à tester le composant à cause d'une indisponibilité des tests. Causer par un manque de communication avec le testeur.
+
+					\item<5-> Peu de reference pour le produire le code.
+					
+				\end{itemize}
+
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+    \begin{frame}{Bilan: backend}{Deroulement de la mise en oeuvre du back-end}
+    	\begin{block}{Deroulement de la mise en oeuvre du back-end}
+	    	\begin{itemize}
+	    		\item<1-> Erreur commise
+	    		\begin{itemize}
+					\item<2-> Sous estimation de la tache.
+					\item<3-> Architecture defectuese.
+					\item<4-> Sous estimation de l'importance des tests
+	    		\end{itemize}
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+
+    \begin{frame}{Bilan: backend}{Bilan}
+    	\begin{block}{Bilan}
+	    	\begin{itemize}
+	    		\item<1-> Prise en charge de 
+	    		\begin{itemize}
+					\item<2-> Generation classe
+					\item<3-> Generation methodes
+					\item<4-> Generation appel de methodes
+					\item<5-> Generation attributs
+					\item<6-> Generation appel d'attribut
+					\item<7-> Generation affectaion
+					\item<8-> Generation affichage de types primitifs sur la sortie standards
+					\item<9-> Generation prise Table adHoc
+	    			
+	    		\end{itemize}
+	    	\end{itemize}
+	    \end{block}
+	\end{frame}
+
+	\begin{frame}{Bilan: backend}{Bilan}
+    	\begin{block}{Bilan}
+    		\begin{itemize}
+				\item<1-> Prise en charge mais non integrer
+				\begin{itemize}
+					\item<2-> Operation binaires
+				\end{itemize}
+
+				\item<3-> Non pris en charge
+				\begin{itemize}
+					\item<4-> Bloc intrucion a plusieurs niveau
+				\end{itemize}
+
+				\item<5-> Documentation pas en sync avec l'implementation.
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+    \begin{frame}{Bilan: backend}{Si c'était à refaire}
+    	\begin{block}{Si c'était à refaire}
+	    	\begin{itemize}
+	    		\item<1-> Meilleur communication avec le testeur
+				\item<2-> Revoir l'architecture
+				\item<3-> Changer le mode de dev
+	    	\end{itemize}
+	    \end{block}
+    \end{frame}
+
+	\begin{frame}{Bilan: backend}{Demo}
+    	\begin{itemize}
+    		\item<1-> Conclure avec la presentation d'une demo du back end
+    	\end{itemize}
+    \end{frame}
+

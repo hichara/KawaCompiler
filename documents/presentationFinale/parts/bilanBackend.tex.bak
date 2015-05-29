@@ -26,8 +26,8 @@
 	    \end{block}
     \end{frame}
 
-    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en oeuvre du BackEnd}
-    	\begin{block}{Déroulement de la mise en oeuvre du BackEnd}
+    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en œuvre du BackEnd}
+    	\begin{block}{Déroulement de la mise en œuvre du BackEnd}
 	    	\begin{itemize}
 				\item<1-> Phase d'étude de l'architecture LLVM au cours de laquelle il fallait se familiariser avec l'API
 
@@ -46,14 +46,14 @@
 	    \end{block}
     \end{frame}
 
-    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en oeuvre du BackEnd}
-    	\begin{block}{Déroulement de la mise en oeuvre du BackEnd}
+    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en œuvre du BackEnd}
+    	\begin{block}{Déroulement de la mise en œuvre du BackEnd}
 	    	\begin{itemize}
 				\item<1-> Problèmes rencontrés
 				\begin{itemize}
 					\item<2-> Révision à plusieurs reprise de l'architecture du BackEnd à cause d'incohérences rencontrées au fur et à mesure que je développais, causant des retards
 
-					\item<3-> Tests unitaires longs à mettre en oeuvre et une compilation lente, augmentant la fatigue.
+					\item<3-> Tests unitaires longs à mettre en œuvre et une compilation lente, augmentant la fatigue.
 
 					\item<4-> Difficulté à tester le composant à cause d'une indisponibilité des tests. Causer par un manque de communication avec le testeur.
 
@@ -65,8 +65,8 @@
 	    \end{block}
     \end{frame}
 
-    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en oeuvre du BackEnd}
-    	\begin{block}{Déroulement de la mise en oeuvre du BackEnd}
+    \begin{frame}{Bilan: BackEnd}{Déroulement de la mise en œuvre du BackEnd}
+    	\begin{block}{Déroulement de la mise en œuvre du BackEnd}
 	    	\begin{itemize}
 	    		\item<1-> Erreur commise
 	    		\begin{itemize}

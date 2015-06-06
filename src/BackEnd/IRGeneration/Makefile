@@ -21,6 +21,9 @@ CallGenerator:
 FunctionGenerator:
 	clang++ -g FunctionGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3 2> Makeout
 
+BasicInstructionGenerator:
+	clang++ -g BasicInstructionGenerator.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3 2> Makeout
+
 KawaUtilitary:
 	clang++ -g KawaUtilitary.cpp `llvm-config-3.5 --cxxflags --ldflags --system-libs --libs core` -O3
 
@@ -45,8 +48,7 @@ try:
 
 test: kawac
 	./kawac 2> kawac.ll
-	./kawac 2> Makeout
 	llc-3.5 kawac.ll
-	gcc kawac.s
+	gcc kawac.s -o main
 
 

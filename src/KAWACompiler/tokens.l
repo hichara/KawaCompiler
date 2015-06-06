@@ -25,6 +25,10 @@
 #include "../Semantique/CheckVariableStatementType.cpp"
 #include <map>
 #include <algorithm>
+
+#include "../BackEnd/IRCompiler/IRCompiler.h"
+#include "../BackEnd/IRCompiler/KT_includes.h"
+
 using namespace std;
 
 typedef std::string String;
@@ -190,7 +194,8 @@ int main( int argc, char** argv ){
          * Frontend
          ***/
         // analyse syntaxique --> production de l'AST avec KawaTree
-        yyparse();
+
+        if(!yyparse()){
 
         // analyse sémantique
         /*
@@ -203,7 +208,12 @@ int main( int argc, char** argv ){
          * Backend
          ***/
         // production de code intermédiare avec IRCompiler
+        IRCompiler *cmp = new IRCompiler;
 
+       //cmp->debugOn = false;
+
+       cmp->compile(program);
+        }
 
     }
 

@@ -48,8 +48,7 @@ int KT_Modifier::getVisibility() {
 * @param bool
 */
 void KT_Modifier::setStatic(bool var) {
-	visibility=var;
-
+	Static = var;
 }
 
 /**

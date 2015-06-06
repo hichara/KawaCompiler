@@ -50,6 +50,8 @@ public:
 
 	static std::string buildClassTypeName(std::string className);
 
+	static std::string StructNameToClass(std::string n);
+
 	static std::string buildClassStructTypeName(std::string className);
 
 	static std::string LLVMTypeToStr(Type* type);

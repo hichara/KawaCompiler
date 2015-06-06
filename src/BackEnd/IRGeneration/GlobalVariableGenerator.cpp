@@ -75,7 +75,6 @@ Value* GlobalVariableGenerator::createIndexOfMember(Module *module, std::string 
 Value* GlobalVariableGenerator::getIndexOfMember(Module *module, std::string name) {
 
 	GlobalVariable *g = module->getGlobalVariable(name);
-
 	Value *v = new LoadInst(g);
 
 	return v;	

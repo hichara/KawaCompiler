@@ -37,12 +37,12 @@ Type* IRCompiler::createType(KT_Interface* interface) {
 	std::vector<bool> att_static;
 
 	return TypeGenerator::createClassType(getModule(), 
-								*(interface->getName()),
+								*(interface->getFQN()),
 								att_names, att_types, att_static);	
 }
 
 
-Type* IRCompiler::createType(KT_Class * classe) {
+Type* IRCompiler::createType(KT_Class *classe) {
 
 	std::vector<KT_Attribute*> att = classe->getAttributes();
 
@@ -59,7 +59,7 @@ Type* IRCompiler::createType(KT_Class * classe) {
 	}
 
 	return TypeGenerator::createClassType(getModule(), 
-								*(classe->getName()),
+								*(classe->getFQN()),
 								att_names, att_types, att_static);
 }
 

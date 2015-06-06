@@ -29,7 +29,7 @@ public:
     /**
      * @param bool
      */
-    void setIsVoidReturn( bool var);
+    void setIsVoidReturn(bool var);
     
     /**
      * @param Kt_Expression *

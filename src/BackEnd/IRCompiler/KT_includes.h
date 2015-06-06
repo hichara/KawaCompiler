@@ -24,4 +24,9 @@
 #include "../../implementation_KawaTree/KT_Addition.h"
 
 
+// -------- extras KT ----------------------------
+
+#include "../KT_extra/KT_LoadAttribute.h"
+#include "../KT_extra/KawaTool.h"
+
 #endif

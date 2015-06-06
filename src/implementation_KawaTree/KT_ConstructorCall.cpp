@@ -29,7 +29,11 @@ vector<string*> KT_ConstructorCall::getName() {
  * @return KT_Constructor *
  */
 KT_Constructor* KT_ConstructorCall::getMethod() {
-    return NULL;
+    return constructor;
+}
+
+void KT_ConstructorCall::setMethod(KT_Constructor *c) {
+	constructor = c;
 }
 
 /**

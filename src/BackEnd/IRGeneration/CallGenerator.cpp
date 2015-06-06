@@ -25,18 +25,19 @@ Value* CallGenerator::createMethodeCall(Module *module, Function *f, Value *inst
 	std::vector<Value *> indexes, casted;
 
 	indexes.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
-	indexes.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));		
+	indexes.push_back(ConstantInt::get(Type::getInt32Ty(context), 1));
 
 	Value *adr_table = builder.CreateGEP(instance, indexes);
 	Value *table = builder.CreateLoad(adr_table);
+
+	casted.push_back(instance);
 
 	unsigned Idx = 0, size = args.size();
 
 	for(Function::arg_iterator AI = f->arg_begin(); Idx != size;
 	       ++AI, ++Idx) {
-		Value *c = builder.CreateBitCast(args[Idx], AI->getType());
-		casted.push_back(c);
-	}
+		casted.push_back(args[Idx]);
+	} 
 
     return createCallFromTable(module, f, table,  index, casted, bb);
 }
@@ -64,10 +65,11 @@ Value* CallGenerator::createCallFromTable(Module *module, Function *f, Value *ta
 	       ++AI, ++Idx) {
 
 		Value *c = builder.CreateBitCast(args[Idx], AI->getType());
+
 		casted.push_back(c);
 	}
 
-	return CallInst::Create(v4, args, "",bb);	
+	return CallInst::Create(v4, casted, "", bb);	
 }
 
 
@@ -103,7 +105,7 @@ Value* CallGenerator::createPrintCall(Module *module, Value *str, BasicBlock *bb
 
   Value *v = PrimitiveValueConverter::convertToStr(module, str, bb);
 
-  Function *f = FunctionGenerator::getOrCreatePutsFunction(module);
+  Function *f = FunctionGenerator::getOrCreatePrintf(module);
 
   std::vector<Value *> arg;
   arg.push_back(v);

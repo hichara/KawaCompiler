@@ -9,24 +9,8 @@
 #include "CallGenerator.h"
 #include "NameBuilder.h"
 #include "TypeGenerator.h"
+#include "KawaUtilitary.h"
 
-
-Value* BasicInstructionGenerator::createDeclaration(std::string varName, Type *type, BasicBlock *b) {
-	IRBuilder<> builder(type->getContext());
-	builder.SetInsertPoint(b);
-
-	return  builder.CreateAlloca(type, NULL, varName);
-}
-
-Value* BasicInstructionGenerator::createAffectation(Module *module, Value *target, Value *val, BasicBlock *b) {
-	
-	Type *type = target->getType()->getPointerElementType();
-
-	if(type->isStructTy())
-		return createAffectationObj(module, target, val, b);
-
-	return createAffectationReg(module, target, val, b);
-}
 
 Value *BasicInstructionGenerator::stripVal(Value* val, BasicBlock *b) {
 	Type* type = val->getType();
@@ -52,6 +36,23 @@ Value *BasicInstructionGenerator::stripVal(Value* val, BasicBlock *b) {
 	return val;	
 }
 
+Value* BasicInstructionGenerator::createDeclaration(std::string varName, Type *type, BasicBlock *b) {
+	IRBuilder<> builder(type->getContext());
+	builder.SetInsertPoint(b);
+
+	return  builder.CreateAlloca(type, NULL, varName);
+}
+
+Value* BasicInstructionGenerator::createAffectation(Module *module, Value *target, Value *val, BasicBlock *b) {
+	
+	Type *type = target->getType()->getPointerElementType();
+
+	if(type->isStructTy())
+		return createAffectationObj(module, target, val, b);
+
+	return createAffectationReg(module, target, val, b);
+}
+
 Value* BasicInstructionGenerator::createAffectationReg(Module *module, Value *target, Value *val, BasicBlock *b) {
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
@@ -69,6 +70,20 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
 
+
+	// ----- initialisation pour l'affectation----------
+
+	Value *newWrapper = builder.CreateAlloca(target->getType()->getPointerElementType());
+	newWrapper = builder.CreateLoad(newWrapper);
+
+//	std::vector<Constant*> initializer;
+// 	Value *newWrapper = ConstantStruct::get(
+//  		(StructType*)target->getType()->getPointerElementType(),
+// 		 initializer);
+
+  	builder.CreateStore(newWrapper, target);
+
+	//--- affectation-------
 	std::vector<Value*> indexI, indexII, empty;
 
 	indexI.push_back(ConstantInt::get(Type::getInt32Ty(target->getContext()), 0));
@@ -94,16 +109,22 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	}
 
 	std::string className = target->getType()->getPointerElementType()->getStructName().str();
+	className = NameBuilder::StructNameToClass(className);
+
 	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
+
 	std::string varName = NameBuilder::buildFunctionIndexName(s);
-	Value *adHocIndex = GlobalVariableGenerator::getIndexOfMember(module, varName);
+
+	Value *adHocIndex = GlobalVariableGenerator::getOrCreateIndexOfMember(module, varName, -1);
+
+	adHocIndex = builder.CreateLoad(adHocIndex);
 
 	Value *newDataPtr = builder.CreateGEP(val, indexI);
 	Value *newData    = builder.CreateLoad(newDataPtr);
 
-	Function *fs = FunctionGenerator::getFunction(module, s);
-	Value *newTable = CallGenerator::createMethodeCall(module, fs, val,
-					 empty, adHocIndex, b);
+	Function *fs = FunctionGenerator::getAdHocTableFunction(module, className, className);
+
+	Value *newTable = builder.CreateCall(fs, empty, "");
 
 	newData = builder.CreateBitCast(newData, oldData->getType());
 
@@ -113,6 +134,43 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	return target;
 }
 
+
+Value* BasicInstructionGenerator::createLoadAttribute(Module *module, Value *src, int attIndex, BasicBlock *b) {
+
+	if(src == NULL) {
+		KawaUtilitary::stopGenerationIR("src == NULL for instruction load attribute");
+	}
+
+	Type *tmp = src->getType();
+
+	while(tmp->isPointerTy()) {
+		tmp = tmp->getPointerElementType();
+	}
+
+	if(!tmp->isStructTy()) {
+		KawaUtilitary::stopGenerationIR("class Type expected for load attribute");
+	}
+
+	IRBuilder<> builder(module->getContext());
+	builder.SetInsertPoint(b);
+
+	std::vector<Value*> indexI, indexII;	
+
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(src->getContext()), 0));
+	indexI.push_back(ConstantInt::get(Type::getInt32Ty(src->getContext()), 0));
+
+	indexII.push_back(ConstantInt::get(Type::getInt32Ty(src->getContext()), 0));
+	indexII.push_back(ConstantInt::get(Type::getInt32Ty(src->getContext()), attIndex));
+
+	Value *att = builder.CreateGEP(src, indexI);
+	att = builder.CreateLoad(att);
+
+	att = builder.CreateGEP(att, indexII);
+
+	att = builder.CreateLoad(att);
+
+	return att;
+}
 
 
 ReturnInst* BasicInstructionGenerator::createReturn(BasicBlock *b, Type* type, Value *v) {

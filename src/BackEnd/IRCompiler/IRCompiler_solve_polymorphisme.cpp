@@ -130,7 +130,11 @@ std::vector<KT_Class*> IRCompiler::getAllParentClasses(KT_Class *classe) {
 
 	parent = classe->getParentClasseSemantique();
 
-	parent_classes.push_back(parent);
+	// En cas d'heritage multiple
+	while(parent != NULL) {
+		parent_classes.push_back(parent);		
+		parent = parent->getParentClasseSemantique();
+	}
 
 	return parent_classes;
 }

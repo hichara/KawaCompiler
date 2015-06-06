@@ -19,8 +19,6 @@
 #include <vector>
 #include <iostream>
 
-#include "llvm/Target/TargetLibraryInfo.h"
-#include "llvm/ADT/Triple.h"
 #include "llvm/IR/Type.h"
 
 

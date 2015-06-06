@@ -31,9 +31,7 @@ StructType* TypeGenerator::createClassType(Module *module,
 				
 		t = list_types[i];
 
-		if(t->isStructTy()){
-			t = t->getPointerTo();
-		}
+		t = t->getPointerTo();
 		
 		if(!isStatic[i]) {
 			llvm_types.push_back(t);

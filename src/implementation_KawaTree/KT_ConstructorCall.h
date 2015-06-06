@@ -28,6 +28,8 @@ public:
 
     KT_Constructor* getMethod();
 
+    void setMethod(KT_Constructor *cons);
+
     vector<KT_ParamsMethodCall*> getParams();
 
     /**
@@ -54,9 +56,10 @@ public:
 
     virtual llvm::Value *acceptIRCompiler(IRCompiler *compiler);
 	
-private: 
+private:
     vector<string*> name;
     vector<KT_ParamsMethodCall*> params;
+    KT_Constructor* constructor;
 };
 
 #endif //_KT_CONSTRUCTORCALL_H

@@ -20,8 +20,12 @@ std::string NameBuilder::buildFunctionName(std::string className,
 	if(name == "")
 		return "";
 
+	if(isStatic)
+		result << KawaEnumeration::STATIC << "_"; 
+
 	result << className << '.' << name << "_rt_";
 	result << strToKawaType(ret_type);
+	result << "_pt_";
 
 	if (list_type.size() == 0) {
 		result << "_" << KawaEnumeration::KAWA_VOID;
@@ -38,8 +42,6 @@ std::string NameBuilder::buildFunctionName(std::string className,
 		result << result.str() << "_" << tmp;
 	}
 
-	if(isStatic)
-		result << KawaEnumeration::STATIC << "_" << result.str(); 
 
 	return result.str();
 }
@@ -214,6 +216,10 @@ std::string NameBuilder::strToKawaType(std::string type) {
 		result << buildClassTypeName(type);
 
 	return result.str();
+}
+
+std::string NameBuilder::StructNameToClass(std::string n) {
+	return n.substr(KawaEnumeration::KAWA_CLASS_PREFIX.length());
 }
 
 std::string NameBuilder::LLVMTypeToStr(Type* type) {

@@ -66,12 +66,10 @@ Value* IRCompiler::compileString(KT_String *expr) {
 }
 
 Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
-	debug("compiling a KT_LinkedMethodCall");
+	debug("compiling a MethodCall");
 
 	KT_Prototype *proto = call->getMethod()->getPrototype();
 	bool isStatic = proto->getModifier()->isStatic();
-
-	Value *caller = compileVarOrAttr(call->getCaller());
 
 	Function *f = compile(proto);	
 	std::string index_str = NameBuilder::buildFunctionIndexName(
@@ -79,19 +77,33 @@ Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 
 	std::vector<KT_ParamsMethodCall*> params = call->getParams();
 	std::vector<Value*> v_args;
+	std::vector<Type*> param_types;
 
-	for(int i = 0; i < params.size(); i++) {
-		Value *v  = compileExpression(params[i]->getExpression());
-		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
-		v_args.push_back(v);
+	for(int i = 0; i < proto->getParams().size(); i++) {
+		std::string tn = fqnType(proto->getParams()[i]->getParamType()->getTypeName());
+		param_types.push_back(TypeGenerator::strToLLVMType(getModule(), tn));
 	}
 
-	Value *index = GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), index_str);
+	IRBuilder<> builder(getModule()->getContext());
+	builder.SetInsertPoint(getCurrentBlock());
+
+
+	for(int i = 0; i < params.size(); i++) {
+		Value *v = compileExpression(params[i]->getExpression());
+		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
+
+		v_args.push_back(v);
+	}
 
 	if(isStatic) {
 		return CallGenerator::createStaticMethodeCall(getModule(),
 			f->getName().str(), v_args, getCurrentBlock());
 	}
+
+	Value *caller = compileVarOrAttr(call->getCaller());
+
+	Value *index = GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), index_str);
+	index = builder.CreateLoad(index);
 
 	return CallGenerator::createMethodeCall(getModule(),
 	 f, caller, v_args, index, getCurrentBlock());
@@ -101,12 +113,14 @@ Value* IRCompiler::compileMethodCall(KT_MethodCall *call) {
 Value* IRCompiler::compileConstructorCall(KT_ConstructorCall *call) {
 	debug("compiling a KT_ConstructorCall");
 
+
 	KT_Constructor *cons = call->getMethod();
 	std::string name = *(cons->getName());
 	std::vector<KT_Param*> params = cons->getParams();
 
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
+
 
   	for(int i = 0; i < params.size(); i++) {
   		params_names.push_back(*(params[i]->getName()));
@@ -119,28 +133,39 @@ Value* IRCompiler::compileConstructorCall(KT_ConstructorCall *call) {
 								params_names);
 
   	f = FunctionGenerator::getConstructor(getModule(),
-  			name, params_types, params_types);
+  			name, params_types, params_names);
 
   	std::string consName = f->getName().str();
 
 	std::vector<KT_ParamsMethodCall*> params_call = call->getParams();
 	std::vector<Value*> v_args;
 
+	IRBuilder<> builder(getModule()->getContext());
+
 	for(int i = 0; i < params.size(); i++) {
-		Value *v  = compileExpression(params_call[i]->getExpression());
+		Value *v = compileExpression(params_call[i]->getExpression());
 		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
+
+		builder.SetInsertPoint(getCurrentBlock());
+		Value *vv = builder.CreateAlloca(TypeGenerator::strToLLVMType(getModule(),
+				 params_types[i]));
+
+		BasicInstructionGenerator::createAffectation(getModule(),
+			vv, v, getCurrentBlock());
+
 		v_args.push_back(v);
 	}
 
 	Value* res = CallGenerator::createStaticMethodeCall(getModule(),
 					 consName, v_args, getCurrentBlock());
 
+	debug("call done");
+
 	return res;
 }
 
 Value* IRCompiler::compileID(KT_ID *id) {
 	debug("compiling a KT_ID");
-
 
 	ValueSymbolTable &table = currentFunction->getValueSymbolTable();
 	Value *v;
@@ -152,13 +177,20 @@ Value* IRCompiler::compileID(KT_ID *id) {
 
 	while(currentlvl >= 0) {
 		std::stringstream str;
-		str << v_name << "_" << currentlvl;
+		str << v_name;
 
 		v = table.lookup(str.str());
 		if(v != NULL) {
-			v->dump();
 			return v;
 		}
+
+		str << "_" << currentlvl;
+		v = table.lookup(str.str());
+		if(v != NULL) {
+			return v;
+		}
+
+
 		currentlvl--;
 	}
 
@@ -190,4 +222,11 @@ Value* IRCompiler::compileAddition(KT_Addition *add) {
 	Type *t = PrimitiveValueConverter::dominatingType(vl->getType(), vg->getType());
 
 	return PrimitiveBinaryOperationGenerator::createAdd(getModule(), t, vl, vg, getCurrentBlock());
+}
+
+
+Value* IRCompiler::compileLoadAttribute(KT_LoadAttribute *att) {
+
+	return BasicInstructionGenerator::createLoadAttribute(getModule(), 
+		compileExpression(att->getCaller()), att->getIndex(), getCurrentBlock());
 }

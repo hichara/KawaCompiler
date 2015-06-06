@@ -8,6 +8,7 @@
 
 
 #include "KT_MethodOrVarCall.h"
+#include "KT_VarOrAttr.h"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -17,8 +18,8 @@ using namespace std;
 class IRCompiler;
 
 
-class KT_ID: public KT_MethodOrVarCall {
-public: 
+class KT_ID: public KT_MethodOrVarCall,public KT_VarOrAttr {
+public:
     KT_ID ();
     ~KT_ID ();
     vector<string*> getValue();

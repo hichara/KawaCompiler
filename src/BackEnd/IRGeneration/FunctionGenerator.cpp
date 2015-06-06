@@ -70,7 +70,7 @@ Function* FunctionGenerator::getOrCreateFunction(Module *module, bool isStatic,
 
 	std::vector<Type*> list_type;
 
-	if(isStatic) {
+	if(!isStatic) {
 		Type *c_type = TypeGenerator::strToLLVMType(module, className)->getPointerTo();
 		list_type.push_back(c_type);
 	}
@@ -183,7 +183,7 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	Value *adHoc = builder.CreateGEP(instance, indx);
 	builder.CreateStore(table, adHoc);
 
-	//inserttion des donnée
+	//insertion des donnée
 	std::string subtypeName = NameBuilder::buildClassStructTypeName(className);
 	Type *stype = module->getTypeByName(subtypeName);
 
@@ -195,6 +195,27 @@ Function* FunctionGenerator::getOrCreateConstructor(Module *module,
 	Value *ptrdata = builder.CreateGEP(instance, indx);
 
 	builder.CreateStore(data, ptrdata);
+
+	//initialisation des pointeur
+
+	int idx = 0;
+
+	for(Type::subtype_iterator it = stype->subtype_begin();
+	 it != stype->subtype_end(); ++it, ++idx) {
+
+	 	std::vector<Value*> index_elmt;
+		index_elmt.push_back(ConstantInt::get(Type::getInt32Ty(context), 0));
+		index_elmt.push_back(ConstantInt::get(Type::getInt32Ty(context), idx));
+
+	 	Type *tmp = *(it);
+	 	if(tmp->isPointerTy()) {
+	 		tmp = tmp->getPointerElementType();
+	 	}
+
+	 	Value*  al_elemt = builder.CreateAlloca(tmp);
+	 	Value* ptr_elemt = builder.CreateGEP(data, index_elmt);
+	 	builder.CreateStore(al_elemt, ptr_elemt);
+	}
 
 	//Appel de la fonction d'initiallisation
 	std::vector<Value*> callargs;
@@ -219,36 +240,28 @@ Function* FunctionGenerator::getFunction(Module *module, std::string name) {
  *--------------------------------------------------------------------
  */
 
-Function* FunctionGenerator::getOrCreateMainFunction(Module *module, std::string aC, std::string aV) {
+Function* FunctionGenerator::getOrCreateMainFunction(Module *module, int nbArgs) {
   Function *f = module->getFunction("main");
 
   if(f != NULL)
   	return f;
 
-  std::vector<std::string> args_names;
 
-  if(aC != "")
-  	args_names.push_back(aC);
-  if(aV != aC && aV != "")
-  	args_names.push_back(aV);
-
-  if(args_names.size() == 1)
+  if(nbArgs != 2 && nbArgs != 0)
   	KawaUtilitary::stopGenerationIR(KawaEnumeration::ERROR_MAIN_ONLY_TWO_NOT_EMPTY_NAME_REQUIRED);
 
   LLVMContext &context = module->getContext();
 
   std::vector<Type *> args;
 
-  if(args_names.size() == 2) {
+  if(nbArgs == 2) {
     args.push_back(Type::getInt32Ty(context));
-    args.push_back(Type::getInt8Ty(context)->getPointerTo()->getPointerTo());  	
+    args.push_back(Type::getInt8Ty(context)->getPointerTo()->getPointerTo());
   }
 
   FunctionType *ft = FunctionType::get(Type::getInt32Ty(context), args, false);
 
   f = Function::Create(ft, GlobalValue::ExternalLinkage ,"main", module);
-
-  initFunction(f, args_names, false); 
 
   return f;
 }
@@ -366,6 +379,29 @@ Function* FunctionGenerator::getOrCreateCallocFunction(Module *module) {
 
   	return f;	
 }
+
+Function* FunctionGenerator::getOrCreatePrintf(Module *module) {
+	Function *f = module->getFunction("printf");
+
+	if(f != NULL)
+		return f;
+
+	LLVMContext &context = module->getContext();
+
+	Type* i8 = Type::getInt8Ty(context);
+	Type* i32 = Type::getInt32Ty(context);
+
+	std::vector<Type*> args;
+
+	args.push_back(i8->getPointerTo());
+
+	FunctionType *ft = FunctionType::get(i32, args, true);
+  
+  	f = Function::Create(ft, GlobalValue::ExternalLinkage, "printf", module);
+
+  	return f;	
+}
+
 
 Function* FunctionGenerator::getOrCreateSprintf(Module *module) {
 	Function *f = module->getFunction("sprintf");

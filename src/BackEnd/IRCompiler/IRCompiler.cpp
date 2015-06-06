@@ -43,7 +43,23 @@ void IRCompiler::compile(KT_Package *package) {
   std::vector<KT_Interface*> interfaces = package->getInterfaces();
 
   int size_i = interfaces.size();
-  int size_c = classes.size();  
+  int size_c = classes.size();
+
+  debug("debut creation table adHoc interfaces");
+
+  for(int i = 0; i < size_i; i++) {
+    createAdHocTable(interfaces[i]);
+  }
+
+  debug("fin creation table adHoc interfaces");
+
+  debug("debut creation table adHoc classes");
+
+  for(int i = 0; i < size_c; i++) {
+    createAdHocTable(classes[i]);
+  }
+
+  debug("fin creation table adHoc classes");
 
   debug("debut compilation des interfaces");
   for(int i = 0; i < size_i; i++) {
@@ -52,7 +68,6 @@ void IRCompiler::compile(KT_Package *package) {
 
   debug("fin compilation des interfaces");
 
-
   debug("debut compilation des classes");
 
   for(int i = 0; i < size_c; i++) {
@@ -60,28 +75,42 @@ void IRCompiler::compile(KT_Package *package) {
   }
 
   debug("fin compilation des classes");
-
-  debug("debut creation table adHoc interfaces");
-
-  for(int i = 0; i < size_i; i++) {
-  	createAdHocTable(interfaces[i]);
-  }
-
-  debug("fin creation table adHoc interfaces");
-
-
-  debug("debut creation table adHoc classes");
-
-  for(int i = 0; i < size_c; i++) {
-  	createAdHocTable(classes[i]);
-  }
-
-  debug("fin creation table adHoc classes");
 }
 
 
 void IRCompiler::compile(KT_Class *classe) {
   debug("class");
+
+  //--------- Creation du type --------
+  std::stringstream info;
+
+  info << "creation structure " << *(classe->getFQN());
+
+  debug(info.str());
+
+  std::vector<std::string> att_names;
+  std::vector<std::string> types;
+  std::vector<bool> isstatic;
+
+  std::vector<KT_Attribute*> attributs = classe->getAttributes();
+
+  KT_Attribute *a;
+  for(int i = 0; i < attributs.size(); i++) {
+    a = attributs[i];
+    att_names.push_back(*(a->getName()));
+    types.push_back(fqnType(a->getType()->getTypeName()));
+    isstatic.push_back(a->getModifier()->isStatic());
+  }
+
+  TypeGenerator::createClassType(getModule(),
+            *(classe->getFQN()),
+            att_names, 
+            TypeGenerator::strToLLVMType(getModule(), types), 
+            isstatic);
+
+  debug("fin creation structure");
+
+  //-----------------------------------
 
 	std::vector<KT_SimpleMethod*> s_mehtodes = classe->getSimpleMethods();
 
@@ -140,8 +169,10 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 
 	bool istatic = modifier->isStatic();
 
-	err2 << "rtype : " << r_type << " et " << istatic;
+	err2 << "rtype : " << r_type << " et " << istatic << "\n";
 
+  debug(err2.str());
+  
 	//parametres
   	std::vector<std::string> params_names;
   	std::vector<std::string> params_types;
@@ -157,19 +188,20 @@ Function* IRCompiler::compile(KT_Prototype *p) {
   	}
     
     if(name == "main") {
-      return FunctionGenerator::getOrCreateMainFunction(getModule(), "argc", "argv");
+      return FunctionGenerator::getOrCreateMainFunction(getModule(), params_names.size());
     }
 
   	debug("fin boucle");
 
   	debug("avant declaration");
 
-  	Function *f =  FunctionGenerator::getOrCreateFunction(getModule(), istatic,
+  	Function *f = FunctionGenerator::getOrCreateFunction(getModule(), istatic,
 									className,
 									name,
 									r_type, 
 									params_types,
 									params_names);
+
   	debug("apres declaration");
 
 
@@ -195,13 +227,10 @@ Function* IRCompiler::compile(KT_SimpleMethod *methode) {
 
  	Function *f = compile(methode->getPrototype());
 
-  f->dump();
-  std::cerr << "\n";
-
   debug("Prototype recupere");
 
   currentFunction = f;
- 	currentBloc = FunctionGenerator::initFunction(f, param_names, addThis);
+  currentBloc = FunctionGenerator::initFunction(f, param_names, addThis);
 
   debug("Compilation bloc instructions");
 

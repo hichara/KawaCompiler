@@ -31,6 +31,7 @@ class KT_ReturnStatement;
 class KT_Addition;
 class KT_BlockStatement;
 class KT_Block;
+class KT_LoadAttribute;
 
 
 #define COMPILING_NONE  0
@@ -58,8 +59,6 @@ class IRCompiler {
 
 private:
 
-	bool debugOn = false;
-
 	Module *IRmodule;
 
 	LLVMContext &IRcontext = getGlobalContext();
@@ -85,6 +84,8 @@ private:
 public:
 
 	IRCompiler(); 
+
+	bool debugOn = false;
 
 	/**
 	* Compile les noeud du KawaTree
@@ -144,6 +145,7 @@ public:
 	Value* compileAddition(KT_Addition *add);
 	Value* compileBlockStatement(KT_BlockStatement *bstmt);
 	Value* compileBlock(KT_Block *bloc);
+ 	Value* compileLoadAttribute(KT_LoadAttribute *att);
 
 private:
 

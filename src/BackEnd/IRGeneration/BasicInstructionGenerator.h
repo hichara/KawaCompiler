@@ -37,16 +37,9 @@ public:
 	static Value* createDeclaration(std::string varName, Type* type, BasicBlock *b);
 	
 	/**
-	* La taille de l'array est purement statique
-	*/
-	static Value* createAllocOfArray(Type *type, BasicBlock *b);
-
-
-	/**
 	*  
 	*/
 	static Value* createAffectationReg(Module *module, Value *target, Value *val, BasicBlock *b);
-
 
 	/**
 	*
@@ -59,24 +52,9 @@ public:
 	static Value* createAffectation(Module *module, Value *target, Value *val, BasicBlock *b);
 
 	/**
-	* 
+	*  Cree l'acces a un attribut
 	*/
-	static Value* createLoad(Value *src, BasicBlock *b);
-
-	/**
-	*
-	*/
-	static Value* getVariableAdresse(Function *f, std::string name);
-
-	/**
-	*
-	*/
-	static Value* getVariableValue(Function *f, std::string name);
-
-	/**
-	*
-	*/
-	static Value* createGetPointerAt(Value *target, std::vector<Value*> v, BasicBlock *b);
+	static Value* createLoadAttribute(Module *module, Value *src, int attIndex, BasicBlock *b);
 
 	/**
 	* Cree un retour de valeur.
@@ -89,8 +67,7 @@ public:
 	/**
 	*  Termine une fonction par une instruction de retour null ou void
 	*/
-	static ReturnInst* endFunction(Function *f, BasicBlock *b);
-
+	static ReturnInst* endFunction(Function *f, BasicBlock *b);		
 };
 
 

@@ -21,9 +21,9 @@ Value* IRCompiler::createAdHocTable(KT_Interface* interface) {
 }
 
 Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
-	debug("creation table adHoc");
+	debug("creation table adHoc classe - classe");
 
-	std::vector<KT_Class *> classes;
+	std::vector<KT_Class*> classes;
 	std::vector<KT_Interface*> interfaces;
 	std::vector<KT_Prototype*> methodes;
 	std::vector<Function*> functions;
@@ -33,7 +33,8 @@ Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
 
 	int size_c = classes.size();
 	int size_i = interfaces.size();
-
+	std::stringstream str;
+	
 	for(int i = 0; i < size_c; i++) {
 		createAdHocTable(classes[i], c2);
 	}
@@ -42,10 +43,14 @@ Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
 		createAdHocTable(interfaces[i], c2);
 	}
 
+	debug("calcul polymorph");
+
 	methodes = getPolymorphiqueMethodeFor(c1, c2);
 
+	debug("succes calcul polymorph");
+
 	for(int i = 0; i < methodes.size(); i++) {
-		functions.push_back(prototypeMap[methodes[i]]);
+		functions.push_back(compile(methodes[i]));
 	}
 
 	for(int i = 0; i < classes.size(); i++) {
@@ -72,6 +77,8 @@ Value* IRCompiler::createAdHocTable(KT_Class* c1, KT_Class* c2) {
 }
 
 Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Class* c2) {
+	debug("creation table adHoc interface - classe");
+
 	std::vector<KT_Interface * > interfaces;
 	std::vector<KT_Prototype*> methodes;
 	std::vector<Function*> functions;
@@ -87,7 +94,7 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Class* c2) {
 	methodes = getPolymorphiqueMethodeFor(i1, c2);
 
 	for(int i = 0; i < methodes.size(); i++) {
-		functions.push_back(prototypeMap[methodes[i]]);
+		functions.push_back(compile(methodes[i]));
 	}
 
 	for(int i = 0; i < interfaces.size(); i++) {
@@ -107,6 +114,8 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Class* c2) {
 }
 
 Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Interface* i2) {
+	debug("creation table adHoc interface - interface");
+
 	std::vector<KT_Interface*> interfaces;
 	std::vector<KT_Prototype*> methodes;
 	std::vector<Function*> functions;
@@ -122,7 +131,7 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Interface* i2) {
 	methodes = getPolymorphiqueMethodeFor(i1, i2);
 
 	for(int i = 0; i < methodes.size(); i++) {
-		functions.push_back(prototypeMap[methodes[i]]);
+		functions.push_back(compile(methodes[i]));
 	}
 
 	for(int i = 0; i < interfaces.size(); i++) {

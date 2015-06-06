@@ -69,9 +69,13 @@ public:
 								 std::string nameDyn);
 
 	// Fonction primitives
-	static Function *getOrCreateMainFunction(Module *module, std::string aC = "", std::string aV = "");
+	static Function *getOrCreateMainFunction(Module *module, int nbArgs);
 
+	// Function puts
 	static Function *getOrCreatePutsFunction(Module *module);
+
+	// Function printf
+	static Function *getOrCreatePrintf(Module *module);
 
 	static Function *getOrCreateSprintf(Module *module);
 

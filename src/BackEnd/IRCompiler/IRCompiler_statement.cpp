@@ -14,25 +14,38 @@ Value* IRCompiler::compileStatement(KT_Statement *expr) {
 Value* IRCompiler::compileVariable(KT_Variable *var) {
 	debug("compiling a KT_Variable");
 
+	debug("name");
+
 	std::string name = fqnType(var->getName());
+
+	debug("type");
+
 	std::string type = fqnType(var->getType()->getTypeName());
 
 	std::stringstream r_name;
 
+	if(var->getType() == NULL) {
+		debug("No type");
+	}
+
 	r_name << name << "_" << getInbricationLevel();
 
 	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
-	Value *dec = BasicInstructionGenerator::BasicInstructionGenerator::createDeclaration(r_name.str(), t, getCurrentBlock());
+
+	Value *dec = BasicInstructionGenerator::createDeclaration(r_name.str(), t, getCurrentBlock());
 
 	KT_Expression *expr = var->getValue();
 
 	if(expr != NULL) {
-		debug("expr is not null");
 		Value *v = compileExpression(expr);
+
 		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
+
 		return BasicInstructionGenerator::createAffectation(getModule(),
 			dec, v, getCurrentBlock());
 	}
+
+	debug("fin compiling a KT_Variable");
 
 	return dec;
 }
@@ -47,7 +60,11 @@ Value* IRCompiler::compileAffectation(KT_Affectation *af) {
 	Value *v1 = compileExpression(lexpr);
 	Value *v2 = compileExpression(rexpr);
 
+	debug("bofore strip");
+
 	v2 = BasicInstructionGenerator::stripVal(v2, getCurrentBlock());
+
+	debug("before affectation");
 
 	return BasicInstructionGenerator::createAffectation(
 		getModule(), v1, v2, getCurrentBlock());
@@ -61,7 +78,7 @@ Value* IRCompiler::compilePrint(KT_Print *print) {
 	IRBuilder<> buider(getModule()->getContext());
 	buider.SetInsertPoint(getCurrentBlock());
 
-	Function *f = FunctionGenerator::getOrCreatePutsFunction(getModule());
+	Function *f = FunctionGenerator::getOrCreatePrintf(getModule());
 
 	for(int i = 0; i < args.size(); i++) {
 		Value *v = compileFactFinal(args[i]);
@@ -82,8 +99,9 @@ Value* IRCompiler::compileReturnStatement(KT_ReturnStatement *ret) {
 	IRBuilder<> buider(getContext());
 	buider.SetInsertPoint(getCurrentBlock());
 
-	if(ret->isVoidReturn())
-		buider.CreateRetVoid();
+	if(ret->isVoidReturn()) {
+		return buider.CreateRetVoid();
+	}
 
 	Value *v = compileExpression(ret->getReturnExpression());
 
@@ -111,7 +129,6 @@ Value* IRCompiler::compileBlock(KT_Block *bloc) {
 	debug("Debut compilatiton statements"); 
 
 	for(int i = 0; i < stmnts.size(); i++) {
-	    debug("controle boucle infinie");
 		compileStatement(stmnts[i]);
 	}
 

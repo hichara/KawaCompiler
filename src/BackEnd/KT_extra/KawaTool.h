@@ -29,6 +29,22 @@ public:
 	static KT_LoadAttribute* getLoadAtt(KT_Expression* caller, string name, int index, bool isstatic = false);
 	static KT_Affectation*	 getAffectation(KT_Expression* le, KT_Expression* re);
 	static KT_MethodCall*    getMethodeCall(KT_VarOrAttr *caller, KT_SimpleMethod *sm);
+	static KT_Interface*     getInterface(string name);
+
+	static KT_Constructor* 	   getConstructor(KT_Class* classe, string nameClasse);
+	static KT_ConstructorCall* getConstructorCall(KT_Constructor* cons);
+
+	static bool 			prototype_equal(KT_Prototype *p1, KT_Prototype *p2);
+	static string 			fqnType(vector<std::string*> vec);
+
+
+	static KT_Prototype* 	 CopyPrototype(KT_Prototype *p);
+
+
+//	static void addKT_PrototypeToInterface(KT_Class *c, KT_Interface *i);
+//	static void addKT_SimpleMethodeToClass(KT_Class *);
+//	static void addInterfaceParent();
+//	static void addClassParent();
 };
 
 #endif

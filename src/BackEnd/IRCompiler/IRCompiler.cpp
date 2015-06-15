@@ -211,9 +211,9 @@ Function* IRCompiler::compile(KT_Prototype *p) {
 }
 
 Function* IRCompiler::compile(KT_SimpleMethod *methode) {
-  	  debug("methode");
+  	  debug("Compiling simple methode");
 
-  	// A completer
+  // A completer
  	KT_Prototype* proto = methode->getPrototype();
  	std::vector<KT_Param*> params = proto->getParams();
  	std::vector<std::string> param_names;
@@ -231,6 +231,8 @@ Function* IRCompiler::compile(KT_SimpleMethod *methode) {
 
   currentFunction = f;
   currentBloc = FunctionGenerator::initFunction(f, param_names, addThis);
+
+  f->setLinkage(GlobalValue::LinkageTypes::ExternalLinkage);
 
   debug("Compilation bloc instructions");
 

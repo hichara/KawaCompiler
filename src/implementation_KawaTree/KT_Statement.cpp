@@ -15,7 +15,7 @@ KT_Statement::KT_Statement(){}
 
 
 void KT_Statement::toString() {
-	cout << "toString for KT_Statement";
+	//cout << "toString for KT_Statement";
 }
 
 void KT_Statement::whoAmI() {
@@ -26,7 +26,7 @@ void KT_Statement::whoAmI() {
 
 
 void KT_Statement::accept(SemanticVisitor* visitor){
-	cout << "kt statement visited : " << endl;
+	//cout << "kt statement visited : " << endl;
 	this->toString();
 }
 

@@ -197,22 +197,19 @@ int main( int argc, char** argv ){
 
         if(!yyparse()){
 
-        // analyse sémantique
-        /*
-        Semantic::check(program);
-        /*/
+          // analyse sémantique
+          
+          if(Semantic::check(program) == false)
+          {
+            //*/
+            /****
+            * Backend
+            ***/
+            // production de code intermédiare avec IRCompiler
+            IRCompiler *cmp = new IRCompiler;
 
-        Semantic::checkWithDebug(program);
-        //*/
-        /****
-         * Backend
-         ***/
-        // production de code intermédiare avec IRCompiler
-        IRCompiler *cmp = new IRCompiler;
-
-       //cmp->debugOn = false;
-
-       cmp->compile(program);
+            cmp->compile(program);
+          }
         }
 
     }

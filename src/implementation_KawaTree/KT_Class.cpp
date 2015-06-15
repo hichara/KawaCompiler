@@ -238,7 +238,8 @@ void KT_Class::setAllPrototypes(vector<KT_Prototype*> var){
 */
 void KT_Class::addPrototype(KT_Prototype* var) {
 	AllPrototypes.push_back(var);
-	var->setParentName(*(getFQN()));
+//	var->setParentName(*(getFQN()));
+//	cout << "Add KT_Prototype : " << *(getFQN()) << "\n";
 }
 
 /**

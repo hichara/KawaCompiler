@@ -36,16 +36,22 @@ void decoration(KT_Program * prog);
 
 class Semantic{public:
 	static bool existSemanticError;
-	static void check(KT_Program* prog){
+	static bool  check(KT_Program* prog){
 
 		createListOfType(prog);
 		createHeritage(prog);
 		decoration(prog);
+		if (Semantic::existSemanticError) {
+			cout << "\n\nErreur(s) dans la compilation" << endl;
+		} else {
+			cout << "\n\nCompilation reussie" << endl;
+		}
+		return Semantic::existSemanticError;
 	};
 
-	static void checkWithDebug(KT_Program* prog){
-		check(prog);
-		cout << endl << endl << "Resume " << endl << endl;
+	static bool checkWithDebug(KT_Program* prog){
+		bool error = check(prog);
+		cout << endl << endl << "Résumé " << endl << endl;
 		for (KT_Package * package : prog->getPackages()) {
 			cout << "-(P) " + *package->getName() << endl;
 			for (KT_Class * classe : package->getClasses()) {
@@ -98,11 +104,13 @@ class Semantic{public:
 			}
 		}
 		//*
-		if (Semantic::existSemanticError) {
-			cout << "\n\nIl y a des erreurs => compilation echouee => ICI CA PLANTE :D" << endl;
+		if (error) {
+			cout << "\n\nErreurs dans la compilation" << endl;
 		} else {
 			cout << "\n\nCompilation reussie" << endl;
 		}
+
+		return error;
 		//*/
 	}
 };

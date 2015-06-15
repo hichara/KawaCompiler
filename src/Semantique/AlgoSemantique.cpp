@@ -1,4 +1,5 @@
 #include "AlgoSemantique.h"
+#include "../BackEnd/KT_extra/KawaTool.h"
 
 map<string, KT_Class *> classTypes;             // Map des classes
 map<string, KT_Interface *> interfaceTypes;     // Map des interfaces
@@ -10,7 +11,6 @@ bool Semantic::existSemanticError = false;
 
 // Phase 1
 void createListOfType(KT_Program * prog) {
-	cout << "===================> Start P1 <===================" << endl << endl;
 	vector<string> packagesName;
 
 	// On parcourt chaque package
@@ -186,14 +186,11 @@ void createAndVerifySignaturePrototype(KT_Interface * interface, string * packag
 
 // TODO: reste le cas ClasseX implement I1,I1,I1
 int createHeritage(KT_Program * prog) {
-	cout << "===================> Start P2 <===================" << endl << endl;
 	// On parcourt chaque package, et chaque classe qu'il contient
 	for (KT_Package * package : prog->getPackages()) {
 		for (KT_Class * classe : package->getClasses()) {
 			// Si la classe hérite d'une classe mère,
-			cout << "createHeritage: " << *classe->getParentClass() << endl;
 			if (!classe->getParentClass()->empty()) {
-				cout << "je suis dans le if createHeritage" << endl;
 				string * fqn = new string(*package->getName() + "." + *classe->getParentClass());
 				// on verifie que le type existe
 				if (classTypes.find(*fqn) == classTypes.end()) {
@@ -207,13 +204,11 @@ int createHeritage(KT_Program * prog) {
 				}
 
 				// on décore
-				cout << *classe->getFQN() + " a pour classe mere : " + *classTypes[*fqn]->getFQN() << endl;
 				//TODO:
 				classe->setParentClasseSemantique(classTypes[*fqn]);
 			}
 			// Si la classe implémentes une ou plusieurs interfaces,
 			if (classe->getParentInterfaces().size() > 0) {
-				cout << "je suis dans le if interface createHeritage" << endl;
 				vector<KT_Interface *> listInter;
 				for (string * interface : classe->getParentInterfaces()) {
 					string * fqn = new string(*package->getName() + "." + *interface);
@@ -264,15 +259,13 @@ int createHeritage(KT_Program * prog) {
 // Phase 3
 
 void completion(KT_Class * classe) {
-	cout << "completion --- " << classe->getParentClasseSemantique() << endl;
 	if (classe->getParentClasseSemantique() != NULL) {
-		cout << "class name: " << classe->getName() << endl;
 		completion(classe->getParentClasseSemantique());
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
-			cout << "method name: " << methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
 
 				KT_Prototype * proto = new KT_Prototype();
+				proto->setParentName(*(classe->getFQN()));
 				proto->setModifier(methode->getModifier());
 				proto->setName(methode->getName());
 				vector<KT_Param*> x = methode->getParams();
@@ -286,7 +279,7 @@ void completion(KT_Class * classe) {
 		for (KT_Prototype * protoParent : classe->getParentClasseSemantique()->getAllPrototypes()) {
 			ispresent = false;
 			for (KT_Prototype * protoFils : classe->getAllPrototypes()) {
-				if (protoFils->equal(protoParent)) {
+				if (KawaTool::prototype_equal(protoFils, protoParent)) {
 					ispresent = true;
 				}
 			}
@@ -302,12 +295,10 @@ void completion(KT_Class * classe) {
 			 }*/
 		}
 	} else {
-		cout << "completion: pas de classe parent"  << endl;
 		for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
-			cout << "nom de méthode: " << *methode->getName() << endl;
 			if (methode->getPrototype() == NULL) {
-				cout << "proto null" << endl;
 				KT_Prototype * proto = new KT_Prototype();
+				proto->setParentName(*(classe->getFQN()));
 				proto->setModifier(methode->getModifier());
 				proto->setName(methode->getName());
 				vector<KT_Param*> x = methode->getParams();
@@ -335,7 +326,6 @@ void completionInterface(KT_Interface * interface) {
 
 // (en cours) reste indexation de toutes les methodes (mygod) + gestion des methodes heritees
 void decoration(KT_Program * prog) {
-	cout << endl << "decoration : " << endl;
 	for (KT_Package * package : prog->getPackages()) {
 		for (KT_Interface * interface : package->getInterfaces()) {
 			for (KT_Interface * iParent : interface->getParentsInterfacesSemantique()) {
@@ -368,10 +358,96 @@ void decoration(KT_Program * prog) {
 			completion(classe);
 
 			// on effectue le traitement sur les body de chaque methode
-
 			for (KT_SimpleMethod * methode : classe->getSimpleMethods()) {
 				if ((*methode->getName()).compare("main") == 0) {
-					//* todo: ligne a dé/commenter pour dé/activer le traitement
+
+
+					// Constructeur
+					KT_Constructor *cons1 = KawaTool::getConstructor(classe, "test.ClassA");
+					KT_Constructor *cons2 = KawaTool::getConstructor(classe, "test.ClassB");
+
+				    // ConsCall
+				    KT_ConstructorCall *consCall1 = KawaTool::getConstructorCall(cons1);
+				    KT_ConstructorCall *consCall2 = KawaTool::getConstructorCall(cons2);
+
+					// Declaration
+					KT_Variable *varA = KawaTool::getDeclaration("varA", "test.ClassA", consCall1);
+					KT_Variable *varB = KawaTool::getDeclaration("varB", "test.ClassB", consCall1);
+					KT_Variable *varC = KawaTool::getDeclaration("varC", "test.ClassB", consCall2);
+
+					// Bloc
+					KT_Block *b1 = new KT_Block;
+					KT_Block *b2 = new KT_Block;
+
+					methode->setBlock(b1);
+					cons1->setBlock(b2);					
+					cons2->setBlock(b2);					
+					// Statement 
+					vector<KT_Statement*> vec_stmnts1;
+					vector<KT_Statement*> vec_stmnts2;
+
+					vec_stmnts1.push_back(varA);
+					vec_stmnts1.push_back(varB);
+					vec_stmnts1.push_back(varC);
+
+					KT_Print *kt_endln = KawaTool::getPrint( KawaTool::getString("\n"));
+	
+					// Appel methode de la classe A
+					// ClassA a = new A();
+
+					for(KT_Prototype *p : classe->getAllPrototypes()) {
+						if ((*p->getName()).compare("main") != 0) {
+								KT_Prototype *callP = KawaTool::CopyPrototype(p);
+								callP->setParentName("test.ClassA");
+								KT_SimpleMethod *sm = new KT_SimpleMethod;
+								sm->setPrototype(callP);
+
+								// Methode call
+								KT_ID *idVarA = KawaTool::getID("varA");
+
+								KT_MethodCall *call = KawaTool::getMethodeCall(idVarA, sm);
+
+
+								vec_stmnts1.push_back(call);
+								vec_stmnts1.push_back(kt_endln);
+						}
+
+/*
+						if((*p->getName()).compare("methodeTrois") == 0) {
+								cout << "je suis dans le second if \n";
+								KT_SimpleMethod *sm = new KT_SimpleMethod;
+								KT_Prototype *pp = KawaTool::CopyPrototype(p);
+								pp->setParentName("test.ClassB");
+								sm->setPrototype(pp);
+
+
+								KT_ID *idVarB = KawaTool::getID("varB");
+								KT_ID *idVarC = KawaTool::getID("varC");
+
+								KT_MethodCall *call = KawaTool::getMethodeCall(idVarB, sm);
+								KT_MethodCall *call2 = KawaTool::getMethodeCall(idVarC, sm);
+
+								cout << "prototype appelle : " << *(p->getName()) << "\n";
+
+								vec_stmnts1.push_back(call);
+								vec_stmnts1.push_back(kt_endln);							
+								vec_stmnts1.push_back(call2);
+								vec_stmnts1.push_back(kt_endln);							
+						}*/
+					}
+
+					// Appel methode 3 Avec ClassB b = new A();
+
+
+
+
+					// Ajout des statements aux blocs
+
+					b1->setStatements(vec_stmnts1);
+					b2->setStatements(vec_stmnts2);
+
+					/*
+					// todo: ligne a dé/commenter pour dé/activer le traitement
 					KT_Block* mainBlock = methode->getBlock();
 					bool mainIsGood = true;
 					SemanticVisitor* affectationVisitor = new CheckAffectationStatementType();
@@ -400,8 +476,10 @@ void decoration(KT_Program * prog) {
 						cout << "!!!!!!! ERREUR * !!!!!!!! Méthode main doit comporter uniquement des déclarations,"
 						     << "affectations ou appels de méthodes uniquement" << endl;
 					}
-					//*/
+					
 					//cout << "main" << endl;
+					*/
+
 				} else {
 					KT_Print * ktPrint = new KT_Print();
 					vector<KT_FactFinal *> args;
@@ -412,11 +490,10 @@ void decoration(KT_Program * prog) {
 					ktPrint->setArgs(args);
 
 					//cout << "simple methode :" << endl;
-				}
+				} 
 			}
 
 			// analyse des appels
-			cout << "analyse appels" << endl;
 			CheckConstructorCallStatementType* constructorCallVisitor = new CheckConstructorCallStatementType;
 			for(KT_SimpleMethod* method : classe->getSimpleMethods()){
 				KT_Block* block = method->getBlock();
@@ -427,6 +504,7 @@ void decoration(KT_Program * prog) {
 			}
 		}
 	}
+
 }
 
 int main_semantic() {
@@ -758,11 +836,11 @@ int main_semantic() {
 
 	if (Semantic::existSemanticError) {
 		cout << "\n\nIl y a des erreurs => compilation echouee => ICI CA PLANTE :D" << endl;
+		return -1;
 	} else {
 		cout << "\n\nCompilation reussie" << endl;
+		return 0;
 	}
-	return EXIT_SUCCESS;
-
 	/*
 
 	 // *************** variable 1 **********************

@@ -3,7 +3,7 @@
 #include "KT_includes.h"
 
 std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Class* classe) {
-	std::vector<KT_SimpleMethod*> methodes;
+/*	std::vector<KT_SimpleMethod*> methodes;
 	std::vector<KT_Prototype*> herited, res;
 
 	if(classe == NULL) {
@@ -11,6 +11,15 @@ std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Class* classe) {
 	}
 	
 	KT_Class* parent_classe = classe->getParentClasseSemantique();
+
+	if(parent_classe == NULL) {
+		std::cout << "Aucune parent pour la classe :" << *(classe->getFQN()) << "\n";
+	} else {
+		std::cout << "Parent pour la classe :" << *(classe->getFQN()) << " est ";		
+		std::cout << *(parent_classe->getFQN()) << "\n";		
+	}
+
+
 	std::vector<KT_Interface*> interfaces = classe->getParentsInterfacesSemantique();
 
 	bool redefined;
@@ -26,6 +35,7 @@ std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Class* classe) {
 	herited = getActualMethodes(parent_classe);
 
 	for(int i = 0; i < herited.size(); i++) {
+		std::cout << "methode herirte " << *(herited[i]->getName()) << "\n";
 		redefined = false;
 		for(int j = 0; j < res.size(); j++) {
 			if(isRedefiniton(res[j], herited[i])){
@@ -59,14 +69,13 @@ std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Class* classe) {
 			}
 		}		
 	}
-
-
-	return res;
+*/
+	return classe->getAllPrototypes();
 }
 
 
 std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Interface* interface) {
-	std::vector<KT_Prototype*> res;
+/*	std::vector<KT_Prototype*> res;
 
 	if(interface == NULL) {
 		return res;
@@ -98,14 +107,14 @@ std::vector<KT_Prototype*> IRCompiler::getActualMethodes(KT_Interface* interface
 			}
 		}		
 	}
-
-	return res;
+*/
+	return interface->getPrototypes();
 }
 
 bool IRCompiler::isRedefiniton(KT_Prototype *p1, KT_Prototype *p2) {
 	bool b1 = *(p1->getName()) == *(p2->getName());
     
-	b1 = fqnType(
+	b1 = b1 && fqnType(
 		p1->getReturnType()->getTypeName()) == fqnType(
 		p2->getReturnType()->getTypeName());
 
@@ -205,8 +214,7 @@ std::vector<KT_Prototype*> IRCompiler::getPolymorphiqueMethodeFor(std::vector<KT
 
 		for(int j = 0; j < size_d; j++) {
 			if(isRedefiniton(s[i], d[j])) {
-				res.push_back(d[i]);
-				break;
+				res.push_back(d[j]);
 			}
 		}
 	}

@@ -28,9 +28,15 @@ Value* IRCompiler::compileVariable(KT_Variable *var) {
 		debug("No type");
 	}
 
+	debug("1\n");
+
 	r_name << name << "_" << getInbricationLevel();
 
+	debug("2\n");
+
 	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
+
+	debug("1\n");
 
 	Value *dec = BasicInstructionGenerator::createDeclaration(r_name.str(), t, getCurrentBlock());
 

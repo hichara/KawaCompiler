@@ -40,6 +40,15 @@ KT_Param* KawaTool::getParam(string name, string type) {
 	return p;
 }
 
+KT_Prototype* KawaTool::CopyPrototype(KT_Prototype *p) {
+	KT_Prototype *newP = new KT_Prototype;
+
+	*newP = *p;
+	
+	return newP;
+}
+
+
 KT_Class* KawaTool::getClass(string name) {
 	KT_Class *c = new KT_Class;
 
@@ -143,3 +152,71 @@ KT_MethodCall* KawaTool::getMethodeCall(KT_VarOrAttr *caller, KT_SimpleMethod *s
 
 	return call;
 }
+
+KT_Constructor* KawaTool::getConstructor(KT_Class*classe, string name) {
+
+	KT_Constructor *cons1 = new KT_Constructor;
+	cons1->setName(new string(name));
+	cons1->setModifier(new KT_Modifier);
+    classe->addConstructor(cons1);
+
+    return cons1;
+}
+
+KT_ConstructorCall* KawaTool::getConstructorCall(KT_Constructor* cons1) {
+	
+	KT_ConstructorCall *consCall1 = new KT_ConstructorCall;
+	std::vector<KT_ParamsMethodCall*> var_cons_call;
+
+	consCall1->setMethod(cons1);
+	consCall1->setParams(var_cons_call);
+
+	return consCall1;
+}
+
+
+bool KawaTool::prototype_equal(KT_Prototype *p1, KT_Prototype *p2) {
+	bool b1 = *(p1->getName()) == *(p2->getName());
+    
+	b1 = b1 && fqnType(
+		p1->getReturnType()->getTypeName()) == fqnType(
+		p2->getReturnType()->getTypeName());
+
+    std::vector<KT_Param*> params1 = p1->getParams();
+    std::vector<KT_Param*> params2 = p2->getParams();
+
+    b1 = b1 && (params1.size() == params2.size());
+
+	for(int i = 0; i < params1.size() && b1; i++) {
+		std::string s1 = fqnType(params1[i]->getParamType()->getTypeName());
+		std::string s2 = fqnType(params2[i]->getParamType()->getTypeName());
+
+		b1 = (s1 == s2);
+	}
+    
+	return b1;
+}
+
+string KawaTool::fqnType(vector<std::string*> vec) {
+	std::stringstream res;
+
+	res << *(vec[0]);
+	for(int i = 1; i < vec.size(); i++) {
+		res << "." << *(vec[i]);
+	}
+
+	return res.str();
+}
+
+
+
+/*
+KT_Interface* KawaTool::getInterface(string name) {
+
+	KT_Interface *i = new KT_Interface;
+
+	i->setName(new string(name));
+
+	return i;
+}
+*/

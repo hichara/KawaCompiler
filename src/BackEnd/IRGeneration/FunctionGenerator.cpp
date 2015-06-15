@@ -85,7 +85,7 @@ Function* FunctionGenerator::getOrCreateFunction(Module *module, bool isStatic,
 
 	FunctionType *ftype = FunctionType::get(r_type, list_type, false);
 
-	f = Function::Create(ftype, Function::ExternalLinkage, functionName, module);
+	f = Function::Create(ftype, Function:: ExternalWeakLinkage, functionName, module);
 
 	return f;
 }

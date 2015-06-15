@@ -94,14 +94,11 @@ Value* GlobalVariableGenerator::createAdHocTable(Module *module,
 	ArrayType*  arty = ArrayType::get(i8ptr, size);
 
 	std::vector<Constant *> casts;
-	std::string indexName;
-	Constant *cast;
+	
 
 	for(int i = 0; i < functions.size(); i++) {
-		cast = ConstantExpr::getBitCast(functions[i], i8ptr);
+		Constant *cast = ConstantExpr::getBitCast(functions[i], i8ptr);
 		casts.push_back(cast);
-		indexName = NameBuilder::buildFunctionIndexName(functions[i]->getName().str());
-		getOrCreateIndexOfMember(module, indexName, i);
 	}
 
 	std::string tableName = NameBuilder::buildAdHocTableName(classStatic, classDynamic);

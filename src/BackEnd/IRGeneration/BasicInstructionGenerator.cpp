@@ -108,10 +108,12 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 		return target;
 	}
 
-	std::string className = target->getType()->getPointerElementType()->getStructName().str();
-	className = NameBuilder::StructNameToClass(className);
+	std::string classNameS = target->getType()->getPointerElementType()->getStructName().str();
+	std::string classNameD = 	val->getType()->getPointerElementType()->getStructName().str();
+	classNameS = NameBuilder::StructNameToClass(classNameS);
+	classNameD = NameBuilder::StructNameToClass(classNameD);
 
-	std::string s = NameBuilder::buildgetAdHocTableFunction(className, className);
+	std::string s = NameBuilder::buildgetAdHocTableFunction(classNameS, classNameD);
 
 	std::string varName = NameBuilder::buildFunctionIndexName(s);
 
@@ -119,12 +121,16 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 
 	adHocIndex = builder.CreateLoad(adHocIndex);
 
-	Value *newDataPtr = builder.CreateGEP(val, indexI);
-	Value *newData    = builder.CreateLoad(newDataPtr);
+	Value *newDataPtr  = builder.CreateGEP(val, indexI);
+	Value *newData     = builder.CreateLoad(newDataPtr);
 
-	Function *fs = FunctionGenerator::getAdHocTableFunction(module, className, className);
+	Value *newTablePtr = builder.CreateGEP(val, indexII);
+	Value *newTable    = builder.CreateLoad(newTablePtr);
 
-	Value *newTable = builder.CreateCall(fs, empty, "");
+	Function *fs = FunctionGenerator::getAdHocTableFunction(module, classNameS, classNameD);
+
+	newTable = CallGenerator::createCallFromTable(module, fs, newTable, 
+	adHocIndex, empty, b);
 
 	newData = builder.CreateBitCast(newData, oldData->getType());
 

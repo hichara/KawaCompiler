@@ -412,9 +412,8 @@ void decoration(KT_Program * prog) {
 								vec_stmnts1.push_back(kt_endln);
 						}
 
-/*
+
 						if((*p->getName()).compare("methodeTrois") == 0) {
-								cout << "je suis dans le second if \n";
 								KT_SimpleMethod *sm = new KT_SimpleMethod;
 								KT_Prototype *pp = KawaTool::CopyPrototype(p);
 								pp->setParentName("test.ClassB");
@@ -427,13 +426,12 @@ void decoration(KT_Program * prog) {
 								KT_MethodCall *call = KawaTool::getMethodeCall(idVarB, sm);
 								KT_MethodCall *call2 = KawaTool::getMethodeCall(idVarC, sm);
 
-								cout << "prototype appelle : " << *(p->getName()) << "\n";
 
 								vec_stmnts1.push_back(call);
 								vec_stmnts1.push_back(kt_endln);							
 								vec_stmnts1.push_back(call2);
 								vec_stmnts1.push_back(kt_endln);							
-						}*/
+						}
 					}
 
 					// Appel methode 3 Avec ClassB b = new A();

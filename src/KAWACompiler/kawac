@@ -8,11 +8,34 @@ usage() {
 	exit 0
 }
 
-monoc(){
-	echo "compilation du fichier $1 en mode monolitique";
-	./kawac -m $1
+check(){
+	if [ ! $? = 0 ];
+	then
+		echo $1
+	fi
 	exit $?
 }
+
+monoc(){
+	echo "compilation du fichier $1 en mode monolitique";
+	./kawap -m $1
+
+	#get filename only
+	NAME=`echo "$FILE" | cut -d'.' -f1`
+
+	check "kawac: la compilation a échouée"
+	llc-3.5	$NAME.ll
+	check "llc: la compilation a échouée" 
+	gcc $NAME.s -o $NAME.out
+	check "gcc: la compilation a échouée"
+	exit $?
+}
+
+if [ ! -f "kawap" ];
+then
+	echo "compilez kawap"
+	exit 0
+fi
 
 if [ $# = 0 ];
 then

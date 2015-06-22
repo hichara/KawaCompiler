@@ -277,15 +277,17 @@ void completion(KT_Class * classe) {
 		}
 		bool ispresent;
 		for (KT_Prototype * protoParent : classe->getParentClasseSemantique()->getAllPrototypes()) {
-			ispresent = false;
-			for (KT_Prototype * protoFils : classe->getAllPrototypes()) {
-				if (KawaTool::prototype_equal(protoFils, protoParent)) {
-					ispresent = true;
+			if(protoParent->getModifier()->getVisibility() != 3){
+				ispresent = false;
+				for (KT_Prototype * protoFils : classe->getAllPrototypes()) {
+					if (KawaTool::prototype_equal(protoFils, protoParent)) {
+						ispresent = true;
+					}
 				}
-			}
-			if (!ispresent) {
-				classe->addPrototype(protoParent);
-				classe->addSignature(protoParent->toString());
+				if (!ispresent) {
+					classe->addPrototype(protoParent);
+					classe->addSignature(protoParent->toString());
+				}
 			}
 			/*
 			 vector<string> signa = classe->getFullSignatures();

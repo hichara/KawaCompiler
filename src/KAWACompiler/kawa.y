@@ -496,7 +496,7 @@ ClassDeclaration
 		$$->setParentClass($3);
 		$$->setParentInterfaces(*$4);
 		$$->setMemberDec(*$5);
-		cout<<"MemberDec : " << $$->getSimpleMethods().size() << endl;
+		//cout<<"MemberDec : " << $$->getSimpleMethods().size() << endl;
 	}
 ;
 
@@ -521,7 +521,7 @@ MemberDecs
 	| {
 		vector<PARSER_MemberDec*>* var = new vector<PARSER_MemberDec*>;
 		$$ = var;
-		cout << "epsilon  :";
+		//cout << "epsilon  :";
 	}
 ;
 

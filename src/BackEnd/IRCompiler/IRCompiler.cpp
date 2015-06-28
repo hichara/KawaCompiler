@@ -28,7 +28,7 @@ void IRCompiler::compile(KT_Program *program) {
 
   pName << progName << ".ll";
 
-  int fd = open(pName.str().c_str(), O_CREAT | O_WRONLY, S_IRWXU | S_IRWXG | S_IRWXG);
+  int fd = open(pName.str().c_str(), O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXG);
 
   raw_fd_ostream my_out(fd, true);
 

@@ -1,1 +1,1 @@
-kawa.cpp kawa.hpp kawap tokens.cpp
+kawa.cpp kawa.hpp kawap tokens.cpp *.ll *.s

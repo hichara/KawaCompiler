@@ -1,5 +1,5 @@
 package test;
-<<<<<<< HEAD
+
 class ClassA extends ClassB {
 
 	public void methodeUn() {

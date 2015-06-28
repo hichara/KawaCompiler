@@ -1,0 +1,11 @@
+package test;
+class ClassC implements InterfaceI {
+
+	public void methodeSept() {
+		print("Methode 7 in C");
+	}
+
+	public void methodeFromI() {
+		print("Methode From I in C");
+	}
+}

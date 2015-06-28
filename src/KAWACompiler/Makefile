@@ -10,7 +10,7 @@ KTXTRA=   ../BackEnd/KT_extra
 all: kawap
 
 clean:
-	@rm -f kawa.cpp kawa.hpp kawac tokens.cpp
+	@rm -f kawa.cpp kawa.hpp kawap tokens.cpp
 
 lexer: parser tokens.l
 	lex -o tokens.cpp tokens.l kawa.hpp

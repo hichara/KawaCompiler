@@ -4,7 +4,7 @@
 *.log
 *.nav
 *.snm
-kawac
+kawap
 tokens.cpp
 kawa.cpp
 kawa.hpp

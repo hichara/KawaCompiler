@@ -3,6 +3,7 @@
 KAWA_COLOR=0
 KAWA_OUT="a.out"
 KAWA_VERSION="0.5"
+KAWA_AUTO_RUN=0;
 
 usage() {
 	echo "Usage: kawa [-h] | [-c] | [-o output_name] -m KAWA_FILES"
@@ -85,7 +86,7 @@ monoc(){
 		color_end
 	fi
 		
-	
+	rm program.ll program.s $KAWA_OUT
 	./kawap -m $KAWA_SRC
 	check "kawap: la compilation a échouée"
 	
@@ -100,6 +101,12 @@ monoc(){
 	color_begin $KAWA_COLOR_YELLOW
 	echo "Executable: $KAWA_OUT"
 	color_end
+	if [ $KAWA_AUTO_RUN -eq 1 ]; then
+		color_begin $KAWA_COLOR_WHITE
+		echo "Lancement du programme:\n"
+		color_end
+		./$KAWA_OUT
+	fi
 	exit $?
 }
 
@@ -114,9 +121,10 @@ then
 	usage
 fi
 
-while getopts co:m:h opts; do
+while getopts cro:m:h opts; do
  case ${opts} in
   c) KAWA_COLOR=1;;
+  r) KAWA_AUTO_RUN=1;;
   o) KAWA_OUT=$OPTARG;;
   m) monoc $@;;
   h) usage;;

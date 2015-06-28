@@ -17,7 +17,7 @@ class ClassA extends ClassB {
 	public void methodeFromI() {
 		print("Methode From I in A");
 	}
-
+	
 	public static void main() {
 		ClassA varA = new ClassA();
 		ClassB varB = new ClassA();

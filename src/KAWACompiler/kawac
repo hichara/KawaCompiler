@@ -89,9 +89,9 @@ monoc(){
 	./kawap -m $KAWA_SRC
 
 	check "kawap: la compilation a échouée"
-	llc-3.5	$KAWA_OUT.ll
+	llc-3.5	program.ll
 	check "llc: la compilation a échouée" 
-	gcc $KAWA_OUT.s -o $KAWA_OUT
+	gcc program.s -o $KAWA_OUT
 	check "gcc: la compilation a échouée"
 	color_begin KAWA_COLOR_GREEN
 	echo "Compilation réussie: $KAWA_SRC"

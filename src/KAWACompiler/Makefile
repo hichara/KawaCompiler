@@ -12,6 +12,9 @@ all: kawap
 clean:
 	@rm -f kawa.cpp kawa.hpp kawap tokens.cpp
 
+clean-backend:
+	@rm *.ll *.s
+
 lexer: parser tokens.l
 	lex -o tokens.cpp tokens.l kawa.hpp
 

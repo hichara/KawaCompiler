@@ -1,39 +1,107 @@
 #!/bin/sh
 
+KAWA_COLOR=0
+KAWA_OUT="a.out"
+KAWA_VERSION="0.5"
+
 usage() {
-	echo "Usage: kawa [-m KAWA_FILE] | [-h]"
+	echo "Usage: kawa [-h] | [-c] | [-o output_name] -m KAWA_FILES"
+	echo "VERSION $KAWA_VERSION"
 	echo "OPTIONS:"
-	echo "\tm KAWA_FILE : lance la compilation de KAWA_FILE en mode monolitique"
 	echo "\th           : affiche l'aide"
+	echo "\tc           : affiche la sortie en couleur"
+	echo "\to           : définit le nom de l'exécutable"
+	echo "\tm KAWA_FILES : lance la compilation des fichiers KAWA_FILES en mode monolitique"
+	echo "\n\nIMPORTANT"
+	echo "\t Il est important de finir la commande par l'ensemble des fichiers à compiler."
+	echo "\tAutrement, les options qui suivent seront vues comme des noms de fichiers"
 	exit 0
+}
+
+
+KAWA_COLOR_GREEN="1;32"
+KAWA_COLOR_RED="1;31"
+KAWA_COLOR_MAGENTA="1;35"
+KAWA_COLOR_WHITE="1;37"
+KAWA_COLOR_YELLOW="1;33"
+
+color_begin(){
+	if [ $KAWA_COLOR -eq 1 ]; then
+		echo -n "\033[$1m"
+	fi
+}
+
+color_end(){
+	if [ $KAWA_COLOR -eq 1 ]; then
+		echo -n "\033[0m"
+	fi
 }
 
 check(){
 	if [ ! $? = 0 ];
 	then
+		color_begin $KAWA_COLOR_RED
 		echo $1
+		color_end
 	fi
 	exit $?
 }
 
 monoc(){
-	echo "compilation du fichier $1 en mode monolitique";
-	./kawap -m $1
+	shift $((OPTIND-2))
+	KAWA_SRC=""
+	for kawaSrc in $*; do
+		EXTENSION=`echo "$kawaSrc" | cut -d'.' -f2`
+		if [ $EXTENSION = "kawa" ]; then
+			if [ ! -f "$kawaSrc" ]; then
+				color_begin $KAWA_COLOR_WHITE
+				echo -n $kawaSrc
+				color_begin $KAWA_COLOR_RED
+				echo " est introuvable"
+				color_end
+			else
+				KAWA_SRC="$KAWA_SRC $kawaSrc"
+			fi
+		else
+			color_begin $KAWA_COLOR_YELLOW
+			echo -n "le fichier "
+			color_begin $KAWA_COLOR_WHITE
+			echo -n $kawaSrc
+			color_begin $KAWA_COLOR_YELLOW
+			echo -n " doit avoir l'extention "
+			color_begin $KAWA_COLOR_WHITE
+			echo ".kawa"
+			color_end
+		fi
+	done
+	if [ "$KAWA_SRC" = "" ]; then
+		color_begin $KAWA_COLOR_MAGENTA
+		echo "Aucun fichier à compiler"
+		color_end
+		exit
+	else
+		color_begin $KAWA_COLOR_WHITE
+		echo "Compilation en mode monolithique"
+		color_end
+	fi
+		
+	
+	./kawap -m $KAWA_SRC
 
-	#get filename only
-	NAME=`echo "$FILE" | cut -d'.' -f1`
-
-	check "kawac: la compilation a échouée"
-	llc-3.5	$NAME.ll
+	check "kawap: la compilation a échouée"
+	llc-3.5	$KAWA_OUT.ll
 	check "llc: la compilation a échouée" 
-	gcc $NAME.s -o $NAME.out
+	gcc $KAWA_OUT.s -o $KAWA_OUT
 	check "gcc: la compilation a échouée"
+	color_begin KAWA_COLOR_GREEN
+	echo "Compilation réussie: $KAWA_SRC"
+	color_end
 	exit $?
 }
 
 if [ ! -f "kawap" ];
 then
-	echo "compilez kawap"
+	echo "compilez kawap \ncommande à taper: make"
 	exit 0
 fi
 
@@ -42,11 +110,17 @@ then
 	usage
 fi
 
-while getopts m:h opts; do
+while getopts co:m:h opts; do
  case ${opts} in
+  c) KAWA_COLOR=1;;
+  o) KAWA_OUT=$OPTARG;;
+  m) monoc $@;;
   h) usage;;
-  m) monoc ${OPTARG} ;;
  esac
 done
+# si aucune option n'a été renseignée malgrès la présence de flag
+if [ $OPTIND -le 2 ]; then
+	usage
+fi
 
 exit 0

@@ -1,0 +1,10 @@
+package monPaquetage;
+import pipi.*;
+
+public class B extends A{
+	
+	public void maMethodeA(int a, double b){
+			this.maMethodeA(a);
+	}
+
+}

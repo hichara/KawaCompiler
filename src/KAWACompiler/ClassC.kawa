@@ -1,0 +1,6 @@
+package test;
+class ClassC {
+	public void methodeSept() {
+		print("Methode 7 in C");
+	}
+}

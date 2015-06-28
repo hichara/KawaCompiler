@@ -1,0 +1,14 @@
+package monPaquetage;
+import pipi.*;
+
+public class A{
+	
+	public void maMethodeA(int a, double b){
+			
+	}
+
+	public void maMethodeA(int a){
+		
+	}
+
+}

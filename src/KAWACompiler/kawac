@@ -4,6 +4,7 @@ KAWA_COLOR=0
 KAWA_OUT="a.out"
 KAWA_VERSION="0.5"
 KAWA_AUTO_RUN=0;
+KAWAP=kawap
 
 usage() {
 	echo "Usage: kawa [-h] | [-c] | [-o output_name] -m KAWA_FILES"
@@ -94,8 +95,16 @@ monoc(){
 		color_end
 	fi
 		
-	remove program.ll program.s $KAWA_OUT
-	./kawap -m $KAWA_SRC
+	remove program.ll
+	remove program.s
+	remove $KAWA_OUT
+	
+	if [ -f ./kawap ]; then
+		./kawap -m $KAWA_SRC
+	else
+		kawap -m $KAWA_SRC
+	fi
+
 	check "kawap: la compilation a échouée"
 	
 	KAWA_LLC="llc"
@@ -118,6 +127,9 @@ monoc(){
 	
 	gcc program.s -o $KAWA_OUT
 	check "gcc: la compilation a échouée"
+
+	remove program.ll 
+	remove program.s
 	
 	color_begin $KAWA_COLOR_GREEN
 	echo "Compilation réussie: $KAWA_SRC"
@@ -133,10 +145,15 @@ monoc(){
 	exit $?
 }
 
-if [ ! -f "kawap" ];
-then
-	echo "compilez kawap \ncommande à taper: make"
-	exit 0
+
+
+if [ ! -f ./$KAWAP ]; then
+	if [ -f /usr/bin/kawa/$KAWAP ]; then
+		KAWAP="/usr/bin/kawa/kawap"
+	else
+		echo "Installez kawap \nmake install"
+		exit 0
+	fi
 fi
 
 if [ $# = 0 ];

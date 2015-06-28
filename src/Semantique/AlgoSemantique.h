@@ -44,7 +44,7 @@ class Semantic{public:
 		if (Semantic::existSemanticError) {
 			cout << "\n\nErreur(s) dans la compilation" << endl;
 		} else {
-			cout << "\n\nCompilation reussie" << endl;
+			//cout << "\n\nCompilation reussie" << endl;
 		}
 		return Semantic::existSemanticError;
 	};
@@ -107,7 +107,7 @@ class Semantic{public:
 		if (error) {
 			cout << "\n\nErreurs dans la compilation" << endl;
 		} else {
-			cout << "\n\nCompilation reussie" << endl;
+			//cout << "\n\nCompilation reussie" << endl;
 		}
 
 		return error;

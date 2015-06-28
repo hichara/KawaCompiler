@@ -12,6 +12,4 @@ class ClassB extends ClassC {
 	public void methodeFromI() {
 		print("Methode From I in B");
 	}
-
-
 }

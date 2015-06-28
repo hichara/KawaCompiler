@@ -7,10 +7,13 @@ IRGENDIR= ../BackEnd/IRGeneration
 IRCMPDIR= ../BackEnd/IRCompiler
 KTXTRA=   ../BackEnd/KT_extra
 
-all: kawac
+all: kawap
 
 clean:
-	@rm -f kawa.cpp kawa.hpp kawac tokens.cpp
+	@rm -f kawa.cpp kawa.hpp kawap tokens.cpp
+
+clean-backend:
+	@rm *.ll *.s
 
 lexer: parser tokens.l
 	lex -o tokens.cpp tokens.l kawa.hpp
@@ -18,5 +21,5 @@ lexer: parser tokens.l
 parser: kawa.y
 	bison -d -o kawa.cpp kawa.y
 
-kawac: lexer
-	${CC} ${CFLAGS} ${KTXTRA}/*.cpp ${IRGENDIR}/*.cpp ${IRCMPDIR}/*.cpp ${SemanticSrcDir}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawac kawa.cpp tokens.cpp ${LDFLAGS}
+kawap: lexer
+	${CC} ${CFLAGS} ${KTXTRA}/*.cpp ${IRGENDIR}/*.cpp ${IRCMPDIR}/*.cpp ${SemanticSrcDir}/*.cpp ${KAWATreeSrcDir}/*.cpp -o kawap kawa.cpp tokens.cpp ${LDFLAGS}

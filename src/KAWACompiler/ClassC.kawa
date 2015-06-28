@@ -1,4 +1,5 @@
 package test;
+
 class ClassC implements InterfaceI {
 
 	public void methodeSept() {

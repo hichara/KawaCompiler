@@ -98,7 +98,22 @@ monoc(){
 	./kawap -m $KAWA_SRC
 	check "kawap: la compilation a échouée"
 	
-	llc	program.ll
+	KAWA_LLC="llc"
+	if [ ! -f /usr/bin/llc ]; then
+		if [ -f /usr/bin/llc-3.5 ]; then
+		  KAWA_LLC="llc-3.5"
+		else
+		  color_begin $KAWA_COLOR_RED
+		  echo -n "Les composants suivant sont introuvables: "
+		  color_begin $KAWA_COLOR_WHITE
+		  echo "llc, llc-3.5"
+		  color_end
+		  exit 1
+		fi
+	  
+	fi
+	
+	$KAWA_LLC program.ll
 	check "llc: la compilation a échouée" 
 	
 	gcc program.s -o $KAWA_OUT

@@ -93,7 +93,7 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Class* c2) {
 
 	std::vector<KT_Interface * > interfaces;
 	std::vector<KT_Prototype*> methodes;
-	std::vector<Function*> functions;
+	std::vector<Function*> functions, cpyFunc;
 
 	interfaces = getAllParentInterfaces(i1);
 
@@ -107,18 +107,30 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Class* c2) {
 
 	for(int i = 0; i < methodes.size(); i++) {
 		functions.push_back(compile(methodes[i]));
+
+		KT_Prototype *cpy = KawaTool::CopyPrototype(methodes[i]);
+		cpy->setParentName(*(i1->getFQN()));
+		cpyFunc.push_back(compile(cpy));	
 	}
 
 	for(int i = 0; i < interfaces.size(); i++) {
 		Function *f = FunctionGenerator::getAdHocTableFunction(getModule(),*(interfaces[i]->getFQN()), *(c2->getFQN()));
+
 		functions.push_back(f);
+		cpyFunc.push_back(f);
 	}
 
 	Function* f = FunctionGenerator::getAdHocTableFunction(getModule(), *(i1->getFQN()), *(c2->getFQN()));
 	functions.push_back(f);
+	cpyFunc.push_back(f);
 
 	Value *v = GlobalVariableGenerator::createAdHocTable(getModule(), *(i1->getFQN()), 
 				*(c2->getFQN()), functions);
+
+	for(int i = 0; i < cpyFunc.size(); i++) {
+		std::string indexName = NameBuilder::buildFunctionIndexName(cpyFunc[i]->getName().str());
+		GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), indexName, i);		
+	}	
 
 	f = FunctionGenerator::createAdHocTableFunction(getModule(), *(i1->getFQN()), *(c2->getFQN()));
 
@@ -130,7 +142,7 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Interface* i2) {
 
 	std::vector<KT_Interface*> interfaces;
 	std::vector<KT_Prototype*> methodes;
-	std::vector<Function*> functions;
+	std::vector<Function*> functions, cpyFunc;
 
 	interfaces = getAllParentInterfaces(i1);
 
@@ -144,18 +156,29 @@ Value* IRCompiler::createAdHocTable(KT_Interface* i1, KT_Interface* i2) {
 
 	for(int i = 0; i < methodes.size(); i++) {
 		functions.push_back(compile(methodes[i]));
+
+		KT_Prototype *cpy = KawaTool::CopyPrototype(methodes[i]);
+		cpy->setParentName(*(i1->getFQN()));
+		cpyFunc.push_back(compile(cpy));
 	}
 
 	for(int i = 0; i < interfaces.size(); i++) {
 		Function *f = FunctionGenerator::getAdHocTableFunction(getModule(), *(interfaces[i]->getFQN()), *(i2->getFQN()));
 		functions.push_back(f);
+		cpyFunc.push_back(f);
 	}
 
 	Function* f = FunctionGenerator::getAdHocTableFunction(getModule(), *(i1->getFQN()), *(i2->getFQN()));
 	functions.push_back(f);
+	cpyFunc.push_back(f);
 
 	Value *v = GlobalVariableGenerator::createAdHocTable(getModule(), *(i1->getFQN()), 
 				*(i2->getFQN()), functions);
+
+	for(int i = 0; i < cpyFunc.size(); i++) {
+		std::string indexName = NameBuilder::buildFunctionIndexName(cpyFunc[i]->getName().str());
+		GlobalVariableGenerator::getOrCreateIndexOfMember(getModule(), indexName, i);		
+	}	
 
 	f = FunctionGenerator::createAdHocTableFunction(getModule(), *(i1->getFQN()), *(i2->getFQN()));
 

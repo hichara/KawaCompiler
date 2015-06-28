@@ -70,7 +70,6 @@ Value* BasicInstructionGenerator::createAffectationObj(Module *module, Value *ta
 	IRBuilder<> builder(module->getContext());
 	builder.SetInsertPoint(b);
 
-
 	// ----- initialisation pour l'affectation----------
 
 	Value *newWrapper = builder.CreateAlloca(target->getType()->getPointerElementType());

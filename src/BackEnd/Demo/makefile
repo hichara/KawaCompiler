@@ -11,6 +11,12 @@ all: build compile_ll
 build:
 	clang++ demo.cpp ${KTXTRA}/*.cpp ${IRGENDIR}/*.cpp ${KTDIR}/*.cpp ${IRCMP}/IRCompiler*.cpp  ${CFLAGS} ${LLMVFLAGS} -o demo 2> Makeout
 
+build_o:
+	clang++ demo.cpp ${KTXTRA}/*.cpp ${IRGENDIR}/*.cpp *.o ${IRCMP}/IRCompiler*.cpp  ${CFLAGS} ${LLMVFLAGS} -o demo 2> Makeout
+
+kt_o:	
+	clang++ -c ${KTDIR}/*.cpp  ${CFLAGS} ${LLMVFLAGS} 2> Makeout
+
 compile_ll:
 	./demo
 	llc-3.5	programme_test.ll

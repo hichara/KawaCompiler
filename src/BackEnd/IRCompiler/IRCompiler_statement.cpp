@@ -14,13 +14,17 @@ Value* IRCompiler::compileStatement(KT_Statement *expr) {
 Value* IRCompiler::compileVariable(KT_Variable *var) {
 	debug("compiling a KT_Variable");
 
-	debug("name");
+	if(var == NULL) {
+		debug("KT_Variable *var == NULL");
+	}
+
 
 	std::string name = fqnType(var->getName());
 
-	debug("type");
-
 	std::string type = fqnType(var->getType()->getTypeName());
+
+	debug(name);
+	debug(type);
 
 	std::stringstream r_name;
 
@@ -28,15 +32,9 @@ Value* IRCompiler::compileVariable(KT_Variable *var) {
 		debug("No type");
 	}
 
-	debug("1\n");
-
 	r_name << name << "_" << getInbricationLevel();
 
-	debug("2\n");
-
 	Type *t = TypeGenerator::strToLLVMType(getModule(), type);
-
-	debug("1\n");
 
 	Value *dec = BasicInstructionGenerator::createDeclaration(r_name.str(), t, getCurrentBlock());
 
@@ -58,6 +56,10 @@ Value* IRCompiler::compileVariable(KT_Variable *var) {
 
 
 Value* IRCompiler::compileAffectation(KT_Affectation *af) {
+	if(af == NULL) {
+		debug("KT_Affectation *aff == NULL");
+	}
+
 	debug("compiling a KT_Affectation");
 
 	KT_Expression *lexpr =  af->getLExpression();

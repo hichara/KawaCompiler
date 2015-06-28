@@ -316,6 +316,11 @@ void completion(KT_Class * classe) {
 }
 
 void completionInterface(KT_Interface * interface) {
+	for(int i = 0; i < interface->getPrototypes().size(); i++) {
+		KT_Prototype *p = interface->getPrototypes()[i];
+		p->setParentName(*interface->getFQN());
+	}
+
 	if (interface->getParentsInterfacesSemantique().size() > 0) {
 		for (KT_Interface * parent : interface->getParentsInterfacesSemantique()) {
 			completionInterface(parent);
@@ -398,6 +403,7 @@ void decoration(KT_Program * prog) {
 					// ClassA a = new A();
 
 					for(KT_Prototype *p : classe->getAllPrototypes()) {
+
 						if ((*p->getName()).compare("main") != 0) {
 								KT_Prototype *callP = KawaTool::CopyPrototype(p);
 								callP->setParentName("test.ClassA");
@@ -408,7 +414,6 @@ void decoration(KT_Program * prog) {
 								KT_ID *idVarA = KawaTool::getID("varA");
 
 								KT_MethodCall *call = KawaTool::getMethodeCall(idVarA, sm);
-
 
 								vec_stmnts1.push_back(call);
 								vec_stmnts1.push_back(kt_endln);
@@ -428,12 +433,50 @@ void decoration(KT_Program * prog) {
 								KT_MethodCall *call = KawaTool::getMethodeCall(idVarB, sm);
 								KT_MethodCall *call2 = KawaTool::getMethodeCall(idVarC, sm);
 
-
 								vec_stmnts1.push_back(call);
 								vec_stmnts1.push_back(kt_endln);							
 								vec_stmnts1.push_back(call2);
 								vec_stmnts1.push_back(kt_endln);							
 						}
+
+						if((*p->getName()).compare("methodeFromI") == 0) {
+								KT_SimpleMethod *sm = new KT_SimpleMethod;
+								KT_Prototype *pp = KawaTool::CopyPrototype(p);
+								pp->setParentName("test.InterfaceI");
+								sm->setPrototype(pp);
+
+								// Declaration InterfaceI i;
+								KT_Variable *varI = KawaTool::getDeclaration(
+									"varI", "test.InterfaceI", NULL);
+
+								KT_ID *idVarA = KawaTool::getID("varA");
+								KT_ID *idVarB = KawaTool::getID("varB");
+								KT_ID *idVarC = KawaTool::getID("varC");
+								KT_ID *idVarI = KawaTool::getID("varI");
+
+								// Affectation
+								// i = a;
+								// i = b;
+								// i = c;
+								KT_Affectation *affI_A = KawaTool::getAffectation(idVarI, idVarA);
+								KT_Affectation *affI_B = KawaTool::getAffectation(idVarI, idVarB);
+								KT_Affectation *affI_C = KawaTool::getAffectation(idVarI, idVarC);
+
+								// Appel i.methodeFromI()
+								KT_MethodCall *callFromI = KawaTool::getMethodeCall(idVarI, sm);
+
+								vec_stmnts1.push_back(varI);
+								vec_stmnts1.push_back(affI_A);
+								vec_stmnts1.push_back(callFromI);
+								vec_stmnts1.push_back(kt_endln);
+
+								vec_stmnts1.push_back(affI_B);
+								vec_stmnts1.push_back(callFromI);								
+								vec_stmnts1.push_back(kt_endln);
+								vec_stmnts1.push_back(affI_C);
+								vec_stmnts1.push_back(callFromI);								
+								vec_stmnts1.push_back(kt_endln);
+						} 
 					}
 
 					// Appel methode 3 Avec ClassB b = new A();

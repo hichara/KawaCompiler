@@ -69,10 +69,12 @@ int main() {
 
 	KT_Attribute *att1 = KawaTool::getAttribute("valeur", "int", false, PUBLIC);
 	KT_Attribute *att2 = KawaTool::getAttribute("coeff", "float", false, PUBLIC);
+	KT_Attribute *att3 = KawaTool::getAttribute("coeff_commun", "float", true, PUBLIC);
 
 	std::vector<KT_Attribute*> vec_att_c1;
 	c1->addAttribut(att1);
 	c1->addAttribut(att2);
+	c1->addAttribut(att3);
 
 //  --------- SimpleMethode -----------
 
@@ -94,10 +96,12 @@ int main() {
 	p1 = KawaTool::getPrototype("main", *(c1->getFQN()), "int", true);
 	p2 = KawaTool::getPrototype("methode_une", *(c1->getFQN()), "void", false);
 	p3 = KawaTool::getPrototype("methode_deux", *(c1->getFQN()), "void", false);
+	p4 = KawaTool::getPrototype("methode_trois", *(c1->getFQN()), "void", true);
 
 	sm1->setPrototype(p1);
 	sm2->setPrototype(p2);
 	sm3->setPrototype(p3);
+	sm3->setPrototype(p4);
 
 // ---------- Constructor -------------
 
@@ -127,6 +131,7 @@ int main() {
 
 	sm1->setBlock(b1);
 	sm2->setBlock(b2);
+	sm3->setBlock(b4);
 	sm3->setBlock(b4);
 	cons1->setBlock(b3);
 
@@ -224,8 +229,8 @@ int main() {
 	vec_stmt1.push_back(println);
 	vec_stmt1.push_back(var3);
 	vec_stmt1.push_back(print5);
-	vec_stmt1.push_back(call1);
-	vec_stmt1.push_back(call2);
+//	vec_stmt1.push_back(call1);
+//	vec_stmt1.push_back(call2);
 	vec_stmt1.push_back(printLoadValeurVar3);
 
 	vec_stmt2.push_back(print3);
@@ -250,7 +255,56 @@ int main() {
 
 	cmp->compile(program);
 
-	return 0;
+
+/*
+  InitializeNativeTarget();
+  LLVMContext &Context = getGlobalContext();
+  IRBuilder<> builder(getGlobalContext());
+
+  Module *myModule = new Module("Module Test", Context);
+
+  std::vector<std::string> args_types, args_names;
+
+  args_types.push_back("int");
+  args_types.push_back("float");
+  args_types.push_back("ClasseInconnu");
+
+  args_names.push_back("valeur");
+  args_names.push_back("coeff");
+  args_names.push_back("objet");
+  
+
+  // Teste des fonctions
+
+  Function *f = FunctionGenerator::getOrCreateFunction(myModule, true,
+									"classA",
+									"methodeUne",
+									"int", 
+									args_types,									
+									args_names);
+
+
+
+  f->dump();
+
+ f = FunctionGenerator::getOrCreateFunction(myModule, false,
+									"classB",
+									"methodeDx",
+									"ClassB", 
+									args_types,									
+									args_names);
+
+  f->dump();
+
+  // Teste generation table adHoc et indexes
+
+*/  
+
+
+
+	return 0; 
+
+
 }
 
 

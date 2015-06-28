@@ -150,26 +150,58 @@ std::vector<KT_Class*> IRCompiler::getAllParentClasses(KT_Class *classe) {
 
 std::vector<KT_Interface*> IRCompiler::getAllParentInterfaces(KT_Class* classe) {
 
+	std::vector<KT_Interface*> res;
+
 	if(classe == NULL) {
-		std::vector<KT_Interface*> res;
 		return res;
 	}
 
 	std::vector<KT_Interface*> interfaces = classe->getParentsInterfacesSemantique();
 
-	return interfaces;	
+	KT_Class *parent = classe->getParentClasseSemantique();
+
+	res = getAllParentInterfaces(parent);
+
+	return merge(res, interfaces);	
 }
 
 std::vector<KT_Interface*> IRCompiler::getAllParentInterfaces(KT_Interface* interface) {
 
+	std::vector<KT_Interface*> res;
+
 	if(interface == NULL) {
-		std::vector<KT_Interface*> res;
 		return res;
 	}
 
-	std::vector<KT_Interface *> interfaces = interface->getParentsInterfacesSemantique();
+	std::vector<KT_Interface*> interfaces = interface->getParentsInterfacesSemantique();
 
-	return interfaces;
+	return res;
+}
+
+std::vector<KT_Interface*> IRCompiler::merge(std::vector<KT_Interface*> vec_i1, std::vector<KT_Interface*> vec_i2) {
+
+	std::vector<KT_Interface*> res;
+
+	for(int i = 0; i < vec_i1.size(); i++) {
+		res.push_back(vec_i1[i]);
+	}
+
+	for(int i = 0; i < vec_i2.size(); i++) {
+		bool isIn = false;
+
+		for(int j = 0; j < res.size(); j++) {
+			if(*vec_i2[i]->getFQN() == *res[j]->getFQN()) {
+				isIn = true;
+				continue;
+			}
+		}
+
+		if(isIn == false) {
+			res.push_back(vec_i2[i]);
+		}
+	}
+
+	return res;
 }
 
 

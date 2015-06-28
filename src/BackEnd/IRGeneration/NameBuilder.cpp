@@ -39,7 +39,7 @@ std::string NameBuilder::buildFunctionName(std::string className,
 		if(tmp == "")
 			return "";
 
-		result << result.str() << "_" << tmp;
+		result << "_" << tmp;
 	}
 
 

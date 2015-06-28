@@ -180,6 +180,10 @@ private:
 	std::vector<KT_Interface *> getAllParentInterfaces(KT_Class* classe);
 	std::vector<KT_Interface *> getAllParentInterfaces(KT_Interface* interface);
 
+	// Fusionne deux listes d'interfaces
+	std::vector<KT_Interface*> merge(std::vector<KT_Interface*> vec_i1, std::vector<KT_Interface*> vec_i2);
+
+
 	/**
 	* Retourne les prototypes ordonnées pour le polymorphisme.
 	*/

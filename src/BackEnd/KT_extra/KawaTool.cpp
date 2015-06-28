@@ -208,15 +208,11 @@ string KawaTool::fqnType(vector<std::string*> vec) {
 	return res.str();
 }
 
-
-
-/*
 KT_Interface* KawaTool::getInterface(string name) {
 
 	KT_Interface *i = new KT_Interface;
 
-	i->setName(new string(name));
+	i->setFQN(new string(name));
 
 	return i;
 }
-*/

@@ -48,6 +48,14 @@ check(){
 	fi
 }
 
+remove(){
+	for i in $*; do
+		if [ -f $1 ]; then
+			rm $1
+		fi
+	done	
+}
+
 monoc(){
 	shift $((OPTIND-2))
 	KAWA_SRC=""
@@ -86,7 +94,7 @@ monoc(){
 		color_end
 	fi
 		
-	rm program.ll program.s $KAWA_OUT
+	remove program.ll program.s $KAWA_OUT
 	./kawap -m $KAWA_SRC
 	check "kawap: la compilation a échouée"
 	

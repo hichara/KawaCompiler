@@ -6,9 +6,16 @@ KAWA_VERSION="0.5"
 KAWA_AUTO_RUN=0;
 KAWAP=kawap
 
+version(){
+	echo "version $KAWA_VERSION"
+	if [ ! "$1" = "false" ]; then
+	  exit 0;
+	fi
+}
+
 usage() {
 	echo "Usage: kawa [-h] | [-c] | [-o output_name] -m KAWA_FILES"
-	echo "VERSION $KAWA_VERSION"
+	version "false"
 	echo "OPTIONS:"
 	echo "\th           : affiche l'aide"
 	echo "\tc           : affiche la sortie en couleur"
@@ -98,7 +105,7 @@ monoc(){
 	remove program.ll
 	remove program.s
 	remove $KAWA_OUT
-	
+
 	if [ -f ./kawap ]; then
 		./kawap -m $KAWA_SRC
 	else
@@ -161,9 +168,10 @@ then
 	usage
 fi
 
-while getopts cro:m:h opts; do
+while getopts cvro:m:h opts; do
  case ${opts} in
   c) KAWA_COLOR=1;;
+  v) version;;
   r) KAWA_AUTO_RUN=1;;
   o) KAWA_OUT=$OPTARG;;
   m) monoc $@;;

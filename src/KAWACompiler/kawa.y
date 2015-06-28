@@ -506,7 +506,7 @@ InterfaceDeclaration
 		$$->setName($2);
 		$$->setInterfacesparent(*$3);
 		$$->setPrototypes(*$4);
-		cout<<"ProtoDec : " << $$->getPrototypes().size() << endl;
+		//cout<<"ProtoDec : " << $$->getPrototypes().size() << endl;
 	}
 ;
 

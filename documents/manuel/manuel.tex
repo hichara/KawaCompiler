@@ -59,6 +59,36 @@ L'outil \textbf{kawac} lit des définitions de classes et des interfaces écrite
 langage de programmation Kawa et les compiles en executable ELF. Il est aussi
 possible de les compiler en bytecode.
 
+  \subsection{Installation}
+    Situez-vous dans le répertoire src/KAWACompiler puis lancer la commande:
+    \begin{minted}[bgcolor=bg-gray]{bash}
+      :$ sudo make install
+    \end{minted}
+
+    Cette action va:
+    \begin{itemize}
+      \item compiler le frontend \textbf{kawap}
+      \item créer le répertoire kawa dans \textbf{/usr/bin}
+      \item copier \textbf{kawac} et \textbf{kawap} dans \textbf{/usr/bin/kawa}
+      \item créer deux liens symboliques \textbf{kawac} et \textbf{kawap} dans \textbf{/usr/bin/} qui pointent vers les fichiers \textbf{kawac} et \textbf{kawap}, respectivement, du répertoire \textbf{/usr/bin/kawa}
+
+    \end{itemize}
+
+  \subsection{Désinstallation}
+    Situez-vous dans le répertoire src/KAWACompiler puis lancer la commande:
+    \begin{minted}[bgcolor=bg-gray]{bash}
+      :$ sudo make uninstall
+    \end{minted}
+
+    Cette action va:
+    \begin{itemize}
+      
+      \item supprimer le répertoire \textbf{/usr/bin/kawa} et son contenu
+      
+      \item supprimer les deux liens symboliques \textbf{kawac} et \textbf{kawap} dans \textbf{/usr/bin/} 
+
+    \end{itemize}
+
   \subsection{compilation}
     Il y a deux manières de passer des noms de fichiers sources à \textbf{kawac}.
     \begin{itemize}
@@ -71,8 +101,7 @@ possible de les compiler en bytecode.
         \item Indiquer l’emplacement des fichiers sources de l’application.
         \item Introduire le commutateur -m en premier paramètre dans la
         ligne de commande permettant la compilation.
-        \item L’absence des deux commutateurs (\textbf{-h} ou \textbf{--help}) et (\textbf{-v} ou \textbf{-
-        -version}) en premier paramètre.
+        \item L’absence des deux commutateurs (\textbf{-h}) et (\textbf{-v}) en premier paramètre.
         
       \end{itemize}
 
@@ -118,19 +147,37 @@ possible de les compiler en bytecode.
   \subsection{afficher l'aide du compilateur}
     Il est possible d'afficher l'aide du compilateur avec le commutateur \textbf{-h} ou \textbf{--help}. Cela permet d'obtenir rapidement une aide quant à la manière d'utiliser \textbf{kawac} et ce, depuis le terminal via une ligne de commande.
   \begin{minted}[bgcolor=bg-gray]{bash}
-    :$ kawac --help
+    :$ kawac -h
   \end{minted}
 
-\newpage
+%\newpage
   \subsection{afficher la version du compilateur}
-    Il est possible de savoir la version du compilateur avec le commutateur \textbf{-v} ou \textbf{--version}
+    Il est possible de savoir la version du compilateur avec le commutateur \textbf{-v}
     \begin{itemize}
-      \item L’odre de priorité entre le commutateur de help (\textbf{-h} ou \textbf{--help}) et le commutateur de version (\textbf{-v} ou \textbf{--version}) est définit par la première occurrence de l’un des deux commutateur i-e si nous avons un \textbf{-v}
-      avant un \textbf{-h}, le compilateur annule tout le reste et affiche la version
+      \item L’ordre de priorité entre le commutateur d'aide (\textbf{-h}) et le commutateur de version (\textbf{-v}) est définit par la première occurrence de l’un des deux commutateurs i-e si nous avons un \textbf{-v}
+      avant un \textbf{-h}, kawac annule tout le reste et affiche la version
   \end{itemize}
   \begin{minted}[bgcolor=bg-gray]{bash}
-    :$ kawac --version
+    :$ kawac -v
   \end{minted}
+
+  \subsection{afficher la sortie en couleur}
+    L'affichage de la sortie en couleur est possible via le commutateur \textbf{-c}
+    \begin{itemize}
+        \item Afin d'afficher la sortie en couleur le commutateur devra être placé avant les commutateurs qui produise du texte en sortie. Comme \textbf{-v}, \textbf{-h}, \textbf{-m}
+    \end{itemize}
+
+  \subsection{définir le nom de l'exécutable}
+    Afin de définir le nom du programme compilé, il sera nécessaire d'utiliser le commutateur \textbf{-o} suivi du nom de l'exécutable à produire.
+    \begin{itemize}
+        \item Il n'y pas de réelle priorité avec ce commutateur. La seule existante est de l'appeler avant la compilation (\textbf{-m}).
+    \end{itemize}
+    
+  %\subsection{mode autorun}
+  %  Une fois le programme compilé il est possible de demander au compilateur de le lancer automatiquement. Cette action est défini via le commutateur \textbf{-r}
+    %\begin{itemize}
+    %    \item Il n'y pas de réelle priorité avec ce commutateur. La seule existante est de l'appeler avant la compilation (\textbf{-m}).
+    %\end{itemize}
 
  \section{Dépendances de kawac}
   Le compilateur kawa \textbf{kawac} utilise la technologie \textbf{LLVM} afin de produire du bytecode. \textbf{kawac} offre un frontend \textbf{LLVM} pour le langage Kawa ainsi qu'une partie du backend ce qui produit du bytecode. Néanmoins, pour produire un exécutable à partir du bytecode \textbf{kawac} a besoin d'\textbf{llc} dans sa version 3.4/3.5 et de \textbf{gcc} dans sa version 4.8.2 ou plus.
@@ -154,6 +201,7 @@ possible de les compiler en bytecode.
                 \begin{minted}[bgcolor=bg-gray]{bash}
 :$ sudo ln -s /usr/bin/llc-3.5 /usr/bin/llc
 \end{minted}
+  Cela dit, kawac détecte si llc-3.5 est bien installé si llc ne l'est pas.
 
 
  \section{Fonctionnement de la chaine de compilation}

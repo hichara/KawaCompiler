@@ -6,28 +6,6 @@ KAWA_VERSION="0.5"
 KAWA_AUTO_RUN=0;
 KAWAP=kawap
 
-version(){
-	echo "version $KAWA_VERSION"
-	if [ ! "$1" = "false" ]; then
-	  exit 0;
-	fi
-}
-
-usage() {
-	echo "Usage: kawa [-h] | [-c] | [-o output_name] -m KAWA_FILES"
-	version "false"
-	echo "OPTIONS:"
-	echo "\th           : affiche l'aide"
-	echo "\tc           : affiche la sortie en couleur"
-	echo "\to           : définit le nom de l'exécutable"
-	echo "\tm KAWA_FILES : lance la compilation des fichiers KAWA_FILES en mode monolitique"
-	echo "\n\nIMPORTANT"
-	echo "\t Il est important de finir la commande par l'ensemble des fichiers à compiler."
-	echo "\tAutrement, les options qui suivent seront vues comme des noms de fichiers"
-	exit 0
-}
-
-
 KAWA_COLOR_GREEN="1;32"
 KAWA_COLOR_RED="1;31"
 KAWA_COLOR_MAGENTA="1;35"
@@ -45,6 +23,109 @@ color_end(){
 		echo -n "\033[0m"
 	fi
 }
+
+version(){
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "version "
+	color_begin $KAWA_COLOR_YELLOW
+	echo $KAWA_VERSION
+	color_end
+	if [ ! "$1" = "false" ]; then
+	  exit 0;
+	fi
+}
+
+usage() {
+	color_begin $KAWA_COLOR_WHITE
+	echo "Usage: "
+	color_begin $KAWA_COLOR_GREEN
+	echo -n "\tkawa "
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "["
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-h"
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "] | ["
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-v"
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "] | ["
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-c"
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "] ["
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-r"
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "] ["
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-o"
+	color_begin $KAWA_COLOR_MAGENTA
+	echo -n " output_name"
+	color_begin $KAWA_COLOR_WHITE
+	echo -n "] "
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "-m"
+	color_begin $KAWA_COLOR_MAGENTA
+	echo " KAWA_FILES\n"
+	color_end
+
+	version "false"
+	echo -n "\n"
+	color_begin $KAWA_COLOR_WHITE
+	echo "OPTIONS:"
+	
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\th"
+	color_begin $KAWA_COLOR_WHITE
+	echo "            : affiche l'aide"
+	echo -n "\n"
+	
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\tv"
+	color_begin $KAWA_COLOR_WHITE
+	echo "            : affiche la version"
+	echo -n "\n"
+	
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\tc"
+	color_begin $KAWA_COLOR_WHITE
+	echo "            : affiche la sortie en couleur"
+	echo -n "\n"
+	
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\tr"
+	color_begin $KAWA_COLOR_WHITE
+	echo "            : active le mode autorun qui lance le programme compilé à la fin"
+	echo "\t               de la compilation"
+	echo -n "\n"
+
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\to"
+	color_begin $KAWA_COLOR_MAGENTA
+	echo -n " output_name"
+	color_begin $KAWA_COLOR_WHITE
+	echo ": définit le nom de l'exécutable"
+	echo -n "\n"
+
+	color_begin $KAWA_COLOR_YELLOW
+	echo -n "\tm"
+	color_begin $KAWA_COLOR_MAGENTA
+	echo -n " KAWA_FILES"
+	color_begin $KAWA_COLOR_WHITE
+	echo " : lance la compilation des fichiers KAWA_FILES en mode monolitique"
+	echo -n "\n"
+
+	color_begin $KAWA_COLOR_RED
+	echo "\n\nIMPORTANT"
+	color_begin $KAWA_COLOR_MAGENTA
+	echo "\t Il est important de finir la commande par l'ensemble des fichiers à compiler."
+	echo "\tAutrement, les options qui suivent seront vues comme des noms de fichiers"
+	color_end
+	exit 0
+}
+
+
 
 check(){
 	if [ ! $? = 0 ];

@@ -39,7 +39,7 @@ usage() {
 	color_begin $KAWA_COLOR_WHITE
 	echo "Usage: "
 	color_begin $KAWA_COLOR_GREEN
-	echo -n "\tkawa "
+	echo -n "\tkawac "
 	color_begin $KAWA_COLOR_WHITE
 	echo -n "["
 	color_begin $KAWA_COLOR_YELLOW

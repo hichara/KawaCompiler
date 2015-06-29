@@ -4,6 +4,10 @@
 
 
 #include "KT_Program.h"
+#include <sstream>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 /**
  * KT_Program implementation
@@ -92,4 +96,33 @@ void KT_Program::toString() {
 		cout << "Package " << endl;
 		(*it)->toString();
 	}
+}
+
+void KT_Program::setFiles(char** files, int nbFiles){
+	this->files = files;
+	this->nbFiles = nbFiles;
+	this->filesLine = new int[nbFiles];
+	int total = 0;
+	for(int k = 0; k < nbFiles; k++){
+		std::ifstream f(this->files[k]);
+		char c;
+		int i = 0;
+		while (f.get(c)){
+		    if (c == '\n'){
+		        ++i;
+		    }
+		}
+		total += i;
+		this->filesLine[k] = total;
+	}
+}	
+
+char* KT_Program::getFileName(int line){
+	int index = 0;
+	for(int k = 0; k < this->nbFiles; ++k){
+		if (line >= this->filesLine[k]){
+			index++;
+		}
+	}
+	return this->files[index];
 }

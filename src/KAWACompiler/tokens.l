@@ -41,7 +41,7 @@ inline int strToken( int token ){
     return token;
 }
 
-int column=1; int lineno=1;
+int column=1; int lineno=1; int totalline=1;
 
 /* Fonction qui compte les colonnes et lignes pour préciser la position de l'erreur */
 void count() {
@@ -53,6 +53,7 @@ void count() {
     if (yytext[i] == '\n'){
       column = 1;
       lineno++;
+      totalline++;
     }
   }
 }
@@ -173,8 +174,8 @@ ID [_]?[a-zA-Z][a-zA-Z0-9]*
 "//".*\n 				{count();}
 "/*"[^*\/]*"*/"	{count();}
 [\n]					  {count();}
-[ \t\v\f]  			{count();}
-.			          {count(); printf("TOKEN inconnu!\n"); yyterminate();}
+[ \t\v\f]       {count();}
+.               {count(); printf("TOKEN inconnu!\n"); yyterminate();}
 
 %%
 extern KT_Program* program;
@@ -185,6 +186,7 @@ int main( int argc, char** argv ){
     file_num=0;
     file_num_max = argc;
     files = argv;
+    program->setFiles(files, file_num_max);
     if ( argc > 0 ){
         while( (yyin = fopen(files[file_num],"r")) == 0 && file_num < file_num_max ){
             printf ("pb ouverture du fichier %s \n", files[file_num++]);
@@ -224,7 +226,7 @@ int yywrap() {
       return 1;
     }
     if ( file_num < file_num_max ){
-      lineno=0;
+      lineno = 1;
       return 0;
     }
 

@@ -47,8 +47,15 @@ public:
 	*/
 	KT_Package* getPackage(KT_Package* var);
 
+	void setFiles(char** files, int nbFiles);
+	
+	char* getFileName(int line);
+
 	void toString();
 private: 
+	char** files;
+	int nbFiles;
+	int* filesLine;
     vector<KT_Package*> packages;
 	string name;
 };

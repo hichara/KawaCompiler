@@ -1,0 +1,15 @@
+//plusieurs packages
+package TestSyntaxe;
+
+public class testClassSyntaxe {
+
+	/* Attribut */
+	 Teste t1 = new Teste(;
+	 Teste t2 = new Teste (age);
+	 
+	 //fonction sans parametres
+	 public char method1() {
+                          
+	 //void fonction parametrée 
+	 void methode2(int x, Test t, float tableau) {}
+}

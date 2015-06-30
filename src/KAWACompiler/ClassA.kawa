@@ -1,0 +1,44 @@
+package test;
+
+class ClassA extends ClassB {
+
+	public void methodeUn() {
+		print("Methode 1 in A");
+	}
+
+	public void methodeDeux() {
+		print("Methode 2 in A");
+	}
+
+	public void methodeTrois() {
+		print("Methode 3 in A");
+	}
+
+	public void methodeFromI() {
+		print("Methode From I in A");
+	}
+	
+	public static void main() {
+		ClassA varA = new ClassA();
+		ClassB varB = new ClassA();
+		ClassB varC = new ClassB();
+
+		a.methodeUn();
+		a.methodeDeux();
+		a.methodeTrois();
+		b.methodeTrois();
+		c.methodeTrois();
+		a.methodeFromI();
+		
+		Interface i;
+		i = varA;
+		i.methodeFromI();
+		i = varB;
+		i.methodeFromI();
+		i = varC;
+		i.methodeFromI();
+
+		a.methodeQuatre();
+		a.methodeSept();
+	}
+}

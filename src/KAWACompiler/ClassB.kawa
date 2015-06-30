@@ -1,0 +1,15 @@
+package test;
+
+class ClassB extends ClassC {
+	public void methodeTrois() {
+		print("Methode 3 in B");
+	}
+
+	public void methodeQuatre() {
+		print("Methode 4 in B");
+	}
+
+	public void methodeFromI() {
+		print("Methode From I in B");
+	}
+}

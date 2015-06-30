@@ -9,4 +9,10 @@ class ClassC implements InterfaceI {
 	public void methodeFromI() {
 		print("Methode From I in C");
 	}
+
+	public void methodeFromII() {
+		print("Methode From II in C");
+	}
+
+
 }

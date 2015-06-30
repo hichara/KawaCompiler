@@ -1,0 +1,6 @@
+package test;
+
+public interface InterfaceII {
+
+	public void methodeFromII();
+}

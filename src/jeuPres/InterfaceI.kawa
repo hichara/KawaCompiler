@@ -1,6 +1,6 @@
 package test;
 
-public interface InterfaceI {
+public interface InterfaceI extends InterfaceII {
 
 	public void methodeFromI();
 }

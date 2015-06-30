@@ -1,0 +1,8 @@
+package TestSyntaxe;
+
+public class testClassSyntaxeB {
+
+	 
+	 //fonction sans parametres
+	 public char method1();
+}

@@ -18,11 +18,8 @@ kt_o:
 	clang++ -c ${KTDIR}/*.cpp  ${CFLAGS} ${LLMVFLAGS} 2> Makeout
 
 compile_ll:
-	./demo
 	llc-3.5	programme_test.ll
 	gcc programme_test.s
 	./a.out
-	
-
 
 

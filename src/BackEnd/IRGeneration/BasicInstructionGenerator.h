@@ -68,6 +68,8 @@ public:
 	*  Termine une fonction par une instruction de retour null ou void
 	*/
 	static ReturnInst* endFunction(Function *f, BasicBlock *b);		
+
+	static Value* createPrint(Module *m, BasicBlock *b, Value *v);
 };
 
 

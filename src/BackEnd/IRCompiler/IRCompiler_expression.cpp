@@ -227,6 +227,11 @@ Value* IRCompiler::compileAddition(KT_Addition *add) {
 
 Value* IRCompiler::compileLoadAttribute(KT_LoadAttribute *att) {
 
+	if(att->isStatic()) {
+		Type *t = TypeGenerator::strToLLVMType(getModule(), att->getType());
+		return GlobalVariableGenerator::getOrCreateStaticAttribut(getModule(), att->getClassName(), att->getAttName(), t);
+	}
+
 	return BasicInstructionGenerator::createLoadAttribute(getModule(), 
 		compileExpression(att->getCaller()), att->getIndex(), getCurrentBlock());
 }

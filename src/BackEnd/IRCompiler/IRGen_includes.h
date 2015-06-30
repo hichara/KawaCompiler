@@ -21,7 +21,6 @@
 
 #include "llvm/IR/Type.h"
 
-
 #include "../IRGeneration/BasicInstructionGenerator.h"
 #include "../IRGeneration/FunctionGenerator.h"
 #include "../IRGeneration/TypeGenerator.h"

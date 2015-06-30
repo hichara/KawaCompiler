@@ -58,6 +58,8 @@ public:
 	static const std::string KAWA_FORMAT_FLOAT_TO_STRING;
 	static const std::string KAWA_FORMAT_DOUBLE_TO_STRING;
 	static const std::string KAWA_FORMAT_CHAR_TO_STRING;
+	static const std::string KAWA_FORMAT_OBJECT_TO_STRING;
+	static const std::string KAWA_FORMAT_STRING_TO_STRING;
 };
 
 

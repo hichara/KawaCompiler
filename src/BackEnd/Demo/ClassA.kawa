@@ -4,10 +4,11 @@
 
 class ClassA {
 	int valeur;
-	float coeff;
+	static int counter = 0:
 
-	ClassB() {
-		print("Appel constructeur\n");
+	public ClassA() {
+		this.valeur = 129;
+		counter += 1;
 	}
 
 	void methode_une() {
@@ -15,15 +16,38 @@ class ClassA {
 	}
 
 	void methode_deux() {
-		print("Appel methode deux\n");
+		print("Appel methode deux\n");		
+	}
+
+	void setValeur(int v) {
+		this.valeur = v;
+	}
+
+	void printState() {
+		print("State of the object :");
+		print("valeur = ");
+		print(this.valeur);
+		print("/");
+		print(nb instance = );
+		print("this.counter");
+		print("\n");
 	}
 
 	public static main() {
 		print("Appel fonction static main");
-		int var1 = 15;
-		print("int var1 = " + var1);	
-		ClassA var3 = new ClassA();
-		var3.methode_une();
-		var3.methode_deux();
+		int   ent1 = 15;
+		print("int ent1 = " + var1);	
+
+		ClassA varA = new ClassA();
+		new Class();
+		new Class();
+		varA.printState();
+		varA.methode_une();
+		varA.methode_deux();
+		varA.setValeur(ent1);
+		varA.printState();		
 	}
 }
+
+
+

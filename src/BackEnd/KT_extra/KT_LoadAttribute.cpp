@@ -18,6 +18,21 @@ void KT_LoadAttribute::setAttName(string name) {
 	attName = name;
 }
 
+string KT_LoadAttribute::getClassName() {
+	return className;
+}
+void KT_LoadAttribute::setClassName(string name) {
+	className = name;
+}
+
+string KT_LoadAttribute::getType() {
+	return type;
+}
+
+void KT_LoadAttribute::setType(string name) {
+	type = name;
+}
+
 llvm::Value* KT_LoadAttribute::acceptIRCompiler(IRCompiler *compiler) {
   return compiler->compileLoadAttribute(this);	
 }

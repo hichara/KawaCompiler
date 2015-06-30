@@ -3,25 +3,219 @@
 #include "../IRCompiler/KT_includes.h"
 
 
-int okF(std::string *s) {
-	return 0;
+std::vector<KT_Param*> params_intV() {
+	std::vector<KT_Param*> vec;
+
+	vec.push_back(KawaTool::getParam("v", "int"));
+
+	return vec;
 }
 
+KT_Statement *build_inc_counter() {
+
+	KT_LoadAttribute *load = KawaTool::getLoadAtt("ClassA", "counter", "int");
+	KT_Entier* e = KawaTool::getInt(1);
+	KT_Addition *add = KawaTool::getAddition(load, e);
+
+	KT_Affectation *aff = KawaTool::getAffectation(load, add);
+
+	return aff;
+}
+
+std::vector<KT_Param*> params_empty() {
+	std::vector<KT_Param*> vec;
+
+	return vec;
+}
+
+
+
+KT_Block* bloc_for_methodeUne() {
+	KT_Block* b = new KT_Block;
+	std::vector<KT_Statement*> vec_stmt;
+
+	KT_Print *p = KawaTool::getPrint("Appel methode une\n");
+	vec_stmt.push_back(p);
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+KT_Block* bloc_for_counter() {
+	KT_Block* b = new KT_Block;
+
+	return b;	
+}
+
+KT_Block* bloc_for_methodeDeux() {
+	KT_Block* b = new KT_Block;
+	std::vector<KT_Statement*> vec_stmt;
+
+	KT_Print *p = KawaTool::getPrint("Appel methode deux\n");
+	vec_stmt.push_back(p);
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+KT_Block* bloc_for_constructor_ClassA() {
+	KT_Block* b = new KT_Block;
+	std::vector<KT_Statement*> vec_stmt;
+
+	KT_Print *p = KawaTool::getPrint("Appel Constructor ClassA sans arguments\n");
+
+	KT_ID *idThis = KawaTool::getID("this");
+	KT_Entier *ent = KawaTool::getInt(75);
+
+	KT_LoadAttribute *attValeur = KawaTool::getLoadAtt(idThis, "valeur", 0, false);
+
+	KT_Affectation *aff = KawaTool::getAffectation(attValeur, ent);
+
+	vec_stmt.push_back(p);
+	vec_stmt.push_back(build_inc_counter());
+
+	vec_stmt.push_back(aff);
+
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+KT_Block* bloc_for_printState() {
+	KT_Block *b = new KT_Block;
+
+	KT_ID *idThis = KawaTool::getID("this");
+
+	KT_LoadAttribute *attValeur = KawaTool::getLoadAtt(idThis, "valeur", 0, false);
+	KT_LoadAttribute *attCounter  = KawaTool::getLoadAtt("ClassA", "counter", "int");
+
+
+	KT_Print *endl = KawaTool::getPrint("\n");
+
+	std::vector<KT_Statement*> vec_stmt;
+
+	vec_stmt.push_back(KawaTool::getPrint("valeur = "));
+	vec_stmt.push_back(KawaTool::getPrint(attValeur));
+	vec_stmt.push_back(KawaTool::getPrint(" / "));
+	vec_stmt.push_back(KawaTool::getPrint("counter = "));
+	vec_stmt.push_back(KawaTool::getPrint(attCounter));
+	vec_stmt.push_back(endl);
+
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+KT_Block* bloc_for_setValue() {
+	KT_Block* b = new KT_Block;
+	std::vector<KT_Statement*> vec_stmt;
+
+
+	KT_ID *idThis = KawaTool::getID("this");
+	KT_ID *idV = KawaTool::getID("v");
+
+	KT_LoadAttribute *loadValeurThis = KawaTool::getLoadAtt(idThis, "valeur", 0);
+
+
+	KT_Affectation *af1 = KawaTool::getAffectation(loadValeurThis, idV);
+
+	vec_stmt.push_back(af1);
+
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+
+
+KT_Block* bloc_for_main() {
+	KT_Block *b = new KT_Block;
+
+	KT_ID *ident1 = KawaTool::getID("ent1");
+	KT_ID *idvarA = KawaTool::getID("varA");
+
+	KT_Print *pDebut = KawaTool::getPrint("Debut program :\n");
+	KT_Print *pFin = KawaTool::getPrint("fin program\n");
+	KT_Print *pDecEnt1 = KawaTool::getPrint("int ent1 = ");
+	KT_Print *pendln = KawaTool::getPrint("\n");
+	KT_Print *pEnt1  = KawaTool::getPrint(ident1);
+
+
+	KT_Entier *e = KawaTool::getInt(15);
+
+	KT_Constructor* cons = KawaTool::getConstructor("ClassA");
+	KT_ConstructorCall* consCall = KawaTool::getConstructorCall(cons);
+
+	KT_Variable *varEnt1 = KawaTool::getDeclaration("ent1", "int", e);
+	KT_Variable *varA = KawaTool::getDeclaration("varA", "ClassA", consCall);
+
+	KT_Prototype *proto_printState = KawaTool::getPrototype("printState", "ClassA", "void", false);
+	KT_SimpleMethod *smM_printState = new KT_SimpleMethod;
+	proto_printState->setParams(params_empty());
+	smM_printState->setPrototype(proto_printState);
+	KT_MethodCall *mcall_printState = KawaTool::getMethodeCall(idvarA, smM_printState);
+
+	KT_Prototype *protoM_une = KawaTool::getPrototype("methode_une", "ClassA", "void", false);
+	KT_SimpleMethod *smM_une = new KT_SimpleMethod;
+	protoM_une->setParams(params_empty());
+	smM_une->setPrototype(protoM_une);
+	KT_MethodCall *mcall_methodeUne = KawaTool::getMethodeCall(idvarA, smM_une);
+
+	KT_Prototype *protoM_dx = KawaTool::getPrototype("methode_deux","ClassA", "void", false);
+	KT_SimpleMethod *smM_dx = new KT_SimpleMethod;
+	protoM_dx->setParams(params_empty());
+	smM_dx->setPrototype(protoM_dx);
+	KT_MethodCall *mcall_methodeDx = KawaTool::getMethodeCall(idvarA, smM_dx);
+
+	KT_Prototype *proto_setValue = KawaTool::getPrototype("setValue", "ClassA", "void", false);
+	KT_SimpleMethod *smM_setValue = new KT_SimpleMethod;
+	proto_setValue->setParams(params_intV());
+	smM_setValue->setPrototype(proto_setValue);
+	KT_MethodCall *mcall_methodesetValue = KawaTool::getMethodeCall(idvarA, smM_setValue);
+
+    vector<KT_ParamsMethodCall*> params_setValue;
+    params_setValue.push_back(KawaTool::getParamMethodCall(ident1));
+    mcall_methodesetValue->setParams(params_setValue);
+
+	std::vector<KT_Statement*> vec_stmt;
+
+	vec_stmt.push_back(pDebut);
+	vec_stmt.push_back(varEnt1);
+	vec_stmt.push_back(pDecEnt1);
+	vec_stmt.push_back(pEnt1);
+	vec_stmt.push_back(pendln);
+	vec_stmt.push_back(varA);
+	vec_stmt.push_back(mcall_printState);
+	vec_stmt.push_back(mcall_methodeUne);
+	vec_stmt.push_back(mcall_methodeDx);
+	vec_stmt.push_back(consCall);
+	vec_stmt.push_back(consCall);
+	vec_stmt.push_back(mcall_methodesetValue);
+	vec_stmt.push_back(mcall_printState);
+	vec_stmt.push_back(pFin);
+
+	b->setStatements(vec_stmt);
+
+	return b;
+}
+
+KT_Block* bloc_for_getValue() {
+	KT_Block* b = new KT_Block;
+	std::vector<KT_Statement*> vec_stmt;
+
+	KT_ID *idThis = KawaTool::getID("this");
+	KT_LoadAttribute *loadValeurThis = KawaTool::getLoadAtt(idThis, "valeur", 0);
+	
+	KT_ReturnStatement*	ret = KawaTool::getReturn(loadValeurThis);
+
+	vec_stmt.push_back(ret);
+	b->setStatements(vec_stmt);
+
+	return b;	
+}
+
+
 int main() {
-
-//  --------- Types -------------------
-
-	//void 
-	KT_Type *voidType   = KawaTool::getType("void");
-	//int
-	KT_Type *intType    = KawaTool::getType("int");
-	//float
-	KT_Type *floatType  = KawaTool::getType("float");
-	//string
-	KT_Type *stringType = KawaTool::getType("string");
-	//classA
-	KT_Type *classAType = KawaTool::getType("package_ClassA");
-
 
 //	--------- Programme ---------------
 
@@ -57,195 +251,94 @@ int main() {
 //	--------- Classe ------------------
 	std::vector<KT_Class*> vec_classes;
 
-	KT_Class *c1 = KawaTool::getClass("package_ClassA");
-	KT_Class *c2 = KawaTool::getClass("package_ClassB");
+	KT_Class *c1 = KawaTool::getClass("ClassA");
 
 	vec_classes.push_back(c1);
-	vec_classes.push_back(c2);
 
 	package->setClasses(vec_classes);
 
 //  --------- Attributs ---------------
 
 	KT_Attribute *att1 = KawaTool::getAttribute("valeur", "int", false, PUBLIC);
-	KT_Attribute *att2 = KawaTool::getAttribute("coeff", "float", false, PUBLIC);
-	KT_Attribute *att3 = KawaTool::getAttribute("coeff_commun", "float", true, PUBLIC);
+	KT_Attribute *att2 = KawaTool::getAttribute("counter", "int", true, PUBLIC);
 
 	std::vector<KT_Attribute*> vec_att_c1;
 	c1->addAttribut(att1);
 	c1->addAttribut(att2);
-	c1->addAttribut(att3);
-
-//  --------- SimpleMethode -----------
-
-	KT_SimpleMethod *sm1 = new KT_SimpleMethod;
-	KT_SimpleMethod *sm2 = new KT_SimpleMethod;
-	KT_SimpleMethod *sm3 = new KT_SimpleMethod;
-
-	c1->addMethod(sm1);
-	c1->addMethod(sm2);
-	c1->addMethod(sm3);
-
 
 //  --------- Prototype ---------------
-	KT_Prototype *p1 = new KT_Prototype;
-	KT_Prototype *p2 = new KT_Prototype;
-	KT_Prototype *p3 = new KT_Prototype;
-	KT_Prototype *p4 = new KT_Prototype;
+	KT_Prototype *protoMain = KawaTool::getPrototype("main", *(c1->getFQN()), "int", true);
+	KT_Prototype *protoM_une = KawaTool::getPrototype("methode_une", *(c1->getFQN()), "void", false);
+	KT_Prototype *protoM_deux = KawaTool::getPrototype("methode_deux", *(c1->getFQN()), "void", false);
 
-	p1 = KawaTool::getPrototype("main", *(c1->getFQN()), "int", true);
-	p2 = KawaTool::getPrototype("methode_une", *(c1->getFQN()), "void", false);
-	p3 = KawaTool::getPrototype("methode_deux", *(c1->getFQN()), "void", false);
-	p4 = KawaTool::getPrototype("methode_trois", *(c1->getFQN()), "void", true);
+	KT_Prototype *proto_getValue = KawaTool::getPrototype("getValue", *(c1->getFQN()), "int", false);
+	KT_Prototype *proto_setValue = KawaTool::getPrototype("setValue", *(c1->getFQN()), "void", false);
+	KT_Prototype *proto_printState = KawaTool::getPrototype("printState", *(c1->getFQN()), "void", false);
 
-	sm1->setPrototype(p1);
-	sm2->setPrototype(p2);
-	sm3->setPrototype(p3);
-	sm3->setPrototype(p4);
+	KT_Prototype *proto_counter = KawaTool::getPrototype("counter", *(c1->getFQN()), "void", true);
+
+	protoMain->setParams(params_empty());
+	protoM_une->setParams(params_empty());
+	protoM_deux->setParams(params_empty());
+	proto_getValue->setParams(params_empty());
+	proto_setValue->setParams(params_intV());
+	proto_printState->setParams(params_empty());
+	proto_counter->setParams(params_empty());
+
+//  --------- SimpleMethode -----------
+	KT_SimpleMethod *smMain = new KT_SimpleMethod;
+	KT_SimpleMethod *smM_une = new KT_SimpleMethod;
+	KT_SimpleMethod *smM_deux = new KT_SimpleMethod;
+	KT_SimpleMethod *smM_getValue = new KT_SimpleMethod;
+	KT_SimpleMethod *smM_setValue = new KT_SimpleMethod;
+	KT_SimpleMethod *smM_printState = new KT_SimpleMethod;
+	KT_SimpleMethod	*smM_counter = new KT_SimpleMethod;
+
+	smMain->setPrototype(protoMain);
+	smM_une->setPrototype(protoM_une);
+	smM_deux->setPrototype(protoM_deux);
+	smM_getValue->setPrototype(proto_getValue);
+	smM_setValue->setPrototype(proto_setValue);
+	smM_printState->setPrototype(proto_printState);	
+	smM_counter->setPrototype(proto_counter);
+
+	smMain->setBlock(bloc_for_main());
+	smM_une->setBlock(bloc_for_methodeUne());
+	smM_deux->setBlock(bloc_for_methodeDeux());
+	smM_getValue->setBlock(bloc_for_getValue());
+	smM_setValue->setBlock(bloc_for_setValue());
+	smM_printState->setBlock(bloc_for_printState());
+	smM_counter->setBlock(bloc_for_counter());
 
 // ---------- Constructor -------------
 
-	KT_Constructor *cons1 = new KT_Constructor;
+	KT_Constructor *cons1 = KawaTool::getConstructor("ClassA");
 
-	cons1->setName(new string("package_ClassA"));
-	cons1->setModifier(new KT_Modifier);
+    cons1->setBlock(bloc_for_constructor_ClassA());
+    cons1->setParams(params_empty());
+
+// ----------- add Hoc C1 ----------------
+   std::vector<KT_Prototype*> vec_proto_c1;
+
+   vec_proto_c1.push_back(protoM_une);
+   vec_proto_c1.push_back(protoM_deux);
+   vec_proto_c1.push_back(proto_getValue);
+   vec_proto_c1.push_back(proto_setValue);
+   vec_proto_c1.push_back(proto_printState);
+
+   c1->setAllPrototypes(vec_proto_c1);
+
+// ----------- Populate C1 --------------
 
     c1->addConstructor(cons1);
 
-//  --------- Paramas -----------------
-
-	KT_Param *param1 = new KT_Param;
-
-	std::vector<KT_Param*> vec_param1;
-
-	p1->setParams(vec_param1);
-	cons1->setParams(vec_param1);
-
-
-//  --------- Bloc --------------------
-
-	KT_Block *b1 = new KT_Block;
-	KT_Block *b2 = new KT_Block;
-	KT_Block *b3 = new KT_Block;
-	KT_Block *b4 = new KT_Block;
-
-	sm1->setBlock(b1);
-	sm2->setBlock(b2);
-	sm3->setBlock(b4);
-	sm3->setBlock(b4);
-	cons1->setBlock(b3);
-
-//  --------- Entier ------------------
-
-	KT_Entier *int1 = KawaTool::getInt(15);
-	KT_Entier *int2 = KawaTool::getInt(159);
-
-//  --------- Call Cons ---------------
-
-	KT_ConstructorCall *consCall1 = new KT_ConstructorCall;
-
-	std::vector<KT_ParamsMethodCall*> var_cons_call;
-
-	consCall1->setMethod(cons1);
-	consCall1->setParams(var_cons_call);
-
-//  ----------- Declaration -----------
-
-	KT_Variable *var1 = KawaTool::getDeclaration("var1", "int", int1);
-	KT_Variable *var2 = KawaTool::getDeclaration("var2", "string", NULL);
-	KT_Variable *var3 = KawaTool::getDeclaration("var3", "package_ClassA", consCall1);
-
-//  --------- ID ----------------------
-
-	KT_ID *idThis = KawaTool::getID("this");
-	KT_ID *idVar1 = KawaTool::getID("var1");
-	KT_ID *idVar2 = KawaTool::getID("var2");
-	KT_ID *idVar3 = KawaTool::getID("var3");
-
-//  --------- Mehode Call -------------
-
-	KT_MethodCall *call1 = new KT_MethodCall;
-	KT_MethodCall *call2 = new KT_MethodCall;
-
-	call1->setCaller(idVar3);
-	call1->setMethodCall(sm2);
-
-	call2->setCaller(idVar3);
-	call2->setMethodCall(sm3);
-
-
-//  --------- Get Attribute -----------
-
-	KT_LoadAttribute *loadValeurThis = KawaTool::getLoadAtt(idThis, "valeur", 0);
-	KT_LoadAttribute *loadCoeffThis = KawaTool::getLoadAtt(idThis, "coeff", 1);
-
-	KT_LoadAttribute *loadValeurVar3 = KawaTool::getLoadAtt(idVar3, "valeur", 0);
-	KT_LoadAttribute *loadCoeffVar3 = KawaTool::getLoadAtt(idVar3, "coeff", 1);
-
-// ---------- Affectation -------------
-
-	KT_Affectation *af1 = KawaTool::getAffectation(loadValeurThis, int1);
-	KT_Affectation *af2 = KawaTool::getAffectation(loadValeurThis, int2);
-
-//  --------- String ------------------
-
-	KT_String *str1  = KawaTool::getString("Appel fonction static main\n");
-	KT_String *str2  = KawaTool::getString("int var1 = ");
-	KT_String *str3  = KawaTool::getString("Appel methode une\n");
-	KT_String *str4  = KawaTool::getString("Appel constructeur\n");
-	KT_String *str5  = KawaTool::getString("ClassA var3 = new ClassA()\n");
-	KT_String *str6  = KawaTool::getString("Appel methode deux\n");
-
-	KT_String *strln = KawaTool::getString("\n");
-
-//  --------- Print ---------------
-
-	KT_Print *print1 = KawaTool::getPrint(str1); 
-	KT_Print *print2 = KawaTool::getPrint(str2);
-	KT_Print *print3 = KawaTool::getPrint(str3);
-	KT_Print *print4 = KawaTool::getPrint(str4);
-	KT_Print *print5 = KawaTool::getPrint(str5);
-	KT_Print *print6 = KawaTool::getPrint(str6);
-
-	KT_Print *printVar1 = KawaTool::getPrint(idVar1);
-	KT_Print *printVar2 = KawaTool::getPrint(idVar2);
-
-	KT_Print *println = KawaTool::getPrint(strln);
-
-	KT_Print *printLoadValeurThis = KawaTool::getPrint(loadValeurThis);
-	KT_Print *printLoadValeurVar3 = KawaTool::getPrint(loadValeurVar3);
-
-//  --------- Add Statement -----------
-
-	std::vector<KT_Statement*> vec_stmt1;
-	std::vector<KT_Statement*> vec_stmt2;
-	std::vector<KT_Statement*> vec_stmt3;
-	std::vector<KT_Statement*> vec_stmt4;
-
-	vec_stmt1.push_back(print1);
-	vec_stmt1.push_back(var1);
-	vec_stmt1.push_back(print2);
-	vec_stmt1.push_back(print6);
-	vec_stmt1.push_back(println);
-	vec_stmt1.push_back(var3);
-	vec_stmt1.push_back(print5);
-//	vec_stmt1.push_back(call1);
-//	vec_stmt1.push_back(call2);
-	vec_stmt1.push_back(printLoadValeurVar3);
-
-	vec_stmt2.push_back(print3);
-	vec_stmt2.push_back(af1);
-	vec_stmt2.push_back(printLoadValeurThis);
-
-	vec_stmt3.push_back(print4);
-	vec_stmt3.push_back(af1);
-
-	vec_stmt4.push_back(print6);
-
-	b1->setStatements(vec_stmt1);
-	b2->setStatements(vec_stmt2);
-	b3->setStatements(vec_stmt3);
-	b4->setStatements(vec_stmt4);
+	c1->addMethod(smMain);
+	c1->addMethod(smM_une);
+	c1->addMethod(smM_deux);
+	c1->addMethod(smM_getValue);
+	c1->addMethod(smM_setValue);
+	c1->addMethod(smM_printState);
+	c1->addMethod(smM_counter);
 
 // --------------------------------------
 

@@ -18,6 +18,8 @@ class KT_LoadAttribute : public KT_FactFinal {
 private:
 	KT_Expression *caller;
 	string attName;
+	string className;
+	string type;
 	bool isstatic;
 	int index;
 
@@ -35,6 +37,13 @@ public:
 
 	string getAttName();
 	void setAttName(string name);
+
+	string getClassName();
+	void setClassName(string name);
+
+	string getType();
+	void setType(string name);
+
 
 	int getIndex();
 	void setIndex(int i);

@@ -195,6 +195,43 @@ ReturnInst* BasicInstructionGenerator::createReturn(BasicBlock *b, Type* type, V
 	return builder.CreateRet(cast);
 }
 
+Value* BasicInstructionGenerator::createPrint(Module *m, BasicBlock *b, Value *v) {
+	Function* print = FunctionGenerator::getOrCreatePrintf(m);
+	LLVMContext &context = m->getContext();
+
+	Type *i32T    = Type::getInt32Ty(context);
+	Type *i8T    = Type::getInt8Ty(context);
+	Type *floatT  = Type::getFloatTy(context);
+	Type *doubleT = Type::getDoubleTy(context);
+	Type *charT   = Type::getInt16Ty(context);
+
+	GlobalVariable *gv;
+
+	if(v->getType() == i8T->getPointerTo()) {
+		gv = GlobalVariableGenerator::getOrCreateFormatStringToSTRING(m);
+	} else if(v->getType() == i32T) {
+		gv = GlobalVariableGenerator::getOrCreateFormatIntToSTRING(m);
+	} else if(v->getType() == floatT) {
+		gv = GlobalVariableGenerator::getOrCreateFormatDoubleToSTRING(m);
+	} else if(v->getType() == doubleT) {
+		gv = GlobalVariableGenerator::getOrCreateFormatDoubleToSTRING(m);
+	} else if(v->getType() == charT) {
+		gv = GlobalVariableGenerator::getOrCreateFormatCharToSTRING(m);
+	} else {
+		gv = GlobalVariableGenerator::getOrCreateFormatObjectToSTRING(m);
+	}
+
+	IRBuilder<> builder(context);
+	builder.SetInsertPoint(b);
+
+	Value *format = builder.CreateBitCast(gv, Type::getInt8Ty(context)->getPointerTo());	
+
+	Value *res = builder.CreateCall2(print, format, v);
+
+	return res;
+}
+
+
 
 ReturnInst* BasicInstructionGenerator::endFunction(Function *f, BasicBlock *b) {
 	Type *t = f->getReturnType();
@@ -209,6 +246,8 @@ ReturnInst* BasicInstructionGenerator::endFunction(Function *f, BasicBlock *b) {
 
 	return builder.CreateRet(c);
 }
+
+
 
 
 

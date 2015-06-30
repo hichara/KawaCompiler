@@ -92,9 +92,11 @@ Value* IRCompiler::compilePrint(KT_Print *print) {
 		Value *v = compileFactFinal(args[i]);
 		v = BasicInstructionGenerator::stripVal(v, getCurrentBlock());
 
-		v = PrimitiveValueConverter::convertToStr(getModule(), v, getCurrentBlock());
+//		v = PrimitiveValueConverter::convertToStr(getModule(), v, getCurrentBlock());
 
-		buider.CreateCall(f, v);
+		v = BasicInstructionGenerator::createPrint(getModule(), getCurrentBlock(), v);
+
+//		buider.CreateCall(f, v);
 	}
 
 	return f;

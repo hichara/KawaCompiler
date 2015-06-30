@@ -47,3 +47,5 @@ const std::string KawaEnumeration::KAWA_FORMAT_INT_TO_STRING = "kawa_format_int"
 const std::string KawaEnumeration::KAWA_FORMAT_FLOAT_TO_STRING = "kawa_format_float";
 const std::string KawaEnumeration::KAWA_FORMAT_DOUBLE_TO_STRING = "kawa_format_double";
 const std::string KawaEnumeration::KAWA_FORMAT_CHAR_TO_STRING   = "kawa_format_char";
+const std::string KawaEnumeration::KAWA_FORMAT_OBJECT_TO_STRING   = "kawa_format_object";
+const std::string KawaEnumeration::KAWA_FORMAT_STRING_TO_STRING   = "kawa__format_string";

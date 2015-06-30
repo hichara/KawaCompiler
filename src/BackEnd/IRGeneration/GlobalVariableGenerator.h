@@ -45,7 +45,14 @@ static Value* createAdHocTable(Module *module, std::string classStatic,
 
 static Value* getAdHocTable(Module *module, std::string classStatic, 
 				std::string classDynamic);
+
+static GlobalVariable* getOrCreateFormatIntToSTRING(Module *module);
+static GlobalVariable* getOrCreateFormatCharToSTRING(Module *module);
+static GlobalVariable* getOrCreateFormatDoubleToSTRING(Module *module);
+static GlobalVariable* getOrCreateFormatObjectToSTRING(Module *module);
+static GlobalVariable* getOrCreateFormatStringToSTRING(Module *module);
 };
+
 
 
 #endif

@@ -29,7 +29,6 @@ KT_Entier* KawaTool::getInt(int i) {
 	return int1;
 }
 
-
 KT_Param* KawaTool::getParam(string name, string type) {
 
 	KT_Param* p = new KT_Param;
@@ -77,7 +76,7 @@ KT_Prototype* KawaTool::getPrototype(string name, string parentName, string retT
 
 	p1->setName(new string(name));
 	p1->setParentName(parentName);
-	p1->setReturnType(getType("int"));
+	p1->setReturnType(getType(retType));
 	p1->setModifier(new KT_Modifier);
 	p1->getModifier()->setStatic(isStatic);
 
@@ -123,6 +122,16 @@ KT_Print* KawaTool::getPrint(KT_FactFinal *f) {
 	return print;
 }
 
+KT_Print* KawaTool::getPrint(string name) {
+	KT_String *s = getString(name);
+
+	return getPrint(s);
+}
+
+
+
+
+
 KT_LoadAttribute* KawaTool::getLoadAtt(KT_Expression* caller, string name, int index, bool isstatic) {
 	KT_LoadAttribute *load = new KT_LoadAttribute;
 
@@ -133,6 +142,18 @@ KT_LoadAttribute* KawaTool::getLoadAtt(KT_Expression* caller, string name, int i
 
 	return load;
 }
+
+KT_LoadAttribute* KawaTool::getLoadAtt(string className, string attName,string attType) {
+	KT_LoadAttribute *load = new KT_LoadAttribute;
+
+	load->setClassName(className);
+	load->setAttName(attName);
+	load->setType(attType);
+	load->setIsStatic(true);
+
+	return load;	
+}
+
 
 KT_Affectation*	KawaTool::getAffectation(KT_Expression* le, KT_Expression* re) {
 	KT_Affectation *af = new KT_Affectation;
@@ -162,18 +183,6 @@ KT_Constructor* KawaTool::getConstructor(KT_Class*classe, string name) {
 
     return cons1;
 }
-
-KT_ConstructorCall* KawaTool::getConstructorCall(KT_Constructor* cons1) {
-	
-	KT_ConstructorCall *consCall1 = new KT_ConstructorCall;
-	std::vector<KT_ParamsMethodCall*> var_cons_call;
-
-	consCall1->setMethod(cons1);
-	consCall1->setParams(var_cons_call);
-
-	return consCall1;
-}
-
 
 bool KawaTool::prototype_equal(KT_Prototype *p1, KT_Prototype *p2) {
 	bool b1 = *(p1->getName()) == *(p2->getName());
@@ -216,3 +225,72 @@ KT_Interface* KawaTool::getInterface(string name) {
 
 	return i;
 }
+
+
+KT_ReturnStatement*	KawaTool::getReturn(KT_Expression *val) {
+	KT_ReturnStatement *ret;
+
+	ret = new KT_ReturnStatement;
+
+	if(val == NULL) {
+		ret->setIsVoidReturn(true);
+	} else {
+		ret->setReturnExpression(val);
+	}
+
+	return ret;
+}
+
+KT_Constructor* KawaTool::getConstructor(string name) {
+	KT_Constructor *cons1 = new KT_Constructor;
+
+	cons1->setName(new string(name));
+	cons1->setModifier(new KT_Modifier);
+
+	std::vector<KT_Param*> vec_param1;
+
+	cons1->setParams(vec_param1);
+
+	return cons1;
+}
+
+KT_ConstructorCall* KawaTool::getConstructorCall(KT_Constructor* cons) {
+	KT_ConstructorCall *consCall = new KT_ConstructorCall;
+
+	std::vector<KT_ParamsMethodCall*> params;
+
+	consCall->setMethod(cons);
+	consCall->setParams(params);
+
+	return consCall;
+}
+
+KT_ConstructorCall* KawaTool::getConstructorCall(KT_Constructor* cons, vector<KT_ParamsMethodCall*> params) {
+	KT_ConstructorCall *consCall = new KT_ConstructorCall;
+
+	consCall->setMethod(cons);
+	consCall->setParams(params);
+
+	return consCall;
+}
+
+
+
+KT_ParamsMethodCall* KawaTool::getParamMethodCall(KT_Expression *expr) {
+	KT_ParamsMethodCall *param = new KT_ParamsMethodCall;
+
+	param->setExpression(expr);
+
+	return param;
+}
+
+
+KT_Addition* KawaTool::getAddition(KT_Expression* expr1, KT_Expression *expr2) {
+	KT_Addition *add = new KT_Addition;
+
+	add->setLExpression(expr1);
+	add->setRExpression(expr2);
+
+	return add;
+}
+

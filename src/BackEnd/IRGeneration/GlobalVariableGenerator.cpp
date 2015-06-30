@@ -29,6 +29,9 @@ Value* GlobalVariableGenerator::getOrCreateStaticAttribut(
 	 		type, false, GlobalValue::ExternalLinkage , 
 	 		0, varN);
 
+	Constant *c = Constant::getNullValue(type);
+	gv->setInitializer(c);
+
 	return gv;
 }
 
@@ -127,4 +130,104 @@ Value* GlobalVariableGenerator::getAdHocTable(Module *module,
 
 	return module->getGlobalVariable(tableName);
 }
+
+
+GlobalVariable* GlobalVariableGenerator::getOrCreateFormatIntToSTRING(Module *module) {
+
+	LLVMContext &context = module->getContext();
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_INT_TO_STRING);
+
+	if(gv == NULL) {
+
+		Constant* ar = ConstantDataArray::getString(context, "%d");
+
+		gv = new GlobalVariable (*module, 
+								ar->getType(),
+			 					true,
+			  					GlobalValue::ExternalLinkage,
+			  					ar,
+			  					KawaEnumeration::KAWA_FORMAT_INT_TO_STRING);
+	}
+
+	return gv;
+}
+
+GlobalVariable* GlobalVariableGenerator::getOrCreateFormatObjectToSTRING(Module *module) {
+
+	LLVMContext &context = module->getContext();
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_OBJECT_TO_STRING);
+
+	if(gv == NULL) {
+		Constant* ar = ConstantDataArray::getString(context, "[object]");
+
+		gv = new GlobalVariable (*module, 
+								ar->getType(),
+			 					true,
+			  					GlobalValue::ExternalLinkage,
+			  					ar,
+			  					KawaEnumeration::KAWA_FORMAT_OBJECT_TO_STRING);
+	}
+
+	return gv;
+}
+
+GlobalVariable* GlobalVariableGenerator::getOrCreateFormatStringToSTRING(Module *module) {
+	LLVMContext &context = module->getContext();
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_STRING_TO_STRING);
+
+	if(gv == NULL) {
+		Constant* ar = ConstantDataArray::getString(context, "%s");
+
+		gv = new GlobalVariable (*module, 
+								ar->getType(),
+			 					true,
+			  					GlobalValue::ExternalLinkage,
+			  					ar,
+			  					KawaEnumeration::KAWA_FORMAT_STRING_TO_STRING);
+	}
+
+	return gv;
+}
+
+
+
+GlobalVariable* GlobalVariableGenerator::getOrCreateFormatCharToSTRING(Module *module) {
+
+	LLVMContext &context = module->getContext();
+
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_CHAR_TO_STRING);
+
+	if(gv == NULL) {
+		Constant* ar = ConstantDataArray::getString(context, "%c");
+
+		gv = new GlobalVariable (*module, 
+								ar->getType(),
+			 					true,
+			  					GlobalValue::ExternalLinkage,
+			  					ar,
+			  					KawaEnumeration::KAWA_FORMAT_CHAR_TO_STRING);
+	}
+	return gv;
+}
+
+GlobalVariable* GlobalVariableGenerator::getOrCreateFormatDoubleToSTRING(Module *module) {
+
+	LLVMContext &context = module->getContext();
+	GlobalVariable *gv = module->getGlobalVariable(KawaEnumeration::KAWA_FORMAT_DOUBLE_TO_STRING);
+
+	if(gv == NULL) {
+		Constant* ar = ConstantDataArray::getString(context, "%f");
+
+		gv = new GlobalVariable (*module, 
+								ar->getType(),
+			 					true,
+			  					GlobalValue::ExternalLinkage,
+			  					ar,
+			  					KawaEnumeration::KAWA_FORMAT_DOUBLE_TO_STRING);
+	}
+
+	return gv;
+}
+
+
 

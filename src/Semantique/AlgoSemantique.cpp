@@ -338,12 +338,12 @@ void decoration(KT_Program * prog) {
 			for (KT_Interface * iParent : interface->getParentsInterfacesSemantique()) {
 				for (string signature : iParent->getFullSignatures()) {
 					vector<string> lists = interface->getFullSignatures();
-					if (find(lists.begin(), lists.end(), signature) == lists.end()) {
+					/*if (find(lists.begin(), lists.end(), signature) == lists.end()) {
 						Semantic::existSemanticError = true;
 						cout << "!!!!!! ERREUR 8 !!!!! Une interface en implemente une autre sans reprendre ses prototypes " << endl;
 						cout << *interface->getFQN() << endl;
 						cout << signature << endl;
-					}
+					}*/
 				}
 			}
 			completionInterface(interface);

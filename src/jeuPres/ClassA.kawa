@@ -23,11 +23,24 @@ class ClassA extends ClassB {
 		ClassB varB = new ClassA();
 		ClassB varC = new ClassB();
 
-		a.methodeUn();
-		a.methodeDeux();
-		a.methodeTrois();
-		b.methodeTrois();
-		c.methodeTrois();
-		a.methodeQuatre();
+
+
+		varA.methodeUn();
+		varA.methodeDeux();
+		varA.methodeTrois();
+		varB.methodeTrois();
+		varC.methodeTrois(); 
+		
+		InterfaceI i ;
+		i = varA;
+		i.methodeFromI();
+		i = varB;
+		i.methodeFromI();
+		i = varC;
+		i.methodeFromI();
+
+		varA.methodeQuatre();
+		varA.methodeSept();
+		var.methodeFromII();
 	}
 }

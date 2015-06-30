@@ -16,7 +16,7 @@ using namespace std;
 	int yyerror(const char* err );
 	extern int column;
 	extern int lineno;
-	extern int totalline;
+
 %}
 
 %token<vint> ENTIER
@@ -1744,6 +1744,6 @@ LinkedMethodVarCallList
 %%
 
 int yyerror( const char* err ){
-  printf("Erreur syntaxique dans le fichier %s:\n\t \'%s\' est imprévu dans la ligne [%d]\n", program->getFileName(totalline), yytext, lineno/*, column-strlen(yytext)*/);
+  printf("Erreur syntaxique: \'%s\' est imprévu dans la ligne [%d]\n", yytext, lineno/*, column-strlen(yytext)*/);
   return 0;
 }
